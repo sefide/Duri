@@ -40,7 +40,7 @@
 /* bigTab */
 .tabBigBox {overflow:hidden;}
 .tabBigBox li {float:left; text-align:center; line-height:53px; background:#fff; border-left:1px solid #fff; border-top:3px solid #fff; border-right:1px solid #fff; border-bottom:1px solid #e5e5e5;}
-.tabBigBox li a {color:#bababa; font-size:18px;}
+.tabBigBox li a {color:#bababa; font-size:20px;}
 .tabBigBox li:hover,.tabBigBox .on {border-top:3px solid #606060; background:#fff; line-height:53px; border-left:1px solid #e5e5e5; border-right:1px solid #e5e5e5; border-bottom:none;}
 .tabBigBox li:hover a,.tabBigBox .on a {color:#333; font-weight:bold;}
 
@@ -49,8 +49,8 @@
 .btab_4ea li {width:24.8%;}
 .btab_5ea li {width:19.8%;}
 .btab_6ea li {width:16.5%;}
-.btab_7ea li {width:14.1%;}
-.btab_8ea li {width:12.3%;}
+/* .btab_7ea li {width:14.1%;}
+.btab_8ea li {width:12.3%;} */
 
 
 .tab_group a{float:left;margin-left:-1px;font-size:17px;line-height:58px;letter-spacing:-0.05em;color:#409bdb;border:1px solid #409bdb;text-align:center;display:inline-block;}
@@ -62,10 +62,14 @@
 
 /******************************* tableStyle */
 
+/* button */
+.crowdApply {width: 40px; height: 10px; background: dimGray;}
+
 /* contents board */
 .listBoard {clear:both; border-top:3px solid #6488ba; width:100%;}
 .listBoard tr th {background:#f6faff; font-size:16px; font-weight:bold; color:#2e5182; padding:10px; border-bottom:1px solid #dedede; text-align:center;}
 .listBoard tr td {padding:10px; border-bottom:1px solid #dedede; text-align:center;}
+
 
 /* contents board line */
 /* v.blue */

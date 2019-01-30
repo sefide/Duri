@@ -2,7 +2,7 @@
 <% 
 	String bigtabon="4";
 %>
-<%@ include file="../happymember/include/common.jsp" %>
+<%@ include file="include/common.jsp" %>
 
 <title>충전하기</title>
 <!-- 감사편지 쓰기 -->
@@ -13,14 +13,14 @@
 
 <div id="wrap"><!-- Wrap S -->
 
-<%@ include file="../happymember/include/header.jsp" %>
+<%@ include file="include/header.jsp" %>
 
 <div id="subvisual"></div>
 
 <div id="subContainer">
 	<div class="contBox inner"><!-- inner S -->
 	 
-		<%@ include file="../happymember/include/tabMypage.jsp" %>
+		<%@ include file="include/tabMypage.jsp" %>
 
 		<p class="font30 bold tcen">충전하기</p>
 		
@@ -58,7 +58,7 @@
 </div><!--// Wrap E-->
 
 
-<%@ include file="../happymember/include/myNav.jsp" %>
+<%@ include file="include/myNav.jsp" %>
 
 </body>
 </html>
