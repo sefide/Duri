@@ -6,8 +6,8 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-<link rel="stylesheet" type="text/css" href="/duri/views/admin/common/css/reset.css"/>
-<link rel="stylesheet" type="text/css" href="/duri/views/admin/common/css/board.css"/>
-<link rel="stylesheet" type="text/css" href="/duri/views/admin/common/css/admin.css"/>
+<link rel="stylesheet" type="text/css" href="/duri/resources/admin/css/reset.css"/>
+<link rel="stylesheet" type="text/css" href="/duri/resources/admin/css/board.css"/>
+<link rel="stylesheet" type="text/css" href="/duri/resources/admin/css/admin.css"/>
 
-<script type="text/javascript" src="/duri/views/admin/common/js/jquery.min.js"></script><!-- mainbanner -->
+<script type="text/javascript" src="/duri/resources/admin/admin/js/jquery.min.js"></script><!-- mainbanner -->
