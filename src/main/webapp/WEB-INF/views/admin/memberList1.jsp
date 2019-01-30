@@ -32,7 +32,7 @@
 				</span>
 				<span>
 					<label for="Keyword"></label><input id="Keyword" name="Keyword" class="wth240" type="text">
-					<a class="sch" href="#"><img src="/hyun/myPost/common/images/contents/icoSearch.png" alt="검색" title="검색"></a> 
+					<a class="sch" href="#"><img src="/duri/resources/admin/images/icoSearch.png" alt="검색" title="검색"></a> 
 				</span>
 			</div>			
 			

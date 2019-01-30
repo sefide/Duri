@@ -2,9 +2,9 @@
 
 <header>
 
-	<h1><a href="/duri/views/admin/memberList1.jsp"><em class="orange font30 bold">택배를 부탁해</em> 관리자페이지</a></h1>
+	<h1><a href="Euihee_memberList1.me"><em class="#403643 font30 bold">Admin<em></a></h1>
 
-	<div class="inner"><!-- inner S -->
+	<div>
 		<ul class="gnbMenu">
 			<li><a href="memberList1.jsp">통계 관리</a></li>
 			<li><a href="joinConfirmList.jsp">나눔두리 관리</a></li>
@@ -13,5 +13,5 @@
 			<li><a href="qnaList.jsp">Q&A관리</a></li>
 			<li><a href="reportList.jsp">물품 내역 관리</a></li>
 		</ul>
-	</div><!--// inner E-->
+	</div>
 </header>
