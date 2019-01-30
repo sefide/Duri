@@ -10,24 +10,26 @@
     <link href="https://fonts.googleapis.com/css?family=Dosis:200,300,400,500,700" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Overpass:300,400,400i,600,700" rel="stylesheet">
 
-    <link rel="stylesheet" href="/duri/resources/css/open-iconic-bootstrap.min.css">
-    <link rel="stylesheet" href="/duri/resources/css/animate.css">
+    <link rel="stylesheet" href="/duri/resources/common/css/open-iconic-bootstrap.min.css">
+    <link rel="stylesheet" href="/duri/resources/common/css/animate.css">
     
-    <link rel="stylesheet" href="/duri/resources/css/owl.carousel.min.css">
-    <link rel="stylesheet" href="/duri/resources/css/owl.theme.default.min.css">
-    <link rel="stylesheet" href="/duri/resources/css/magnific-popup.css">
+    <link rel="stylesheet" href="/duri/resources/common/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="/duri/resources/common/css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="/duri/resources/common/css/magnific-popup.css">
 
-    <link rel="stylesheet" href="/duri/resources/css/aos.css">
+    <link rel="stylesheet" href="/duri/resources/common/css/aos.css">
 
-    <link rel="stylesheet" href="/duri/resources/css/ionicons.min.css">
+    <link rel="stylesheet" href="/duri/resources/common/css/ionicons.min.css">
 
-    <link rel="stylesheet" href="/duri/resources/css/bootstrap-datepicker.css">
-    <link rel="stylesheet" href="/duri/resources/css/jquery.timepicker.css">
+    <link rel="stylesheet" href="/duri/resources/common/css/bootstrap-datepicker.css">
+    <link rel="stylesheet" href="/duri/resources/common/css/jquery.timepicker.css">
 
     
-    <link rel="stylesheet" href="/duri/resources/css/flaticon.css">
-    <link rel="stylesheet" href="/duri/resources/css/icomoon.css">
-    <link rel="stylesheet" href="/duri/resources/css/style.css">
+    <link rel="stylesheet" href="/duri/resources/common/css/flaticon.css">
+    <link rel="stylesheet" href="/duri/resources/common/css/icomoon.css">
+    <link rel="stylesheet" href="/duri/resources/common/css/style.css">
+    
+   
 </head>
 <body>
 

@@ -6,11 +6,13 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-<link rel="stylesheet" type="text/css" href="/duri/views/nanumMember/common/css/style.css"/>
+<link rel="stylesheet" type="text/css" href="/duri/resources/NanumMyPage/css/style.css"/>
 
-<script type="text/javascript" src="/duri/views/nanumMember/common/js/jquery.min.js"></script><!-- mainbanner -->
-<script type="text/javascript" src="/duri/views/nanumMember/common/js/jquery.cycle.all.js"></script><!-- mainbanner -->
-<script type="text/javascript" src="/duri/views/nanumMember/common/js/jquery.bxslider.min.js"></script><!-- main small banner -->
+<script type="text/javascript" src="/duri/resources/NanumMyPage/js/jquery.min.js"></script><!-- mainbanner -->
+<script type="text/javascript" src="/duri/resources/NanumMyPage/js/jquery.cycle.all.js"></script><!-- mainbanner -->
+<script type="text/javascript" src="/duri/resources/NanumMyPage/js/jquery.bxslider.min.js"></script><!-- main small banner -->
+
+
 
 <script type="text/javascript">
 	$(document).ready(function(){
