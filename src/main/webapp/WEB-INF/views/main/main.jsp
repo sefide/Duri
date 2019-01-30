@@ -14,5 +14,8 @@
 	<a href="Ajin1.me">아진이 토탈페이지</a>
 	<a href="Ajin1.me">아진이 토탈페이지</a>
 	
+	<br>
+	<a href="Aerin1.happy">애린이 토탈페이지</a>
+	
 </body>
 </html>
