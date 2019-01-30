@@ -28,7 +28,7 @@ body {
 
 	<!-- 메인 사진 부분 -->
 	<div class="hero-wrap"
-		style="background-image: url('/duri/resources/images/main.bg.jpg');"
+		style="background-image: url('/duri/resources/common/images/main.bg.jpg');"
 		data-stellar-background-ratio="0.5">
 		<div class="overlay"></div>
 		<div class="container">
