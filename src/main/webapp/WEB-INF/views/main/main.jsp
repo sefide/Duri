@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+
 	<a href="Euihee_memberList1.ad">의희 memberList1.jsp</a><br>
 	<a href="Euihee_memberList2.ad">의희 memberList2.jsp</a><br>
 	<a href="Euihee_memBlackList.ad">의희 memBlackList.jsp</a><br>
@@ -23,6 +24,22 @@
 	<a href="Euihee_cashList.ad">의희 cashList.jsp</a><br>
 	<a href="Euihee_allNoticeList.ad">의희 allNoticeList.jsp</a><br>
 	<a href="Euihee_joinConfirmList.ad">의희 joinConfirmList.jsp</a><br>
+
+	아진이 뷰 
+	<hr>
+	<a href="Ajin1.nanum">아진 - 전체 메인페이지</a><br>
+	<a href="Ajin2.nanum">아진 - 나눔두리 메인페이지</a><br>
+	<a href="Ajin3.nanum">아진 - 마이페이지</a><br>
+	<a href="Ajin4.nanum">아진 - 마이페이지_정기후원</a><br>
+	<a href="Ajin5.nanum">아진 - 마이페이지_편지</a><br>
+	<a href="Ajin6.nanum">아진 - 마이페이지_기부금 영수증</a><br>
+	<a href="Ajin7.nanum">아진 - 마이페이지 _하고싶었던 후원</a><br>
+	
+	
+	
+	<br>
+	<a href="Aerin1.happy">애린이 토탈페이지</a>
+
 	
 </body>
 </html>
