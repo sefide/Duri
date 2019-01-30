@@ -19,6 +19,18 @@ body {
 	font-family: Nanum Gothic;
 	font-size: 45px;
 }
+.tm_btn{
+	font-family: Nanum Pen Script;
+    color: white;
+    font-size: 50px;
+    width: 380px;
+    height: 150px;
+    background-color: #FD771A;
+    border-radius: 0.3em;
+    text-align: center;
+    display: table-cell;
+    vertical-align: middle;
+}
 </style>
 
 </head>
@@ -26,7 +38,7 @@ body {
 	<br><br><br>
 	<!-- 메인 사진 부분 -->
 	<div class="hero-wrap"
-		style="background-image: url('/duri/resources/images/main_bg.jpg');"
+		style="background-image: url('/duri/resources/common/images/main_bg.jpg');"
 		data-stellar-background-ratio="0.5">
 		<div class="overlay"></div>
 		<div class="container">
@@ -37,8 +49,10 @@ body {
 					data-scrollax=" properties: { translateY: '70%' }">
 					<h1 class="mb-4"
 						data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"
-						style="font-family: Nanum Pen Script; font-size: 80px;">당신의
-						착한 마음을 응원합니다.</h1>
+						style="font-family: Nanum Pen Script; font-size: 80px;">
+						<br>당신의
+						착한 마음을 응원합니다.<br><br>
+						함께 가요 둘이두리</h1>
 					<p class="mb-5"
 						data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">
 						</a>
@@ -103,8 +117,21 @@ body {
 	<br><br>
 
 	<!-- 홈페이지 소개 부분 -->
+	<style>
+	.bg-light {
+    background: #fafafa !important;
+    margin-top: -130px;
+	}
+	</style>
 	<section class="ftco-section bg-light" style="padding: 1em;">
 	<div class="container-fluid">
+		<div class="row justify-content-center" >
+			<div class="col-md-5 heading-section ftco-animate text-center" >
+				<h2 class="mb-4"
+					style="font-family: Nanum Pen Script; font-size:40px;">행복두리와 나눔두리가 함께가는 둘이두리로!</h2>
+				<p style="font-family: Nanum Pen Script; font-size: 40px;"></p>
+			</div>
+		</div>
 		<section class="">
 		<div class="container" style="background-color: #FFEDBF;">
 			<div class="row">
@@ -115,8 +142,9 @@ body {
 						</div>
 						<div class="media-body pl-4">
 							<h3 class="heading"
-								style="font-size: 40px; color: #FD771A; font-family: Nanum Pen Script;">행복두리</h3>
-							<button>행복두리로 가자!</button>
+								style="font-size: 40px; color: #FD771A; font-family: Nanum Pen Script;">행복두리가 되고 싶다면?</h3>
+							<div class="tm_btn" onclick="#">행복두리로 가자!</div>
+							
 						</div>
 					</div>
 				</div>
@@ -127,8 +155,8 @@ body {
 						</div>
 						<div class="media-body pl-4">
 							<h3 class="heading"
-								style="font-size: 40px; color: #FD771A; font-family: Nanum Pen Script;">나눔두리</h3>
-								<button onclick="location.href='/duri/views/nanumMember/nanumMain.jsp'">나눔두리로 가자!</button>
+								style="font-size: 40px; color: #FD771A; font-family: Nanum Pen Script;">나눔두리가 되고 싶다면?</h3>
+								<div class="tm_btn" onclick="#">나눔두리로 가자!</div>
 						</div>
 					</div>
 				</div>
