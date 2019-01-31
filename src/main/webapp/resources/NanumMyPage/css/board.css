@@ -41,7 +41,7 @@
 .tabBigBox {overflow:hidden;}
 .tabBigBox li {float:left; text-align:center; line-height:53px; background:#fff; border-left:1px solid #fff; border-top:3px solid #fff; border-right:1px solid #fff; border-bottom:1px solid #e5e5e5;}
 .tabBigBox li a {color:#bababa; font-size:18px;}
-.tabBigBox li:hover,.tabBigBox .on {border-top:3px solid #606060; background:#fff; line-height:53px; border-left:1px solid #e5e5e5; border-right:1px solid #e5e5e5; border-bottom:none;}
+.tabBigBox li:hover,.tabBigBox .on {border-top: 3px solid #fa8f3d; background:#fff; line-height:53px; border-left:1px solid #e5e5e5; border-right:1px solid #e5e5e5; border-bottom:none;}
 .tabBigBox li:hover a,.tabBigBox .on a {color:#333; font-weight:bold;}
 
 .btab_2ea li {width:49.6%;}
