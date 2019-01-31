@@ -4,6 +4,17 @@
 %>
 <%@ include file="include/common.jsp" %>
 
+<!-- semantic ui -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+<script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+
+<style>
+	a {color: #333;}
+	#button{text-align: center;}
+	/* .textSilver {color: silver; font-weight: 600;}
+	.textOrange {color: orange; font-weight: 600;} */
+</style>
+
 <title>나의 문의내역</title>
 <!-- Q&A -->
 </head>
@@ -21,13 +32,11 @@
 	 
 		<%@ include file="include/tabMypage.jsp" %>
 
-		<div style="float: left;"><h1>> TO.둘이두리님 궁금해요</h1></div>
+		<div style="float: left;" class="ptag"><h1><i class="chevron right icon"></i>TO. 둘이두리님 궁금해요</h1></div>
 		<div style="float: left;">
-			<h4 style="font-weight: 600">답변완료
-			<img src="/duri/resources/HappyMyPage/images/status/ing.PNG" width="26px" height="25px" alt="답변완료">&nbsp;&nbsp;
-			답변 중
-			<img src="/duri/resources/HappyMyPage/images/status/wating.PNG" width="23px" height="24px" alt="답변 중">&nbsp;&nbsp;
-			
+			<h4 style="font-weight: 600">
+				답변완료&nbsp;<i class="green circle icon" alt="답변완료"></i>&nbsp;&nbsp;
+				답변 중&nbsp;<i class="yellow circle icon" alt="답변 중"></i>
 			</h4>
 		</div>
 		<br>
@@ -54,13 +63,13 @@
 				<td>1</td>
 				<td>증빙서류를 기간 내에 내지 못했어요</td>
 				<td>안녕하세요! 증빙서류를 제 기간 내에 내지 못했습니다</td>
-				<td><img src="/duri/resources/HappyMyPage/images/status/ing.PNG" width="25px" height="25px" alt="답변완료"></td>
+				<td><i class="green circle icon" alt="답변완료"></i></td>
 			</tr>
 			<tr>
 				<td>2</td>
 				<td>동생도 같이 후원 받을 수 있나요?</td>
 				<td>동생이 올 해에 11살이 되었습니다. 동생도 저와 같이 후원을 받을 수 있을까요?</td>
-				<td><img src="/duri/resources/HappyMyPage/images/status/wating.PNG" width="25px" height="25px" alt="답변 중"></td>
+				<td><i class="yellow circle icon" alt="답변 중"></i></td>
 			</tr>
 			</tbody>
 		</table>
@@ -78,7 +87,12 @@
 			<span><a class="num" href="#">9</a></span>
 			<span><a class="num" href="#">&gt;</a></span>
 		</div>
-		<br><br><br>
+		
+		<div style="height: 100px;"></div>
+		
+		<div id="button" class="textSilver">
+			<button class="massive ui instagram button">문의하러 가기</button>
+		</div>
 		
 		
 		
