@@ -62,8 +62,9 @@
 
 /******************************* tableStyle */
 
-/* button */
-.crowdApply {width: 40px; height: 10px; background: dimGray;}
+/*  */
+a {color: black; !important}
+
 
 /* contents board */
 .listBoard {clear:both; border-top:3px solid #6488ba; width:100%;}

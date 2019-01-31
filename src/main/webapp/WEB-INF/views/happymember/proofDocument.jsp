@@ -4,6 +4,18 @@
 %>
 <%@ include file="include/common.jsp" %>
 
+<!-- semantic ui -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+<script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+
+<style>
+	a {color: #333;}
+	#button {text-align: center;}
+	#proofDocument {margin:auto; width: 60%; height: 750px; background: lightgray; text-align: center;}
+	/* .textSilver {color: silver; font-weight: 600;}
+	.textOrange {color: orange; font-weight: 600;} */
+</style>
+
 <title>회원정보수정</title>
 <!-- 증빙서류 -->
 </head>
@@ -21,91 +33,77 @@
 	 
 		<%@ include file="include/tabMypage.jsp" %>
 
+		<div style="float: left;" class="ptag"><h1><i class="chevron right icon"></i>내가 올린 증빙서류</h1></div>
+		<div style="float: left;">
+			<h4 style="font-weight: 600">
+				승인완료&nbsp;<i class="green circle icon" alt="승인완료"></i>&nbsp;&nbsp;
+				반려&nbsp;<i class="red circle icon" alt="반려"></i>
+			</h4>
+		</div>
+		<br>
 		
-		<div class="rtv of mt30">
-
-			<div class="flo_left wth300"><!-- flo_left S-->
-				<img src="http://via.placeholder.com/300x300" alt="상품이미지">
-				<div class="input-file mt10"> 
-					<input type="text" readonly="readonly" class="file-name wth295" /> 
-					<label for="upload01" class="file-label">상품 이미지 업로드</label> 
-					<input type="file" name="" id="upload01" class="file-upload" /> 
-				</div>
-			</div><!--// flo_left E-->
-
-			<div class="flo_right wth850"><!-- flo_right S-->
-			
-			<table class="boardWrite wth850"><!-- boardWrite S-->
-			<caption>회원정보수정 리스트입니다.</caption>
+		<table class="boardList mt30">
+			<caption>문의내역 리스트입니다.</caption>
 			<colgroup>
-				<col style="width:30%;">
-				<col style="width:%;">
+				<col style="width:6%;"><!-- No -->
+				<col style="width:17%;"><!--  -->
+				<col style="width:17%;"><!--  -->
+				<col style="width:14%;"><!--  -->
+				<col style="width:17%;"><!--  -->
 			</colgroup>
+			<thead>
+			<tr>
+				<th scope="col">No</th>
+				<th scope="col">증빙서류 제출일</th>
+				<th scope="col">증빙서류 제출 마감일</th>
+				<th scope="col">승인상태</th>
+				<th scope="col">승인 or 반려된 날짜</th>
+			</tr>
+			</thead>
 			<tbody>
 			<tr>
-				<th scope="row">아이디</th>
-				<td colspan="3">
-					<label for=""></label>
-					<input id="" name="" class="wth300" type="text" value="" >
-				</td>
+				<td>1</td>
+				<td>2018.04.22</td>
+				<td>2018.10.22</td>
+				<td><i class="green circle icon" alt="승인완료"></i></td> 	
+				<td>2018.10.11</td>
 			</tr>
 			<tr>
-				<th scope="row">비밀번호</th>
-				<td>
-					<label for=""></label>
-					<input id="" name="" class="wth300" type="text" value="" > 
-				</td>
+				<td>2</td>
+				<td>2018.07.12</td>
+				<td>2019.01.12</td>
+				<td><i class="red circle icon" alt="반려"></i></td> 	
+				<td>2019.01.02</td>
 			</tr>
 			<tr>
-				<th scope="row">비밀번호 확인</th>
-				<td>
-					<label for=""></label>
-					<input id="" name="" class="wth300" type="text" value="" > 
-				</td>
-			</tr>
-			<tr>
-				<th scope="row">이름</th>
-				<td>
-					<label for=""></label>
-					<input id="" name="" class="wth300" type="text" value="" > 
-				</td>
-			</tr>
-			<tr>
-				<th scope="row">휴대폰번호</th>
-				<td>
-					<span><label for=""></label><input id="" name="" class="wth50" type="text" value="" ></span>
-					<span> - </span>
-					<span><label for=""></label><input id="" name="" class="wth60" type="text" value="" ></span>
-					<span> - </span>
-					<span><label for=""></label><input id="" name="" class="wth60" type="text" value="" ></span>
-				</td>
-			</tr>
-			<tr>
-				<th scope="row">이메일</th>
-				<td>
-					<span><label for=""></label><input id="" name="" class="wth100" type="text" value="" ></span>
-					<span>@</span>
-					<span><label for=""></label><input id="" name="" class="wth100" type="text" value="" ></span>
-					<span><a class="sbtn db" href="#">인증하기</a></span>
-				</td>
-			</tr>
-			<tr>
-				<th scope="row">계좌번호</th>
-				<td>
-					<span><label for=""></label><input id="" name="" class="wth230" type="text" value="" ></span>
-					<span><a class="sbtn db" href="#">인증하기</a></span>
-				</td>
+				<td>3</td>
+				<td>2018.10.11</td>
+				<td>2019.04.11</td>
+				<td><i class="green circle icon" alt="승인완료"></i></td> 	
+				<td>2018.04.11</td>
 			</tr>
 			</tbody>
-		</table><!--// boardWrite E-->
+		</table>
 
-		</div><!--// flo_right E-->
+		<div class="numbox pt40 pb50"> 
+			<span><a class="num" href="#">&lt;</a></span>
+			<span><a class="num on" href="#">1</a></span>
+			<span><a class="num" href="#">2</a></span>
+			<span><a class="num" href="#">3</a></span>
+			<span><a class="num" href="#">4</a></span>
+			<span><a class="num" href="#">5</a></span>
+			<span><a class="num" href="#">6</a></span>
+			<span><a class="num" href="#">7</a></span>
+			<span><a class="num" href="#">8</a></span>
+			<span><a class="num" href="#">9</a></span>
+			<span><a class="num" href="#">&gt;</a></span>
 		</div>
+		<br><br><br><br>
+		
+		<div id="proofDocument"><h1>증빙서류 예시</h1></div>
+		
 
-		<div class="btnbox mt20"><!-- btnbox S-->
-			<span><a class="mbtn gy" href="#">취소</a></span>
-			<span><a class="mbtn db" href="#">수정하기</a></span>
-		</div><!--// btnbox E-->
+		
 	</div><!--// inner E-->
 </div>
 
