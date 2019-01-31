@@ -2,24 +2,24 @@
 <% 
 	String bigtabon="7";
 %>
-<%@ include file="../happymember/include/common.jsp" %>
+<%@ include file="include/common.jsp" %>
 
 <title>회원정보수정</title>
-
+<!-- 증빙서류 -->
 </head>
 <body>
 
 
 <div id="wrap"><!-- Wrap S -->
 
-<%@ include file="../happymember/include/header.jsp" %>
+<%@ include file="include/header.jsp" %>
 
 <div id="subvisual"></div>
 
 <div id="subContainer">
 	<div class="contBox inner"><!-- inner S -->
 	 
-		<%@ include file="../happymember/include/tabMypage.jsp" %>
+		<%@ include file="include/tabMypage.jsp" %>
 
 		
 		<div class="rtv of mt30">
@@ -115,7 +115,7 @@
 </div><!--// Wrap E-->
 
 
-<%@ include file="../happymember/include/myNav.jsp" %>
+<%@ include file="include/myNav.jsp" %>
 
 </body>
 </html>

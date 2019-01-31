@@ -37,8 +37,14 @@
 	
 	
 	
-	<br>
-	<a href="Aerin1.happy">애린이 토탈페이지</a>
+	<br><hr>
+	<a href="Aerin_mypage.happy">애린 - mypage.jsp</a><br>
+	<a href="Aerin_longDonate.happy">애린 - longDonate.jsp</a><br>
+	<a href="Aerin_longDonateDetail.happy">애린 - longDonateDetail.jsp</a><br>
+	<a href="Aerin_deliveryStatus.happy">애린 - deliveryStatus.jsp</a><br>
+	<a href="Aerin_thankyouLetter.happy">애린 - thankyouLetter.jsp</a><br>
+	<a href="Aerin_qna.happy">애린 - qna.jsp</a><br>
+	<a href="Aerin_proofDocument.happy">애린 - proofDocument.jsp</a><br>
 
 	
 </body>
