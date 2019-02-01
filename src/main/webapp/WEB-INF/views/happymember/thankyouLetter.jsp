@@ -2,7 +2,19 @@
 <% 
 	String bigtabon="4";
 %>
-<%@ include file="../happymember/include/common.jsp" %>
+<%@ include file="include/common.jsp" %>
+
+<!-- semantic ui -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+<script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+
+<style>
+	.to {font-size: 30px; font-weight: 600;}
+	a {color: #333;}
+	#button{text-align: center;}
+	/* .textSilver {color: silver; font-weight: 600;}
+	.textOrange {color: orange; font-weight: 600;} */
+</style>
 
 <title>충전하기</title>
 <!-- 감사편지 쓰기 -->
@@ -13,40 +25,58 @@
 
 <div id="wrap"><!-- Wrap S -->
 
-<%@ include file="../happymember/include/header.jsp" %>
+<%@ include file="include/header.jsp" %>
 
 <div id="subvisual"></div>
 
 <div id="subContainer">
 	<div class="contBox inner"><!-- inner S -->
 	 
-		<%@ include file="../happymember/include/tabMypage.jsp" %>
+		<%@ include file="include/tabMypage.jsp" %>
 
-		<p class="font30 bold tcen">충전하기</p>
+		<div>
+			<h1>
+				<i class="chevron right icon"></i>TO. 나눔두리님<i class="orange heart icon"></i>
+			</h1>
+		</div>
+		<br>
+		<br>
 		
-		<div class="chargeBox">
-			<dl>
-				<dt class="font20 bold">사이버머니 5,000P</dt>
-				<dd class="font18">5,000원(부가세별도)</dd>
-				<dd class="mt5"><a class="bbtn db" href="#">충전하기</a></dd>
-			</dl>
-
-			<dl>
-				<dt class="font20 bold">사이버머니 10,000P</dt>
-				<dd class="font18">10,000원(부가세별도)</dd>
-				<dd class="mt5"><a class="bbtn db" href="#">충전하기</a></dd>
-			</dl>
-
-			<dl>
-				<dt class="font20 bold">사이버머니 20,000P</dt>
-				<dd class="font18">20,000원(부가세별도)</dd>
-				<dd class="mt5"><a class="bbtn db" href="#">충전하기</a></dd>
-			</dl>
-			<dl>
-				<dt class="font20 bold">사이버머니 50,000P</dt>
-				<dd class="font18">50,000원(부가세별도)</dd>
-				<dd class="mt5"><a class="bbtn db" href="#">충전하기</a></dd>
-			</dl>
+		<div align="center">
+			<!-- 감사편지 쓰기 : 나눔두리 이름 -->
+			<div style="float: left;">
+				&nbsp;<button class="ui button">나눔두리님</button>&nbsp;&nbsp;
+				<div class="ui input" style="width: 330px;">
+					<input type="text" placeholder="감사편지를 전할 나눔두리님의 이름을 써주세요.">
+				</div>
+				<!-- 나눔두리~제목 사이 여백 -->
+				<div style="width: 90px; float: left;"></div>
+			</div>
+			
+			
+			<!-- 감사편지 쓰기 : 제목 -->
+			<div>
+				<button class="ui button">제목</button>&nbsp;&nbsp;
+				<div class="ui input" style="width: 39.5%;">
+					<input type="text" placeholder="제목을 입력해주세요">
+				</div>
+			</div>
+			<br>
+			
+			
+			<!-- 감사편지 쓰기 : 내용 -->
+			<div>
+				<div class="field">
+				    <textarea style="width: 92%; height: 600px;"></textarea>
+				 </div>
+			</div>
+		</div>
+		
+		<div style="height: 100px;"></div>
+		
+		<div id="button">
+			<button class="massive ui instagram button">감사편지 보내기</button>&nbsp;&nbsp;&nbsp;&nbsp;
+			<button style="width: 21%;" class="massive ui button">취소하기</button>
 		</div>
 
 	</div><!--// inner E-->
@@ -58,7 +88,7 @@
 </div><!--// Wrap E-->
 
 
-<%@ include file="../happymember/include/myNav.jsp" %>
+<%@ include file="include/myNav.jsp" %>
 
 </body>
 </html>

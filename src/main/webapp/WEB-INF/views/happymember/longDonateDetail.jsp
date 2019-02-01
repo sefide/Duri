@@ -1,8 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-<%@ include file="../happymember/include/common.jsp" %>
+<%@ include file="include/common.jsp" %>
 
 <title>기사 선택</title>
+<!-- 정기후원 상세페이지 -->
 
 <script type="text/javascript">
 function fn_open() {
@@ -16,7 +17,7 @@ function fn_open() {
 
 <div id="wrap"><!-- Wrap S -->
 
-<%@ include file="../happymember/include/header.jsp" %>
+<%@ include file="include/header.jsp" %>
 
 <div id="subvisual"></div>
 
@@ -55,11 +56,11 @@ function fn_open() {
 					<td>testid1111</td>
 					<td>홍길동</td>
 					<td>
-						<span><img src="../happymember/images/contents/starOn.png" alt="별on"></span>
-						<span><img src="../happymember/images/contents/starOn.png" alt="별on"></span>
-						<span><img src="../happymember/images/contents/starOn.png" alt="별on"></span>
-						<span><img src="../happymember/images/contents/starOn.png" alt="별on"></span>
-						<span><img src="../happymember/images/contents/starOn.png" alt="별on"></span>
+						<span><img src="/duri/resources/HappyMyPage/images/contents/starOn.png" alt="별on"></span>
+						<span><img src="/duri/resources/HappyMyPage/images/contents/starOn.png" alt="별on"></span>
+						<span><img src="/duri/resources/HappyMyPage/images/contents/starOn.png" alt="별on"></span>
+						<span><img src="/duri/resources/HappyMyPage/images/contents/starOn.png" alt="별on"></span>
+						<span><img src="/duri/resources/HappyMyPage/images/contents/starOn.png" alt="별on"></span>
 					</td>
 					<td><a class="sbtn or" href="#fn_open" onclick="fn_open()">상세보기</a></td>
 				</tr>
@@ -71,11 +72,11 @@ function fn_open() {
 					<td>testid1111</td>
 					<td>홍길동</td>
 					<td>
-						<span><img src="../happymember/images/contents/starOn.png" alt="별on"></span>
-						<span><img src="../happymember/images/contents/starOn.png" alt="별on"></span>
-						<span><img src="../happymember/images/contents/starOff.png" alt="별off"></span>
-						<span><img src="../happymember/images/contents/starOff.png" alt="별off"></span>
-						<span><img src="../happymember/images/contents/starOff.png" alt="별off"></span>
+						<span><img src="/duri/resources/HappyMyPage/images/contents/starOn.png" alt="별on"></span>
+						<span><img src="/duri/resources/HappyMyPage/images/contents/starOn.png" alt="별on"></span>
+						<span><img src="/duri/resources/HappyMyPage/images/contents/starOff.png" alt="별off"></span>
+						<span><img src="/duri/resources/HappyMyPage/images/contents/starOff.png" alt="별off"></span>
+						<span><img src="/duri/resources/HappyMyPage/images/contents/starOff.png" alt="별off"></span>
 					</td>
 					<td><a class="sbtn or" href="#fn_open" onclick="fn_open()">상세보기</a></td>
 				</tr>
@@ -93,7 +94,7 @@ function fn_open() {
 </div><!--// Wrap E-->
 
 
-<%@ include file="../happymember/include/myNav.jsp" %>
+<%@ include file="include/myNav.jsp" %>
 
 </body>
 </html>
