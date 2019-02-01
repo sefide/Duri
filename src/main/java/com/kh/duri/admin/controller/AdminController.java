@@ -6,69 +6,38 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class AdminController {
 
-	@RequestMapping("Euihee_memberList1.ad")
+	@RequestMapping("Euihee_chart.ad")
 	public String admin1() {
-		return "admin/memberList1";
+		return "admin/chart";
 }
-	@RequestMapping("Euihee_memberList2.ad")
+	@RequestMapping("Euihee_empty.ad")
 	public String admin2() {
-		return "admin/memberList2";
+		return "admin/empty";
 	}
-	@RequestMapping("Euihee_memBlackList.ad")
+	@RequestMapping("Euihee_form.ad")
 	public String admin3() {
-		return "admin/memBlackList";
+		return "admin/form";
 	}
-	@RequestMapping("Euihee_payBackList.ad")
+	@RequestMapping("Euihee_index.ad")
 	public String admin4() {
-		return "admin/payBackList";
+		return "admin/index";
 	}
-	@RequestMapping("Euihee_pointList.ad")
+	@RequestMapping("Euihee_morris-chart.ad")
 	public String admin5() {
-		return "admin/pointList";
+		return "admin/morris-chart";
 	}
-	@RequestMapping("Euihee_qnaAnswer.ad")
+	@RequestMapping("Euihee_tab-panel.ad")
 	public String admin6() {
-		return "admin/qnaAnswer";
+		return "admin/tab-panel";
 	}
-	@RequestMapping("Euihee_qnaList.ad")
+	@RequestMapping("Euihee_table.ad")
 	public String admin7() {
-		return "admin/qnaList";
+		return "admin/table";
 	}
-	@RequestMapping("Euihee_qnaView.ad")
+	@RequestMapping("Euihee_ui-elements.ad")
 	public String admin8() {
-		return "admin/qnaView";
+		return "admin/ui-elements";
 	}
-	@RequestMapping("Euihee_qnaWrite.ad")
-	public String admin9() {
-		return "admin/qnaWrite";
-	}
-	@RequestMapping("Euihee_reportList.ad")
-	public String admin10() {
-		return "admin/reportList";
-	}
-	@RequestMapping("Euihee_reviewList.ad")
-	public String admin11() {
-		return "admin/reviewList";
-	}
-	@RequestMapping("Euihee_reviewView.ad")
-	public String admin12() {
-		return "admin/reviewView";
-	}
-	@RequestMapping("Euihee_todayNoticeList.ad")
-	public String admin13() {
-		return "admin/todayNoticeList";
-	}
-	@RequestMapping("Euihee_cashList.ad")
-	public String admin14() {
-		return "admin/cashList";
-	}
-	@RequestMapping("Euihee_allNoticeList.ad")
-	public String admin15() {
-		return "admin/allNoticeList";
-	}
-	@RequestMapping("Euihee_joinConfirmList.ad")
-	public String admin16() {
-		return "admin/joinConfirmList";
-	}
+	
 	
 }
