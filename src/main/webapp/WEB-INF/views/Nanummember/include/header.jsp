@@ -22,7 +22,7 @@
 	padding-bottom:10px;
 	background: #ffc107;
 	line-height: 60px;
-	border-radius: 0.3em;
+	border-radius: 0.5em;
 	/* font-family: Nanum Pen Script; */
 }
 #box-left {
@@ -31,8 +31,8 @@
 	 color: white;	 
 	 text-align: center;
 	 line-height: 60px;
-	 font-size:30px !important;
-	 font-weight: bold; 
+	 font-size:25px !important;
+	 /* font-weight: bold;  */
 	 /* font-family: Nanum Pen Script;  */
 }
 #box-center { 	
@@ -42,7 +42,7 @@
   	text-align: left; 	
   	display: table-cell;
 	vertical-align: middle;	
-	font-weight: bold; 
+	/* font-weight: bold;  */
 	/* font-family: Nanum Pen Script; */
 	/* line-height: 60px; */
 }
@@ -53,12 +53,15 @@
   	display: table-cell;
 	vertical-align: middle;
 	line-height: 60px;
-	font-size:30px !important;
-	font-weight: bold; 
+	font-size:20px !important;
+	/* font-weight: bold;  */
 	/* font-family: Nanum Pen Script; */
 }
 .mt50 {
     margin-top: 100px !important;
+}
+#wrap {
+    padding-top: 20px;  
 }
 </style>	
 
@@ -73,9 +76,9 @@
     		후원참여 횟수 : 6 회 <br>
     	</div>
     	<div id='box-right'>
-    		<a href="#" style="color: white; font-size:30px; margin-right: 10px;"> 포인트 충전</a><br>
-    		<a href="#" style="color: white; font-size:30px; margin-right: 10px;"> 포인트 환급</a><br>
-    		<a href="#" style="color: white; font-size:30px;  margin-right: 10px;"> 포인트 내역</a><br>
+    		<a href="#" style="color: white; font-size:20px; margin-right: 10px;"> 포인트 충전</a><br>
+    		<a href="#" style="color: white; font-size:20px; margin-right: 10px;"> 포인트 환급</a><br>
+    		<a href="#" style="color: white; font-size:20px;  margin-right: 10px;"> 포인트 내역</a><br>
     	</div>
 	</div>
 	
