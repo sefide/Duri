@@ -1,63 +1,412 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<link href="/duri/resources/board/css/login.css?after" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<!------ Include the above in your HEAD tag ---------->
+<!doctype html>
+<html lang="kr">
+	<head>
+	<meta charset="UTF-8">
+	<title>http://www.blueb.co.kr</title>
 
-<!DOCTYPE html>
-<html>
-    
-<head>
-	<title>둘이두리-로그인페이지(행복)</title>
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
+<style rel="stylesheet">
+html {
+  width: 100%;
+  height: 100%;
+}
+
+body {	
+  background:orange;
+/*   background: -webkit-linear-gradient(45deg, rgba(66, 183, 245, 0.8) 0%, rgba(66, 245, 189, 0.4) 100%);
+  background: linear-gradient(45deg, rgba(66, 183, 245, 0.8) 0%, rgba(66, 245, 189, 0.4) 100%); */
+  color: rgba(0, 0, 0, 0.6);
+  font-family: "Roboto", sans-serif;
+  font-size: 14px;
+  line-height: 1.6em;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.overlay, .form-panel.one:before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: none;
+  background: rgba(0, 0, 0, 0.8);
+  width: 100%;
+  height: 100%;
+}
+
+.form {
+  z-index: 15;
+  position: relative;
+  background: #FFFFFF;
+  width: 900px;
+  border-radius: 4px;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+  margin: 100px auto 10px;
+  overflow: hidden;
+}
+.form-toggle {
+  z-index: 10;
+  position: absolute;
+  top: 60px;
+  right: 60px;
+  background: #FFFFFF;
+  width: 60px;
+  height: 60px;
+  border-radius: 100%;
+  -webkit-transform-origin: center;
+      -ms-transform-origin: center;
+          transform-origin: center;
+  -webkit-transform: translate(0, -%) scale(0);
+      -ms-transform: translate(0, -25%) scale(0);
+          transform: translate(0, -25%) scale(0);
+  opacity: 0;
+  cursor: pointer;
+  -webkit-transition: all 0.3s ease;
+          transition: all 0.3s ease;
+}
+.form-toggle:before, .form-toggle:after {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 30px;
+  height: 4px;
+  background: yellowgreen;
+  -webkit-transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+}
+.form-toggle:before {
+  -webkit-transform: translate(-50%, -50%) rotate(45deg);
+      -ms-transform: translate(-50%, -50%) rotate(45deg);
+          transform: translate(-50%, -50%) rotate(45deg);
+}
+.form-toggle:after {
+  -webkit-transform: translate(-50%, -50%) rotate(-45deg);
+      -ms-transform: translate(-50%, -50%) rotate(-45deg);
+          transform: translate(-50%, -50%) rotate(-45deg);
+}
+.form-toggle.visible {
+  -webkit-transform: translate(0, -25%) scale(1);
+      -ms-transform: translate(0, -25%) scale(1);
+          transform: translate(0, -25%) scale(1);
+  opacity: 1;
+}
+.form-group {
+  align: center;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+      -ms-flex-wrap: wrap;
+          flex-wrap: wrap;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  margin: 0 0 20px;
+}
+.form-group:last-child {
+  margin: 0;
+}
+.form-group label {
+  display: block;
+  margin: 0 0 10px;
+  color: rgba(0, 0, 0, 0.6);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1;
+  text-transform: uppercase;
+  letter-spacing: .2em;
+}
+.two .form-group label {
+  color: #FFFFFF;
+}
+.form-group input {
+  outline: none;
+  display: block;
+  background: rgba(0, 0, 0, 0.1);
+  width: 100%;
+  border: 0;
+  border-radius: 4px;
+  box-sizing: border-box;
+  padding: 12px 20px;
+  color: rgba(0, 0, 0, 0.6);
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: 500;
+  line-height: inherit;
+  -webkit-transition: 0.3s ease;
+          transition: 0.3s ease;
+}
+.form-group input:focus {
+  color: rgba(0, 0, 0, 0.8);
+}
+.two .form-group input {
+  color: #FFFFFF;
+}
+.two .form-group input:focus {
+  color: #FFFFFF;
+}
+.form-group button {
+  outline: none;
+  background: yellowgreen;
+  width: 100%;
+  border: 0;
+  border-radius: 4px;
+  padding: 12px 40px;
+  color: #FFFFFF;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: 500;
+  line-height: inherit;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.two .form-group button {
+  background: #FFFFFF;
+  color: yellowgreen;
+}
+.form-group .form-remember {
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0;
+  text-transform: none;
+}
+.form-group .form-remember input[type='checkbox'] {
+  display: inline-block;
+  width: auto;
+  margin: 0 10px 0 0;
+}
+.form-group .form-recovery {
+  color: #4285F4;
+  font-size: 12px;
+  text-decoration: none;
+}
+.form-panel {
+  padding: 60px calc(5% + 60px) 60px 60px;
+  box-sizing: border-box;
+}
+.form-panel.one:before {
+  content: '';
+  display: block;
+  opacity: 0;
+  visibility: hidden;
+  -webkit-transition: 0.3s ease;
+          transition: 0.3s ease;
+}
+.form-panel.one.hidden:before {
+  display: block;
+  opacity: 1;
+  visibility: visible;
+}
+.form-panel.two {
+  z-index: 5;
+  position: absolute;
+  top: 0;
+  left: 95%;
+  background: yellowgreen;
+  width: 100%;
+  min-height: 100%;
+  padding: 60px calc(10% + 60px) 60px 60px;
+  -webkit-transition: 0.3s ease;
+          transition: 0.3s ease;
+  cursor: pointer;
+}
+.form-panel.two:before, .form-panel.two:after {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 60px;
+  left: 1.5%;
+  background: rgba(255, 255, 255, 0.2);
+  height: 30px;
+  width: 2px;
+  -webkit-transition: 0.3s ease;
+          transition: 0.3s ease;
+}
+.form-panel.two:after {
+  left: 3%;
+}
+.form-panel.two:hover {
+  left: 93%;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+.form-panel.two:hover:before, .form-panel.two:hover:after {
+  opacity: 0;
+}
+.form-panel.two.active {
+  left: 10%;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  cursor: default;
+}
+.form-panel.two.active:before, .form-panel.two.active:after {
+  opacity: 0;
+}
+.form-header {
+  margin: 0 0 40px;
+}
+.form-header h1 {
+  padding: 4px 0;
+  color: yellowgreen;
+  font-size: 24px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+.two .form-header h1 {
+  position: relative;
+  z-index: 40;
+  color: #FFFFFF;
+}
+
+.pen-footer {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  width: 600px;
+  margin: 20px auto 100px;
+}
+.pen-footer a {
+  color: #FFFFFF;
+  font-size: 12px;
+  text-decoration: none;
+  text-shadow: 1px 2px 0 rgba(0, 0, 0, 0.1);
+}
+.pen-footer a .material-icons {
+  width: 12px;
+  margin: 0 5px;
+  vertical-align: middle;
+  font-size: 12px;
+}
+
+.cp-fab {
+  background: #FFFFFF !important;
+  color: #4285F4 !important;
+}
+
+</style>
 </head>
-<!--Coded with love by Mutiullah Samim-->
 <body>
-	
-	<div class="container h-100">
-	
-		<div class="d-flex justify-content-center h-100">
-		
-			<div class="user_card">
-				<div class="d-flex justify-content-center">
-				</div>
-	<!-- 			<div class="brand_logo_container">
-						<img src="/duri/resources/board/images/main.png" class="brand_logo" alt="Logo">
-						<a id="loginlogo" style="color:#FE8D03; font-size:20px; font-weight:bold">둘이</a>
-						<a id="loginlogo2" style="color:green; font-size:20px; font-weight:bold">두리</a>
-				</div> -->
-				<a id="slogan" style="font-size:21px">당신의 <b>착한마음</b>을<br> 응원합니다.</a>
-				<div class="d-flex justify-content-center form_container">
-					<form>
-						<div class="input-group mb-3">
-							<div class="input-group-append">
-								<span class="input-group-text"><i class="fas fa-user"></i></span>
-							</div>
-							<input type="text" name="" class="form-control input_user" value="" placeholder="userId">
-						</div>
-						<div class="input-group mb-2">
-							<div class="input-group-append">
-								<span class="input-group-text"><i class="fas fa-key"></i></span>
-							</div>
-							<input type="password" name="" class="form-control input_pass" value="" placeholder="password">
-						</div>
-	
-					</form>
-				</div>
-				<div class="d-flex justify-content-center mt-3 login_container">
-					<button type="button" name="button" class="btn login_btn">Login</button>
-				</div>
-				<div class="mt-4">
-					<div class="d-flex justify-content-center links">
-						<a href="#" class="ml-2">회원가입</a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-						<a href="#">아이디/비밀번호찾기</a>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+
+
+<!-- Form-->
+<div class="form">
+  <div class="form-toggle"></div>
+  <div class="form-panel one">
+    <div class="form-header">
+      <h1>행복두리 Login</h1>
+    </div>
+    <div class="form-content">
+      <form>
+        <div class="form-group">
+          <label for="username">userId</label>
+          <input type="text" id="userId" name="userId" required="required"/>
+        </div>
+        <div class="form-group">
+          <label for="userPwd">Password</label>
+          <input type="password" id="userPwd" name="userPwd" required="required"/>
+        </div>
+        <div class="form-group">
+          <label class="form-remember">
+          </label><a href="#" class="form-recovery">Forgot Password?</a>
+        </div>
+        <div class="form-group">
+          <button type="submit">Log In</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="form-panel two">
+    <div class="form-header">
+      <h1>Join Member</h1>
+    </div>
+    <div class="form-content">
+      <form>
+        <div class="form-group">
+          <label for="userId">아이디</label>
+          <input type="text" id="userId" name="userId" required="required"/>
+        </div>
+        <div class="form-group" style="float:left">
+          <label for="userPwd">비밀번호</label>
+          <input type="password" id="userPwd" name="userPwd" required="required"/>
+        </div>
+        
+        <div class="form-group" style="float:left; width:90px;"> 
+        </div>
+        
+        <div class="form-group">
+          <label for="userPwd2">비밀번호 확인</label>
+          <input type="password" id="userPwd2" name="userPwd2" required="required"/>
+        </div>
+         <div class="form-group" style="float:left">
+          <label for="userName">이름</label>
+          <input type="text" id="userName" name="userName" required="required"/>
+        </div>
+        
+        <div class="form-group" style="float:left; width:90px;"> 
+        </div>
+        
+        <div class="form-group">
+          <label for="nickName">닉네임</label>
+          <input type="text" id="nickName" name="nickName" hint="실명 가능" required="required"/>
+        </div>
+        <div class="form-group">
+          <label for="gender">성별</label>
+          <input type="radio" id="male" name="gender" value="M" required="required"/>
+          <input type="radio" id="female" name="gender" value="F" required="required"/>
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required="required"/>
+        </div>
+        <div class="form-group">
+          <button type="submit">Register</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> 
+<script type="text/javascript">
+$(document).ready(function() {
+  var panelOne = $('.form-panel.two').height(),
+    panelTwo = $('.form-panel.two')[0].scrollHeight;
+
+  $('.form-panel.two').not('.form-panel.two.active').on('click', function(e) {
+    e.preventDefault();
+
+    $('.form-toggle').addClass('visible');
+    $('.form-panel.one').addClass('hidden');
+    $('.form-panel.two').addClass('active');
+    $('.form').animate({
+      'height': panelTwo
+    }, 200);
+  });
+
+  $('.form-toggle').on('click', function(e) {
+    e.preventDefault();
+    $(this).removeClass('visible');
+    $('.form-panel.one').removeClass('hidden');
+    $('.form-panel.two').removeClass('active');
+    $('.form').animate({
+      'height': panelTwo
+    }, 200);
+  });
+});
+</script>
 </body>
 </html>
