@@ -40,5 +40,11 @@ public class HappymemberController {
 	public String happy7() {
 		return "happymember/proofDocument";
 	}
-
+	
+	@RequestMapping("Aerin_goosListPopup.happy")
+	public String happy8() {
+		return "happymember/goosListPopup";
+	}
+	
 }
+
