@@ -27,12 +27,12 @@
 	
 }	
 .tableArea{
-	width : 96%;
+	width : 100%;
 	margin : 0 auto;
 	padding-top: 50px;
 	padding-bottom: 20px;
 	margin-left: 20px;
-	margin-right: 20px; 
+	margin-right: 20px;  
 }
 	table {
 		width : 96%;
