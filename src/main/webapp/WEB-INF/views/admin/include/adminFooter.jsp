@@ -7,15 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-<footer><p>All right reserved. Template by: <a href="http://webthemez.com">WebThemez.com</a></p>
-				
-        
-				</footer>
-            </div>
-            <!-- /. PAGE INNER  -->
-        </div>
-        <!-- /. PAGE WRAPPER  -->
-    </div>
+
+   
     <!-- /. WRAPPER  -->
     <!-- JS Scripts-->
     <!-- jQuery Js -->

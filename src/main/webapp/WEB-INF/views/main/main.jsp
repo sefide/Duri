@@ -7,19 +7,20 @@
 <title>Insert title here</title>
 </head>
 <body>
-
-	<a href="Euihee_chart.ad">의희 chart.jsp</a><br>
-	<a href="Euihee_empty.ad">의희 empty.jsp</a><br>
-	<a href="Euihee_form.ad">의희 form.jsp</a><br>
-	<a href="Euihee_index.ad">의희 index.jsp</a><br>
-	<a href="Euihee_morris-chart.ad">의희 morris-chart.jsp</a><br>
-	<a href="Euihee_tab-panel.ad">의희 tab-panel.jsp</a><br>
-	<a href="Euihee_table.ad">의희 table.jsp</a><br>
-	<a href="Euihee_ui-elements.ad">의희 ui-elements.jsp</a><br>
+	의희 관리자 뷰<br>
+	<a href="adminCrowd.ad">크라우드펀딩 관리페이지</a><br>
+	<a href="adminGoods.ad">후원 물품관리 페이지</a><br>
+	<a href="adminMain.ad">관리자 메인페이지</a><br>
+	<a href="adminNanum.ad">나눔두리 관리페이지</a><br>
+	<a href="adminHappy.ad">행복두리 승인페이지</a><br>
+	<a href="adminHappyAll.ad">행복두리 전체관리페이지</a><br>
+	<a href="QnA.ad">관리자Q&A</a><br>
+	<a href="Euihee_ui-elements.ad">템플릿</a><br>
 	
 
-	아진이 뷰 
+
 	<hr>
+		아진이 뷰 
 	<a href="Ajin1.nanum">아진 - 전체 메인페이지</a><br>
 	<a href="Ajin2.nanum">아진 - 나눔두리 메인페이지</a><br>
 	<a href="Ajin3.nanum">아진 - 마이페이지</a><br>
