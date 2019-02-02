@@ -4,10 +4,17 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-
+<jsp:include page="include/common.jsp" />
+<title>둘이두리</title>
 <jsp:include page="../common/css.jsp"/>
 <style>
+	.ftco-section {
+    	padding: 1em 0;
+    }
+    .contBox {
+		padding-bottom: 0px; 
+		min-height: 0px; 
+	}
 	#nav_back{
     		background: #FFBB50; 
     		height:83px; 
@@ -153,15 +160,23 @@
 		font-size : 30px;
 		font-weight : 700;
 	}
+	.row tr:nth-child(even) {
+	    background: none;
+	}
 
 </style>
 </head>
 <body>
 	 <!-- 네비바 -->
 	<jsp:include page="../common/navi.jsp"/>
-   
-    <div id ="nav_back" data-stellar-background-ratio="0.5">
-    </div> 
+	
+	<jsp:include page="../Nanummember/include/header.jsp" />	
+	
+ 	<div id="wrap">		
+		<div class="contBox inner">
+			<jsp:include page="include/tabMypage_point.jsp"/>	
+		</div>
+	</div>
     
     <section class="ftco-section">
     	<div class="container">
@@ -223,8 +238,8 @@
 	    		<div>투명한 기부 후기로 그 변화를 소개하고 보답하겠습니다!</div>
     		</div>
     	</div>
-    	</section>
-    
+   	</section>
+    <br><br><br><br>
     <!-- footer  -->
     <jsp:include page="../common/footer.jsp"></jsp:include>
 
