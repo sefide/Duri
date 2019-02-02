@@ -6,33 +6,36 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class AdminController {
 
-	@RequestMapping("Euihee_chart.ad")
-	public String admin1() {
-		return "admin/chart";
-}
-	@RequestMapping("Euihee_empty.ad")
+
+
+	@RequestMapping("QnA.ad")
 	public String admin2() {
-		return "admin/empty";
+		return "admin/QnA";
 	}
-	@RequestMapping("Euihee_form.ad")
+	@RequestMapping("adminCrowd.ad")
 	public String admin3() {
-		return "admin/form";
+		return "admin/adminCrowd";
 	}
-	@RequestMapping("Euihee_index.ad")
+	@RequestMapping("adminMain.ad")
 	public String admin4() {
-		return "admin/index";
+		return "admin/adminMain";
 	}
-	@RequestMapping("Euihee_morris-chart.ad")
-	public String admin5() {
-		return "admin/morris-chart";
-	}
-	@RequestMapping("Euihee_tab-panel.ad")
+
+	@RequestMapping("adminGoods.ad")
 	public String admin6() {
-		return "admin/tab-panel";
+		return "admin/adminGoods";
 	}
-	@RequestMapping("Euihee_table.ad")
+	@RequestMapping("adminNanum.ad")
 	public String admin7() {
-		return "admin/table";
+		return "admin/adminNanum";
+	}
+	@RequestMapping("adminHappy.ad")
+	public String admin10() {
+		return "admin/adminHappy";
+	}
+	@RequestMapping("adminHappyAll.ad")
+	public String admin9() {
+		return "admin/adminHappyAll";
 	}
 	@RequestMapping("Euihee_ui-elements.ad")
 	public String admin8() {
