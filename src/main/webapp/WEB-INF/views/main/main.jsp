@@ -36,9 +36,7 @@
 	<a href="Aerin_thankyouLetter.happy">애린 - thankyouLetter.jsp</a><br>
 	<a href="Aerin_qna.happy">애린 - qna.jsp</a><br>
 	<a href="Aerin_proofDocument.happy">애린 - proofDocument.jsp</a><br>
-	<a href="Aerin_goosListPopup.happy">애린 - goosListPopup.jsp</a>
-	goosListPopup
-
+	
 	<hr>
 	은지 뷰
 	<a href="Eunji_cloudList.bo">은지 - 크라우드펀딩 페이지(금액후원)</a><br>
