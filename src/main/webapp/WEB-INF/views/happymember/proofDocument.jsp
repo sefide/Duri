@@ -16,7 +16,7 @@
 	.textOrange {color: orange; font-weight: 600;} */
 </style>
 
-<title>회원정보수정</title>
+<title>증빙서류 관리</title>
 <!-- 증빙서류 -->
 </head>
 <body>

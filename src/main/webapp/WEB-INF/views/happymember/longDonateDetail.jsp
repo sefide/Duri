@@ -2,7 +2,7 @@
 
 <%@ include file="include/common.jsp" %>
 
-<title>기사 선택</title>
+<title>정기후원>상세페이지</title>
 <!-- 정기후원 상세페이지 -->
 
 <script type="text/javascript">

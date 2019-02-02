@@ -16,7 +16,7 @@
 	.textOrange {color: orange; font-weight: 600;} */
 </style>
 
-<title>충전하기</title>
+<title>감사편지 쓰기</title>
 <!-- 감사편지 쓰기 -->
 
 </head>
