@@ -46,5 +46,16 @@
 	<a href="Eunji_happyLogin.me">은지 - 로그인페이지(행복두리)</a><br>
 	<a href="Eunji_nanumLogin.me">은지 - 로그인페이지(나눔두리)</a><br>
 	
+	<hr>
+	
+	<a href="directFund.pm">다힝 정기후원 진행</a><br>
+	<a href="fundItem.pm">다힝 물품후원 진행</a><br>
+	<a href="fundMoney.pm">다힝 금액후원 진행</a><br>
+	<a href="pointCharge.pm">다힝 포인트 충전</a><br>
+	<a href="pointHistory.pm">다힝 포인트 히스토리</a><br>
+	<a href="donateReceipt.pm">다힝 기부금영수증</a><br>
+	<a href="pointReturn.pm">다힝 포인트 환급_나눔두리</a><br>
+	<a href="pointReturnHappy.pm">다힝 포인트 환급_행복두리</a><br>
+	
 </body>
 </html>

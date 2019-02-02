@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<jsp:include page="include/common.jsp" />
+<jsp:include page="../Nanummember/include/common.jsp" />
 <title>둘이두리</title>
 <jsp:include page="../common/css.jsp"/>
 <style>
@@ -16,10 +16,10 @@
 		min-height: 0px; 
 	}
 	#nav_back{
-   		background: #FFBB50; 
-   		height:83px; 
-   		box-shadow:0 0 6px 0 #B8B8B8; 
-   	}
+    		background: #FFBB50; 
+    		height:83px; 
+    		box-shadow:0 0 6px 0 #B8B8B8; 
+    	}
 	#pTitle{
 		display: block;
 		font-size : 30px;
@@ -38,29 +38,29 @@
 		width : 35%;
 		height : 100%;
 	}
-   	#bar1{
-   		width:98%; 
-   		margin: 0% auto; 
-   		border-bottom:1px solid #B8B8B8;
-   		height : 10px;
-   		margin-top : 15px;
-   	}
-   	#bar2{
-   		width:98%; 
-   		margin: 0% auto; 
-   		border-top:1px solid #B8B8B8;
-   		height : 10px;
-   		margin-bottom : 15px;
-   	}
+    	#bar1{
+    		width:98%; 
+    		margin: 0% auto; 
+    		border-bottom:1px solid #B8B8B8;
+    		height : 10px;
+    		margin-top : 15px;
+    	}
+    	#bar2{
+    		width:98%; 
+    		margin: 0% auto; 
+    		border-top:1px solid #B8B8B8;
+    		height : 10px;
+    		margin-bottom : 15px;
+    	}
 	#bar3{
-   		width:98%; 
-   		border-top:1px solid #B8B8B8;
-   		height : 10px;
-   		margin: 5px auto;
-   	}
-   	
-   	/* 좌측 flex */
-   	#subTitle{
+    		width:98%; 
+    		border-top:1px solid #B8B8B8;
+    		height : 10px;
+    		margin: 5px auto;
+    	}
+    	
+    	/* 좌측 flex */
+    	#subTitle{
 		margin: 20px 0;
 	}
     #returnValue{
@@ -159,9 +159,7 @@
 		margin-right : 10px;
 		margin-top : 10px;
 	}
-		.row tr:nth-child(even) {
-	    background: none;
-	}
+	
 	
 
 </style>
@@ -255,8 +253,7 @@
     		<div id = "bar2"></div>
     		
     	</div>
-    </section>
-    <br><br><br><br>
+    	</section>
     
     <!-- footer  -->
     <jsp:include page="../common/footer.jsp"></jsp:include>
