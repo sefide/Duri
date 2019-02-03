@@ -4,7 +4,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<!-- Bootstrap Styles-->
+	
+	
+	
+	<!-- Bootstrap Styles-->
     <link href="/duri/resources/admin/css/bootstrap.css" rel="stylesheet" />
     <!-- FontAwesome Styles-->
     <link href="/duri/resources/admin/css/font-awesome.css" rel="stylesheet" />
@@ -15,6 +18,10 @@
     <!-- Google Fonts-->
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
     <link rel="stylesheet" href="/duri/resources/admin/js/Lightweight-Chart/cssCharts.css"> 
+  
+     <!-- TABLE STYLES-->
+    <link href="/duri/resources/admin/js/dataTables/dataTables.bootstrap.css" rel="stylesheet" />
+    
 </head>
 <body>
 

@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<div id="wrapper">
+
         <nav class="navbar navbar-default top-navbar" role="navigation">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
@@ -21,8 +21,8 @@
 		<i class="fa fa-bars icon"></i> 
 		</div>
             </div>
-        </nav>
-        </div>
+    </nav>
+      
 
 </body>
 </html>
