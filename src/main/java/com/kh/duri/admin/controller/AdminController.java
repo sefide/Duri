@@ -29,6 +29,10 @@ public class AdminController {
 	public String admin7() {
 		return "admin/adminNanum";
 	}
+	@RequestMapping("adminNanumDetail.ad")
+	public String admin14() {
+		return "admin/adminNanumDetail";
+	}
 	@RequestMapping("adminHappy.ad")
 	public String admin10() {
 		return "admin/adminHappy";

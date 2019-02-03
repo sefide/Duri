@@ -399,7 +399,7 @@ line-height: 30px;
 	 
  .chat-panel .panel-body {
 height: 450px;
-overflow-y: scroll;
+overflow-y: scroll; 
 }
  .chat-box {
 margin: 0;

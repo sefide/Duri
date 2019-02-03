@@ -19,7 +19,7 @@
     <script src="/duri/resources/admin/js/dataTables/dataTables.bootstrap.js"></script>
         <script>
             $(document).ready(function () {
-                $('#dataTables-example').dataTable();
+                $('.dataTables-example').dataTable();
             });
     </script>
          <!-- Custom Js -->
