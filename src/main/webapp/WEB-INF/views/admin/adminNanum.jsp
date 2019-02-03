@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -8,61 +8,44 @@
 	<meta content="" name="description" />
     <meta content="webthemez" name="author" />
     <title>Bootstrap Admin html Template : Master - WebThemez</title>
-	 <jsp:include page="include/adminStyle.jsp"/>
-	 
+	<jsp:include page="include/adminStyle.jsp" />
 </head>
 <body>
-     <jsp:include page="include/adminNavi.jsp"/>
-     <nav class="navbar-default navbar-side" role="navigation">
-            <div class="sidebar-collapse">
-                <ul class="nav" id="main-menu">
-                    <li>
-                        <a href="adminMain.ad"><i class="fa fa-dashboard"></i>통계관리</a>
-                    </li>
-                       <li>
-                        <a href="adminNanum.ad"  class="active-menu"><i class="fa fa-desktop"></i>나눔두리 관리</a>
-                    </li>
-                    
-					 <li>
-                        <a href="#" ><i class="fa fa-sitemap"></i>행복두리 관리<span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a href="adminHappyAll.ad">행복두리 전체관리</a>
-                            </li>
-                            <li>
-                                <a href="adminHappy.ad">행복두리 승인관리</a>
-                            </li>
-							</ul>
-						</li>	
-					 <li>
-                        <a href="#" ><i class="fa fa-edit"></i>Q&A 관리<span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a href="QnA.ad">나눔두리 Q&A</a>
-                            </li>
-                            <li>
-                                <a href="QnA.ad">행복두리 Q&A</a>
-                            </li>
-							</ul>
-						</li>	
-                   
-                    <li>
-                        <a href="#"><i class="fa fa-qrcode"></i>후원 관리<span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a href="adminCrowd.ad">크라우드 펀딩 관리</a>
-                            </li>
-                            <li>
-                                <a href="adminGoods.ad">후원 물품관리</a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-        
-        
-     
+    <div id="wrapper">
+       <jsp:include page="include/adminNavi.jsp" />
+	
+	<nav class="navbar-default navbar-side" role="navigation">
+	<div class="sidebar-collapse">
+		<ul class="nav" id="main-menu">
+			<li><a href="adminMain.ad" ><i
+					class="fa fa-dashboard"></i>통계관리</a></li>
+			<li><a href="adminNanum.ad" class="active-menu"><i class="fa fa-desktop"></i>나눔두리
+					관리</a></li>
+
+			<li><a href="#"><i class="fa fa-sitemap"></i>행복두리 관리<span
+					class="fa arrow"></span></a>
+				<ul class="nav nav-second-level">
+					<li><a href="adminHappyAll.ad">행복두리 전체관리</a></li>
+					<li><a href="adminHappy.ad">행복두리 승인관리</a></li>
+				</ul></li>
+			<li><a href="#"><i class="fa fa-edit"></i>Q&A 관리<span
+					class="fa arrow"></span> </a>
+				<ul class="nav nav-second-level">
+					<li><a href="QnA.ad">나눔두리 Q&A</a></li>
+					<li><a href="QnA.ad">행복두리 Q&A</a></li>
+				</ul></li>
+
+			<li><a href="#"><i class="fa fa-qrcode"></i>후원 관리<span
+					class="fa arrow"></span></a>
+				<ul class="nav nav-second-level">
+					<li><a href="adminCrowd.ad">크라우드 펀딩 관리</a></li>
+					<li><a href="adminGoods.ad">후원 물품관리</a></li>
+				</ul></li>
+		</ul>
+	</div>
+	</nav>
+	
+       
         <div id="page-wrapper" >
 		  <div class="header"> 
                         <h1 class="page-header">
@@ -508,283 +491,13 @@
                 </div>
             </div>
                 <!-- /. ROW  -->
-            <div class="row">
-                <div class="col-md-6">
-                  <!--   Kitchen Sink -->
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            Kitchen Sink
-                        </div>
-                        <div class="panel-body">
-                            <div class="table-responsive">
-                                <table class="table table-striped table-bordered table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th>#</th>
-                                            <th>First Name</th>
-                                            <th>Last Name</th>
-                                            <th>Username</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>Mark</td>
-                                            <td>Otto</td>
-                                            <td>@mdo</td>
-                                        </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>Jacob</td>
-                                            <td>Thornton</td>
-                                            <td>@fat</td>
-                                        </tr>
-                                        <tr>
-                                            <td>3</td>
-                                            <td>Larry</td>
-                                            <td>the Bird</td>
-                                            <td>@twitter</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                     <!-- End  Kitchen Sink -->
-                </div>
-                <div class="col-md-6">
-                     <!--   Basic Table  -->
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            Basic Table
-                        </div>
-                        <div class="panel-body">
-                            <div class="table-responsive">
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                            <th>#</th>
-                                            <th>First Name</th>
-                                            <th>Last Name</th>
-                                            <th>Username</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>Mark</td>
-                                            <td>Otto</td>
-                                            <td>@mdo</td>
-                                        </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>Jacob</td>
-                                            <td>Thornton</td>
-                                            <td>@fat</td>
-                                        </tr>
-                                        <tr>
-                                            <td>3</td>
-                                            <td>Larry</td>
-                                            <td>the Bird</td>
-                                            <td>@twitter</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                      <!-- End  Basic Table  -->
-                </div>
-            </div>
-                <!-- /. ROW  -->
-            <div class="row">
-                <div class="col-md-6">
-                      <!--    Striped Rows Table  -->
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            Striped Rows Table
-                        </div>
-                        <div class="panel-body">
-                            <div class="table-responsive">
-                                <table class="table table-striped">
-                                    <thead>
-                                        <tr>
-                                            <th>#</th>
-                                            <th>First Name</th>
-                                            <th>Last Name</th>
-                                            <th>Username</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>Mark</td>
-                                            <td>Otto</td>
-                                            <td>@mdo</td>
-                                        </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>Jacob</td>
-                                            <td>Thornton</td>
-                                            <td>@fat</td>
-                                        </tr>
-                                        <tr>
-                                            <td>3</td>
-                                            <td>Larry</td>
-                                            <td>the Bird</td>
-                                            <td>@twitter</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                    <!--  End  Striped Rows Table  -->
-                </div>
-                <div class="col-md-6">
-                    <!--    Bordered Table  -->
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            Bordered Table
-                        </div>
-                        <!-- /.panel-heading -->
-                        <div class="panel-body">
-                            <div class="table-responsive table-bordered">
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                            <th>#</th>
-                                            <th>First Name</th>
-                                            <th>Last Name</th>
-                                            <th>Username</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>Mark</td>
-                                            <td>Otto</td>
-                                            <td>@mdo</td>
-                                        </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>Jacob</td>
-                                            <td>Thornton</td>
-                                            <td>@fat</td>
-                                        </tr>
-                                        <tr>
-                                            <td>3</td>
-                                            <td>Larry</td>
-                                            <td>the Bird</td>
-                                            <td>@twitter</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                     <!--  End  Bordered Table  -->
-                </div>
-            </div>
-                <!-- /. ROW  -->
-            <div class="row">
-                <div class="col-md-6">
-                     <!--    Hover Rows  -->
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            Hover Rows
-                        </div>
-                        <div class="panel-body">
-                            <div class="table-responsive">
-                                <table class="table table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th>#</th>
-                                            <th>First Name</th>
-                                            <th>Last Name</th>
-                                            <th>Username</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>Mark</td>
-                                            <td>Otto</td>
-                                            <td>@mdo</td>
-                                        </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>Jacob</td>
-                                            <td>Thornton</td>
-                                            <td>@fat</td>
-                                        </tr>
-                                        <tr>
-                                            <td>3</td>
-                                            <td>Larry</td>
-                                            <td>the Bird</td>
-                                            <td>@twitter</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- End  Hover Rows  -->
-                </div>
-                <div class="col-md-6">
-                     <!--    Context Classes  -->
-                    <div class="panel panel-default">
-                       
-                        <div class="panel-heading">
-                            Context Classes
-                        </div>
-                        
-                        <div class="panel-body">
-                            <div class="table-responsive">
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                            <th>#</th>
-                                            <th>First Name</th>
-                                            <th>Last Name</th>
-                                            <th>Username</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr class="success">
-                                            <td>1</td>
-                                            <td>Mark</td>
-                                            <td>Otto</td>
-                                            <td>@mdo</td>
-                                        </tr>
-                                        <tr class="info">
-                                            <td>2</td>
-                                            <td>Jacob</td>
-                                            <td>Thornton</td>
-                                            <td>@fat</td>
-                                        </tr>
-                                        <tr class="warning">
-                                            <td>3</td>
-                                            <td>Larry</td>
-                                            <td>the Bird</td>
-                                            <td>@twitter</td>
-                                        </tr>
-                                        <tr class="danger">
-                                            <td>4</td>
-                                            <td>John</td>
-                                            <td>Smith</td>
-                                            <td>@jsmith</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                    <!--  end  Context Classes  -->
-                </div>
-            </div>
-                <!-- /. ROW  -->
+            
+            
         </div>
-               <jsp:include page="include/adminFooter.jsp"/>
+    </div>
+             <!-- /. PAGE INNER  -->
+            </div>
+    
+    <jsp:include page="include/admintableFooter.jsp" />
 </body>
 </html>
