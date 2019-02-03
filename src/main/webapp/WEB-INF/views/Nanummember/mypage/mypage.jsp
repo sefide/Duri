@@ -2,14 +2,10 @@
 <% 
 	String bigtabon="1";
 %>
-<script
-  src="https://code.jquery.com/jquery-3.1.1.min.js"
-  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
-  crossorigin="anonymous"></script>
-<script src="semantic/dist/semantic.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<link rel="stylesheet" type="text/css" href="semantic/dist/semantic.min.css">
 
+<!-- semantic ui -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+<script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
 
 
 <%@ include file="../include/common.jsp" %>
@@ -22,49 +18,56 @@
 #myTitle{
 	margin-bottom: 20px;
 	font-size:25px;
-	color: rgb(50, 147, 63);
+	color: rgba(250, 143, 61);
 	font-weight: bold;
 	
 }	
 .tableArea{
-	width : 100%;
+	width : 95%;
 	margin : 0 auto;
 	padding-top: 50px;
 	padding-bottom: 20px;
-	margin-left: 20px;
-	margin-right: 20px;  
+/* 	margin-left: 20px;
+	margin-right: 20px;   */
 }
 	table {
 		width : 96%;
 		margin : 0 auto;
 		color : #434343;
-		border-top : 4px solid #FE9D35;
+		border-top : 4px solid #FE9D35; 
 		text-align:center;	
+		margin-bottom: 10px;
 	}
-	th{	
-			
+	th{				
 		color :  rgba(250, 143, 61);
-		background : rgba(200,200,200,0.5);
+		background : #FFEDBF;
 		font-weight: bold;
 		font-size: 17px;
 	}
 	tr{
-		height : 60px;
+		height : 50px;
 	}
 	td{
-		font-size: 20px;
+		font-size: 16px;
 	}
 	.categotyBtn{
 		width: 80px;
 		height: 30px;
 		text-align: center;
 		display: table-cell;
-        vertical-align: middle;
-		background-color: black;
-		color: white;
-		
+        vertical-align: middle; 
+		background-color: #FFEDBF; 
+		/* border-top: 3px solid #FE9D35;
+		border-left: 3px solid #FE9D35; */
+		/* border-right: 1px solid #FE9D35; */	 
+		color: #FE9D35;
+		font-weight:bold;
+		/*margin-left : 10px;
+		margin-right: 10px;		
 		padding-left: 10px;
-		padding-right: 10px;
+		padding-right: 10px;  */
+		cursor:pointer;
+		text-align: center;
 		
 	}
 	
@@ -79,9 +82,9 @@
 				<%@ include file="../include/tabMypage.jsp"%>
 
 			<div class="tableArea">
-				<div id="myTitle">진행중인 크라우드 펀딩</div>
-				<div style="padding-left: 30px;">
-				<div class="categotyBtn" onclick="#">금액</div>
+				<div id="myTitle"> <i class="hourglass half icon"></i>진행중인 크라우드 펀딩</div>
+				<div style="width: 96%; margin: 0 auto;">
+				<div class="categotyBtn" onclick="#" style="margin-right: 30px;">금액</div>
 				<div class="categotyBtn" onclick="#">물품</div>
 				</div>
 				<table>
@@ -114,10 +117,27 @@
 						</tr>
 					</tbody>
 				</table>
+				<div class="col text-center">
+					<div class="block-27">
+						<ul>
+							<li><a href="#">&lt;</a></li>
+							<li class="active"><span>1</span></li>
+							<li><a href="#">2</a></li>
+							<li><a href="#">3</a></li>
+							<li><a href="#">4</a></li>
+							<li><a href="#">5</a></li>
+							<li><a href="#">&gt;</a></li>
+						</ul>
+					</div>
+				</div>
 			</div>
 
 			<div class="tableArea">
-				<div id="myTitle">종료된 크라우드 펀딩</div>
+				<div id="myTitle"><i class="hourglass end icon"></i>종료된 크라우드 펀딩</div>
+				<div style="width: 96%; margin: 0 auto;">
+				<div class="categotyBtn" onclick="#" style="margin-right: 30px;">금액</div>
+				<div class="categotyBtn" onclick="#">물품</div>
+				</div>
 				<table>
 					<thead>
 						<tr>
@@ -148,6 +168,19 @@
 						</tr>
 					</tbody>
 				</table>
+				<div class="col text-center">
+					<div class="block-27">
+						<ul>
+							<li><a href="#">&lt;</a></li>
+							<li class="active"><span>1</span></li>
+							<li><a href="#">2</a></li>
+							<li><a href="#">3</a></li>
+							<li><a href="#">4</a></li>
+							<li><a href="#">5</a></li>
+							<li><a href="#">&gt;</a></li>
+						</ul>
+					</div>
+				</div>
 			</div>
 		</div>								
 	</div>		

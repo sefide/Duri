@@ -2,6 +2,9 @@
 <link
 	href="https://fonts.googleapis.com/css?family=Gamja+Flower|Nanum+Gothic:400,700,800|Nanum+Pen+Script|Poor+Story&amp;subset=korean" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="semantic/dist/semantic.min.css">
+<!-- semantic ui -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+<script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
 
 <style>
 .mynav_2{	
@@ -14,31 +17,30 @@
 }
 #container {
   	display: flex;
+  	width : 70%;
+  	margin: 0 auto;
   	margin-top:20px;
-	margin-bottom:10px;
-	margin-left:150px;
-	margin-right:150px;
+	margin-bottom:20px;
 	padding-top : 15px;
-	padding-bottom:10px;
-	background: #ffc107;
+	padding-bottom:15px;
+	background: rgb(242, 179, 78);
 	line-height: 60px;
 	border-radius: 0.5em;
-	/* font-family: Nanum Pen Script; */
 }
 #box-left {
-	 /* background: red; */
 	 flex: 1;
-	 color: white;	 
-	 text-align: center;
+	 color: white;	  
+	 text-align: left;
 	 line-height: 60px;
-	 font-size:25px !important;
+	 font-size:23px !important;
+	 padding-left: 10px;
 	 /* font-weight: bold;  */
 	 /* font-family: Nanum Pen Script;  */
 }
 #box-center { 	
  	flex: 1;
  	color: white;
- 	font-size:25px !important;
+ 	font-size:22px !important;
   	text-align: left; 	
   	display: table-cell;
 	vertical-align: middle;	
@@ -69,7 +71,9 @@
 	<a class="mynav_2" ref="#" >회원정보 수정</a>
 	<a class="mynav_2" href="#">로그아웃</a>
 	<div class="" id="container">	
-		<div id='box-left'>이아진님 반갑습니다!</div>
+		<div id='box-left'>
+		<i class="handshake outline icon"></i>
+		<span id='box-left' style="font-weight: bold; margin-left: 5px;">이아진 </span>님 반갑습니다!</div>
     	<div id='box-center'>
     		등급 : 새싹두리<br>
     		포인트 : 50,000 원 <br>
