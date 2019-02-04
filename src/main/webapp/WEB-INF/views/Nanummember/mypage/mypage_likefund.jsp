@@ -48,6 +48,7 @@
 		height : 50px;
 	}
 	td{
+		cursor : pointer;
 		font-size: 16px;
 	}
 	.categotyBtn{
@@ -86,30 +87,22 @@
 				<table>
 					<thead>
 						<tr>
-							<th style="width: 45%;">제목</th>
-							<th style="width: 15%;">진행현황</th>
-							<th style="width: 30%;">내가 후원한 호인트</th>
-							<th style="width: 15%;">100%달성여부</th>
+							<th style="width: 20%;">행복두리</th>
+							<th style="width: 80%;">자기소개</th>							
 						</tr>
 					</thead>
 					<tbody>
 						<tr>
-							<td>굶어서 영양실조에 걸린 제 동생을 도와주세요</td>
-							<td>80%</td>
-							<td>20,000원</td>
-							<td>X</td>
+							<td>행콩이</td>
+							<td>4남매 중 첫째인 저는 소녀가장입니다. 4남매다 보니 보조금은 턱없이 부족합니다....</td>
 						</tr>
 						<tr>
-							<td>학교에 가고 싶어요</td>
-							<td>70%</td>
-							<td>50,000원</td>
-							<td>X</td>
+							<td>뭉뭉이</td>
+							<td>안녕하세요. 외 증조 할머니와 살고있는 고등학생입니다. 학교가기도 너무힘들고 ....</td>							
 						</tr>
 						<tr>
-							<td>추운겨울 월세를 못내서,,,</td>
-							<td>100%</td>
-							<td>40,000원</td>
-							<td>O</td>
+							<td>햇살이</td>
+							<td>차가운 물, 보일러도 안들어오는 집에 살고있는 중입니다. 저희는 ....</td>							
 						</tr>
 					</tbody>
 				</table>
@@ -137,30 +130,23 @@
 				<table>
 					<thead>
 						<tr>
-							<th style="width: 45%;">제목</th>
-							<th style="width: 15%;">진행현황</th>
-							<th style="width: 30%;">내가 후원한 호인트</th>
-							<th style="width: 15%;">100%달성여부</th>
+							<th style="width: 20%;">행복두리</th>
+							<th style="width: 80%;">크라우드 펀딩 제목</th>
+							
 						</tr>
 					</thead>
 					<tbody>
 						<tr>
-							<td>밀린 월세를 도와주세요</td>
-							<td>77%</td>
-							<td>10,000원</td>
-							<td>X</td>
+							<td>눈송이</td>
+							<td>간이 아픈 제 동생의 수술비를 도와주세요.</td>							
 						</tr>
 						<tr>
-							<td>계속해서 공부를 하고싶어요</td>
-							<td>100%</td>
-							<td>40,000원</td>
-							<td>O</td>
+							<td>솔솔향기</td>
+							<td>추운겨울 집에서 쫓겨날 위기에 처해있어요.</td>						
 						</tr>
 						<tr>
-							<td>제 동생의 간 수술비를 도와주세요</td>
-							<td>100%</td>
-							<td>20,000원</td>
-							<td>O</td>
+							<td>하하호호</td>
+							<td>학교에 가고싶은데 입학금이 부족해요.</td>						
 						</tr>
 					</tbody>
 				</table>

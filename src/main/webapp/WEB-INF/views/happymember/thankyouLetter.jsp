@@ -27,7 +27,7 @@
 
 <%@ include file="include/header.jsp" %>
 
-<div id="subvisual"></div>
+<%@ include file="include/myNav.jsp" %>
 
 <div id="subContainer">
 	<div class="contBox inner"><!-- inner S -->
@@ -88,7 +88,6 @@
 </div><!--// Wrap E-->
 
 
-<%@ include file="include/myNav.jsp" %>
 
 </body>
 </html>

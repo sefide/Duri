@@ -168,7 +168,7 @@ a {color: black; !important}
 /* numberStyle */
 .numbox {clear:both; position:relative; text-align:center; height:30px;}
 .numbox span {display:inline-block; }
-.numbox a {display:block; width:30px; height:30px; line-height:30px;}
+.numbox a {display:block; width:30px; height:30px; line-height:30px; color:#444; font-size: 15px;}
 .numbox .num {border:1px solid #dfdfdf;}
 .numbox .on,.numbox a:hover {border:0; background:#444; border:1px solid #444; color:#fff;}
 
