@@ -15,42 +15,6 @@
 	#button{text-align: center;}
 	/* .textSilver {color: silver; font-weight: 600;}
 	.textOrange {color: orange; font-weight: 600;} */
-	
-	/* 모달 background */
-	.modal {
-		display: none; /* 버튼 누르기 전은 숨겨놓기 */
-		position: fixed; /* Stay in place */
-		z-index: 1; /* 뷰 위에 띄워야 하니까 1로 설정 (뷰는 0) */
-		left: 0;
-		top: 0;
-		width: 100%;
-		height: 100%; 
-		overflow: auto; /* Enable scroll if needed */
-		background-color: rgb(0, 0, 0); 
-		background-color: rgba(0, 0, 0, 0.4); /* 투명도 */
-	}
-	
-	/* 모달 내용 */
-	.modal-content {
-		background-color: #fefefe;
-		margin: 15% auto; /* 중앙정렬 */
-		padding: 20px;
-		border: 1px solid #888;
-		width: 50%; /* Could be more or less, depending on screen size */
-	}
-	/* 닫기 버튼 */
-	.close {
-		color: #aaa;
-		float: right;
-		font-size: 28px;
-		font-weight: bold;
-	}
-	
-	.close:hover, .close:focus {
-		color: black;
-		text-decoration: none;
-		cursor: pointer;
-	}
 </style>
 </head>
 <body>
@@ -60,69 +24,26 @@
 
 <%@ include file="include/header.jsp" %>
 
-<div id="subvisual">
-	<div id="subvisual-sub">
-		<!-- Trigger/Open The Modal -->
-		<button id="modalBtn">물품목록</button>
-	</div>
-</div>
-
-<!-- 물품목록 모달 띄우기 S -->
-<!-- 모달 창  -->
-<div id="myModal" class="modal">
- 
-	<!-- 내용 -->
-	<div class="modal-content">
-		<span class="close">&times;</span>                                                               
-		<p>Some text in the Modal..</p>
-	</div>
- 
-</div>
-<script>
-
-	//모달 가져오기
-	var modal = document.getElementById('myModal');
-
-	//모달창 여는 버튼
-	var btn = document.getElementById("modalBtn");
-
-	//모달 닫기
-	var spanclose = document.getElementsByClassName("close")[0];
-
-	//버튼을 눌렀을 때 모달 창 띄우기
-	btn.onclick = function() {
-		modal.style.display = "block";
-	}
-
-	//(x)를 눌렀을 때 모달 창 닫기
-	spanclose.onclick = function() {
-		modal.style.display = "none";
-	}
-
-	//외부의 검은 화면 클릭 시 모달 창 닫기
-	window.onclick = function(event) {
-		if (event.target == modal) {
-			modal.style.display = "none";
-		}
-	}
-</script>
-<!-- 물품목록 모달 띄우기 E -->
+<%@ include file="include/myNav.jsp" %>
 
 <div id="subContainer">
 	<div class="contBox inner"><!-- inner S -->
 
 		<%@ include file="include/tabMypage.jsp" %>
 
-		<div style="float: left;"><h1><i class="chevron right icon"></i>물품 후원 현황</h1></div>
-		<div style="float: left;">
-			<h4 style="font-weight: 600">
-				진행중&nbsp;<i class="green circle icon" alt="진행중"></i>&nbsp;&nbsp;
-				종료&nbsp;<i class="red circle icon" alt="종료"></i>&nbsp;&nbsp;
-				승인대기중&nbsp;<i class="yellow circle icon" alt="승인대기중"></i>
-				<!-- <img src="/duri/resources/HappyMyPage/images/status/ing.PNG" width="26px" height="25px" alt="진행중"> -->
-				<!-- <img src="/duri/resources/HappyMyPage/images/status/finish.PNG" width="23px" height="24px" alt="종료"> -->
-				<!-- <img src="/duri/resources/HappyMyPage/images/status/wating.PNG" width="22px" height="24px" alt="승인대기중"> -->
-			</h4>
+		<div  class="titNavi">
+			<div style="float: left;"><h1><i class="chevron right icon"></i>물품 후원 현황</h1></div>
+			<div style="float: left;">
+				<h4 style="font-weight: 600">
+					진행중&nbsp;<i class="green circle icon" alt="진행중"></i>&nbsp;&nbsp;
+					종료&nbsp;<i class="red circle icon" alt="종료"></i>&nbsp;&nbsp;
+					승인대기중&nbsp;<i class="yellow circle icon" alt="승인대기중"></i>
+					<!-- <img src="/duri/resources/HappyMyPage/images/status/ing.PNG" width="26px" height="25px" alt="진행중"> -->
+					<!-- <img src="/duri/resources/HappyMyPage/images/status/finish.PNG" width="23px" height="24px" alt="종료"> -->
+					<!-- <img src="/duri/resources/HappyMyPage/images/status/wating.PNG" width="22px" height="24px" alt="승인대기중"> -->
+				</h4>
+			</div>
+			<span>마이페이지 &gt; 내 사연 &gt; 물품 후원 현황</span>
 		</div>
 		<br>
 		
@@ -182,25 +103,23 @@
 			<span><a class="num" href="#">3</a></span>
 			<span><a class="num" href="#">4</a></span>
 			<span><a class="num" href="#">5</a></span>
-			<span><a class="num" href="#">6</a></span>
-			<span><a class="num" href="#">7</a></span>
-			<span><a class="num" href="#">8</a></span>
-			<span><a class="num" href="#">9</a></span>
 			<span><a class="num" href="#">&gt;</a></span>
 		</div>
 		<br><br><br><br>
 		
-		
-		<div style="float: left;"><h1><i class="chevron right icon"></i>금액 후원 현황</h1></div>
-		<div style="float: left;">
-			<h4 style="font-weight: 600">
-				진행중&nbsp;<i class="green circle icon"></i>&nbsp;&nbsp;
-				종료&nbsp;<i class="red circle icon"></i>&nbsp;&nbsp;
-				승인대기중&nbsp;<i class="yellow circle icon"></i>
-				<!-- <img src="/duri/resources/HappyMyPage/images/status/ing.PNG" width="26px" height="25px" alt="진행중"> -->
-				<!-- <img src="/duri/resources/HappyMyPage/images/status/finish.PNG" width="23px" height="24px" alt="종료"> -->
-				<!-- <img src="/duri/resources/HappyMyPage/images/status/wating.PNG" width="22px" height="24px" alt="승인대기중"> -->
-			</h4>
+		<div class="titNavi">
+			<div style="float: left;"><h1><i class="chevron right icon"></i>금액 후원 현황</h1></div>
+			<div style="float: left;">
+				<h4 style="font-weight: 600">
+					진행중&nbsp;<i class="green circle icon"></i>&nbsp;&nbsp;
+					종료&nbsp;<i class="red circle icon"></i>&nbsp;&nbsp;
+					승인대기중&nbsp;<i class="yellow circle icon"></i>
+					<!-- <img src="/duri/resources/HappyMyPage/images/status/ing.PNG" width="26px" height="25px" alt="진행중"> -->
+					<!-- <img src="/duri/resources/HappyMyPage/images/status/finish.PNG" width="23px" height="24px" alt="종료"> -->
+					<!-- <img src="/duri/resources/HappyMyPage/images/status/wating.PNG" width="22px" height="24px" alt="승인대기중"> -->
+				</h4>
+			</div>
+			<span>마이페이지 &gt; 내 사연 &gt; 금액 후원 현황</span>
 		</div>
 		<br>
 		
@@ -250,10 +169,6 @@
 			<span><a class="num" href="#">3</a></span>
 			<span><a class="num" href="#">4</a></span>
 			<span><a class="num" href="#">5</a></span>
-			<span><a class="num" href="#">6</a></span>
-			<span><a class="num" href="#">7</a></span>
-			<span><a class="num" href="#">8</a></span>
-			<span><a class="num" href="#">9</a></span>
 			<span><a class="num" href="#">&gt;</a></span>
 		</div>
 		
@@ -262,7 +177,6 @@
 		<div id="button">
 			<button class="massive ui instagram button">사연 신청하러 가기</button>
 		</div>
-	</div>
 
 </div><!--// inner E-->
 </div> 
@@ -273,7 +187,7 @@
 </div><!--// Wrap E-->
 
 
-<%@ include file="include/myNav.jsp" %>
+
 
 </body>
 </html>

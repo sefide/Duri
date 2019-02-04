@@ -13,6 +13,7 @@
 
 <style>
 	a {color: #333;}
+	.num {font-size: 15px;}
 	#button{text-align: center;}
 	.textSilver {color: silver; font-weight: 600;}
 	.textOrange {color: orange; font-weight: 600;}
@@ -25,7 +26,7 @@
 
 <%@ include file="include/header.jsp" %>
 
-<div id="subvisual"></div>
+<%@ include file="include/myNav.jsp" %>
 
 <div id="subContainer">
 	<div class="contBox inner"><!-- inner S -->
@@ -37,16 +38,19 @@
 			<span>홈 &gt; 마이페이지 &gt; 내 공고 목록</span>
 		</div> -->
 		
-		<div style="float: left;" class="ptag"><h1><i class="chevron right icon"></i>정기 후원</h1></div>
-		<div style="float: left;">
-			<div style="float: left;" class="textSilver" >&nbsp;&nbsp;&nbsp;* 매월 둘째 주 월요일마다 후원 받은 금액이&nbsp;</div>
-			<div style="float: left;" class="textOrange" >포인트로  자동 충전</div>
-			<div style="float: left;" class="textSilver" >됩니다.&nbsp;반드시&nbsp;</div>
-			<div style="float: left;" class="textOrange" >포인트 환급 신청&nbsp;</div>
-			<div style="float: left;" class="textSilver" >바랍니다. </div>
-			<!-- <h5>&nbsp;&nbsp;
-			* 매월 둘째 주 월요일마다 후원 받은 금액이 포인트로  자동 충전됩니다. 반드시 포인트 환급 신청 바랍니다.
-			</h5> -->
+		<div class="titNavi">
+			<div style="float: left;"><h1><i class="chevron right icon"></i>정기 후원</h1></div>
+			<div style="float: left;">
+				<div style="float: left;" class="textSilver" >&nbsp;&nbsp;&nbsp;* 매월 둘째 주 월요일마다 후원 받은 금액이&nbsp;</div>
+				<div style="float: left;" class="textOrange" >포인트로  자동 충전</div>
+				<div style="float: left;" class="textSilver" >됩니다.&nbsp;반드시&nbsp;</div>
+				<div style="float: left;" class="textOrange" >포인트 환급 신청&nbsp;</div>
+				<div style="float: left;" class="textSilver" >바랍니다. </div>
+				<!-- <h5>&nbsp;&nbsp;
+				* 매월 둘째 주 월요일마다 후원 받은 금액이 포인트로  자동 충전됩니다. 반드시 포인트 환급 신청 바랍니다.
+				</h5> -->
+			</div>
+			<span>마이페이지 &gt; 정기 후원 현황</span>
 		</div>
 		<br>
 		
@@ -90,10 +94,6 @@
 			<span><a class="num" href="#">3</a></span>
 			<span><a class="num" href="#">4</a></span>
 			<span><a class="num" href="#">5</a></span>
-			<span><a class="num" href="#">6</a></span>
-			<span><a class="num" href="#">7</a></span>
-			<span><a class="num" href="#">8</a></span>
-			<span><a class="num" href="#">9</a></span>
 			<span><a class="num" href="#">&gt;</a></span>
 		</div>
 		
@@ -113,8 +113,6 @@
 
 </div><!--// Wrap E-->
 
-
-<%@ include file="include/myNav.jsp" %>
 
 </body>
 </html>

@@ -1,15 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
+<% 
+	String bigtabon="4";
+%>
 <%@ include file="include/common.jsp" %>
 
-<title>정기후원>상세페이지</title>
-<!-- 정기후원 상세페이지 -->
+<!-- semantic ui -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+<script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
 
-<script type="text/javascript">
-function fn_open() {
-   window.open('deliDetailPop.jsp','deliDetailPop','scrollbars=yes,menubar=no,toolbar=no,location=no,top=50,left=50,width=700,height=600');
-}
-</script>
+<style>
+	.to {font-size: 30px; font-weight: 600;}
+	a {color: #333;}
+	#button{text-align: center;}
+	/* .textSilver {color: silver; font-weight: 600;}
+	.textOrange {color: orange; font-weight: 600;} */
+</style>
+
+<title>감사편지 쓰기</title>
+<!-- 감사편지 쓰기 -->
 
 </head>
 <body>
@@ -19,82 +27,62 @@ function fn_open() {
 
 <%@ include file="include/header.jsp" %>
 
-<div id="subvisual"></div>
+<%@ include file="include/myNav.jsp" %>
 
 <div id="subContainer">
 	<div class="contBox inner"><!-- inner S -->
 	 
-		<div class="titNavi">
-			기사 선택
-			<span>홈 &gt; 마이페이지 &gt; 기사 선택</span>
+		<%@ include file="include/tabMypage.jsp" %>
+
+		<div style="float: left; margin-left: 35px;">
+			<h1><i class="chevron right icon"></i>제목 : 동생도 같이 후원 받을 수 있나요?</h1>
 		</div>
-
-		<table class="boardList mt20">
-			<caption>전체공고 리스트입니다.</caption>
-			<colgroup>
-				<col style="width:%;"><!--  -->
-				<col style="width:%;"><!--  -->
-				<col style="width:%;"><!--  -->
-				<col style="width:%;"><!--  -->
-				<col style="width:%;"><!--  -->
-			</colgroup>
-			<thead>
-				<tr>
-					<th scope="col">선택</th>
-					<th scope="col">기사ID</th>
-					<th scope="col">기사이름</th>
-					<th scope="col">기사 평점</th>
-					<th scope="col">상세</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<td>
-						<label for=""> 체크</label>
-						<input id="" name="" class="check" type="checkbox">
-					</td>
-					<td>testid1111</td>
-					<td>홍길동</td>
-					<td>
-						<span><img src="/duri/resources/HappyMyPage/images/contents/starOn.png" alt="별on"></span>
-						<span><img src="/duri/resources/HappyMyPage/images/contents/starOn.png" alt="별on"></span>
-						<span><img src="/duri/resources/HappyMyPage/images/contents/starOn.png" alt="별on"></span>
-						<span><img src="/duri/resources/HappyMyPage/images/contents/starOn.png" alt="별on"></span>
-						<span><img src="/duri/resources/HappyMyPage/images/contents/starOn.png" alt="별on"></span>
-					</td>
-					<td><a class="sbtn or" href="#fn_open" onclick="fn_open()">상세보기</a></td>
-				</tr>
-				<tr>
-					<td>
-						<label for=""> 체크</label>
-						<input id="" name="" class="check" type="checkbox">
-					</td>
-					<td>testid1111</td>
-					<td>홍길동</td>
-					<td>
-						<span><img src="/duri/resources/HappyMyPage/images/contents/starOn.png" alt="별on"></span>
-						<span><img src="/duri/resources/HappyMyPage/images/contents/starOn.png" alt="별on"></span>
-						<span><img src="/duri/resources/HappyMyPage/images/contents/starOff.png" alt="별off"></span>
-						<span><img src="/duri/resources/HappyMyPage/images/contents/starOff.png" alt="별off"></span>
-						<span><img src="/duri/resources/HappyMyPage/images/contents/starOff.png" alt="별off"></span>
-					</td>
-					<td><a class="sbtn or" href="#fn_open" onclick="fn_open()">상세보기</a></td>
-				</tr>
-			</tbody>
-		</table>
-
-		<p class="tcen mt30"><a class="mbtn or" href="deliList.jsp">선택하기</a></p>
+		<div align="right" style="margin-right: 47px;">
+			<h1>작성일 : 2019.01.11</h1>
+		</div>
+		<br>
+		<br>
+		
+		<div align="center">
+			<!-- Q&A : 내용 -->
+			<div>
+				<div class="field">
+				    <textarea style="width: 92%; height: 600px;">동생이 올해 11살이 되었습니다. 저랑 동생 둘다 후원 받을 수 있는건가요? 혹시 같은 가족이라면 후원 받을 수 있는 사람의 수가 제한되나요??
+				    </textarea>
+				 </div>
+			</div>
+			<br>
+			<br>
+			<!-- 둘이두리 답변란 -->
+			<div align="left" style="margin-left: 47px;">
+				<button class="ui button">둘이두리님의 답변</button>
+			</div>
+			<br>
+			<div>
+				<div class="field">
+				    <textarea style="width: 92%; height: 200px;"></textarea>
+				 </div>
+			</div>
+			<div align="right" style="margin-right: 48px;">
+				<a class="sbtn gy" href="#">답변등록</a>
+			</div>
+		</div>
+		
+		<div style="height: 100px;"></div>
+		
+		<div id="button">
+			<button class="massive ui instagram button">목록으로 돌아가기</button>&nbsp;&nbsp;&nbsp;&nbsp;
+		</div>
 
 	</div><!--// inner E-->
 </div>
 
-<%-- <%@ include file="../happymember/include/footer.jsp" %> --%>
+<%-- <%@ include file="/hyun/myPost/include/footer.jsp" %> --%>
 
 
 </div><!--// Wrap E-->
 
 
-<%@ include file="include/myNav.jsp" %>
 
 </body>
 </html>

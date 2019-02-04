@@ -41,6 +41,10 @@ public class HappymemberController {
 		return "happymember/proofDocument";
 	}
 
+	@RequestMapping("Aerin_return.happy")
+	public String happy8() {
+		return "payment/point_return_happy";
+	}
 	
 }
 

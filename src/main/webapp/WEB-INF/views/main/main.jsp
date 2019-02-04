@@ -28,6 +28,7 @@
 	<a href="Ajin_QnA_list.nanum">아진 - QnA_목록</a><br>
 	<a href="Ajin_QnA_detail.nanum">아진 - QnA_상세</a><br>
 
+	애린이 뷰
 	<hr>
 	<a href="Aerin_mypage.happy">애린 - mypage.jsp</a><br>
 	<a href="Aerin_longDonate.happy">애린 - longDonate.jsp</a><br>
@@ -36,6 +37,8 @@
 	<a href="Aerin_thankyouLetter.happy">애린 - thankyouLetter.jsp</a><br>
 	<a href="Aerin_qna.happy">애린 - qna.jsp</a><br>
 	<a href="Aerin_proofDocument.happy">애린 - proofDocument.jsp</a><br>
+	<a href="Aerin_return.happy">애린 - payment > point_return_happy.jsp</a><br>
+	
 	
 	<hr>
 	은지 뷰
