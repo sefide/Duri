@@ -17,7 +17,7 @@
 
 
 	<hr>
-		아진이 뷰 
+		아진이 뷰 <br>
 	<a href="Ajin1.nanum">아진 - 전체 메인페이지</a><br>
 	<a href="Ajin2.nanum">아진 - 나눔두리 메인페이지</a><br>
 	<a href="Ajin3.nanum">아진 - 마이페이지</a><br>
@@ -25,6 +25,8 @@
 	<a href="Ajin5.nanum">아진 - 마이페이지_편지</a><br>
 	<a href="Ajin6.nanum">아진 - 마이페이지_기부금 영수증</a><br>
 	<a href="Ajin7.nanum">아진 - 마이페이지 _하고싶었던 후원</a><br>
+	<a href="Ajin_QnA_list.nanum">아진 - QnA_목록</a><br>
+	<a href="Ajin_QnA_detail.nanum">아진 - QnA_상세</a><br>
 
 	<hr>
 	<a href="Aerin_mypage.happy">애린 - mypage.jsp</a><br>

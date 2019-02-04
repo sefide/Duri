@@ -90,30 +90,30 @@
 				<table>
 					<thead>
 						<tr>
-							<th style="width: 45%;">제목</th>
-							<th style="width: 15%;">진행현황</th>
-							<th style="width: 30%;">내가 후원한 호인트</th>
-							<th style="width: 15%;">100%달성여부</th>
+							<th style="width: 25%;">행복두리</th>
+							<th style="width: 25%;">후원금액</th>
+							<th style="width: 25%;">누적 후원기간</th>
+							<th style="width: 25%;">누적 후원금액</th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr>
-							<td>굶어서 영양실조에 걸린 제 동생을 도와주세요</td>
-							<td>80%</td>
-							<td>20,000원</td>
-							<td>X</td>
+							<td>공룡이</td>
+							<td>30,000 원</td>
+							<td>4달 째</td>
+							<td>120,000 원</td>
 						</tr>
 						<tr>
-							<td>학교에 가고 싶어요</td>
-							<td>70%</td>
-							<td>50,000원</td>
-							<td>X</td>
+							<td>짹짹이</td>
+							<td>40,000 원</td>
+							<td>2달 째</td>
+							<td>80,000 원</td>
 						</tr>
 						<tr>
-							<td>추운겨울 월세를 못내서,,,</td>
-							<td>100%</td>
-							<td>40,000원</td>
-							<td>O</td>
+							<td>호호이</td>
+							<td>20,000</td>
+							<td>1달 째</td>
+							<td>20,000 원</td>
 						</tr>
 					</tbody>
 				</table>

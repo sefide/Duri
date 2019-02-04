@@ -19,8 +19,7 @@
 	margin-bottom: 20px;
 	font-size:25px;
 	color: rgba(250, 143, 61);
-	font-weight: bold;
-	
+	font-weight: bold;	
 }	
 .tableArea{
 	width : 95%;
