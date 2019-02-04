@@ -1,19 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <header>
-	<!-- <div class="inner">inner S
+	<!-- <div class="inner">inner S -->
 		
-		로그인 전
-		<div class="multBoxL1">
-			<span class="mu11"><a href="javascript:openpop();">로그인</a></span>
-			<span class="mu12"><a href="/hyun/myPost/member/joinSort.jsp">회원가입</a></span>
+		<!-- 로그인 후 -->
+		<div class="myNavBox">
+			<!-- <span class="mu11"><a href="javascript:openpop();">로그인</a></span> -->
+			
+			<span class="mumyNavBox-logout"><a href="Aerin_mypage.happy">로그아웃</a></span>
 		</div>
+		
+		
 
-		로그인 후
 
-	
-
-		<span class="menuAll" onclick="openNav()"><img src="../happymember/images/gnb/ico_menu.png" alt="menu"></span>gnbmenu S
+		<!-- <span class="menuAll" onclick="openNav()"><img src="../happymember/images/gnb/ico_menu.png" alt="menu"></span>gnbmenu S
 
 		<div id="myNav" class="overlay">
 		  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>

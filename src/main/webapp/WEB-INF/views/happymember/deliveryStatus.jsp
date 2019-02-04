@@ -25,7 +25,7 @@
 
 <%@ include file="include/header.jsp" %>
 
-<div id="subvisual">마이페이지</div>
+<%@ include file="include/myNav.jsp" %>
 
 <div id="subContainer">
 	<div class="contBox inner"><!-- inner S -->
@@ -33,16 +33,19 @@
 		<%@ include file="include/tabMypage.jsp" %>
 		
 		
-		<div style="float: left;"><h1><i class="chevron right icon"></i>물품 배송 현황</h1></div>
-		<div style="float: left; vertical-align: middle;" class="ptag">
-			<div style="float: left;" class="textSilver" >&nbsp;&nbsp;&nbsp;* 배송받을&nbsp;</div>
-			<div style="float: left;" class="textOrange" >주소가 변경 되었을 시&nbsp;</div>
-			<div style="float: left;" class="textSilver" >반드시&nbsp;</div>
-			<div style="float: left;" class="textOrange" >수정해주세요.&nbsp; </div>
-			<div style="float: left;" class="textSilver" >내 정보수정에서도 수정할 수 있습니다. </div>
-			<!-- <h5>&nbsp;&nbsp;
-			* 배송받을 주소가 변경 되었을 시 반드시 수정해주세요.  내 정보 수정에서도 수정할 수 있습니다.
-			</h5> -->
+		<div class="titNavi">
+			<div style="float: left;"><h1><i class="chevron right icon"></i>물품 배송 현황</h1></div>
+			<div style="float: left; vertical-align: middle;" class="ptag">
+				<div style="float: left;" class="textSilver" >&nbsp;&nbsp;&nbsp;* 배송받을&nbsp;</div>
+				<div style="float: left;" class="textOrange" >주소가 변경 되었을 시&nbsp;</div>
+				<div style="float: left;" class="textSilver" >반드시&nbsp;</div>
+				<div style="float: left;" class="textOrange" >수정해주세요.&nbsp; </div>
+				<div style="float: left;" class="textSilver" >내 정보수정에서도 수정할 수 있습니다. </div>
+				<!-- <h5>&nbsp;&nbsp;
+				* 배송받을 주소가 변경 되었을 시 반드시 수정해주세요.  내 정보 수정에서도 수정할 수 있습니다.
+				</h5> -->
+			</div>
+			<span>마이페이지 &gt; 물품 배송 현황</span>
 		</div>
 		<br>
 
@@ -89,10 +92,6 @@
 			<span><a class="num" href="#">3</a></span>
 			<span><a class="num" href="#">4</a></span>
 			<span><a class="num" href="#">5</a></span>
-			<span><a class="num" href="#">6</a></span>
-			<span><a class="num" href="#">7</a></span>
-			<span><a class="num" href="#">8</a></span>
-			<span><a class="num" href="#">9</a></span>
 			<span><a class="num" href="#">&gt;</a></span>
 		</div>
 		
@@ -111,7 +110,6 @@
 </div><!--// Wrap E-->
 
 
-<%@ include file="include/myNav.jsp" %>
 
 </body>
 </html>

@@ -25,19 +25,22 @@
 
 <%@ include file="include/header.jsp" %>
 
-<div id="subvisual">마이페이지</div>
+<%@ include file="include/myNav.jsp" %>
 
 <div id="subContainer">
 	<div class="contBox inner"><!-- inner S -->
 	 
 		<%@ include file="include/tabMypage.jsp" %>
 
-		<div style="float: left;" class="ptag"><h1><i class="chevron right icon"></i>TO. 둘이두리님 궁금해요</h1></div>
-		<div style="float: left;">
-			<h4 style="font-weight: 600">
-				답변완료&nbsp;<i class="green circle icon" alt="답변완료"></i>&nbsp;&nbsp;
-				답변 중&nbsp;<i class="yellow circle icon" alt="답변 중"></i>
-			</h4>
+		<div class="titNavi">
+			<div style="float: left;" class="ptag"><h1><i class="chevron right icon"></i>TO. 둘이두리님 궁금해요</h1></div>
+			<div style="float: left;">
+				<h4 style="font-weight: 600">
+					답변완료&nbsp;<i class="green circle icon" alt="답변완료"></i>&nbsp;&nbsp;
+					답변 중&nbsp;<i class="yellow circle icon" alt="답변 중"></i>
+				</h4>
+			</div>
+			<span>마이페이지 &gt; 나의 문의 내역</span>
 		</div>
 		<br>
 		
@@ -62,13 +65,13 @@
 			<tr>
 				<td>1</td>
 				<td>증빙서류를 기간 내에 내지 못했어요</td>
-				<td>안녕하세요! 증빙서류를 제 기간 내에 내지 못했습니다</td>
+				<td class="tleft"><a href="Aerin_longDonateDetail.happy">안녕하세요! 증빙서류를 제 기간 내에 내지 못했습니다</a></td>
 				<td><i class="green circle icon" alt="답변완료"></i></td>
 			</tr>
 			<tr>
 				<td>2</td>
 				<td>동생도 같이 후원 받을 수 있나요?</td>
-				<td>동생이 올 해에 11살이 되었습니다. 동생도 저와 같이 후원을 받을 수 있을까요?</td>
+				<td class="tleft"><a href="Aerin_longDonateDetail.happy">동생이 올 해에 11살이 되었습니다. 동생도 저와 같이 후원을 받을 수 있을까요?</a></td>
 				<td><i class="yellow circle icon" alt="답변 중"></i></td>
 			</tr>
 			</tbody>
@@ -81,10 +84,6 @@
 			<span><a class="num" href="#">3</a></span>
 			<span><a class="num" href="#">4</a></span>
 			<span><a class="num" href="#">5</a></span>
-			<span><a class="num" href="#">6</a></span>
-			<span><a class="num" href="#">7</a></span>
-			<span><a class="num" href="#">8</a></span>
-			<span><a class="num" href="#">9</a></span>
 			<span><a class="num" href="#">&gt;</a></span>
 		</div>
 		
@@ -109,7 +108,6 @@
 </div><!--// Wrap E-->
 
 
-<%@ include file="include/myNav.jsp" %>
 
 </body>
 </html>

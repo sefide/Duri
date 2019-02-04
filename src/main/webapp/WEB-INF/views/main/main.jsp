@@ -26,6 +26,7 @@
 	<a href="Ajin6.nanum">아진 - 마이페이지_기부금 영수증</a><br>
 	<a href="Ajin7.nanum">아진 - 마이페이지 _하고싶었던 후원</a><br>
 
+	애린이 뷰
 	<hr>
 	<a href="Aerin_mypage.happy">애린 - mypage.jsp</a><br>
 	<a href="Aerin_longDonate.happy">애린 - longDonate.jsp</a><br>
@@ -34,6 +35,8 @@
 	<a href="Aerin_thankyouLetter.happy">애린 - thankyouLetter.jsp</a><br>
 	<a href="Aerin_qna.happy">애린 - qna.jsp</a><br>
 	<a href="Aerin_proofDocument.happy">애린 - proofDocument.jsp</a><br>
+	<a href="Aerin_return.happy">애린 - payment > point_return_happy.jsp</a><br>
+	
 	
 	<hr>
 	은지 뷰

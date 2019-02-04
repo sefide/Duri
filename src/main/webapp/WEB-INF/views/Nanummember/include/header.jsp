@@ -72,8 +72,9 @@
 	<a class="mynav_2" href="#">로그아웃</a>
 	<div class="" id="container">	
 		<div id='box-left'>
-		<i class="handshake outline icon"></i>
-		<span id='box-left' style="font-weight: bold; margin-left: 5px;">이아진 </span>님 반갑습니다!</div>
+			<i class="handshake outline icon"></i>
+			<span id='box-left' style="font-weight: bold; margin-left: 5px;">이아진 </span>님 반갑습니다!
+		</div>
     	<div id='box-center'>
     		등급 : 새싹두리<br>
     		포인트 : 50,000 원 <br>
@@ -82,7 +83,7 @@
     	<div id='box-right'>
     		<a href="#" style="color: white; font-size:20px; margin-right: 10px;"> 포인트 충전</a><br>
     		<a href="#" style="color: white; font-size:20px; margin-right: 10px;"> 포인트 환급</a><br>
-    		<a href="#" style="color: white; font-size:20px;  margin-right: 10px;"> 포인트 내역</a><br>
+    		<a href="#" style="color: white; font-size:20px; margin-right: 10px;"> 포인트 내역</a><br>
     	</div>
 	</div>
 	

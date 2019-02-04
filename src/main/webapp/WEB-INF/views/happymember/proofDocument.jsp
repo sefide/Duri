@@ -26,19 +26,22 @@
 
 <%@ include file="include/header.jsp" %>
 
-<div id="subvisual"></div>
+<%@ include file="include/myNav.jsp" %>
 
 <div id="subContainer">
 	<div class="contBox inner"><!-- inner S -->
 	 
 		<%@ include file="include/tabMypage.jsp" %>
 
-		<div style="float: left;" class="ptag"><h1><i class="chevron right icon"></i>내가 올린 증빙서류</h1></div>
-		<div style="float: left;">
-			<h4 style="font-weight: 600">
-				승인완료&nbsp;<i class="green circle icon" alt="승인완료"></i>&nbsp;&nbsp;
-				반려&nbsp;<i class="red circle icon" alt="반려"></i>
-			</h4>
+		<div class="titNavi">
+			<div style="float: left;" class="ptag"><h1><i class="chevron right icon"></i>내가 올린 증빙서류</h1></div>
+			<div style="float: left;">
+				<h4 style="font-weight: 600">
+					승인완료&nbsp;<i class="green circle icon" alt="승인완료"></i>&nbsp;&nbsp;
+					반려&nbsp;<i class="red circle icon" alt="반려"></i>
+				</h4>
+			</div>
+			<span>마이페이지 &gt; 증빙 서류 현황</span>
 		</div>
 		<br>
 		
@@ -92,10 +95,6 @@
 			<span><a class="num" href="#">3</a></span>
 			<span><a class="num" href="#">4</a></span>
 			<span><a class="num" href="#">5</a></span>
-			<span><a class="num" href="#">6</a></span>
-			<span><a class="num" href="#">7</a></span>
-			<span><a class="num" href="#">8</a></span>
-			<span><a class="num" href="#">9</a></span>
 			<span><a class="num" href="#">&gt;</a></span>
 		</div>
 		<br><br><br><br>
@@ -113,7 +112,6 @@
 </div><!--// Wrap E-->
 
 
-<%@ include file="include/myNav.jsp" %>
 
 </body>
 </html>
