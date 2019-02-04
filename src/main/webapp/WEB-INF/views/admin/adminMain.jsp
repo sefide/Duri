@@ -195,16 +195,12 @@
 
 
 			<div class="row">
-
-
 				<div class="col-md-12">
-
 					<div class="panel panel-default">
 						<div class="panel-heading">Since 2019 Total</div>
 						<div class="panel-body">
 							<div class="table-responsive">
 								<table class="table table-bordered">
-									
 									<tbody>
 										<tr>
 											<td class="total">누적 나눔두리</td>

@@ -8,12 +8,9 @@
 </head>
 <body>
 	의희 관리자 뷰<br>
-	<a href="adminCrowd.ad">크라우드펀딩 관리페이지</a><br>
-	<a href="adminGoods.ad">후원 물품관리 페이지</a><br>
+	링크연결 완료<br>
 	<a href="adminMain.ad">관리자 메인페이지</a><br>
-	<a href="adminNanum.ad">나눔두리 관리페이지</a><br>
-	<a href="adminHappy.ad">행복두리 승인페이지</a><br>
-	<a href="adminHappyAll.ad">행복두리 전체관리페이지</a><br>
+	
 	<a href="QnA.ad">관리자Q&A</a><br>
 	<a href="Euihee_ui-elements.ad">템플릿</a><br>
 	
