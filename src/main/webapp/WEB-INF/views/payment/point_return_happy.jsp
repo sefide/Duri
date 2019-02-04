@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<jsp:include page="../Nanummember/include/common.jsp" />
+<jsp:include page="../happymember/include/common.jsp" />
 <title>둘이두리</title>
 <jsp:include page="../common/css.jsp"/>
 <style>
@@ -27,10 +28,10 @@
 		color : #434343;
 	}
 	.d-flex{
-    		padding-left : 5%;
-    		margin: 0% 0;
-    	}
-    	.d-flex-left{
+   		padding-left : 5%;
+   		margin: 0% 0;
+   	}
+   	.d-flex-left{
 		width : 64%;
 		height : 100%;
 	}
@@ -38,30 +39,33 @@
 		width : 35%;
 		height : 100%;
 	}
-    	#bar1{
-    		width:98%; 
-    		margin: 0% auto; 
-    		border-bottom:1px solid #B8B8B8;
-    		height : 10px;
-    		margin-top : 15px;
-    	}
-    	#bar2{
-    		width:98%; 
-    		margin: 0% auto; 
-    		border-top:1px solid #B8B8B8;
-    		height : 10px;
-    		margin-bottom : 15px;
-    	}
+   	#bar1{
+   		width:98%; 
+   		margin: 0% auto; 
+   		border-bottom:1px solid #B8B8B8;
+   		height : 10px;
+   		margin-top : 15px;
+   	}
+   	#bar2{
+   		width:98%; 
+   		margin: 0% auto; 
+   		border-top:1px solid #B8B8B8;
+   		height : 10px;
+   		margin-bottom : 15px;
+   	}
 	#bar3{
-    		width:98%; 
-    		border-top:1px solid #B8B8B8;
-    		height : 10px;
-    		margin: 5px auto;
-    	}
-    	
-    	/* 좌측 flex */
-    	#subTitle{
+   		width:98%; 
+   		border-top:1px solid #B8B8B8;
+   		height : 10px;
+   		margin: 5px auto;
+   	}
+   	
+   	/* 좌측 flex */
+   	#subTitle{
 		margin: 20px 0;
+    	font-size: 24px;
+    	font-weight : 600;
+    	color : #424242;
 	}
     #returnValue{
 		height :40px !important;
@@ -158,102 +162,102 @@
 		font-weight : 400;
 		margin-right : 10px;
 		margin-top : 10px;
+		position : relative;
+		top : 0;
+		overflow : visible;
 	}
-	
-	
 
 </style>
 </head>
 <body>
 	<!-- 네비바 -->
-	<jsp:include page="../common/navi.jsp"/>
-	
-	<jsp:include page="../Nanummember/include/header.jsp" />	
-	
- 	<div id="wrap">		
-		<div class="contBox inner">
-			<jsp:include page="include/tabMypage_point.jsp"/>	
-		</div>
-	</div>
-    
-    <section class="ftco-section">
-    	<div class="container">
-    		<div class="row d-flex">
-    			<h3 class = "ftco-animate" id = "pTitle">후원포인트 환급받기</h3>
-    		</div>
-    		<div id = "bar1"></div>
-    		<div class ="row d-flex"> 
-    			<div class = "d-flex-left">
- 	  			<h4 class ="ftco-animate" id = "subTitle">> 환급포인트</h4>
-    				<table>
-    					<tr>
-    						<th>현재 보유포인트</th>
-    						<td>200350원</td>
-    					</tr>
-    					<tr>
-    						<th>환급 금액</th>
-    						<td><input class="form-control" type = "text" name = "returnValue" id = "returnValue">원
-    							<div class="form-check">
-							  <input class="form-check-input" type="checkbox" value="" id="allPoint">
-							  <label class="form-check-label" for="allPoint" id = "txtAllPoint">
-							 	  모든 포인트 사용하기
-							  </label>
-							</div>
-    						</td>
-    					</tr>
-    				</table>
-    				
-    				<div id = "bar2"></div>
-    				<h4 class ="ftco-animate" id = "subTitle">> 환급받을 계좌</h4>
-    				
-    				<table>
-    					<tr>
-    						<th>은행</th>
-    						<td>
-    							<select name = "returnBank" class="form-control inputTxt" id="returnBankSelect">
-    								<option>은행을 선택해주세요 .</option>
-    								<option>은행을 선택해주세요 .</option>
-    								<option>은행을 선택해주세요 .</option>
-    								<option>은행을 선택해주세요 .</option>
-    								<option>은행을 선택해주세요 .</option>
-    							</select>
-    						</td>
-    					</tr>
-    					<tr>
-    						<th>계좌번호</th>
-    						<td><input class="form-control inputTxt" type = "text" name = "returnAccount" id = "returnAccount">원</td>
-    					</tr>
-    					<tr>
-    						<th>예금주명</th>
-    						<td><input class="form-control inputTxt" type = "text" name = "accountName" id = "accountName" placeholder = "이름을 입력해주세요."></td>
-    					</tr>
-    				</table>
-    				<p style = "margin-left : 1%;"> *환급받을 계좌 정보를 정확히 입력해주세요. <br> 
-계좌번호와 예금주명이 다를 경우 환급이 제대로 되지 않을 수 있습니다.  </p>
-    			</div>
-    			
-    			<div class = "d-flex-right">
-    				<div class = "back-right">
-    					<input type ="checkbox" id= "chkinfo1"><label for = "chkinfo1">수수료 약관동의</label> <br>
-	    				<a>포인트 결제 시 부과했던 후원 수수료는 환급되지 않습니다. </a><br>
-					
-	    				<div class= "flexBox valueBox">
-	    					<div class = "d-left">현재 보유포인트 </div><div class = "d-right" id = "txtChargeValue">0원</div>
-	    					<div id = "txtTotalValue">환급 금액</div><div class = "txtColor_o d-right" id = "totalValue">103,000</div>원
-	    					<div id = "bar3"></div>
-	    					<div class = "d-left">잔여포인트 </div><div class = "d-right" id = "txtFees">3000원</div>
-	    					
-	    				</div>
-    				</div>
-    				<div id = "back-btn">
-    					<a id = "btnPay">환급받기 </a>
-    				</div>
-    			</div>
-    		</div>
-    		<div id = "bar2"></div>
-    		
+	<jsp:include page="../happymember/include/header.jsp" />	
+	<div id="subvisual"></div>
+	 <div id="subContainer">
+		<div class="contBox inner"><!-- inner S -->
+		 
+			<jsp:include page="include/tabMypage.jsp" />
+	    
+		    <section class="ftco-section">
+		    	<div class="container">
+		    		<div class="row d-flex">
+		    			<h3 class = "" id = "pTitle">후원포인트 환급받기</h3>
+		    		</div>
+		    		<div id = "bar1"></div>
+		    		<div class ="row d-flex"> 
+		    			<div class = "d-flex-left">
+		 	  			<h4 class ="" id = "subTitle">> 환급포인트</h4>
+		    				<table>
+		    					<tr>
+		    						<th>현재 보유포인트</th>
+		    						<td>200350원</td>
+		    					</tr>
+		    					<tr>
+		    						<th>환급 금액</th>
+		    						<td><input class="form-control" type = "text" name = "returnValue" id = "returnValue">원
+		    							<div class="form-check">
+									  <input class="form-check-input" type="checkbox" value="" id="allPoint">
+									  <label class="form-check-label" for="allPoint" id = "txtAllPoint">
+									 	  모든 포인트 사용하기
+									  </label>
+									</div>
+		    						</td>
+		    					</tr>
+		    				</table>
+		    				
+		    				<div id = "bar2"></div>
+		    				<h4 class ="" id = "subTitle">> 환급받을 계좌</h4>
+		    				
+		    				<table>
+		    					<tr>
+		    						<th>은행</th>
+		    						<td>
+		    							<select name = "returnBank" class="form-control inputTxt" id="returnBankSelect">
+		    								<option>은행을 선택해주세요 .</option>
+		    								<option>은행을 선택해주세요 .</option>
+		    								<option>은행을 선택해주세요 .</option>
+		    								<option>은행을 선택해주세요 .</option>
+		    								<option>은행을 선택해주세요 .</option>
+		    							</select>
+		    						</td>
+		    					</tr>
+		    					<tr>
+		    						<th>계좌번호</th>
+		    						<td><input class="form-control inputTxt" type = "text" name = "returnAccount" id = "returnAccount">원</td>
+		    					</tr>
+		    					<tr>
+		    						<th>예금주명</th>
+		    						<td><input class="form-control inputTxt" type = "text" name = "accountName" id = "accountName" placeholder = "이름을 입력해주세요."></td>
+		    					</tr>
+		    				</table>
+		    				<p style = "margin-left : 1%;"> *환급받을 계좌 정보를 정확히 입력해주세요. <br> 
+								계좌번호와 예금주명이 다를 경우 환급이 제대로 되지 않을 수 있습니다.  </p>
+		    			</div>
+		    			
+		    			<div class = "d-flex-right">
+		    				<div class = "back-right">
+		    					<input type ="checkbox" id= "chkinfo1"><label for = "chkinfo1">수수료 약관동의</label> <br>
+			    				<a>포인트 결제 시 부과했던 후원 수수료는 환급되지 않습니다. </a><br>
+							
+			    				<div class= "flexBox valueBox">
+			    					<div class = "d-left">현재 보유포인트 </div><div class = "d-right" id = "txtChargeValue">0원</div>
+			    					<div id = "txtTotalValue">환급 금액</div><div class = "txtColor_o d-right" id = "totalValue">103,000</div>원
+			    					<div id = "bar3"></div>
+			    					<div class = "d-left">잔여포인트 </div><div class = "d-right" id = "txtFees">3000원</div>
+			    					
+			    				</div>
+		    				</div>
+		    				<div id = "back-btn">
+		    					<a id = "btnPay">환급받기 </a>
+		    				</div>
+		    			</div>
+		    		</div>
+		    		<div id = "bar2"></div>
+		    		
+		    	</div>
+	    	</section>
     	</div>
-    	</section>
+   	</div>
     
     <!-- footer  -->
     <jsp:include page="../common/footer.jsp"></jsp:include>

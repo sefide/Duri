@@ -80,9 +80,9 @@
     		후원참여 횟수 : 6 회 <br>
     	</div>
     	<div id='box-right'>
-    		<a href="#" style="color: white; font-size:20px; margin-right: 10px;"> 포인트 충전</a><br>
-    		<a href="#" style="color: white; font-size:20px; margin-right: 10px;"> 포인트 환급</a><br>
-    		<a href="#" style="color: white; font-size:20px;  margin-right: 10px;"> 포인트 내역</a><br>
+    		<a href="pointCharge.pm" style="color: white; font-size:20px; margin-right: 10px;"> 포인트 충전</a><br>
+    		<a href="pointReturn.pm" style="color: white; font-size:20px; margin-right: 10px;"> 포인트 환급</a><br>
+    		<a href="pointHistory.pm" style="color: white; font-size:20px;  margin-right: 10px;"> 포인트 내역</a><br>
     	</div>
 	</div>
 	

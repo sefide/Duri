@@ -2,12 +2,12 @@
 
 @import url("reset.css");
 @import url("font.css");
-@import url("/duri/resources/payment/css/board.css");
+@import url("board.css");
 
 
 #wrap {position:relative; width:100%;}
 
-.inner {position:relative;width: 90%;margin:0 auto;}
+.inner {position:relative;width: 70%;margin:0 auto;}
 
 header {margin-top:70px;height: 50px;border-bottom: 2px solid #fa8f3d; font-family: }
 header h1 {text-align:center;}
