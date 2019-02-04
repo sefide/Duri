@@ -34,5 +34,15 @@ public class NanumController {
 	public String Total7() {
 		return "Nanummember/mypage/mypage_likefund";
 	}
+	@RequestMapping("Ajin_QnA_list.nanum")
+	public String Total8() {
+		return "Nanummember/QnA_list";
+	}
+	@RequestMapping("Ajin_QnA_detail.nanum")
+	public String Total9() {
+		return "Nanummember/QnA_detail";
+	}
+	
+	
 	
 }

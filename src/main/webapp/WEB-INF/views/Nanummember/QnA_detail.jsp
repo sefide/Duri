@@ -1,16 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<% 
-	String bigtabon="3";
-%>
 
-<!-- semantic ui -->
+<!-- <!-- semantic ui -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
-<script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script> -->
 
 
-<%@ include file="../include/common.jsp" %>
+<%@ include file="include/common.jsp" %>
 <title> 나눔두리 마이페이지</title>
-<%@ include file="../../common/css.jsp" %>
+<%@ include file="../common/css.jsp" %>
 <style>
 .mb50 {
      margin-bottom: 0px !important; 
@@ -74,34 +71,46 @@
 </style>
 </head>
 <body>
-<%@ include file="../../common/navi.jsp" %>
-<%@ include file="../include/header.jsp" %>
+<%@ include file="../common/navi.jsp" %>
+<%-- <%@ include file="include/header.jsp" %> --%>
 <!-- #wrap {position:relative; width:100%;} -->
 	<div id="wrap">		
 			<div class="contBox inner">
-				<%@ include file="../include/tabMypage.jsp"%>
+				
 
 			<div class="tableArea">
-				<div id="myTitle"><i class="envelope icon"></i></i>정기 행복두리 편지</div>
+				<div id="myTitle"> <i class="hourglass half icon"></i>진행중인 크라우드 펀딩</div>
+				<div style="width: 96%; margin: 0 auto;">
+				<div class="categotyBtn" onclick="#" style="margin-right: 30px;">금액</div>
+				<div class="categotyBtn" onclick="#">물품</div>
+				</div>
 				<table>
 					<thead>
 						<tr>
-							<th style="width: 20%;">행복두리</th>
-							<th style="width: 80%;">감사편지</th>
+							<th style="width: 45%;">제목</th>
+							<th style="width: 15%;">진행현황</th>
+							<th style="width: 30%;">내가 후원한 호인트</th>
+							<th style="width: 15%;">100%달성여부</th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr>
-							<td>공룡이</td>
-							<td>행복두리님 이번달 후원으로 다행히 급식비를 낼 수 있게 되었어요 감사합니다</td>						
-						</tr>
-						<tr>						
-							<td>밍구밍구</td>
-							<td>이번 달 월세는 밀리지 않고 내서 불안하지 않게 잘 살고 있습니다! 감사해요</td>
+							<td>굶어서 영양실조에 걸린 제 동생을 도와주세요</td>
+							<td>80%</td>
+							<td>20,000원</td>
+							<td>X</td>
 						</tr>
 						<tr>
-							<td>링이1004</td>
-							<td>추운 겨울 나눔두리님 덕분에 연탄도 사고 따듯한 겨울 보내고 있어요</td>					
+							<td>학교에 가고 싶어요</td>
+							<td>70%</td>
+							<td>50,000원</td>
+							<td>X</td>
+						</tr>
+						<tr>
+							<td>추운겨울 월세를 못내서,,,</td>
+							<td>100%</td>
+							<td>40,000원</td>
+							<td>O</td>
 						</tr>
 					</tbody>
 				</table>
@@ -121,7 +130,7 @@
 			</div>
 
 			<div class="tableArea">
-				<div id="myTitle"><i class="envelope outline icon"></i>크라우드펀딩 행복두리 편지</div>
+				<div id="myTitle"><i class="hourglass end icon"></i>종료된 크라우드 펀딩</div>
 				<div style="width: 96%; margin: 0 auto;">
 				<div class="categotyBtn" onclick="#" style="margin-right: 30px;">금액</div>
 				<div class="categotyBtn" onclick="#">물품</div>
@@ -129,22 +138,30 @@
 				<table>
 					<thead>
 						<tr>
-							<th style="width: 20%;">제목</th>
-							<th style="width: 80%;">진행현황</th>						
+							<th style="width: 45%;">제목</th>
+							<th style="width: 15%;">진행현황</th>
+							<th style="width: 30%;">내가 후원한 호인트</th>
+							<th style="width: 15%;">100%달성여부</th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr>
-							<td>냥냥이</td>
-							<td>생리대가 부족했었는데 많은 행복두리님 덕분에 충분해졌습니다 감사해요</td>						
-						</tr>
-						<tr>							
-							<td>뭉뭉이</td>
-							<td>5명의 동생들과 먹을 쌀이 부족했는데,,도와주셔서 밥을 먹게되어 행복해요</td>
+							<td>밀린 월세를 도와주세요</td>
+							<td>77%</td>
+							<td>10,000원</td>
+							<td>X</td>
 						</tr>
 						<tr>
-							<td>행복행복이</td>
-							<td>비누로 씼어 피부염이 났는데,,좋은 바디워시등을 선물해주셔서 나아가고있어요!</td>						
+							<td>계속해서 공부를 하고싶어요</td>
+							<td>100%</td>
+							<td>40,000원</td>
+							<td>O</td>
+						</tr>
+						<tr>
+							<td>제 동생의 간 수술비를 도와주세요</td>
+							<td>100%</td>
+							<td>20,000원</td>
+							<td>O</td>
 						</tr>
 					</tbody>
 				</table>
@@ -168,7 +185,7 @@
 			
 	
 
-	<%@ include file="../include/myNav.jsp" %>
+	<%@ include file="include/myNav.jsp" %>
 
 </body>
 </html>
