@@ -8,6 +8,12 @@
 <title>둘이두리</title>
 <jsp:include page="../common/css.jsp"/>
 <style>
+	#myTitle{
+		margin-bottom: 20px;
+		font-size:25px;
+		color: rgba(250, 143, 61);
+		font-weight: bold;	
+	}
 	.ftco-section {
     	padding: 1em 0;
     }
@@ -195,7 +201,7 @@
     <section class="ftco-section">
     	<div class="container">
     		<div class="row d-flex">
-    			<h3 class = "" id = "pTitle">후원포인트 환급받기</h3>
+    			<div id="myTitle"> <i class="bookmark outline icon"></i>후원포인트 환급하기 </div>
     		</div>
     		<div id = "bar1"></div>
     		<div class ="row d-flex"> 

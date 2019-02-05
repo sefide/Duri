@@ -4,21 +4,31 @@
 <html>
 <head>
 <meta charset="UTF-8">
+
+<!-- semantic ui -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+<script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+
 <jsp:include page="../Nanummember/include/common.jsp" />
 <title>둘이두리</title>
 <jsp:include page="../common/css.jsp"/>
 <style>
-	/* .ftco-section {
+	 .ftco-section {
     	padding: 1em 0;
     }
-    .contBox {
+    /*.contBox {
 		padding-bottom: 0px; 
 		min-height: 0px; 
 	} */
 	/* .mb50 {
 	     margin-bottom: 0px !important; 
 	} */
-	
+	#myTitle{
+		margin-bottom: 20px;
+		font-size:25px;
+		color: rgba(250, 143, 61);
+		font-weight: bold;	
+	}	
 	#nav_back{
     		background: #FFBB50; 
     		height:83px; 
@@ -61,6 +71,7 @@
    	}
    	.top-bar-text div {
    		display : inline-block;
+  		padding-top: 5px;
    	}
    	.date-div{
    		width : 120px;
@@ -75,7 +86,7 @@
    	}
    	.search-div{
    		width : 70px;
-   		height : 40px;
+   		height : 35px;
    		background : white;
    		border-radius : 5px;
    		margin :8px;
@@ -170,7 +181,10 @@
     	text-decoration: none;
     }
 
-    
+    .calen {
+    	color: rgba(250, 143, 61);
+    }
+  
 </style>
 </head>
 <body>
@@ -186,13 +200,13 @@
 		    <section class="ftco-section">
 		    	<div class="container">
 		    		<div class="row d-flex">
-		    			<h3 class = "" id = "pTitle">기부금 영수증 </h3>
+		    			<div id="myTitle"> <i class="file alternate outline icon"></i>기부금 영수증 </div>
 		    			<!-- ftco-animate -->
 		    			<p>둘이두리에서는 결제 기부하신 기부자님들께 연말정산 소득공제를 위한 기부금영수증 발급을 지원합니다. <br>
 					소득세법 제 160조의 3에 따라 기부금 영수증을 발행하고 있으며, 개인정보(고유식별정보) 수집 및 이용에
 					동의를 해주셔야 기부금 영수증 발급이 가능합니다. </p>
-					<div id = "back-btn">
-						<a href = "https://www.hometax.go.kr/" id = "btnHomeTax">연말정산 간소화 서비스 바로가기</a>
+						<div id = "back-btn">
+							<a href = "https://www.hometax.go.kr/" id = "btnHomeTax">연말정산 간소화 서비스 바로가기</a>
 		    			</div>
 		    		</div>
 		    		<br>
@@ -202,14 +216,14 @@
 			    				<div class ="top-bar-text">
 			    					<div >조회기간 </div>
 			    					<div class = "date-div">2019.12 
-									<a href="#" id = "startMonth">달력
-			         		 		<span class="glyphicon glyphicon-calendar"></span>
-			        					</a>
+										<a href="#" id = "startMonth" class = "calen">
+											<i class="calendar alternate outline big icon"></i>
+				        				</a>
 			        				</div>
 			        				~
 			        				<div class = "date-div">2019.01 
-			    						<a href="#" id = "endMonth">달력
-			         		 		<span class="glyphicon glyphicon-calendar"></span>
+			    						<a href="#" id = "endMonth" class = "calen">
+			    							<i class="calendar alternate outline big icon"></i>
 			        					</a>
 			        				</div>
 			        				

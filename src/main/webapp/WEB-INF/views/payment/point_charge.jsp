@@ -8,7 +8,15 @@
 <title>둘이두리</title>
 <jsp:include page="../common/css.jsp"/>
 <style>
-	
+	#myTitle{
+		margin-bottom: 20px;
+		font-size:25px;
+		color: rgba(250, 143, 61);
+		font-weight: bold;	
+	}
+	.ftco-section {
+    	padding: 1em 0;
+    }
 	#nav_back{
     		background: #FFBB50; 
     		height:83px; 
@@ -21,10 +29,10 @@
 		color : #434343;
 	}
 	.d-flex{
-    		padding-left : 5%;
-    		margin: 0% 0;
-    	}
-    	.d-flex-left{
+   		padding-left : 5%;
+   		margin: 0% 0;
+   	}
+   	.d-flex-left{
 		width : 64%;
 		height : 100%;
 	}
@@ -179,7 +187,7 @@
 			 <section class="ftco-section">
 		    	<div class="container">
 		    		<div class="row d-flex">
-		    			<h3 class = "" id = "pTitle">후원포인트 충전하기</h3>
+		    			<div id="myTitle"> <i class="bookmark icon"></i>후원포인트 충전하기 </div>
 		    		</div>
 		    		<div id = "bar1"></div>
 		    		<div class ="row d-flex"> 
