@@ -1,191 +1,147 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
-<!-- <!-- semantic ui -->
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>QnA</title>
+<!-- semantic ui -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
-<script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script> -->
+<script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
 
-
-<%@ include file="include/common.jsp" %>
-<title> 나눔두리 마이페이지</title>
 <%@ include file="../common/css.jsp" %>
+<%@ include file="../common/navi.jsp" %>
+<%@ include file="include/common.jsp" %>
 <style>
-.mb50 {
-     margin-bottom: 0px !important; 
+.head {
+	width: 80%;
+	margin: 0 auto;
+	margin-top: 70px;
+}
+.QnA-nocie {
+	width: 70%;
+	margin: 0 auto;
+	margin-top: 30px;
+	position: static;
+}
+
+.QnA-list {
+	width: 70%;
+	margin: 0 auto;
+	margin-top: 30px;
+	position: static;
 }
 #myTitle{
 	margin-bottom: 20px;
 	font-size:25px;
 	color: rgba(250, 143, 61);
-	font-weight: bold;
-	
-}	
-.tableArea{
-	width : 95%;
-	margin : 0 auto;
-	padding-top: 50px;
-	padding-bottom: 20px;
-/* 	margin-left: 20px;
-	margin-right: 20px;   */
+	font-weight: bold;	
 }
-	table {
-		width : 96%;
-		margin : 0 auto;
-		color : #434343;
-		border-top : 4px solid #FE9D35; 
-		text-align:center;	
-		margin-bottom: 10px;
-	}
-	th{				
-		color :  rgba(250, 143, 61);
-		background : #FFEDBF;
-		font-weight: bold;
-		font-size: 17px;
-	}
-	tr{
-		height : 50px;
-	}
-	td{
-		font-size: 16px;
-	}
-	.categotyBtn{
-		width: 80px;
-		height: 30px;
-		text-align: center;
-		display: table-cell;
-        vertical-align: middle; 
-		background-color: #FFEDBF; 
-		/* border-top: 3px solid #FE9D35;
-		border-left: 3px solid #FE9D35; */
-		/* border-right: 1px solid #FE9D35; */	 
-		color: #FE9D35;
-		font-weight:bold;
-		/*margin-left : 10px;
-		margin-right: 10px;		
-		padding-left: 10px;
-		padding-right: 10px;  */
-		cursor:pointer;
-		text-align: center;
-		
-	}
 	
+.nontice{
+	font-size:20px;
+	color: rgba(250, 143, 61);
+	margin-left: 30px;
+}
+.tableArea {
+	width: 95%;
+	margin: 0 auto;	
+	padding-bottom: 20px;
+}
+
+.listTable{
+	width: 96%;
+	margin: 0 auto;
+	color: #434343;
+	border-top: 4px solid #FE9D35;
+	margin-bottom: 10px;
+}
+.answerTable{
+	width: 96%;
+	margin: 0 auto;
+	color: #434343;
+	border-top: 8px solid #FE9D35;
+	margin-bottom: 10px;
+}
+
+th {
+	color: rgba(250, 143, 61);
+	background: #FFEDBF;
+	font-weight: bold;
+	font-size: 17px;
+}
+
+tr {
+	height: 50px;
+}
+
+td {
+	font-size: 16px;
+}
+.tableTitle{
+	border-bottom-color: rgba(250, 143, 61);
+	color: rgba(250, 143, 61);
+	font-weight: bold;
+}
+.writeBtn{
+	width: auto;
+	height : auto;
+	background-color : rgba(250, 143, 61);
+	color : white;
+	font-weight : bold;
+	margin-right: 20px;
+}
 </style>
 </head>
 <body>
-<%@ include file="../common/navi.jsp" %>
-<%-- <%@ include file="include/header.jsp" %> --%>
-<!-- #wrap {position:relative; width:100%;} -->
-	<div id="wrap">		
-			<div class="contBox inner">
-				
-
-			<div class="tableArea">
-				<div id="myTitle"> <i class="hourglass half icon"></i>진행중인 크라우드 펀딩</div>
-				<div style="width: 96%; margin: 0 auto;">
-				<div class="categotyBtn" onclick="#" style="margin-right: 30px;">금액</div>
-				<div class="categotyBtn" onclick="#">물품</div>
-				</div>
-				<table>
-					<thead>
-						<tr>
-							<th style="width: 45%;">제목</th>
-							<th style="width: 15%;">진행현황</th>
-							<th style="width: 30%;">내가 후원한 호인트</th>
-							<th style="width: 15%;">100%달성여부</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td>굶어서 영양실조에 걸린 제 동생을 도와주세요</td>
-							<td>80%</td>
-							<td>20,000원</td>
-							<td>X</td>
-						</tr>
-						<tr>
-							<td>학교에 가고 싶어요</td>
-							<td>70%</td>
-							<td>50,000원</td>
-							<td>X</td>
-						</tr>
-						<tr>
-							<td>추운겨울 월세를 못내서,,,</td>
-							<td>100%</td>
-							<td>40,000원</td>
-							<td>O</td>
-						</tr>
-					</tbody>
-				</table>
-				<div class="col text-center">
-					<div class="block-27">
-						<ul>
-							<li><a href="#">&lt;</a></li>
-							<li class="active"><span>1</span></li>
-							<li><a href="#">2</a></li>
-							<li><a href="#">3</a></li>
-							<li><a href="#">4</a></li>
-							<li><a href="#">5</a></li>
-							<li><a href="#">&gt;</a></li>
-						</ul>
-					</div>
-				</div>
-			</div>
-
-			<div class="tableArea">
-				<div id="myTitle"><i class="hourglass end icon"></i>종료된 크라우드 펀딩</div>
-				<div style="width: 96%; margin: 0 auto;">
-				<div class="categotyBtn" onclick="#" style="margin-right: 30px;">금액</div>
-				<div class="categotyBtn" onclick="#">물품</div>
-				</div>
-				<table>
-					<thead>
-						<tr>
-							<th style="width: 45%;">제목</th>
-							<th style="width: 15%;">진행현황</th>
-							<th style="width: 30%;">내가 후원한 호인트</th>
-							<th style="width: 15%;">100%달성여부</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td>밀린 월세를 도와주세요</td>
-							<td>77%</td>
-							<td>10,000원</td>
-							<td>X</td>
-						</tr>
-						<tr>
-							<td>계속해서 공부를 하고싶어요</td>
-							<td>100%</td>
-							<td>40,000원</td>
-							<td>O</td>
-						</tr>
-						<tr>
-							<td>제 동생의 간 수술비를 도와주세요</td>
-							<td>100%</td>
-							<td>20,000원</td>
-							<td>O</td>
-						</tr>
-					</tbody>
-				</table>
-				<div class="col text-center">
-					<div class="block-27">
-						<ul>
-							<li><a href="#">&lt;</a></li>
-							<li class="active"><span>1</span></li>
-							<li><a href="#">2</a></li>
-							<li><a href="#">3</a></li>
-							<li><a href="#">4</a></li>
-							<li><a href="#">5</a></li>
-							<li><a href="#">&gt;</a></li>
-						</ul>
-					</div>
-				</div>
-			</div>
-		</div>								
-	</div>		
-			
-			
 	
-
-	<%@ include file="include/myNav.jsp" %>
-
+	<div class="head">
+		<hr>		
+	</div>
+	
+	<!-- QnA 내용 -->
+	<div class="QnA-nocie">
+		<div id="myTitle"><i class="question icon"></i>QnA 상세보기</div>
+	</div>
+	<div class="QnA-list">
+		<table class="listTable">
+			<tr>
+				<td class="tableTitle">제목</td>
+				<td colspan="3" style="">기부금 영수증에 대해 궁금해요</td>
+			</tr>
+			<tr>
+				<td class="tableTitle">작성자</td>
+				<td>뭉뭉</td>
+				<td class="tableTitle">작성일</td>
+				<td>2019-02-05</td>
+			</tr>
+			<tr>
+				<td class="tableTitle">내용</td>
+			</tr>
+			<tr>
+				<td colspan="4"><textarea rows="8" cols="150">내용입니다올ㄴㅇㄹ망;ㅏㄹ;ㅁ은;ㅁㄹ으;ㅁ</textarea> </td>
+			</tr>			
+		</table>
+	</div>
+	<!-- 댓글 내용 -->
+	<div class="QnA-nocie">
+		<div id="myTitle" style="margin-bottom: 0px;"><i class="lightbulb outline icon"></i>두리두리 답변</div>
+	</div>
+	<div class="QnA-list">
+		<table class="answerTable">
+			<tr>
+				<td class="tableTitle">두리두리 답변</td>
+			</tr>
+			<tr>
+				<td>기부금영수증이란 ~~~ 입니다.</td>
+			</tr>
+		</table>
+	</div>
+	
+	<div align="center" style="margin-top: 80px;"> 
+	<button class="ui orange basic button"  style="font-size: 20px; margin-right : 10px;">목록으로 되돌아가기</button>
+	<button class="ui orange basic button" style="font-size: 20px; margin-left : 10px;">삭제하기</button>
+	</div>
+	
 </body>
 </html>
