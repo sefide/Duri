@@ -26,9 +26,8 @@
 	#myTitle{
 		margin-bottom: 20px;
 		font-size:25px;
-		color: rgb(50, 147, 63);
-		font-weight: bold;
-		
+		color: rgba(250, 143, 61);
+		font-weight: bold;	
 	}	
 	#nav_back{
     		background: #FFBB50; 
@@ -71,6 +70,7 @@
    	}
    	.top-bar-text div {
    		display : inline-block;
+  		padding-top: 5px;
    	}
    	.date-div{
    		width : 120px;
@@ -85,7 +85,7 @@
    	}
    	.search-div{
    		width : 70px;
-   		height : 40px;
+   		height : 35px;
    		background : white;
    		border-radius : 5px;
    		margin :8px;
@@ -185,7 +185,9 @@
   		margin:0 auto;
   	}
 
-
+    .calen {
+    	color: rgba(250, 143, 61);
+    }
 </style>
 </head>
 <body>
@@ -203,7 +205,7 @@
 			<section class="ftco-section">
     			<div class="container">
 		    		<div class="row d-flex">
-		    			<h3 class = "ftco-animate" id = "pTitle">포인트 히스토리</h3>
+		    			<div id="myTitle"> <i class="history icon"></i>포인트 히스토리</div>
 		    		</div>
 		    		<br>
 		    		<div>
@@ -212,14 +214,14 @@
 			    				<div class ="top-bar-text">
 			    					<div >조회기간 </div>
 			    					<div class = "date-div">2019.12 
-									<a href="#" id = "startMonth">달력
-			         		 		<span class="glyphicon glyphicon-calendar"></span>
-			        					</a>
+										<a href="#" id = "startMonth" class = "calen">
+											<i class="calendar alternate outline big icon"></i>
+				        				</a>
 			        				</div>
 			        				~
 			        				<div class = "date-div">2019.01 
-			    						<a href="#" id = "endMonth">달력
-			         		 		<span class="glyphicon glyphicon-calendar"></span>
+			    						<a href="#" id = "endMonth" class = "calen">
+			    							<i class="calendar alternate outline big icon"></i>
 			        					</a>
 			        				</div>
 			        				

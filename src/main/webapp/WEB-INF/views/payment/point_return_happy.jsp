@@ -5,7 +5,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<jsp:include page="../happymember/include/common.jsp" />
+
+<jsp:include page="../happymember/include/common.jsp" /> 
 <title>둘이두리</title>
 <jsp:include page="../common/css.jsp"/>
 <style>
@@ -23,9 +24,10 @@
     	}
 	#pTitle{
 		display: block;
-		font-size : 30px;
+		font-size : 29px;
 		font-weight : 700;
-		color : #434343;
+		margin-left : -20px;
+		
 	}
 	.d-flex{
    		padding-left : 5%;
@@ -77,24 +79,26 @@
 	.inputTxt{
 		height :40px !important;
 		border-radius : 5px;
-		width :  180px;
+		width :  200px;
 		display : inline-block;
 		margin-right : 2%;
 	}
 	table{
 		width : 96%;
 		margin: 2%;
+		color : #333;
 	}
 	th {
 		color : black;
-		font-weight : 400;
-		font-size : 20px;
+		font-weight : 600;
+		font-size : 18px;
 	}
 	tr{
 		height : 85px;
+		background : white !important;
 	}
 	td{
-		font-size : 20px;
+		font-size : 18px;
 		font-weight : 400;
 	}
 	#txtAllPoint{
@@ -109,7 +113,7 @@
 		text-decoration : underline;
 	}
 	#back-btn{
-		background: #FE9D35;
+		background: #2e3a4a;
 		width : 100%;
 		height : 75px;
 		text-align : center;
@@ -135,7 +139,7 @@
 		display:flex;
 		flex-wrap : wrap;
 		width : 97%;
-		margin: 323px 1% 1% 1%;
+		margin: 245px 1% 1% 1%;
 	}
 	.d-left{
 		width : 49%;
@@ -166,18 +170,23 @@
 		top : 0;
 		overflow : visible;
 	}
+	h1, h2, h3, h4  {
+		color: #333;
+	}
 
 </style>
 </head>
 <body>
 	<!-- 네비바 -->
 	<jsp:include page="../happymember/include/header.jsp" />	
-	<div id="subvisual"></div>
+	
+	<jsp:include page="../happymember/include/myNav.jsp" />
+	
 	 <div id="subContainer">
 		<div class="contBox inner"><!-- inner S -->
 		 
 			<jsp:include page="include/tabMypage.jsp" />
-	    
+	    	
 		    <section class="ftco-section">
 		    	<div class="container">
 		    		<div class="row d-flex">
@@ -185,8 +194,10 @@
 		    		</div>
 		    		<div id = "bar1"></div>
 		    		<div class ="row d-flex"> 
-		    			<div class = "d-flex-left">
-		 	  			<h4 class ="" id = "subTitle">> 환급포인트</h4>
+		    			<div class = "d-flex-left"> <br>
+		 	  			<!-- <h4 class ="" id = "subTitle">> 환급포인트</h4> -->
+					    <div style="float: left; margin : 20px 0"><h1><i class="chevron right icon"></i>환급포인트</h1></div>
+		 	  			
 		    				<table>
 		    					<tr>
 		    						<th>현재 보유포인트</th>
@@ -206,8 +217,8 @@
 		    				</table>
 		    				
 		    				<div id = "bar2"></div>
-		    				<h4 class ="" id = "subTitle">> 환급받을 계좌</h4>
-		    				
+		    				<!-- <h4 class ="" id = "subTitle">> 환급받을 계좌</h4> -->
+		    				<div style="float: left; margin : 20px 0;"><h1><i class="chevron right icon"></i>환급받을 계좌</h1></div>
 		    				<table>
 		    					<tr>
 		    						<th>은행</th>
@@ -230,17 +241,17 @@
 		    						<td><input class="form-control inputTxt" type = "text" name = "accountName" id = "accountName" placeholder = "이름을 입력해주세요."></td>
 		    					</tr>
 		    				</table>
-		    				<p style = "margin-left : 1%;"> *환급받을 계좌 정보를 정확히 입력해주세요. <br> 
-								계좌번호와 예금주명이 다를 경우 환급이 제대로 되지 않을 수 있습니다.  </p>
+		    				
 		    			</div>
 		    			
 		    			<div class = "d-flex-right">
 		    				<div class = "back-right">
 		    					<input type ="checkbox" id= "chkinfo1"><label for = "chkinfo1">수수료 약관동의</label> <br>
-			    				<a>포인트 결제 시 부과했던 후원 수수료는 환급되지 않습니다. </a><br>
-							
+			    				<a>포인트 결제 시 부과했던 후원 수수료는 환급되지 않습니다. </a><br><br>
+								<p style = "margin-left : 1%;"> *환급받을 계좌 정보를 정확히 입력해주세요. <br> 
+								계좌번호와 예금주명이 다를 경우 환급이 제대로 되지 않을 수 있습니다.  </p>
 			    				<div class= "flexBox valueBox">
-			    					<div class = "d-left">현재 보유포인트 </div><div class = "d-right" id = "txtChargeValue">0원</div>
+			    					<div class = "d-left">현재 보유포인트 </div><div class = "d-right" id = "txtChargeValue">0원</div><br><br>
 			    					<div id = "txtTotalValue">환급 금액</div><div class = "txtColor_o d-right" id = "totalValue">103,000</div>원
 			    					<div id = "bar3"></div>
 			    					<div class = "d-left">잔여포인트 </div><div class = "d-right" id = "txtFees">3000원</div>
@@ -258,6 +269,8 @@
 	    	</section>
     	</div>
    	</div>
+   	
+   	<br><br><br><br><br>
     
     <!-- footer  -->
     <jsp:include page="../common/footer.jsp"></jsp:include>
