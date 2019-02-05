@@ -28,15 +28,13 @@
 	padding: 20px;
 	border: 1px solid #888;
 	width: 50%;
-	height: 800px;
+	height: 950px;
 }
 
 input {font-size: 20px;}
 select {font-size: 15px;}
 .num {font-size: 15px;}
-#button{text-align: center;}
-.textBlack {color: black; font-weight: 600; font-size: 20px;}
-.textOrange {color: orange; font-weight: 600; font-size: 20px;}
+
 /* 닫기 버튼 */
 .close {
 	color: #aaa;
@@ -99,7 +97,27 @@ select {font-size: 15px;}
 	/* font-weight: bold;  */
 	/* font-family: Nanum Pen Script; */
 }
-.right {text-align: right;}
+
+.textBlack1, .textBlack2{color: black; font-weight: 600;}
+.textOrange1, .textOrange2 {color: orange; font-weight: 600;}
+.textBlack1, .textOrange1 {font-size: 25px;}
+.textBlack2, .textOrange2 {font-size: 22px;}
+
+/*취소, 배송받기 버튼*/
+.resetBtn {
+	font-size: 27px; 
+	font-weight: bold;
+	color: silver;
+	width: 50%; 
+	float: left;
+}
+.deliveryBtn {
+	font-size: 27px; 
+	font-weight: bold;
+	color: orange;
+}
+.resetBtn:hover {color: silver; cursor: pointer;}
+.deliveryBtn:hover {color: orange; cursor: pointer;}
 </style>
 </head>
 <body>
@@ -145,7 +163,7 @@ select {font-size: 15px;}
 		<h1 align="center"><&nbsp;보유 물품 현황&nbsp;></h1>
 		<br><br>
 		<div>
-		<!-- 왼쪽 세로 물품 -->
+			<!-- 왼쪽 세로 물품 -->
 			<div style="float: left; margin-left:30px;">
 				<div style="float: left;"><input type="radio"/></div>
 				<div style="float: left;">
@@ -287,6 +305,7 @@ select {font-size: 15px;}
 				</div>
 			</div>
 		</div>
+		<!-- 페이징 -->
 		<div class="numbox pt40 pb50"> 
 			<span><a class="num" href="#">&lt;</a></span>
 			<span><a class="num on" href="#">1</a></span>
@@ -296,15 +315,19 @@ select {font-size: 15px;}
 			<span><a class="num" href="#">5</a></span>
 			<span><a class="num" href="#">&gt;</a></span>
 		</div>
-		<br><br><br>
-		<div style="float: left;">
-			<div align="center" style="float: left;" class="textBlack">배송 받을 물품을&nbsp;</div>
-			<div style="float: left;" class="textOrange">맞게 선택하셨나요?</div>
-			<br>
-			<div style="float: left;" class="textBlack" >배송 받을 주소가 변경되었다면&nbsp;</div>
-			<div style="float: left;" class="textOrange">내 정보 수정</div>
-			<div style="float: left;" class="textBlack">에서 꼭!수정해주세요!&nbsp;</div>
+		<br><br><br><br><br>
+		<div>
+			<div style="float: left; margin-left: 25%;" class="textBlack1">배송 받을 물품을&nbsp;</div>
+			<div style="float: left;" class="textOrange1">맞게 선택하셨나요?</div><br>
+			<div style="float: left; margin-left: 8%;" class="textBlack2" >배송 받을 주소가 변경되었다면&nbsp;</div>
+			<div style="float: left;" class="textOrange2">내 정보 수정</div>
+			<div style="float: left;" class="textBlack2">에서 꼭!수정해주세요!&nbsp;</div>
 		</div>
+		<br>
+		<!-- 취소, 배송받기 위에 선 표현 -->
+		<h2 class="ui dividing header">&nbsp;</h2><br>
+		<div align="center"><a class="resetBtn">취소</a></div>
+		<div align="center"><a class="deliveryBtn">배송받기</a></div>
 	</div>
 </div>
 <script>
@@ -315,7 +338,7 @@ select {font-size: 15px;}
 	//모달창 여는 a태그
 	var modalbtn = document.getElementById("modalBtn");
 
-	//모달 닫기
+	//모달 닫기 버튼
 	var modalclose = document.getElementsByClassName("close")[0];
 
 	//버튼을 눌렀을 때 모달 창 띄우기
