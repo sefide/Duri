@@ -1,8 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!doctype html>
 <html lang="kr">
 	<head>
+	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css">
+<script src="//code.jquery.com/jquery.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/latest/js/bootstrap.min.js"></script>
 	<meta charset="UTF-8">
 	<title>http://www.blueb.co.kr</title>
 
@@ -170,6 +174,18 @@ body {
   background: #FFFFFF;
   color: yellowgreen;
 }
+
+#idCheckBtn{
+	border:1px solid white;
+	background: #FFFFFF;
+  	color: yellowgreen;
+}
+#idCheckBtn:hover{
+
+	background: yellowgreen;
+  	color: #FFFFFF;
+}
+
 .form-group .form-remember {
   font-size: 12px;
   font-weight: 400;
@@ -296,6 +312,20 @@ body {
   background: #FFFFFF !important;
   color: #4285F4 !important;
 }
+input, select{
+  margin-bottom:7px;
+  background: rgba(0, 0, 0, 0.1);
+  width: 100%;
+  border: 0;
+  border-radius: 4px;
+  box-sizing: border-box;
+  padding: 12px 20px;
+  color: rgba(0, 0, 0, 0.6);
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: 500;
+
+}
 
 </style>
 </head>
@@ -310,21 +340,21 @@ body {
       <h1>행복두리 Login</h1>
     </div>
     <div class="form-content">
-      <form>
+      <form action="login.me" method="POST">
         <div class="form-group">
-          <label for="username">userId</label>
-          <input type="text" id="userId" name="userId" required="required"/>
+          <label for="userId">userId</label>
+          <input type="text" id="mid" name="mid" required="required"/>
         </div>
         <div class="form-group">
           <label for="userPwd">Password</label>
-          <input type="password" id="userPwd" name="userPwd" required="required"/>
+          <input type="password" id="mpwd" name="mpwd" required="required"/>
         </div>
         <div class="form-group">
           <label class="form-remember">
           </label><a href="#" class="form-recovery">Forgot Password?</a>
         </div>
         <div class="form-group">
-          <button type="submit">Log In</button>
+          <button id="loginBtn">LogIn</button>
         </div>
       </form>
     </div>
@@ -334,48 +364,220 @@ body {
       <h1>Join Member</h1>
     </div>
     <div class="form-content">
-      <form>
-        <div class="form-group">
-          <label for="userId">아이디</label>
-          <input type="text" id="userId" name="userId" required="required"/>
-        </div>
-        <div class="form-group" style="float:left">
-          <label for="userPwd">비밀번호</label>
-          <input type="password" id="userPwd" name="userPwd" required="required"/>
-        </div>
-        
-        <div class="form-group" style="float:left; width:90px;"> 
-        </div>
-        
-        <div class="form-group">
-          <label for="userPwd2">비밀번호 확인</label>
-          <input type="password" id="userPwd2" name="userPwd2" required="required"/>
-        </div>
-         <div class="form-group" style="float:left">
-          <label for="userName">이름</label>
-          <input type="text" id="userName" name="userName" required="required"/>
-        </div>
-        
-        <div class="form-group" style="float:left; width:90px;"> 
-        </div>
-        
-        <div class="form-group">
-          <label for="nickName">닉네임</label>
-          <input type="text" id="nickName" name="nickName" hint="실명 가능" required="required"/>
-        </div>
-        <div class="form-group">
-          <label for="gender">성별</label>
-          <input type="radio" id="male" name="gender" value="M" required="required"/>
-          <input type="radio" id="female" name="gender" value="F" required="required"/>
-        </div>
-        <div class="form-group">
-          <label for="email">Email</label>
-          <input type="email" id="email" name="email" required="required"/>
-        </div>
-        <div class="form-group">
+      <form id="joinForm" action="<%=request.getContextPath()%>/insertMember.me" method="post">
+		<table class="boardWrite wth700 mr_auto mt30"><!-- boardWrite S-->
+			<colgroup>
+				<col style="width:30%;">
+				<col style="width:%;">
+			</colgroup>
+			<tbody>
+			<tr>
+				<th scope="row">아이디</th>
+				<td>
+					
+					<input id="SId" name="userId" type="text">
+				</td>
+				
+				<td>
+					<span>
+						&nbsp;&nbsp;<a id="idCheckBtn" class="btn btn-primary" > 중복확인</a>
+						<span id="idCheckMsg"></span>
+					</span>
+				</td>
+
+			</tr>
+
+			<tr>
+				<th scope="row">비밀번호</th>
+				<td>
+					<input id="SPwd" name="userPwd" type="password"> 
+					<span id="pwdCheckMsg"></span>
+				</td>
+
+			</tr>
+			<tr>
+				<th scope="row">비밀번호 확인</th>
+				<td>
+					<input id="SPwd2" type="password"> 
+				</td>
+		
+			</tr>
+			<tr>
+				<th scope="row">이름</th>
+				<td>
+					<label for=""></label>
+					<input id="SName" name="userName" type="text"> 
+				</td>
+				<td align="center">
+					<b>닉네임</b>
+				</td>
+				<td>
+					<label for=""></label>
+					<input id="nickName" name="nickName" type="text"> 
+				</td>
+			</tr>
+			<!-- <tr>
+				<th scope="row">닉네임</th>
+				<td>
+					
+				</td>
+			</tr> -->
+			
+			<tr>
+				<th scope="row">휴대폰번호</th>
+				<td>
+					<span>
+						<input id="Sphone" name="phone" type="text" placeholder="-없이 입력">
+					</span>
+				 </td>
+			</tr>
+			<tr>
+				<th scope="row">이메일</th>
+				<td>
+					<input id="Semail1" name="email1" class="wth100" type="text">
+				</td>
+
+				<td>
+					<input id="Semail2" name="email2" class="wth100" type="text">
+				</td>
+				<td>
+			</tr>
+			
+			
+			<tr>
+			<td></td>
+				<td>
+					<select id="email">
+							<option value="self" selected>직접입력</option>
+							<option value="naver">naver.com</option>
+							<option value="daum">daum.net</option>
+							<option value="google">google.com</option>
+					</select>
+				</td>
+				<td>
+					<span>
+						&nbsp;&nbsp;<a id="idCheckBtn" class="btn btn-primary" >인증번호발송</a>
+						<span id="idCheckMsg"></span>
+					</span>
+				</td>
+			</tr>
+			<tr>
+					
+					<%!
+						public int getRandom(){
+							int randomCode=0;
+							randomCode = (int)Math.floor((Math.random()*99999-10000+1))+10000;
+							return randomCode;
+						}
+					%>
+				<td>
+					<input type="hidden" value="<%=getRandom()%>" id="randomCode">
+				</td>
+				<td>	
+						<input id="authCode" type="text" placeholder="인증번호를 입력하세요">
+				</td>
+				<td>
+						<span>
+						&nbsp;&nbsp;<a id="idCheckBtn" class="btn btn-primary" >인증하기</a>
+						<span id="idCheckMsg"></span>
+					</span>
+
+				</td>
+			</tr>
+			
+
+			<tr>
+				<th scope="row">주소</th>
+				<td>
+					<input id="address" name="address" class="wth100" type="text">
+				</td>
+				<td>
+					<span>
+						&nbsp;&nbsp;<a id="idCheckBtn" class="btn btn-primary" >주소검색</a>
+					<span id="idCheckMsg"></span>
+					</span>
+				</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td colspan="3">
+					<input id="address" name="address" class="wth100" type="text" placeholder="상세주소를 입력해주세요">
+				</td>
+				
+			</tr>
+			
+
+
+			<tr>
+				<th scope="row">계좌번호</th>
+				<td>
+					은행명  <select name="bankcode" id="bankcode">
+							<option value="004">국민은행</option>
+							<option value="003">기업은행</option>
+							<option value="088">신한은행</option>
+							<option value="011">농협</option>
+							<option value="020">우리은행</option>
+						</select>
+			</tr>
+			<tr>
+				<td></td>
+				<td colspan="2">
+					<input type="text" size="25" placeholder="'-'를 제외하고 입력" name="accnum" id="accnum"><br>
+				
+				</td>
+				<td>
+
+						&nbsp;<a id="idCheckBtn" class="btn btn-primary" >계좌인증</a>
+
+					
+				</td>
+				<td><img id="accountCheckImg" class="checkTest" src=""></td>
+			</tr>
+			
+			<tr>
+				<th scope="row" >주민등록번호</th>
+				<td>
+					<input type="text" size="25" name="birth" id="birth" maxlength="6">
+				</td>
+				<td>
+					<input type="text" size="25" name="birth" id="birth" maxlength="1">
+				</td>
+				<td>******</td>
+			</tr>
+			
+			<tr>
+				<th scope="row">증빙서류 제출</th>
+				<td>
+					서류유형  <select name="bankcode" id="bankcode">
+							<option value="004">기초생활수급자</option>
+							<option value="003">소년소녀가장</option>
+							<option value="088">한부모가정</option>
+						</select>
+			</tr>
+			<tr>
+				<td></td>
+				<td colspan="2">
+					<input type="file" size="25"  name="accnum" id="accnum"><br>
+				
+				</td>
+
+			</tr>
+			
+			
+			</tbody>
+			</table>
+			
+		
+			<!-- <div id="fileArea">
+				<input type="file" id="IdCardImg" name="IdCardImg" onchange="loadImg(this, 1)">
+				<input type="file" id="faceImg" name="faceImg" onchange="loadImg(this, 2)">
+			</div> -->
+
+		<div class="form-group">
           <button type="submit">Register</button>
         </div>
-      </form>
+		</div>
+		</form>
     </div>
   </div>
 </div>

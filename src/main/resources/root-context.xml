@@ -4,5 +4,33 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
+	<!-- 데이터베이스 접속에 관련된 클래스들을 bean으로 등록할 수 있다. -->
+	
+	<!-- sqlSessionTemplate 등록 -->
+	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg ref="sqlSession"/>
+	</bean>
+	<!-- <constructor-arg>부분 내용 = new SqlSessionTemplate(sqlSession); -->
+		
+	<!-- sqlSession도 bean으로 등록한다. -->	
+	<!-- SqlSessionFactoryBeadn sqlSession = new SqlSessionFactoryBean(); 이랑 같은뜻 -->
+	<!-- SqlSession.setConfigLocation("classpth:mybatis-config.xml"); -->
+	<!-- SqlSession.setDataSource(dataSource); 와 같은뜻(2번째 property) -->
+	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="configLocation" value="classpath:mybatis-config.xml"/>
+		<property name="dataSource" ref="dataSource"/>
+	</bean>
+	
+	<!-- dataSource객체 bean등록 -->
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
+		<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"/>
+		<property name="username" value="duri"/>
+		<property name="password" value="duri"/>
+		<property name="defaultAutoCommit" value="false"/>
+	</bean>
+	
+
+	
 		
 </beans>
