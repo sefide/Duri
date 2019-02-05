@@ -28,7 +28,7 @@
 
 
     
-    <div class="hero-wrap" style="background-image: url('/duri/resources/images/bg_11.jpg');" data-stellar-background-ratio="0.5">
+    <div class="hero-wrap" style="background-image: url('/duri/resources/common/images/bg_11.jpg');" data-stellar-background-ratio="0.5">
       <div class="overlay"></div>
       <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center" data-scrollax-parent="true">
@@ -48,7 +48,7 @@
       	<div class="row">
       		<div class="col-md-4 ftco-animate">
       			<div class="cause-entry">
-    					<a href="#" class="img" style="background-image: url(/duri/resources/images/cause-1.jpg);"></a>
+    					<a href="#" class="img" style="background-image: url(/duri/resources/common/images/cause-1.jpg);"></a>
     					<div class="text p-3 p-md-4">
     						<h3><a href="/duri/views/board/about_money.jsp">저는 집이 무섭습니다.</a></h3>
     						<p>wewe1596 행복두리의 사연</p>
@@ -62,7 +62,7 @@
       		</div>
       		<div class="col-md-4 ftco-animate">
       			<div class="cause-entry">
-    					<a href="#" class="img" style="background-image: url(/duri/resources/images/cause-2.jpg);"></a>
+    					<a href="#" class="img" style="background-image: url(/duri/resources/common/images/cause-2.jpg);"></a>
     					<div class="text p-3 p-md-4">
     						<h3><a href="#">Clean water for the urban area</a></h3>
     						<p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life</p>
@@ -76,7 +76,7 @@
       		</div>
       		<div class="col-md-4 ftco-animate">
       			<div class="cause-entry">
-    					<a href="#" class="img" style="background-image: url(/duri/resources/images/cause-3.jpg);"></a>
+    					<a href="#" class="img" style="background-image: url(/duri/resources/common/images/cause-3.jpg);"></a>
     					<div class="text p-3 p-md-4">
     						<h3><a href="#">Clean water for the urban area</a></h3>
     						<p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life</p>
@@ -90,7 +90,7 @@
       		</div>
       		<div class="col-md-4 ftco-animate">
       			<div class="cause-entry">
-    					<a href="#" class="img" style="background-image: url(/duri/resources/images/cause-4.jpg);"></a>
+    					<a href="#" class="img" style="background-image: url(/duri/resources/common/images/cause-4.jpg);"></a>
     					<div class="text p-3 p-md-4">
     						<h3><a href="#">Clean water for the urban area</a></h3>
     						<p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life</p>
@@ -104,7 +104,7 @@
       		</div>
       		<div class="col-md-4 ftco-animate">
       			<div class="cause-entry">
-    					<a href="#" class="img" style="background-image: url(/duri/resources/images/cause-5.jpg);"></a>
+    					<a href="#" class="img" style="background-image: url(/duri/resources/common/images/cause-5.jpg);"></a>
     					<div class="text p-3 p-md-4">
     						<h3><a href="#">Clean water for the urban area</a></h3>
     						<p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life</p>
@@ -118,7 +118,7 @@
       		</div>
       		<div class="col-md-4 ftco-animate">
       			<div class="cause-entry">
-    					<a href="#" class="img" style="background-image: url(/duri/resources/images/cause-6.jpg);"></a>
+    					<a href="#" class="img" style="background-image: url(/duri/resources/common/images/cause-6.jpg);"></a>
     					<div class="text p-3 p-md-4">
     						<h3><a href="#">Clean water for the urban area</a></h3>
     						<p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life</p>
@@ -149,12 +149,12 @@
       </div>
     </section>
 
-    <section class="ftco-section-3 img" style="background-image: url(/duri/resources/images/bg_3.jpg);">
+    <section class="ftco-section-3 img" style="background-image: url(/duri/resources/common/images/bg_3.jpg);">
     	<div class="overlay"></div>
     	<div class="container">
     		<div class="row d-md-flex">
     		<div class="col-md-6 d-flex ftco-animate">
-    			<div class="img img-2 align-self-stretch" style="background-image: url(/duri/resources/images/bg_4.jpg);"></div>
+    			<div class="img img-2 align-self-stretch" style="background-image: url(/duri/resources/common/images/bg_4.jpg);"></div>
     		</div>
     		<div class="col-md-6 volunteer pl-md-5 ftco-animate">
     			<h3 class="mb-3">Be a volunteer</h3>

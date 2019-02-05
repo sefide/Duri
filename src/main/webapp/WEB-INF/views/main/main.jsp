@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -46,6 +47,22 @@
 
 	<hr>
 	은지 뷰
+	로그인 정보<br>
+	<c:set var="contextPath" value="${ pageContext.servletContext.contextPath }" scope="application"/>
+	
+	<c:if test="${ !empty sessionScope.loginUser }">	<!-- 로그인유저 존재시 세션에서 로그인유저 정보 표시 -->
+	    <h3 align="right"><c:out value="${ sessionScope.loginUser.mNickName }님 환영합니다."/></h3>
+	    <button>정보수정</button>
+	    <button onclick="location.href='logout.me'">로그아웃</button>
+	</c:if>	<br>
+	
+	<c:if test="${ !empty sessionScope.loginUser2 }">
+	    <h3 align="right"><c:out value="${ sessionScope.loginUser2.mNickName }님 환영합니다."/></h3>
+	    <button>정보수정</button>
+	    <button onclick="location.href='logout.me'">로그아웃</button>
+	</c:if>	
+	
+	<br>
 	<a href="Eunji_cloudList.bo">은지 - 크라우드펀딩 페이지(금액후원)</a><br>
 	<a href="Eunji_cloudList2.bo">은지 - 크라우드펀딩 페이지(물품후원)</a><br>
 	<a href="Eunji_happyLogin.me">은지 - 로그인페이지(행복두리)</a><br>

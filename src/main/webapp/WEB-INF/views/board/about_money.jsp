@@ -34,7 +34,7 @@
  		
  		
     
-    <div class="hero-wrap" style="background-image: url('/duri/resources/images/bg_44.jpg');" data-stellar-background-ratio="0.5">
+    <div class="hero-wrap" style="background-image: url('/duri/resources/common/images/bg_44.jpg');" data-stellar-background-ratio="0.5">
       <div class="overlay"></div>
       <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center" data-scrollax-parent="true">
@@ -51,7 +51,7 @@
     	<div class="container">
     		<div class="row d-flex">
     			<div class="col-md-6 d-flex ftco-animate">
-    				<div class="img img-about align-self-stretch" style="background-image: url(/duri/resources/images/bg_3.jpg); width: 100%;"></div>
+    				<div class="img img-about align-self-stretch" style="background-image: url(/duri/resources/common/images/bg_3.jpg); width: 100%;"></div>
     			</div>
     			<div class="col-md-6 pl-md-5 ftco-animate">
     				<h2 class="mb-4">WEWE1596 행복두리님의 사연</h2>
@@ -116,7 +116,7 @@
         	<div class="col-lg-4 d-flex mb-sm-4 ftco-animate">
         		<div class="staff">
         			<div class="d-flex mb-4">
-        				<div class="img" style="background-image: url(/duri/resources/images/person_1.jpg);"></div>
+        				<div class="img" style="background-image: url(/duri/resources/common/images/person_1.jpg);"></div>
         				<div class="info ml-4">
         					<h3><a href="teacher-single,jsp">cjdrud123</a></h3>
         					<span class="position">Donated Just now</span>
@@ -131,7 +131,7 @@
         	<div class="col-lg-4 d-flex mb-sm-4 ftco-animate">
         		<div class="staff">
         			<div class="d-flex mb-4">
-        				<div class="img" style="background-image: url(/duri/resources/images/person_2.jpg);"></div>
+        				<div class="img" style="background-image: url(/duri/resources/common/images/person_2.jpg);"></div>
         				<div class="info ml-4">
         					<h3><a href="teacher-single,jsp">Ivan Jacobson</a></h3>
         					<span class="position">Donated Just now</span>
@@ -146,7 +146,7 @@
         	<div class="col-lg-4 d-flex mb-sm-4 ftco-animate">
         		<div class="staff">
         			<div class="d-flex mb-4">
-        				<div class="img" style="background-image: url(/duri/resources/images/person_3.jpg);"></div>
+        				<div class="img" style="background-image: url(/duri/resources/common/images/person_3.jpg);"></div>
         				<div class="info ml-4">
         					<h3><a href="teacher-single,jsp">Ivan Jacobson</a></h3>
         					<span class="position">Donated Just now</span>
