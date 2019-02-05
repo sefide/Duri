@@ -96,7 +96,7 @@
                                             <td class="center">한의희</td>
                                             <td class="center">W</td>
                                             <td class="center">한부모가정</td>
-                                            <td class="center"><a href="adminNanumDetail.ad" class="btn btn-default btn-sm">상세보기</a></td>
+                                            <td class="center"><a href="adminNewHappyDetail.ad" class="btn btn-default btn-sm">상세보기</a></td>
                                         </tr>
                                         <tr class="odd gradeX">
                                             <td class="center">1</td>
@@ -105,7 +105,7 @@
                                             <td class="center">한의희</td>
                                             <td class="center">W</td>
                                             <td class="center">한부모가정</td>
-                                            <td class="center"><a href="adminNanumDetail.ad" class="btn btn-default btn-sm">상세보기</a></td>
+                                            <td class="center"><a href="adminNewHappyDetail.ad" class="btn btn-default btn-sm">상세보기</a></td>
                                         </tr>
                                         <tr class="odd gradeX">
                                             <td class="center">1</td>
@@ -114,7 +114,7 @@
                                             <td class="center">한의희</td>
                                             <td class="center">W</td>
                                             <td class="center">한부모가정</td>
-                                            <td class="center"><a href="adminNanumDetail.ad" class="btn btn-default btn-sm">상세보기</a></td>
+                                            <td class="center"><a href="adminNewHappyDetail.ad" class="btn btn-default btn-sm">상세보기</a></td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -155,7 +155,7 @@
                                             <td class="center">W</td>
                                             <td class="center">2018/10/11</td>
                                             <td class="center">제출</td>
-                                            <td class="center"><a href="adminNanumDetail.ad" class="btn btn-default btn-sm">상세보기</a></td>
+                                            <td class="center"><a href="adminHappyDetail.ad" class="btn btn-default btn-sm">상세보기</a></td>
                                         </tr>
                                         <tr class="odd gradeX">
                                             <td class="center">1</td>
@@ -165,7 +165,7 @@
                                             <td class="center">W</td>
                                             <td class="center">2018/10/11</td>
                                             <td class="center">제출</td>
-                                            <td class="center"><a href="adminNanumDetail.ad" class="btn btn-default btn-sm">상세보기</a></td>
+                                            <td class="center"><a href="adminHappyDetail.ad" class="btn btn-default btn-sm">상세보기</a></td>
                                         </tr>
                                         <tr class="odd gradeX">
                                             <td class="center">1</td>
@@ -175,7 +175,7 @@
                                             <td class="center">W</td>
                                             <td class="center">2018/10/11</td>
                                             <td class="center">미제출</td>
-                                            <td class="center"><a href="adminNanumDetail.ad" class="btn btn-default btn-sm">상세보기</a></td>
+                                            <td class="center"><a href="adminHappyDetail.ad" class="btn btn-default btn-sm">상세보기</a></td>
                                         </tr>
                                         
                                     </tbody>
@@ -217,7 +217,7 @@
                                             <td class="center">W</td>
                                             <td class="center">2018/10/11</td>
                                             <td class="center">제출</td>
-                                            <td class="center"><a href="adminNanumDetail.ad" class="btn btn-default btn-sm">상세보기</a></td>
+                                            <td class="center"><a href="adminHappyDetail.ad" class="btn btn-default btn-sm">상세보기</a></td>
                                         </tr>
                                         <tr class="odd gradeX">
                                             <td class="center">1</td>
@@ -227,7 +227,7 @@
                                             <td class="center">W</td>
                                             <td class="center">2018/10/11</td>
                                             <td class="center">제출</td>
-                                            <td class="center"><a href="adminNanumDetail.ad" class="btn btn-default btn-sm">상세보기</a></td>
+                                            <td class="center"><a href="adminHappyDetail.ad" class="btn btn-default btn-sm">상세보기</a></td>
                                         </tr>
                                         <tr class="odd gradeX">
                                             <td class="center">1</td>
@@ -237,7 +237,7 @@
                                             <td class="center">W</td>
                                             <td class="center">2018/10/11</td>
                                             <td class="center">미제출</td>
-                                            <td class="center"><a href="adminNanumDetail.ad" class="btn btn-default btn-sm">상세보기</a></td>
+                                            <td class="center"><a href="adminHappyDetail.ad" class="btn btn-default btn-sm">상세보기</a></td>
                                         </tr>
                                         
                                     </tbody>

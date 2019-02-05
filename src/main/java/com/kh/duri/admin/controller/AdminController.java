@@ -41,6 +41,18 @@ public class AdminController {
 	public String admin9() {
 		return "admin/adminHappyAll";
 	}
+	@RequestMapping("adminHappyDetail.ad")
+	public String admin16() {
+		return "admin/adminHappyDetail";
+	}
+	@RequestMapping("adminHappyTotalDetail.ad")
+	public String admin17() {
+		return "admin/adminHappyTotalDetail";
+	}
+	@RequestMapping("adminNewHappyDetail.ad")
+	public String admin15() {
+		return "admin/adminNewHappyDetail";
+	}
 	@RequestMapping("Euihee_ui-elements.ad")
 	public String admin8() {
 		return "admin/ui-elements";

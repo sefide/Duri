@@ -101,7 +101,7 @@
                                             <td class="center">han419120@naver.com</td>
                                             <td class="center">한부모가정</td>
                                             <td class="center">Y</td>
-                                            <td class="center"><a href="#1" class="btn btn-default btn-sm">상세보기</a></td>
+                                            <td class="center"><a href="adminHappyTotalDetail.ad" class="btn btn-default btn-sm">상세보기</a></td>
                                         </tr>
                                         <tr class="odd gradeX">
                                             <td>1</td>
@@ -111,7 +111,7 @@
                                             <td class="center">han419120@naver.com</td>
                                             <td class="center">한부모가정</td>
                                             <td class="center">Y</td>
-                                            <td class="center"><a href="#1" class="btn btn-default btn-sm">상세보기</a></td>
+                                            <td class="center"><a href="adminHappyTotalDetail.ad" class="btn btn-default btn-sm">상세보기</a></td>
                                         </tr>
                                         <tr class="odd gradeX">
                                             <td>1</td>
@@ -121,7 +121,7 @@
                                             <td class="center">han419120@naver.com</td>
                                             <td class="center">한부모가정</td>
                                             <td class="center">Y</td>
-                                            <td class="center"><a href="#1" class="btn btn-default btn-sm">상세보기</a></td>
+                                            <td class="center"><a href="adminHappyTotalDetail.ad" class="btn btn-default btn-sm">상세보기</a></td>
                                         </tr>
                                         <tr class="odd gradeX">
                                             <td>1</td>
@@ -131,7 +131,7 @@
                                             <td class="center">han419120@naver.com</td>
                                             <td class="center">한부모가정</td>
                                             <td class="center">Y</td>
-                                            <td class="center"><a href="#1" class="btn btn-default btn-sm">상세보기</a></td>
+                                            <td class="center"><a href="adminHappyTotalDetail.ad" class="btn btn-default btn-sm">상세보기</a></td>
                                         </tr>
                                         <tr class="odd gradeX">
                                             <td>1</td>
@@ -141,7 +141,7 @@
                                             <td class="center">han419120@naver.com</td>
                                             <td class="center">한부모가정</td>
                                             <td class="center">Y</td>
-                                            <td class="center"><a href="#1" class="btn btn-default btn-sm">상세보기</a></td>
+                                            <td class="center"><a href="adminHappyTotalDetail.ad" class="btn btn-default btn-sm">상세보기</a></td>
                                         </tr>
                                         <tr class="odd gradeX">
                                             <td>1</td>
@@ -151,7 +151,7 @@
                                             <td class="center">han419120@naver.com</td>
                                             <td class="center">한부모가정</td>
                                             <td class="center">N</td>
-                                            <td class="center"><a href="#1" class="btn btn-default btn-sm">상세보기</a></td>
+                                            <td class="center"><a href="adminHappyTotalDetail.ad" class="btn btn-default btn-sm">상세보기</a></td>
                                         </tr>
                                         <tr class="odd gradeX">
                                             <td>1</td>
@@ -161,7 +161,7 @@
                                             <td class="center">han419120@naver.com</td>
                                             <td class="center">한부모가정</td>
                                             <td class="center">N</td>
-                                            <td class="center"><a href="#1" class="btn btn-default btn-sm">상세보기</a></td>
+                                            <td class="center"><a href="adminHappyTotalDetail.ad" class="btn btn-default btn-sm">상세보기</a></td>
                                         </tr>
                                         <tr class="odd gradeX">
                                             <td>1</td>
@@ -171,7 +171,7 @@
                                             <td class="center">han419120@naver.com</td>
                                             <td class="center">한부모가정</td>
                                             <td class="center">Y</td>
-                                            <td class="center"><a href="#1" class="btn btn-default btn-sm">상세보기</a></td>
+                                            <td class="center"><a href="adminHappyTotalDetail.ad" class="btn btn-default btn-sm">상세보기</a></td>
                                         </tr>
                                         <tr class="odd gradeX">
                                             <td>1</td>
@@ -181,7 +181,7 @@
                                             <td class="center">han419120@naver.com</td>
                                             <td class="center">한부모가정</td>
                                             <td class="center">N</td>
-                                            <td class="center"><a href="#1" class="btn btn-default btn-sm">상세보기</a></td>
+                                            <td class="center"><a href="adminHappyTotalDetail.ad" class="btn btn-default btn-sm">상세보기</a></td>
                                         </tr>
                                        
                                     </tbody>
