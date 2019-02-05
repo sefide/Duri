@@ -24,7 +24,7 @@ public class PaymentController {
 	    return "payment/pay_fundMoney";
 	}
 
-	// 포인트 환급페이지
+	// 포인트 충전페이지
 	@RequestMapping("pointCharge.pm")
 	public String pointCharge() {
 	    return "payment/point_charge"; 

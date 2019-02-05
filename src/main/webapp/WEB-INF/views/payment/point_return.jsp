@@ -27,10 +27,10 @@
 		color : #434343;
 	}
 	.d-flex{
-    		padding-left : 5%;
-    		margin: 0% 0;
-    	}
-    	.d-flex-left{
+   		padding-left : 5%;
+   		margin: 0% 0;
+   	}
+   	.d-flex-left{
 		width : 64%;
 		height : 100%;
 	}
@@ -62,6 +62,9 @@
    	/* 좌측 flex */
    	#subTitle{
 		margin: 20px 0;
+    	font-size: 24px;
+    	font-weight : 600;
+    	color : #424242;
 	}
     #returnValue{
 		height :40px !important;
@@ -131,7 +134,7 @@
 		display:flex;
 		flex-wrap : wrap;
 		width : 97%;
-		margin: 323px 1% 1% 1%;
+		margin: 245px 1% 1% 1%;
 	}
 	.d-left{
 		width : 49%;
@@ -147,6 +150,14 @@
 		color : #FE9D35;
 		font-weight : 700;
 		font-size : 32px;
+		display : inline-block;
+		
+	}
+	.txtright{
+		font-size : 18px;
+		color :black;
+		font-weight : 300;
+		display : inline-block;
 	}
 	#txtTotalValue{
 		font-size : 20px;
@@ -158,8 +169,11 @@
 		font-weight : 400;
 		margin-right : 10px;
 		margin-top : 10px;
+		position : relative;
+		top : 0;
+		overflow : visible;
 	}
-		.row tr:nth-child(even) {
+	.row tr:nth-child(even) {
 	    background: none;
 	}
 	
@@ -181,12 +195,12 @@
     <section class="ftco-section">
     	<div class="container">
     		<div class="row d-flex">
-    			<h3 class = "ftco-animate" id = "pTitle">후원포인트 환급받기</h3>
+    			<h3 class = "" id = "pTitle">후원포인트 환급받기</h3>
     		</div>
     		<div id = "bar1"></div>
     		<div class ="row d-flex"> 
     			<div class = "d-flex-left">
- 	  			<h4 class ="ftco-animate" id = "subTitle">> 환급포인트</h4>
+ 	  			<h4 class ="" id = "subTitle">> 환급포인트</h4>
     				<table>
     					<tr>
     						<th>현재 보유포인트</th>
@@ -206,7 +220,7 @@
     				</table>
     				
     				<div id = "bar2"></div>
-    				<h4 class ="ftco-animate" id = "subTitle">> 환급받을 계좌</h4>
+    				<h4 class ="" id = "subTitle">> 환급받을 계좌</h4>
     				
     				<table>
     					<tr>
@@ -227,21 +241,24 @@
     					</tr>
     					<tr>
     						<th>예금주명</th>
-    						<td><input class="form-control inputTxt" type = "text" name = "accountName" id = "accountName" placeholder = "이름을 입력해주세요."></td>
+    						<td><input class="form-control inputTxt" type = "text" name = "accountName" id = "accountName" placeholder = "이름을 입력해주세요.">
+    						
+    						</td>
+    					
     					</tr>
     				</table>
-    				<p style = "margin-left : 1%;"> *환급받을 계좌 정보를 정확히 입력해주세요. <br> 
-계좌번호와 예금주명이 다를 경우 환급이 제대로 되지 않을 수 있습니다.  </p>
+    				
     			</div>
     			
     			<div class = "d-flex-right">
     				<div class = "back-right">
     					<input type ="checkbox" id= "chkinfo1"><label for = "chkinfo1">수수료 약관동의</label> <br>
-	    				<a>포인트 결제 시 부과했던 후원 수수료는 환급되지 않습니다. </a><br>
-					
+	    				<a>포인트 결제 시 부과했던 후원 수수료는 환급되지 않습니다. </a><br><br> 
+						<p style = "margin-left : 1%;"> *환급받을 계좌 정보를 정확히 입력해주세요. <br> 
+						계좌번호와 예금주명이 다를 경우 환급이 제대로 되지 않을 수 있습니다.  </p>
 	    				<div class= "flexBox valueBox">
 	    					<div class = "d-left">현재 보유포인트 </div><div class = "d-right" id = "txtChargeValue">0원</div>
-	    					<div id = "txtTotalValue">환급 금액</div><div class = "txtColor_o d-right" id = "totalValue">103,000</div>원
+	    					<div id = "txtTotalValue">환급 금액</div><div class = "txtColor_o d-right" id = "totalValue">103,000<p class = "txtright">원</p></div>
 	    					<div id = "bar3"></div>
 	    					<div class = "d-left">잔여포인트 </div><div class = "d-right" id = "txtFees">3000원</div>
 	    					
