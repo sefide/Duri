@@ -14,12 +14,12 @@
 <%@ include file="include/common.jsp" %>
 <style>
 .head {
-	width: 100%;
+	width: 90%;
 	margin: 0 auto;
 	margin-top: 70px;
 }
 .QnA-nocie {
-	width: 90%;
+	width: 80%;
 	margin: 0 auto;
 	margin-top: 30px;
 	/* border: 2px solid red; */
@@ -27,7 +27,7 @@
 }
 
 .QnA-list {
-	width: 90%;
+	width: 80%;
 	margin: 0 auto;
 	margin-top: 30px;
 	/* border: 2px solid yellow; */
@@ -74,8 +74,11 @@ td {
 	font-size: 16px;
 }
 .writeBtn{
-	width: 50px;
-	color : rgba(250, 143, 61);
+	width: auto;
+	height : auto;
+	background-color : rgba(250, 143, 61);
+	color : white;
+	font-weight : bold;
 	margin-right: 20px;
 }
 </style>
@@ -92,12 +95,12 @@ td {
 		<ul>
 			<li class="nontice">비방 / 욕설은 삼가 해 주세요.</li>
 			<li class="nontice">모든 나눔두리들이 볼 수 있는 공간이니 매너는 필수입니다.</li>
-		</ul>	
-		
-		<div align="right">글 작성하기</div>			
+		</ul>		
 	</div>
 	<!-- QnA 리스트 -->
 	<div class="QnA-list">
+		<button class="ui orange basic button" style="float: right;" >글 작성하기</button>		
+		<br><br>
 		<div class="tableArea">
 				<table>
 					<thead>
