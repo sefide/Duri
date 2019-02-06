@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="Point">
+	<resultMap type="com.kh.duri.payment.model.vo.Point" id="pointResultSet">
+		<id property="pNo" column="PNO"></id>
+		<result property="pType" column="PTYPE"/>
+		<result property="pValue" column="PVALUE"/>
+		<result property="pDate" column="PDATE"/>
+		<result property="pReason" column="PREASON"/>
+		<result property="p_mNo" column="P_MNO"/>
+		<result property="p_pyNo" column="P_PYNO"/>
+		<result property="p_dhdNo" column="P_DHDNO"/>
+		<result property="p_rNo" column="P_RNO"/>
+		<result property="p_fhNo" column="P_FHNO"/>
+	</resultMap>
+	
+	<resultMap type="com.kh.duri.payment.model.vo.DonateReceipt" id="donateReceiptResultSet">
+		<id property="drNo" column="DRNO"></id>
+		<result property="drRegistNum" column="DRREGISTNUM"/>
+		<result property="drApplyDate" column="DRAPPLYDATE"/>
+		<result property="drDonateDate" column="DRDONATEDATE"/>
+		<result property="drValue" column="DRVALUE"/>
+		<result property="dr_mNo" column="DR_MNO"/>
+	</resultMap>
+	
+	<select id="donateReceiptHistory" resultMap="donateReceiptResultSet" parameterType="DonateReceipt">
+		SELECT *
+		FROM DONATERECEIPT
+		WHERE DR_MNO=#{mno}
+	</select>
+</mapper>
