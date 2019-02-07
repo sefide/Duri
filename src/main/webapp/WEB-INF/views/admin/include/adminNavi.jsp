@@ -43,7 +43,7 @@
                                 <a href="adminHappy.ad">행복두리 승인관리</a>
                             </li>
 							</ul>
-						</li>	
+						</li>	    
 					 <li>
                         <a href="#" ><i class="fa fa-edit"></i>Q&A 관리<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
