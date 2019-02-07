@@ -139,8 +139,10 @@ td {
 	</div>
 	
 	<div align="center" style="margin-top: 80px;"> 
-	<button class="ui orange basic button"  style="font-size: 20px; margin-right : 10px;">목록으로 되돌아가기</button>
-	<button class="ui orange basic button" style="font-size: 20px; margin-left : 10px;">삭제하기</button>
+	<button onclick="location.href='QnAList.nanum'"  
+		class="ui orange basic button"  style="font-size: 20px; margin-right : 10px;">목록으로 되돌아가기</button>
+	<button 
+		class="ui orange basic button" style="font-size: 20px; margin-left : 10px;">삭제하기</button>
 	</div>
 	
 </body>

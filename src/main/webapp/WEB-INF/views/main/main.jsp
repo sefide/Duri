@@ -27,9 +27,10 @@
 	<a href="Ajin6.nanum">아진 - 마이페이지_기부금 영수증</a><br>
 	<a href="Ajin7.nanum">아진 - 마이페이지 _하고싶었던 후원</a><br>
 	<a href="Ajin_QnA_list.nanum">아진 - QnA_목록</a><br>
+	<a href="Ajin_QnA_insert.nanum">아진 - QnA_등록</a><br>
 	<a href="Ajin_QnA_detail.nanum">아진 - QnA_상세</a><br>
 
-	
+  
 	<hr>
 	애린이 뷰
 	<a href="mypage.happy">애린 - mypage.jsp</a><br>
@@ -65,6 +66,7 @@
 	<a href="Eunji_cloudList2.bo">은지 - 크라우드펀딩 페이지(물품후원)</a><br>
 	<a href="Eunji_happyLogin.me">은지 - 로그인페이지(행복두리)</a><br>
 	<a href="Eunji_nanumLogin.me">은지 - 로그인페이지(나눔두리)</a><br>
+	<a href="Eunji_cloudWrite.bo">은지 - 펀딩글 작성 페이지</a><br>
 	
 	<hr>
 	
@@ -76,6 +78,8 @@
 	<a href="donateReceipt.pm">다힝 기부금영수증</a><br>
 	<a href="pointReturn.pm">다힝 포인트 환급_나눔두리</a><br>
 	<a href="pointReturnHappy.pm">다힝 포인트 환급_행복두리</a><br>
+	<a href="pointReturnList.pm">다힝 포인트 환급목록_나눔두리</a><br>
+	<a href="pointReturnListHappy.pm">다힝 포인트 환급목록_행복두리</a><br>
 	
 </body>
 </html>

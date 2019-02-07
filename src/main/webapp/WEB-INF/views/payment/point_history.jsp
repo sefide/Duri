@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -130,7 +130,8 @@
 		width : 95%;
 		display :flex;
 		flex-wrap : wrap;
-		margin : 25px auto;
+		margin : 40px auto;
+		border-bottom : 1px solid rgb(250,250,250);
 	}
 	.histLeft{
 		width : 10%;
@@ -141,7 +142,7 @@
 		height : 100%;
 		background : rgba(220,220,220,0.5);
 		border-radius : 50%;
-		padding-left : 32%;
+		text-align: center;
 		padding-top : 35%;
 		color : #434343;
 		font-weight : 400;
@@ -231,119 +232,64 @@
 		    			</div>
 		    		</div>
 		    		
-		    		
+		    		<c:if test = "${ !empty phList }">
+						
 		    		<div class ="contents_search"> 
 		    			<div id = "month01" class = "month">
-		    				<div class = "month-view">
-		    					<div class = "month-bar-left"></div>
-		    					<div class = "month-date">2019.01</div>
-		    					<div class = "month-bar-right"></div>
-		    				</div>
+		    			<div class = "month-view">
+	    					<div class = "month-bar-left"></div>
+	    					<div class = "month-date">All</div>
+	    					<div class = "month-bar-right"></div>
+	    				</div>
+	    				
+		    			<c:forEach var="ph" items="${phList}">
+		    				
+		    				
+		    				
 		    				<div class = "cont-view">
 		    					<div class = "histContents">
 		    						<div class = "histLeft">
-		    							<div class = "circle">펀딩</div>
+		    							<div class = "circle">${ ph.pReason }</div>
 		    						</div>
 		    						<div class = "histCenter">
-		    							<div class = "fMonth">2019.01.11</div>
-		 							<div class = "fTitle">크라우드 펀딩 제목</div>
-		 							<div class = "fName">행복두리 닉네임</div>
+		    							<div class = "fMonth">${ ph.pDate }</div>	
+		    							
+		    							<c:if test = "${ ph.pReason == '정기후원'}">
+		    								<div class = "fTitle"> 정기후원 ${ ph.p_d_c }차</div>
+		    								<div class = "fName">${ ph.p_d_m } 행복두리</div>
+		    							</c:if>
+		    							<c:if test = "${ ph.pReason == '펀딩'}">
+		    								<div class = "fTitle"> ${ ph.p_f_title }</div>
+		    								<div class = "fName">${ ph.p_f_m } 행복두리</div>
+		    							</c:if>
+			 							<c:if test = "${ ph.pReason == '결제'}">
+		    								<div class = "fTitle"> 포인트 충전</div>
+		    								<div class = "fName"> - </div>
+		    							</c:if>
+		    							<c:if test = "${ ph.pReason == '환급'}">
+		    								<div class = "fTitle"> 포인트 환불</div>
+		    								<div class = "fName"> - </div>
+		    							</c:if>
+			 							
 		    						</div>
 		    						<div class = "histRight">
-		    							<div class = "fValue">-30000</div>
+		    							<c:if test = "${ ph.pType == 'U'}">
+		    								<div class = "fValue">-${ ph.pValue }</div>
+		    							</c:if>
+		    							<c:if test = "${ ph.pType == 'A'}">
+		    								<div class = "fValue">+${ ph.pValue }</div>
+		    							</c:if>
 		    							<div class = "txtValue">원</div>
-		    						</div>
-		    					</div>
-		    					
-		    					<div class = "histContents">
-		    						<div class = "histLeft">
-		    							<div class = "circle">펀딩</div>
-		    						</div>
-		    						<div class = "histCenter">
-		    							<div class = "fMonth">2019.01.11</div>
-		 							<div class = "fTitle">크라우드 펀딩 제목</div>
-		 							<div class = "fName">행복두리 닉네임</div>
-		    						</div>
-		    						<div class = "histRight">
-		    							<div class = "fValue">-30000</div>
-		    							<div class = "txtValue">원</div>
-		    						</div>
-		    					</div>
-		    					
-		    					
-		    					<div class = "histContents">
-		    						<div class = "histLeft">
-		    							<div class = "circle">펀딩</div>
-		    						</div>
-		    						<div class = "histCenter">
-		    							<div class = "fMonth">2019.01.11</div>
-		 							<div class = "fTitle">크라우드 펀딩 제목</div>
-		 							<div class = "fName">행복두리 닉네임</div>
-		    						</div>
-		    						<div class = "histRight">
-		    							<div class = "fValue">-30000</div>
-		    							<div class = "txtValue">원</div>
+		    							
 		    						</div>
 		    					</div>
 		    				</div>
+		    				
+    					</c:forEach>
 		    			</div>
-		    			
-			    		<div id = "month01" class = "month">
-		    				<div class = "month-view">
-		    					<div class = "month-bar-left"></div>
-		    					<div class = "month-date">2019.01</div>
-		    					<div class = "month-bar-right"></div>
-		    				</div>
-		    				<div class = "cont-view">
-		    					<div class = "histContents">
-		    						<div class = "histLeft">
-		    							<div class = "circle">펀딩</div>
-		    						</div>
-		    						<div class = "histCenter">
-		    							<div class = "fMonth">2019.01.11</div>
-		 							<div class = "fTitle">크라우드 펀딩 제목</div>
-		 							<div class = "fName">행복두리 닉네임</div>
-		    						</div>
-		    						<div class = "histRight">
-		    							<div class = "fValue">-30000</div>
-		    							<div class = "txtValue">원</div>
-		    						</div>
-		    					</div>
-		    					
-		    					<div class = "histContents">
-		    						<div class = "histLeft">
-		    							<div class = "circle">펀딩</div>
-		    						</div>
-		    						<div class = "histCenter">
-		    							<div class = "fMonth">2019.01.11</div>
-		 							<div class = "fTitle">크라우드 펀딩 제목</div>
-		 							<div class = "fName">행복두리 닉네임</div>
-		    						</div>
-		    						<div class = "histRight">
-		    							<div class = "fValue">-30000</div>
-		    							<div class = "txtValue">원</div>
-		    						</div>
-		    					</div>
-		    					
-		    					
-		    					<div class = "histContents">
-		    						<div class = "histLeft">
-		    							<div class = "circle">펀딩</div>
-		    						</div>
-		    						<div class = "histCenter">
-		    							<div class = "fMonth">2019.01.11</div>
-		 							<div class = "fTitle">크라우드 펀딩 제목</div>
-		 							<div class = "fName">행복두리 닉네임</div>
-		    						</div>
-		    						<div class = "histRight">
-		    							<div class = "fValue">-30000</div>
-		    							<div class = "txtValue">원</div>
-		    						</div>
-		    					</div>
-		    				</div>
-		    			</div>
-		    			
 		    		</div>
+		    		
+		    		</c:if>
 		    		
 	    		<!-- 페이징 처리 -->
 	    		 <div class="row mt-3">

@@ -156,7 +156,7 @@ body {
 						<div class="media-body pl-4">
 							<h3 class="heading"
 								style="font-size: 40px; color: #FD771A; font-family: Nanum Pen Script;">나눔두리가 되고 싶다면?</h3>
-								<div class="tm_btn" onclick="#">나눔두리로 가자!</div>
+								<div class="tm_btn" onclick="location.href='main.nanum'">나눔두리로 가자!</div>
 						</div>
 					</div>
 				</div>

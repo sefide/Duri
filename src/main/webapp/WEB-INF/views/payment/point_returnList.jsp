@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <% 
-	String bigtabon="2";
+	String bigtabon="0";
 %>
 
 <!-- semantic ui -->
@@ -8,9 +8,9 @@
 <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
 
 
-<%@ include file="../include/common.jsp" %>
+<jsp:include page="../Nanummember/include/common.jsp" />
 <title> 나눔두리 마이페이지</title>
-<%@ include file="../../common/css.jsp" %>
+<jsp:include page="../common/css.jsp" />
 <style>
 .mb50 {
      margin-bottom: 0px !important; 
@@ -57,61 +57,70 @@
 		display: table-cell;
         vertical-align: middle; 
 		background-color: #FFEDBF; 
-		/* border-top: 3px solid #FE9D35;
-		border-left: 3px solid #FE9D35; */
-		/* border-right: 1px solid #FE9D35; */	 
 		color: #FE9D35;
 		font-weight:bold;
-		/*margin-left : 10px;
-		margin-right: 10px;		
-		padding-left: 10px;
-		padding-right: 10px;  */
 		cursor:pointer;
 		text-align: center;
+		
 	}
-	.categotyBtn:hover{
-		color:  rgb(50, 147, 63);
+	#back-btn{
+		background: #FE9D35;
+		width : 320px;
+		height : 50px;
+		border-radius : 5px;
+		text-align : center;
+		padding-top : 8px;
+		cursor : pointer;
 	}
-	
+	#btnReturnPage{
+		border-radius : 4px;
+		font-weight : 600;
+		color : white;
+		font-size : 19px;
+		cursor : pointer;
+	}
 </style>
 </head>
 <body>
-<%@ include file="../../common/navi.jsp" %>
-<%@ include file="../include/header.jsp" %>
+<jsp:include page="../common/navi.jsp" />
+<jsp:include page="../Nanummember/include/header.jsp" />
 <!-- #wrap {position:relative; width:100%;} -->
 	<div id="wrap">		
 			<div class="contBox inner">
-				<%@ include file="../include/tabMypage.jsp"%>
+				<jsp:include page="include/tabMypage_point.jsp"/>
 
 			<div class="tableArea">
-				<div id="myTitle"><i class="child icon"></i>정기후훤현황</div>
+				<div id="myTitle"> <i class="reply icon"></i>후원포인트 환불신청 </div>
+    			<!-- ftco-animate -->
+    			<p>둘이두리에서는 결제 기부하신 기부자님들께 연말정산 소득공제를 위한 기부금영수증 발급을 지원합니다. <br>
+				소득세법 제 160조의 3에 따라 기부금 영수증을 발행하고 있으며, 개인정보(고유식별정보) 수집 및 이용에
+				동의를 해주셔야 기부금 영수증 발급이 가능합니다. </p>
+				<div id = "back-btn">
+					<a href = "pointReturn.pm" id = "btnReturnPage">환불 신청하러가기</a>
+    			</div>
+    			
+    			<br><br><br><br>
+				
+				<div id="myTitle"><i class="reply all icon"></i></i>포인트 환불 처리 내역</div>
 				<table>
 					<thead>
 						<tr>
-							<th style="width: 25%;">행복두리</th>
-							<th style="width: 25%;">후원금액</th>
-							<th style="width: 25%;">누적 후원기간</th>
-							<th style="width: 25%;">누적 후원금액</th>
+							<th>요청일시</th>
+							<th>요청금액</th>
+							<th>은행</th>
+							<th>예금주명 </th>
+							<th>계좌번호</th>
+							<th>처리상태</th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr>
-							<td>공룡이</td>
-							<td>30,000 원</td>
-							<td>4달 째</td>
-							<td>120,000 원</td>
-						</tr>
-						<tr>
-							<td>짹짹이</td>
-							<td>40,000 원</td>
-							<td>2달 째</td>
-							<td>80,000 원</td>
-						</tr>
-						<tr>
-							<td>호호이</td>
-							<td>20,000</td>
-							<td>1달 째</td>
-							<td>20,000 원</td>
+							<td>요청일시</td>
+							<td>요청금액</td>
+							<td>은행</td>
+							<td>예금주명 </td>
+							<td>계좌번호</td>
+							<td>처리상태</td>				
 						</tr>
 					</tbody>
 				</table>
@@ -130,14 +139,21 @@
 				</div>
 			</div>
 
-
+		
 		</div>								
 	</div>		
 			
 			
 	
 
-	<%@ include file="../include/myNav.jsp" %>
+	<jsp:include page="../Nanummember/include/myNav.jsp" />
+	<br><br>
+    
+    <!-- footer  -->
+    <jsp:include page="../common/footer.jsp"></jsp:include>
 
+	<!-- loader -->
+	<jsp:include page="../common/loader.jsp"></jsp:include>
+	
 </body>
 </html>

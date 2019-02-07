@@ -12,6 +12,10 @@ public class AdminController {
 	public String admin2() {
 		return "admin/QnA";
 	}
+	@RequestMapping("QnADetail.ad")
+	public String admin18() {
+		return "admin/QnADetail";
+	}
 	@RequestMapping("adminCrowd.ad")
 	public String admin3() {
 		return "admin/adminCrowd";
@@ -21,9 +25,9 @@ public class AdminController {
 		return "admin/adminMain";
 	}
 
-	@RequestMapping("adminGoods.ad")
+	@RequestMapping("adminCrowdDetail.ad")
 	public String admin6() {
-		return "admin/adminGoods";
+		return "admin/adminCrowdDetail";
 	}
 	@RequestMapping("adminNanum.ad")
 	public String admin7() {

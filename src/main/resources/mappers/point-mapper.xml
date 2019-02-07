@@ -16,6 +16,10 @@
 		<result property="p_dhdNo" column="P_DHDNO"/>
 		<result property="p_rNo" column="P_RNO"/>
 		<result property="p_fhNo" column="P_FHNO"/>
+		<result property="p_f_m" column="MNAME1"/>
+		<result property="p_f_title" column="FTITLE"/>
+		<result property="p_d_m" column="MNAME2"/>
+		<result property="p_d_c" column="DHDCOUNT"/>
 	</resultMap>
 	
 	<resultMap type="com.kh.duri.payment.model.vo.DonateReceipt" id="donateReceiptResultSet">
@@ -24,12 +28,31 @@
 		<result property="drApplyDate" column="DRAPPLYDATE"/>
 		<result property="drDonateDate" column="DRDONATEDATE"/>
 		<result property="drValue" column="DRVALUE"/>
-		<result property="dr_mNo" column="DR_MNO"/>
+		<result property="dr_mNo" column="MNAME"/>
 	</resultMap>
 	
+	<!-- 포인트 이력 select -->
+	<select id="getPointHistory" resultMap="pointResultSet" parameterType="Point">
+		SELECT PNO, PTYPE, PVALUE, PDATE, PREASON, P_MNO, P_PYNO, P_DHDNO, P_RNO, P_FHNO, FTITLE, M1.MNAME AS MNAME1, M2.MNAME AS MNAME2, DHD.DHDCOUNT
+		FROM POINT P
+		LEFT JOIN FUNDHISTORY FH ON(P.P_FHNO = FH.FHNO)
+		LEFT JOIN FUNDING F ON (FH.FH_FNO = F.FNO)
+		LEFT JOIN MEMBER M1 ON (M1.MNO = F.FWRITER)
+		LEFT JOIN DIRECTFUNDHISTORYDETAIL DHD ON (P.P_DHDNO = DHD.DHDNO)
+		LEFT JOIN DIRECTFUNDHISTORY DH ON (DH.DHNO = DHD.DHD_DHNO)
+		LEFT JOIN MEMBER M2 ON (M2.MNO = DH.DH_MNO_TAKE)
+		WHERE P_MNO=#{mno}
+		ORDER BY PDATE DESC
+	</select>
+	
+	<!-- 기부금 영수증 발급내역 select -->
 	<select id="donateReceiptHistory" resultMap="donateReceiptResultSet" parameterType="DonateReceipt">
 		SELECT *
 		FROM DONATERECEIPT
+		JOIN MEMBER  ON (MEMBER.MNO = DONATERECEIPT.DR_MNO)
 		WHERE DR_MNO=#{mno}
+		ORDER BY DRAPPLYDATE DESC
 	</select>
+	
+	
 </mapper>
