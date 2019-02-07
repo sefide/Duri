@@ -22,36 +22,6 @@
     <div id="wrapper">
        <jsp:include page="include/adminNavi.jsp" />
 	
-	<nav class="navbar-default navbar-side" role="navigation">
-	<div class="sidebar-collapse">
-		<ul class="nav" id="main-menu">
-			<li><a href="adminMain.ad" ><i
-					class="fa fa-dashboard"></i>통계관리</a></li>
-			<li><a href="adminNanum.ad" ><i class="fa fa-desktop"></i>나눔두리
-					관리</a></li>
-
-			<li><a href="#" class="active-menu"><i class="fa fa-sitemap"></i>행복두리 관리<span
-					class="fa arrow"></span></a>
-				<ul class="nav nav-second-level">
-					<li><a href="adminHappyAll.ad">행복두리 전체관리</a></li>
-					<li><a href="adminHappy.ad">행복두리 승인관리</a></li>
-				</ul></li>
-			<li><a href="#"><i class="fa fa-edit"></i>Q&A 관리<span
-					class="fa arrow"></span> </a>
-				<ul class="nav nav-second-level">
-					<li><a href="QnA.ad">나눔두리 Q&A</a></li>
-					<li><a href="QnA.ad">행복두리 Q&A</a></li>
-				</ul></li>
-
-			<li><a href="#"><i class="fa fa-qrcode"></i>후원 관리<span
-					class="fa arrow"></span></a>
-				<ul class="nav nav-second-level">
-					<li><a href="adminCrowd.ad">크라우드 펀딩 관리</a></li>
-					<li><a href="adminGoods.ad">후원 물품관리</a></li>
-				</ul></li>
-		</ul>
-	</div>
-	</nav>
 	
        
         <div id="page-wrapper" >
@@ -90,14 +60,8 @@
 										<tr>
 											<td class="total">성별</td>
 											<td>W</td>
-											<td class="total">계좌번호</td>
-											<td>20420512971</td>
-										</tr>
-										<tr>
 											<td class="total">이메일</td>
 											<td>han419120@naver.com</td>
-											<td class="total">거래은행</td>
-											<td>sc제일은행</td>
 										</tr>
 										<tr>
 											<td class="total">휴대전화</td>

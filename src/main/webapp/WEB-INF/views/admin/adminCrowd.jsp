@@ -16,54 +16,7 @@
 <body>
    <jsp:include page="include/adminNavi.jsp"/>
   
-   <nav class="navbar-default navbar-side" role="navigation">
-            <div class="sidebar-collapse">
-                <ul class="nav" id="main-menu">
-                    <li>
-                        <a href="adminMain.ad"><i class="fa fa-dashboard"></i>통계관리</a>
-                    </li>
-                       <li>
-                        <a href="adminNanum.ad"><i class="fa fa-desktop"></i>나눔두리 관리</a>
-                    </li>
-                    
-					 <li>
-                        <a href="#" ><i class="fa fa-sitemap"></i>행복두리 관리<span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a href="adminHappyAll.ad">행복두리 전체관리</a>
-                            </li>
-                            <li>
-                                <a href="adminHappy.ad">행복두리 승인관리</a>
-                            </li>
-							</ul>
-						</li>	
-					 <li>
-                        <a href="#" ><i class="fa fa-edit"></i>Q&A 관리<span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a href="QnA.ad">나눔두리 Q&A</a>
-                            </li>
-                            <li>
-                                <a href="QnA.ad">행복두리 Q&A</a>
-                            </li>
-							</ul>
-						</li>	
-                   
-                    <li>
-                        <a href="#" class="active-menu"><i class="fa fa-qrcode"></i>후원 관리<span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a href="adminCrowd.ad" >크라우드 펀딩 관리</a>
-                            </li>
-                            <li>
-                                <a href="adminGoods.ad">후원 물품관리</a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-        
+  
         
    
         <div id="page-wrapper" >
@@ -130,7 +83,7 @@
                                             <td class="center">한부모가정</td>
                                             <td class="center">금액후원</td>
                                             <td class="center">300,000</td>
-                                            <td class="center"> <a href="#" class="btn btn-default btn-sm">승인하러하기</a></td>
+                                            <td class="center"> <a href="adminCrowdDetail.ad" class="btn btn-default btn-sm">승인하러하기</a></td>
                                         </tr>
                                        <tr class="odd gradeX">
                                         	<td class="center">1</td>
@@ -140,7 +93,7 @@
                                             <td class="center">한부모가정</td>
                                             <td class="center">금액후원</td>
                                             <td class="center">300,000</td>
-                                            <td class="center"> <a href="#" class="btn btn-default btn-sm">승인하러하기</a></td>
+                                            <td class="center"> <a href="adminCrowdDetail.ad" class="btn btn-default btn-sm">승인하러하기</a></td>
                                         </tr>
                                        <tr class="odd gradeX">
                                         	<td class="center">1</td>
@@ -150,7 +103,7 @@
                                             <td class="center">한부모가정</td>
                                             <td class="center">금액후원</td>
                                             <td class="center">300,000</td>
-                                            <td class="center"> <a href="#" class="btn btn-default btn-sm">승인하러하기</a></td>
+                                            <td class="center"> <a href="adminCrowdDetail.ad" class="btn btn-default btn-sm">승인하러하기</a></td>
                                         </tr>
                                        <tr class="odd gradeX">
                                         	<td class="center">1</td>
