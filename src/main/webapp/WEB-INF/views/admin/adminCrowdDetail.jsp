@@ -23,19 +23,18 @@
        <jsp:include page="include/adminNavi.jsp" />
 	
 	
-	
        
         <div id="page-wrapper" >
 		  <div class="header"> 
                         <h1 class="page-header">
-                            	EH님의 상세정보
+                            	EH님의 신규 크라우드 펀딩 게시글
                         </h1>
 		</div>
             <div id="page-inner"> 
             	<div class="row">
 				<div class="col-md-12">
 					<div class="panel panel-default">
-						<div class="panel-heading">EH님의 기본정보</div>
+						<div class="panel-heading">기본정보</div>
 						<div class="panel-body">
 							<div class="table-responsive">
 								<table class="table table-bordered">
@@ -74,10 +73,8 @@
 											<td class="total">증빙서류 갱신일</td>
 											<td>2019/01/11</td>
 											<td class="total">자기소개 갱신일</td>
-											<td>2019/03/14</td>
+											<td>2019/01/11</td>
 										</tr>
-										
-										
 									</tbody>
 								</table>
 							</div>
@@ -86,133 +83,139 @@
 
 				</div>
 			</div>
-            	
-            	
-            	
-            	
-			<h1 class="page-header">
-                            	EH님의 후원 필수서류
-                        </h1>
-             
+        
+        
+        
+        <div class="row">
+				<div class="col-md-12">
+					<div class="panel panel-default">
+					<div class="panel-heading"></div>
+						<div class="panel-body">
+							<div class="table-responsive">
+								<table class="table table-bordered">
+									<tbody>
+										<tr>
+											<th class="total" style="text-align: center;">자기소개</th>
+										</tr>
+										<tr>
+											<td>
+											Lorem ipsum dolor sit amet, 
+		                        consectetur adipiscing elit. Vestibulum tincidunt 
+		                        est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, 
+		                        posuere lectus et, fringilla augue.
+		                        Lorem ipsum dolor sit amet, 
+		                        consectetur adipiscing elit. Vestibulum tincidunt 
+		                        est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, 
+		                        posuere lectus et, fringilla augue.
+		                        Lorem ipsum dolor sit amet, 
+		                        consectetur adipiscing elit. Vestibulum tincidunt 
+		                        est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, 
+		                        posuere lectus et, fringilla augue.
+		                        Lorem ipsum dolor sit amet, 
+		                        consectetur adipiscing elit. Vestibulum tincidunt 
+		                        est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, 
+		                        posuere lectus et, fringilla augue.
+										
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>  
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            		<div class="row">
+				<div class="col-md-12">
+					<div class="panel panel-default">
+						<div class="panel-heading">신규 펀딩 게시글</div>
+						<div class="panel-body">
+							<div class="table-responsive">
+								<table class="table table-bordered">
+									<tbody>
+										<tr>
+											<td class="total">펀딩 제목</td>
+											<td>집이 없어여...</td>
+										</tr>
+										<tr>
+											<td class="total">후원 유형</td>
+											<td>한부모가정</td>
+										</tr>
+										<tr>
+											<td class="total">카테고리</td>
+											<td>의료비</td>
+										</tr>
+										<tr>
+											<td class="total">목표 금액 or 수량</td>
+											<td>300,000</td>
+										</tr>
+										<tr>
+											<td class="total">펀딩 등록 날짜</td>
+											<td>2019/01/00</td>
+										</tr>
+										<tr>
+											<td class="total">펀딩 종료 날짜</td>
+											<td>2019/01/00</td>
+										</tr>
+										
+										<tr>
+											<td class="total" colspan="2">펀딩 내용</td>
+											
+										</tr>
+										<tr>
+										<td colspan="2">
+											Lorem ipsum dolor sit amet, 
+		                        consectetur adipiscing elit. Vestibulum tincidunt 
+		                        est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, 
+		                        posuere lectus et, fringilla augue.
+		                        Lorem ipsum dolor sit amet, 
+		                        consectetur adipiscing elit. Vestibulum tincidunt 
+		                        est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, 
+		                        posuere lectus et, fringilla augue.
+		                        Lorem ipsum dolor sit amet, 
+		                        consectetur adipiscing elit. Vestibulum tincidunt 
+		                        est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, 
+		                        posuere lectus et, fringilla augue.
+		                        Lorem ipsum dolor sit amet, 
+		                        consectetur adipiscing elit. Vestibulum tincidunt 
+		                        est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, 
+		                        posuere lectus et, fringilla augue.
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>  
+                	  
+            		  
+            		  
+            		 
+	
 		
-            		  <div class="row">
-                    <div class="col-md-6">
-                        <div class="panel panel-default">
-                        <div class="panel-heading">
-                           	자기소개 글(원글)
-                        </div>
-                       
-                        <div class="panel-body">
-		                  <div class="well">
-		                        <h4>저는 집이 없어요...</h4>
-		                        <p style="height: 550px;">
-		                        Lorem ipsum dolor sit amet, 
-		                        consectetur adipiscing elit. Vestibulum tincidunt 
-		                        est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, 
-		                        posuere lectus et, fringilla augue.
-		                        Lorem ipsum dolor sit amet, 
-		                        consectetur adipiscing elit. Vestibulum tincidunt 
-		                        est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, 
-		                        posuere lectus et, fringilla augue.
-		                        Lorem ipsum dolor sit amet, 
-		                        consectetur adipiscing elit. Vestibulum tincidunt 
-		                        est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, 
-		                        posuere lectus et, fringilla augue.
-		                        Lorem ipsum dolor sit amet, 
-		                        consectetur adipiscing elit. Vestibulum tincidunt 
-		                        est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, 
-		                        posuere lectus et, fringilla augue.
-		                        </p>
-		                    </div>
-                
-                        </div>
-                          </div>
-                    </div>
-                  <div class="col-md-6">
-                        <div class="panel panel-default">
-                        <div class="panel-heading">
-                           	자기소개 글(갱신 글)
-                        </div>
-                       
-                        <div class="panel-body">
-		                  <div class="well">
-		                        <h4>저는 집이 없어요...</h4>
-		                        <p style="height: 550px;">
-		                        Lorem ipsum dolor sit amet, 
-		                        consectetur adipiscing elit. Vestibulum tincidunt 
-		                        est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, 
-		                        posuere lectus et, fringilla augue.
-		                        Lorem ipsum dolor sit amet, 
-		                        consectetur adipiscing elit. Vestibulum tincidunt 
-		                        est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, 
-		                        posuere lectus et, fringilla augue.
-		                        Lorem ipsum dolor sit amet, 
-		                        consectetur adipiscing elit. Vestibulum tincidunt 
-		                        est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, 
-		                        posuere lectus et, fringilla augue.
-		                        Lorem ipsum dolor sit amet, 
-		                        consectetur adipiscing elit. Vestibulum tincidunt 
-		                        est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, 
-		                        posuere lectus et, fringilla augue.
-		                        </p>
-		                    </div>
-                
-                        </div>
-                          </div>
-                    </div>
-                </div>
-                <br>
+            
+           
+             <br>
                 <br>
                  <button type="button" class="btn btn-light btn-lg btn-block">반려하기</button>
 		  		 <button type="button" class="btn btn-warning btn-lg btn-block">승인하기</button>
             	<br><br>	  
-            	<br><br>		  
-            		  
-            		  
-            		  <div class="row">
-                  
-                    <div class="col-md-6">
-                        <div class="panel panel-default">
-                        <div class="panel-heading">
-                            	증빙 서류(원본)
-                        </div>
-                       
-                        <div class="panel-body" style="height: 700px;">
-                       	
-		                 <img src="/duri/resources/admin/img/happy.PNG" style="width: 100%; height: 100%;">
-		               
-                            </div>
-                            </div>
-                    </div>
-                    
-                    <div class="col-md-6">
-                        <div class="panel panel-default">
-                        <div class="panel-heading">
-                            	증빙 서류(갱신서류)
-                        </div>
-                       
-                        <div class="panel-body" style="height: 700px;">
-                       	
-		                 <img src="/duri/resources/admin/img/happy.PNG" style="width: 100%; height: 100%;">
-		               
-                            </div>
-                            </div>
-                    </div>
-                </div>
-	
-		<br><br><br>
-            	
-          <button type="button" class="btn btn-light btn-lg btn-block">반려하기</button>
-		  <button type="button" class="btn btn-warning btn-lg btn-block">승인하기</button>
-           
-           <br><br><br> 
-            
-            
-            
-            
-            
-            
-            
+            	<br><br>	
         </div>
     </div>
              <!-- /. PAGE INNER  -->
