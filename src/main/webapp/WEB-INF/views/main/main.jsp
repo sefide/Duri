@@ -27,7 +27,9 @@
 	<a href="Ajin6.nanum">아진 - 마이페이지_기부금 영수증</a><br>
 	<a href="Ajin7.nanum">아진 - 마이페이지 _하고싶었던 후원</a><br>
 	<a href="Ajin_QnA_list.nanum">아진 - QnA_목록</a><br>
+	<a href="Ajin_QnA_insert.nanum">아진 - QnA_등록</a><br>
 	<a href="Ajin_QnA_detail.nanum">아진 - QnA_상세</a><br>
+
 
 	애린이 뷰
 	<hr>

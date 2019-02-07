@@ -9,21 +9,18 @@
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar" >
     <div class="container" >
-      <a class="navbar-brand" href="/duri/index.jsp" style="color: black;">Welfare</a>
+      <a class="navbar-brand" href="main.nanum" style="color: rgb(50, 147, 63);">둘이두리 나눔두리</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="oi oi-menu"></span> Menu
       </button>
 
       <div class="collapse navbar-collapse" id="ftco-nav" > 
         <ul class="navbar-nav ml-auto">
-          <li class="nav-item"><a href="/duri/WEB-INF/views/Nanummember/nanumMain.jsp" class="nav-link" style="color: black;">홈으로</a></li>
-          <li class="nav-item"><a href="/duri/views/board/about.jsp" class="nav-link" style="color: black;">About</a></li>
-          <li class="nav-item"><a href="/duri/views/board/causes.jsp" class="nav-link" style="color: black;">Causes</a></li>
-          <li class="nav-item"><a href="/duri/views/board/donate.jsp" class="nav-link">Donate</a></li>
-          <li class="nav-item"><a href="/duri/views/Nanummember/blog.jsp" class="nav-link">Blog</a></li>
-          <li class="nav-item"><a href="/duri/views/Nanummember/gallery.jsp" class="nav-link">Gallery</a></li>
-          <li class="nav-item"><a href="/duri/views/Nanummember/event.jsp" class="nav-link">Events</a></li>
-          <li class="nav-item"><a href="/duri/views/board/contact.jsp" class="nav-link" style="color: black;">Contact</a></li>
+          <li class="nav-item"><a href="Eunji_nanumLogin.me" class="nav-link" style="color: rgb(50, 147, 63);" >로그인</a></li>
+          <li class="nav-item"><a href="" class="nav-link" style="color: rgb(50, 147, 63);" >크라우드펀딩</a></li>
+          <li class="nav-item"><a href="" class="nav-link" style="color: rgb(50, 147, 63);" >정기후원</a></li>
+          <li class="nav-item"><a href="QnAList.nanum" class="nav-link" style="color: rgb(50, 147, 63);" >QnA</a></li>
+          <li class="nav-item"><a href="mypage.nanum" class="nav-link" style="color: rgb(50, 147, 63);" >마이페이지</a></li>
         </ul>
       </div>
     </div>

@@ -65,12 +65,24 @@
 #wrap {
     padding-top: 20px;  
 }
+
+.headerpoint{
+	color: white; 
+	font-size:20px; 
+	margin-right: 10px;
+}
+
+.headerpoint:hover{
+	color: black;
+}
+
+
 </style>	
 
 <header style="margin-top: 70px; height: 50px; text-align: right; ">		
-	<a class="mynav_2" ref="#" >회원정보 수정</a>
-	<a class="mynav_2" href="#">로그아웃</a>
-	<div class="" id="container">	
+	<a class="mynav_2" href="updateInfo.nanum" >회원정보 수정</a>
+	<a class="mynav_2" href="main.nanum">로그아웃</a>
+	<div id="container">	
 		<div id='box-left'>
 			<i class="handshake outline icon"></i>
 			<span id='box-left' style="font-weight: bold; margin-left: 5px;">이아진 </span>님 반갑습니다!
@@ -81,7 +93,7 @@
     		후원참여 횟수 : 6 회 <br>
     	</div>
     	<div id='box-right'>
-    		<a href="#" style="color: white; font-size:20px; margin-right: 10px;"> 포인트 충전</a><br>
+    		<a href="Ajin1.nanum" class="headerpoint"> 포인트 충전</a><br>
     		<a href="#" style="color: white; font-size:20px; margin-right: 10px;"> 포인트 환급</a><br>
     		<a href="#" style="color: white; font-size:20px; margin-right: 10px;"> 포인트 내역</a><br>
     	</div>

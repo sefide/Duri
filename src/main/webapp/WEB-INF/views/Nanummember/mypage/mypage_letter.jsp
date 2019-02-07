@@ -70,7 +70,14 @@
 		text-align: center;
 		
 	}
-	
+.categotyBtn:hover{
+		color:  rgb(50, 147, 63);
+	}
+
+.hoverTr:hover{
+	background-color : rgb(249, 246, 234);
+	cursor: pointer;
+}
 </style>
 </head>
 <body>
@@ -83,23 +90,27 @@
 
 			<div class="tableArea">
 				<div id="myTitle"><i class="envelope icon"></i></i>정기 행복두리 편지</div>
+				<div style="width: 96%; margin: 0 auto;">
+				<div class="categotyBtn" onclick="#" style="margin-right: 30px;">진행중</div>
+				<div class="categotyBtn" onclick="#">종료</div>
+				</div>
 				<table>
 					<thead>
 						<tr>
 							<th style="width: 20%;">행복두리</th>
-							<th style="width: 80%;">감사편지</th>
+							<th style="width: 80%;">감사편지 제목</th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<td>공룡이</td>
+						<tr class="hoverTr" onclick="location.href='mypageLetterDetail.nanum'">
+							<td >공룡이</td>
 							<td>행복두리님 이번달 후원으로 다행히 급식비를 낼 수 있게 되었어요 감사합니다</td>						
 						</tr>
-						<tr>						
+						<tr class="hoverTr">						
 							<td>밍구밍구</td>
 							<td>이번 달 월세는 밀리지 않고 내서 불안하지 않게 잘 살고 있습니다! 감사해요</td>
 						</tr>
-						<tr>
+						<tr class="hoverTr">
 							<td>링이1004</td>
 							<td>추운 겨울 나눔두리님 덕분에 연탄도 사고 따듯한 겨울 보내고 있어요</td>					
 						</tr>
@@ -162,8 +173,8 @@
 					</div>
 				</div>
 			</div>
-		</div>								
-	</div>		
+		</div>	
+		</div>
 			
 			
 	

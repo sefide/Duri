@@ -6,43 +6,62 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class NanumController {
 	
-	@RequestMapping("Ajin1.nanum")
+	@RequestMapping("total.nanum")
 	public String Total1() {
 		return "Nanummember/totalMain";
 	}
-	@RequestMapping("Ajin2.nanum")
+	@RequestMapping("main.nanum")
 	public String Total2() {
 		return "Nanummember/nanumMain";
 	}
-	@RequestMapping("Ajin3.nanum")
+	@RequestMapping("mypage.nanum")
 	public String Total3() {
 		return "Nanummember/mypage/mypage";
 	}
-	@RequestMapping("Ajin4.nanum")
+	@RequestMapping("mypageFund.nanum")
 	public String Total4() {
 		return "Nanummember/mypage/mypage_fund";
 	}
-	@RequestMapping("Ajin5.nanum")
+	
+	@RequestMapping("mypageLetter.nanum")
 	public String Total5() {
 		return "Nanummember/mypage/mypage_letter";
 	}
-	@RequestMapping("Ajin6.nanum")
+	
+	@RequestMapping("mypageLetterDetail.nanum")
+	public String Total11() {
+		return "Nanummember/mypage/mypage_letterDetail";
+	}
+	
+	@RequestMapping("mypageReceipt.nanum")
 	public String Total6() {
 		return "Nanummember/mypage/mypage_receipt";
 	}
-	@RequestMapping("Ajin7.nanum")
+	
+	@RequestMapping("mypageLikefund.nanum")
 	public String Total7() {
 		return "Nanummember/mypage/mypage_likefund";
 	}
-	@RequestMapping("Ajin_QnA_list.nanum")
+	
+	@RequestMapping("QnAList.nanum")
 	public String Total8() {
 		return "Nanummember/QnA_list";
 	}
-	@RequestMapping("Ajin_QnA_detail.nanum")
+	
+	@RequestMapping("QnAInsert.nanum")
 	public String Total9() {
+		return "Nanummember/QnA_insert";
+	}
+	
+	@RequestMapping("QnADetail.nanum")
+	public String Total10() {
 		return "Nanummember/QnA_detail";
 	}
 	
+	@RequestMapping("updateInfo.nanum")
+	public String Total12() {
+		return "Nanummember/mypage/mypage_updateInfo";
+	}
 	
 	
 }
