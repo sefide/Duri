@@ -6,8 +6,8 @@
 <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
 
 <style>
-/* 모달 창 */
-/*background */
+/* 모달 창 : modal-물품목록, modal2-알림창 */
+/*모달의 background(window부분)*/
 .modal {
 	display: none; /* 버튼 누르기 전은 숨겨놓기 */
 	position: fixed; /* Stay in place */
@@ -21,6 +21,19 @@
 	background-color: rgba(0, 0, 0, 0.4); /* 투명도 */
 }
 
+.modal2 {
+	display: none; 
+	position: fixed;
+	z-index: 1; 
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	overflow: auto; 
+	background-color: rgb(0, 0, 0);
+	background-color: rgba(0, 0, 0, 0.4); 
+}
+
 /*내용 */
 .modal-content {
 	background-color: #fefefe;
@@ -30,13 +43,28 @@
 	width: 50%;
 	height: 950px;
 }
+.modal-content2 {
+	background-color: #F9E79F;
+	margin: 15% auto; /* 중앙정렬 */
+	padding: 20px;
+	border: 1px solid #888;
+	width: 30%;
+	height: 300px;
+}
 
 input {font-size: 20px;}
 select {font-size: 15px;}
 .num {font-size: 15px;}
+p {font-size: 20px; text-align: center;}
 
 /* 닫기 버튼 */
 .close {
+	color: #aaa;
+	float: right;
+	font-size: 28px;
+	font-weight: bold;
+}
+.close2 {
 	color: #aaa;
 	float: right;
 	font-size: 28px;
@@ -48,7 +76,13 @@ select {font-size: 15px;}
 	text-decoration: none;
 	cursor: pointer;
 }
+.close2:hover, .close2:focus {
+	color: black;
+	text-decoration: none;
+	cursor: pointer;
+}/*모달 창 끝*/
 
+/* 네비 a태그*/
 .a-tag {
 	font-size: 25px;
 	font-weight: bold;
@@ -118,6 +152,7 @@ select {font-size: 15px;}
 }
 .resetBtn:hover {color: silver; cursor: pointer;}
 .deliveryBtn:hover {color: orange; cursor: pointer;}
+
 </style>
 </head>
 <body>
@@ -147,7 +182,7 @@ select {font-size: 15px;}
 			<span><a class="a-tag" href="Aerin_return.happy" style="margin-right: 80px;">포인트 환급</a></span>
 			<span><a class="a-tag" id="modalBtn">보유물품</a></span><br>
 			<span><a class="a-tag" href="#" style="margin-right: 80px;">내 정보 수정</a></span>
-			<span><a class="a-tag" href="#">알림</a></span><br>
+			<span><a class="a-tag" id="modalBtn2">알림</a></span><br>
 		</div>
 	</div>
 </div>
@@ -330,38 +365,66 @@ select {font-size: 15px;}
 		<div align="center"><a class="deliveryBtn">배송받기</a></div>
 	</div>
 </div>
+
+<div id="myModal2" class="modal2">
+	<!-- 내용 -->
+	<div class="modal-content2">
+		<!-- 닫기 버튼 -->
+		<span class="close2">&times;</span>  
+		
+		<h1 align="center"><&nbsp;내용&nbsp;></h1>
+		<br><br>
+		<div>
+			<p>●'기초생활 수급자.jpg'제출이 반려되었습니다.</p>
+			<p>●'한부모 가족 증명서.png'제출이 반려되었습니다.</p>
+		</div>
+	</div>	    
+</div>
 <script>
 
 	//모달 가져오기
-	var modal = document.getElementById('myModal');
+	var modal = document.getElementById("myModal");
+	var modal2 = document.getElementById("myModal2");
 
 	//모달창 여는 a태그
-	var modalbtn = document.getElementById("modalBtn");
+	var modalbtn = document.getElementById("modalBtn");	//보유물품
+	var modalBtn2 = document.getElementById("modalBtn2"); //알림
 
 	//모달 닫기 버튼
 	var modalclose = document.getElementsByClassName("close")[0];
-
+	var modalclose2 = document.getElementsByClassName("close2")[0];
+	
 	//버튼을 눌렀을 때 모달 창 띄우기
 	modalbtn.onclick = function() {
 		modal.style.display = "block";
 	}
+	modalBtn2.onclick = function(){
+		modal2.style.display = "block";
+	}
+	
 
 	//(x)를 눌렀을 때 모달 창 닫기
 	modalclose.onclick = function() {
 		modal.style.display = "none";
 	}
+	modalclose2.onclick = function() {
+		modal2.style.display = "none";
+	}
+	
 
 	//외부의 검은 화면 클릭 시 모달 창 닫기
 	window.onclick = function(event) {
 		if (event.target == modal) {
 			modal.style.display = "none";
+		}else if(event.target == modal2){
+			modal2.style.display = "none";
 		}
 	}
 </script>
 <!-- 물품목록 모달 띄우기 E -->
 
 
-<script type="text/javascript">
+<!-- <script type="text/javascript">
 function openNav() {
   document.getElementById("myNav").style.width = "100%";
 }
@@ -369,7 +432,7 @@ function openNav() {
 function closeNav() {
   document.getElementById("myNav").style.width = "0%";
 }
-</script>
+</script> -->
 </body>
 
 
