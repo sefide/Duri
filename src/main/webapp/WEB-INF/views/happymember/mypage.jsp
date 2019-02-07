@@ -175,7 +175,7 @@
 		<div style="height: 100px;"></div>
 		
 		<div id="button">
-			<button class="massive ui instagram button">사연 신청하러 가기</button>
+			<button onclick="location.href='cloudWrite.happy'" class="massive ui instagram button">사연 신청하러 가기</button>
 		</div>
 
 </div><!--// inner E-->

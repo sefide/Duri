@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <% 
-	String bigtabon="4";
+	String bigtabon="6";
 %>
 <%@ include file="include/common.jsp" %>
 
@@ -35,43 +35,35 @@
 		<%@ include file="include/tabMypage.jsp" %>
 
 		<div style="float: left; margin-left: 35px;">
-			<h1><i class="chevron right icon"></i>제목 : 동생도 같이 후원 받을 수 있나요?</h1>
-		</div>
-		<div align="right" style="margin-right: 47px;">
-			<h1>작성일 : 2019.01.11</h1>
+			<h1><i class="chevron right icon"></i>TO. 둘이두리님 궁금해요</h1>
 		</div>
 		<br>
 		<br>
 		
-		<div align="center">
+		<div style="margin-left: 35px;">			
+			<!-- Q&A : 제목 -->
+			<div>
+				<button class="ui button">제목</button>&nbsp;&nbsp;
+				<div class="ui input" style="width: 39.5%;">
+					<input type="text" placeholder="제목을 입력해주세요">
+				</div>
+			</div>
+			<br>
+			
+			
 			<!-- Q&A : 내용 -->
 			<div>
 				<div class="field">
-				    <textarea style="width: 92%; height: 600px;">동생이 올해 11살이 되었습니다. 저랑 동생 둘다 후원 받을 수 있는건가요? 혹시 같은 가족이라면 후원 받을 수 있는 사람의 수가 제한되나요??
-				    </textarea>
+				    <textarea style="width: 92%; height: 600px;"></textarea>
 				 </div>
-			</div>
-			<br>
-			<br>
-			<!-- 둘이두리 답변란 -->
-			<div align="left" style="margin-left: 47px;">
-				<button class="ui button">둘이두리님의 답변</button>
-			</div>
-			<br>
-			<div>
-				<div class="field">
-				    <textarea style="width: 92%; height: 200px;"></textarea>
-				 </div>
-			</div>
-			<div align="right" style="margin-right: 48px;">
-				<a class="sbtn gy" href="#">답변등록</a>
 			</div>
 		</div>
 		
 		<div style="height: 100px;"></div>
 		
 		<div id="button">
-			<button class="massive ui instagram button">목록으로 돌아가기</button>&nbsp;&nbsp;&nbsp;&nbsp;
+			<button onclick="location.href='qna.happy'" class="massive ui instagram button">문의하기 완료</button>&nbsp;&nbsp;&nbsp;&nbsp;
+			<button style="width: 21%;" class="massive ui button">취소하기</button>
 		</div>
 
 	</div><!--// inner E-->

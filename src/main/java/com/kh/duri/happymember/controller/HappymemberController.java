@@ -6,45 +6,54 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class HappymemberController {
 	
-	@RequestMapping("Aerin_mypage.happy")
+	@RequestMapping("mypage.happy")
 	public String happy1() {
 		return "happymember/mypage";
 	}
 	
-	@RequestMapping("Aerin_longDonate.happy")
+	@RequestMapping("longDonate.happy")
 	public String happy2() {
 		return "happymember/longDonate";
 	}
 	
-	@RequestMapping("Aerin_longDonateDetail.happy")
+	@RequestMapping("deliveryStatus.happy")
 	public String happy3() {
-		return "happymember/longDonateDetail";
-	}
-	
-	@RequestMapping("Aerin_deliveryStatus.happy")
-	public String happy4() {
 		return "happymember/deliveryStatus";
 	}
 	
-	@RequestMapping("Aerin_thankyouLetter.happy")
-	public String happy5() {
+	@RequestMapping("thankyouLetter.happy")
+	public String happy4() {
 		return "happymember/thankyouLetter";
 	}
 	
-	@RequestMapping("Aerin_qna.happy")
-	public String happy6() {
+	@RequestMapping("qna.happy")
+	public String happy5() {
 		return "happymember/qna";
 	}
-
-	@RequestMapping("Aerin_proofDocument.happy")
+	
+	@RequestMapping("qnaDetail.happy")
+	public String happy6() {
+		return "happymember/qnaDetail";
+	}
+	
+	@RequestMapping("qnaInsert.happy")
 	public String happy7() {
+		return "happymember/qnaInsert";
+	}
+
+	@RequestMapping("proofDocument.happy")
+	public String happy8() {
 		return "happymember/proofDocument";
 	}
 
-	@RequestMapping("Aerin_return.happy")
-	public String happy8() {
+	@RequestMapping("return.happy")
+	public String happy9() {
 		return "payment/point_return_happy";
 	}
 	
+	@RequestMapping("cloudWrite.happy")
+	public String happt10() {
+		return "happymember/cloudWrite";
+	}
 }
 
