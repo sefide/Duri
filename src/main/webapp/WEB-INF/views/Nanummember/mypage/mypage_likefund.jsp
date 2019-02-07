@@ -68,8 +68,10 @@
 		padding-left: 10px;
 		padding-right: 10px;  */
 		cursor:pointer;
-		text-align: center;
-		
+		text-align: center;		
+	}
+	.categotyBtn:hover{
+		color:  rgb(50, 147, 63);
 	}
 	
 </style>

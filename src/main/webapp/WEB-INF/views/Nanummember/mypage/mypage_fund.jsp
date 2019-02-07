@@ -68,7 +68,9 @@
 		padding-right: 10px;  */
 		cursor:pointer;
 		text-align: center;
-		
+	}
+	.categotyBtn:hover{
+		color:  rgb(50, 147, 63);
 	}
 	
 </style>
@@ -83,10 +85,6 @@
 
 			<div class="tableArea">
 				<div id="myTitle"><i class="child icon"></i>정기후훤현황</div>
-				<div style="width: 96%; margin: 0 auto;">
-				<div class="categotyBtn" onclick="#" style="margin-right: 30px;">금액</div>
-				<div class="categotyBtn" onclick="#">물품</div>
-				</div>
 				<table>
 					<thead>
 						<tr>

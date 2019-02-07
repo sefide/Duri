@@ -81,6 +81,10 @@ td {
 	font-weight : bold;
 	margin-right: 20px;
 }
+tr:hover{
+	background-color : rgb(249, 246, 234);
+	cursor: pointer;
+}
 </style>
 </head>
 <body>
@@ -99,12 +103,13 @@ td {
 	</div>
 	<!-- QnA 리스트 -->
 	<div class="QnA-list">
-		<button class="ui orange basic button" style="float: right;" >글 작성하기</button>		
+		<button onclick="location.href='QnAInsert.nanum'" 
+			class="ui orange basic button" style="float: right; margin-right: 50px;" >글 작성하기</button>		
 		<br><br>
 		<div class="tableArea">
 				<table>
 					<thead>
-						<tr>
+						<tr >
 							<th style="width: 10%;">글번호</th>
 							<th style="width: 40%;">제목</th>
 							<th style="width: 15%;">작성자</th>
@@ -113,7 +118,7 @@ td {
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
+						<tr onclick="location.href='QnADetail.nanum'">
 							<td>1</td>
 							<td>기부금 영수증에대해 궁금해요</td>
 							<td>나누미왕</td>
