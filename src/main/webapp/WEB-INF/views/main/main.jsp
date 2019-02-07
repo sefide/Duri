@@ -74,6 +74,8 @@
 	<a href="donateReceipt.pm">다힝 기부금영수증</a><br>
 	<a href="pointReturn.pm">다힝 포인트 환급_나눔두리</a><br>
 	<a href="pointReturnHappy.pm">다힝 포인트 환급_행복두리</a><br>
+	<a href="pointReturnList.pm">다힝 포인트 환급목록_나눔두리</a><br>
+	<a href="pointReturnListHappy.pm">다힝 포인트 환급목록_행복두리</a><br>
 	
 </body>
 </html>

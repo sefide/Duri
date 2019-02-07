@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,13 +17,6 @@
 	 .ftco-section {
     	padding: 1em 0;
     }
-    /*.contBox {
-		padding-bottom: 0px; 
-		min-height: 0px; 
-	} */
-	/* .mb50 {
-	     margin-bottom: 0px !important; 
-	} */
 	#myTitle{
 		margin-bottom: 20px;
 		font-size:25px;
@@ -133,13 +127,6 @@
 	tr{
 		height : 60px;
 	}
-	.fir-tr{
-		/* border-top : 1px solid gray; */
-		background : rgba(230,230,230,0.3);
-	}
-	.sec-tr{
-		/* border-top : 1px solid gray; */
-	}
 	#back-btn{
 		background: #FE9D35;
 		width : 320px;
@@ -184,10 +171,24 @@
     .calen {
     	color: rgba(250, 143, 61);
     }
-  
+	
+	tr:nth-child(even) {background:#f9f9f9;}
+	tr:nth-child(even) {background: rgba(230,230,230,0.3);}
+	tr, td, th {
+		text-align : center;
+	}
+	/* tr>th, tr>td {padding-left : 5px;} 
+	tr>th:first-child {padding-left : 15px;} 
+	tr>td:first-child {padding-left : 15px;}  */
 </style>
 </head>
 <body>
+<%-- 	<c:if test="${ !empty sessionScope.loginUser }">
+	</c:if>
+	<c:if test="${ empty sessionScope.loginUser }">
+		<c:set var="message" value="로그인이 필요한 서비스입니다." scope="request"/>
+		<jsp:forward page="../common/errorPage.jsp"/>
+	</c:if> --%>
 	 <!-- 네비바 -->
 	<jsp:include page="../common/navi.jsp"/>
 	
@@ -245,39 +246,26 @@
 		    					<table>
 		    						<tr class = "thth">
 		    							<th>기부자명</th>
-		    							<th>기부내역</th>
 		    							<th>기부금액</th>
 		    							<th>기부일시</th>
 		    							<th>발급 신청일</th>
 		    						</tr>
-		    						<tr class = "fir-tr">
-		    							<td>기부자명</td>
-		    							<td>크라우드펀딩 이름</td>
-		    							<td>10000원</td>
-		    							<td>2019.01.11</td>
-		    							<td>2019.01.11</td>
-		    						</tr>
-		    						<tr class = "sec-tr">
-		    							<td>기부자명</td>
-		    							<td>크라우드펀딩 이름</td>
-		    							<td>10000원</td>
-		    							<td>2019.01.11</td>
-		    							<td>2019.01.11</td>
-		    						</tr>
-		    						<tr class = "fir-tr">
-		    							<td>기부자명</td>
-		    							<td>크라우드펀딩 이름</td>
-		    							<td>10000원</td>
-		    							<td>2019.01.11</td>
-		    							<td>2019.01.11</td>
-		    						</tr>
-		    						<tr class = "sec-tr">
-		    							<td>기부자명</td>
-		    							<td>크라우드펀딩 이름</td>
-		    							<td>10000원</td>
-		    							<td>2019.01.11</td>
-		    							<td>2019.01.11</td>
-		    						</tr>
+		    					<c:if test = "${ !empty drList }">
+		    					
+			    					<c:forEach var="dr" items="${drList}">
+			    						<tr class = "">
+			    							<td>${dr.dr_mNo}</td>
+			    							<td>${dr.drValue}원</td>
+			    							<td>${dr.drDonateDate}</td>
+			    							<td>${dr.drApplyDate}</td>
+			    						</tr>
+			    					</c:forEach>
+		    					</c:if>
+		    					<c:if test = "${ empty drList }">
+		    						<tr class = "">
+		    							<td colspan = "5" style = "text-align:center">&{ msg }</td>
+	    							</tr>
+		    					</c:if>
 		    					</table>
 		    				</div>
 		    			</div>
@@ -398,7 +386,8 @@
 	<script>
 	
 	
-	
 	</script>
+	
+	
 </body>
 </html>
