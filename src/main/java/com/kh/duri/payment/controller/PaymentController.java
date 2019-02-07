@@ -11,6 +11,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.kh.duri.member.model.vo.Member;
+import com.kh.duri.payment.model.exception.PointHistoryException;
+import com.kh.duri.payment.model.exception.ReceiptException;
 import com.kh.duri.payment.model.service.PaymentService;
 import com.kh.duri.payment.model.vo.DonateReceipt;
 import com.kh.duri.payment.model.vo.Point;
@@ -26,23 +28,42 @@ public class PaymentController {
 		Member m = (Member) request.getSession().getAttribute("loginUser2");
 		System.out.println("세션에 저장된 회원번호 : " + m.getMno());
 		
-		Point ph = ps.getPointHistory(m);
+		try {
+			List<Point> ph = ps.getPointHistory(m);
+			
+			/*for(Point i : ph) {
+				System.out.println("내역 : "+ i);
+			}*/
+			model.addAttribute("phList", ph);
+			return "payment/point_history";
+		} catch (PointHistoryException e) {
+			model.addAttribute("msg", e.getMessage());
+			return "payment/point_history";
+		}
 		
-	    return "payment/point_history";
 	}
 		
 	// 기부금 영수증 발급내역 페이지
 	@RequestMapping("donateReceipt.pm")
-	public String donateReceipt(HttpServletRequest request, HttpServletResponse response) {
+	public String donateReceipt(HttpServletRequest request, HttpServletResponse response, Model model) {
 		Member m = (Member) request.getSession().getAttribute("loginUser2");
-		System.out.println("세션에 저장된 회원번호 : " + m.getMno());
+		//System.out.println("세션에 저장된 회원번호 : " + m.getMno());
 		
-		List<DonateReceipt> dr = ps.getDonateReceiptHistory(m);
-		for(DonateReceipt i : dr) {
-			System.out.println("내역 : "+ i);
+		List<DonateReceipt> dr;
+		try {
+			dr = ps.getDonateReceiptHistory(m);
+			
+			/*for(DonateReceipt i : dr) {
+				System.out.println("내역 : "+ i);
+			}*/
+			model.addAttribute("drList", dr);
+			return "payment/donation_receipt";
+			
+		} catch (ReceiptException e) {
+			model.addAttribute("msg", e.getMessage());
+			return "payment/donation_receipt";
 		}
-		
-	    return "payment/donation_receipt";
+	   
 	}
 	
 	// 정기후원 결제페이지
@@ -69,8 +90,17 @@ public class PaymentController {
 	    return "payment/point_charge"; 
 	}
 
+	// 포인트 환급목록 페이지
+	@RequestMapping("pointReturnList.pm")
+	public String pointReturnList() {
+	    return "payment/point_returnList";
+	}
 	
-
+	// 행복두리 포인트 환급목록 페이지
+	@RequestMapping("pointReturnListHappy.pm")
+	public String pointReturnHappyList() {
+	    return "payment/point_returnList_happy";
+	}
 	
 	// 포인트 환급페이지
 	@RequestMapping("pointReturn.pm")

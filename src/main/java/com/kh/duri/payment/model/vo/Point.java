@@ -4,7 +4,7 @@ import java.sql.Date;
 
 public class Point {
 	private int pNo;
-	private String nType;
+	private String pType;
 	private long pValue;
 	private Date pDate;
 	private String pReason;
@@ -13,14 +13,18 @@ public class Point {
 	private int p_dhdNo;
 	private int p_rNo;
 	private int p_fhNo;
+	private String p_f_m; // 크라우드 펀딩 대상자명
+	private String p_f_title; // 크라우드 펀딩글 제목
+	private String p_d_m; // 정기후원 대상자명
+	private int p_d_c;  // 정기후원 회차 
 	
 	public Point() {}
-	
-	public Point(int pNo, String nType, long pValue, Date pDate, String pReason, String p_mNo, int p_pyNo, int p_dhdNo,
-			int p_rNo, int p_fhNo) {
+
+	public Point(int pNo, String pType, long pValue, Date pDate, String pReason, String p_mNo, int p_pyNo, int p_dhdNo,
+			int p_rNo, int p_fhNo, String p_f_m, String p_f_title, String p_d_m, int p_d_c) {
 		super();
 		this.pNo = pNo;
-		this.nType = nType;
+		this.pType = pType;
 		this.pValue = pValue;
 		this.pDate = pDate;
 		this.pReason = pReason;
@@ -29,6 +33,10 @@ public class Point {
 		this.p_dhdNo = p_dhdNo;
 		this.p_rNo = p_rNo;
 		this.p_fhNo = p_fhNo;
+		this.p_f_m = p_f_m;  
+		this.p_f_title = p_f_title;  
+		this.p_d_m = p_d_m;   
+		this.p_d_c = p_d_c;
 	}
 
 	public int getpNo() {
@@ -39,12 +47,12 @@ public class Point {
 		this.pNo = pNo;
 	}
 
-	public String getnType() {
-		return nType;
+	public String getpType() {
+		return pType;
 	}
 
-	public void setnType(String nType) {
-		this.nType = nType;
+	public void setpType(String pType) {
+		this.pType = pType;
 	}
 
 	public long getpValue() {
@@ -111,12 +119,44 @@ public class Point {
 		this.p_fhNo = p_fhNo;
 	}
 
+	public String getP_f_m() {
+		return p_f_m;
+	}
+
+	public void setP_f_m(String p_f_m) {
+		this.p_f_m = p_f_m;
+	}
+
+	public String getP_f_title() {
+		return p_f_title;
+	}
+
+	public void setP_f_title(String p_f_title) {
+		this.p_f_title = p_f_title;
+	}
+
+	public String getP_d_m() {
+		return p_d_m;
+	}
+
+	public void setP_d_m(String p_d_m) {
+		this.p_d_m = p_d_m;
+	}
+
+	public int getP_d_c() {
+		return p_d_c;
+	}
+
+	public void setP_d_c(int p_d_c) {
+		this.p_d_c = p_d_c;
+	}
+
 	@Override
 	public String toString() {
-		return "Point [pNo=" + pNo + ", nType=" + nType + ", pValue=" + pValue + ", pDate=" + pDate + ", pReason="
+		return "Point [pNo=" + pNo + ", pType=" + pType + ", pValue=" + pValue + ", pDate=" + pDate + ", pReason="
 				+ pReason + ", p_mNo=" + p_mNo + ", p_pyNo=" + p_pyNo + ", p_dhdNo=" + p_dhdNo + ", p_rNo=" + p_rNo
-				+ ", p_fhNo=" + p_fhNo + "]";
+				+ ", p_fhNo=" + p_fhNo + ", p_f_m=" + p_f_m + ", p_f_title=" + p_f_title + ", p_d_m=" + p_d_m
+				+ ", p_d_c=" + p_d_c + "]";
 	}
-	
-	
+
 }
