@@ -32,7 +32,7 @@
 
   
 	<hr>
-	애린이 뷰
+	애린이 뷰<br>
 	<a href="mypage.happy">애린 - mypage.jsp</a><br>
 	<a href="longDonate.happy">애린 - longDonate.jsp</a><br>
 	<a href="deliveryStatus.happy">애린 - deliveryStatus.jsp</a><br>
