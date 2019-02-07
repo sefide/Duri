@@ -63,6 +63,7 @@
 	<a href="Eunji_cloudList2.bo">은지 - 크라우드펀딩 페이지(물품후원)</a><br>
 	<a href="Eunji_happyLogin.me">은지 - 로그인페이지(행복두리)</a><br>
 	<a href="Eunji_nanumLogin.me">은지 - 로그인페이지(나눔두리)</a><br>
+	<a href="Eunji_cloudWrite.bo">은지 - 펀딩글 작성 페이지</a><br>
 	
 	<hr>
 	

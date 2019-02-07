@@ -15,4 +15,19 @@ public class BoardController {
 	public String cloudList2() {
 		return "board/causes2";
 	}
+	
+	@RequestMapping("Eunji_cloudMoneyList.bo")
+	public String cloudMoneyList() {
+		return "board/causes";
+	}
+	
+	@RequestMapping("Eunji_cloudStuffList.bo")
+	public String cloudStuffList() {
+		return "board/causes2";
+	}
+	
+	@RequestMapping("Eunji_cloudWrite.bo")
+	public String cloudWrite() {
+		return "happymember/cloudWrite";
+	}
 }
