@@ -30,17 +30,18 @@
 	<a href="Ajin_QnA_insert.nanum">아진 - QnA_등록</a><br>
 	<a href="Ajin_QnA_detail.nanum">아진 - QnA_상세</a><br>
 
-
-	애린이 뷰
+  
 	<hr>
-	<a href="Aerin_mypage.happy">애린 - mypage.jsp</a><br>
-	<a href="Aerin_longDonate.happy">애린 - longDonate.jsp</a><br>
-	<a href="Aerin_longDonateDetail.happy">애린 - longDonateDetail.jsp</a><br>
-	<a href="Aerin_deliveryStatus.happy">애린 - deliveryStatus.jsp</a><br>
-	<a href="Aerin_thankyouLetter.happy">애린 - thankyouLetter.jsp</a><br>
-	<a href="Aerin_qna.happy">애린 - qna.jsp</a><br>
-	<a href="Aerin_proofDocument.happy">애린 - proofDocument.jsp</a><br>
-	<a href="Aerin_return.happy">애린 - payment > point_return_happy.jsp</a><br>
+	애린이 뷰
+	<a href="mypage.happy">애린 - mypage.jsp</a><br>
+	<a href="longDonate.happy">애린 - longDonate.jsp</a><br>
+	<a href="deliveryStatus.happy">애린 - deliveryStatus.jsp</a><br>
+	<a href="thankyouLetter.happy">애린 - thankyouLetter.jsp</a><br>
+	<a href="qna.happy">애린 - qna.jsp</a><br>
+	<a href="qnaDetail.happy">애린 - qnaDetail.jsp</a><br>
+	<a href="qnaInsert.happy">애린 - qnaInsert.jsp</a><br>
+	<a href="proofDocument.happy">애린 - proofDocument.jsp</a><br>
+	<a href="return.happy">애린 - payment > point_return_happy.jsp</a><br>
 	
 	
 	<hr>

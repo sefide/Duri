@@ -65,13 +65,13 @@
 			<tr>
 				<td>1</td>
 				<td>증빙서류를 기간 내에 내지 못했어요</td>
-				<td class="tleft"><a href="Aerin_longDonateDetail.happy">안녕하세요! 증빙서류를 제 기간 내에 내지 못했습니다</a></td>
+				<td class="tleft"><a href="qnaDetail.happy">안녕하세요! 증빙서류를 제 기간 내에 내지 못했습니다</a></td>
 				<td><i class="green circle icon" alt="답변완료"></i></td>
 			</tr>
 			<tr>
 				<td>2</td>
 				<td>동생도 같이 후원 받을 수 있나요?</td>
-				<td class="tleft"><a href="Aerin_longDonateDetail.happy">동생이 올 해에 11살이 되었습니다. 동생도 저와 같이 후원을 받을 수 있을까요?</a></td>
+				<td class="tleft"><a href="qnaDetail.happy">동생이 올 해에 11살이 되었습니다. 동생도 저와 같이 후원을 받을 수 있을까요?</a></td>
 				<td><i class="yellow circle icon" alt="답변 중"></i></td>
 			</tr>
 			</tbody>
@@ -90,7 +90,7 @@
 		<div style="height: 100px;"></div>
 		
 		<div id="button" class="textSilver">
-			<button class="massive ui instagram button">문의하러 가기</button>
+			<button onclick="location.href='qnaInsert.happy'" class="massive ui instagram button">문의하러 가기</button>
 		</div>
 		
 		
