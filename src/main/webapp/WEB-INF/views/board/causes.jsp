@@ -44,7 +44,7 @@
 
     <section class="ftco-section">
       <div class="container">
-        <h3><a href="/duri/views/board/causes.jsp" id="money">금액후원</a><b> | </b><a href="/duri/views/board/causes2.jsp" id="thing">물품후원</a></h3>
+        <h3><a href="Eunji_cloudMoneyList.bo" id="money">금액후원</a><b> | </b><a href="Eunji_cloudStuffList.bo" id="thing">물품후원</a></h3>
       	<div class="row">
       		<div class="col-md-4 ftco-animate">
       			<div class="cause-entry">

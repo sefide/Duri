@@ -28,14 +28,22 @@ public class MemberController {
 	public ModelAndView loginCheck(Member m, ModelAndView mv, HttpSession session) {
 			
 		try {
-			
 			System.out.println("member : "+m);
 			
-			Member loginUser = ms.loginMember(m); //받아온 아이디와 비밀번호로 로그인 정보 조회
-					
-			session.setAttribute("loginUser", loginUser);	//세션에 뿌려주기
+			Member loginUser = null; 
 			
-			mv.setViewName("redirect:goMain.me"); //위처럼 redirect로 뷰페이지이름연결할거랑 똑같음
+			if(!(m.getMid().equals("mng01")||m.getMid().equals("mng02")||m.getMid().equals("mng03")||m.getMid().equals("mng04"))) {
+				loginUser = ms.loginMember(m); //받아온 아이디와 비밀번호로 로그인 정보 조회
+				
+				session.setAttribute("loginUser", loginUser);	//세션에 뿌려주기
+				
+				mv.setViewName("redirect:goHappyMain.me"); //위처럼 redirect로 뷰페이지이름연결할거랑 똑같음
+			}else {
+				
+				mv.setViewName("redirect:goAdmin.me"); //위처럼 redirect로 뷰페이지이름연결할거랑 똑같음
+			}
+			
+
 			
 		} catch (LoginException e) {
 			
@@ -50,15 +58,31 @@ public class MemberController {
 	
 	//로그인 회원 조회용 메소드(나눔두리)
 		@RequestMapping	("loginNa.me")
-		public ModelAndView loginNaCheck(Member m, ModelAndView mv, HttpSession session) throws LoginException {
+		public ModelAndView loginNaCheck(Member m, ModelAndView mv, HttpSession session){
 				
-			System.out.println("member : "+m);
-			
-			Member loginUser2 = ms.loginNaMember(m); //받아온 아이디와 비밀번호로 로그인 정보 조회
+			try {
+				System.out.println("member : "+m);
+				
+				Member loginUser2 = null; 
+				
+				if(!(m.getMid().equals("mng01")||m.getMid().equals("mng02")||m.getMid().equals("mng03")||m.getMid().equals("mng04"))) {
+					loginUser2 = ms.loginNaMember(m); //받아온 아이디와 비밀번호로 로그인 정보 조회
 					
-			session.setAttribute("loginUser2", loginUser2);	//세션에 뿌려주기
-			
-			mv.setViewName("redirect:goMain.me"); //위처럼 redirect로 뷰페이지이름연결할거랑 똑같음
+					session.setAttribute("loginUser2", loginUser2);	//세션에 뿌려주기
+					
+					mv.setViewName("redirect:goNanumMain.me"); //위처럼 redirect로 뷰페이지이름연결할거랑 똑같음
+				}else {
+					
+					mv.setViewName("redirect:goAdmin.me"); //위처럼 redirect로 뷰페이지이름연결할거랑 똑같음
+				}
+				
+
+				
+			} catch (LoginException e) {
+				
+				mv.addObject("msg",e.getMessage());
+				mv.setViewName("common/errorPage");
+			}
 			
 			
 			return mv;
@@ -67,16 +91,27 @@ public class MemberController {
 		
 	
 	//새로고침하면 로그인계속요청함 ! 방지하기 위해 아래 메서드 생성
-	@RequestMapping("goMain.me")
-	public String goMain() {
-		return "main/main";
+	@RequestMapping("goHappyMain.me")
+	public String goHappyMain() {
+		return "happymember/mypage";
 	}
+	
+	@RequestMapping("goNanumMain.me")
+	public String goMain() {
+		return "Nanummember/nanumMain";
+	}
+	
 	
 	@RequestMapping("logout.me")
 	public String logout(HttpServletRequest request) {
 		request.getSession().invalidate();
 		
 		return "redirect:goMain.me";
+	}
+	
+	@RequestMapping("goAdmin.me")
+	public String goAdmin() {
+		return "admin/adminMain";
 	}
 
 
