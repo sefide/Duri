@@ -1,7 +1,15 @@
 package com.kh.duri.Nanummember.controller;
 
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.kh.duri.member.model.vo.Member;
 
 @Controller
 public class NanumController {
@@ -14,8 +22,13 @@ public class NanumController {
 	public String Total2() {
 		return "Nanummember/nanumMain";
 	}
+	
 	@RequestMapping("mypage.nanum")
-	public String Total3() {
+	public String selectCloudList(Model model, HttpServletRequest request, HttpServletResponse response) {
+		Member m = (Member)request.getSession().getAttribute("loginUser2");
+		/*List<>*/
+		
+		
 		return "Nanummember/mypage/mypage";
 	}
 	@RequestMapping("mypageFund.nanum")
