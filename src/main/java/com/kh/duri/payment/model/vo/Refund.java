@@ -8,13 +8,13 @@ public class Refund {
 	private String rName;  // 예금주
 	private String rAccount;  // 계좌번호
 	private int r_mNo;  // 회원번호
-	private long rValue;   // 요청금액
+	private String rValue;   // 요청금액
 	private Date rDate;   // 요청 일시
 	private String rStatus;   // 요청 상태
 	
 	public Refund() {}
 	
-	public Refund(int rNo, String rBank, String rName, String rAccount, int r_mNo, long rValue, Date rDate,
+	public Refund(int rNo, String rBank, String rName, String rAccount, int r_mNo, String rValue, Date rDate,
 			String rStatus) {
 		super();
 		this.rNo = rNo;
@@ -57,10 +57,10 @@ public class Refund {
 	public void setR_mNo(int r_mNo) {
 		this.r_mNo = r_mNo;
 	}
-	public long getrValue() {
+	public String getrValue() {
 		return rValue;
 	}
-	public void setrValue(long rValue) {
+	public void setrValue(String rValue) {
 		this.rValue = rValue;
 	}
 	public Date getrDate() {

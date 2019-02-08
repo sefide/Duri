@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,10 +21,10 @@
 		min-height: 0px; 
 	}
 	#nav_back{
-    		background: #FFBB50; 
-    		height:83px; 
-    		box-shadow:0 0 6px 0 #B8B8B8; 
-    	}
+   		background: #FFBB50; 
+   		height:83px; 
+   		box-shadow:0 0 6px 0 #B8B8B8; 
+   	}
 	#pTitle{
 		display: block;
 		font-size : 29px;
@@ -84,6 +85,13 @@
 		width :  200px;
 		display : inline-block;
 		margin-right : 2%;
+	}
+	.inputAcc{
+		height :40px !important;
+		border-radius : 5px;
+		width :  90px;
+		display : inline-block;
+		margin-right : 1%;
 	}
 	table{
 		width : 96%;
@@ -199,15 +207,15 @@
 		    			<div class = "d-flex-left"> <br>
 		 	  			<!-- <h4 class ="" id = "subTitle">> 환급포인트</h4> -->
 					    <div style="float: left; margin : 20px 0"><h1><i class="chevron right icon"></i>환급포인트</h1></div>
-		 	  			
+		 	  			<form id = "returnHappyForm" action = "execPointReturnHappy.pm" method = "post" >
 		    				<table>
 		    					<tr>
 		    						<th>현재 보유포인트</th>
-		    						<td>200350원</td>
+		    						<td id = "myPoint">${ sessionScope.loginUser.mPoint }원</td>
 		    					</tr>
 		    					<tr>
 		    						<th>환급 금액</th>
-		    						<td><input class="form-control" type = "text" name = "returnValue" id = "returnValue">원
+		    						<td><input class="form-control" type = "text" name = "returnValue" id = "returnValue" numberOnly>원
 		    							<div class="form-check">
 									  <input class="form-check-input" type="checkbox" value="" id="allPoint">
 									  <label class="form-check-label" for="allPoint" id = "txtAllPoint">
@@ -227,22 +235,32 @@
 		    						<td>
 		    							<select name = "returnBank" class="form-control inputTxt" id="returnBankSelect">
 		    								<option>은행을 선택해주세요 .</option>
-		    								<option>은행을 선택해주세요 .</option>
-		    								<option>은행을 선택해주세요 .</option>
-		    								<option>은행을 선택해주세요 .</option>
-		    								<option>은행을 선택해주세요 .</option>
+		    								<option value = "농협">농협</option>
+		    								<option value = "국민은행">국민은행</option>
+		    								<option value = "신한은행">신한은행</option>
+		    								<option value = "우리은행">우리은행</option>
+		    								<option value = "기업은행">기업은행</option>
+		    								<option value = "KEB하나은행">KEB하나은행</option>
+		    								<option value = "대구은행">대구은행</option>
+		    								<option value = "부산은행">부산은행</option>
+		    								<option value = "우체국">우체국</option>
 		    							</select>
 		    						</td>
 		    					</tr>
 		    					<tr>
 		    						<th>계좌번호</th>
-		    						<td><input class="form-control inputTxt" type = "text" name = "returnAccount" id = "returnAccount">원</td>
+		    						<td id = "td_account">
+		    							<input class="form-control inputAcc" type = "text" name = "returnAccount" id = "returnAccount" maxlength = "3" numberOnly> - 
+		    							<input class="form-control inputAcc" type = "text" name = "returnAccount" id = "returnAccount" maxlength = "3" numberOnly> - 
+		    							<input class="form-control inputAcc" type = "text" name = "returnAccount" id = "returnAccount" maxlength = "6" numberOnly>
+		    						</td>
 		    					</tr>
 		    					<tr>
 		    						<th>예금주명</th>
 		    						<td><input class="form-control inputTxt" type = "text" name = "accountName" id = "accountName" placeholder = "이름을 입력해주세요."></td>
 		    					</tr>
 		    				</table>
+		 	  			</form>
 		    				
 		    			</div>
 		    			
@@ -250,18 +268,18 @@
 		    				<div class = "back-right">
 		    					<input type ="checkbox" id= "chkinfo1"><label for = "chkinfo1">수수료 약관동의</label> <br>
 			    				<a>포인트 결제 시 부과했던 후원 수수료는 환급되지 않습니다. </a><br><br>
-								<p style = "margin-left : 1%;"> *환급받을 계좌 정보를 정확히 입력해주세요. <br> 
+								<p style = "margin-left : 1%; font-size: 14px; line-height : 2; text-align : left;"> *환급받을 계좌 정보를 정확히 입력해주세요. <br> 
 								계좌번호와 예금주명이 다를 경우 환급이 제대로 되지 않을 수 있습니다.  </p>
 			    				<div class= "flexBox valueBox">
-			    					<div class = "d-left">현재 보유포인트 </div><div class = "d-right" id = "txtChargeValue">0원</div><br><br>
-			    					<div id = "txtTotalValue">환급 금액</div><div class = "txtColor_o d-right" id = "totalValue">103,000</div>원
+			    					<div class = "d-left">현재 보유포인트 </div><div class = "d-right" id = "txtChargeValue">${ sessionScope.loginUser.mPoint }원</div><br><br>
+			    					<div id = "txtTotalValue">환급 금액</div><div class = "txtColor_o d-right" id = "totalValue">0</div>원
 			    					<div id = "bar3"></div>
 			    					<div class = "d-left">잔여포인트 </div><div class = "d-right" id = "txtFees">3000원</div>
 			    					
 			    				</div>
 		    				</div>
 		    				<div id = "back-btn">
-		    					<a id = "btnPay">환급받기 </a>
+		    					<a id = "btnPay">환급신청하기 </a>
 		    				</div>
 		    			</div>
 		    		</div>
@@ -282,19 +300,124 @@
 	
 	<script>
 	$(document).ready(function() {
+		/* 후원 포인트 입력 시 */
 		$("#returnValue").change(function(){
 			var value = Number($("#returnValue").val());
 			$("#totalValue").text(value);
+			changeFreePoint();
+		}).on("keyup", function() {
+			$("#allPoint").prop("checked", false);
 		});
 		
+		
+		/* 모든 포인트 쓰기 선택 할 시  */
+		$("#allPoint").change(function(){
+			var mypoint = $("#myPoint").text();
+			var pointlength = mypoint.length-1;
+			mypoint = mypoint.substring(0,pointlength);
+			
+			/*mypoint = mypoint.split(",");
+			console.log(mypoint); 
+		    var mypointt = mypoint.join();
+			console.log(mypointt);*/
+			
+			if($("#allPoint").is(":checked")){
+				$("#returnValue").val(mypoint);
+				$("#returnValue").text(mypoint);
+				$("#returnValue").change();
+			}
+			changeFreePoint();
+		});
+		
+		function changeFreePoint() {
+			var mPoint = ${ sessionScope.loginUser.mPoint }; /* 현재 보유포인트 */
+			var returnValue = $("#returnValue").val(); /* 환급금액 */
+			
+			$("#txtFees").text(mPoint-returnValue);
+		}
+		
+		/* 은행 종류에 따라 계좌번호 형식 바꾸기 */
+		/* td_account */
+		$("#returnBankSelect").change(function(){
+			var bankName = $("#returnBankSelect option:selected").val();
+			var contents = "";
+			if(bankName == "신한은행"){
+				$("#td_account").html("");
+				contents = "<input class='form-control inputAcc' type = 'text' name = 'returnAccount' id = 'returnAccount' maxlength = '3' numberOnly> - <input class='form-control inputAcc' type = 'text' name = 'returnAccount' id = 'returnAccount' maxlength = '3' numberOnly> - <input class='form-control inputAcc' type = 'text' name = 'returnAccount' id = 'returnAccount' maxlength = '6' numberOnly>" ;
+			}else if(bankName == "국민은행"){
+				$("#td_account").html("");
+				contents = "<input class='form-control inputAcc' type = 'text' name = 'returnAccount' id = 'returnAccount' maxlength = '6' numberOnly> - <input class='form-control inputAcc' type = 'text' name = 'returnAccount' id = 'returnAccount' maxlength = '2' numberOnly> - <input class='form-control inputAcc' type = 'text' name = 'returnAccount' id = 'returnAccount' maxlength = '6' numberOnly>" ;
+			}else if(bankName == "농협"){
+				$("#td_account").html("");
+				contents = "<input class='form-control inputAcc' type = 'text' name = 'returnAccount' id = 'returnAccount' maxlength = '4' numberOnly> - <input class='form-control inputAcc' type = 'text' name = 'returnAccount' id = 'returnAccount' maxlength = '2' numberOnly> - <input class='form-control inputAcc' type = 'text' name = 'returnAccount' id = 'returnAccount' maxlength = '6' numberOnly>" ;
+			}else if(bankName == "우리은행"){
+				$("#td_account").text("");
+				contents = "<input class='form-control inputAcc' type = 'text' name = 'returnAccount' id = 'returnAccount' maxlength = '4' numberOnly> - <input class='form-control inputAcc' type = 'text' name = 'returnAccount' id = 'returnAccount' maxlength = '3' numberOnly> - <input class='form-control inputAcc' type = 'text' name = 'returnAccount' id = 'returnAccount' maxlength = '6' numberOnly>" ;
+			}else if(bankName == "기업은행"){
+				$("#td_account").text("");
+				contents = "<input class='form-control inputAcc' type = 'text' name = 'returnAccount' id = 'returnAccount' maxlength = '3' numberOnly> - <input class='form-control inputAcc' type = 'text' name = 'returnAccount' id = 'returnAccount' maxlength = '6' numberOnly> - <input class='form-control inputAcc' type = 'text' name = 'returnAccount' id = 'returnAccount' maxlength = '2' numberOnly> - <input class='form-control inputAcc' type = 'text' name = 'returnAccount' id = 'returnAccount' maxlength = '3' numberOnly>" ;
+			}else if(bankName == "KEB하나은행"){
+				$("#td_account").text("");
+				contents = "<input class='form-control inputAcc' type = 'text' name = 'returnAccount' id = 'returnAccount' maxlength = '3' numberOnly> - <input class='form-control inputAcc' type = 'text' name = 'returnAccount' id = 'returnAccount' maxlength = '6' numberOnly> - <input class='form-control inputAcc' type = 'text' name = 'returnAccount' id = 'returnAccount' maxlength = '5' numberOnly>" ;
+			}else if(bankName == "대구은행"){
+				$("#td_account").text("");
+				contents = "<input class='form-control inputAcc' type = 'text' name = 'returnAccount' id = 'returnAccount' maxlength = '3' numberOnly> - <input class='form-control inputAcc' type = 'text' name = 'returnAccount' id = 'returnAccount' maxlength = '2' numberOnly> - <input class='form-control inputAcc' type = 'text' name = 'returnAccount' id = 'returnAccount' maxlength = '6' numberOnly> - <input class='form-control inputAcc' type = 'text' name = 'returnAccount' id = 'returnAccount' maxlength = '1' numberOnly>" ;
+			}else if(bankName == "부산은행"){
+				$("#td_account").text("");
+				contents = "<input class='form-control inputAcc' type = 'text' name = 'returnAccount' id = 'returnAccount' maxlength = '3' numberOnly> - <input class='form-control inputAcc' type = 'text' name = 'returnAccount' id = 'returnAccount' maxlength = '4' numberOnly> - <input class='form-control inputAcc' type = 'text' name = 'returnAccount' id = 'returnAccount' maxlength = '4' numberOnly> - <input class='form-control inputAcc' type = 'text' name = 'returnAccount' id = 'returnAccount' maxlength = '2' numberOnly>" ;
+			}else if(bankName == "우체국"){
+				$("#td_account").text("");
+				contents = "<input class='form-control inputAcc' type = 'text' name = 'returnAccount' id = 'returnAccount' maxlength = '6' numberOnly> - <input class='form-control inputAcc' type = 'text' name = 'returnAccount' id = 'returnAccount' maxlength = '2' numberOnly> - <input class='form-control inputAcc' type = 'text' name = 'returnAccount' id = 'returnAccount' maxlength = '6' numberOnly>" ;
+			}
+			$("#td_account").html(contents);
+
+			
+		});
+		
+		$("input:text[numberOnly]").on("keyup", function() {
+		    $(this).val($(this).val().replace(/[^0-9]/g,""));
+		});
 		
 	});
 	
 	$("#back-btn").click(function(){
-		alert("환급 진행 ");
+		/* 유효성 검사 */
+		var numberTest = /[^0-9]/g; /* 숫자로만 이뤄지기 */
+		var returnPoint = $("#returnValue").val();
+		var accountNum = $("#returnAccount").val();
+		console.log(returnPoint);
+		console.log(accountNum);
+		console.log(numberTest.test(returnPoint)); //false
+		if( numberTest.test(returnPoint)){
+			alert("환급금액을 숫자로만 입력해주세요.");
+		}else if( numberTest.test(accountNum)){
+			alert("계좌번호를 숫자로만 입력해주세요.");
+		}else if(Number($("#txtFees").text()) < 0){
+			alert("환급 금액이 부족합니다.");
+		}else {
+			$("#returnHappyForm").submit();
+		}
+		
+		
 	});
 	
 	
+	/* $("input:text[numberOnly]").on("focus", function() {
+	    var x = $(this).val();
+	    x = removeCommas(x);
+	    $(this).val(x);
+	}).on("focusout", function() {
+	    var x = $(this).val();
+	    if(x && x.length > 0) {
+	        if(!$.isNumeric(x)) {
+	            x = x.replace(/[^0-9]/g,"");
+	        }
+	        x = addCommas(x);
+	        $(this).val(x);
+	    }
+	})
+ */
+
 	</script>
 </body>
 </html>

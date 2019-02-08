@@ -90,14 +90,47 @@ public class PaymentController {
 		
 	}
 	
-	
 	// 행복두리 포인트 환급페이지
 	@RequestMapping("pointReturnHappy.pm")
-	public String pointReturnHappy(HttpServletRequest request, HttpServletResponse response, Model model) {
+	public String pointReturnHappy() {
+	    return "payment/point_return_happy";
+	}
+	
+	// 행복두리 - 포인트 환급 요청하기
+	@RequestMapping("execPointReturnHappy.pm")
+	public String execPointReturnHappy(HttpServletRequest request, HttpServletResponse response, Model model) {
 		Member m = (Member) request.getSession().getAttribute("loginUser");
 		
+		String rValue = request.getParameter("returnValue");
+		String rBank = request.getParameter("returnBank");
+		String[] rAccountArr = request.getParameterValues("returnAccount");
+		String rName = request.getParameter("accountName");
+		String rAccount = "";
+		for(int i = 0; i < rAccountArr.length; i++) {
+			
+			if(i == 0) {
+				rAccount += rAccountArr[i];
+			}else {
+				rAccount += "-"+rAccountArr[i];
+			}
+		}
 		
-	    return "payment/point_return_happy";
+		Refund r = new Refund();
+		r.setrValue(rValue);
+		r.setR_mNo(m.getMno());
+		r.setrBank(rBank);
+		r.setrAccount(rAccount);
+		r.setrName(rName);
+		
+		try {
+			int resultInsert = ps.insertRefund(r);
+			
+			return "payment/point_returnList_happy";
+		} catch (RefundException e) {
+			model.addAttribute("msg", e.getMessage());
+			return "payment/point_returnList_happy";
+		}
+		
 	}
 	
 	// 나눔두리 포인트 환급목록 페이지
