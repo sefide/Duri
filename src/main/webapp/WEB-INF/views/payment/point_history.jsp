@@ -198,128 +198,127 @@
 	<jsp:include page="../Nanummember/include/header.jsp" />
     <!-- <div id ="nav_back" data-stellar-background-ratio="0.5">
     </div>  -->
-    <div id="wrap">		
-		<div class="contBox inner">
-			<jsp:include page="include/tabMypage_point.jsp"/>
+	<br><br><br><br>	
+	<div class="contBox inner">
+		<jsp:include page="include/tabMypage_point.jsp"/>
+		
+		<c:if test = "${ !empty sessionScope.loginUser }">
 			
-			<c:if test = "${ !empty sessionScope.loginUser }">
-				
-			<section class="ftco-section">
-    			<div class="container">
-		    		<div class="row d-flex">
-		    			<div id="myTitle"> <i class="history icon"></i>포인트 히스토리</div>
-		    		</div>
-		    		<br>
-		    		<div>
-		    			<div class = "top-bar">
-			    			<div class = "back-top-bar">
-			    				<div class ="top-bar-text">
-			    					<div >조회기간 </div>
-			    					<div class = "date-div">2019.12 
-										<a href="#" id = "startMonth" class = "calen">
-											<i class="calendar alternate outline big icon"></i>
-				        				</a>
-			        				</div>
-			        				~
-			        				<div class = "date-div">2019.01 
-			    						<a href="#" id = "endMonth" class = "calen">
-			    							<i class="calendar alternate outline big icon"></i>
-			        					</a>
-			        				</div>
-			        				
-			        				<div class = "search-div"><a>검색</a></div>
-			    				</div>
-			    			</div>
+		<section class="ftco-section">
+   			<div class="container">
+	    		<div class="row d-flex">
+	    			<div id="myTitle"> <i class="history icon"></i>포인트 히스토리</div>
+	    		</div>
+	    		<br>
+	    		<div>
+	    			<div class = "top-bar">
+		    			<div class = "back-top-bar">
+		    				<div class ="top-bar-text">
+		    					<div >조회기간 </div>
+		    					<div class = "date-div">2019.12 
+									<a href="#" id = "startMonth" class = "calen">
+										<i class="calendar alternate outline big icon"></i>
+			        				</a>
+		        				</div>
+		        				~
+		        				<div class = "date-div">2019.01 
+		    						<a href="#" id = "endMonth" class = "calen">
+		    							<i class="calendar alternate outline big icon"></i>
+		        					</a>
+		        				</div>
+		        				
+		        				<div class = "search-div"><a>검색</a></div>
+		    				</div>
 		    			</div>
-		    		</div>
-		    		
-		    		<c:if test = "${ !empty phList }">
-						
-		    		<div class ="contents_search"> 
-		    			<div id = "month01" class = "month">
-		    			<div class = "month-view">
-	    					<div class = "month-bar-left"></div>
-	    					<div class = "month-date">All</div>
-	    					<div class = "month-bar-right"></div>
+	    			</div>
+	    		</div>
+	    		
+	    		<c:if test = "${ !empty phList }">
+					
+	    		<div class ="contents_search"> 
+	    			<div id = "month01" class = "month">
+	    			<div class = "month-view">
+    					<div class = "month-bar-left"></div>
+    					<div class = "month-date">All</div>
+    					<div class = "month-bar-right"></div>
+    				</div>
+    				
+	    			<c:forEach var="ph" items="${phList}">
+	    				
+	    				
+	    				
+	    				<div class = "cont-view">
+	    					<div class = "histContents">
+	    						<div class = "histLeft">
+	    							<div class = "circle">${ ph.pReason }</div>
+	    						</div>
+	    						<div class = "histCenter">
+	    							<div class = "fMonth">${ ph.pDate }</div>	
+	    							
+	    							<c:if test = "${ ph.pReason == '정기후원'}">
+	    								<div class = "fTitle"> 정기후원 ${ ph.p_d_c }차</div>
+	    								<div class = "fName">${ ph.p_d_m } 행복두리</div>
+	    							</c:if>
+	    							<c:if test = "${ ph.pReason == '펀딩'}">
+	    								<div class = "fTitle"> ${ ph.p_f_title }</div>
+	    								<div class = "fName">${ ph.p_f_m } 행복두리</div>
+	    							</c:if>
+		 							<c:if test = "${ ph.pReason == '결제'}">
+	    								<div class = "fTitle"> 포인트 충전</div>
+	    								<div class = "fName"> - </div>
+	    							</c:if>
+	    							<c:if test = "${ ph.pReason == '환급'}">
+	    								<div class = "fTitle"> 포인트 환불</div>
+	    								<div class = "fName"> - </div>
+	    							</c:if>
+		 							
+	    						</div>
+	    						<div class = "histRight">
+	    							<c:if test = "${ ph.pType == 'U'}">
+	    								<div class = "fValue">-${ ph.pValue }</div>
+	    							</c:if>
+	    							<c:if test = "${ ph.pType == 'A'}">
+	    								<div class = "fValue">+${ ph.pValue }</div>
+	    							</c:if>
+	    							<div class = "txtValue">원</div>
+	    							
+	    						</div>
+	    					</div>
 	    				</div>
 	    				
-		    			<c:forEach var="ph" items="${phList}">
-		    				
-		    				
-		    				
-		    				<div class = "cont-view">
-		    					<div class = "histContents">
-		    						<div class = "histLeft">
-		    							<div class = "circle">${ ph.pReason }</div>
-		    						</div>
-		    						<div class = "histCenter">
-		    							<div class = "fMonth">${ ph.pDate }</div>	
-		    							
-		    							<c:if test = "${ ph.pReason == '정기후원'}">
-		    								<div class = "fTitle"> 정기후원 ${ ph.p_d_c }차</div>
-		    								<div class = "fName">${ ph.p_d_m } 행복두리</div>
-		    							</c:if>
-		    							<c:if test = "${ ph.pReason == '펀딩'}">
-		    								<div class = "fTitle"> ${ ph.p_f_title }</div>
-		    								<div class = "fName">${ ph.p_f_m } 행복두리</div>
-		    							</c:if>
-			 							<c:if test = "${ ph.pReason == '결제'}">
-		    								<div class = "fTitle"> 포인트 충전</div>
-		    								<div class = "fName"> - </div>
-		    							</c:if>
-		    							<c:if test = "${ ph.pReason == '환급'}">
-		    								<div class = "fTitle"> 포인트 환불</div>
-		    								<div class = "fName"> - </div>
-		    							</c:if>
-			 							
-		    						</div>
-		    						<div class = "histRight">
-		    							<c:if test = "${ ph.pType == 'U'}">
-		    								<div class = "fValue">-${ ph.pValue }</div>
-		    							</c:if>
-		    							<c:if test = "${ ph.pType == 'A'}">
-		    								<div class = "fValue">+${ ph.pValue }</div>
-		    							</c:if>
-		    							<div class = "txtValue">원</div>
-		    							
-		    						</div>
-		    					</div>
-		    				</div>
-		    				
-    					</c:forEach>
-		    			</div>
-		    		</div>
-		    		
-		    		</c:if>
-		    		
-	    		<!-- 페이징 처리 -->
-	    		 <div class="row mt-3">
-		          <div class="col text-center">
-		            <div class="block-27">
-		              <ul>
-		                <li><a href="#">&lt;</a></li>
-		                <li class="active"><span>1</span></li>
-		                <li><a href="#">2</a></li>
-		                <li><a href="#">3</a></li>
-		                <li><a href="#">&gt;</a></li>
-		              </ul>
-		            </div>
-		          </div>
-		        </div>
-		        
-    			<div id = "bar2"></div>
-    		
-    		</div>
-    	</section>
-    	
-    	</c:if>
-    	
-    	<c:if test = " ${ empty sessionScope.loginUser }">
-    		<h2>비회원 입장 불가 !!! </h2>
-    	</c:if>
-		</div>
+   					</c:forEach>
+	    			</div>
+	    		</div>
+	    		
+	    		</c:if>
+	    		
+    		<!-- 페이징 처리 -->
+    		 <div class="row mt-3">
+	          <div class="col text-center">
+	            <div class="block-27">
+	              <ul>
+	                <li><a href="#">&lt;</a></li>
+	                <li class="active"><span>1</span></li>
+	                <li><a href="#">2</a></li>
+	                <li><a href="#">3</a></li>
+	                <li><a href="#">&gt;</a></li>
+	              </ul>
+	            </div>
+	          </div>
+	        </div>
+	        
+   			<div id = "bar2"></div>
+   		
+   		</div>
+   	</section>
+   	
+   	</c:if>
+   	
+   	<c:if test = " ${ empty sessionScope.loginUser }">
+   		<h2>비회원 입장 불가 !!! </h2>
+   	</c:if>
 	</div>
- 
+	
     
     <!-- footer  -->
     <jsp:include page="../common/footer.jsp"></jsp:include>

@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,6 +17,8 @@ import com.kh.duri.payment.model.exception.ReceiptException;
 import com.kh.duri.payment.model.exception.RefundException;
 import com.kh.duri.payment.model.service.PaymentService;
 import com.kh.duri.payment.model.vo.DonateReceipt;
+import com.kh.duri.payment.model.vo.PageInfo;
+import com.kh.duri.payment.model.vo.Pagination;
 import com.kh.duri.payment.model.vo.Point;
 import com.kh.duri.payment.model.vo.Refund;
 
@@ -73,15 +76,25 @@ public class PaymentController {
 	@RequestMapping("pointReturnListHappy.pm")
 	public String pointReturnHappyList(HttpServletRequest request, HttpServletResponse response, Model model) {
 		Member m = (Member) request.getSession().getAttribute("loginUser");
+		int currentPage = 1;
+		
+		if(request.getParameter("currentPage") != null) {
+			currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		}
 		
 		try {
-			List<Refund> rfList	= ps.selectRefundList(m);
+			int listCount = ps.getListCount(m);
 			
-			for(Refund i : rfList) {
+			PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
+			
+			List<Refund> rfList	= ps.selectRefundList(m, pi);
+			
+			/*for(Refund i : rfList) {
 				System.out.println("내역 : "+ i);
-			}
+			}*/
 
 			model.addAttribute("rfList", rfList);
+			model.addAttribute("pi", pi);
 			return "payment/point_returnList_happy";
 		} catch (RefundException e) {
 			model.addAttribute("msg", e.getMessage());
@@ -98,9 +111,18 @@ public class PaymentController {
 	
 	// 행복두리 - 포인트 환급 요청하기
 	@RequestMapping("execPointReturnHappy.pm")
-	public String execPointReturnHappy(HttpServletRequest request, HttpServletResponse response, Model model) {
-		Member m = (Member) request.getSession().getAttribute("loginUser");
-		
+	public String execPointReturnHappy(HttpServletRequest request, HttpServletResponse response, Model model, HttpSession session) {
+		Member m = null;
+		String memberType = request.getParameter("memberType");
+		System.out.println("memberType :" + memberType);
+		if(memberType.equals("n")) {
+			m = (Member) request.getSession().getAttribute("loginUser2");
+		}else if(memberType.equals("h")){
+			m  = (Member) request.getSession().getAttribute("loginUser");
+		}else {
+			return "redirect:pointReturnListHappy.pm";
+		}
+		System.out.println("m :" + m);
 		String rValue = request.getParameter("returnValue");
 		String rBank = request.getParameter("returnBank");
 		String[] rAccountArr = request.getParameterValues("returnAccount");
@@ -123,12 +145,19 @@ public class PaymentController {
 		r.setrName(rName);
 		
 		try {
-			int resultInsert = ps.insertRefund(r);
+			Member loginUser = ps.insertRefund(r, m);
 			
-			return "payment/point_returnList_happy";
+			// 포인트 변경된 회원 정보 세션에 업데이트 
+			if(memberType.equals("n")) { // 나눔두리 
+				session.setAttribute("loginUser2", loginUser);
+				return "redirect:pointReturnList.pm";
+			}else { // 행복두리
+				session.setAttribute("loginUser", loginUser);
+				return "redirect:pointReturnListHappy.pm";
+			}
 		} catch (RefundException e) {
 			model.addAttribute("msg", e.getMessage());
-			return "payment/point_returnList_happy";
+			return "redirect:pointReturnListHappy.pm";
 		}
 		
 	}
@@ -137,9 +166,31 @@ public class PaymentController {
 	@RequestMapping("pointReturnList.pm")
 	public String pointReturnList(HttpServletRequest request, HttpServletResponse response, Model model) {
 		Member m = (Member) request.getSession().getAttribute("loginUser2");
+		int currentPage = 1;
 		
+		if(request.getParameter("currentPage") != null) {
+			currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		}
 		
-	    return "payment/point_returnList";
+		try {
+			int listCount = ps.getListCount(m);
+			
+			PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
+			
+			List<Refund> rfList	= ps.selectRefundList(m, pi);
+			
+			/*for(Refund i : rfList) {
+				System.out.println("내역 : "+ i);
+			}*/
+
+			model.addAttribute("rfList", rfList);
+			model.addAttribute("pi", pi);
+			return "payment/point_returnList";
+		} catch (RefundException e) {
+			model.addAttribute("msg", e.getMessage());
+			return "payment/point_returnList";
+		}
+	    
 	}
 	
 	// 나눔두리 포인트 환급페이지

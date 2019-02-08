@@ -45,7 +45,8 @@
 			<colgroup>
 				<col style="width:14%;"><!-- 환급요청일시 -->
 				<col style="width:15%;"><!-- 요청금액 -->
-				<col style="width:15%;"><!-- 예금주명 -->
+				<col style="width:15%;"><!-- 은행 -->
+				<col style="width:20%;"><!-- 예금주명 -->
 				<col style="width:20%;"><!-- 계좌번호 -->
 				<col style="width:6%;"><!-- 처리상태 -->
 			</colgroup>
@@ -54,6 +55,7 @@
 				<th scope="col">환급요청일시</th>
 				<th scope="col">요청금액</th>
 				<th scope="col">예금주명</th>
+				<th scope="col">은행</th>
 				<th scope="col">계좌번호</th>
 				<th scope="col">처리상태</th>
 			</tr>
@@ -66,7 +68,8 @@
 		    		<tr>	
 					<td>${ rf.rDate }</td>
 					<td>${ rf.rValue }</td>
-					<td>${ rf.rDate }</td>
+					<td> - </td>
+					<td>${ rf.rBank }</td>
 					<td>${ rf.rAccount }</td>
 					<td>
 						<c:if test = "${ rf.rStatus == 'N' }">
@@ -82,7 +85,7 @@
 			</c:if>
 			<c:if test = "${ empty rfList }">
 				<tr>
-					<td colspan = "5"> 환급 내역이 없습니다.  </td>
+					<td colspan = "6"> 환급 내역이 없습니다.  </td>
 				<tr>
 			</c:if>
 			
@@ -90,13 +93,38 @@
 		</table>
 
 		<div class="numbox pt40 pb50"> 
+			<c:if test="${ pi.currentPage <= 1 }">
 			<span><a class="num" href="#">&lt;</a></span>
-			<span><a class="num on" href="#">1</a></span>
-			<span><a class="num" href="#">2</a></span>
-			<span><a class="num" href="#">3</a></span>
-			<span><a class="num" href="#">4</a></span>
-			<span><a class="num" href="#">5</a></span>
-			<span><a class="num" href="#">&gt;</a></span>
+			</c:if>
+			<c:if test="${ pi.currentPage > 1 }">
+				<c:url var="blistBack" value="pointReturnListHappy.pm">
+					<c:param name="currentPage" value="${ pi.currentPage - 1}"/>
+				</c:url>
+				<span><a class="num" href="${ blistBack }">&lt;</a></span>
+			</c:if>
+			
+			<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+				<c:if test="${ p eq pi.currentPage }">
+					<span><a class="num on" href="${ blistCheck }">${ p }</a></span>
+				</c:if>
+				<c:if test="${ p ne pi.currentPage }">
+					<c:url var="blistCheck" value="pointReturnListHappy.pm">
+						<c:param name="currentPage" value="${p}"/>
+					</c:url>
+					<span><a class="num" href="${ blistCheck }">${ p }</a></span>
+				</c:if>
+			</c:forEach>
+			
+			<c:if test="${ pi.currentPage >= pi.maxPage }">
+				<span><a class="num" href="#">&gt;</a></span>
+			</c:if>
+			<c:if test="${ pi.currentPage < pi.maxPage }">
+				<c:url var="blistEnd" value="pointReturnListHappy.pm">
+					<c:param name="currentPage" value="${ pi.currentPage + 1}"/>
+				</c:url>
+				<span><a class="num" href="${ blistEnd }">&gt;</a></span>
+			</c:if>
+			
 		</div>
 		<br><br><br><br>
 		
@@ -112,7 +140,11 @@
 
 </div><!--// Wrap E-->
 
-
+<script>
+	$("#button").click(function(){
+		location.href = "pointReturnHappy.pm";
+	});
+</script>
 
 
 </body>

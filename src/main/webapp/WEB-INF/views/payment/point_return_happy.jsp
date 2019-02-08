@@ -207,7 +207,9 @@
 		    			<div class = "d-flex-left"> <br>
 		 	  			<!-- <h4 class ="" id = "subTitle">> 환급포인트</h4> -->
 					    <div style="float: left; margin : 20px 0"><h1><i class="chevron right icon"></i>환급포인트</h1></div>
+					    
 		 	  			<form id = "returnHappyForm" action = "execPointReturnHappy.pm" method = "post" >
+		 	  			<input type = "hidden" value = "h" name = "memberType">
 		    				<table>
 		    					<tr>
 		    						<th>현재 보유포인트</th>
@@ -274,7 +276,7 @@
 			    					<div class = "d-left">현재 보유포인트 </div><div class = "d-right" id = "txtChargeValue">${ sessionScope.loginUser.mPoint }원</div><br><br>
 			    					<div id = "txtTotalValue">환급 금액</div><div class = "txtColor_o d-right" id = "totalValue">0</div>원
 			    					<div id = "bar3"></div>
-			    					<div class = "d-left">잔여포인트 </div><div class = "d-right" id = "txtFees">3000원</div>
+			    					<div class = "d-left">잔여포인트 </div><div class = "d-right" id = "txtFees">${ sessionScope.loginUser.mPoint }원</div>
 			    					
 			    				</div>
 		    				</div>

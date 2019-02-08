@@ -41,6 +41,30 @@
 		<result property="rStatus" column="RSTATUS"/>
 	</resultMap>
 	
+	<resultMap type="com.kh.duri.member.model.vo.Member" id="memberResultSet">
+	<!-- property=컬럼명, column=필드명    반드시 일치! -->
+		<id property="mno" column="MNO"></id>
+		<result property="mName" column="MNAME"/>
+		<result property="mNickName" column="MNICK"/>
+		<result property="mGender" column="MGENDER"/>
+		<result property="mPhone" column="MPHONE"/>
+		<result property="mid" column="MID"/>
+		<result property="mpwd" column="MPWD"/>
+		<result property="email" column="MEMAIL"/>
+		<result property="mEnrollDate" column="MENROLLDATE"/>
+		<result property="mPoint" column="MPOINT"/>
+		<result property="mtype" column="MTYPE"/>
+		<result property="mFundtype" column="MFUNDTYPE"/>
+		<result property="mpr" column="MPR"/>
+		<result property="mprNew" column="MPRNEW"/>
+		<result property="mBirthDay" column="MBIRTHDAY"/>
+		<result property="mAddress" column="MADDRESS"/>
+		<result property="mAcceptDate" column="MACCEPTDATE"/>
+		<result property="mGoalNum" column="MGOALNUM"/>
+		<result property="mStatus" column="MSTATUS"/>
+		<result property="mTakeStatus" column="MTAKESTATUS"/>
+	</resultMap>
+	
 	<!-- 포인트 이력 select -->
 	<select id="selectPointHistory" resultMap="pointResultSet" parameterType="Point">
 		SELECT PNO, PTYPE, PVALUE, PDATE, PREASON, P_MNO, P_PYNO, P_DHDNO, P_RNO, P_FHNO, FTITLE, M1.MNAME AS MNAME1, M2.MNAME AS MNAME2, DHD.DHDCOUNT
@@ -64,6 +88,13 @@
 		ORDER BY DRAPPLYDATE DESC
 	</select>
 	
+	<!-- 행복두리 - 환급내역 수 세기 -->
+	<select id="selectRefundListCount" resultType="_int">
+		SELECT COUNT(*)
+		FROM REFUND
+		WHERE R_MNO = #{mno}
+	</select>
+	
 	<!-- 행복두리 - 환급내역 select -->
 	<select id="selectRefundList" resultMap="refundResultSet" parameterType="Refund">
 		SELECT *
@@ -72,9 +103,19 @@
 		ORDER BY RDATE DESC
 	</select>
 	
+	<!-- 행복두리 - 환급 insert -->
 	<insert id = "insertRefund">
 		INSERT INTO REFUND VALUES (SEQ_R_NO.NEXTVAL, #{rBank}, #{rAccount}, #{r_mNo}, #{rValue}, SYSDATE, DEFAULT)
 	</insert>
 	
+	<!-- 행복두리 - 환급 포인트 차감 -->
+	<update id = "updatePoint">
+		UPDATE MEMBER SET MPOINT = MPOINT-#{rValue} WHERE MNO=#{r_mNo}
+	</update>
 	
+	<select id="loginUserCheck" resultMap="memberResultSet" parameterType="Member">
+		SELECT *
+		FROM MEMBER
+		WHERE MNO=#{mno}
+	</select>
 </mapper>
