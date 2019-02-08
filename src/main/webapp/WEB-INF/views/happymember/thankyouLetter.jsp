@@ -75,8 +75,8 @@
 		<div style="height: 100px;"></div>
 		
 		<div id="button">
-			<button class="massive ui instagram button">감사편지 보내기</button>&nbsp;&nbsp;&nbsp;&nbsp;
-			<button style="width: 21%;" class="massive ui button">취소하기</button>
+			<button onclick="#" class="massive ui instagram button">감사편지 보내기</button>&nbsp;&nbsp;&nbsp;&nbsp;
+			<button onclick="reset();" style="width: 21%;" id="reset" class="massive ui button">취소하기</button>
 		</div>
 
 	</div><!--// inner E-->
@@ -86,7 +86,11 @@
 
 
 </div><!--// Wrap E-->
-
+<script>
+	function reset(){
+		$("#reset").reset();
+	}
+</script>
 
 
 </body>

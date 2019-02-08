@@ -7,6 +7,8 @@
 <meta charset="UTF-8">
 
 <jsp:include page="../happymember/include/common.jsp" /> 
+
+
 <title>둘이두리</title>
 <jsp:include page="../common/css.jsp"/>
 <style>

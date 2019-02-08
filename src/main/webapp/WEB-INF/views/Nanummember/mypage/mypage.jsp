@@ -78,7 +78,7 @@
 <%@ include file="../../common/navi.jsp" %>
 <%@ include file="../include/header.jsp" %>
 <!-- #wrap {position:relative; width:100%;} -->
-	<div id="wrap">		
+<br><br><br><br>
 			<div class="contBox inner">
 				<%@ include file="../include/tabMypage.jsp"%>
 
@@ -184,7 +184,6 @@
 				</div>
 			</div>
 		</div>								
-	</div>		
 			
 			
 	

@@ -179,7 +179,7 @@ p {font-size: 20px; text-align: center;}
 		<!-- 네비 오른쪽 -->
 		<div class="box-right">
 			<!-- Trigger/Open The Modal -->
-			<span><a class="a-tag" href="Aerin_return.happy" style="margin-right: 80px;">포인트 환급</a></span>
+			<span><a class="a-tag" href="pointReturnListHappy.pm" style="margin-right: 80px;">포인트 환급</a></span>
 			<span><a class="a-tag" id="modalBtn">보유물품</a></span><br>
 			<span><a class="a-tag" href="#" style="margin-right: 80px;">내 정보 수정</a></span>
 			<span><a class="a-tag" id="modalBtn2">알림</a></span><br>

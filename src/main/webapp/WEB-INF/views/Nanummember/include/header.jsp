@@ -16,7 +16,9 @@
 	font-family: Nanum Pen Script; 
 }
 #container {
+	
   	display: flex;
+  	height: 200px;
   	width : 70%;
   	margin: 0 auto;
   	margin-top:20px;
@@ -33,7 +35,7 @@
 	 text-align: left;
 	 line-height: 60px;
 	 font-size:23px !important;
-	 padding-left: 10px;
+	 padding :20px;
 	 /* font-weight: bold;  */
 	 /* font-family: Nanum Pen Script;  */
 }
@@ -44,6 +46,7 @@
   	text-align: left; 	
   	display: table-cell;
 	vertical-align: middle;	
+	 padding :20px;
 	/* font-weight: bold;  */
 	/* font-family: Nanum Pen Script; */
 	/* line-height: 60px; */
@@ -56,6 +59,7 @@
 	vertical-align: middle;
 	line-height: 60px;
 	font-size:20px !important;
+	 padding :20px;
 	/* font-weight: bold;  */
 	/* font-family: Nanum Pen Script; */
 }
@@ -93,9 +97,9 @@
     		후원참여 횟수 : 6 회 <br>
     	</div>
     	<div id='box-right'>
-    		<a href="Ajin1.nanum" class="headerpoint"> 포인트 충전</a><br>
-    		<a href="#" style="color: white; font-size:20px; margin-right: 10px;"> 포인트 환급</a><br>
-    		<a href="#" style="color: white; font-size:20px; margin-right: 10px;"> 포인트 내역</a><br>
+    		<a href = "pointCharge.pm" class="headerpoint"> 포인트 충전</a><br>
+    		<a href="pointReturnList.pm" class="headerpoint" > 포인트 환급</a><br>
+    		<a href="pointHistory.pm" class="headerpoint"> 포인트 내역</a><br>
     	</div>
 	</div>
 	
@@ -119,5 +123,6 @@ function openpop()
 	   });
 	  });
  }
+ 
 //]]>
 </script>

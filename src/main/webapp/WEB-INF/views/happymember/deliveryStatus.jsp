@@ -98,7 +98,7 @@
 		<div style="height: 100px;"></div>
 		
 		<div id="button" class="textSilver">
-			<button class="massive ui instagram button">배송지 수정하러 가기</button>
+			<button onclick="#" class="massive ui instagram button">배송지 수정하러 가기</button>
 		</div>
 
 	</div><!--// inner E-->

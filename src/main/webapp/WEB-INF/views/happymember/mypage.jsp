@@ -69,7 +69,7 @@
 			<tr>
 				<td>1</td>
 				<td>생리대가 부족해요</td>
-				<td class="tleft"><a href="myQnaView.jsp">안녕하세요 저는 올해 15살로 초경을 시작하게 되었습니다.</a></td>
+				<td class="tleft"><a href="cloudThingDetail.happy">안녕하세요 저는 올해 15살로 초경을 시작하게 되었습니다.</a></td>
 				<td>2018-11-04 ~ 2019-01-04</td>
 				<td><!-- <img src="/duri/resources/HappyMyPage/images/status/ing.PNG" width="25px" height="25px" alt="진행중">-->
 					<i class="green circle icon" alt="진행중"></i>
@@ -78,7 +78,7 @@
 			<tr>
 				<td>2</td>
 				<td>저보고 입냄새 난대요</td>
-				<td class="tleft"><a href="myQnaView.jsp">칫솔이 다 닳아 버리고 새 칫솔을 사지 못해 이를 잘 닦지 못합니다.. </a></td>
+				<td class="tleft"><a href="#">칫솔이 다 닳아 버리고 새 칫솔을 사지 못해 이를 잘 닦지 못합니다.. </a></td>
 				<td>2019-01-11 ~ 2019-02-11</td>
 				<td><!-- <img src="/duri/resources/HappyMyPage/images/status/wating.PNG" width="22px" height="25px" alt="승인요청중">-->
 					<i class="yellow circle icon" alt="승인대기중"></i>
@@ -146,7 +146,7 @@
 			<tr>
 				<td>1</td>
 				<td>수학공부 잘 하고 싶어요</td>
-				<td class="tleft"><a href="myQnaView.jsp">제 꿈은 수학자입니다. 그런데 교과서 살 돈이 모자라서 늘 짝꿍 책을 같이 보다..</a></td>
+				<td class="tleft"><a href="cloudMoneyDetail.happy">제 꿈은 수학자입니다. 그런데 교과서 살 돈이 모자라서 늘 짝꿍 책을 같이 보다..</a></td>
 				<td>2018-11-04 ~ 2019-01-04</td>
 				<td><!-- <img src="/duri/resources/HappyMyPage/images/status/ing.PNG" width="25px" height="25px" alt="진행중"></td> -->
 					<i class="green circle icon" alt="진행중"></i>

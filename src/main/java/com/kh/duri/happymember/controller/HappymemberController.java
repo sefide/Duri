@@ -45,15 +45,20 @@ public class HappymemberController {
 	public String happy8() {
 		return "happymember/proofDocument";
 	}
-
-	@RequestMapping("return.happy")
-	public String happy9() {
-		return "payment/point_return_happy";
-	}
 	
 	@RequestMapping("cloudWrite.happy")
 	public String happt10() {
 		return "happymember/cloudWrite";
+	}
+	
+	@RequestMapping("cloudThingDetail.happy")
+	public String happt11() {
+		return "board/about_thing";
+	}
+	
+	@RequestMapping("cloudMoneyDetail.happy")
+	public String happt12() {
+		return "board/about_money";
 	}
 }
 

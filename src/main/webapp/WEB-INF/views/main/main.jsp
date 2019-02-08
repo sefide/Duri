@@ -8,7 +8,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-	의희 관리자 뷰<br>
+	<jsp:include page="total.nanum"/>
+	<jsp:forward page=""/>
+	<%-- 의희 관리자 뷰<br>
 	링크연결 완료<br>
 	<a href="adminMain.ad">관리자 메인페이지</a><br>
 	
@@ -19,17 +21,8 @@
 
 	<hr>
 		아진이 뷰 <br>
-	<a href="Ajin1.nanum">아진 - 전체 메인페이지</a><br>
-	<a href="Ajin2.nanum">아진 - 나눔두리 메인페이지</a><br>
-	<a href="Ajin3.nanum">아진 - 마이페이지</a><br>
-	<a href="Ajin4.nanum">아진 - 마이페이지_정기후원</a><br>
-	<a href="Ajin5.nanum">아진 - 마이페이지_편지</a><br>
-	<a href="Ajin6.nanum">아진 - 마이페이지_기부금 영수증</a><br>
-	<a href="Ajin7.nanum">아진 - 마이페이지 _하고싶었던 후원</a><br>
-	<a href="Ajin_QnA_list.nanum">아진 - QnA_목록</a><br>
-	<a href="Ajin_QnA_insert.nanum">아진 - QnA_등록</a><br>
-	<a href="Ajin_QnA_detail.nanum">아진 - QnA_상세</a><br>
-
+	<a href="total.nanum">아진 - 전체 메인페이지</a><br>
+	
   
 	<hr>
 	애린이 뷰<br>
@@ -79,7 +72,7 @@
 	<a href="pointReturn.pm">다힝 포인트 환급_나눔두리</a><br>
 	<a href="pointReturnHappy.pm">다힝 포인트 환급_행복두리</a><br>
 	<a href="pointReturnList.pm">다힝 포인트 환급목록_나눔두리</a><br>
-	<a href="pointReturnListHappy.pm">다힝 포인트 환급목록_행복두리</a><br>
+	<a href="pointReturnListHappy.pm">다힝 포인트 환급목록_행복두리</a><br> --%>
 	
 </body>
 </html>

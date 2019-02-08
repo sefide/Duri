@@ -61,7 +61,7 @@ footer li,footer address,footer span a {color:#c0c0c0}
 
 /* sub */
 /* contBox ******************************************/
-.contBox {padding-bottom:50px; min-height:400px;}
+.contBox {padding-bottom:50px; min-height:400px; }
 .contBox .titNavi {position:relative; font-size:24px; line-height:80px; border-bottom:1px solid #d7d7d7; font-weight:500;}
 .contBox .titNavi span {position:absolute; right:0; font-size:16px; line-height:80px; color:#a5a5a5; font-weight:300;}
 
