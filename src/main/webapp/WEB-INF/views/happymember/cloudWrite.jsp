@@ -1,8 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <% 
 	String bigtabon="2";
 %>
-<%@ include file="include/common.jsp" %>
+<jsp:include page="include/common.jsp"/>
 
 <!-- semantic ui -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
@@ -41,7 +44,7 @@
 <div id="subContainer">
 	<div class="contBox inner"><!-- inner S -->
 	 <br>
-		
+		<%@ include file="include/tabMypage.jsp" %>
 		<!-- <div class="titNavi">
 			내 공고 목록
 			<span>홈 &gt; 마이페이지 &gt; 내 공고 목록</span>
@@ -136,6 +139,7 @@
 		
 		<div id="button" class="textSilver">
 			* 정기후원은 자기소개를 바탕으로 진행되므로 변경할 내용이 있을 시 수정해주세요.<br><br>
+			
 			<button class="massive ui instagram button">자기소개 수정하기</button>
 		</div>
 

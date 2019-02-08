@@ -1,4 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <% 
 	String bigtabon="3";
 %>
@@ -98,7 +101,7 @@
 		<div style="height: 100px;"></div>
 		
 		<div id="button" class="textSilver">
-			<button onclick="#" class="massive ui instagram button">배송지 수정하러 가기</button>
+			<button class="massive ui instagram button">배송지 수정하러 가기</button>
 		</div>
 
 	</div><!--// inner E-->

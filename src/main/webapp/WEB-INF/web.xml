@@ -39,6 +39,82 @@
 			<init-param>
 			<param-name>contextConfigLocation</param-name>
 			<param-value>/WEB-INF/config/action-servlet.xml</param-value>
+
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>dispatcher</servlet-name>
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+
+  
+	<servlet>
+		<servlet-name>admin</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+			<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>/WEB-INF/config/admin-servlet.xml</param-value>
+      </init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+<servlet-mapping>
+  <servlet-name>admin</servlet-name>
+		<url-pattern>*.ad</url-pattern>
+	</servlet-mapping>
+
+
+
+  <servlet>
+		<servlet-name>happymember</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+			<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>/WEB-INF/config/happymember-servlet.xml</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>happymember</servlet-name>
+		<url-pattern>*.happy</url-pattern>
+	</servlet-mapping>
+
+		
+ <servlet>
+		<servlet-name>nanummember</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+			<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>/WEB-INF/config/nanummember-servlet.xml</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>nanummember</servlet-name>
+		<url-pattern>*.nanum</url-pattern>
+	</servlet-mapping>
+
+  <servlet>
+		<servlet-name>board</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+			<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>/WEB-INF/config/board-servlet.xml</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>board</servlet-name>
+		<url-pattern>*.bo</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>payment</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+			<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>/WEB-INF/config/payment-servlet.xml</param-value>
+
 		</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
