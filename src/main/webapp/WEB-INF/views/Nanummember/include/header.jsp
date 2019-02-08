@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+ <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <link
 	href="https://fonts.googleapis.com/css?family=Gamja+Flower|Nanum+Gothic:400,700,800|Nanum+Pen+Script|Poor+Story&amp;subset=korean" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="semantic/dist/semantic.min.css">
@@ -83,22 +84,43 @@
 
 </style>	
 
-<header style="margin-top: 70px; height: 50px; text-align: right; ">		
+<header style=" height: 50px; text-align: right; ">		
 	<a class="mynav_2" href="updateInfo.nanum" >회원정보 수정</a>
-	<a class="mynav_2" href="main.nanum">로그아웃</a>
+	<a class="mynav_2" href="total.nanum">로그아웃</a>
 	<div id="container">	
 		<div id='box-left'>
 			<i class="handshake outline icon"></i>
-			<span id='box-left' style="font-weight: bold; margin-left: 5px;">이아진 </span>님 반갑습니다!
+			<span id='box-left' style="font-weight: bold; margin-left: 5px;">"<c:out value="${ sessionScope.loginUser2.mName }"/>"</span>님 반갑습니다!
 		</div>
     	<div id='box-center'>
-    		등급 : 새싹두리<br>
-    		포인트 : 50,000 원 <br>
-    		후원참여 횟수 : 6 회 <br>
+    		<c:choose>
+    			<c:when test="${ sessionScope.loginUser2.mGoalNum+0 <= 4 }">
+    				등급 : 씨앗두리<br>
+    			</c:when>
+    			<c:when test="${5 <= sessionScope.loginUser2.mGoalNum+0 && sessionScope.loginUser2.mGoalNum+0 < 7}">
+    				등급 : 새싹두리<br>
+    			</c:when>
+    			<c:when test="${ 10 <= sessionScope.loginUser2.mGoalNum+0 }">
+    				등급 : 열매두리<br>
+    			</c:when>
+    			<c:otherwise>
+      				 등급이 아직 존재하지 않아요!<br>
+        		</c:otherwise>
+    		</c:choose>
+    		
+    		<c:if test=" 4 < ${ sessionScope.loginUser2.mGoalNum } < 7">
+    			등급 : 새싹두리<br>
+    		</c:if>
+    		<c:if test=" 9 < ${ sessionScope.loginUser2.mGoalNum } ">
+    			등급 : 열매두리<br>
+    		</c:if>
+    		
+    		포인트 : <c:out value="${ sessionScope.loginUser2.mPoint }"/> 원 <br>
+    		100% 달성 크라우드 펀딩 참여 횟수 : <c:out value="${ sessionScope.loginUser2.mGoalNum }"/> 회 <br>
     	</div>
     	<div id='box-right'>
     		<a href = "pointCharge.pm" class="headerpoint"> 포인트 충전</a><br>
-    		<a href="pointReturnList.pm" class="headerpoint" > 포인트 환급</a><br>
+    		<a href="pointReturnList.pm" class="headerpoint" >포인트 환급</a><br>
     		<a href="pointHistory.pm" class="headerpoint"> 포인트 내역</a><br>
     	</div>
 	</div>

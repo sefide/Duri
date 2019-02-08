@@ -51,9 +51,22 @@ public class PaymentDaoImpl implements PaymentDao {
 		if(rfList == null){
 			throw new RefundException("환급 내역이 존재하지 않습니다.");
 		}
-		System.out.println("Dao Donate 객체 size : "+ rfList.size());
+		System.out.println("Dao Refund 객체 size : "+ rfList.size());
 		
 		return rfList;
+	}
+	
+	// 행복두리 - 포인트 환급 요청하기
+	@Override
+	public int insertRefund(SqlSessionTemplate sqlSession, Refund r) throws RefundException {
+		int result = sqlSession.insert("Point.insertRefund", r);
+		
+		if(result == 0){
+			throw new RefundException("환급 신청을 실패했습니다.");
+		}
+		System.out.println("Dao result : "+ result);
+		
+		return result;
 	}
 
 }

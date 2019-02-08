@@ -21,6 +21,9 @@ public interface PaymentService {
 	// 행복두리 - 환급목록 가져오기 
 	List<Refund> selectRefundList(Member m) throws RefundException;
 
+	// 행복두리 - 포인트 환급 요청하기
+	int insertRefund(Refund r) throws RefundException;
+
 	
 
 }

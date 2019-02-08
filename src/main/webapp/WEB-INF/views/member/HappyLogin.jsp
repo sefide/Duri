@@ -8,6 +8,9 @@
 <script src="//code.jquery.com/jquery.min.js"></script>
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/latest/js/bootstrap.min.js"></script>
 	<meta charset="UTF-8">
+	<!-- semantic ui -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+<script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
 	<title>http://www.blueb.co.kr</title>
 
 <style rel="stylesheet">
@@ -17,7 +20,12 @@ html {
 }
 
 body {	
-  background:orange;
+   background:white; 
+/*   background-image: url('/duri/resources/member/images/loginBg.png');
+  background-repeat: no-repeat;
+  background-size:contain;
+  background-position: center; */
+  bac
 /*   background: -webkit-linear-gradient(45deg, rgba(66, 183, 245, 0.8) 0%, rgba(66, 245, 189, 0.4) 100%);
   background: linear-gradient(45deg, rgba(66, 183, 245, 0.8) 0%, rgba(66, 245, 189, 0.4) 100%); */
   color: rgba(0, 0, 0, 0.6);
@@ -327,14 +335,44 @@ input, select{
 
 }
 
+ #two{
+	position: absolute;
+	top: 150px; 
+	left: 1040px;
+	font-size:60px;
+	font-weight:bold;
+	
+}
+
+#add{
+	position: absolute;
+	top: 150px; 
+	left:1170px;
+	font-size:60px;
+	font-weight:bold;
+	
+} 
+
+#img1{
+	width:120px;
+	height:80px;
+	position:absolute;
+	top: 120px; 
+	left:1290px;
+	font-size:60px;
+	font-weight:bold;
+}
 </style>
 </head>
 <body>
-
-
+<a id="two" style="color:orange">둘이</a><a id="add" style="color:yellowgreen">두리</a>
+<img src = "/duri/resources/board/images/main.png" id="img1">
+<br><br><br><br><br>
 <!-- Form-->
 <div class="form">
+
   <div class="form-toggle"></div>
+
   <div class="form-panel one">
     <div class="form-header">
       <h1>행복두리 Login</h1>
@@ -351,7 +389,10 @@ input, select{
         </div>
         <div class="form-group">
           <label class="form-remember">
-          </label><a href="#" class="form-recovery">Forgot Password?</a>
+          
+          </label>
+          <a href="join.me" class="form-recovery">회원가입</a>
+          <a href="#" class="form-recovery">Forgot Password?</a>
         </div>
         <div class="form-group">
           <button id="loginBtn">LogIn</button>
@@ -359,223 +400,177 @@ input, select{
       </form>
     </div>
   </div>
-  <div class="form-panel two">
+   <div class="form-panel two">
     <div class="form-header">
-      <h1>Join Member</h1>
+<form class="ui form">
+
+  <div class="field">
+    <label>Name</label>
+    <div class="two fields">
+      <div class="field">
+        <input type="text" name="shipping[first-name]" placeholder="First Name">
+      </div>
+      <div class="field">
+        <input type="text" name="shipping[last-name]" placeholder="Last Name">
+      </div>
     </div>
-    <div class="form-content">
-      <form id="joinForm" action="<%=request.getContextPath()%>/insertMember.me" method="post">
-		<table class="boardWrite wth700 mr_auto mt30"><!-- boardWrite S-->
-			<colgroup>
-				<col style="width:30%;">
-				<col style="width:%;">
-			</colgroup>
-			<tbody>
-			<tr>
-				<th scope="row">아이디</th>
-				<td>
-					
-					<input id="SId" name="userId" type="text">
-				</td>
-				
-				<td>
-					<span>
-						&nbsp;&nbsp;<a id="idCheckBtn" class="btn btn-primary" > 중복확인</a>
-						<span id="idCheckMsg"></span>
-					</span>
-				</td>
+  </div>
+  <div class="field">
+    <label>Billing Address</label>
+    <div class="fields">
+      <div class="twelve wide field">
+        <input type="text" name="shipping[address]" placeholder="Street Address">
+      </div>
+      <div class="four wide field">
+        <input type="text" name="shipping[address-2]" placeholder="Apt #">
+      </div>
+    </div>
+  </div>
+  <div class="two fields">
+    <div class="field">
+      <label>State</label>
+      <select class="ui fluid dropdown">
+        <option value="">State</option>
+    <option value="AL">Alabama</option>
+    <option value="AK">Alaska</option>
+    <option value="AZ">Arizona</option>
+    <option value="AR">Arkansas</option>
+    <option value="CA">California</option>
+    <option value="CO">Colorado</option>
 
-			</tr>
+      </select>
+    </div>
+    <div class="field">
+      <label>Country</label>
+      <div class="ui fluid search selection dropdown">
+        <input type="hidden" name="country">
+        <i class="dropdown icon"></i>
+        <div class="default text">Select Country</div>
+        <div class="menu">
+    <div class="item" data-value="af"><i class="af flag"></i>Afghanistan</div>
+    <div class="item" data-value="ax"><i class="ax flag"></i>Aland Islands</div>
+    <div class="item" data-value="al"><i class="al flag"></i>Albania</div>
+    <div class="item" data-value="dz"><i class="dz flag"></i>Algeria</div>
+    <div class="item" data-value="as"><i class="as flag"></i>American Samoa</div>
+    <div class="item" data-value="ad"><i class="ad flag"></i>Andorra</div>
 
-			<tr>
-				<th scope="row">비밀번호</th>
-				<td>
-					<input id="SPwd" name="userPwd" type="password"> 
-					<span id="pwdCheckMsg"></span>
-				</td>
-
-			</tr>
-			<tr>
-				<th scope="row">비밀번호 확인</th>
-				<td>
-					<input id="SPwd2" type="password"> 
-				</td>
+  </div>
+       </div>
+    </div>
+  </div>
+  <h4 class="ui dividing header">Billing Information</h4>
+  <div class="field">
+    <label>Card Type</label>
+    <div class="ui selection dropdown">
+      <input type="hidden" name="card[type]">
+      <div class="default text">Type</div>
+      <i class="dropdown icon"></i>
+      <div class="menu">
+        <div class="item" data-value="visa">
+          <i class="visa icon"></i>
+          Visa
+        </div>
+        <div class="item" data-value="amex">
+          <i class="amex icon"></i>
+          American Express
+        </div>
+        <div class="item" data-value="discover">
+          <i class="discover icon"></i>
+          Discover
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="fields">
+    <div class="seven wide field">
+      <label>Card Number</label>
+      <input type="text" name="card[number]" maxlength="16" placeholder="Card #">
+    </div>
+    <div class="three wide field">
+      <label>CVC</label>
+      <input type="text" name="card[cvc]" maxlength="3" placeholder="CVC">
+    </div>
+    <div class="six wide field">
+      <label>Expiration</label>
+      <div class="two fields">
+        <div class="field">
+          <select class="ui fluid search dropdown" name="card[expire-month]">
+            <option value="">Month</option>
+            <option value="1">January</option>
+            <option value="2">February</option>
+            <option value="3">March</option>
+            <option value="4">April</option>
+            <option value="5">May</option>
+            <option value="6">June</option>
+            <option value="7">July</option>
+            <option value="8">August</option>
+            <option value="9">September</option>
+            <option value="10">October</option>
+            <option value="11">November</option>
+            <option value="12">December</option>
+          </select>
+        </div>
+        <div class="field">
+          <input type="text" name="card[expire-year]" maxlength="4" placeholder="Year">
+        </div>
+      </div>
+    </div>
+  </div>
+   <h4 class="ui dividing header">Receipt</h4>
+   <div class="field">
+    <label>Send Receipt To:</label>
+    <div class="ui fluid multiple search selection dropdown">
+      <input type="hidden" name="receipt">
+      <i class="dropdown icon"></i>
+      <div class="default text">Saved Contacts</div>
+      <div class="menu">
+        <div class="item" data-value="jenny" data-text="Jenny">
+          <img class="ui mini avatar image" src="/images/avatar/small/jenny.jpg">
+          Jenny Hess
+        </div>
+        <div class="item" data-value="elliot" data-text="Elliot">
+          <img class="ui mini avatar image" src="/images/avatar/small/elliot.jpg">
+          Elliot Fu
+        </div>
+        <div class="item" data-value="stevie" data-text="Stevie">
+          <img class="ui mini avatar image" src="/images/avatar/small/stevie.jpg">
+          Stevie Feliciano
+        </div>
+        <div class="item" data-value="christian" data-text="Christian">
+          <img class="ui mini avatar image" src="/images/avatar/small/christian.jpg">
+          Christian
+        </div>
+        <div class="item" data-value="matt" data-text="Matt">
+          <img class="ui mini avatar image" src="/images/avatar/small/matt.jpg">
+          Matt
+        </div>
+        <div class="item" data-value="justen" data-text="Justen">
+          <img class="ui mini avatar image" src="/images/avatar/small/justen.jpg">
+          Justen Kitsune
+        </div>
+      </div>
+    </div>
+  </div>
+   <div class="ui segment">
+    <div class="field">
+      <div class="ui toggle checkbox">
+        <input type="checkbox" name="gift" tabindex="0" class="hidden">
+        <label>Do not include a receipt in the package</label>
+      </div>
+    </div>
+  </div>
+  <div class="ui button" tabindex="0">Submit Order</div>
+</form>
 		
-			</tr>
-			<tr>
-				<th scope="row">이름</th>
-				<td>
-					<label for=""></label>
-					<input id="SName" name="userName" type="text"> 
-				</td>
-				<td align="center">
-					<b>닉네임</b>
-				</td>
-				<td>
-					<label for=""></label>
-					<input id="nickName" name="nickName" type="text"> 
-				</td>
-			</tr>
-			<!-- <tr>
-				<th scope="row">닉네임</th>
-				<td>
-					
-				</td>
-			</tr> -->
-			
-			<tr>
-				<th scope="row">휴대폰번호</th>
-				<td>
-					<span>
-						<input id="Sphone" name="phone" type="text" placeholder="-없이 입력">
-					</span>
-				 </td>
-			</tr>
-			<tr>
-				<th scope="row">이메일</th>
-				<td>
-					<input id="Semail1" name="email1" class="wth100" type="text">
-				</td>
-
-				<td>
-					<input id="Semail2" name="email2" class="wth100" type="text">
-				</td>
-				<td>
-			</tr>
-			
-			
-			<tr>
-			<td></td>
-				<td>
-					<select id="email">
-							<option value="self" selected>직접입력</option>
-							<option value="naver">naver.com</option>
-							<option value="daum">daum.net</option>
-							<option value="google">google.com</option>
-					</select>
-				</td>
-				<td>
-					<span>
-						&nbsp;&nbsp;<a id="idCheckBtn" class="btn btn-primary" >인증번호발송</a>
-						<span id="idCheckMsg"></span>
-					</span>
-				</td>
-			</tr>
-			<tr>
-					
-					<%!
-						public int getRandom(){
-							int randomCode=0;
-							randomCode = (int)Math.floor((Math.random()*99999-10000+1))+10000;
-							return randomCode;
-						}
-					%>
-				<td>
-					<input type="hidden" value="<%=getRandom()%>" id="randomCode">
-				</td>
-				<td>	
-						<input id="authCode" type="text" placeholder="인증번호를 입력하세요">
-				</td>
-				<td>
-						<span>
-						&nbsp;&nbsp;<a id="idCheckBtn" class="btn btn-primary" >인증하기</a>
-						<span id="idCheckMsg"></span>
-					</span>
-
-				</td>
-			</tr>
-			
-
-			<tr>
-				<th scope="row">주소</th>
-				<td>
-					<input id="address" name="address" class="wth100" type="text">
-				</td>
-				<td>
-					<span>
-						&nbsp;&nbsp;<a id="idCheckBtn" class="btn btn-primary" >주소검색</a>
-					<span id="idCheckMsg"></span>
-					</span>
-				</td>
-			</tr>
-			<tr>
-				<td></td>
-				<td colspan="3">
-					<input id="address" name="address" class="wth100" type="text" placeholder="상세주소를 입력해주세요">
-				</td>
-				
-			</tr>
-			
-
-
-			<tr>
-				<th scope="row">계좌번호</th>
-				<td>
-					은행명  <select name="bankcode" id="bankcode">
-							<option value="004">국민은행</option>
-							<option value="003">기업은행</option>
-							<option value="088">신한은행</option>
-							<option value="011">농협</option>
-							<option value="020">우리은행</option>
-						</select>
-			</tr>
-			<tr>
-				<td></td>
-				<td colspan="2">
-					<input type="text" size="25" placeholder="'-'를 제외하고 입력" name="accnum" id="accnum"><br>
-				
-				</td>
-				<td>
-
-						&nbsp;<a id="idCheckBtn" class="btn btn-primary" >계좌인증</a>
-
-					
-				</td>
-				<td><img id="accountCheckImg" class="checkTest" src=""></td>
-			</tr>
-			
-			<tr>
-				<th scope="row" >주민등록번호</th>
-				<td>
-					<input type="text" size="25" name="birth" id="birth" maxlength="6">
-				</td>
-				<td>
-					<input type="text" size="25" name="birth" id="birth" maxlength="1">
-				</td>
-				<td>******</td>
-			</tr>
-			
-			<tr>
-				<th scope="row">증빙서류 제출</th>
-				<td>
-					서류유형  <select name="bankcode" id="bankcode">
-							<option value="004">기초생활수급자</option>
-							<option value="003">소년소녀가장</option>
-							<option value="088">한부모가정</option>
-						</select>
-			</tr>
-			<tr>
-				<td></td>
-				<td colspan="2">
-					<input type="file" size="25"  name="accnum" id="accnum"><br>
-				
-				</td>
-
-			</tr>
-			
-			
-			</tbody>
-			</table>
-			
 		
 			<!-- <div id="fileArea">
 				<input type="file" id="IdCardImg" name="IdCardImg" onchange="loadImg(this, 1)">
 				<input type="file" id="faceImg" name="faceImg" onchange="loadImg(this, 2)">
 			</div> -->
 
-		<div class="form-group">
+		<!-- <div class="form-group">
           <button type="submit">Register</button>
-        </div>
+        </div> -->
 		</div>
 		</form>
     </div>

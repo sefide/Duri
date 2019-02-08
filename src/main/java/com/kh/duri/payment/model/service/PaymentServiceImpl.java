@@ -46,6 +46,14 @@ public class PaymentServiceImpl implements PaymentService {
 		
 		return rfList;
 	}
+	
+	// 행복두리 - 포인트 환급 요청하기
+	@Override
+	public int insertRefund(Refund r) throws RefundException {
+		int result = pd.insertRefund(sqlSession, r);
+		
+		return result;
+	}
 
 	
 	

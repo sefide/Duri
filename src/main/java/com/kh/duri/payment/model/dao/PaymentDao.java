@@ -23,4 +23,7 @@ public interface PaymentDao {
 	// 행복두리 - 환급목록 가져오기
 	List<Refund> selectRefundList(SqlSessionTemplate sqlSession, Member m) throws RefundException;
 
+	// 행복두리 - 포인트 환급 요청하기
+	int insertRefund(SqlSessionTemplate sqlSession, Refund r) throws RefundException;
+
 }

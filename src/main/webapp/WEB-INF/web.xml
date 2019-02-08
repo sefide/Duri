@@ -39,6 +39,7 @@
 			<init-param>
 			<param-name>contextConfigLocation</param-name>
 			<param-value>/WEB-INF/config/action-servlet.xml</param-value>
+
 		</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
@@ -113,14 +114,14 @@
 			<init-param>
 			<param-name>contextConfigLocation</param-name>
 			<param-value>/WEB-INF/config/payment-servlet.xml</param-value>
+
 		</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>payment</servlet-name>
-		<url-pattern>*.pm</url-pattern>
+		<servlet-name>dispatcher</servlet-name>
+		<url-pattern>/</url-pattern>
 	</servlet-mapping>
-	
 	
 	<!-- <filter>
 		<filter-name>encodingFilter</filter-name>
