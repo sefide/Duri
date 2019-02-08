@@ -72,7 +72,9 @@
 		ORDER BY RDATE DESC
 	</select>
 	
-	
+	<insert id = "insertRefund">
+		INSERT INTO REFUND VALUES (SEQ_R_NO.NEXTVAL, #{rBank}, #{rAccount}, #{r_mNo}, #{rValue}, SYSDATE, DEFAULT)
+	</insert>
 	
 	
 </mapper>
