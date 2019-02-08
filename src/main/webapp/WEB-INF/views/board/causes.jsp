@@ -26,7 +26,7 @@
  		<jsp:include page="../common/navi.jsp"/>
 
 
-
+<!-- 
     
     <div class="hero-wrap" style="background-image: url('/duri/resources/common/images/bg_11.jpg');" data-stellar-background-ratio="0.5">
       <div class="overlay"></div>
@@ -39,7 +39,7 @@
         </div>
       </div>
     </div>
-
+ -->
 
 
     <section class="ftco-section">
@@ -149,7 +149,7 @@
       </div>
     </section>
 
-    <section class="ftco-section-3 img" style="background-image: url(/duri/resources/common/images/bg_3.jpg);">
+    <!-- <section class="ftco-section-3 img" style="background-image: url(/duri/resources/common/images/bg_3.jpg);">
     	<div class="overlay"></div>
     	<div class="container">
     		<div class="row d-md-flex">
@@ -176,7 +176,7 @@
     		</div>
     	</div>
     </section>
-		
+		 -->
 
   <!-- footer  -->
    <jsp:include page="../common/footer.jsp"></jsp:include>

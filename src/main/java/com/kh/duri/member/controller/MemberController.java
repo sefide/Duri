@@ -129,6 +129,11 @@ public class MemberController {
 		return "member/NanumLogin";
 	}
 	
+	@RequestMapping("join.me") 
+	public String cloudList3() {
+		return "member/memberJoin";
+	}
+	
 	
 	
 
