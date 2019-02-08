@@ -46,7 +46,7 @@
         					<h3><a href="teacher-single.jsp">wewe1596</a></h3>
         					<span class="position">Donated Just now</span>
         					<div class="text">
-		        				<p>현재 <span>2명</span> 참여중<br><a href="/duri/views/board/about_long.jsp">후원하러가기</a></p>
+		        				<p>현재 <span>2명</span> 참여중<br><a href="long_donate_datail.bo">후원하러가기</a></p>
 		        			</div>
         				</div>
         			</div>

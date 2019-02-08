@@ -3,7 +3,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
  <head>
-    <title>Welfare - Free Bootstrap 4 Template by Colorlib</title>
+    <title>둘이두리 - 정기후원상세</title>
     <meta charset="utf-8">
       <!-- 공통 css 부분 -->
       <jsp:include page="../common/css.jsp"/>
@@ -34,16 +34,18 @@
  		
  		
     
-    <div class="hero-wrap" style="background-image: url('/duri/resources/common/images/bg_7.jpg');" data-stellar-background-ratio="0.5">
+    <div id="hero" class="hero-wrap" style="background-image: url('/duri/resources/common/images/bg_33.jpg');"  data-stellar-background-ratio="0.5">
+    <div id="hero" class="hero-wrap" style="background-color: rgba(0,0,0,0.3)"  data-stellar-background-ratio="0.5">
       <div class="overlay"></div>
       <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center" data-scrollax-parent="true">
           <div class="col-md-7 ftco-animate text-center" data-scrollax=" properties: { translateY: '70%' }">
-             <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span class="mr-2"><a href="/duri/index.jsp">Home</a></span> <span>정기후원하기</span></p>
-            <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">정기후원하기</h1>
+             <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span class="mr-2"><a href="../index.jsp">Home</a></span> <span>정기후원</span></p>
+            <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">정기후원상세</h1>
           </div>
         </div>
       </div>
+    </div>
     </div>
 
     
@@ -51,7 +53,7 @@
     	<div class="container">
     		<div class="row d-flex">
     			<div class="col-md-6 d-flex ftco-animate">
-    				<div class="img img-about align-self-stretch" style="background-image: url(/duri/resources/common/images/bg_3.jpg); width: 100%;"></div>
+    				<div class="img img-about align-self-stretch" style="background-image: url(/duri/resources/common/images/bg_44.jpg); width: 100%;"></div>
     			</div>
     			<div class="col-md-6 pl-md-5 ftco-animate">
     				<h2 class="mb-4">WEWE1596 행복두리님의 자기소개</h2>
@@ -95,7 +97,7 @@
               <div class="text">
               	<h3 class="mb-4">후원하기</h3>
               	<p>행복두리에게 올 한해 따뜻하게 </br>지낼 수 있는 행복을 선물하세요.</p>
-              	<p><a href="#" class="btn btn-white px-3 py-2 mt-2">후원하러가기</a></p>
+              	<p><a href="directFund.pm" class="btn btn-white px-3 py-2 mt-2">후원하러가기</a></p>
               </div>
             </div>
           </div>

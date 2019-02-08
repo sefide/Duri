@@ -50,7 +50,7 @@
       			<div class="cause-entry">
     					<a href="#" class="img" style="background-image: url(/duri/resources/common/images/cause-1.jpg);"></a>
     					<div class="text p-3 p-md-4">
-    						<h3><a href="/duri/views/board/about_thing.jsp">깔창생리대 더이상 쓰기 싫어요..</a></h3>
+    						<h3><a href="cloud_thing_datail.bo">깔창생리대 더이상 쓰기 싫어요..</a></h3>
     						<p>wewe1596 행복두리의 사연</p>
     						<span class="donation-time mb-3 d-block">Last donation 1w ago</span>
                 <div class="progress custom-progress-success">

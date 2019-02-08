@@ -3,7 +3,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
  <head>
-    <title>Welfare - Free Bootstrap 4 Template by Colorlib</title>
+    <title>둘이두리 - 물품후원하기</title>
     <meta charset="utf-8">
       <!-- 공통 css 부분 -->
       <jsp:include page="../common/css.jsp"/>
@@ -34,13 +34,13 @@
  		
  		
     
-    <div class="hero-wrap" style="background-image: url('/duri/resources/common/images/bg_44.jpg');" data-stellar-background-ratio="0.5">
+    <div class="hero-wrap" style="background-image: url('/duri/resources/common/images/bg_33.jpg');" data-stellar-background-ratio="0.5">
       <div class="overlay"></div>
       <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center" data-scrollax-parent="true">
           <div class="col-md-7 ftco-animate text-center" data-scrollax=" properties: { translateY: '70%' }">
              <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span class="mr-2"><a href="/duri/index.jsp">Home</a></span> <span>About</span></p>
-            <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">물품후원하기</h1>
+            <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">물품후원상세</h1>
           </div>
         </div>
       </div>
@@ -86,9 +86,9 @@
             <div class="block-18 color-2 align-items-stretch">
                     <div class="text">
               	<h3 class="mb-4">목표 물품 갯수</h3>
-              	<p style="font-size:18px; font-weight:bold"><img src="/duri/resources/images/give.png" style="width:30px; height:30px;"> 1. 생리대 : 10개</p>
-              	<p style="font-size:18px; font-weight:bold"><img src="/duri/resources/images/give.png" style="width:30px; height:30px;"> 2. 생필품 : 50개</p>
-              	<p style="font-size:18px; font-weight:bold"><img src="/duri/resources/images/give.png" style="width:30px; height:30px;"> 3. 휴지 : 50개</p>
+              	<p style="font-size:18px; font-weight:bold"><img src="/duri/resources/board/images/give.png" style="width:30px; height:30px;"> 1. 생리대 : 10개</p>
+              	<p style="font-size:18px; font-weight:bold"><img src="/duri/resources/board/images/give.png" style="width:30px; height:30px;"> 2. 생필품 : 50개</p>
+              	<p style="font-size:18px; font-weight:bold"><img src="/duri/resources/board/images/give.png" style="width:30px; height:30px;"> 3. 휴지 : 50개</p>
               </div>
             </div>
           </div>
@@ -97,7 +97,7 @@
               <div class="text">
               	<h3 class="mb-4">후원하기</h3>
               	<p>행복두리에게 올 한해 따뜻하게 </br>지낼 수 있는 행복을 선물하세요.</p>
-              	<p><a href="#" class="btn btn-white px-3 py-2 mt-2">후원하러가기</a></p>
+              	<p><a href="fundItem.pm" class="btn btn-white px-3 py-2 mt-2">후원하러가기</a></p>
               </div>
             </div>
           </div>
