@@ -1,11 +1,15 @@
 package com.kh.duri.admin.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-@Controller
-public class AdminController {
+import com.kh.duri.admin.model.service.adminHappyService;
 
+@Controller
+public class AdminHappyController {
+
+	
 
 
 	@RequestMapping("QnA.ad")
@@ -15,27 +19,6 @@ public class AdminController {
 	@RequestMapping("QnADetail.ad")
 	public String admin18() {
 		return "admin/QnADetail";
-	}
-	@RequestMapping("adminCrowd.ad")
-	public String admin3() {
-		return "admin/adminCrowd";
-	}
-	@RequestMapping("adminMain.ad")
-	public String admin4() {
-		return "admin/adminMain";
-	}
-
-	@RequestMapping("adminCrowdDetail.ad")
-	public String admin6() {
-		return "admin/adminCrowdDetail";
-	}
-	@RequestMapping("adminNanum.ad")
-	public String admin7() {
-		return "admin/adminNanum";
-	}
-	@RequestMapping("adminNanumDetail.ad")
-	public String admin14() {
-		return "admin/adminNanumDetail";
 	}
 	@RequestMapping("adminHappy.ad")
 	public String admin10() {
@@ -57,10 +40,7 @@ public class AdminController {
 	public String admin15() {
 		return "admin/adminNewHappyDetail";
 	}
-	@RequestMapping("Euihee_ui-elements.ad")
-	public String admin8() {
-		return "admin/ui-elements";
-	}
+	
 	
 	
 }

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Admin">
+	<resultMap type="com.kh.duri.member.model.vo.Member" id="memberResultSet">
+	<!-- property=컬럼명, column=필드명    반드시 일치! -->
+		<id property="mno" column="MNO"></id>
+		<result property="mName" column="MNAME"/>
+		<result property="mNickName" column="MNICK"/>
+		<result property="mGender" column="MGENDER"/>
+		<result property="mPhone" column="MPHONE"/>
+		<result property="mid" column="MID"/>
+		<result property="mpwd" column="MPWD"/>
+		<result property="email" column="MEMAIL"/>
+		<result property="mEnrollDate" column="MENROLLDATE"/>
+		<result property="mPoint" column="MPOINT"/>
+		<result property="mtype" column="MTYPE"/>
+		<result property="mFundtype" column="MFUNDTYPE"/>
+		<result property="mpr" column="MPR"/>
+		<result property="mprNew" column="MPRNEW"/>
+		<result property="mBirthDay" column="MBIRTHDAY"/>
+		<result property="mAddress" column="MADDRESS"/>
+		<result property="mAcceptDate" column="MACCEPTDATE"/>
+		<result property="mGoalNum" column="MGOALNUM"/>
+		<result property="mStatus" column="MSTATUS"/>
+		<result property="mTakeStatus" column="MTAKESTATUS"/>
+	</resultMap>
+	
+	<select id="adminNanumList" resultMap="memberResultSet" parameterType="Member">
+		SELECT *
+		FROM MEMBER
+		WHERE MID=#{mid}
+		AND MPWD=#{mpwd}
+		AND MTYPE='H'
+	</select>
+	
+	
+
+	
+	
+	
+	
+</mapper>
+
+
+
+
+
+
+
