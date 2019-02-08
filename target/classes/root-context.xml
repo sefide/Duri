@@ -27,7 +27,7 @@
 		<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"/>
 		<property name="username" value="duri"/>
 		<property name="password" value="duri"/>
-		<property name="defaultAutoCommit" value="false"/>
+		<property name="defaultAutoCommit" value="false"/><!-- 자동커밋 방지 -->
 	</bean>
 	
 

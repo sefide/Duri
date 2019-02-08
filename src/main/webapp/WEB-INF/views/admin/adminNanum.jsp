@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -7,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<meta content="" name="description" />
     <meta content="webthemez" name="author" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <title>나눔두리 관리 페이지</title>
 	<jsp:include page="include/adminStyle.jsp" />
 </head>
@@ -44,133 +46,28 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                   
+                                    <c:forEach var="row" items="${list}" varStatus="status">
                                         <tr class="odd gradeX">
-                                            <td class="center">1</td>
-                                            <td class="center">han419120</td>
-                                            <td class="center">후원자1</td>
-                                            <td class="center">W</td>
-                                            <td class="center">han419120@naver.com</td>
-                                            <td class="center">열매두리</td>
+                                            <td class="center">${status.count}</td>
+                                            <td class="center">${row.mid}</td>
+                                            <td class="center">${row.mNickName}</td>
+                                            <td class="center">${row.mGender}</td>
+                                            <td class="center">${row.email}</td>
+                                            <c:choose>
+                                            	<c:when test="${row.mGoalNum <5}">
+                                            		<td class="center">씨앗두리</td>
+                                            	</c:when>
+                                            	<c:when test="${row.mGoalNum <9}">
+                                            		<td class="center">새싹두리</td>
+                                            	</c:when>
+                                            	<c:otherwise>
+                                            		<td class="center">열매두리</td>
+                                            	</c:otherwise>
+                                            </c:choose>
                                             <td class="center"><a href="adminNanumDetail.ad" class="btn btn-default btn-sm">상세보기</a></td>
                                         </tr>
-                                        <tr class="odd gradeX">
-                                            <td class="center">1</td>
-                                            <td class="center">han419120</td>
-                                            <td class="center">후원자1</td>
-                                            <td class="center">W</td>
-                                            <td class="center">han419120@naver.com</td>
-                                            <td class="center">열매두리</td>
-                                            <td class="center"><a href="adminNanumDetail.ad" class="btn btn-default btn-sm">상세보기</a></td>
-                                        </tr>
-                                        <tr class="odd gradeX">
-                                            <td class="center">1</td>
-                                            <td class="center">han419120</td>
-                                            <td class="center">후원자1</td>
-                                            <td class="center">W</td>
-                                            <td class="center">han419120@naver.com</td>
-                                            <td class="center">열매두리</td>
-                                            <td class="center"><a href="adminNanumDetail.ad" class="btn btn-default btn-sm">상세보기</a></td>
-                                        </tr>
-                                        <tr class="odd gradeX">
-                                            <td class="center">1</td>
-                                            <td class="center">han419120</td>
-                                            <td class="center">후원자1</td>
-                                            <td class="center">W</td>
-                                            <td class="center">han419120@naver.com</td>
-                                            <td class="center">열매두리</td>
-                                            <td class="center"><a href="adminNanumDetail.ad" class="btn btn-default btn-sm">상세보기</a></td>
-                                        </tr>
-                                        <tr class="odd gradeX">
-                                            <td class="center">1</td>
-                                            <td class="center">han419120</td>
-                                            <td class="center">후원자1</td>
-                                            <td class="center">W</td>
-                                            <td class="center">han419120@naver.com</td>
-                                            <td class="center">열매두리</td>
-                                            <td class="center"><a href="adminNanumDetail.ad" class="btn btn-default btn-sm">상세보기</a></td>
-                                        </tr>
-                                        <tr class="odd gradeX">
-                                            <td class="center">1</td>
-                                            <td class="center">han419120</td>
-                                            <td class="center">후원자1</td>
-                                            <td class="center">W</td>
-                                            <td class="center">han419120@naver.com</td>
-                                            <td class="center">열매두리</td>
-                                            <td class="center"><a href="adminNanumDetail.ad" class="btn btn-default btn-sm">상세보기</a></td>
-                                        </tr>
-                                        <tr class="odd gradeX">
-                                            <td class="center">1</td>
-                                            <td class="center">han419120</td>
-                                            <td class="center">후원자1</td>
-                                            <td class="center">W</td>
-                                            <td class="center">han419120@naver.com</td>
-                                            <td class="center">열매두리</td>
-                                            <td class="center"><a href="adminNanumDetail.ad" class="btn btn-default btn-sm">상세보기</a></td>
-                                        </tr>
-                                        <tr class="odd gradeX">
-                                            <td class="center">1</td>
-                                            <td class="center">han419120</td>
-                                            <td class="center">후원자1</td>
-                                            <td class="center">W</td>
-                                            <td class="center">han419120@naver.com</td>
-                                            <td class="center">열매두리</td>
-                                            <td class="center"><a href="adminNanumDetail.ad" class="btn btn-default btn-sm">상세보기</a></td>
-                                        </tr>
-                                        <tr class="odd gradeX">
-                                            <td class="center">1</td>
-                                            <td class="center">han419120</td>
-                                            <td class="center">후원자1</td>
-                                            <td class="center">W</td>
-                                            <td class="center">han419120@naver.com</td>
-                                            <td class="center">열매두리</td>
-                                            <td class="center"><a href="adminNanumDetail.ad" class="btn btn-default btn-sm">상세보기</a></td>
-                                        </tr>
-                                        <tr class="odd gradeX">
-                                            <td class="center">1</td>
-                                            <td class="center">han419120</td>
-                                            <td class="center">후원자1</td>
-                                            <td class="center">W</td>
-                                            <td class="center">han419120@naver.com</td>
-                                            <td class="center">열매두리</td>
-                                            <td class="center"><a href="adminNanumDetail.ad" class="btn btn-default btn-sm">상세보기</a></td>
-                                        </tr>
-                                        <tr class="odd gradeX">
-                                            <td class="center">1</td>
-                                            <td class="center">han419120</td>
-                                            <td class="center">후원자1</td>
-                                            <td class="center">W</td>
-                                            <td class="center">han419120@naver.com</td>
-                                            <td class="center">열매두리</td>
-                                            <td class="center"><a href="adminNanumDetail.ad" class="btn btn-default btn-sm">상세보기</a></td>
-                                        </tr>
-                                        <tr class="odd gradeX">
-                                            <td class="center">1</td>
-                                            <td class="center">han419120</td>
-                                            <td class="center">후원자1</td>
-                                            <td class="center">W</td>
-                                            <td class="center">han419120@naver.com</td>
-                                            <td class="center">열매두리</td>
-                                            <td class="center"><a href="adminNanumDetail.ad" class="btn btn-default btn-sm">상세보기</a></td>
-                                        </tr>
-                                        <tr class="odd gradeX">
-                                            <td class="center">1</td>
-                                            <td class="center">han419120</td>
-                                            <td class="center">후원자1</td>
-                                            <td class="center">W</td>
-                                            <td class="center">han419120@naver.com</td>
-                                            <td class="center">열매두리</td>
-                                            <td class="center"><a href="adminNanumDetail.ad" class="btn btn-default btn-sm">상세보기</a></td>
-                                        </tr>
-                                        <tr class="odd gradeX">
-                                            <td class="center">1</td>
-                                            <td class="center">han419120</td>
-                                            <td class="center">후원자1</td>
-                                            <td class="center">W</td>
-                                            <td class="center">han419120@naver.com</td>
-                                            <td class="center">열매두리</td>
-                                            <td class="center"><a href="adminNanumDetail.ad" class="btn btn-default btn-sm">상세보기</a></td>
-                                        </tr>
-                                        
+                                      </c:forEach> 
                                     </tbody>
                                 </table>
                             </div>

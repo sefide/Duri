@@ -1,6 +1,6 @@
 package com.kh.duri.admin.controller;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,7 +22,7 @@ public class AdminNanumController {
 	@RequestMapping("adminNanum.ad")
 	public String adminNanumList(Model model) {
 	
-		ArrayList<Member>list = ans.adminNanumList();
+		List<Member>list = ans.adminNanumList();
 		model.addAttribute("list", list);
 		return "admin/adminNanum";
 	
