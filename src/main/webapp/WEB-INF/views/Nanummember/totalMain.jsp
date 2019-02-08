@@ -31,6 +31,10 @@ body {
     display: table-cell;
     vertical-align: middle;
 }
+
+#goLogin{
+	cursor:pointer;
+}
 </style>
 
 </head>
@@ -143,7 +147,7 @@ body {
 						<div class="media-body pl-4">
 							<h3 class="heading"
 								style="font-size: 40px; color: #FD771A; font-family: Nanum Pen Script;">행복두리가 되고 싶다면?</h3>
-							<div class="tm_btn" onclick="location.href='Eunji_happyLogin.me'">행복두리로 가자!</div>
+							<div class="tm_btn" id="goLogin" onclick="location.href='Eunji_happyLogin.me'">행복두리로 가자!</div>
 							
 						</div>
 					</div>
@@ -156,7 +160,7 @@ body {
 						<div class="media-body pl-4">
 							<h3 class="heading"
 								style="font-size: 40px; color: #FD771A; font-family: Nanum Pen Script;">나눔두리가 되고 싶다면?</h3>
-								<div class="tm_btn" onclick="location.href='main.nanum'">나눔두리로 가자!</div>
+								<div class="tm_btn" id="goLogin" onclick="location.href='main.nanum'">나눔두리로 가자!</div>
 						</div>
 					</div>
 				</div>

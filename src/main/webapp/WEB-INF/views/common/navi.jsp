@@ -17,8 +17,8 @@
       <div class="collapse navbar-collapse" id="ftco-nav" > 
         <ul class="navbar-nav ml-auto">
           <li class="nav-item"><a href="Eunji_nanumLogin.me" class="nav-link" style="color: rgb(50, 147, 63);" >로그인</a></li>
-          <li class="nav-item"><a href="" class="nav-link" style="color: rgb(50, 147, 63);" >크라우드펀딩</a></li>
-          <li class="nav-item"><a href="" class="nav-link" style="color: rgb(50, 147, 63);" >정기후원</a></li>
+          <li class="nav-item"><a href="Eunji_cloudList.bo" class="nav-link" style="color: rgb(50, 147, 63);" >크라우드펀딩</a></li>
+          <li class="nav-item"><a href="long_donate.bo" class="nav-link" style="color: rgb(50, 147, 63);" >정기후원</a></li>
           <li class="nav-item"><a href="QnAList.nanum" class="nav-link" style="color: rgb(50, 147, 63);" >QnA</a></li>
           <li class="nav-item"><a href="mypage.nanum" class="nav-link" style="color: rgb(50, 147, 63);" >마이페이지</a></li>
         </ul>

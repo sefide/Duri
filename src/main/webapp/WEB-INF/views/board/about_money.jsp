@@ -34,13 +34,13 @@
  		
  		
     
-    <div class="hero-wrap" style="background-image: url('/duri/resources/common/images/bg_44.jpg');" data-stellar-background-ratio="0.5">
+    <div class="hero-wrap" style="background-image: url('/duri/resources/common/images/bg_11.jpg');" data-stellar-background-ratio="0.5">
       <div class="overlay"></div>
       <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center" data-scrollax-parent="true">
           <div class="col-md-7 ftco-animate text-center" data-scrollax=" properties: { translateY: '70%' }">
              <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span class="mr-2"><a href="/duri/index.jsp">Home</a></span> <span>About</span></p>
-            <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">금액후원하기</h1>
+            <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">금액후원상세</h1>
           </div>
         </div>
       </div>
@@ -96,7 +96,7 @@
               <div class="text">
               	<h3 class="mb-4">후원하기</h3>
               	<p style="font-weight:bold;">행복두리에게 올 한해 따뜻하게 </br>지낼 수 있는 행복을 선물하세요.</p>
-              	<p><a href="#" class="btn btn-white px-3 py-2 mt-2" style="font-weight:bold;">후원하러가기</a></p>
+              	<p><a href="fundMoney.pm" class="btn btn-white px-3 py-2 mt-2" style="font-weight:bold;">후원하러가기</a></p>
               </div>
             </div>
           </div>

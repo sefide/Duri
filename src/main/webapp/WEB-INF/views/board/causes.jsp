@@ -44,13 +44,13 @@
 
     <section class="ftco-section">
       <div class="container">
-        <h3><a href="Eunji_cloudMoneyList.bo" id="money">금액후원</a><b> | </b><a href="Eunji_cloudStuffList.bo" id="thing">물품후원</a></h3>
+        <h3><a href="Eunji_cloudList.bo" id="money">금액후원</a><b> | </b><a href="Eunji_cloudList2.bo" id="thing">물품후원</a></h3>
       	<div class="row">
       		<div class="col-md-4 ftco-animate">
       			<div class="cause-entry">
     					<a href="#" class="img" style="background-image: url(/duri/resources/common/images/cause-1.jpg);"></a>
     					<div class="text p-3 p-md-4">
-    						<h3><a href="/duri/views/board/about_money.jsp">저는 집이 무섭습니다.</a></h3>
+    						<h3><a href="cloud_money_datail.bo">저는 집이 무섭습니다.</a></h3>
     						<p>wewe1596 행복두리의 사연</p>
     						<span class="donation-time mb-3 d-block">Last donation 1w ago</span>
                 <div class="progress custom-progress-success">
