@@ -7,7 +7,8 @@
 	<typeAliases>
 		<typeAlias type="com.kh.duri.member.model.vo.Member" alias="Member"/>	
 		<typeAlias type="com.kh.duri.payment.model.vo.Point" alias="Point"/>	
-		<typeAlias type="com.kh.duri.payment.model.vo.DonateReceipt" alias="DonateReceipt"/>	
+		<typeAlias type="com.kh.duri.payment.model.vo.DonateReceipt" alias="DonateReceipt"/>
+		<typeAlias type="com.kh.duri.payment.model.vo.Refund" alias="Refund"/>	
 	</typeAliases>
 	<mappers>
 		<mapper resource="/mappers/member-mapper.xml"/>

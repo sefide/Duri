@@ -13,9 +13,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.kh.duri.member.model.vo.Member;
 import com.kh.duri.payment.model.exception.PointHistoryException;
 import com.kh.duri.payment.model.exception.ReceiptException;
+import com.kh.duri.payment.model.exception.RefundException;
 import com.kh.duri.payment.model.service.PaymentService;
 import com.kh.duri.payment.model.vo.DonateReceipt;
 import com.kh.duri.payment.model.vo.Point;
+import com.kh.duri.payment.model.vo.Refund;
 
 @Controller
 public class PaymentController {
@@ -29,12 +31,12 @@ public class PaymentController {
 		System.out.println("세션에 저장된 회원번호 : " + m.getMno());
 		
 		try {
-			List<Point> ph = ps.getPointHistory(m);
+			List<Point> phList = ps.selectPointHistory(m);
 			
 			/*for(Point i : ph) {
 				System.out.println("내역 : "+ i);
 			}*/
-			model.addAttribute("phList", ph);
+			model.addAttribute("phList", phList);
 			return "payment/point_history";
 		} catch (PointHistoryException e) {
 			model.addAttribute("msg", e.getMessage());
@@ -49,14 +51,14 @@ public class PaymentController {
 		Member m = (Member) request.getSession().getAttribute("loginUser2");
 		//System.out.println("세션에 저장된 회원번호 : " + m.getMno());
 		
-		List<DonateReceipt> dr;
+		List<DonateReceipt> drList;
 		try {
-			dr = ps.getDonateReceiptHistory(m);
+			drList = ps.selectDonateReceiptHistory(m);
 			
 			/*for(DonateReceipt i : dr) {
 				System.out.println("내역 : "+ i);
 			}*/
-			model.addAttribute("drList", dr);
+			model.addAttribute("drList", drList);
 			return "payment/donation_receipt";
 			
 		} catch (ReceiptException e) {
@@ -66,6 +68,53 @@ public class PaymentController {
 	   
 	}
 	
+	
+	// 행복두리 포인트 환급목록 페이지
+	@RequestMapping("pointReturnListHappy.pm")
+	public String pointReturnHappyList(HttpServletRequest request, HttpServletResponse response, Model model) {
+		Member m = (Member) request.getSession().getAttribute("loginUser");
+		
+		try {
+			List<Refund> rfList	= ps.selectRefundList(m);
+			
+			for(Refund i : rfList) {
+				System.out.println("내역 : "+ i);
+			}
+
+			model.addAttribute("rfList", rfList);
+			return "payment/point_returnList_happy";
+		} catch (RefundException e) {
+			model.addAttribute("msg", e.getMessage());
+			return "payment/point_returnList_happy";
+		}
+		
+	}
+	
+	
+	// 행복두리 포인트 환급페이지
+	@RequestMapping("pointReturnHappy.pm")
+	public String pointReturnHappy(HttpServletRequest request, HttpServletResponse response, Model model) {
+		Member m = (Member) request.getSession().getAttribute("loginUser");
+		
+		
+	    return "payment/point_return_happy";
+	}
+	
+	// 나눔두리 포인트 환급목록 페이지
+	@RequestMapping("pointReturnList.pm")
+	public String pointReturnList(HttpServletRequest request, HttpServletResponse response, Model model) {
+		Member m = (Member) request.getSession().getAttribute("loginUser2");
+		
+		
+	    return "payment/point_returnList";
+	}
+	
+	// 나눔두리 포인트 환급페이지
+	@RequestMapping("pointReturn.pm")
+	public String pointReturn() {
+	    return "payment/point_return";
+	}
+			
 	// 정기후원 결제페이지
 	@RequestMapping("directFund.pm")
 	public String directFund() {
@@ -90,27 +139,5 @@ public class PaymentController {
 	    return "payment/point_charge"; 
 	}
 
-	// 포인트 환급목록 페이지
-	@RequestMapping("pointReturnList.pm")
-	public String pointReturnList() {
-	    return "payment/point_returnList";
-	}
-	
-	// 행복두리 포인트 환급목록 페이지
-	@RequestMapping("pointReturnListHappy.pm")
-	public String pointReturnHappyList() {
-	    return "payment/point_returnList_happy";
-	}
-	
-	// 포인트 환급페이지
-	@RequestMapping("pointReturn.pm")
-	public String pointReturn() {
-	    return "payment/point_return";
-	}
-	
-	// 행복두리 포인트 환급페이지
-	@RequestMapping("pointReturnHappy.pm")
-	public String pointReturnHappy() {
-	    return "payment/point_return_happy";
-	}
+
 }

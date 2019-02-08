@@ -31,8 +31,18 @@
 		<result property="dr_mNo" column="MNAME"/>
 	</resultMap>
 	
+	<resultMap type="com.kh.duri.payment.model.vo.Refund" id="refundResultSet">
+		<id property="rNo" column="RNO"></id>
+		<result property="rBank" column="RBANK"/>
+		<result property="rAccount" column="RACCOUNT"/>
+		<result property="r_mNo" column="R_MNO"/>
+		<result property="rValue" column="RVALUE"/>
+		<result property="rDate" column="RDATE"/>
+		<result property="rStatus" column="RSTATUS"/>
+	</resultMap>
+	
 	<!-- 포인트 이력 select -->
-	<select id="getPointHistory" resultMap="pointResultSet" parameterType="Point">
+	<select id="selectPointHistory" resultMap="pointResultSet" parameterType="Point">
 		SELECT PNO, PTYPE, PVALUE, PDATE, PREASON, P_MNO, P_PYNO, P_DHDNO, P_RNO, P_FHNO, FTITLE, M1.MNAME AS MNAME1, M2.MNAME AS MNAME2, DHD.DHDCOUNT
 		FROM POINT P
 		LEFT JOIN FUNDHISTORY FH ON(P.P_FHNO = FH.FHNO)
@@ -41,7 +51,7 @@
 		LEFT JOIN DIRECTFUNDHISTORYDETAIL DHD ON (P.P_DHDNO = DHD.DHDNO)
 		LEFT JOIN DIRECTFUNDHISTORY DH ON (DH.DHNO = DHD.DHD_DHNO)
 		LEFT JOIN MEMBER M2 ON (M2.MNO = DH.DH_MNO_TAKE)
-		WHERE P_MNO=#{mno}
+		WHERE P_MNO= #{mno}
 		ORDER BY PDATE DESC
 	</select>
 	
@@ -50,9 +60,19 @@
 		SELECT *
 		FROM DONATERECEIPT
 		JOIN MEMBER  ON (MEMBER.MNO = DONATERECEIPT.DR_MNO)
-		WHERE DR_MNO=#{mno}
+		WHERE DR_MNO= #{mno}
 		ORDER BY DRAPPLYDATE DESC
 	</select>
+	
+	<!-- 행복두리 - 환급내역 select -->
+	<select id="selectRefundList" resultMap="refundResultSet" parameterType="Refund">
+		SELECT *
+		FROM REFUND
+		WHERE R_MNO = #{mno}
+		ORDER BY RDATE DESC
+	</select>
+	
+	
 	
 	
 </mapper>

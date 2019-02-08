@@ -30,10 +30,10 @@
 		font-weight: bold;	
 	}	
 	#nav_back{
-    		background: #FFBB50; 
-    		height:83px; 
-    		box-shadow:0 0 6px 0 #B8B8B8; 
-    	}
+   		background: #FFBB50; 
+   		height:83px; 
+   		box-shadow:0 0 6px 0 #B8B8B8; 
+   	}
 	#pTitle{
 		display: block;
 		font-size : 30px;
@@ -81,7 +81,7 @@
    		margin :8px;
    		text-align : left;
    		font-size : 18px;
-    		padding-left :3px;
+   		padding-left :3px;
    	}
    	.search-div{
    		width : 70px;
@@ -202,7 +202,8 @@
 		<div class="contBox inner">
 			<jsp:include page="include/tabMypage_point.jsp"/>
 			
-			
+			<c:if test = "${ !empty sessionScope.loginUser }">
+				
 			<section class="ftco-section">
     			<div class="container">
 		    		<div class="row d-flex">
@@ -310,6 +311,12 @@
     		
     		</div>
     	</section>
+    	
+    	</c:if>
+    	
+    	<c:if test = " ${ empty sessionScope.loginUser }">
+    		<h2>비회원 입장 불가 !!! </h2>
+    	</c:if>
 		</div>
 	</div>
  
