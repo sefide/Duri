@@ -183,7 +183,7 @@
       </div>
     </section>
 
-    <section class="ftco-section-3 img" style="background-image: url(/duri/resources/common/images/bg_3.jpg);">
+    <!-- <section class="ftco-section-3 img" style="background-image: url(/duri/resources/common/images/bg_3.jpg);">
     	<div class="overlay"></div>
     	<div class="container">
     		<div class="row d-md-flex">
@@ -209,7 +209,7 @@
     		</div>    			
     		</div>
     	</div>
-    </section>
+    </section> -->
 
   <!-- footer  -->
    <jsp:include page="../common/footer.jsp"></jsp:include>
