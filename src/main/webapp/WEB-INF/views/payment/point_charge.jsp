@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<jsp:include page="include/common.jsp" />
+<jsp:include page="../Nanummember/include/common.jsp" />
 <title>둘이두리</title>
 <jsp:include page="../common/css.jsp"/>
 <style>
@@ -18,10 +18,10 @@
     	padding: 1em 0;
     }
 	#nav_back{
-    		background: #FFBB50; 
-    		height:83px; 
-    		box-shadow:0 0 6px 0 #B8B8B8; 
-    	}
+   		background: #FFBB50; 
+   		height:83px; 
+   		box-shadow:0 0 6px 0 #B8B8B8; 
+   	}
 	#pTitle{
 		display: block;
 		font-size : 30px;
@@ -177,77 +177,75 @@
 <body>
 	 <!-- 네비바 -->
 	<jsp:include page="../common/navi.jsp"/>
-	
 	<jsp:include page="../Nanummember/include/header.jsp" />	
 	
- 	<div id="wrap">		
-		<div class="contBox inner">
-			<jsp:include page="include/tabMypage_point.jsp"/>	
-			
-			 <section class="ftco-section">
-		    	<div class="container">
-		    		<div class="row d-flex">
-		    			<div id="myTitle"> <i class="bookmark icon"></i>후원포인트 충전하기 </div>
-		    		</div>
-		    		<div id = "bar1"></div>
-		    		<div class ="row d-flex"> 
-		    			<div class = "d-flex-left">
-		 	  			<h4 class ="" id = "subTitle">> 충전포인트</h4>
-		    				<table>
-		    					<tr>
-		    						<th>현재 보유포인트</th>
-		    						<td>1200원</td>
-		    					</tr>
-		    					<tr>
-		    						<th>충전 금액</th>
-		    						<td><input class="form-control" type = "text" name = "chargeValue" id = "chargeValue">원</td>
+	<br><br><br><br>	
+	<div class="contBox inner">
+		<jsp:include page="include/tabMypage_point.jsp"/>	
 		
-		    					</tr>
-		    					<tr>
-		    						<th>회원등급
-			    						<a href="#">
-							          <span class="glyphicon glyphicon-question-sign"></span>
-							        </a>
-						        </th>
-		    						<td>열매 나눔두리 (후원수수료 3%)</td>
-		    					</tr>
-		    				</table>
-		    			</div>
-		    			
-		    			<div class = "d-flex-right">
-		    				<div class = "back-right">
-		    					<input type ="checkbox" id= "chkinfo1"><label for = "chkinfo1">수수료 약관동의</label> <br>
-			    				<a>둘이두리에서는 포인트 결제 시 후원포인트 외에 
-								후원 수수료와 카드 수수료를 부과합니다. 
-								후원 수수료와 100% 후원에 사용되며 
-								다른 이윤목적으로는 절대 사용하지 않음을 알립니다.
-								또한 후원 포인트는 환급이 불가능합니다.</a><br>
-							<input type ="checkbox" id= "chkinfo2"><label for = "chkinfo2">유료이용 약관동의 </label> 
-			    				<a id = "seeTerms"> > 전문보기 </a> 
-			    				
-			    				<div class= "flexBox valueBox">
-			    					<div class = "d-left">충전액 </div><div class = "d-right" id = "txtChargeValue">0원</div>
-			    					<div class = "d-left">후원 수수료 </div><div class = "d-right" id = "txtFees">3000원</div>
-			    					<div id = "bar3"></div>
-			    					<div id = "txtTotalValue">총 결제금액</div><div class = "txtColor_o d-right" id = "totalValue">103,000</div>원
-			    					
-			    				</div>
+		 <section class="ftco-section">
+	    	<div class="container">
+	    		<div class="row d-flex">
+	    			<div id="myTitle"> <i class="bookmark icon"></i>후원포인트 충전하기 </div>
+	    		</div>
+	    		<div id = "bar1"></div>
+	    		<div class ="row d-flex"> 
+	    			<div class = "d-flex-left">
+	 	  			<h4 class ="" id = "subTitle">> 충전포인트</h4>
+	    				<table>
+	    					<tr>
+	    						<th>현재 보유포인트</th>
+	    						<td>1200원</td>
+	    					</tr>
+	    					<tr>
+	    						<th>충전 금액</th>
+	    						<td><input class="form-control" type = "text" name = "chargeValue" id = "chargeValue">원</td>
+	
+	    					</tr>
+	    					<tr>
+	    						<th>회원등급
+		    						<a href="#">
+						          <span class="glyphicon glyphicon-question-sign"></span>
+						        </a>
+					        </th>
+	    						<td>열매 나눔두리 (후원수수료 3%)</td>
+	    					</tr>
+	    				</table>
+	    			</div>
+	    			
+	    			<div class = "d-flex-right">
+	    				<div class = "back-right">
+	    					<input type ="checkbox" id= "chkinfo1"><label for = "chkinfo1">수수료 약관동의</label> <br>
+		    				<a>둘이두리에서는 포인트 결제 시 후원포인트 외에 
+							후원 수수료와 카드 수수료를 부과합니다. 
+							후원 수수료와 100% 후원에 사용되며 
+							다른 이윤목적으로는 절대 사용하지 않음을 알립니다.
+							또한 후원 포인트는 환급이 불가능합니다.</a><br>
+						<input type ="checkbox" id= "chkinfo2"><label for = "chkinfo2">유료이용 약관동의 </label> 
+		    				<a id = "seeTerms"> > 전문보기 </a> 
+		    				
+		    				<div class= "flexBox valueBox">
+		    					<div class = "d-left">충전액 </div><div class = "d-right" id = "txtChargeValue">0원</div>
+		    					<div class = "d-left">후원 수수료 </div><div class = "d-right" id = "txtFees">3000원</div>
+		    					<div id = "bar3"></div>
+		    					<div id = "txtTotalValue">총 결제금액</div><div class = "txtColor_o d-right" id = "totalValue">103,000</div>원
+		    					
 		    				</div>
-		    				<div id = "back-btn">
-		    					<a id = "btnPay">결제하기 </a>
-		    				</div>
-		    			</div>
-		    		</div>
-		    		<div id = "bar2"></div>
-		    		<div id = "middle">
-			    		<div id = "lastMent">" 나눔두리의 소중한 마음으로 놀라운 변화가 일어납니다. "</div>
-			    		<div>투명한 기부 후기로 그 변화를 소개하고 보답하겠습니다!</div>
-		    		</div>
-		    	</div>
-		   	</section>
-			
-			
-		</div>
+	    				</div>
+	    				<div id = "back-btn">
+	    					<a id = "btnPay">결제하기 </a>
+	    				</div>
+	    			</div>
+	    		</div>
+	    		<div id = "bar2"></div>
+	    		<div id = "middle">
+		    		<div id = "lastMent">" 나눔두리의 소중한 마음으로 놀라운 변화가 일어납니다. "</div>
+		    		<div>투명한 기부 후기로 그 변화를 소개하고 보답하겠습니다!</div>
+	    		</div>
+	    	</div>
+	   	</section>
+		
+		
 	</div>
     
    

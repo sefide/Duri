@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<% 
-	String bigtabon="0";
-%>
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!-- semantic ui -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
@@ -12,24 +11,23 @@
 <title> 나눔두리 마이페이지</title>
 <jsp:include page="../common/css.jsp" />
 <style>
-.mb50 {
-     margin-bottom: 0px !important; 
-}
-#myTitle{
-	margin-bottom: 20px;
-	font-size:25px;
-	color: rgba(250, 143, 61);
-	font-weight: bold;
+	.mb50 {
+	     margin-bottom: 0px !important; 
+	}
+	#myTitle{
+		margin-bottom: 20px;
+		font-size:25px;
+		color: rgba(250, 143, 61);
+		font-weight: bold;
+		
+	}	
+	.tableArea{
+		width : 95%;
+		margin : 0 auto;
+		padding-top: 50px;
+		padding-bottom: 20px;
 	
-}	
-.tableArea{
-	width : 95%;
-	margin : 0 auto;
-	padding-top: 50px;
-	padding-bottom: 20px;
-/* 	margin-left: 20px;
-	margin-right: 20px;   */
-}
+	}
 	table {
 		width : 96%;
 		margin : 0 auto;
@@ -82,69 +80,125 @@
 </style>
 </head>
 <body>
-<jsp:include page="../common/navi.jsp" />
-<jsp:include page="../Nanummember/include/header.jsp" />
-<!-- #wrap {position:relative; width:100%;} -->
-	<div id="wrap">		
-			<div class="contBox inner">
-				<jsp:include page="include/tabMypage_point.jsp"/>
+	<jsp:include page="../common/navi.jsp" />
+	<jsp:include page="../Nanummember/include/header.jsp" />
+	
+	<br><br><br><br>	
+	<div class="contBox inner">
+		<jsp:include page="include/tabMypage_point.jsp"/>
 
-			<div class="tableArea">
-				<div id="myTitle"> <i class="reply icon"></i>후원포인트 환불신청 </div>
-    			<!-- ftco-animate -->
-    			<p>둘이두리에서는 결제 기부하신 기부자님들께 연말정산 소득공제를 위한 기부금영수증 발급을 지원합니다. <br>
-				소득세법 제 160조의 3에 따라 기부금 영수증을 발행하고 있으며, 개인정보(고유식별정보) 수집 및 이용에
-				동의를 해주셔야 기부금 영수증 발급이 가능합니다. </p>
-				<div id = "back-btn">
-					<a href = "pointReturn.pm" id = "btnReturnPage">환불 신청하러가기</a>
-    			</div>
-    			
-    			<br><br><br><br>
+		<div class="tableArea">
+			<div id="myTitle"> <i class="reply icon"></i>후원포인트 환불신청 </div>
+   			<!-- ftco-animate -->
+   			<p>둘이두리에서는 결제 기부하신 기부자님들께 연말정산 소득공제를 위한 기부금영수증 발급을 지원합니다. <br>
+			소득세법 제 160조의 3에 따라 기부금 영수증을 발행하고 있으며, 개인정보(고유식별정보) 수집 및 이용에
+			동의를 해주셔야 기부금 영수증 발급이 가능합니다. </p>
+			<div id = "back-btn">
+				<a href = "pointReturn.pm" id = "btnReturnPage">환불 신청하러가기</a>
+   			</div>
+   			
+   			<br><br><br><br>
+			
+			<div id="myTitle"><i class="reply all icon"></i>포인트 환불 처리 내역</div>
+			<table>
+				<thead>
+					<tr>
+						<th>요청일시</th>
+						<th>요청금액</th>
+						<th>예금주명 </th>
+						<th>은행</th>
+						<th>계좌번호</th>
+						<th>처리상태</th>
+					</tr>
+				</thead>
+				<tbody>
+					<!-- <tr>
+						<td>요청일시</td>
+						<td>요청금액</td>
+						<td>예금주명 </td>
+						<td>은행</td>
+						<td>계좌번호</td>
+						<td>처리상태</td>				
+					</tr>
+					 -->
+					<c:if test = "${ !empty rfList }">
+		
+	    			<c:forEach var="rf" items="${ rfList }">
+			    		<tr>	
+						<td>${ rf.rDate }</td>
+						<td>${ rf.rValue }</td>
+						<td> - </td>
+						<td>${ rf.rBank }</td>
+						<td>${ rf.rAccount }</td>
+						<td>
+							<c:if test = "${ rf.rStatus == 'N' }">
+								환불 처리중
+							</c:if>
+							<c:if test = "${ rf.rStatus == 'Y' }">
+								환불 완료
+							</c:if>
+						</td> 
+						</tr>
+					</c:forEach>
 				
-				<div id="myTitle"><i class="reply all icon"></i></i>포인트 환불 처리 내역</div>
-				<table>
-					<thead>
+					</c:if>
+					<c:if test = "${ empty rfList }">
 						<tr>
-							<th>요청일시</th>
-							<th>요청금액</th>
-							<th>은행</th>
-							<th>예금주명 </th>
-							<th>계좌번호</th>
-							<th>처리상태</th>
-						</tr>
-					</thead>
-					<tbody>
+							<td colspan = "6"> 환급 내역이 없습니다.  </td>
 						<tr>
-							<td>요청일시</td>
-							<td>요청금액</td>
-							<td>은행</td>
-							<td>예금주명 </td>
-							<td>계좌번호</td>
-							<td>처리상태</td>				
-						</tr>
-					</tbody>
-				</table>
-				<div class="col text-center">
-					<div class="block-27">
-						<ul>
-							<li><a href="#">&lt;</a></li>
-							<li class="active"><span>1</span></li>
-							<li><a href="#">2</a></li>
-							<li><a href="#">3</a></li>
-							<li><a href="#">4</a></li>
-							<li><a href="#">5</a></li>
+					</c:if>
+				</tbody>
+			</table>
+			
+			<div class="col text-center">
+				<div class="block-27">
+					<ul>
+						<c:if test="${ pi.currentPage <= 1 }">
+						<li><a href="#">&lt;</a></li>
+						</c:if>
+						<c:if test="${ pi.currentPage > 1 }">
+							<c:url var="blistBack" value="pointReturnList.pm">
+								<c:param name="currentPage" value="${ pi.currentPage - 1}"/>
+							</c:url>
+							<li><a href="${ blistBack }">&lt;</a></li>
+						</c:if>
+						
+						<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+							<c:if test="${ p eq pi.currentPage }">
+								<li><a class="active" href="${ blistCheck }">${ p }</a></li>
+							</c:if>
+							<c:if test="${ p ne pi.currentPage }">
+								<c:url var="blistCheck" value="pointReturnList.pm">
+									<c:param name="currentPage" value="${p}"/>
+								</c:url>
+								<li><a href="${ blistCheck }">${ p }</a></li>
+							</c:if>
+						</c:forEach>
+						
+						<c:if test="${ pi.currentPage >= pi.maxPage }">
 							<li><a href="#">&gt;</a></li>
-						</ul>
-					</div>
+						</c:if>
+						<c:if test="${ pi.currentPage < pi.maxPage }">
+							<c:url var="blistEnd" value="pointReturnList.pm">
+								<c:param name="currentPage" value="${ pi.currentPage + 1}"/>
+							</c:url>
+							<li><a href="${ blistEnd }">&gt;</a></li>
+						</c:if>
+						
+					</ul>
 				</div>
 			</div>
+		</div>
 
-		
-		</div>								
-	</div>		
-			
-			
 	
+	</div>								
+			
+			
+	<script>
+		$("#back-btn").click(function(){
+			location.href = "pointReturn.pm";
+		});
+	</script>
 
 	<jsp:include page="../Nanummember/include/myNav.jsp" />
 	<br><br>
