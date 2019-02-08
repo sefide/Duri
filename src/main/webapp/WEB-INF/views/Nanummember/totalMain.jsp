@@ -35,7 +35,6 @@ body {
 
 </head>
 <body>
-	<br><br><br>
 	<!-- 메인 사진 부분 -->
 	<div class="hero-wrap"
 		style="background-image: url('/duri/resources/common/images/main_bg.jpg');"
