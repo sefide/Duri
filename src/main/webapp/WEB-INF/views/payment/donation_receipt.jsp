@@ -1,11 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import = "java.util.Date, java.text.SimpleDateFormat, java.text.ParseException" %>
+<% 
+	String isNew = "";
+	SimpleDateFormat format = new SimpleDateFormat("yyyy-MM");
+	Date beforeDate = null;
+	Date newDate = null;
+%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-
 <!-- semantic ui -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
 <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
@@ -67,17 +74,7 @@
    		display : inline-block;
   		padding-top: 5px;
    	}
-   	.date-div{
-   		width : 120px;
-   		height : 40px;
-   		background : white;
-   		border-radius : 5px;
-   		border : 1px solid lightgray;
-   		margin :8px;
-   		text-align : left;
-   		font-size : 18px;
-    		padding-left :3px;
-   	}
+   
    	.search-div{
    		width : 70px;
    		height : 35px;
@@ -89,7 +86,7 @@
    	
    	.month-view{
    		width : 100%;
-		margin: 3% 0 2% 3.5%;
+		margin: 3% 0 2% 2%;
 		display :flex;
 		flex-wrap : wrap;
 	}
@@ -177,9 +174,22 @@
 	tr, td, th {
 		text-align : center;
 	}
-	/* tr>th, tr>td {padding-left : 5px;} 
-	tr>th:first-child {padding-left : 15px;} 
-	tr>td:first-child {padding-left : 15px;}  */
+	
+	.month-pick{
+		width : 130px;
+   		height : 40px;
+   		background : white;
+   		border-radius : 5px;
+   		border : 1px solid lightgray;
+   		margin :8px;
+   		font-size : 13px;
+   		font-weight : bold;
+	}
+	.active{
+    	background: #fcc4a8;
+	    color: #f86f2d;
+	    border: 1px solid transparent;
+    }
 </style>
 </head>
 <body>
@@ -193,6 +203,10 @@
 	<jsp:include page="../common/navi.jsp"/>
 	
 	<jsp:include page="../Nanummember/include/header.jsp" />	
+	
+	<!-- 날짜 변수 선언 -->
+ 	<jsp:useBean id="now" class="java.util.Date" />
+ 	<fmt:formatDate value="${now}" pattern="yyyy-MM" var="now" />
 	
  	<br><br><br><br>	
 	<div class="contBox inner">
@@ -216,17 +230,9 @@
 		    			<div class = "back-top-bar">
 		    				<div class ="top-bar-text">
 		    					<div >조회기간 </div>
-		    					<div class = "date-div">2019.12 
-									<a href="#" id = "startMonth" class = "calen">
-										<i class="calendar alternate outline big icon"></i>
-			        				</a>
-		        				</div>
+	    						<input type = "month" class = "month-pick" id = "startMonth">
 		        				~
-		        				<div class = "date-div">2019.01 
-		    						<a href="#" id = "endMonth" class = "calen">
-		    							<i class="calendar alternate outline big icon"></i>
-		        					</a>
-		        				</div>
+	        					<input type = "month" class = "month-pick" id = "endMonth">
 		        				
 		        				<div class = "search-div"><a>검색</a></div>
 		    				</div>
@@ -236,62 +242,129 @@
 	    		
 	    		
 	    		<div class ="contents_search"> 
-	    			<div id = "month01">
-	    				<div class = "month-view">
-	    					<div class = "month-bar-left"></div>
-	    					<div class = "month">2019.01</div>
-	    					<div class = "month-bar-right"></div>
-	    				</div>
-	    				<div class = "cont-view">
+	    		
+	    		<c:if test = "${ !empty drList }">
+	    		<%-- <fmt:parseDate var="beforeDate" value="${now}" pattern="yyyy.MM"/> --%>
+	    			<% 
+	    			beforeDate = format.parse((String)pageContext.getAttribute("now")); 
+	    			%>
+				
+	    			<c:forEach var="dr" items="${drList}">
+	    				<fmt:formatDate var="newDate" type = "date" value="${dr.drApplyDate}" pattern="yyyy-MM"/>
+	    				<c:set var ="Applydate" value = "${newDate}"/>
+	    				<% newDate = format.parse((String)pageContext.getAttribute("newDate")); 
+	    				
+	    				if(newDate.compareTo(beforeDate) < 0){%>
+	    				<c:if test = "${ dr.rnum != 1}">
+		    					</table>
+			    				</div>
+			    			</div>
+	    				</c:if>	
+	    						
+	    				<div id = "month01">
+							<div class = "month-view">
+		    					<div class = "month-bar-left"></div>
+		    					<div class = "month">${newDate}</div>
+		    					<div class = "month-bar-right"></div>
+		    				</div>
+		    				<div class = "cont-view">
 	    					<table>
 	    						<tr class = "thth">
+	    							<th>No</th>
 	    							<th>기부자명</th>
 	    							<th>기부금액</th>
 	    							<th>기부일시</th>
 	    							<th>발급 신청일</th>
 	    						</tr>
-	    					<c:if test = "${ !empty drList }">
-	    					
-		    					<c:forEach var="dr" items="${drList}">
-		    						<tr class = "">
-		    							<td>${dr.dr_mNo}</td>
-		    							<td>${dr.drValue}원</td>
-		    							<td>${dr.drDonateDate}</td>
-		    							<td>${dr.drApplyDate}</td>
-		    						</tr>
-		    					</c:forEach>
-	    					</c:if>
-	    					<c:if test = "${ empty drList }">
+	    				
+	    				<% } %>
 	    						<tr class = "">
-	    							<td colspan = "5" style = "text-align:center">&{ msg }</td>
-    							</tr>
-	    					</c:if>
+	    							<td>${dr.rnum}</td>
+	    							<td>${dr.dr_mNo}</td>
+	    							<td>${dr.drValue}원</td>
+	    							<td>${dr.drDonateDate}</td>
+	    							<td>${dr.drApplyDate}</td>
+	    						</tr>
+		    		
+	    				<% 
+						beforeDate = format.parse((String)pageContext.getAttribute("Applydate")); %>
+	    			</c:forEach>
 	    					</table>
 	    				</div>
 	    			</div>
-	    			
+	    		</c:if>
+				
+				<!-- 발급 내역 없을 경우 -->
+ 				<c:if test = "${ empty drList }">
+ 				<div id = "month01">
+    				<div class = "month-view">
+    					<div class = "month-bar-left"></div>
+    					<div class = "month"> ~ ${ now } </div>
+    					<div class = "month-bar-right"></div>
+    				</div>
+    				<div class = "cont-view">
+    					<table>
+    						<tr class = "thth">
+    							<th>기부자명</th>
+    							<th>기부금액</th>
+    							<th>기부일시</th>
+    							<th>발급 신청일</th>
+    						</tr>
+    					
+	    					<tr class = "">
+ 								<td colspan = "4" style = "text-align:center">발급 내역이 없습니다.</td>
+							</tr>
+	    				</table>
+	    			</div>
+	    		</div>
+ 				</c:if>	
+ 				
 	    		</div>
 	    		
 	    		<!-- 페이징 처리 -->
-	    		 <div class="row mt-5">
+	    		 <div class="row mt-4">
 		          <div class="col text-center">
-		            <div class="block-27">
-		              <ul>
-		                <li><a href="#">&lt;</a></li>
-		                <li class="active"><span>1</span></li>
-		                <li><a href="#">2</a></li>
-		                <li><a href="#">3</a></li>
-		                <li><a href="#">4</a></li>
-		                <li><a href="#">5</a></li>
-		                <li><a href="#">&gt;</a></li>
-		              </ul>
-		            </div>
-		          </div>
-		        </div>
+					<div class="block-27">
+						<ul>
+							<c:if test="${ pi.currentPage <= 1 }">
+							<li><a href="#">&lt;</a></li>
+							</c:if>
+							<c:if test="${ pi.currentPage > 1 }">
+								<c:url var="blistBack" value="pointReturnList.pm">
+									<c:param name="currentPage" value="${ pi.currentPage - 1}"/>
+								</c:url>
+								<li><a href="${ blistBack }">&lt;</a></li>
+							</c:if>
+							
+							<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+								<c:if test="${ p eq pi.currentPage }">
+									<li><a class="active" href="${ blistCheck }">${ p }</a></li>
+								</c:if>
+								<c:if test="${ p ne pi.currentPage }">
+									<c:url var="blistCheck" value="pointReturnList.pm">
+										<c:param name="currentPage" value="${p}"/>
+									</c:url>
+									<li><a href="${ blistCheck }">${ p }</a></li>
+								</c:if>
+							</c:forEach>
+							
+							<c:if test="${ pi.currentPage >= pi.maxPage }">
+								<li><a href="#">&gt;</a></li>
+							</c:if>
+							<c:if test="${ pi.currentPage < pi.maxPage }">
+								<c:url var="blistEnd" value="pointReturnList.pm">
+									<c:param name="currentPage" value="${ pi.currentPage + 1}"/>
+								</c:url>
+								<li><a href="${ blistEnd }">&gt;</a></li>
+							</c:if>
+							
+						</ul>
+						</div>
+					</div>
+				</div>
 		        
 	    		<div id = "bar1"></div>
 	    				
-	    	</div>
 	    	
 	    	<br><br>
 	    	
@@ -381,10 +454,53 @@
 
 	<!-- loader -->
 	<jsp:include page="../common/loader.jsp"></jsp:include>
-	
+
+
 	<script>
+		Date.prototype.format = function(f) {
+		    if (!this.valueOf()) return " ";
+		 
+		    var d = this;
+		     
+		    return f.replace(/(yyyy|yy|MM|dd|E|hh|mm|ss|a\/p)/gi, function($1) {
+		        switch ($1) {
+		            case "yyyy": return d.getFullYear();
+		            case "yy": return (d.getFullYear() % 1000).zf(2);
+		            case "MM": return (d.getMonth() + 1).zf(2);
+		            case "dd": return d.getDate().zf(2);
+		            default: return $1;
+		        }
+		    });
+		};
+		String.prototype.string = function(len){var s = '', i = 0; while (i++ < len) { s += this; } return s;};
+		String.prototype.zf = function(len){return "0".string(len - this.length) + this;};
+		Number.prototype.zf = function(len){return this.toString().zf(len);};
+
+
+		$(document).ready(function(){
+			/* 검색 날짜 기본값 지정 */
+			let today = new Date().format('yyyy-MM');
+			$("#startMonth").val(today);
+			$("#endMonth").val(today);
 	
-	
+		});
+		
+		$(".search-div").mouseover(function(){
+			$(".search-div").css('background', '#FE9D35');
+		}).mouseout(function(){
+			$(".search-div").css('background', 'white');
+		}).click(function(){
+			var startMonth = $("#startMonth").val();
+			var endMonth =  $("#endMonth").val();
+			var term;
+			if(startMonth > endMonth){
+				term = startMonth;
+				startMonth = endMonth;
+				endMonth = term;
+			}
+			console.log("startMonth :" + startMonth + " , endMonth : " + endMonth);
+			location.href = "searchDonateReceipt.pm?startMonth="+startMonth +"&endMonth=" + endMonth;
+		});
 	</script>
 	
 	

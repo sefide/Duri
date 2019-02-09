@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.kh.duri.member.model.vo.Member;
+import com.kh.duri.payment.model.exception.PaymentException;
 import com.kh.duri.payment.model.exception.PointHistoryException;
 import com.kh.duri.payment.model.exception.ReceiptException;
 import com.kh.duri.payment.model.exception.RefundException;
@@ -19,6 +20,7 @@ import com.kh.duri.payment.model.service.PaymentService;
 import com.kh.duri.payment.model.vo.DonateReceipt;
 import com.kh.duri.payment.model.vo.PageInfo;
 import com.kh.duri.payment.model.vo.Pagination;
+import com.kh.duri.payment.model.vo.Payment;
 import com.kh.duri.payment.model.vo.Point;
 import com.kh.duri.payment.model.vo.Refund;
 
@@ -27,19 +29,28 @@ public class PaymentController {
 	@Autowired
 	private PaymentService ps;
 
-	// 포인트 히스토리 페이지
+	// 나눔두리 포인트 히스토리 페이지
 	@RequestMapping("pointHistory.pm")
 	public String pointHistory(Model model, HttpServletRequest request, HttpServletResponse response) {
 		Member m = (Member) request.getSession().getAttribute("loginUser2");
-		System.out.println("세션에 저장된 회원번호 : " + m.getMno());
+		int currentPage = 1;
 		
+		if(request.getParameter("currentPage") != null) {
+			currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		}
+
 		try {
-			List<Point> phList = ps.selectPointHistory(m);
+			int listCount = ps.getPointListCount(m);
 			
-			/*for(Point i : ph) {
+			PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
+			
+			List<Point> phList = ps.selectPointHistory(m, pi);
+			
+			/*for(Point i : phList) {
 				System.out.println("내역 : "+ i);
 			}*/
 			model.addAttribute("phList", phList);
+			model.addAttribute("pi", pi);
 			return "payment/point_history";
 		} catch (PointHistoryException e) {
 			model.addAttribute("msg", e.getMessage());
@@ -47,21 +58,77 @@ public class PaymentController {
 		}
 		
 	}
+	// 나눔두리 포인트 히스토리 기간별 검색 조회
+	@RequestMapping("searchPointHistory.pm")
+	public String searchPointHistory(HttpServletRequest request, HttpServletResponse response, Model model) {
+		Member m = (Member) request.getSession().getAttribute("loginUser2");
+		String sm = request.getParameter("startMonth")+"-01";
+		String em = request.getParameter("endMonth");
+		System.out.println("어허 " + em.substring(5, 7));
+		if(em.substring(5, 7).equals("04") ||em.substring(5, 7).equals("06")||em.substring(5, 7).equals("09")||em.substring(5, 7).equals("11")) {
+			em = em + "-30";
+		}else if (em.substring(5, 7).equals("02")) {
+			em = em + "-28";
+		}else {
+			em = em + "-31";
+		}
 		
-	// 기부금 영수증 발급내역 페이지
+		//System.out.println("startMonth : " + sm + "/ endMonth : " + em);
+		m.setmPhone(sm); //startMonth
+		m.setmAddress(em); // endMonth
+		
+		int currentPage = 1;
+		
+		if(request.getParameter("currentPage") != null) {
+			currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		}
+		
+		List<Point> phList;
+		try {
+			int listCount = ps.getSearchPointListCount(m);
+			
+			PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
+			System.out.println("Controller : endPage :"+ pi.getEndPage());
+			phList = ps.searchPointHistory(m, pi);
+			
+			/*for(DonateReceipt i : dr) {
+				System.out.println("내역 : "+ i);
+			}*/
+			model.addAttribute("phList", phList);
+			model.addAttribute("pi", pi);
+			return "payment/point_history";
+			
+		} catch (PointHistoryException e) {
+			model.addAttribute("msg", e.getMessage());
+			return "payment/point_history";
+		}
+	   
+	}
+		
+	// 나눔두리 기부금 영수증 발급내역 페이지
 	@RequestMapping("donateReceipt.pm")
 	public String donateReceipt(HttpServletRequest request, HttpServletResponse response, Model model) {
 		Member m = (Member) request.getSession().getAttribute("loginUser2");
 		//System.out.println("세션에 저장된 회원번호 : " + m.getMno());
+		int currentPage = 1;
+		
+		if(request.getParameter("currentPage") != null) {
+			currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		}
 		
 		List<DonateReceipt> drList;
 		try {
-			drList = ps.selectDonateReceiptHistory(m);
+			int listCount = ps.getReceiptListCount(m);
+			
+			PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
+			
+			drList = ps.selectDonateReceiptHistory(m, pi);
 			
 			/*for(DonateReceipt i : dr) {
 				System.out.println("내역 : "+ i);
 			}*/
 			model.addAttribute("drList", drList);
+			model.addAttribute("pi", pi);
 			return "payment/donation_receipt";
 			
 		} catch (ReceiptException e) {
@@ -71,6 +138,52 @@ public class PaymentController {
 	   
 	}
 	
+	// 나눔두리 기부금 영수증 발급내역 기간별 검색 조회
+	@RequestMapping("searchDonateReceipt.pm")
+	public String searchDonateReceipt(HttpServletRequest request, HttpServletResponse response, Model model) {
+		Member m = (Member) request.getSession().getAttribute("loginUser2");
+		String sm = request.getParameter("startMonth")+"-01";
+		String em = request.getParameter("endMonth");
+		System.out.println("어허 " + em.substring(5, 7));
+		if(em.substring(5, 7).equals("04") ||em.substring(5, 7).equals("06")||em.substring(5, 7).equals("09")||em.substring(5, 7).equals("11")) {
+			em = em + "-30";
+		}else if (em.substring(5, 7).equals("02")) {
+			em = em + "-28";
+		}else {
+			em = em + "-31";
+		}
+		
+		//System.out.println("startMonth : " + sm + "/ endMonth : " + em);
+		m.setmPhone(sm); //startMonth
+		m.setmAddress(em); // endMonth
+		
+		int currentPage = 1;
+		
+		if(request.getParameter("currentPage") != null) {
+			currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		}
+		
+		List<DonateReceipt> drList;
+		try {
+			int listCount = ps.getReceiptListCount(m);
+			
+			PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
+			
+			drList = ps.searchDonateReceipt(m, pi);
+			
+			/*for(DonateReceipt i : dr) {
+				System.out.println("내역 : "+ i);
+			}*/
+			model.addAttribute("drList", drList);
+			model.addAttribute("pi", pi);
+			return "payment/donation_receipt";
+			
+		} catch (ReceiptException e) {
+			model.addAttribute("msg", e.getMessage());
+			return "payment/donation_receipt";
+		}
+	   
+	}
 	
 	// 행복두리 포인트 환급목록 페이지
 	@RequestMapping("pointReturnListHappy.pm")
@@ -109,7 +222,7 @@ public class PaymentController {
 	    return "payment/point_return_happy";
 	}
 	
-	// 행복두리 - 포인트 환급 요청하기
+	// 나눔,행복두리 - 포인트 환급 요청하기
 	@RequestMapping("execPointReturnHappy.pm")
 	public String execPointReturnHappy(HttpServletRequest request, HttpServletResponse response, Model model, HttpSession session) {
 		Member m = null;
@@ -198,7 +311,50 @@ public class PaymentController {
 	public String pointReturn() {
 	    return "payment/point_return";
 	}
+	
+	// 나눔두리 포인트 충전페이지
+	@RequestMapping("pointCharge.pm")
+	public String pointCharge() {
+	    return "payment/point_charge"; 
+	}
+
+	// 나눔두리 - 포인트 충전 결제하기
+	@RequestMapping("pointChargePayment.pm")
+	public String pointChargePayment(HttpServletRequest request, HttpServletResponse response, Model model, HttpSession session) {
+		String pyPrice = request.getParameter("price");
+		String pyCardNum = request.getParameter("apply");
+		String py_mNo = request.getParameter("mno");
+		/*System.out.println("pyPrice : " + pyPrice);
+		System.out.println("pyCardNum : " + pyCardNum);
+		System.out.println("py_mNo : " + py_mNo);*/
+		
+		if(pyCardNum.equals("")) {
+			pyCardNum = "kakaopay";
+		}
+		
+		Payment py = new Payment();
+		py.setPy_mNo(Integer.parseInt(py_mNo));
+		py.setPyPrice(pyPrice);
+		py.setPyCardNum(pyCardNum);
+		
+		Member m = (Member) request.getSession().getAttribute("loginUser2");
+		
+		Member loginUser;
+		try {
+			loginUser = ps.insertPayment(m, py);
 			
+			session.setAttribute("loginUser2", loginUser);
+			model.addAttribute("msg", "후원이 완료되었습니다.");
+		    return "payment/pay_success"; 
+		    
+		} catch (PaymentException e) {
+			model.addAttribute("msg", e.getMessage());
+			return "payment/pay_success"; 
+		}
+		
+		
+	}
+	
 	// 정기후원 결제페이지
 	@RequestMapping("directFund.pm")
 	public String directFund() {
@@ -215,12 +371,6 @@ public class PaymentController {
 	@RequestMapping("fundMoney.pm")
 	public String fundMoney() {
 	    return "payment/pay_fundMoney";
-	}
-
-	// 포인트 충전페이지
-	@RequestMapping("pointCharge.pm")
-	public String pointCharge() {
-	    return "payment/point_charge"; 
 	}
 
 

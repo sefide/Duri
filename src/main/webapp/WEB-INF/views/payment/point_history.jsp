@@ -1,6 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import = "java.util.Date, java.text.SimpleDateFormat, java.text.ParseException" %>
+<% 
+	String isNew = "";
+	SimpleDateFormat format = new SimpleDateFormat("yyyy-MM");
+	Date beforeDate = null;
+	Date newDate = null;
+%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -72,17 +81,16 @@
    		display : inline-block;
   		padding-top: 5px;
    	}
-   	.date-div{
-   		width : 120px;
+   	.month-pick{
+		width : 130px;
    		height : 40px;
    		background : white;
    		border-radius : 5px;
    		border : 1px solid lightgray;
    		margin :8px;
-   		text-align : left;
-   		font-size : 18px;
-   		padding-left :3px;
-   	}
+   		font-size : 13px;
+   		font-weight : bold;
+	}
    	.search-div{
    		width : 70px;
    		height : 35px;
@@ -189,6 +197,11 @@
     .calen {
     	color: rgba(250, 143, 61);
     }
+    .active{
+    	background: #fcc4a8;
+	    color: #f86f2d;
+	    border: 1px solid transparent;
+    }
 </style>
 </head>
 <body>
@@ -196,14 +209,15 @@
 	<jsp:include page="../common/navi.jsp"/>
  
 	<jsp:include page="../Nanummember/include/header.jsp" />
-    <!-- <div id ="nav_back" data-stellar-background-ratio="0.5">
-    </div>  -->
+
+	<!-- 날짜 변수 선언 -->
+ 	<jsp:useBean id="now" class="java.util.Date" />
+ 	<fmt:formatDate value="${now}" pattern="yyyy-MM" var="now" />
+
 	<br><br><br><br>	
 	<div class="contBox inner">
 		<jsp:include page="include/tabMypage_point.jsp"/>
 		
-		<c:if test = "${ !empty sessionScope.loginUser }">
-			
 		<section class="ftco-section">
    			<div class="container">
 	    		<div class="row d-flex">
@@ -215,17 +229,9 @@
 		    			<div class = "back-top-bar">
 		    				<div class ="top-bar-text">
 		    					<div >조회기간 </div>
-		    					<div class = "date-div">2019.12 
-									<a href="#" id = "startMonth" class = "calen">
-										<i class="calendar alternate outline big icon"></i>
-			        				</a>
-		        				</div>
+		    					<input type = "month" class = "month-pick" id = "startMonth">
 		        				~
-		        				<div class = "date-div">2019.01 
-		    						<a href="#" id = "endMonth" class = "calen">
-		    							<i class="calendar alternate outline big icon"></i>
-		        					</a>
-		        				</div>
+	        					<input type = "month" class = "month-pick" id = "endMonth">
 		        				
 		        				<div class = "search-div"><a>검색</a></div>
 		    				</div>
@@ -233,86 +239,136 @@
 	    			</div>
 	    		</div>
 	    		
-	    		<c:if test = "${ !empty phList }">
-					
+	    		
 	    		<div class ="contents_search"> 
-	    			<div id = "month01" class = "month">
-	    			<div class = "month-view">
-    					<div class = "month-bar-left"></div>
-    					<div class = "month-date">All</div>
-    					<div class = "month-bar-right"></div>
-    				</div>
-    				
+	    		
+	    		<c:if test = "${ !empty phList }">
+				<% 
+	    			beforeDate = format.parse((String)pageContext.getAttribute("now")); 
+    			%>
+				
 	    			<c:forEach var="ph" items="${phList}">
+	    				<fmt:formatDate var="newDate" type = "date" value="${ph.pDate}" pattern="yyyy-MM"/>
+	    				<c:set var ="Applydate" value = "${newDate}"/>
+	    				<c:if test = "${ ph.rnum == 1 }">
+	    				<div id = "month01" class = "month">
+			    			<div class = "month-view">
+		    					<div class = "month-bar-left"></div>
+		    					<div class = "month-date">${newDate}</div>
+		    					<div class = "month-bar-right"></div>
+		    				</div>
+	    				</c:if>	 
+	    				<% newDate = format.parse((String)pageContext.getAttribute("newDate")); 
+	    				if(newDate.compareTo(beforeDate) < 0){%>
+	    				<c:if test = "${ ph.rnum != 1 }">
+		    			</div>
+		    			<div id = "month01" class = "month">
+			    			<div class = "month-view">
+		    					<div class = "month-bar-left"></div>
+		    					<div class = "month-date">${newDate}</div>
+		    					<div class = "month-bar-right"></div>
+		    				</div>
+	    				</c:if>	
 	    				
-	    				
-	    				
-	    				<div class = "cont-view">
-	    					<div class = "histContents">
-	    						<div class = "histLeft">
-	    							<div class = "circle">${ ph.pReason }</div>
-	    						</div>
-	    						<div class = "histCenter">
-	    							<div class = "fMonth">${ ph.pDate }</div>	
-	    							
-	    							<c:if test = "${ ph.pReason == '정기후원'}">
-	    								<div class = "fTitle"> 정기후원 ${ ph.p_d_c }차</div>
-	    								<div class = "fName">${ ph.p_d_m } 행복두리</div>
-	    							</c:if>
-	    							<c:if test = "${ ph.pReason == '펀딩'}">
-	    								<div class = "fTitle"> ${ ph.p_f_title }</div>
-	    								<div class = "fName">${ ph.p_f_m } 행복두리</div>
-	    							</c:if>
-		 							<c:if test = "${ ph.pReason == '결제'}">
-	    								<div class = "fTitle"> 포인트 충전</div>
-	    								<div class = "fName"> - </div>
-	    							</c:if>
-	    							<c:if test = "${ ph.pReason == '환급'}">
-	    								<div class = "fTitle"> 포인트 환불</div>
-	    								<div class = "fName"> - </div>
-	    							</c:if>
-		 							
-	    						</div>
-	    						<div class = "histRight">
-	    							<c:if test = "${ ph.pType == 'U'}">
-	    								<div class = "fValue">-${ ph.pValue }</div>
-	    							</c:if>
-	    							<c:if test = "${ ph.pType == 'A'}">
-	    								<div class = "fValue">+${ ph.pValue }</div>
-	    							</c:if>
-	    							<div class = "txtValue">원</div>
-	    							
-	    						</div>
-	    					</div>
-	    				</div>
-	    				
-   					</c:forEach>
-	    			</div>
+    					
+	    				<%} %>
+		    				<div class = "cont-view">
+		    					<div class = "histContents">
+		    						<div class = "histLeft">
+		    							<div class = "circle">${ ph.pReason }</div>
+		    						</div>
+		    						<div class = "histCenter">
+		    							<div class = "fMonth">${ ph.pDate }</div>	
+		    							
+		    							<c:if test = "${ ph.pReason == '정기후원'}">
+		    								<div class = "fTitle"> 정기후원 ${ ph.p_d_c }차</div>
+		    								<div class = "fName">${ ph.p_d_m } 행복두리</div>
+		    							</c:if>
+		    							<c:if test = "${ ph.pReason == '펀딩'}">
+		    								<div class = "fTitle"> ${ ph.p_f_title }</div>
+		    								<div class = "fName">${ ph.p_f_m } 행복두리</div>
+		    							</c:if>
+			 							<c:if test = "${ ph.pReason == '결제'}">
+		    								<div class = "fTitle"> 포인트 충전</div>
+		    								<div class = "fName"> - </div>
+		    							</c:if>
+		    							<c:if test = "${ ph.pReason == '환급'}">
+		    								<div class = "fTitle"> 포인트 환불</div>
+		    								<div class = "fName"> - </div>
+		    							</c:if>
+			 							
+		    						</div>
+		    						<div class = "histRight">
+		    							<c:if test = "${ ph.pType == 'U'}">
+		    								<div class = "fValue">-${ ph.pValue }</div>
+		    							</c:if>
+		    							<c:if test = "${ ph.pType == 'A'}">
+		    								<div class = "fValue">+${ ph.pValue }</div>
+		    							</c:if>
+		    							<div class = "txtValue">원</div>
+		    							
+		    						</div>
+		    					</div>
+		    				</div>
+		    				<% 
+						beforeDate = format.parse((String)pageContext.getAttribute("Applydate")); %>
+	    			</c:forEach>
+   				</c:if>
+   				<!-- 포인트 이력이 없을 경우 -->
+ 				<%-- <c:if test = "${ empty drList }">
+ 					<h2>포인트 사용 내역이 없습니다.</h2>
+ 				</c:if> --%>
 	    		</div>
 	    		
-	    		</c:if>
+	    	
+				
 	    		
-    		<!-- 페이징 처리 -->
-    		 <div class="row mt-3">
-	          <div class="col text-center">
-	            <div class="block-27">
-	              <ul>
-	                <li><a href="#">&lt;</a></li>
-	                <li class="active"><span>1</span></li>
-	                <li><a href="#">2</a></li>
-	                <li><a href="#">3</a></li>
-	                <li><a href="#">&gt;</a></li>
-	              </ul>
-	            </div>
-	          </div>
-	        </div>
+    			<!-- 페이징 처리 -->
+	    		 <div class="row mt-3">
+		          <div class="col text-center">
+					<div class="block-27">
+						<ul>
+							<c:if test="${ pi.currentPage <= 1 }">
+							<li><a href="#">&lt;</a></li>
+							</c:if>
+							<c:if test="${ pi.currentPage > 1 }">
+								<c:url var="blistBack" value="pointHistory.pm">
+									<c:param name="currentPage" value="${ pi.currentPage - 1}"/>
+								</c:url>
+								<li><a href="${ blistBack }">&lt;</a></li>
+							</c:if>
+
+							<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+								<c:if test="${ p == pi.currentPage }">
+									<li><a class="active" href="${ blistCheck }">${ p }</a></li>
+								</c:if>
+								<c:if test="${ p != pi.currentPage }">
+									<c:url var="blistCheck" value="pointHistory.pm">
+										<c:param name="currentPage" value="${p}"/>
+									</c:url>
+									<li><a href="${ blistCheck }">${ p }</a></li>
+								</c:if>
+							</c:forEach>
+							
+							<c:if test="${ pi.currentPage >= pi.maxPage }">
+								<li><a href="#">&gt;</a></li>
+							</c:if>
+							<c:if test="${ pi.currentPage < pi.maxPage }">
+								<c:url var="blistEnd" value="pointHistory.pm">
+									<c:param name="currentPage" value="${ pi.currentPage + 1}"/>
+								</c:url>
+								<li><a href="${ blistEnd }">&gt;</a></li>
+							</c:if>
+							
+						</ul>
+						</div>
+					</div>
+				</div>
 	        
    			<div id = "bar2"></div>
    		
-   		</div>
    	</section>
    	
-   	</c:if>
    	
    	<c:if test = " ${ empty sessionScope.loginUser }">
    		<h2>비회원 입장 불가 !!! </h2>
@@ -327,7 +383,50 @@
 	<jsp:include page="../common/loader.jsp"></jsp:include>
 	
 	<script>
+		Date.prototype.format = function(f) {
+		    if (!this.valueOf()) return " ";
+		 
+		    var d = this;
+		     
+		    return f.replace(/(yyyy|yy|MM|dd|E|hh|mm|ss|a\/p)/gi, function($1) {
+		        switch ($1) {
+		            case "yyyy": return d.getFullYear();
+		            case "yy": return (d.getFullYear() % 1000).zf(2);
+		            case "MM": return (d.getMonth() + 1).zf(2);
+		            case "dd": return d.getDate().zf(2);
+		            default: return $1;
+		        }
+		    });
+		};
+		String.prototype.string = function(len){var s = '', i = 0; while (i++ < len) { s += this; } return s;};
+		String.prototype.zf = function(len){return "0".string(len - this.length) + this;};
+		Number.prototype.zf = function(len){return this.toString().zf(len);};
 	
+	
+		$(document).ready(function(){
+			/* 검색 날짜 기본값 지정 */
+			let today = new Date().format('yyyy-MM');
+			$("#startMonth").val(today);
+			$("#endMonth").val(today);
+	
+		});
+		
+		$(".search-div").mouseover(function(){
+			$(".search-div").css('background', '#FE9D35');
+		}).mouseout(function(){
+			$(".search-div").css('background', 'white');
+		}).click(function(){
+			var startMonth = $("#startMonth").val();
+			var endMonth =  $("#endMonth").val();
+			var term;
+			if(startMonth > endMonth){
+				term = startMonth;
+				startMonth = endMonth;
+				endMonth = term;
+			}
+			console.log("startMonth :" + startMonth + " , endMonth : " + endMonth);
+			location.href = "searchPointHistory.pm?startMonth="+startMonth +"&endMonth=" + endMonth;
+		});
 	
 	
 	</script>
