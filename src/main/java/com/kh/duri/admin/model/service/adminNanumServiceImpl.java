@@ -1,6 +1,6 @@
 package com.kh.duri.admin.model.service;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,9 +19,9 @@ public class adminNanumServiceImpl implements adminNanumService{
 	
 	
 	@Override
-	public ArrayList<Member> adminNanumList() {
+	public List<Member> adminNanumList() {
 		
-		ArrayList<Member> list = and.adminNanumList(sqlsession);
+		List<Member> list = and.adminNanumList(sqlsession);
 		
 		return list;
 	}

@@ -29,12 +29,8 @@
 		<result property="mTakeStatus" column="MTAKESTATUS"/>
 	</resultMap>
 	
-	<select id="adminNanumList" resultMap="memberResultSet" parameterType="Member">
-		SELECT *
-		FROM MEMBER
-		WHERE MID=#{mid}
-		AND MPWD=#{mpwd}
-		AND MTYPE='H'
+	<select id="adminNanumList" resultMap="memberResultSet" parameterType="Member" >
+		SELECT MID,MNICK,MGENDER,MEMAIL,MGOALNUM FROM MEMBER WHERE MTYPE='N' ORDER BY MACCEPTDATE
 	</select>
 	
 	
