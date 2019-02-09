@@ -37,6 +37,7 @@
                                     <thead>
                                         <tr>
                                             <th>No</th>
+                                            <th style="display: none;">회원번호</th>
                                             <th>ID</th>
                                             <th>닉네임</th>
                                             <th>성별</th>
@@ -47,9 +48,10 @@
                                     </thead>
                                     <tbody>
                                    
-                                    <c:forEach var="row" items="${list}" varStatus="status">
+                                    <c:forEach var="row" items="${Nanumlist}" varStatus="status">
                                         <tr class="odd gradeX">
                                             <td class="center">${status.count}</td>
+                                            <td class="center" style="display: none;">${row.mno}</td>
                                             <td class="center">${row.mid}</td>
                                             <td class="center">${row.mNickName}</td>
                                             <td class="center">${row.mGender}</td>
@@ -65,7 +67,9 @@
                                             		<td class="center">열매두리</td>
                                             	</c:otherwise>
                                             </c:choose>
-                                            <td class="center"><a href="adminNanumDetail.ad" class="btn btn-default btn-sm">상세보기</a></td>
+                                            <td class="center">
+                                            <a class="btn btn-default btn-sm Nanumdetail">상세보기</a>
+                                            </td>
                                         </tr>
                                       </c:forEach> 
                                     </tbody>
@@ -95,133 +99,25 @@
                                             <th>ID</th>
                                             <th>이름</th>
                                             <th>생년월일</th>
-                                            <th>Email</th>
                                             <th>휴대전화</th>
+                                            <th>신청일자</th>
                                             <th>기부금액</th>
                                             <th>기부날짜</th>
                                         </tr>
                                     </thead>
                                     <tbody>
+                                    <c:forEach var="row" items="${Donatelist}" varStatus="status">
                                        <tr class="odd gradeX">
-                                            <td class="center">1</td>
-                                            <td class="center">han419120</td>
-                                            <td class="center">한의희</td>
-                                            <td class="center">930504</td>
-                                            <td class="center">han419120@naver.com</td>
-                                            <td class="center">01055432010</td>
-                                            <td class="center">300,000원</td>
-                                            <td class="center">2019/01/28</td>
+                                            <td class="center">${status.count}</td>
+                                            <td class="center">${row.dr_mid}</td>
+                                            <td class="center">${row.dr_mNo}</td>
+                                            <td class="center">${row.drRegistNum}</td>
+                                            <td class="center">${row.dr_mPhone}</td>
+                                            <td class="center">${row.drApplyDate}</td>
+                                            <td class="center">${row.drValue}원</td>
+                                            <td class="center">${row.drDonateDate}</td>
                                         </tr>
-                                       <tr class="odd gradeX">
-                                            <td class="center">1</td>
-                                            <td class="center">han419120</td>
-                                            <td class="center">한의희</td>
-                                            <td class="center">930504</td>
-                                            <td class="center">han419120@naver.com</td>
-                                            <td class="center">01055432010</td>
-                                            <td class="center">300,000원</td>
-                                            <td class="center">2019/01/28</td>
-                                        </tr>
-                                       <tr class="odd gradeX">
-                                            <td class="center">1</td>
-                                            <td class="center">han419120</td>
-                                            <td class="center">한의희</td>
-                                            <td class="center">930504</td>
-                                            <td class="center">han419120@naver.com</td>
-                                            <td class="center">01055432010</td>
-                                            <td class="center">300,000원</td>
-                                            <td class="center">2019/01/28</td>
-                                        </tr>
-                                       <tr class="odd gradeX">
-                                            <td class="center">1</td>
-                                            <td class="center">han419120</td>
-                                            <td class="center">한의희</td>
-                                            <td class="center">930504</td>
-                                            <td class="center">han419120@naver.com</td>
-                                            <td class="center">01055432010</td>
-                                            <td class="center">300,000원</td>
-                                            <td class="center">2019/01/28</td>
-                                        </tr>
-                                       <tr class="odd gradeX">
-                                            <td class="center">1</td>
-                                            <td class="center">han419120</td>
-                                            <td class="center">한의희</td>
-                                            <td class="center">930504</td>
-                                            <td class="center">han419120@naver.com</td>
-                                            <td class="center">01055432010</td>
-                                            <td class="center">300,000원</td>
-                                            <td class="center">2019/01/28</td>
-                                        </tr>
-                                       <tr class="odd gradeX">
-                                            <td class="center">1</td>
-                                            <td class="center">han419120</td>
-                                            <td class="center">한의희</td>
-                                            <td class="center">930504</td>
-                                            <td class="center">han419120@naver.com</td>
-                                            <td class="center">01055432010</td>
-                                            <td class="center">300,000원</td>
-                                            <td class="center">2019/01/28</td>
-                                        </tr>
-                                       <tr class="odd gradeX">
-                                            <td class="center">1</td>
-                                            <td class="center">han419120</td>
-                                            <td class="center">한의희</td>
-                                            <td class="center">930504</td>
-                                            <td class="center">han419120@naver.com</td>
-                                            <td class="center">01055432010</td>
-                                            <td class="center">300,000원</td>
-                                            <td class="center">2019/01/28</td>
-                                        </tr>
-                                       <tr class="odd gradeX">
-                                            <td class="center">1</td>
-                                            <td class="center">han419120</td>
-                                            <td class="center">한의희</td>
-                                            <td class="center">930504</td>
-                                            <td class="center">han419120@naver.com</td>
-                                            <td class="center">01055432010</td>
-                                            <td class="center">300,000원</td>
-                                            <td class="center">2019/01/28</td>
-                                        </tr>
-                                       <tr class="odd gradeX">
-                                            <td class="center">1</td>
-                                            <td class="center">han419120</td>
-                                            <td class="center">한의희</td>
-                                            <td class="center">930504</td>
-                                            <td class="center">han419120@naver.com</td>
-                                            <td class="center">01055432010</td>
-                                            <td class="center">300,000원</td>
-                                            <td class="center">2019/01/28</td>
-                                        </tr>
-                                       <tr class="odd gradeX">
-                                            <td class="center">1</td>
-                                            <td class="center">han419120</td>
-                                            <td class="center">한의희</td>
-                                            <td class="center">930504</td>
-                                            <td class="center">han419120@naver.com</td>
-                                            <td class="center">01055432010</td>
-                                            <td class="center">300,000원</td>
-                                            <td class="center">2019/01/28</td>
-                                        </tr>
-                                       <tr class="odd gradeX">
-                                            <td class="center">1</td>
-                                            <td class="center">han419120</td>
-                                            <td class="center">한의희</td>
-                                            <td class="center">930504</td>
-                                            <td class="center">han419120@naver.com</td>
-                                            <td class="center">01055432010</td>
-                                            <td class="center">300,000원</td>
-                                            <td class="center">2019/01/28</td>
-                                        </tr>
-                                       <tr class="odd gradeX">
-                                            <td class="center">1</td>
-                                            <td class="center">han419120</td>
-                                            <td class="center">한의희</td>
-                                            <td class="center">930504</td>
-                                            <td class="center">han419120@naver.com</td>
-                                            <td class="center">01055432010</td>
-                                            <td class="center">300,000원</td>
-                                            <td class="center">2019/01/28</td>
-                                        </tr>
+                                       </c:forEach>
                                     </tbody>
                                 </table>
                             </div>
@@ -239,5 +135,14 @@
             </div>
     
     <jsp:include page="include/admintableFooter.jsp" />
+    
+    
+    <script type="text/javascript">
+    	$(".Nanumdetail").click(function () {
+			var num = $(this).parent().parent().children().eq(1).text();
+			location.href= "adminNanumDetail.ad?num="+num;
+		});
+    
+    </script>
 </body>
 </html>

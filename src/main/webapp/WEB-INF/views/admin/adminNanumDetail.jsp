@@ -22,10 +22,10 @@
     <div id="wrapper">
        <jsp:include page="include/adminNavi.jsp" />
 	
-	
        
         <div id="page-wrapper" >
 		  <div class="header"> 
+		<div id="NanumDetailnum" style="display: none;"></div>
                         <h1 class="page-header">
                             	EH님의 상세페이지
                         </h1>
