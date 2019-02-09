@@ -338,7 +338,7 @@ input, select{
  #two{
 	position: absolute;
 	top: 150px; 
-	left: 1040px;
+	left: 700px;
 	font-size:60px;
 	font-weight:bold;
 	
@@ -347,7 +347,7 @@ input, select{
 #add{
 	position: absolute;
 	top: 150px; 
-	left:1170px;
+	left:830px;
 	font-size:60px;
 	font-weight:bold;
 	
@@ -358,9 +358,13 @@ input, select{
 	height:80px;
 	position:absolute;
 	top: 120px; 
-	left:1290px;
+	left:930px;
 	font-size:60px;
 	font-weight:bold;
+}
+
+#check{
+	display:none;
 }
 </style>
 </head>
@@ -373,163 +377,180 @@ input, select{
   
 
 <form class="ui form">
+	<div class="field" style="margin:10px;">
+    <label>ID</label>
+    <div class="two fields">
+      <div class="field">
+        <input type="text" name="shipping[first-name]" placeholder="아이디를 입력하세요.">
+      </div>
+        <div class="ui button" tabindex="0">중복확인</div>
 
-  <div class="field" >
+    </div>
+  </div>
+
+
+  <div class="field" style="margin:10px;">
     <label>Name</label>
     <div class="two fields">
       <div class="field">
-        <input type="text" name="shipping[first-name]" placeholder="First Name">
+        <input type="text" name="shipping[first-name]" placeholder="이름을 입력하세요.">
       </div>
+      
       <div class="field">
-        <input type="text" name="shipping[last-name]" placeholder="Last Name">
+        <input type="text" name="shipping[last-name]" placeholder="닉네임을 입력하세요.(실명가능)">
       </div>
     </div>
   </div>
-  <div class="field">
-    <label>Billing Address</label>
-    <div class="fields">
-      <div class="twelve wide field">
-        <input type="text" name="shipping[address]" placeholder="Street Address">
+  
+	<div class="field" style="margin:10px;">
+    <label>Password</label>
+    <div class="two fields">
+      <div class="field">
+        <input type="password" name="shipping[first-name]" placeholder="비밀번호를 입력하세요.">
       </div>
-      <div class="four wide field">
-        <input type="text" name="shipping[address-2]" placeholder="Apt #">
+
+      <div class="field">
+        <input type="password" name="shipping[last-name]"  placeholder="비밀번호를 확인하세요.">
       </div>
     </div>
-  </div>
-  <div class="two fields">
+    </div>
+
+ 
+  <div class="two fields"  style="margin:10px;">
     <div class="field">
-      <label>State</label>
+      <label>Gender</label>
       <select class="ui fluid dropdown">
-        <option value="">State</option>
-    <option value="AL">Alabama</option>
-    <option value="AK">Alaska</option>
-    <option value="AZ">Arizona</option>
-    <option value="AR">Arkansas</option>
-    <option value="CA">California</option>
-    <option value="CO">Colorado</option>
+        <option value="" selected disabled>선택</option>
+    	<option value="AL">남</option>
+        <option value="AL">여</option>
+
 
       </select>
     </div>
-    <div class="field">
-      <label>Country</label>
-      <div class="ui fluid search selection dropdown">
+    <div class="field" >
+      <label>Phone</label>
+      <div class="ui field">
         <input type="hidden" name="country">
-        <i class="dropdown icon"></i>
-        <div class="default text">Select Country</div>
-        <div class="menu">
-    <div class="item" data-value="af"><i class="af flag"></i>Afghanistan</div>
-    <div class="item" data-value="ax"><i class="ax flag"></i>Aland Islands</div>
-    <div class="item" data-value="al"><i class="al flag"></i>Albania</div>
-    <div class="item" data-value="dz"><i class="dz flag"></i>Algeria</div>
-    <div class="item" data-value="as"><i class="as flag"></i>American Samoa</div>
-    <div class="item" data-value="ad"><i class="ad flag"></i>Andorra</div>
-
-  </div>
+      
+       
+			 <input type="text" name="shipping[first-name]" placeholder="(-)를 제외하고 입력하세요.">
        </div>
     </div>
   </div>
-  <h4 class="ui dividing header">Billing Information</h4>
-  <div class="field">
-    <label>Card Type</label>
-    <div class="ui selection dropdown">
-      <input type="hidden" name="card[type]">
-      <div class="default text">Type</div>
-      <i class="dropdown icon"></i>
-      <div class="menu">
-        <div class="item" data-value="visa">
-          <i class="visa icon"></i>
-          Visa
-        </div>
-        <div class="item" data-value="amex">
-          <i class="amex icon"></i>
-          American Express
-        </div>
-        <div class="item" data-value="discover">
-          <i class="discover icon"></i>
-          Discover
-        </div>
-      </div>
+  <h4 class="ui dividing header"  style="margin:10px;">Email</h4>
+
+   
+  <div class="fields"  style="margin:10px;">
+    <div class="five wide field">
+      <label>이메일주소</label>
+      <input type="text" name="email" maxlength="10" placeholder="이메일 주소를 입력해주세요.">
     </div>
-  </div>
-  <div class="fields">
-    <div class="seven wide field">
-      <label>Card Number</label>
-      <input type="text" name="card[number]" maxlength="16" placeholder="Card #">
+     <div class="field">
+     <label></label><label></label><br>
+		@
     </div>
     <div class="three wide field">
-      <label>CVC</label>
-      <input type="text" name="card[cvc]" maxlength="3" placeholder="CVC">
+      <label></label><br>
+      <input type="text" name="card[cvc]" maxlength="3" placeholder="직접입력">
     </div>
-    <div class="six wide field">
-      <label>Expiration</label>
+    <div class="seven wide field">
+      <label></label><br>
       <div class="two fields">
         <div class="field">
           <select class="ui fluid search dropdown" name="card[expire-month]">
-            <option value="">Month</option>
-            <option value="1">January</option>
-            <option value="2">February</option>
-            <option value="3">March</option>
-            <option value="4">April</option>
-            <option value="5">May</option>
-            <option value="6">June</option>
-            <option value="7">July</option>
-            <option value="8">August</option>
-            <option value="9">September</option>
-            <option value="10">October</option>
-            <option value="11">November</option>
-            <option value="12">December</option>
+            <option value="" selected disabled>선택</option>
+            <option value="1">daum.net</option>
+            <option value="2">google.com</option>
+            <option value="3">nate.com</option>
+            <option value="4">naver.com</option>
           </select>
         </div>
-        <div class="field">
-          <input type="text" name="card[expire-year]" maxlength="4" placeholder="Year">
-        </div>
+         <div class="ui button" style="width:120px; height:35px;" id="email">이메일 인증</div>
       </div>
     </div>
   </div>
-   <h4 class="ui dividing header">Receipt</h4>
-   <div class="field">
-    <label>Send Receipt To:</label>
-    <div class="ui fluid multiple search selection dropdown">
-      <input type="hidden" name="receipt">
-      <i class="dropdown icon"></i>
-      <div class="default text">Saved Contacts</div>
-      <div class="menu">
-        <div class="item" data-value="jenny" data-text="Jenny">
-          <img class="ui mini avatar image" src="/images/avatar/small/jenny.jpg">
-          Jenny Hess
-        </div>
-        <div class="item" data-value="elliot" data-text="Elliot">
-          <img class="ui mini avatar image" src="/images/avatar/small/elliot.jpg">
-          Elliot Fu
-        </div>
-        <div class="item" data-value="stevie" data-text="Stevie">
-          <img class="ui mini avatar image" src="/images/avatar/small/stevie.jpg">
-          Stevie Feliciano
-        </div>
-        <div class="item" data-value="christian" data-text="Christian">
-          <img class="ui mini avatar image" src="/images/avatar/small/christian.jpg">
-          Christian
-        </div>
-        <div class="item" data-value="matt" data-text="Matt">
-          <img class="ui mini avatar image" src="/images/avatar/small/matt.jpg">
-          Matt
-        </div>
-        <div class="item" data-value="justen" data-text="Justen">
-          <img class="ui mini avatar image" src="/images/avatar/small/justen.jpg">
-          Justen Kitsune
-        </div>
+	<div class="field" style="margin:10px;" id="check">
+    <div class="fields">
+      <div class="field">
+        <input type="text" name="shipping[first-name]" placeholder="인증번호를 입력하세요.">
       </div>
+        <div class="ui button" tabindex="0">인증하기</div>
+
     </div>
   </div>
-   <div class="ui segment">
-    <div class="field">
-      <div class="ui toggle checkbox">
-        <input type="checkbox" name="gift" tabindex="0" class="hidden">
-        <label>Do not include a receipt in the package</label>
+  
+  <div class="fields" style="margin:10px;">
+     <div class="five wide field">
+       <label>주민등록번호</label>
+      <input type="text" name="email" maxlength="6" placeholder="">
+    </div>
+
+    <div class="three wide field">
+      <label></label><br>
+      <input type="text" name="card[cvc]" maxlength="1" placeholder="">
+    </div>
+    
+      <div class="three wide field">
+      <label></label><label></label><br>
+      ******
+    </div>
+    
+    </div>
+
+     <div class="seven wide field" style="margin:15px">
+      <label>주소</label>
+      <div class="two fields">
+         <div class="field">
+        <input type="text" name="shipping[first-name]" placeholder="">
       </div>
+         <div class="ui button" style="width:120px; height:35px;" id="email">주소검색</div>
+      </div>
+       <div class="field">
+           <input type="text" name="shipping[first-name]" placeholder="상세주소를 입력해주세요.">  	
+       </div>
+    </div>
+
+	<div class="field" style="margin:10px;" id="check">
+    <div class="fields">
+      <div class="field">
+        <input type="text" name="shipping[first-name]" placeholder="인증번호를 입력하세요.">
+      </div>
+        <div class="ui button" tabindex="0">인증하기</div>
+
     </div>
   </div>
-  <div class="ui button" tabindex="0">Submit Order</div>
+  
+    
+    
+   <h4 class="ui dividing header" style="margin:10px; font-size:10px">증빙서류</h4>
+   <div class="fields" style="margin:10px">
+
+      <div class="two field" style="width:300px;">
+          <label>증빙서류 유형:</label>
+          <select class="ui fluid search dropdown" name="card[expire-month]">
+            <option value="" selected disabled>선택</option>
+            <option value="1">기초생활수급자</option>
+            <option value="2">소년소녀가장</option>
+            <option value="3">한부모가정</option>
+          </select>
+          	
+        </div>
+        <div class="field" style="width:300px;">
+        <label></label><br>
+   			<input type="file" >
+        </div>
+    </div>
+    
+     <h4 class="ui dividing header" style="margin:10px; font-size:10px">자기소개</h4>
+   	<div class="field" style="margin:10px">
+        <div class="field" >
+        <label></label><br>
+   			<textarea name="memo" cols="230" rows="10" style="resize:none" placeholder="입력하신 자기소개는 정기후원 게시판에서 보여집니다."></textarea>
+        </div>
+    </div>
+
+  
+  <div class="ui button" style="margin:10px" tabindex="0">회원가입</div>
 </form>
 		
 
@@ -564,6 +585,17 @@ $(document).ready(function() {
     }, 200);
   });
 });
+
+ 
+
+	$("#email").click(function(){
+
+		$("#check").show();
+
+	});
+
+
+
 </script>
 </body>
 </html>
