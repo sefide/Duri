@@ -1,10 +1,20 @@
 package com.kh.duri.happymember.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.kh.duri.happymember.model.service.HappymemberService;
+
 @Controller
 public class HappymemberController {
+	//의존성 주입
+	@Autowired
+	private HappymemberService hm;
+	
+	//마이페이지 - 닉네임 불러오기
+	
+	
 	
 	@RequestMapping("mypage.happy")
 	public String happy1() {
@@ -60,5 +70,6 @@ public class HappymemberController {
 	public String happt12() {
 		return "board/about_money";
 	}
+	
 }
 

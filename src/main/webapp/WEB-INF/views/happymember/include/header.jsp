@@ -5,9 +5,7 @@
 		
 		<!-- 로그인 후 -->
 		<div class="myNavBox">
-			<!-- <span class="mu11"><a href="javascript:openpop();">로그인</a></span> -->
-			
-			<span class="mumyNavBox-logout"><a href="Aerin_mypage.happy">로그아웃</a></span>
+			<span class="mumyNavBox-logout"><a href="logout.me">로그아웃</a></span>
 		</div>
 		
 		
