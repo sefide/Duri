@@ -33,13 +33,18 @@
 </style>
 </head>
 <body>
-
-
+<c:if test="${empty sessionScope.loginUser}">
+	<c:set var="message" value="해당 페이지는 로그인을 해야 이용하실 수 있습니다." scope="request"></c:set>
+	<jsp:forward page="../common/errorPage.jsp"/>
+</c:if>
+ 
+<c:if test="${not empty sessionScope.loginUser and loginUser.mtype == 'H'}">
 <div id="wrap"><!-- Wrap S -->
 
 <%@ include file="include/header.jsp" %>
 
 <%@ include file="include/myNav.jsp" %>
+
 
 <div id="subContainer">
 	<div class="contBox inner"><!-- inner S -->
@@ -146,11 +151,12 @@
 	</div><!--// inner E-->
 </div>
 
+
 <%-- <%@ include file="/hyun/myPost/include/footer.jsp" %> --%>
 
 
 </div><!--// Wrap E-->
-
+</c:if>
 
 </body>
 </html>

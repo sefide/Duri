@@ -1,4 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <% 
 	String bigtabon="1";
 %>
@@ -18,13 +21,21 @@
 </style>
 </head>
 <body>
-
+<!-- 로그인 세션이 만료 되면 errorPage로 이동 -->
+<c:if test="${empty sessionScope.loginUser}">
+	<c:set var="message" value="해당 페이지는 로그인을 해야 이용하실 수 있습니다." scope="request"></c:set>
+	<jsp:forward page="../common/errorPage.jsp"/>
+</c:if>
  
+<!-- 로그인 세션이 유지 되어 있고, 멤버구분이 행복두리면 마이페이지를 보여준다 -->
+<c:if test="${not empty sessionScope.loginUser and loginUser.mtype == 'H'}">
 <div id="wrap"><!-- Wrap S -->
 
 <%@ include file="include/header.jsp" %>
 
 <%@ include file="include/myNav.jsp" %>
+
+
 
 <div id="subContainer">
 	<div class="contBox inner"><!-- inner S -->
@@ -181,11 +192,12 @@
 </div><!--// inner E-->
 </div> 
 
+
 <%-- <%@ include file="/hyun/myPost/include/footer.jsp" %> --%>
 
 
 </div><!--// Wrap E-->
-
+</c:if>
 
 
 

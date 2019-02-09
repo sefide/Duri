@@ -106,8 +106,9 @@ public class MemberController {
 	public String logout(HttpServletRequest request) {
 		request.getSession().invalidate();
 		
-		return "redirect:goMain.me";
+		return "redirect:total.nanum";
 	}
+
 	
 	@RequestMapping("goAdmin.me")
 	public String goAdmin() {

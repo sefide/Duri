@@ -5,7 +5,8 @@
   
   <configuration>
 	<typeAliases>
-		<typeAlias type="com.kh.duri.member.model.vo.Member" alias="Member"/>	
+		<typeAlias type="com.kh.duri.member.model.vo.Member" alias="Member"/>
+		<typeAlias type="com.kh.duri.member.model.vo.Member" alias="HappyMember"/>	
 		<typeAlias type="com.kh.duri.payment.model.vo.Point" alias="Point"/>	
 		<typeAlias type="com.kh.duri.payment.model.vo.DonateReceipt" alias="DonateReceipt"/>
 		<typeAlias type="com.kh.duri.payment.model.vo.Refund" alias="Refund"/>	
@@ -14,6 +15,7 @@
 		<mapper resource="/mappers/member-mapper.xml"/>
 		<mapper resource="/mappers/point-mapper.xml"/>
 		<mapper resource="/mappers/admin-mapper.xml"/>
+		<mapper resource="/mappers/happy-mapper.xml"/>
 	</mappers>
 	
 	

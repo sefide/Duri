@@ -164,12 +164,15 @@ p {font-size: 20px; text-align: center;}
 				<img class="defaultPhoto" src="resources/HappyMyPage/images/status/girlProfile.png">
 			</div>
 			<span class="box-left-content">
-				제니<br>
-				500,000&nbsp;<i class="yellow product hunt icon"></i>
+				${loginUser.mNickName}<br>
+				${loginUser.mPoint}&nbsp;<i class="yellow product hunt icon"></i>
 			</span>
 			<br>
 			<div style="font-weight: bold; color: white; font-size:20px;">
-				후원 총 누적액 : 1,507,000 원
+				매 달 정기후원 금액 : 200,000 원
+			</div>
+			<div style="font-weight: bold; color: white; font-size:20px;">
+				일시 후원 총 누적액 : 1,507,000 원
 			</div>
 		</div>
 		

@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -149,8 +151,12 @@ body {
 						<div class="media-body pl-4">
 							<h3 class="heading"
 								style="font-size: 40px; color: #FD771A; font-family: Nanum Pen Script;">행복두리가 되고 싶다면?</h3>
-							<div class="tm_btn" id="goLogin" onclick="location.href='Eunji_happyLogin.me'">행복두리로 가자!</div>
-							
+							<c:if test="${empty sessionScope.loginUser}">
+								<div class="tm_btn" id="goLogin" onclick="location.href='Eunji_happyLogin.me'">행복두리로 가자!</div>
+							</c:if>
+							<c:if test="${not empty sessionScope.loginUser}">
+								<div class="tm_btn" id="goLogin" onclick="location.href='mypage.happy'">행복두리로 가자!</div>
+							</c:if>
 						</div>
 					</div>
 				</div>
