@@ -17,11 +17,12 @@ public class Point {
 	private String p_f_title; // 크라우드 펀딩글 제목
 	private String p_d_m; // 정기후원 대상자명
 	private int p_d_c;  // 정기후원 회차 
+	private int rnum;
 	
 	public Point() {}
 
 	public Point(int pNo, String pType, long pValue, Date pDate, String pReason, String p_mNo, int p_pyNo, int p_dhdNo,
-			int p_rNo, int p_fhNo, String p_f_m, String p_f_title, String p_d_m, int p_d_c) {
+			int p_rNo, int p_fhNo, String p_f_m, String p_f_title, String p_d_m, int p_d_c, int rnum) {
 		super();
 		this.pNo = pNo;
 		this.pType = pType;
@@ -33,11 +34,13 @@ public class Point {
 		this.p_dhdNo = p_dhdNo;
 		this.p_rNo = p_rNo;
 		this.p_fhNo = p_fhNo;
-		this.p_f_m = p_f_m;  
-		this.p_f_title = p_f_title;  
-		this.p_d_m = p_d_m;   
+		this.p_f_m = p_f_m;
+		this.p_f_title = p_f_title;
+		this.p_d_m = p_d_m;
 		this.p_d_c = p_d_c;
+		this.rnum = rnum;
 	}
+
 
 	public int getpNo() {
 		return pNo;
@@ -151,12 +154,21 @@ public class Point {
 		this.p_d_c = p_d_c;
 	}
 
+	public int getRnum() {
+		return rnum;
+	}
+
+	public void setRnum(int rnum) {
+		this.rnum = rnum;
+	}
+
 	@Override
 	public String toString() {
 		return "Point [pNo=" + pNo + ", pType=" + pType + ", pValue=" + pValue + ", pDate=" + pDate + ", pReason="
 				+ pReason + ", p_mNo=" + p_mNo + ", p_pyNo=" + p_pyNo + ", p_dhdNo=" + p_dhdNo + ", p_rNo=" + p_rNo
 				+ ", p_fhNo=" + p_fhNo + ", p_f_m=" + p_f_m + ", p_f_title=" + p_f_title + ", p_d_m=" + p_d_m
-				+ ", p_d_c=" + p_d_c + "]";
+				+ ", p_d_c=" + p_d_c + ", rnum=" + rnum + "]";
 	}
 
+	
 }

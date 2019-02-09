@@ -20,6 +20,7 @@
 		<result property="p_f_title" column="FTITLE"/>
 		<result property="p_d_m" column="MNAME2"/>
 		<result property="p_d_c" column="DHDCOUNT"/>
+		<result property="rnum" column="RNUM"/> 
 	</resultMap>
 	
 	<resultMap type="com.kh.duri.payment.model.vo.DonateReceipt" id="donateReceiptResultSet">
@@ -29,6 +30,7 @@
 		<result property="drDonateDate" column="DRDONATEDATE"/>
 		<result property="drValue" column="DRVALUE"/>
 		<result property="dr_mNo" column="MNAME"/>
+		<result property="rnum" column="RNUM"/> 
 	</resultMap>
 	
 	<resultMap type="com.kh.duri.payment.model.vo.Refund" id="refundResultSet">
@@ -42,7 +44,6 @@
 	</resultMap>
 	
 	<resultMap type="com.kh.duri.member.model.vo.Member" id="memberResultSet">
-	<!-- property=컬럼명, column=필드명    반드시 일치! -->
 		<id property="mno" column="MNO"></id>
 		<result property="mName" column="MNAME"/>
 		<result property="mNickName" column="MNICK"/>
@@ -65,9 +66,34 @@
 		<result property="mTakeStatus" column="MTAKESTATUS"/>
 	</resultMap>
 	
-	<!-- 포인트 이력 select -->
+	<resultMap type="com.kh.duri.payment.model.vo.Payment" id="paymentResultSet">
+		<id property="pyNo" column="PYNO"></id>
+		<result property="pyCardNum" column="PYCARDNUM"/>
+		<result property="pyPrice" column="PYPRICE"/>
+		<result property="pyDate" column="PYDATE"/>
+		<result property="py_mNo" column="PY_MNO"/>
+	</resultMap>
+	
+	<!-- 나눔두리 - 포인트 이력 수 세기 -->
+	<select id="selectPointListCount" resultType="_int">
+		SELECT COUNT(*)
+		FROM POINT
+		WHERE P_MNO = #{mno}
+	</select>
+	<!-- 나눔두리 - 기간별 포인트 이력 수 세기 -->
+	<select id="selectSearchPointListCount" resultType="_int">
+		SELECT COUNT(*)
+		FROM POINT
+		<![CDATA[
+		WHERE P_MNO=#{mno}
+		AND TO_DATE(#{mPhone}, 'YYYY-MM-DD') < PDATE 
+		AND PDATE < TO_DATE(#{mAddress}, 'YYYY-MM-DD')]]>
+	</select>
+	
+	<!-- 나눔두리 - 포인트 이력 select -->
 	<select id="selectPointHistory" resultMap="pointResultSet" parameterType="Point">
-		SELECT PNO, PTYPE, PVALUE, PDATE, PREASON, P_MNO, P_PYNO, P_DHDNO, P_RNO, P_FHNO, FTITLE, M1.MNAME AS MNAME1, M2.MNAME AS MNAME2, DHD.DHDCOUNT
+		SELECT ROWNUM RNUM, PNO, PTYPE, PVALUE, PDATE, PREASON, P_MNO, P_PYNO, P_DHDNO, P_RNO, P_FHNO, FTITLE, MNAME1, MNAME2, DHDCOUNT
+		FROM (SELECT PNO, PTYPE, PVALUE, PDATE, PREASON, P_MNO, P_PYNO, P_DHDNO, P_RNO, P_FHNO, FTITLE, M1.MNAME AS MNAME1, M2.MNAME AS MNAME2, DHD.DHDCOUNT
 		FROM POINT P
 		LEFT JOIN FUNDHISTORY FH ON(P.P_FHNO = FH.FHNO)
 		LEFT JOIN FUNDING F ON (FH.FH_FNO = F.FNO)
@@ -75,18 +101,67 @@
 		LEFT JOIN DIRECTFUNDHISTORYDETAIL DHD ON (P.P_DHDNO = DHD.DHDNO)
 		LEFT JOIN DIRECTFUNDHISTORY DH ON (DH.DHNO = DHD.DHD_DHNO)
 		LEFT JOIN MEMBER M2 ON (M2.MNO = DH.DH_MNO_TAKE)
-		WHERE P_MNO= #{mno}
-		ORDER BY PDATE DESC
+		WHERE P_MNO=#{mno}
+		ORDER BY PDATE DESC)
 	</select>
 	
-	<!-- 기부금 영수증 발급내역 select -->
-	<select id="donateReceiptHistory" resultMap="donateReceiptResultSet" parameterType="DonateReceipt">
-		SELECT *
-		FROM DONATERECEIPT
-		JOIN MEMBER  ON (MEMBER.MNO = DONATERECEIPT.DR_MNO)
-		WHERE DR_MNO= #{mno}
-		ORDER BY DRAPPLYDATE DESC
+	<!-- 나눔두리 - 기간별 포인트 이력 select -->
+	<select id="searchPointHistory" resultMap="pointResultSet" parameterType="Point">
+		SELECT ROWNUM RNUM, PNO, PTYPE, PVALUE, PDATE, PREASON, P_MNO, P_PYNO, P_DHDNO, P_RNO, P_FHNO, FTITLE, MNAME1, MNAME2, DHDCOUNT
+		FROM (SELECT PNO, PTYPE, PVALUE, PDATE, PREASON, P_MNO, P_PYNO, P_DHDNO, P_RNO, P_FHNO, FTITLE, M1.MNAME AS MNAME1, M2.MNAME AS MNAME2, DHD.DHDCOUNT
+		FROM POINT P
+		LEFT JOIN FUNDHISTORY FH ON(P.P_FHNO = FH.FHNO)
+		LEFT JOIN FUNDING F ON (FH.FH_FNO = F.FNO)
+		LEFT JOIN MEMBER M1 ON (M1.MNO = F.FWRITER)
+		LEFT JOIN DIRECTFUNDHISTORYDETAIL DHD ON (P.P_DHDNO = DHD.DHDNO)
+		LEFT JOIN DIRECTFUNDHISTORY DH ON (DH.DHNO = DHD.DHD_DHNO)
+		LEFT JOIN MEMBER M2 ON (M2.MNO = DH.DH_MNO_TAKE)
+		<![CDATA[
+		WHERE P_MNO=#{mno}
+		AND TO_DATE(#{mPhone}, 'YYYY-MM-DD') < PDATE 
+		AND PDATE < TO_DATE(#{mAddress}, 'YYYY-MM-DD')]]>
+		ORDER BY PDATE DESC)
 	</select>
+	
+	<!-- 나눔두리 - 기부금 영수증 발급내역 수 세기 -->
+	<select id="selectReceiptListCount" resultType="_int">
+		SELECT COUNT(*)
+		FROM DONATERECEIPT
+		WHERE DR_MNO = #{mno}
+	</select>
+	<!-- 나눔두리 - 기간별 기부금 영수증 발급내역 수 세기 -->
+	<select id="selectSearchReceiptListCount" resultType="_int">
+		SELECT COUNT(*)
+		FROM DONATERECEIPT
+		<![CDATA[
+		WHERE DR.DR_MNO=#{mno}
+		AND TO_DATE(#{mPhone}, 'YYYY-MM-DD') < DR.DRAPPLYDATE 
+		AND DR.DRAPPLYDATE < TO_DATE(#{mAddress}, 'YYYY-MM-DD')]]>
+	</select>
+	
+	<!-- 나눔두리 - 기부금 영수증 발급내역 select -->
+	<select id="donateReceiptHistory" resultMap="donateReceiptResultSet" parameterType="DonateReceipt">
+		SELECT ROWNUM RNUM, DRNO, DRREGISTNUM, DRAPPLYDATE, DRDONATEDATE, DRVALUE, DR_MNO, MNAME
+		FROM (SELECT *
+        FROM DONATERECEIPT DR
+        JOIN MEMBER M ON (M.MNO = DR.DR_MNO)
+        WHERE DR.DR_MNO=#{mno}
+        ORDER BY DRAPPLYDATE DESC)
+	</select>
+	
+	<!-- 나눔두리 - 기간별 기부금 영수증 발급내역 select -->
+	<select id="searchDonateReceipt" resultMap="donateReceiptResultSet" parameterType="DonateReceipt">
+       SELECT ROWNUM RNUM, DRNO, DRREGISTNUM, DRAPPLYDATE, DRDONATEDATE, DRVALUE, DR_MNO, MNAME
+		FROM ( SELECT *
+		FROM DONATERECEIPT DR
+		JOIN MEMBER M ON (M.MNO = DR.DR_MNO)
+		<![CDATA[
+		WHERE DR.DR_MNO=#{mno}
+		AND TO_DATE(#{mPhone}, 'YYYY-MM-DD') < DR.DRAPPLYDATE 
+		AND DR.DRAPPLYDATE < TO_DATE(#{mAddress}, 'YYYY-MM-DD')]]>
+		ORDER BY DRAPPLYDATE DESC )
+	</select>
+	
 	
 	<!-- 행복두리 - 환급내역 수 세기 -->
 	<select id="selectRefundListCount" resultType="_int">
@@ -95,7 +170,7 @@
 		WHERE R_MNO = #{mno}
 	</select>
 	
-	<!-- 행복두리 - 환급내역 select -->
+	<!-- 나눔,행복두리 - 환급내역 select -->
 	<select id="selectRefundList" resultMap="refundResultSet" parameterType="Refund">
 		SELECT *
 		FROM REFUND
@@ -103,19 +178,50 @@
 		ORDER BY RDATE DESC
 	</select>
 	
-	<!-- 행복두리 - 환급 insert -->
+	<!-- 나눔,행복두리 - 환급 insert -->
 	<insert id = "insertRefund">
 		INSERT INTO REFUND VALUES (SEQ_R_NO.NEXTVAL, #{rBank}, #{rAccount}, #{r_mNo}, #{rValue}, SYSDATE, DEFAULT)
 	</insert>
 	
-	<!-- 행복두리 - 환급 포인트 차감 -->
-	<update id = "updatePoint">
+	<!-- 환급 테이블 현재 SEQ_R_NO 값 구하기 -->
+	<select id="selectRefundCurVal" resultType="_int">
+		SELECT SEQ_R_NO.CURRVAL FROM DUAL
+	</select>
+	
+	<!-- 나눔,행복두리 - 환급 포인트 차감 -->
+	<update id = "updateRefundPoint">
 		UPDATE MEMBER SET MPOINT = MPOINT-#{rValue} WHERE MNO=#{r_mNo}
 	</update>
+
+	<!-- 나눔,행복두리 - 포인트 환급 후 포인트 내역에 추가 -->	
+	<insert id = "insertPointHistoryRefund">
+		INSERT INTO POINT VALUES (SEQ_P_NO.NEXTVAL, 'U', #{rValue}, SYSDATE, '환급', #{r_mNo}, null, null, #{rNo}, null)
+	</insert>
 	
+	<!-- 회원번호로 로그인 유저 정보 가져오기 -->
 	<select id="loginUserCheck" resultMap="memberResultSet" parameterType="Member">
 		SELECT *
 		FROM MEMBER
 		WHERE MNO=#{mno}
 	</select>
+	
+	<!-- 나눔두리 - 결제 insert -->
+	<insert id = "insertPayment">
+		INSERT INTO PAYMENT VALUES (SEQ_PY_NO.NEXTVAL, #{pyCardNum}, #{pyPrice}, SYSDATE, #{py_mNo})
+	</insert>
+	
+	<!-- 결제 테이블 현재 SEQ_PY_NO 값 구하기 -->
+	<select id="selectPaymentCurVal" resultType="_int">
+		SELECT SEQ_PY_NO.CURRVAL FROM DUAL
+	</select>
+	
+	<!-- 나눔두리 - 결제 포인트 증가 -->
+	<update id = "updatePaymentPoint">
+		UPDATE MEMBER SET MPOINT = MPOINT+#{pyPrice} WHERE MNO=#{py_mNo}
+	</update>
+
+	<!-- 나눔두리 - 결제 후 포인트 내역에 추가 -->	
+	<insert id = "insertPointHistoryPayment">
+		INSERT INTO POINT VALUES (SEQ_P_NO.NEXTVAL, 'A', #{pyPrice}, SYSDATE, '결제', #{py_mNo}, #{pyNo}, null, null, null)
+	</insert>
 </mapper>

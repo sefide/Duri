@@ -77,6 +77,11 @@
 		font-size : 19px;
 		cursor : pointer;
 	}
+	.active{
+    	background: #fcc4a8;
+	    color: #f86f2d;
+	    border: 1px solid transparent;
+    }
 </style>
 </head>
 <body>
@@ -112,15 +117,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					<!-- <tr>
-						<td>요청일시</td>
-						<td>요청금액</td>
-						<td>예금주명 </td>
-						<td>은행</td>
-						<td>계좌번호</td>
-						<td>처리상태</td>				
-					</tr>
-					 -->
+					
 					<c:if test = "${ !empty rfList }">
 		
 	    			<c:forEach var="rf" items="${ rfList }">

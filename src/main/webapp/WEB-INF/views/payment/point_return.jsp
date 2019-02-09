@@ -393,6 +393,10 @@
 	
 	$("#back-btn").click(function(){
 		/* 유효성 검사 */
+		if(!$("#chkinfo1").is(':checked')){
+			alert("수수료 약관 동의 해주십시오.");
+			return false;
+		}
 		var numberTest = /[^0-9]/g; /* 숫자로만 이뤄지기 */
 		var returnPoint = $("#returnValue").val();
 		var accountNum = $("#returnAccount").val();

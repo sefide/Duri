@@ -268,8 +268,6 @@
 		    			
 		    			<div class = "d-flex-right">
 		    				<div class = "back-right">
-		    					<input type ="checkbox" id= "chkinfo1"><label for = "chkinfo1">수수료 약관동의</label> <br>
-			    				<a>포인트 결제 시 부과했던 후원 수수료는 환급되지 않습니다. </a><br><br>
 								<p style = "margin-left : 1%; font-size: 14px; line-height : 2; text-align : left;"> *환급받을 계좌 정보를 정확히 입력해주세요. <br> 
 								계좌번호와 예금주명이 다를 경우 환급이 제대로 되지 않을 수 있습니다.  </p>
 			    				<div class= "flexBox valueBox">

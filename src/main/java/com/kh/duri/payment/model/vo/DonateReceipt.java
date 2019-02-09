@@ -9,11 +9,12 @@ public class DonateReceipt {
 	private Date drDonateDate;
 	private long drValue;
 	private String dr_mNo;
+	private int rnum;
 	
 	public DonateReceipt() {}
 
-	public DonateReceipt(int drNo, String drRegistNum, Date drApplyDate, Date drDonateDate, long drValue,
-			String dr_mNo) {
+	public DonateReceipt(int drNo, String drRegistNum, Date drApplyDate, Date drDonateDate, long drValue, String dr_mNo,
+			int rnum) {
 		super();
 		this.drNo = drNo;
 		this.drRegistNum = drRegistNum;
@@ -21,7 +22,9 @@ public class DonateReceipt {
 		this.drDonateDate = drDonateDate;
 		this.drValue = drValue;
 		this.dr_mNo = dr_mNo;
+		this.rnum = rnum;
 	}
+
 
 	public int getDrNo() {
 		return drNo;
@@ -71,11 +74,20 @@ public class DonateReceipt {
 		this.dr_mNo = dr_mNo;
 	}
 
+	public int getRnum() {
+		return rnum;
+	}
+
+	public void setRnum(int rnum) {
+		this.rnum = rnum;
+	}
+
 	@Override
 	public String toString() {
 		return "DonateReceipt [drNo=" + drNo + ", drRegistNum=" + drRegistNum + ", drApplyDate=" + drApplyDate
-				+ ", drDonateDate=" + drDonateDate + ", drValue=" + drValue + ", dr_mNo=" + dr_mNo + "]";
+				+ ", drDonateDate=" + drDonateDate + ", drValue=" + drValue + ", dr_mNo=" + dr_mNo + ", rnum=" + rnum
+				+ "]";
 	}
-
+	
 	
 }

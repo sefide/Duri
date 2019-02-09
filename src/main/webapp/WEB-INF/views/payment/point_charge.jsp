@@ -1,9 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
+
+<!-- import cdn -->
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+
 <jsp:include page="../Nanummember/include/common.jsp" />
 <title>둘이두리</title>
 <jsp:include page="../common/css.jsp"/>
@@ -178,7 +185,7 @@
 	 <!-- 네비바 -->
 	<jsp:include page="../common/navi.jsp"/>
 	<jsp:include page="../Nanummember/include/header.jsp" />	
-	
+	<c:set var = "user" value = "${ sessionScope.loginUser2 }"/>
 	<br><br><br><br>	
 	<div class="contBox inner">
 		<jsp:include page="include/tabMypage_point.jsp"/>	
@@ -195,7 +202,7 @@
 	    				<table>
 	    					<tr>
 	    						<th>현재 보유포인트</th>
-	    						<td>1200원</td>
+	    						<td>${ user.mPoint }원</td>
 	    					</tr>
 	    					<tr>
 	    						<th>충전 금액</th>
@@ -208,7 +215,16 @@
 						          <span class="glyphicon glyphicon-question-sign"></span>
 						        </a>
 					        </th>
-	    						<td>열매 나눔두리 (후원수수료 3%)</td>
+					        	
+					        	<c:if test = "${ user.mGoalNum > 9 }">
+					        		<td>열매 나눔두리 (후원수수료 3%)</td>
+					        	</c:if>
+	    						<c:if test = "${ user.mGoalNum <= 9 && 4 < user.mGoalNum}">
+					        		<td>새싹 나눔두리 (후원수수료 4%)</td>
+					        	</c:if>
+					        	<c:if test = "${ user.mGoalNum <= 4 }">
+					        		<td>씨앗 나눔두리 (후원수수료 5%)</td>
+					        	</c:if>
 	    					</tr>
 	    				</table>
 	    			</div>
@@ -258,10 +274,19 @@
 	
 	<script>
 	$(document).ready(function() {
+		/* 충전 포인트 입력 시 */
 		$("#chargeValue").change(function(){
 			var value = Number($("#chargeValue").val());
-			var fees = $("#txtFees").text();
-			fees = Number(fees.substring(0, fees.length-1));
+			var fees = 0;
+			if(${user.mGoalNum}  > 9 ){
+				fees = value * 0.03;
+			}else if( ${user.mGoalNum} <= 9 && 4 < ${user.mGoalNum} ){
+				fees = value * 0.04;
+			}else {
+				fees = value * 0.05;
+			}
+			$("#txtFees").text(fees);
+			//fees = Number(fees.substring(0, fees.length-1));
 			$("#txtChargeValue").text(value+"원");
 			$("#totalValue").text(value+fees);
 		});
@@ -270,7 +295,41 @@
 	});
 	
 	$("#back-btn").click(function(){
-		alert("결제 진행 ");
+		var bName = "${ user.mName }";
+		if(!$("#chkinfo1").is(':checked')){
+			alert("수수료 약관 동의 해주십시오.");
+		}else if(!$("#chkinfo2").is(':checked')){
+			alert("유료이용 약관 동의 해주십시오.");
+		} else {
+			var IMP = window.IMP;
+			IMP.init('imp35475580'); 
+			IMP.request_pay({
+				pg : 'inicis', // version 1.1.0부터 지원.
+				merchant_uid : 'merchant_' + new Date().getTime(),
+				name : '결제테스트',
+				amount : 100,
+				buyer_email : 'sefide@naver.com',
+				buyer_name : bName,
+			}, function(rsp) {
+				if ( rsp.success ) {
+					var msg = '결제가 완료되었습니다.';
+					msg += '고유ID : ' + rsp.imp_uid;
+					msg += '상점 거래ID : ' + rsp.merchant_uid;
+					msg += '결제 금액 : ' + rsp.paid_amount;
+					msg += '카드 승인번호 : ' + rsp.apply_num;
+					
+				 	var muid = rsp.merchant_uid;
+			        var price = rsp.paid_amount;
+			        var applyNum = rsp.apply_num;	
+			        location.href="pointChargePayment.pm?price="+price+"&apply="+applyNum+"&mno="+${user.mno};
+				} else {
+					var msg = '결제에 실패하였습니다.';
+					msg += '에러내용 : ' + rsp.error_msg;
+				}
+			});
+
+			
+		}
 	});
 	
 	

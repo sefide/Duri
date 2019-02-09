@@ -61,8 +61,8 @@
     			<div id = "msgHappy">" 나눔두리의 소중한 마음으로 놀라운 변화가 일어납니다. "</div>
     			
     			<div id = "msgBox">
-    				<div class = "txtColor_o txtBold" id = "msg">후원이 완료되었습니다. </div>
-    				<div id = "seePointHistory"><a>후원내역 보러가기 </a></div>
+    				<div class = "txtColor_o txtBold" id = "msg">${ msg } </div>
+    				<div id = "seePointHistory"><a href = "mypage.nanum">마이페이지 가기 </a></div>
     			
     			</div>
     		</div>
