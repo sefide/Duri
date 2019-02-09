@@ -1,11 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
 <% 
 	String bigtabon="2";
 %>
-<jsp:include page="include/common.jsp"/>
+<%@ include file="include/common.jsp" %>
 
 <!-- semantic ui -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
@@ -43,8 +40,9 @@
 
 <div id="subContainer">
 	<div class="contBox inner"><!-- inner S -->
+			<%@ include file="include/tabMypage.jsp" %>
 	 <br>
-		<%@ include file="include/tabMypage.jsp" %>
+		
 		<!-- <div class="titNavi">
 			내 공고 목록
 			<span>홈 &gt; 마이페이지 &gt; 내 공고 목록</span>
@@ -80,10 +78,10 @@
      <tr height="1" bgcolor="#dddddd"><td colspan="4"></td></tr><br>
     <tr>
       <td>&nbsp;</td>
-      <td align="center" width="150px"><b>후원유형</b></td>
-      <td><input type="radio" id="money" name="name" size="100px">금액후원
+      <td align="center" width="180px"><b>후원유형</b></td>
+      <td><input type="radio" id="money" value="money" name="name" size="100px">금액후원
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <input type="radio" id="stuff" name="name">물품후원</td>
+      <input type="radio" id="stuff" value="stuff" name="name">물품후원</td>
       <td>&nbsp;<br>
       <div id="button" class="textSilver">
 		* 물품으로 받을 수 있는 후원은 물품후원을 선택해주세요!<br><br>
@@ -107,42 +105,46 @@
      	<select align="center" style="width:150px; height:30px;">
      		<option>1개월</option>
      		<option>3개월</option>
-     		<option>6개월</option>
+     		<option>증빙서류 만료기간</option>
      	</select>
 	 </td>
+	 <td>&nbsp;<br>
+      <div id="button" class="textSilver">
+		* 펀딩종료 날짜는 현재 날짜 ~ 증빙서류 만료기간까지 가능합니다.
+		</div></td>
      </tr>
      <tr height="1" bgcolor="#dddddd"><td colspan="4"></td></tr>
      
      
      <tr>
       <td>&nbsp;</td>
-      <td align="center"><b>내용</b></td>
-      <td><textarea name="memo" cols="50" rows="13"></textarea></td>
+      <td align="center" style="height:300px;"><b>후원 게시글 내용</b></td>
+      <td><textarea name="memo" cols="110" rows="18" style="resize:none"></textarea></td>
       <td>&nbsp;</td>
      </tr>
      <tr height="1" bgcolor="#dddddd"><td colspan="4"></td></tr>
      <tr height="1" bgcolor="#82B5DF"><td colspan="4"></td></tr>
      <tr align="center">
       <td>&nbsp;</td>
-      <td colspan="2"><input type=button value="등록">
-       <input type=button value="취소">
-      <td>&nbsp;</td>
+
      </tr>
     </table>
    </td>
   </tr>
  </table>
-
+	<div align="center">
+		 <button class="ui primary button">
+		   	사연등록
+		</button>
+		<button class="ui button">
+		  	취소하기
+		</button>
+	</div>
 
 		
 		<div style="height: 100px;"></div>
 		
-		<div id="button" class="textSilver">
-			* 정기후원은 자기소개를 바탕으로 진행되므로 변경할 내용이 있을 시 수정해주세요.<br><br>
-			
-			<button class="massive ui instagram button">자기소개 수정하기</button>
-		</div>
-
+		
 	</div><!--// inner E-->
 </div>
 

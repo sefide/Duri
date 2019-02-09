@@ -17,10 +17,7 @@ html {
 }
 
 body {	
-   background-image: url('/duri/resources/member/images/loginBg.png');
-  background-repeat: no-repeat;
-  background-size:contain;
-  background-position: center;
+	background:white;
 /*   background: -webkit-linear-gradient(45deg, rgba(66, 183, 245, 0.8) 0%, rgba(66, 245, 189, 0.4) 100%);
   background: linear-gradient(45deg, rgba(66, 183, 245, 0.8) 0%, rgba(66, 245, 189, 0.4) 100%); */
   color: rgba(0, 0, 0, 0.6);
@@ -333,10 +330,41 @@ input{
 	background:#FFFED7;
 }
 
+
+ #two{
+	position: absolute;
+	top: 150px; 
+	left: 700px;
+	font-size:60px;
+	font-weight:bold;
+	
+}
+
+#add{
+	position: absolute;
+	top: 150px; 
+	left:830px;
+	font-size:60px;
+	font-weight:bold;
+	
+} 
+
+#img1{
+	width:120px;
+	height:80px;
+	position:absolute;
+	top: 120px; 
+	left:930px;
+	font-size:60px;
+	font-weight:bold;
+}
+
 </style>
 </head>
 <body>
-
+<a id="two" style="color:orange">둘이</a><a id="add" style="color:yellowgreen">두리</a>
+<img src = "/duri/resources/board/images/main.png" id="img1">
+<br><br><br><br><br>
 
 <!-- Form-->
 <div class="form">
@@ -547,7 +575,7 @@ $(document).ready(function() {
 
   $('.form-toggle').on('click', function(e) {
     e.preventDefault();
-    $(this).removeClass('visible');
+    $(this).removeClass('vklmisible');
     $('.form-panel.one').removeClass('hidden');
     $('.form-panel.two').removeClass('active');
     $('.form').animate({
