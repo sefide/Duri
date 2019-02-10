@@ -159,7 +159,7 @@ p {font-size: 20px; text-align: center;}
 <div id="subvisual">
 	<div id="subvisual-sub">
 		<!-- 네비 왼쪽 -->
-		<div style="float: left; margin-left: 270px;">
+		<div style="float: left; margin-left: 17%;">
 			<div style="float: left;">
 				<img class="defaultPhoto" src="resources/HappyMyPage/images/status/girlProfile.png">
 			</div>
