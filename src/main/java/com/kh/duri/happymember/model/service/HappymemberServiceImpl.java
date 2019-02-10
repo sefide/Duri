@@ -1,11 +1,14 @@
 package com.kh.duri.happymember.model.service;
 
+import java.util.ArrayList;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.kh.duri.happymember.model.dao.HappymemberDao;
 import com.kh.duri.happymember.model.exception.MypageException;
+import com.kh.duri.happymember.model.vo.DonateItems;
 import com.kh.duri.member.model.vo.Member;
 
 @Component
@@ -16,13 +19,17 @@ public class HappymemberServiceImpl implements HappymemberService {
 	@Autowired
 	private HappymemberDao hd;
 
-	
-	/*//마이페이지 - 닉네임 불러오기
+	//마이페이지 - 보유물품 목록 불러오기 ajax
 	@Override
-	public Member selectNickName(Member m) throws MypageException {
-		Member selectNickName = hd.selectNickName(sqlSession, m);
+	public ArrayList<DonateItems> donateItemList(DonateItems di) throws MypageException {
 		
-		return selectNickName;
-	}*/
+		ArrayList<DonateItems> list = hd.donateItemList(sqlSession, di);;
+		
+		/*System.out.println("Sevice 보유물품리스트 : " + list);*/
+		
+		return list;
+	}
+
+	
 
 }

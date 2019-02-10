@@ -27,9 +27,23 @@
 		<result property="mGoalNum" column="MGOALNUM"/>
 		<result property="mStatus" column="MSTATUS"/>
 		<result property="mTakeStatus" column="MTAKESTATUS"/>
+		<result property="dMoney" column="DHVALUE"/>
+      	<result property="cfMoney" column="FHDATE"/>
 	</resultMap>
 	
+	<resultMap type="com.kh.duri.happymember.model.vo.DonateItems" id="donateItemsResultSet">
+	<!-- property=컬럼명, column=필드명    반드시 일치! -->
+		<id property="ono" column="ONO"></id>
+		<result property="o_ino" column="O_INO"/>
+		<result property="ovalue" column="OVALUE"/>
+		<result property="o_mno" column="O_MNO"/>
+	</resultMap>
 
+	<select id="selectDonateItemList" resultMap="donateItemsResultSet" parameterType="_int">
+		SELECT * 
+		FROM OWNITEM 
+		WHERE O_MNO=#{mno}
+	</select>
 	
 	
 	

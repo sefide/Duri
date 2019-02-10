@@ -1,18 +1,47 @@
 package com.kh.duri.happymember.controller;
 
+import java.util.ArrayList;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.kh.duri.happymember.model.exception.MypageException;
 import com.kh.duri.happymember.model.service.HappymemberService;
+import com.kh.duri.happymember.model.vo.DonateItems;
 
 @Controller
 public class HappymemberController {
 	//의존성 주입
 	@Autowired
-	private HappymemberService hm;
+	private HappymemberService hs;
 	
-	//마이페이지 - 닉네임 불러오기
+	//마이페이지 - 보유물품 목록 불러오기 ajax
+	@RequestMapping("donateItemList.happy")
+	public @ResponseBody ArrayList<DonateItems> donateItemList(String mno, HttpServletRequest request, HttpServletResponse response) {
+		
+		System.out.println("controller 회원번호 : " + mno);
+		
+		ArrayList<DonateItems> list = null;
+		
+		DonateItems di = new DonateItems();
+		di.setO_mno(Integer.parseInt(mno));
+		
+		try {
+			list = hs.donateItemList(di);
+			
+			System.out.println("controller 보유물품리스트 : " + list);
+			
+		} catch (MypageException e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
 	
 	
 	
