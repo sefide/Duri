@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -22,50 +23,61 @@
     <div id="wrapper">
        <jsp:include page="include/adminNavi.jsp" />
 	
-       
+       <c:forEach var="row" items="${NanumDetailList}">
         <div id="page-wrapper" >
 		  <div class="header"> 
 		<div id="NanumDetailnum" style="display: none;"></div>
                         <h1 class="page-header">
-                            	EH님의 상세페이지
+                            	<strong style="color: #212259;">${row.mName}</strong>님의 상세페이지
                         </h1>
 		</div>
             <div id="page-inner"> 
             	<div class="row">
 				<div class="col-md-12">
 					<div class="panel panel-default">
-						<div class="panel-heading">EH님의 기본정보</div>
+						<div class="panel-heading"><strong style="color: #212259;">${row.mName}</strong> 님의 기본정보</div>
 						<div class="panel-body">
 							<div class="table-responsive">
 								<table class="table table-bordered">
 									<tbody>
 										<tr>
 											<td class="total">아이디</td>
-											<td>han419120</td>
+											<td>${row.mid}</td>
 										</tr>
 										<tr>
 											<td class="total">성별</td>
-											<td>W</td>
+											<c:if test="${row.mGender == 'F'}"><td>여성</td></c:if>
+											<c:if test="${row.mGender == 'M'}"><td>남성</td></c:if>
 										</tr>
 										<tr>
 											<td class="total">휴대전화</td>
-											<td>01055432101</td>
+											<td>${row.mPhone}</td>
 										</tr>
 										<tr>
 											<td class="total">이메일</td>
-											<td>han419120@naver.com</td>
+											<td>${row.email}</td>
 										</tr>
 										<tr>
 											<td class="total">회원등급</td>
-											<td>열매두리</td>
+											<c:choose>
+                                            	<c:when test="${row.mGoalNum <5}">
+                                            		<td>씨앗두리</td>
+                                            	</c:when>
+                                            	<c:when test="${row.mGoalNum <9}">
+                                            		<td>새싹두리</td>
+                                            	</c:when>
+                                            	<c:otherwise>
+                                            		<td>열매두리</td>
+                                            	</c:otherwise>
+                                            </c:choose>
 										</tr>
 										<tr>
 											<td class="total">100%펀딩 달성 횟수</td>
-											<td>5</td>
+											<td>${row.mGoalNum}회</td>
 										</tr>
 										<tr>
 											<td class="total">총 후원금액</td>
-											<td>345,600</td>
+											<td>${row.pValue}원</td>
 										</tr>
 										
 									</tbody>
@@ -78,9 +90,10 @@
 			</div>
 			
 			<h1 class="page-header">
-                            	EH님의 후원내역
+                            	<strong style="color: #212259;">${row.mName}</strong>님의 후원내역
                         </h1>
              <br><br> 
+             </c:forEach>
 			<!-- /. ROW  -->
             <div class="row">
                 <div class="col-md-12">

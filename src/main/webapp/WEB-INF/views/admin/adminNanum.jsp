@@ -1,14 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
+
       <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<meta content="" name="description" />
     <meta content="webthemez" name="author" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    
     <title>나눔두리 관리 페이지</title>
 	<jsp:include page="include/adminStyle.jsp" />
 </head>
@@ -39,6 +42,7 @@
                                             <th>No</th>
                                             <th style="display: none;">회원번호</th>
                                             <th>ID</th>
+                                            <th>이름</th>
                                             <th>닉네임</th>
                                             <th>성별</th>
                                             <th>Email</th>
@@ -53,8 +57,10 @@
                                             <td class="center">${status.count}</td>
                                             <td class="center" style="display: none;">${row.mno}</td>
                                             <td class="center">${row.mid}</td>
+                                            <td class="center">${row.mName}</td>
                                             <td class="center">${row.mNickName}</td>
-                                            <td class="center">${row.mGender}</td>
+                                            <c:if test="${row.mGender == 'F'}"><td class="center">여</td></c:if>
+											<c:if test="${row.mGender == 'M'}"><td class="center">남</td></c:if>
                                             <td class="center">${row.email}</td>
                                             <c:choose>
                                             	<c:when test="${row.mGoalNum <5}">
@@ -111,7 +117,9 @@
                                             <td class="center">${status.count}</td>
                                             <td class="center">${row.dr_mid}</td>
                                             <td class="center">${row.dr_mNo}</td>
+                                           
                                             <td class="center">${row.drRegistNum}</td>
+                                           <!-- 뒤의 6자리 짤라내야함 -->
                                             <td class="center">${row.dr_mPhone}</td>
                                             <td class="center">${row.drApplyDate}</td>
                                             <td class="center">${row.drValue}원</td>

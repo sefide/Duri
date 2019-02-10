@@ -43,16 +43,25 @@ public class AdminNanumController {
 	
 	}
 	
-	//나눔두리 상세조회
+	//나눔두리 상세조회 - 기본정보
 	@RequestMapping("adminNanumDetail.ad")
 	public String adminNanumListDetail(HttpServletRequest request, HttpServletResponse response,Model model,Member m) {
 	 
 		int num = Integer.parseInt(request.getParameter("num"));
 		m.setMno(num);
+		List<Member> NanumDetailList;
+		try {
+			NanumDetailList = ans.adminNanumDetailList(m);
+			model.addAttribute("NanumDetailList", NanumDetailList);
 		
-	 
-	
-		return "admin/adminNanumDetail";
+			return "admin/adminNanumDetail";
+		} catch (ListException e) {
+
+			model.addAttribute("msg", e.getMessage());
+			
+			return "admin/adminNanumDetail";
+		}
+		
 	}
 	
 	
