@@ -29,8 +29,25 @@
 		<result property="mTakeStatus" column="MTAKESTATUS"/>
 	</resultMap>
 	
+	<resultMap type="com.kh.duri.admin.model.vo.Donatelist" id="donateResultSet">
+		<id property="drNo" column="DRNO"></id>
+		<result property="drRegistNum" column="DRREGISTNUM"/>
+		<result property="drApplyDate" column="DRAPPLYDATE"/>
+		<result property="drDonateDate" column="DRDONATEDATE"/>
+		<result property="drValue" column="DRVALUE"/>
+		<result property="dr_mNo" column="MNAME"/>
+		<result property="dr_mid" column="MID"/>
+		<result property="dr_mPhone" column="MPHONE"/>
+	</resultMap>
+	
+	
+	<!-- 나눔두리 전체목록 조회 -->
 	<select id="adminNanumList" resultMap="memberResultSet" parameterType="Member" >
-		SELECT MID,MNICK,MGENDER,MEMAIL,MGOALNUM FROM MEMBER WHERE MTYPE='N' ORDER BY MACCEPTDATE
+		SELECT MNO,MID,MNICK,MGENDER,MEMAIL,MGOALNUM FROM MEMBER WHERE MTYPE='N' ORDER BY MACCEPTDATE
+	</select>
+	<!-- 나눔두리 기부영수증 목록 조회 -->
+	<select id="adminDonateList" resultMap="donateResultSet" parameterType="Donatelist" >
+		SELECT M.MID,M.MNAME,D.DRREGISTNUM,M.MPHONE,D.DRAPPLYDATE,D.DRVALUE,D.DRDONATEDATE FROM MEMBER M JOIN DONATERECEIPT D ON (M.MNO=D.DR_MNO) ORDER BY D.DRAPPLYDATE 
 	</select>
 	
 	
