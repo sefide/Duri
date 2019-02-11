@@ -109,7 +109,7 @@
 		
 		<div id="button" class="textSilver">
 			* 정기후원은 자기소개를 바탕으로 진행되므로 변경할 내용이 있을 시 수정해주세요.<br><br>
-			<button class="massive ui instagram button">자기소개 수정하기</button>
+			<button onclick="location.href='myIntroModify.happy'"class="massive ui instagram button">자기소개 수정하기</button>
 		</div>
 
 	</div><!--// inner E-->

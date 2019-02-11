@@ -15,10 +15,16 @@
   	}
   	
   	b{
-  		color:yellowgreen;
+  		color:gray;
   	}
   	
-
+	#money:hover,#thing:hover{
+		background:orange;
+		color:white;
+		/* margin:10px; */
+		padding:3px 3px;
+		border-radius:8px;
+	}
   </style>
   <body>
     
@@ -27,24 +33,33 @@
 
 
 
-    
-    <div class="hero-wrap" style="background-image: url('/duri/resources/common/images/bg_11.jpg');" data-stellar-background-ratio="0.5">
-      <div class="overlay"></div>
-      <div class="container">
-        <div class="row no-gutters slider-text align-items-center justify-content-center" data-scrollax-parent="true">
-          <div class="col-md-7 ftco-animate text-center" data-scrollax=" properties: { translateY: '70%' }">
-             <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span class="mr-2"><a href="/duri/index.jsp">Home</a></span> <span>일시후원</span></p>
-            <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">일시후원</h1>
-          </div>
-        </div>
-      </div>
-    </div>
 
 
 
     <section class="ftco-section">
       <div class="container">
-        <h3><a href="/duri/views/board/causes.jsp" id="money">금액후원</a><b> | </b><a href="/duri/views/board/causes2.jsp" id="thing">물품후원</a></h3>
+             <div class="row">
+
+        <h3><a href="Eunji_cloudList.bo" id="money">금액후원</a><b> | </b><a href="Eunji_cloudList2.bo" id="thing">물품후원</a></h3>
+
+		<div align="right" style="width:950px">
+		<label>지역 : </label>
+		 <select align="center" style="height:40px; width:150px;">
+        	<option>서울시</option>
+        	<option>경상도</option>
+        	<option>경기도</option>
+        </select>
+        
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <label>유형 : </label>
+        <select align="center" style="height:40px; width:150px;">
+        	<option>기초생활수급자</option>
+        	<option>소년소녀가장</option>
+        	<option>한부모가정</option>
+        </select>
+</div>
+
+      </div>
       	<div class="row">
       		<div class="col-md-4 ftco-animate">
       			<div class="cause-entry">

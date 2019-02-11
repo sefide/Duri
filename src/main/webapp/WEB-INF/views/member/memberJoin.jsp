@@ -20,7 +20,7 @@ html {
 }
 
 body {	
-   background:white; 
+   background:#FFFFA1; 
 /*   background-image: url('/duri/resources/member/images/loginBg.png');
   background-repeat: no-repeat;
   background-size:contain;
@@ -366,6 +366,8 @@ input, select{
 #check{
 	display:none;
 }
+
+
 </style>
 </head>
 <body>
@@ -550,43 +552,23 @@ input, select{
     </div>
 
   
-  <div class="ui button" style="margin:10px" tabindex="0">회원가입</div>
-</form>
-		
 
-        </div> -->
-		</div>
+</form>
+		    
+  	<div align="center">
+		 <button class="ui primary button">
+		   	회원가입
+		</button>
+		<button class="ui button" onclick="location.href='Eunji_happyLogin.me'">
+		  	취소하기
+		</button>
+	</div>
+
 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> 
 <script type="text/javascript">
-$(document).ready(function() {
-  var panelOne = $('.form-panel.two').height(),
-    panelTwo = $('.form-panel.two')[0].scrollHeight;
 
-  $('.form-panel.two').not('.form-panel.two.active').on('click', function(e) {
-    e.preventDefault();
-
-    $('.form-toggle').addClass('visible');
-    $('.form-panel.one').addClass('hidden');
-    $('.form-panel.two').addClass('active');
-    $('.form').animate({
-      'height': panelTwo
-    }, 200);
-  });
-
-  $('.form-toggle').on('click', function(e) {
-    e.preventDefault();
-    $(this).removeClass('visible');
-    $('.form-panel.one').removeClass('hidden');
-    $('.form-panel.two').removeClass('active');
-    $('.form').animate({
-      'height': panelTwo
-    }, 200);
-  });
-});
-
- 
 
 	$("#email").click(function(){
 

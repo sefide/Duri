@@ -34,7 +34,26 @@
     </div>
     </div>
 
-    
+          <div class="row">
+
+		<div align="right" style="width:950px">
+		<label>지역 : </label>
+		 <select align="center" style="height:40px; width:150px;">
+        	<option>서울시</option>
+        	<option>경상도</option>
+        	<option>경기도</option>
+        </select>
+        
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <label>유형 : </label>
+        <select align="center" style="height:40px; width:150px;">
+        	<option>기초생활수급자</option>
+        	<option>소년소녀가장</option>
+        	<option>한부모가정</option>
+        </select>
+</div>
+
+      </div>
     <section class="ftco-section bg-light">
       <div class="container">
         <div class="row">

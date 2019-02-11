@@ -20,7 +20,7 @@ html {
 }
 
 body {	
-   background:white; 
+   background:#FFFFA1; 
 /*   background-image: url('/duri/resources/member/images/loginBg.png');
   background-repeat: no-repeat;
   background-size:contain;
@@ -51,7 +51,7 @@ body {
   position: relative;
   background: #FFFFFF;
   width: 900px;
-  border-radius: 4px;
+  border-radius: 40px;
   box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
   box-sizing: border-box;
   margin: 100px auto 10px;
@@ -365,12 +365,14 @@ input, select{
 
 #intro {
 	display:none;
+	background:white;
     position: absolute;
+    top: 10%;
+    left:5%;
     width: 300px;
-    height: 150px;
-    margin: -150px 0 0 -75px;
-    top: 50%;
-    left: 40%;
+    height: 300px;
+    padding:10px 10px;
+
 }
 
 </style>
@@ -401,7 +403,7 @@ input, select{
         <div class="form-group">
 
         <a href="join.me" class="form-recovery">회원가입</a>
-          <a href="#" class="form-recovery">Forgot Password?</a>
+          <a href="#" class="form-recovery" id="forget">Forgot Password?</a>
         </div>
         <div class="form-group">
           <button id="loginBtn">LogIn</button>
@@ -409,6 +411,7 @@ input, select{
       </form>
     </div>
   </div>
+ </div> 
   
   <div id="intro">
   	<div class="form-group">
@@ -424,6 +427,7 @@ input, select{
         </div>
 
  </div>
+
    
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> 
 <script type="text/javascript">
@@ -451,6 +455,10 @@ $(document).ready(function() {
       'height': panelTwo
     }, 200);
   });
+});
+
+$("#forget").click(function(){
+	$("#intro").show();
 });
 </script>
 </body>
