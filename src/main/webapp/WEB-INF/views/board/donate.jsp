@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"  %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
  <head>
@@ -34,7 +35,7 @@
     </div>
     </div>
 
-          <div class="row">
+     <div class="row">
 
 		<div align="right" style="width:950px">
 		<label>지역 : </label>
@@ -57,12 +58,13 @@
     <section class="ftco-section bg-light">
       <div class="container">
         <div class="row">
+        <c:forEach var="do" items="${doList}">
         	<div class="col-lg-4 d-flex mb-sm-4 ftco-animate">
         		<div class="staff">
         			<div class="d-flex mb-4">
         				<div class="img" style="background-image: url(/duri/resources/common/images/person_1.jpg);"></div>
         				<div class="info ml-4">
-        					<h3><a href="teacher-single.jsp">wewe1596</a></h3>
+        					<h3><a href="teacher-single.jsp"></a></h3>
         					<span class="position">Donated Just now</span>
         					<div class="text">
 		        				<p>현재 <span>2명</span> 참여중<br><a href="long_donate_datail.bo">후원하러가기</a></p>
@@ -71,7 +73,8 @@
         			</div>
         		</div>
         	</div>
-        	<div class="col-lg-4 d-flex mb-sm-4 ftco-animate">
+        	</c:forEach>
+        <!-- 	<div class="col-lg-4 d-flex mb-sm-4 ftco-animate">
         		<div class="staff">
         			<div class="d-flex mb-4">
         				<div class="img" style="background-image: url(/duri/resources/common/images/person_2.jpg);"></div>
@@ -182,7 +185,7 @@
         				</div>
         			</div>
         		</div>
-        	</div>
+        	</div> -->
         </div>
         <div class="row mt-5">
           <div class="col text-center">
