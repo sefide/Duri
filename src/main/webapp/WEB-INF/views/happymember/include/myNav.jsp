@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!-- semantic ui -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
@@ -201,12 +202,14 @@ p {font-size: 20px; text-align: center;}
                                                        
 		<h1 align="center"><&nbsp;보유 물품 현황&nbsp;></h1>
 		<br><br>
-		<div>
+		
+		<div id="itemsList">
 			<!-- 왼쪽 세로 물품 -->
-			<div style="float: left; margin-left:30px;">
-				<div style="float: left;"><input type="radio"/></div>
+			<div id="items1" style="float: left; margin-left:30px;">
+				<!-- <div style="float: left;"><input type="radio"/></div>
 				<div style="float: left;">
-					<h3>&nbsp;&nbsp;생리대중형(10개입)
+					<h3>&nbsp;&nbsp;
+		
 						<select>
 						<option>3</option>
 						<option>2</option>
@@ -246,12 +249,12 @@ p {font-size: 20px; text-align: center;}
 						<option>1</option>
 						</select>
 					</h3>
-				</div>
+				</div> -->
 			</div>
 			
 			<!-- 가운데 세로 물품 -->
-			<div style="float: left; margin-left:80px;">
-				<div style="float: left;"><input type="radio"/></div>
+			<div id="items2" style="float: left; margin-left:80px;">
+				<!-- <div style="float: left;"><input type="radio"/></div>
 				<div style="float: left;">
 					<h3>&nbsp;&nbsp;속옷
 						<select>
@@ -294,12 +297,12 @@ p {font-size: 20px; text-align: center;}
 						</select>
 					</h3>
 				</div>
-				<br>
+				<br> -->
 			</div>
 			
 			<!-- 오른쪽 세로 물품 -->
-			<div style="float: left; margin-left: 150px;">
-				<div style="float: left;"><input type="radio"/></div>
+			<div id="items3" style="margin-left: 300px;">
+				<!-- <div style="float: left;"><input type="radio"/></div>
 				<div style="float: left;">
 					<h3>&nbsp;&nbsp;양말
 						<select>
@@ -341,7 +344,7 @@ p {font-size: 20px; text-align: center;}
 						<option>1</option>
 						</select>
 					</h3>
-				</div>
+				</div> -->
 			</div>
 		</div>
 		<!-- 페이징 -->
@@ -434,9 +437,44 @@ p {font-size: 20px; text-align: center;}
 			type:"get",
 			data:{mno:mno},
 			success:function(data){
-				console.log();
+				console.log(data.ownlist);
+				console.log(data.fundItemList);
+	
+				$itemsList = $("#itemsList");
+				$items1 = $("#items1");
+				$items2 = $("#items2");
+				$items3 = $("#items3");
+				
+				
+				for(var i in data.fundItemList){
+					/* console.log(data.fundItemList[i]); */
+					console.log(data.fundItemList[i].iname);
+					var test = "<div style='float: left;'><input type='radio'/></div><div style='float: left;'><h3>&nbsp;&nbsp;"+data.fundItemList[i].iname+"<select>	<option>3</option><option>2</option><option>1</option></select></h3></div><br><br><br><br><br><br>"
+					$itemsName1 = $("<h3>").text(data.fundItemList[i].iname);
+					if( i < 6){
+						
+						$items1.append(test);
+					} else if(i >= 6 && i < 12){
+						$items2.append(test);
+					} else {
+						$items3.append(test);
+					}
+					
+					//$itemsList.append($items1);
+					
+					/* $itemsName2 = $("<h3>").text(data.fundItemList[i].iname);
+					$items2.append($itemsName2);
+					$itemsList.append($items2);
+					
+					$itemsName3 = $("<h3>").text(data.fundItemList[i].iname);
+					$items3.append($itemsName3);
+					$itemsList.append($items3); */
+				}
+				
+			},
+			error:function(data){
+				console.log("통신실패");
 			}
-			
 		});
 	}
 	

@@ -31,12 +31,19 @@
       	<result property="cfMoney" column="FHDATE"/>
 	</resultMap>
 	
-	<resultMap type="com.kh.duri.happymember.model.vo.DonateItems" id="donateItemsResultSet">
+	<resultMap type="com.kh.duri.happymember.model.vo.MyDonateItems" id="donateItemsResultSet">
 	<!-- property=컬럼명, column=필드명    반드시 일치! -->
 		<id property="ono" column="ONO"></id>
 		<result property="o_ino" column="O_INO"/>
 		<result property="ovalue" column="OVALUE"/>
 		<result property="o_mno" column="O_MNO"/>
+	</resultMap>
+	
+	<resultMap type="com.kh.duri.happymember.model.vo.FundItemList" id="fundItemListResultSet">
+	<!-- property=컬럼명, column=필드명    반드시 일치! -->
+		<id property="ino" column="INO"></id>
+		<result property="iname" column="INAME"/>
+		<result property="iprice" column="IPRICE"/>
 	</resultMap>
 
 	<select id="selectDonateItemList" resultMap="donateItemsResultSet" parameterType="_int">
@@ -45,6 +52,10 @@
 		WHERE O_MNO=#{mno}
 	</select>
 	
+	<select id="selectFundItemList" resultMap="fundItemListResultSet" parameterType="_int">
+		SELECT * 
+		FROM FUNDITEM
+	</select>
 	
 	
 	
