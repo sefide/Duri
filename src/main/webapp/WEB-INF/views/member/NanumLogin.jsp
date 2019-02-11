@@ -7,6 +7,7 @@
 	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css">
 <script src="//code.jquery.com/jquery.min.js"></script>
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/latest/js/bootstrap.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	<meta charset="UTF-8">
 	<title>둘이두리 - 나눔두리 로그인</title>
 
@@ -175,12 +176,12 @@ body {
   color: yellowgreen;
 }
 
-#idCheckBtn,#idCheckBtn2,#idCheckBtn3{
+#idCheckBtn,#idCheckBtn2,#idCheckBtn3,#sendEmail{
 	border:1px solid white;
 	background: #FFFFFF;
   	color: yellowgreen;
 }
-#idCheckBtn:hover,#idCheckBtn2:hover,#idCheckBtn3:hover{
+#idCheckBtn:hover,#idCheckBtn2:hover,#idCheckBtn3:hover,#sendEmail:hover{
 
 	background: yellowgreen;
   	color: #FFFFFF;
@@ -362,6 +363,13 @@ input{
 #check,#check2{
 	display:none;
 }
+
+#join:hover{
+	background:yellowgreen;
+	color:white;
+	border:1px solid white;
+	cursor:pointer;
+}
 </style>
 </head>
 <body>
@@ -405,7 +413,7 @@ input{
       <h1>Join Member</h1>
     </div>
     <div class="form-content">
-      <form id="joinForm" action="/joinNanum.me" method="post" encType="multipart/form-data">
+      <form id="joinForm" name="sub1" action="joinNanum.me" method="post">
 		<table class="boardWrite wth700 mr_auto mt30"><!-- boardWrite S-->
 			<colgroup>
 				<col style="width:20%;">
@@ -416,12 +424,12 @@ input{
 				<th scope="row">*아이디</th>
 				<td>
 					
-					<input id="SId" name="mid" type="text"  required="required">
+					<input id="mid2" name="mid" type="text"  required>
 				</td>
 				
 				<td>
 					<span>
-						&nbsp;&nbsp;<a id="idCheckBtn3" class="btn btn-primary" > 중복확인</a>
+						&nbsp;&nbsp;<a id="idCheckBtn3" onclick="return duplicationCheck();" class="btn btn-primary" > 중복확인</a>
 						<span id="idCheckMsg"></span>
 					</span>
 				</td>
@@ -431,7 +439,7 @@ input{
 			<tr>
 				<th scope="row">*비밀번호</th>
 				<td>
-					<input id="SPwd" name="mpwd" type="password" required="required"> 
+					<input id="mpwd2" name="mpwd" type="password" required="required"> 
 					<span id="pwdCheckMsg"></span>
 				</td>
 
@@ -439,7 +447,7 @@ input{
 			<tr>
 				<th scope="row">*비밀번호 확인</th>
 				<td>
-					<input id="SPwd2" type="password" required="required"> 
+					<input id="mpwd22" type="password" required="required"> 
 				</td>
 		
 			</tr>
@@ -447,7 +455,7 @@ input{
 				<th scope="row">*이름</th>
 				<td>
 					<label for=""></label>
-					<input id="SName" name=mName type="text" required="required"> 
+					<input id="mName" name=mName type="text" required="required"> 
 				</td>
 			</tr>
 			<tr>
@@ -456,7 +464,7 @@ input{
 
 				<td>
 					<label for=""></label>
-					<input id="nickName" name="mNickName" type="text" required="required"> 
+					<input id="mNickName" name="mNickName" type="text" required="required"> 
 				</td>
 			</tr>
 
@@ -464,18 +472,18 @@ input{
 				<th scope="row">휴대폰번호</th>
 				<td>
 					<span>
-						<input id="Sphone" name="mPhone" type="text" placeholder="-없이 입력">
+						<input id="mPhone" name="mPhone" type="text" placeholder="-없이 입력">
 					</span>
 				 </td>
 			</tr>
 			<tr>
 				<th scope="row">*이메일</th>
 				<td>
-					<input id="Semail1" name="email1" class="wth100" type="text" required="required">
+					<input id="mEmail" name="email1" class="wth100" type="text" required="required">
 				</td>
 
 				<td>
-					<input id="Semail2" name="email2" class="wth100" type="text" required="required">
+					<input id="mEmail2" name="email2" class="wth100" type="text" required="required">
 				</td>
 				<td>
 			</tr>
@@ -493,7 +501,7 @@ input{
 				</td>
 				<td>
 					<span>
-						&nbsp;&nbsp;<a id="idCheckBtn" class="btn btn-primary" >인증번호발송</a>
+						&nbsp;&nbsp;<a id="sendEmail" class="btn btn-primary" >인증번호발송</a>
 					<span id="idCheckMsg"></span>
 					</span>
 				</td>
@@ -528,10 +536,10 @@ input{
 			<tr>
 				<th scope="row" >*주민등록번호</th>
 				<td>
-					<input type="text" size="25" name="mBirthDay" id="birth" maxlength="6" required="required">
+					<input type="text" size="25" name="mBirthDay" id="mBirthDay" maxlength="6" required="required">
 				</td>
 				<td>
-					<input type="text" size="25" name="birth" id="birth" maxlength="1" required="required">
+					<input type="text" size="25" name="mGender" id="mGender" maxlength="1" required="required">
 				</td>
 				<td>******</td>
 			</tr>
@@ -540,10 +548,12 @@ input{
 			</tbody>
 			</table>
 			
+			<input type="button" value="가입하기" id="join" onclick="erchk();">
+<!-- 			
 			<div align="center">
-			<button type="reset">작성취소</button>
-			<button type="submit">가입하기</button>
-			</div>
+				<button type="reset">작성취소</button>
+				<button type="submit">가입하기</button>
+			</div> -->
 		</form>
 
 		</div>
@@ -572,8 +582,14 @@ $(document).ready(function() {
 	    }, 200);
 	  });
 
+	  
+	  //회원가입 폼 x눌렀을때 반응
 	  $('.form-toggle').on('click', function(e) {
 	    e.preventDefault();
+	    //모든 정보 초기화
+	    $("#joinForm").each(function() {
+	        this.reset();
+	    });
 	    $(this).removeClass('visible');
 	    $('.form-panel.one').removeClass('hidden');
 	    $('.form-panel.two').removeClass('active');
@@ -587,6 +603,51 @@ $(document).ready(function() {
 		$("#check").show();
 		$("#check2").show();
 	});
+	
+	
+	//필수입력사항 입력 검사
+	function erchk() {
+			if($("#mid2").val()!="" 
+				&& $("#mpwd2").val()!="" && $("#mpwd22").val()!="" && $("#mName").val()!="" 
+				&& $("#mNickName").val()!="" && $("#mEmail").val()!="" && $("#mEmail2").val()!=""
+				&& $("#mBirthDay").val()!="" && $("#mGender").val()!="" ){
+				if($("#mGender").val()=="1" || $("#mGender").val()=="3"){
+					$("#mGender").val("M");
+					document.sub1.submit();	
+				}else if($("#mGender").val()=="2" || $("#mGender").val()=="4"){
+					$("#mGender").val("F");
+					document.sub1.submit();	
+				}
+				
+			}else{
+				swal("필수 입력 사항을 입력해 주세요!");
+			}
+		   
+  }
+	
+	
+	function duplicationCheck(){
+		var mid2 = $("#mid2").val();
+		console.log(mid2);
+		
+		$.ajax({
+			url:"duplicationCheck.me",
+			type:"post",
+			data:{mid2:mid2},
+			success:function(data){
+				/* alert.log(data); */
+				console.log(data.userId);
+			},
+			error:function(status){
+				console.log(status);
+			}
+		});
+		
+		return false;
+	}
+
+
+
 </script>
 </body>
 </html>

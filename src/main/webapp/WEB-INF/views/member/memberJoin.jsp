@@ -52,7 +52,7 @@ body {
   background: #FFFFFF;
   width: 900px;
   border-radius: 4px;
-  box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
+ /*  box-shadow: 0 0 30px rgba(0, 0, 0, 0.1); */
   box-sizing: border-box;
   margin: 100px auto 10px;
   overflow: hidden;
@@ -378,7 +378,7 @@ input, select{
 
   
 
-<form class="ui form">
+<form class="ui form" style="background: none;">
 	<div class="field" style="margin:10px;">
     <label>ID</label>
     <div class="two fields">
@@ -395,11 +395,11 @@ input, select{
     <label>Name</label>
     <div class="two fields">
       <div class="field">
-        <input type="text" name="shipping[first-name]" placeholder="이름을 입력하세요.">
+        <input type="text" name="shipping[first-name]" placeholder="이름을 입력하세요." required>
       </div>
       
       <div class="field">
-        <input type="text" name="shipping[last-name]" placeholder="닉네임을 입력하세요.(실명가능)">
+        <input type="text" name="shipping[last-name]" placeholder="닉네임을 입력하세요.(실명가능)" required>
       </div>
     </div>
   </div>
@@ -408,11 +408,11 @@ input, select{
     <label>Password</label>
     <div class="two fields">
       <div class="field">
-        <input type="password" name="shipping[first-name]" placeholder="비밀번호를 입력하세요.">
+        <input type="password" name="shipping[first-name]" placeholder="비밀번호를 입력하세요." required>
       </div>
 
       <div class="field">
-        <input type="password" name="shipping[last-name]"  placeholder="비밀번호를 확인하세요.">
+        <input type="password" name="shipping[last-name]"  placeholder="비밀번호를 확인하세요." required>
       </div>
     </div>
     </div>

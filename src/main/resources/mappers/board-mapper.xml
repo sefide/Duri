@@ -31,7 +31,7 @@
       	<result property="cfMoney" column="FHVALUE"/>
 	</resultMap>
 	
-	<select id="loginCheck" resultMap="memberResultSet" parameterType="Member">
+	<select id="longDonateList" resultMap="memberResultSet" parameterType="board">
 		<!-- 로그인 함과 동시에 정기후원 금액, 일시후원 받은 총 누적액 불러오기 -->
 		SELECT MNO, MNAME, MNICK ,MGENDER ,MPHONE ,MID ,MPWD ,MEMAIL 
 		,MENROLLDATE ,MPOINT ,MTYPE ,MFUNDTYPE ,MPR ,MPRNEW ,MBIRTHDAY 
@@ -52,21 +52,6 @@
 		WHERE MID=#{mid}
 		AND MPWD=#{mpwd}
 		AND MTYPE='N'
-	</select>
-	
-	<select id="selectDonateList" resultMap="memberResultSet" parameterType="Member">
-		SELECT MNO,MNICK,MFUNDTYPE, MPR,MADDRESS 
-		FROM MEMBER
-		WHERE MTAKESTATUS = '1'
-		OR MTAKESTATUS = '2'
-	</select>
-	
-		<!-- 나눔두리 - 포인트 이력 수 세기 -->
-	<select id="selectDonateListCount" resultType="_int">
-		SELECT COUNT(*)
-		FROM MEMBER
-		WHERE MTAKESTATUS = '1'
-		OR MTAKESTATUS = '2'
 	</select>
 
 
