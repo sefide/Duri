@@ -2,6 +2,9 @@ package com.kh.duri.admin.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,9 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.kh.duri.admin.model.exception.ListException;
 import com.kh.duri.admin.model.service.adminHappyService;
-import com.kh.duri.admin.model.service.adminNanumService;
-import com.kh.duri.admin.model.vo.Donatelist;
-import com.kh.duri.member.model.vo.Member;
+import com.kh.duri.admin.model.vo.adminMember;
+
 
 @Controller
 public class AdminHappyController {
@@ -38,7 +40,7 @@ public class AdminHappyController {
 	public String adminHappyAllList(Model model) {
 		
 		try {
-			List<Member>HappyAlllist = ahs.adminHappyList();
+			List<adminMember>HappyAlllist = ahs.adminHappyList();
 			
 			model.addAttribute("HappyAlllist", HappyAlllist);
 			
@@ -52,13 +54,31 @@ public class AdminHappyController {
 		
 		
 	}
+	//행복두리 상세조회(전체목록에서 들어가는거임)////////////////////////템플릿깨짐시발~~~~~~~~~~~~~~~~~~~~`뷰에서 값만꺼내면됨~
 	@RequestMapping("adminHappyDetail.ad")
-	public String admin16() {
-		return "admin/adminHappyDetail";
+	public String adminHappyDetailList(HttpServletRequest request, HttpServletResponse response,Model model,adminMember m) {
+		
+		int num = Integer.parseInt(request.getParameter("num"));
+		m.setMno(num);
+		List<adminMember> HappyDetailList;
+		try {
+			HappyDetailList = ahs.adminHappyDetailList(m);
+			model.addAttribute("HappyDetailList", HappyDetailList);
+			return "admin/adminHappyDetail";
+			
+		} catch (ListException e) {
+			model.addAttribute("msg", e.getMessage());
+			return "admin/adminHappyDetail";
+		}
+		
+		
+		
+		
+		
 	}
-	@RequestMapping("adminHappyTotalDetail.ad")
+	@RequestMapping("adminHappyAccDetail.ad")
 	public String admin17() {
-		return "admin/adminHappyTotalDetail";
+		return "admin/adminHappyAccDetail";
 	}
 	@RequestMapping("adminNewHappyDetail.ad")
 	public String admin15() {

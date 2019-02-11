@@ -3,11 +3,13 @@ package com.kh.duri.admin.model.service;
 import java.util.List;
 
 import com.kh.duri.admin.model.exception.ListException;
-import com.kh.duri.member.model.vo.Member;
+import com.kh.duri.admin.model.vo.adminMember;
 
 public interface adminHappyService {
 
 	//행복두리 전체목록
-	List<Member> adminHappyList() throws ListException;
+	List<adminMember> adminHappyList() throws ListException;
+	//행복두리 상세보기(기존회원)
+	List<adminMember> adminHappyDetailList(adminMember m)throws ListException;
 
 }
