@@ -9,10 +9,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+
+import com.kh.duri.Nanummember.model.exception.NanumException;
 import com.kh.duri.Nanummember.model.service.NanumMemberService;
 import com.kh.duri.Nanummember.model.vo.Funding;
+import com.kh.duri.Nanummember.model.vo.PageInfo;
+import com.kh.duri.Nanummember.model.vo.Pagination;
 import com.kh.duri.member.model.vo.Member;
+
 
 @Controller
 public class NanumController {
@@ -29,18 +36,74 @@ public class NanumController {
 		return "Nanummember/nanumMain";
 	}
 	
+	// 나눔두리 마이페이지(금액 크라우드 펀딩 - 진행/ 금액크라우드 펀딩- 종료)
 	@RequestMapping("mypage.nanum")
 	public String selectCloudList(Model model, HttpServletRequest request, HttpServletResponse response) {
 		Member m = (Member)request.getSession().getAttribute("loginUser2");
+		int currentPage = 1;
+		int currentPage2 = 1;
 		
-		List<Funding> fList = ns.selectMoneyCloud(m);
+		if(request.getParameter("currentPage") != null) {
+			currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		}
 		
+		if(request.getParameter("currentPage2") != null) {
+			currentPage2 = Integer.parseInt(request.getParameter("currentPage2"));
+		}
 		
-		return "Nanummember/mypage/mypage";
+		try {
+			// 금액 크라우드 펀딩 개수 구하기 - 진행
+			int listCount = ns.getMoneyCloundListCount(m);
+			/*// 금액 크라우드 펀딩 개수 구하기 - 종료
+			int listCount2 = ns.getEndMoneyCloundListCount(m);*/
+			
+			PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
+			/*PageInfo pi2 = Pagination.getPageInfo(currentPage2, listCount2);*/
+			
+			List<Funding> fList = ns.selectMoneyCloud(m,pi);
+			
+			model.addAttribute("fList",fList);
+			model.addAttribute("pi",pi);
+			return "Nanummember/mypage/mypage";
+		} catch (NanumException e) {
+			model.addAttribute("msg", e.getMessage());
+			return "Nanummember/mypage/mypage";
+		}		
 	}
+	
+	//물품 크라우드 펀딩 조회 - 진행 (@ResponseBody를 이용한 ajax)
+	@RequestMapping("ItemClound.nanum")
+	public @ResponseBody String selectItemList(@RequestParam int mno, Model model, HttpServletRequest request, HttpServletResponse response) {
+		
+		System.out.println("ajax mno: "+mno);
+		
+		return "Nanummember/mypage/mypage";	
+	}
+	
+	
+	//정기 후원 조회
 	@RequestMapping("mypageFund.nanum")
-	public String Total4() {
-		return "Nanummember/mypage/mypage_fund";
+	public String selectFundList(Model model, HttpServletRequest request, HttpServletResponse response) {
+		Member m = (Member)request.getSession().getAttribute("loginUser2");
+		int currentPage = 1;
+		
+		if(request.getParameter("currentPage") != null) {
+			currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		}	
+
+		try {
+			int listCount = ns.getDirectFundListCount(m);
+			PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
+			/*List<Funding> dfList = ns.selectDirectFund(m,pi);*/
+			
+			/*model.addAttribute("dfList",dfList);
+			model.addAttribute("pi",pi);*/
+			
+			return "Nanummember/mypage/mypage";
+		} catch (NanumException e) {			
+			e.printStackTrace();
+			return "Nanummember/mypage/mypage";
+		}
 	}
 	
 	@RequestMapping("mypageLetter.nanum")

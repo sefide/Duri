@@ -2,7 +2,7 @@
 <% 
 	String bigtabon="1";
 %>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <!-- semantic ui -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
 <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
@@ -74,10 +74,10 @@
 	
 </style>
 </head>
+
 <body>
 <%@ include file="../../common/navi.jsp" %>
 <%@ include file="../include/header.jsp" %>
-<!-- #wrap {position:relative; width:100%;} -->
 <br><br><br><br>
 			<div class="contBox inner">
 				<%@ include file="../include/tabMypage.jsp"%>
@@ -85,7 +85,7 @@
 			<div class="tableArea">
 				<div id="myTitle"> <i class="hourglass half icon"></i>진행중인 크라우드 펀딩</div>
 				<div style="width: 96%; margin: 0 auto;">
-				<div class="categotyBtn" onclick="#" style="margin-right: 30px;">금액</div>
+				<div class="categotyBtn" onclick="MoneyCloud()" style="margin-right: 30px;">금액</div>
 				<div class="categotyBtn" onclick="#">물품</div>
 				</div>
 				<table>
@@ -98,41 +98,67 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<td>굶어서 영양실조에 걸린 제 동생을 도와주세요</td>
-							<td>80%</td>
-							<td>20,000원</td>
-							<td>X</td>
+						<c:forEach items="${fList}" var = "funding" varStatus="">
+							<tr>
+							<td><c:out value="${funding.fTitle}"/></td>
+							<td></td>
+							<td><c:out value="${funding.fhValue}"/></td>
+							<c:choose>
+								<c:when test="${funding.fStatus eq 'GOAL'}">
+									<td>O</td>
+								</c:when>
+								<c:otherwise>
+									<td>X</td>
+								</c:otherwise>
+							</c:choose>						
 						</tr>
-						<tr>
-							<td>학교에 가고 싶어요</td>
-							<td>70%</td>
-							<td>50,000원</td>
-							<td>X</td>
-						</tr>
-						<tr>
-							<td>추운겨울 월세를 못내서,,,</td>
-							<td>100%</td>
-							<td>40,000원</td>
-							<td>O</td>
-						</tr>
+						</c:forEach>
 					</tbody>
 				</table>
+				
+				
+				
 				<div class="col text-center">
 					<div class="block-27">
 						<ul>
+							<c:if test="${ pi.currentPage <= 1 }">
 							<li><a href="#">&lt;</a></li>
-							<li class="active"><span>1</span></li>
-							<li><a href="#">2</a></li>
-							<li><a href="#">3</a></li>
-							<li><a href="#">4</a></li>
-							<li><a href="#">5</a></li>
-							<li><a href="#">&gt;</a></li>
+							</c:if>
+							<c:if test="${ pi.currentPage > 1 }">
+								<c:url var="blistBack" value="mypage.nanum">
+									<c:param name="currentPage" value="${ pi.currentPage - 1}"/>
+								</c:url>
+								<li><a href="${ blistBack }">&lt;</a></li>
+							</c:if>
+
+							<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+								<c:if test="${ p == pi.currentPage }">
+									<li class="active"><a class="active" href="${ blistCheck }">${ p }</a></li>
+								</c:if>
+								<c:if test="${ p != pi.currentPage }">
+									<c:url var="blistCheck" value="mypage.nanum">
+										<c:param name="currentPage" value="${p}"/>									
+									</c:url>
+									 <li><a href="${ blistCheck }">${ p }</a></li> 									
+								</c:if>
+							</c:forEach>
+							
+							<c:if test="${ pi.currentPage >= pi.maxPage }">
+								<li><a href="#">&gt;</a></li>
+							</c:if>
+							<c:if test="${ pi.currentPage < pi.maxPage }">
+								<c:url var="blistEnd" value="mypage.nanum">
+									<c:param name="currentPage" value="${ pi.currentPage + 1}"/>
+								</c:url>
+								<li><a href="${ blistEnd }">&gt;</a></li>
+							</c:if>
+							
 						</ul>
-					</div>
+						</div>
 				</div>
 			</div>
-
+			
+			
 			<div class="tableArea">
 				<div id="myTitle"><i class="hourglass end icon"></i>종료된 크라우드 펀딩</div>
 				<div style="width: 96%; margin: 0 auto;">
@@ -185,10 +211,26 @@
 			</div>
 		</div>								
 			
-			
-	
-
 	<%@ include file="../include/myNav.jsp" %>
-
+	
+	<script type="text/javascript">
+			function MoneyCloud() {	
+				var mno = ${ sessionScope.loginUser2.mno };
+				console.log("회원번호 : "+mno); 
+				
+				$ajax({
+					url:"ItemClound.nanum",
+					type:"post",
+					data:{mno:mno},
+					success:function(data){
+						console.log(data.mno)	
+					},
+					error:function(status){
+						console.log(status);
+					}				
+				});
+			}
+				
+		</script>	
 </body>
 </html>
