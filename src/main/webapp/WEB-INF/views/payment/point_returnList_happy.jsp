@@ -69,7 +69,7 @@
 		    		<tr>	
 					<td>${ rf.rDate }</td>
 					<td>${ rf.rValue }</td>
-					<td> - </td>
+					<td>${ rf.rName } </td>
 					<td>${ rf.rBank }</td>
 					<td>${ rf.rAccount }</td>
 					<td>

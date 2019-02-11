@@ -6,7 +6,8 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.duri.happymember.model.exception.MypageException;
-import com.kh.duri.happymember.model.vo.DonateItems;
+import com.kh.duri.happymember.model.vo.FundItemList;
+import com.kh.duri.happymember.model.vo.MyDonateItems;
 import com.kh.duri.member.model.vo.Member;
 
 @Repository
@@ -14,17 +15,31 @@ public class HappymemberDaoImpl implements HappymemberDao{
 
 	//마이페이지 - 보유물품 목록 불러오기 ajax
 	@Override
-	public ArrayList<DonateItems> donateItemList(SqlSessionTemplate sqlSession, DonateItems di) throws MypageException {
+	public ArrayList<MyDonateItems> donateItemList(SqlSessionTemplate sqlSession, MyDonateItems mdi) throws MypageException {
 		
-		ArrayList<DonateItems> list = null;
-		int mno = di.getO_mno();
+		ArrayList<MyDonateItems> ownlist = null;
+		int mno = mdi.getO_mno();
 		
-		list = (ArrayList)sqlSession.selectList("HappyMember.selectDonateItemList", mno);
+		ownlist = (ArrayList)sqlSession.selectList("HappyMember.selectDonateItemList", mno);
 		
 		/*System.out.println("Dao 보유물품 리스트 : " + list);*/
 		
 		
-		return list;
+		return ownlist;
+	}
+
+	//후원물품 리스트
+	@Override
+	public ArrayList<FundItemList> fundItemList(SqlSessionTemplate sqlSession) throws MypageException {
+
+		ArrayList<FundItemList> fundItemList = null;
+		/*int ino = fil.getIno();*/
+		
+		fundItemList = (ArrayList)sqlSession.selectList("HappyMember.selectFundItemList");
+		
+		/*System.out.println("Dao 후원물품 리스트 : " + fundItemList);*/
+		
+		return fundItemList;
 	}
 
 

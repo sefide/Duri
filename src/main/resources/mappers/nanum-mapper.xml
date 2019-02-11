@@ -50,10 +50,31 @@
 		<result property="fhMnoGive" column="FH_MNO_GIVE"/>
 	</resultMap>
 	
+	<!-- 진행중인 금액 크라우드 펀딩 개수 조회 -->
+	<select id="selectMoneyCloundListCount" resultType="_int">
+		SELECT COUNT(*)
+		FROM FUNDING f, FUNDHISTORY fh
+		WHERE f.FNO = fh.FH_FNO and fh.FH_MNO_GIVE = #{mno} and f.FTYPE= 'MONEY' 
+	</select>
+	
 	<!-- 진행중인 금액 크라우드 펀딩 조회 -->
-	<!-- <select id="selectMoneyCloud" resultMap="fundingResultSet" parameterType="Funding">
-		
-	</select>  -->
+	<select id="selectMoneyCloud" resultMap="fundingResultSet" parameterType="Funding" resultType="list">
+		SELECT ROWNUM RNUM, FTITLE , FHVALUE ,FSTATUS, FSTARTDATE , FENDDATE
+		FROM(SELECT f.FTITLE , fh.FHVALUE , f.FSTATUS,  f.FSTARTDATE ,f.FENDDATE
+		FROM FUNDING f, FUNDHISTORY fh
+		<![CDATA[
+		WHERE f.FNO = fh.FH_FNO and fh.FH_MNO_GIVE = #{mno} and f.FTYPE= 'MONEY' 
+			and f.fstartdate <= SYSDATE and f.fenddate >= SYSDATE ]]>
+        ORDER BY SYSDATE DESC) 
+	</select> 
+	
+	<!-- 진행중인 금액 크라우드 펀딩 개수 조회 -->
+	<select id="selectDirectFundCount" resultType="_int">
+		SELECT COUNT(*)
+		FROM FUNDING f, FUNDHISTORY fh
+		WHERE f.FNO = fh.FH_FNO and fh.FH_MNO_GIVE = #{mno} and f.FTYPE= 'MONEY' 
+	</select>
+	
 	
 	
   

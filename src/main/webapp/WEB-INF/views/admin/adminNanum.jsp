@@ -118,8 +118,15 @@
                                             <td class="center">${row.dr_mid}</td>
                                             <td class="center">${row.dr_mNo}</td>
                                            
-                                            <td class="center">${row.drRegistNum}</td>
-                                           <!-- 뒤의 6자리 짤라내야함 -->
+                                           <c:choose>
+                                            <c:when test="${row.drRegistNum !=null}">
+	                                           <td class="center">
+	                                           		<c:out value="${fn:substring(row.drRegistNum,0,6)}"/>-
+	                                           		<c:out value="${fn:substring(row.drRegistNum,6,7)}"/>******
+	                                           	</td>
+                                           </c:when>
+                                           </c:choose>
+                                           
                                             <td class="center">${row.dr_mPhone}</td>
                                             <td class="center">${row.drApplyDate}</td>
                                             <td class="center">${row.drValue}원</td>

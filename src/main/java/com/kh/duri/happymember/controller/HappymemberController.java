@@ -1,6 +1,7 @@
 package com.kh.duri.happymember.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -8,11 +9,13 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.duri.happymember.model.exception.MypageException;
 import com.kh.duri.happymember.model.service.HappymemberService;
-import com.kh.duri.happymember.model.vo.DonateItems;
+import com.kh.duri.happymember.model.vo.FundItemList;
+import com.kh.duri.happymember.model.vo.MyDonateItems;
 
 @Controller
 public class HappymemberController {
@@ -22,25 +25,40 @@ public class HappymemberController {
 	
 	//마이페이지 - 보유물품 목록 불러오기 ajax
 	@RequestMapping("donateItemList.happy")
-	public @ResponseBody ArrayList<DonateItems> donateItemList(String mno, HttpServletRequest request, HttpServletResponse response) {
+	public @ResponseBody HashMap<String, Object> items(@RequestParam String mno, HttpServletRequest request, HttpServletResponse response) {
 		
 		System.out.println("controller 회원번호 : " + mno);
+
+		HashMap<String, Object> hmap = new HashMap<String, Object>();
 		
-		ArrayList<DonateItems> list = null;
+		ArrayList<MyDonateItems> ownlist = null;
+		ArrayList<FundItemList> fundItemList = null;
 		
-		DonateItems di = new DonateItems();
-		di.setO_mno(Integer.parseInt(mno));
+		MyDonateItems mdi = new MyDonateItems();
+		mdi.setO_mno(Integer.parseInt(mno));
+		
+		
+		FundItemList fil = new FundItemList();
+		
+		
 		
 		try {
-			list = hs.donateItemList(di);
+			ownlist = hs.donateItemList(mdi);	//보유물품 리스트
 			
-			System.out.println("controller 보유물품리스트 : " + list);
+			fundItemList = hs.fundItemList();	//후원물품 리스트
+			
+			System.out.println("controller 보유물품리스트 : " + ownlist);
+			System.out.println("controller 후원물품리스트 : " + fundItemList);
+			
+			
+			hmap.put("ownlist", ownlist);
+			hmap.put("fundItemList", fundItemList);
+			return hmap;
 			
 		} catch (MypageException e) {
-			e.printStackTrace();
+			hmap.put("msg", e.getMessage());
+			return hmap;
 		}
-		
-		return list;
 	}
 	
 	
