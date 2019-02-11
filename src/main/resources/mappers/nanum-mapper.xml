@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ <mapper namespace="Nanum">
+ 
+	<resultMap type="com.kh.duri.member.model.vo.Member" id="memberResultSet">
+		<id property="mno" column="MNO"></id>
+		<result property="mName" column="MNAME"/>
+		<result property="mNickName" column="MNICK"/>
+		<result property="mGender" column="MGENDER"/>
+		<result property="mPhone" column="MPHONE"/>
+		<result property="mid" column="MID"/>
+		<result property="mpwd" column="MPWD"/>
+		<result property="email" column="MEMAIL"/>
+		<result property="mEnrollDate" column="MENROLLDATE"/>
+		<result property="mPoint" column="MPOINT"/>
+		<result property="mtype" column="MTYPE"/>
+		<result property="mFundtype" column="MFUNDTYPE"/>
+		<result property="mpr" column="MPR"/>
+		<result property="mprNew" column="MPRNEW"/>
+		<result property="mBirthDay" column="MBIRTHDAY"/>
+		<result property="mAddress" column="MADDRESS"/>
+		<result property="mAcceptDate" column="MACCEPTDATE"/>
+		<result property="mGoalNum" column="MGOALNUM"/>
+		<result property="mStatus" column="MSTATUS"/>
+		<result property="mTakeStatus" column="MTAKESTATUS"/>
+	</resultMap> 
+	
+	<resultMap type="com.kh.duri.Nanummember.model.vo.Funding" id="fundingResultSet">
+		<id property="fNo" column="FNO"/> 
+		<result property="fType" column="FTYPE"/>
+		<result property="fTitle" column="FTITLE"/>
+		<result property="fContent" column="FCONTENT"/>
+		<result property="fWriteDate" column="FWRITEDATE"/>
+		<result property="fStartDate" column="FSTARTDATE"/>
+		<result property="fEndDate" column="FENDDATE"/>
+		<result property="fStatus" column="FSTATUS"/>
+		<result property="fValue" column="FVALUE"/>
+		<result property="fWriter" column="FWRITER"/>
+	</resultMap>
+	
+	<resultMap type="com.kh.duri.Nanummember.model.vo.FundHistory" id="fundHistoryResultSet">
+		<id property="fhNo" column="FHNO"/>
+		<result property="fhDate" column="FHDATE"/>
+		<result property="fhValue" column="FHVALUE"/>
+		<result property="fhFno" column="FH_FNO"/>
+		<result property="fhMnoGive" column="FH_MNO_GIVE"/>
+	</resultMap>
+	
+	<!-- 진행중인 금액 크라우드 펀딩 조회 -->
+	<!-- <select id="selectMoneyCloud" resultMap="fundingResultSet" parameterType="Funding">
+		
+	</select>  -->
+	
+	
+  
+  
+  
+ </mapper>
+  

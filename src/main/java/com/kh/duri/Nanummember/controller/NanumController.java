@@ -5,14 +5,20 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.kh.duri.Nanummember.model.service.NanumMemberService;
+import com.kh.duri.Nanummember.model.vo.Funding;
 import com.kh.duri.member.model.vo.Member;
 
 @Controller
 public class NanumController {
+	@Autowired
+	private NanumMemberService ns;
+	
 	
 	@RequestMapping("total.nanum")
 	public String Total1() {
@@ -26,7 +32,8 @@ public class NanumController {
 	@RequestMapping("mypage.nanum")
 	public String selectCloudList(Model model, HttpServletRequest request, HttpServletResponse response) {
 		Member m = (Member)request.getSession().getAttribute("loginUser2");
-		/*List<>*/
+		
+		List<Funding> fList = ns.selectMoneyCloud(m);
 		
 		
 		return "Nanummember/mypage/mypage";
