@@ -24,5 +24,11 @@ public class adminNanumDaoImpl implements adminNanumDao{
 		
 		return sqlsession.selectList("Admin.adminDonateList");
 	}
+	//나눔두리 상세조회 - 기본정보
+	@Override
+	public List<Member> adminNanumDetailList(SqlSessionTemplate sqlsession, Member m) throws ListException {
+		
+		return sqlsession.selectList("Admin.adminNanumDetailList",m);
+	}
 
 }

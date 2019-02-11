@@ -36,6 +36,15 @@ public class adminNanumServiceImpl implements adminNanumService{
 		
 		return list;
 	}
+
+	//나눔두리 상세조회-기본정보
+	@Override
+	public List<Member> adminNanumDetailList(Member m) throws ListException {
+
+		List<Member> list = and.adminNanumDetailList(sqlsession, m);
+		
+		return list;
+	}
 	
 	
 	
