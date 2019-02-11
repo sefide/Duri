@@ -1,14 +1,14 @@
 package com.kh.duri.happymember.model.vo;
 
-public class DonateItems implements java.io.Serializable{
+public class MyDonateItems implements java.io.Serializable{
 	private int ono;	//물품연관번호
 	private int o_ino;	//물품번호
 	private int ovalue;	//수량
 	private int o_mno;	//회원번호
 	
-	public DonateItems() {}
+	public MyDonateItems() {}
 
-	public DonateItems(int ono, int o_ino, int ovalue, int o_mno) {
+	public MyDonateItems(int ono, int o_ino, int ovalue, int o_mno) {
 		super();
 		this.ono = ono;
 		this.o_ino = o_ino;
@@ -50,7 +50,7 @@ public class DonateItems implements java.io.Serializable{
 
 	@Override
 	public String toString() {
-		return "DonateItems [ono=" + ono + ", o_ino=" + o_ino + ", ovalue=" + ovalue + ", o_mno=" + o_mno + "]";
+		return "MyDonateItems [ono=" + ono + ", o_ino=" + o_ino + ", ovalue=" + ovalue + ", o_mno=" + o_mno + "]";
 	}
 	
 	
