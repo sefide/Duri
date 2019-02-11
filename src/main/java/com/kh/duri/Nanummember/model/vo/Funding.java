@@ -5,6 +5,7 @@ import java.sql.Date;
 public class Funding implements java.io.Serializable{
 	private int fNo;
 	private String fType;
+	private String fTitle;
 	private String fContent;
 	private Date fWriteDate;
 	private Date fStartDate;
@@ -12,14 +13,16 @@ public class Funding implements java.io.Serializable{
 	private String fStatus;
 	private int fValue;
 	private int fWriter;
+	private int fhValue;
 	
 	public Funding() {}
 
-	public Funding(int fNo, String fType, String fContent, Date fWriteDate, Date fStartDate, Date fEndDate,
-			String fStatus, int fValue, int fWriter) {
+	public Funding(int fNo, String fType, String fTitle, String fContent, Date fWriteDate, Date fStartDate,
+			Date fEndDate, String fStatus, int fValue, int fWriter, int fhValue) {
 		super();
 		this.fNo = fNo;
 		this.fType = fType;
+		this.fTitle = fTitle;
 		this.fContent = fContent;
 		this.fWriteDate = fWriteDate;
 		this.fStartDate = fStartDate;
@@ -27,13 +30,14 @@ public class Funding implements java.io.Serializable{
 		this.fStatus = fStatus;
 		this.fValue = fValue;
 		this.fWriter = fWriter;
+		this.fhValue = fhValue;
 	}
 
 	@Override
 	public String toString() {
-		return "Funding [fNo=" + fNo + ", fType=" + fType + ", fContent=" + fContent + ", fWriteDate=" + fWriteDate
-				+ ", fStartDate=" + fStartDate + ", fEndDate=" + fEndDate + ", fStatus=" + fStatus + ", fValue="
-				+ fValue + ", fWriter=" + fWriter + "]";
+		return "Funding [fNo=" + fNo + ", fType=" + fType + ", fTitle=" + fTitle + ", fContent=" + fContent
+				+ ", fWriteDate=" + fWriteDate + ", fStartDate=" + fStartDate + ", fEndDate=" + fEndDate + ", fStatus="
+				+ fStatus + ", fValue=" + fValue + ", fWriter=" + fWriter + ", fhValue=" + fhValue + "]";
 	}
 
 	public int getfNo() {
@@ -50,6 +54,14 @@ public class Funding implements java.io.Serializable{
 
 	public void setfType(String fType) {
 		this.fType = fType;
+	}
+
+	public String getfTitle() {
+		return fTitle;
+	}
+
+	public void setfTitle(String fTitle) {
+		this.fTitle = fTitle;
 	}
 
 	public String getfContent() {
@@ -107,6 +119,20 @@ public class Funding implements java.io.Serializable{
 	public void setfWriter(int fWriter) {
 		this.fWriter = fWriter;
 	}
+
+	public int getFhValue() {
+		return fhValue;
+	}
+
+	public void setFhValue(int fhValue) {
+		this.fhValue = fhValue;
+	}
+
+	
+
+	
+
+
 
 	
 	
