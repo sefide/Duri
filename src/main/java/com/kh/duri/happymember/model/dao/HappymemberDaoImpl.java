@@ -1,25 +1,33 @@
 package com.kh.duri.happymember.model.dao;
 
+import java.util.ArrayList;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.duri.happymember.model.exception.MypageException;
+import com.kh.duri.happymember.model.vo.DonateItems;
 import com.kh.duri.member.model.vo.Member;
 
 @Repository
 public class HappymemberDaoImpl implements HappymemberDao{
 
-	/*//마이페이지 - 닉네임 불러오기
+	//마이페이지 - 보유물품 목록 불러오기 ajax
 	@Override
-	public Member selectNickName(SqlSessionTemplate sqlSession, Member m) throws MypageException {
-		Member selectNickName = sqlSession.selectOne("HappyMember.selectNickName", m);
+	public ArrayList<DonateItems> donateItemList(SqlSessionTemplate sqlSession, DonateItems di) throws MypageException {
 		
-		System.out.println("Dao selectNickName : " + selectNickName);
+		ArrayList<DonateItems> list = null;
+		int mno = di.getO_mno();
 		
-		if(selectNickName == null) {
-			throw new MypageException("마이페이지를 불러올 수 없습니다!");
-		}
-		return selectNickName;
-	}*/
+		list = (ArrayList)sqlSession.selectList("HappyMember.selectDonateItemList", mno);
+		
+		/*System.out.println("Dao 보유물품 리스트 : " + list);*/
+		
+		
+		return list;
+	}
+
+
+
 
 }

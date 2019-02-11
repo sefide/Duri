@@ -58,25 +58,25 @@ select {font-size: 15px;}
 p {font-size: 20px; text-align: center;}
 
 /* 닫기 버튼 */
-.close {
+#close {
 	color: #aaa;
 	float: right;
 	font-size: 28px;
 	font-weight: bold;
 }
-.close2 {
+#close2 {
 	color: #aaa;
 	float: right;
 	font-size: 28px;
 	font-weight: bold;
 }
 
-.close:hover, .close:focus {
+#close:hover, #close:focus {
 	color: black;
 	text-decoration: none;
 	cursor: pointer;
 }
-.close2:hover, .close2:focus {
+#close2:hover, #close2:focus {
 	color: black;
 	text-decoration: none;
 	cursor: pointer;
@@ -169,22 +169,23 @@ p {font-size: 20px; text-align: center;}
 			</span>
 			<br>
 			<div style="font-weight: bold; color: white; font-size:20px;">
-				매 달 정기후원 금액 : 200,000 원
+				매 달 정기후원 금액 : ${loginUser.dMoney} 원
 			</div>
 			<div style="font-weight: bold; color: white; font-size:20px;">
-				일시 후원 총 누적액 : 1,507,000 원
+				일시 후원 총 누적액 : ${loginUser.cfMoney} 원
 			</div>
 		</div>
 		
 		<!-- 네비 가운데 -->
-		<div class="box-center" style="float: left;"></div>
+		<div class="box-center" style="float: left;"><input type="hidden" name="mno" value="${loginUser.mno}"/></div>
 		
 		<!-- 네비 오른쪽 -->
 		<div class="box-right">
 			<!-- Trigger/Open The Modal -->
 			<span><a class="a-tag" href="pointReturnListHappy.pm" style="margin-right: 80px;">포인트 환급</a></span>
-			<span><a class="a-tag" id="modalBtn">보유물품</a></span><br>
-			<span><a class="a-tag" href="#" style="margin-right: 80px;">내 정보 수정</a></span>
+
+			<span><a class="a-tag" id="modalBtn" onclick="items(${loginUser.mno});">보유물품</a></span><br>
+			<span><a class="a-tag" href="myInfoModifyHappy.happy" style="margin-right: 80px;">내 정보 수정</a></span>
 			<span><a class="a-tag" id="modalBtn2">알림</a></span><br>
 		</div>
 	</div>
@@ -196,7 +197,7 @@ p {font-size: 20px; text-align: center;}
 	<!-- 내용 -->
 	<div class="modal-content">
 		<!-- 닫기 버튼 -->
-		<span class="close">&times;</span>       
+		<span id="close">&times;</span>       
                                                        
 		<h1 align="center"><&nbsp;보유 물품 현황&nbsp;></h1>
 		<br><br>
@@ -373,7 +374,7 @@ p {font-size: 20px; text-align: center;}
 	<!-- 내용 -->
 	<div class="modal-content2">
 		<!-- 닫기 버튼 -->
-		<span class="close2">&times;</span>  
+		<span id="close2">&times;</span>  
 		
 		<h1 align="center"><&nbsp;내용&nbsp;></h1>
 		<br><br>
@@ -385,37 +386,35 @@ p {font-size: 20px; text-align: center;}
 </div>
 <script>
 
-	//모달 가져오기
-	var modal = document.getElementById("myModal");
-	var modal2 = document.getElementById("myModal2");
-
-	//모달창 여는 a태그
-	var modalbtn = document.getElementById("modalBtn");	//보유물품
-	var modalBtn2 = document.getElementById("modalBtn2"); //알림
-
+	//클릭시 모달 가져오기(보유물품, 알림)
+	/* $(function () {
+        $("#modalBtn").click(function () {
+        	$("#myModal").css("display", "block");
+        });
+     }); */
+     
+	$(function () {
+        $("#modalBtn2").click(function () {
+        	$("#myModal2").css("display", "block");
+        });
+     });
+	
 	//모달 닫기 버튼
-	var modalclose = document.getElementsByClassName("close")[0];
-	var modalclose2 = document.getElementsByClassName("close2")[0];
-	
-	//버튼을 눌렀을 때 모달 창 띄우기
-	modalbtn.onclick = function() {
-		modal.style.display = "block";
-	}
-	modalBtn2.onclick = function(){
-		modal2.style.display = "block";
-	}
-	
-
-	//(x)를 눌렀을 때 모달 창 닫기
-	modalclose.onclick = function() {
-		modal.style.display = "none";
-	}
-	modalclose2.onclick = function() {
-		modal2.style.display = "none";
-	}
-	
+	$(function (){
+		$("#close").click(function(){
+			$("#myModal").css("display", "none");
+		});
+	});
+	$(function (){
+		$("#close2").click(function(){
+			$("#myModal2").css("display", "none");
+		});
+	});
 
 	//외부의 검은 화면 클릭 시 모달 창 닫기
+	var modal = document.getElementById("myModal");
+	var modal2 = document.getElementById("myModal2");
+	
 	window.onclick = function(event) {
 		if (event.target == modal) {
 			modal.style.display = "none";
@@ -423,19 +422,27 @@ p {font-size: 20px; text-align: center;}
 			modal2.style.display = "none";
 		}
 	}
+
+	//보유하고 있는 물품명&수량 뿌리기
+	var mno = 0;
+	function items(mno){
+		$("#myModal").css("display", "block");
+		console.log("ajax 회원번호 : " + mno);
+		
+		$.ajax({
+			url:"donateItemList.happy",
+			type:"get",
+			data:{mno:mno},
+			success:function(data){
+				console.log();
+			}
+			
+		});
+	}
+	
 </script>
 <!-- 물품목록 모달 띄우기 E -->
 
-
-<!-- <script type="text/javascript">
-function openNav() {
-  document.getElementById("myNav").style.width = "100%";
-}
-
-function closeNav() {
-  document.getElementById("myNav").style.width = "0%";
-}
-</script> -->
 </body>
 
 
