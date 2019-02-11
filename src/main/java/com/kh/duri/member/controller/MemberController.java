@@ -89,6 +89,39 @@ public class MemberController {
 		}
 		
 		
+		
+		//로그인 회원가입 메소드(나눔두리)
+		@RequestMapping	("joinNanum.me")
+		public ModelAndView joinNanum(Member m, ModelAndView mv, HttpSession session) {
+				
+		/*	try {*/
+				System.out.println("member : "+m);
+				
+				/*Member loginUser = null; 
+				
+				if(!(m.getMid().equals("mng01")||m.getMid().equals("mng02")||m.getMid().equals("mng03")||m.getMid().equals("mng04"))) {
+					loginUser = ms.loginMember(m); //받아온 아이디와 비밀번호로 로그인 정보 조회
+					
+					session.setAttribute("loginUser", loginUser);	//세션에 뿌려주기
+					
+					mv.setViewName("redirect:goHappyMain.me"); //위처럼 redirect로 뷰페이지이름연결할거랑 똑같음
+				}else {
+					
+					mv.setViewName("redirect:goAdmin.me"); //위처럼 redirect로 뷰페이지이름연결할거랑 똑같음
+				}
+				
+*/
+			/*	
+			} catch (LoginException e) {
+				
+				mv.addObject("msg",e.getMessage());
+				mv.setViewName("common/errorPage");
+			}
+			
+			*/
+			return null;
+		}
+
 	
 	//새로고침하면 로그인계속요청함 ! 방지하기 위해 아래 메서드 생성
 	@RequestMapping("goHappyMain.me")

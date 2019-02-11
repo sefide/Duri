@@ -8,7 +8,7 @@
 <script src="//code.jquery.com/jquery.min.js"></script>
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/latest/js/bootstrap.min.js"></script>
 	<meta charset="UTF-8">
-	<title>http://www.blueb.co.kr</title>
+	<title>둘이두리 - 나눔두리 로그인</title>
 
 <style rel="stylesheet">
 html {
@@ -17,7 +17,7 @@ html {
 }
 
 body {	
-	background:white;
+	background:#FFFFA1;
 /*   background: -webkit-linear-gradient(45deg, rgba(66, 183, 245, 0.8) 0%, rgba(66, 245, 189, 0.4) 100%);
   background: linear-gradient(45deg, rgba(66, 183, 245, 0.8) 0%, rgba(66, 245, 189, 0.4) 100%); */
   color: rgba(0, 0, 0, 0.6);
@@ -43,7 +43,7 @@ body {
   position: relative;
   background: #FFFFFF;
   width: 900px;
-  border-radius: 4px;
+  border-radius: 40px;
   box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
   box-sizing: border-box;
   margin: 100px auto 10px;
@@ -175,12 +175,12 @@ body {
   color: yellowgreen;
 }
 
-#idCheckBtn{
+#idCheckBtn,#idCheckBtn2,#idCheckBtn3{
 	border:1px solid white;
 	background: #FFFFFF;
   	color: yellowgreen;
 }
-#idCheckBtn:hover{
+#idCheckBtn:hover,#idCheckBtn2:hover,#idCheckBtn3:hover{
 
 	background: yellowgreen;
   	color: #FFFFFF;
@@ -331,7 +331,7 @@ input{
 }
 
 
- #two{
+ #two2{
 	position: absolute;
 	top: 150px; 
 	left: 700px;
@@ -359,10 +359,13 @@ input{
 	font-weight:bold;
 }
 
+#check,#check2{
+	display:none;
+}
 </style>
 </head>
 <body>
-<a id="two" style="color:orange">둘이</a><a id="add" style="color:yellowgreen">두리</a>
+<a id="two2" style="color:orange">둘이</a><a id="add" style="color:yellowgreen">두리</a>
 <img src = "/duri/resources/board/images/main.png" id="img1">
 <br><br><br><br><br>
 
@@ -393,12 +396,16 @@ input{
       </form>
     </div>
   </div>
+  
+  
+  <!-- 회원가입 뷰 -->
+  
   <div class="form-panel two">
     <div class="form-header">
       <h1>Join Member</h1>
     </div>
     <div class="form-content">
-      <form id="joinForm" action="<%=request.getContextPath()%>/insertMember.me" method="post">
+      <form id="joinForm" action="/joinNanum.me" method="post" encType="multipart/form-data">
 		<table class="boardWrite wth700 mr_auto mt30"><!-- boardWrite S-->
 			<colgroup>
 				<col style="width:20%;">
@@ -406,15 +413,15 @@ input{
 			</colgroup>
 			<tbody>
 			<tr>
-				<th scope="row">아이디</th>
+				<th scope="row">*아이디</th>
 				<td>
 					
-					<input id="SId" name="userId" type="text">
+					<input id="SId" name="mid" type="text"  required="required">
 				</td>
 				
 				<td>
 					<span>
-						&nbsp;&nbsp;<a id="idCheckBtn" class="btn btn-primary" > 중복확인</a>
+						&nbsp;&nbsp;<a id="idCheckBtn3" class="btn btn-primary" > 중복확인</a>
 						<span id="idCheckMsg"></span>
 					</span>
 				</td>
@@ -422,59 +429,53 @@ input{
 			</tr>
 
 			<tr>
-				<th scope="row">비밀번호</th>
+				<th scope="row">*비밀번호</th>
 				<td>
-					<input id="SPwd" name="userPwd" type="password"> 
+					<input id="SPwd" name="mpwd" type="password" required="required"> 
 					<span id="pwdCheckMsg"></span>
 				</td>
 
 			</tr>
 			<tr>
-				<th scope="row">비밀번호 확인</th>
+				<th scope="row">*비밀번호 확인</th>
 				<td>
-					<input id="SPwd2" type="password"> 
+					<input id="SPwd2" type="password" required="required"> 
 				</td>
 		
 			</tr>
 			<tr>
-				<th scope="row">이름</th>
+				<th scope="row">*이름</th>
 				<td>
 					<label for=""></label>
-					<input id="SName" name="userName" type="text"> 
+					<input id="SName" name=mName type="text" required="required"> 
 				</td>
 			</tr>
 			<tr>
 	
-				<th scope="row">닉네임</th>
+				<th scope="row">*닉네임</th>
 
 				<td>
 					<label for=""></label>
-					<input id="nickName" name="nickName" type="text"> 
+					<input id="nickName" name="mNickName" type="text" required="required"> 
 				</td>
 			</tr>
-			<!-- <tr>
-				<th scope="row">닉네임</th>
-				<td>
-					
-				</td>
-			</tr> -->
-			
+
 			<tr>
 				<th scope="row">휴대폰번호</th>
 				<td>
 					<span>
-						<input id="Sphone" name="phone" type="text" placeholder="-없이 입력">
+						<input id="Sphone" name="mPhone" type="text" placeholder="-없이 입력">
 					</span>
 				 </td>
 			</tr>
 			<tr>
-				<th scope="row">이메일</th>
+				<th scope="row">*이메일</th>
 				<td>
-					<input id="Semail1" name="email1" class="wth100" type="text">
+					<input id="Semail1" name="email1" class="wth100" type="text" required="required">
 				</td>
 
 				<td>
-					<input id="Semail2" name="email2" class="wth100" type="text">
+					<input id="Semail2" name="email2" class="wth100" type="text" required="required">
 				</td>
 				<td>
 			</tr>
@@ -493,7 +494,7 @@ input{
 				<td>
 					<span>
 						&nbsp;&nbsp;<a id="idCheckBtn" class="btn btn-primary" >인증번호발송</a>
-						<span id="idCheckMsg"></span>
+					<span id="idCheckMsg"></span>
 					</span>
 				</td>
 			</tr>
@@ -510,10 +511,10 @@ input{
 					<input type="hidden" value="<%=getRandom()%>" id="randomCode">
 				</td>
 				<td>	
-						<input id="authCode" type="text" placeholder="인증번호를 입력하세요">
+						<input id="check" type="text" placeholder="인증번호를 입력하세요">
 				</td>
 				<td>
-						<span>
+						<span id="check2">
 						&nbsp;&nbsp;<a id="idCheckBtn" class="btn btn-primary" >인증하기</a>
 						<span id="idCheckMsg"></span>
 					</span>
@@ -525,64 +526,67 @@ input{
 
 
 			<tr>
-				<th scope="row" >주민등록번호</th>
+				<th scope="row" >*주민등록번호</th>
 				<td>
-					<input type="text" size="25" name="birth" id="birth" maxlength="6">
+					<input type="text" size="25" name="mBirthDay" id="birth" maxlength="6" required="required">
 				</td>
 				<td>
-					<input type="text" size="25" name="birth" id="birth" maxlength="1">
+					<input type="text" size="25" name="birth" id="birth" maxlength="1" required="required">
 				</td>
 				<td>******</td>
 			</tr>
-			
-			
-			
-			
+         	 
+
 			</tbody>
 			</table>
 			
-		
-			<!-- <div id="fileArea">
-				<input type="file" id="IdCardImg" name="IdCardImg" onchange="loadImg(this, 1)">
-				<input type="file" id="faceImg" name="faceImg" onchange="loadImg(this, 2)">
-			</div> -->
-
-		<div class="form-group">
-          <button type="submit">Register</button>
-        </div>
-		</div>
+			<div align="center">
+			<button type="reset">작성취소</button>
+			<button type="submit">가입하기</button>
+			</div>
 		</form>
+
+		</div>
+
+
+
+
     </div>
   </div>
-</div>
+
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> 
 <script type="text/javascript">
 $(document).ready(function() {
-  var panelOne = $('.form-panel.two').height(),
-    panelTwo = $('.form-panel.two')[0].scrollHeight;
+	  var panelOne = $('.form-panel.two').height(),
+	    panelTwo = $('.form-panel.two')[0].scrollHeight;
 
-  $('.form-panel.two').not('.form-panel.two.active').on('click', function(e) {
-    e.preventDefault();
+	  $('.form-panel.two').not('.form-panel.two.active').on('click', function(e) {
+	    e.preventDefault();
 
-    $('.form-toggle').addClass('visible');
-    $('.form-panel.one').addClass('hidden');
-    $('.form-panel.two').addClass('active');
-    $('.form').animate({
-      'height': panelTwo
-    }, 200);
-  });
+	    $('.form-toggle').addClass('visible');
+	    $('.form-panel.one').addClass('hidden');
+	    $('.form-panel.two').addClass('active');
+	    $('.form').animate({
+	      'height': panelTwo
+	    }, 200);
+	  });
 
-  $('.form-toggle').on('click', function(e) {
-    e.preventDefault();
-    $(this).removeClass('vklmisible');
-    $('.form-panel.one').removeClass('hidden');
-    $('.form-panel.two').removeClass('active');
-    $('.form').animate({
-      'height': panelTwo
-    }, 200);
-  });
-});
+	  $('.form-toggle').on('click', function(e) {
+	    e.preventDefault();
+	    $(this).removeClass('visible');
+	    $('.form-panel.one').removeClass('hidden');
+	    $('.form-panel.two').removeClass('active');
+	    $('.form').animate({
+	      'height': panelTwo
+	    }, 200);
+	  });
+	});
+
+	$("#idCheckBtn").click(function(){
+		$("#check").show();
+		$("#check2").show();
+	});
 </script>
 </body>
 </html>

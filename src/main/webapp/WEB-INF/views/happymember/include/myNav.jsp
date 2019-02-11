@@ -183,8 +183,9 @@ p {font-size: 20px; text-align: center;}
 		<div class="box-right">
 			<!-- Trigger/Open The Modal -->
 			<span><a class="a-tag" href="pointReturnListHappy.pm" style="margin-right: 80px;">포인트 환급</a></span>
+
 			<span><a class="a-tag" id="modalBtn" onclick="items(${loginUser.mno});">보유물품</a></span><br>
-			<span><a class="a-tag" href="#" style="margin-right: 80px;">내 정보 수정</a></span>
+			<span><a class="a-tag" href="myInfoModifyHappy.happy" style="margin-right: 80px;">내 정보 수정</a></span>
 			<span><a class="a-tag" id="modalBtn2">알림</a></span><br>
 		</div>
 	</div>

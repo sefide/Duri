@@ -100,5 +100,15 @@ public class HappymemberController {
 		return "board/about_money";
 	}
 	
+	
+	@RequestMapping("myInfoModifyHappy.happy")
+	public String happt30() {
+		return "happymember/myInfoModify";
+	}
+	
+	@RequestMapping("myIntroModify.happy")
+	public String happt31() {
+		return "happymember/myIntroModify";
+	}
 }
 

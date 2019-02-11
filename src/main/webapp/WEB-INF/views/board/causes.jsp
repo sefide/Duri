@@ -15,10 +15,16 @@
   	}
   	
   	b{
-  		color:yellowgreen;
+  		color:gray;
   	}
   	
-
+	#money:hover,#thing:hover{
+		background:orange;
+		color:white;
+		/* margin:10px; */
+		padding:3px 3px;
+		border-radius:8px;
+	}
   </style>
   <body>
     
@@ -44,7 +50,29 @@
 
     <section class="ftco-section">
       <div class="container">
+      <div class="row">
+
         <h3><a href="Eunji_cloudList.bo" id="money">금액후원</a><b> | </b><a href="Eunji_cloudList2.bo" id="thing">물품후원</a></h3>
+
+		<div align="right" style="width:950px">
+		<label>지역 : </label>
+		 <select align="center" style="height:40px; width:150px;">
+        	<option>서울시</option>
+        	<option>경상도</option>
+        	<option>경기도</option>
+        </select>
+        
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <label>유형 : </label>
+        <select align="center" style="height:40px; width:150px;">
+        	<option>기초생활수급자</option>
+        	<option>소년소녀가장</option>
+        	<option>한부모가정</option>
+        </select>
+</div>
+
+      </div>
+
       	<div class="row">
       		<div class="col-md-4 ftco-animate">
       			<div class="cause-entry">

@@ -30,7 +30,9 @@
 		<property name="defaultAutoCommit" value="false"/><!-- 자동커밋 방지 -->
 	</bean>
 	
-
+	
+	
+	
 	
 		
 </beans>
