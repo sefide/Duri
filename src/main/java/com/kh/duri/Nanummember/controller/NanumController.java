@@ -99,10 +99,10 @@ public class NanumController {
 			/*model.addAttribute("dfList",dfList);
 			model.addAttribute("pi",pi);*/
 			
-			return "Nanummember/mypage/mypage";
+			return "Nanummember/mypage/mypage_fund";
 		} catch (NanumException e) {			
 			e.printStackTrace();
-			return "Nanummember/mypage/mypage";
+			return "Nanummember/mypage/mypage_fund";
 		}
 	}
 	
