@@ -38,10 +38,6 @@ public class HappymemberController {
 		mdi.setO_mno(Integer.parseInt(mno));
 		
 		
-		FundItemList fil = new FundItemList();
-		
-		
-		
 		try {
 			ownlist = hs.donateItemList(mdi);	//보유물품 리스트
 			
