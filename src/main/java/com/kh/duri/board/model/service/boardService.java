@@ -13,4 +13,6 @@ public interface boardService {
 
 	List<Member> selectDonateList(PageInfo pi) throws DonateListException;
 
+	Member longDanateDetail(Member m);
+
 }

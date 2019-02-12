@@ -13,6 +13,23 @@
   	.hero{
   		opacity:0.5;
   	}
+  	
+  	#join{
+	border:1px solid yellowgreen;
+	background: #FFFFFF;
+  	color: yellowgreen;
+	border-radius:5px;
+	width:120px;
+	padding:5px 5px;
+	cursor:pointer;
+}
+
+#join:hover{
+	border:1px solid white;
+	background: yellowgreen;
+  	color: #FFFFFF;
+  	border-radius:5px;
+}
   </style>
   <body>
     
@@ -28,164 +45,39 @@
         <div class="row no-gutters slider-text align-items-center justify-content-center" data-scrollax-parent="true">
           <div class="col-md-7 ftco-animate text-center" data-scrollax=" properties: { translateY: '70%' }">
              <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span class="mr-2"><a href="../index.jsp">Home</a></span> <span>정기후원</span></p>
-            <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">정기후원</h1>
+            <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">정기후원자 목록</h1>
           </div>
         </div>
       </div>
     </div>
     </div>
 
-     <div class="row">
 
-		<div align="right" style="width:950px">
-		<label>지역 : </label>
-		 <select align="center" style="height:40px; width:150px;">
-        	<option>서울시</option>
-        	<option>경상도</option>
-        	<option>경기도</option>
-        </select>
-        
-        &nbsp;&nbsp;&nbsp;&nbsp;
-        <label>유형 : </label>
-        <select align="center" style="height:40px; width:150px;">
-        	<option>기초생활수급자</option>
-        	<option>소년소녀가장</option>
-        	<option>한부모가정</option>
-        </select>
-</div>
-
-      </div>
     <section class="ftco-section bg-light">
       <div class="container">
         <div class="row">
         <c:forEach var="do" items="${doList}">
         	<div class="col-lg-4 d-flex mb-sm-4 ftco-animate">
         		<div class="staff">
-        			<div class="d-flex mb-4">
-        				<div class="img" style="background-image: url(/duri/resources/common/images/person_1.jpg);"></div>
-        				<div class="info ml-4">
-        					<h3><a href="teacher-single.jsp"></a></h3>
-        					<span class="position">Donated Just now</span>
-        					<div class="text">
-		        				<p>현재 <span>2명</span> 참여중<br><a href="long_donate_datail.bo">후원하러가기</a></p>
+        			<div class="d-flex">
+        				<!--<div class="img" style="background-image: url(/duri/resources/common/images/heart_1.png); width:70px; height:70px"></div>-->
+        				<div class="info ml-4" style="width:250px; height:70px; margin:30px">
+        				
+        				<form name="sub1" action="long_donate_detail.bo" method="POST">
+        					<input type="hidden" id="mno" name="mno" value="${do.mno}">
+        					<h3><a href="#" name="mNickName">${do.mNickName}</a></h3>
+        					<span class="position">${do.mFundtype}</span>
+        					<div class="text" style="width:50px">
+		        				<p style="width:300px">현재 <span>2명</span> 참여중&nbsp;&nbsp;&nbsp;&nbsp;
+		        				<input type="submit" value="후원하러가기" id="join"></p>
 		        			</div>
+		        		</form>
         				</div>
         			</div>
         		</div>
         	</div>
         	</c:forEach>
-        <!-- 	<div class="col-lg-4 d-flex mb-sm-4 ftco-animate">
-        		<div class="staff">
-        			<div class="d-flex mb-4">
-        				<div class="img" style="background-image: url(/duri/resources/common/images/person_2.jpg);"></div>
-        				<div class="info ml-4">
-        					<h3><a href="teacher-single.jsp">Ivan Jacobson</a></h3>
-        					<span class="position">Donated Just now</span>
-        					<div class="text">
-		        				<p>Donated <span>$150</span> for <a href="/duri/views/board/about2.jsp">Children Needs Food</a></p>
-		        			</div>
-        				</div>
-        			</div>
-        		</div>
-        	</div>
-        	<div class="col-lg-4 d-flex mb-sm-4 ftco-animate">
-        		<div class="staff">
-        			<div class="d-flex mb-4">
-        				<div class="img" style="background-image: url(/duri/resources/common/images/person_3.jpg);"></div>
-        				<div class="info ml-4">
-        					<h3><a href="teacher-single.jsp">Ivan Jacobson</a></h3>
-        					<span class="position">Donated Just now</span>
-        					<div class="text">
-		        				<p>Donated <span>$250</span> for <a href="#">Children Needs Food</a></p>
-		        			</div>
-        				</div>
-        			</div>
-        		</div>
-        	</div>
-        	<div class="col-lg-4 d-flex mb-sm-4 ftco-animate">
-        		<div class="staff">
-        			<div class="d-flex mb-4">
-        				<div class="img" style="background-image: url(/duri/resources/common/images/person_4.jpg);"></div>
-        				<div class="info ml-4">
-        					<h3><a href="teacher-single.jsp">Ivan Jacobson</a></h3>
-        					<span class="position">Donated Just now</span>
-        					<div class="text">
-		        				<p>Donated <span>$300</span> for <a href="#">Children Needs Food</a></p>
-		        			</div>
-        				</div>
-        			</div>
-        		</div>
-        	</div>
-        	<div class="col-lg-4 d-flex mb-sm-4 ftco-animate">
-        		<div class="staff">
-        			<div class="d-flex mb-4">
-        				<div class="img" style="background-image: url(/duri/resources/common/images/person_5.jpg);"></div>
-        				<div class="info ml-4">
-        					<h3><a href="teacher-single.jsp">Ivan Jacobson</a></h3>
-        					<span class="position">Donated Just now</span>
-        					<div class="text">
-		        				<p>Donated <span>$150</span> for <a href="#">Children Needs Food</a></p>
-		        			</div>
-        				</div>
-        			</div>
-        		</div>
-        	</div>
-        	<div class="col-lg-4 d-flex mb-sm-4 ftco-animate">
-        		<div class="staff">
-        			<div class="d-flex mb-4">
-        				<div class="img" style="background-image: url(/duri/resources/common/images/person_6.jpg);"></div>
-        				<div class="info ml-4">
-        					<h3><a href="teacher-single.jsp">Ivan Jacobson</a></h3>
-        					<span class="position">Donated Just now</span>
-        					<div class="text">
-		        				<p>Donated <span>$250</span> for <a href="#">Children Needs Food</a></p>
-		        			</div>
-        				</div>
-        			</div>
-        		</div>
-        	</div>
-        	<div class="col-lg-4 d-flex mb-sm-4 ftco-animate">
-        		<div class="staff">
-        			<div class="d-flex mb-4">
-        				<div class="img" style="background-image: url(/duri/resources/common/images/person_7.jpg);"></div>
-        				<div class="info ml-4">
-        					<h3><a href="teacher-single.jsp">Ivan Jacobson</a></h3>
-        					<span class="position">Donated Just now</span>
-        					<div class="text">
-		        				<p>Donated <span>$300</span> for <a href="#">Children Needs Food</a></p>
-		        			</div>
-        				</div>
-        			</div>
-        		</div>
-        	</div>
-        	<div class="col-lg-4 d-flex mb-sm-4 ftco-animate">
-        		<div class="staff">
-        			<div class="d-flex mb-4">
-        				<div class="img" style="background-image: url(/duri/resources/common/images/person_8.jpg);"></div>
-        				<div class="info ml-4">
-        					<h3><a href="teacher-single.jsp">Ivan Jacobson</a></h3>
-        					<span class="position">Donated Just now</span>
-        					<div class="text">
-		        				<p>Donated <span>$150</span> for <a href="#">Children Needs Food</a></p>
-		        			</div>
-        				</div>
-        			</div>
-        		</div>
-        	</div>
-        	<div class="col-lg-4 d-flex mb-sm-4 ftco-animate">
-        		<div class="staff">
-        			<div class="d-flex mb-4">
-        				<div class="img" style="background-image: url(/duri/resources/common/images/person_9.jpg);"></div>
-        				<div class="info ml-4">
-        					<h3><a href="teacher-single.jsp">Ivan Jacobson</a></h3>
-        					<span class="position">Donated Just now</span>
-        					<div class="text">
-		        				<p>Donated <span>$250</span> for <a href="#">Children Needs Food</a></p>
-		        			</div>
-        				</div>
-        			</div>
-        		</div>
-        	</div> -->
+        
         </div>
         <div class="row mt-5">
           <div class="col text-center">
@@ -239,6 +131,11 @@
 
   <!-- loader -->
    <jsp:include page="../common/loader.jsp"></jsp:include>
-    
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> 
+    <script>
+    	function goDonate(){
+    		document.sub1.submit();	
+    	}
+    </script>
   </body>
 </html>

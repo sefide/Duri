@@ -14,4 +14,8 @@ public interface boardDao {
 
 	List<Member> selectDonateList(SqlSessionTemplate sqlSession, PageInfo pi) throws DonateListException;
 
+
+
+	Member longDonateDetail(SqlSessionTemplate sqlSession, Member m);
+
 }
