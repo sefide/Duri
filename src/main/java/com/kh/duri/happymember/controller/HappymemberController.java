@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.codec.multipart.SynchronossPartHttpMessageReader;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -56,8 +57,43 @@ public class HappymemberController {
 			return hmap;
 		}
 	}
-	
-	
+
+	//배송받을 물품 선택 후 수량 변경하기
+	@RequestMapping("getDelivery.happy")
+	public String getDelivery(HttpServletRequest request, HttpServletResponse response) {
+		String item = request.getParameter("item");
+		System.out.println("물품번호 : " + item);
+		
+		String itemAmount = request.getParameter("itemAmount");
+		System.out.println("개수 : " + itemAmount);
+		
+		String[] itemNumArray;
+		itemNumArray = item.split("/");
+		
+		String[] itemAmountArray;
+		itemAmountArray = item.split(",");
+		
+		for(int i = 0; i < itemNumArray.length; i++) {
+			System.out.println("itemArray[i] : " + itemNumArray[i]);
+		}
+		for(int i = 0; i < itemAmountArray.length; i++) {
+			System.out.println("itemAmountArray[i] : " + itemAmountArray[i]);
+		}
+		
+		/*try {
+			String[] itemNumArray = hs.getDeliveryNum(itemNumArray);
+			
+			String[] itemAmountArray = hs.getDeliveryAmoun
+			
+			
+		} catch (MypageException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}*/
+		
+		
+		return "happymember/deliveryStatus";
+	}
 	
 	@RequestMapping("mypage.happy")
 	public String happy1() {

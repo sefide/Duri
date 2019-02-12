@@ -17,4 +17,7 @@ public interface HappymemberService {
 	ArrayList<FundItemList> fundItemList() throws MypageException;
 
 
+	
+
+
 }
