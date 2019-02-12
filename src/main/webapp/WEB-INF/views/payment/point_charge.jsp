@@ -320,8 +320,9 @@
 					
 				 	var muid = rsp.merchant_uid;
 			        var price = rsp.paid_amount;
+			        var value = $("#chargeValue").val();
 			        var applyNum = rsp.apply_num;	
-			        location.href="pointChargePayment.pm?price="+price+"&apply="+applyNum+"&mno="+${user.mno};
+			        location.href="pointChargePayment.pm?price="+price+"&apply="+applyNum+"&mno="+${user.mno} + "&value="+value;
 				} else {
 					var msg = '결제에 실패하였습니다.';
 					msg += '에러내용 : ' + rsp.error_msg;

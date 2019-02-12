@@ -31,11 +31,12 @@
 	</bean>
 	
 	<!-- 메일 보내기 -->
-	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+	 <bean id="mailSender" name="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
 		<property name="host" value="smtp.gmail.com" />
 		<property name="port" value="587" />
 		<property name="username" value="wqwq1563@gmail.com" />
 		<property name="password" value="dmswl1596" />
+
 
 
 	<!-- email 요청시는 SMTP -->
@@ -48,5 +49,6 @@
 			</props>
 		</property>
 	</bean>
+
 		
 </beans>

@@ -3,7 +3,7 @@
 	String bigtabon="2";
 %>
 <%@ include file="include/common.jsp" %>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- semantic ui -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
 <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
@@ -26,6 +26,10 @@
 	input[type='text']{
 		height:25px;
 		width:700px;
+	}
+	
+	#listChoice{
+		display:none;
 	}
 </style>
 </head>
@@ -84,14 +88,35 @@
     <tr>
       <td>&nbsp;</td>
       <td align="center" width="180px"><b>후원유형</b></td>
-      <td><input type="radio" id="money" value="money" name="name" size="100px">금액후원
+      <td><input type="radio" id="money" value="money" name="listChoice" size="100px">금액후원
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <input type="radio" id="stuff" value="stuff" name="name">물품후원</td>
+      <input type="radio" id="stuff" value="stuff" name="listChoice">물품후원</td>
       <td>&nbsp;<br>
       <div id="button" class="textSilver">
 		* 물품으로 받을 수 있는 후원은 물품후원을 선택해주세요!<br><br>
 		</div></td>
      </tr>
+     
+
+      <tr id="listChoice" height="1" bgcolor="#dddddd"><td colspan="4"></td></tr>
+     <tr id="listChoice">
+      <td>&nbsp;</td>
+      <td align="center" style="height:50px;"><b>금액후원 유형 선택</b></td>
+      <td>
+     	<select align="center" style="width:150px; height:30px;">
+     		<option>의료비</option>
+     		<option>교육비</option>
+     		<option>생활비</option>
+     	</select>
+	 </td>
+	 <td>&nbsp;<br>
+      <div id="button" class="textSilver">
+		* 펀딩종료 날짜는 현재 날짜 ~ 증빙서류 만료기간까지 가능합니다.
+		</div></td>
+     </tr>
+s
+     
+     
       <tr height="1" bgcolor="#dddddd"><td colspan="4"></td></tr>
     <tr>
       <td>&nbsp;</td>
@@ -102,6 +127,8 @@
 		</div>
 	 </td>
      </tr>
+     
+     
      <tr height="1" bgcolor="#dddddd"><td colspan="4"></td></tr>
      <tr>
       <td>&nbsp;</td>
@@ -159,6 +186,15 @@
 
 </div><!--// Wrap E-->
 </c:if>
+<script>
+var animal = $(':input[name=animal]:radio:checked').val();
+console.log(animal);
 
+
+
+
+
+
+</script>
 </body>
 </html>

@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -157,8 +159,13 @@
     <!-- 네비바 -->
 	<jsp:include page="../common/navi.jsp"/>
    
-    <div id ="nav_back" data-stellar-background-ratio="0.5">
-    </div> 
+    <!-- <div id ="nav_back" data-stellar-background-ratio="0.5">
+    </div>  -->
+    
+    <!-- 정기후원대상자 정보 -->
+    <c:set var = "takeM" value = "${ takeMember }"></c:set>
+    <!-- 후원자(로그인한 나눔두리) -->
+    <c:set var = "giveM" value = "${ sessionScope.loginUser2 }"></c:set>
     
      <section class="ftco-section">
     	<div class="container">
@@ -175,17 +182,17 @@
     				<tr>
     					<th class = "txtColor_o">행복두리</th>
     					<td class = "txtColor_o txtBold">
-    					응디곤듀
-    					(경기도 안성시)
+    					${takeM.mNickName }
+    					(${ takeM.mAddress })
     					</td>
     				</tr>
     				<tr>
     					<th class = "txtColor_o">나눔두리</th>
-    					<td class = "txtColor_o txtBold">다힝천샤</td>
+    					<td class = "txtColor_o txtBold">${ giveM.mName }</td>
     				</tr>
     				<tr>
     					<th>현재보유 포인트</th>
-    					<td><span id = "myPoint">10000</span> 원</td>
+    					<td><span id = "myPoint">${ giveM.mPoint }</span> 원</td>
     				</tr>
     				<tr>
     					<th>후원포인트</th>
@@ -196,7 +203,11 @@
     				</tr>
     				<tr>
     					<th>후원 기간 </th>
-    					<td>2019년 01월 ~ 
+    					<jsp:useBean id="now" class="java.util.Date" />
+ 						<fmt:formatDate value="${now}" pattern="yyyy년 MM월" var="now" />
+ 						<jsp:useBean id="next" class="java.util.Date" />
+ 						<fmt:formatDate value="${next}" pattern="yyyy년 MM월 dd일" var="next" />
+    					<td>${ now } ~ 
     						<br>
     						<div class ="txtInfo">정기 후원은 따로 후원 중지를 신청하지 않을 경우, 나눔두리의 후원 상태 종료 시 자동 종료됩니다.</div>
     					</td>
@@ -204,7 +215,7 @@
     				<tr>
     					<th>다음 후원일 </th>
     					<td>
-    					<div> 2019년 02월 04일 </div>
+    					<div> ${next} </div>
     					<div class ="txtInfo">( 매월 둘째 주 월요일 )</div>
     					</td>
     				</tr>
@@ -215,11 +226,11 @@
     		
     		<div id = "totaldiv">
     			<div> 
-    				<input type ="checkbox" id= "chkinfo"><label for = "chkinfo">정기결제 약관동의 </label> 
+    				<input type ="checkbox" id= "chkinfo1"><label for = "chkinfo1">정기결제 약관동의 </label> 
 	    			<a id = "seeTerms">전문보기 </a> <br>
-	    			<input type ="checkbox" id= "chkinfo"><label for = "chkinfo">정기결제 수수료 약관동의</label> <br>
+	    			<input type ="checkbox" id= "chkinfo2"><label for = "chkinfo2">정기결제 수수료 약관동의</label> <br>
 	    			<a>둘이두리에서는 포인트 결제 시 후원 수수료와 카드 수수료를 부과합니다. 
-후원 수수료의 경우 행복두리의 더 나은 후원받기에만 사용되며 둘이두리의 이윤목적으로는 절대 사용하지 않음을 알립니다.</a>
+					다만 정기결제 시에는 카드 수수료만 부과되며 둘이두리의 이윤목적과는 무관함을 알려드립니다.</a>
     			</div>
     		
     			<div id = "totalBox">

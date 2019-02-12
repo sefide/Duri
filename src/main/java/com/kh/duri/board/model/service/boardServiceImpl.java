@@ -1,18 +1,16 @@
 package com.kh.duri.board.model.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import com.kh.duri.board.model.dao.boardDao;
 import com.kh.duri.board.model.exception.DonateListException;
 import com.kh.duri.member.model.vo.Member;
-import com.kh.duri.payment.model.exception.PointHistoryException;
 import com.kh.duri.payment.model.vo.PageInfo;
-import com.kh.duri.payment.model.vo.Point;
 
 @Component
 public class boardServiceImpl implements boardService {

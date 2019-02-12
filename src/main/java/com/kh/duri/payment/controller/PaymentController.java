@@ -324,9 +324,12 @@ public class PaymentController {
 		String pyPrice = request.getParameter("price");
 		String pyCardNum = request.getParameter("apply");
 		String py_mNo = request.getParameter("mno");
-		/*System.out.println("pyPrice : " + pyPrice);
+		String value = request.getParameter("value");
+		
+		System.out.println("pyPrice : " + pyPrice);
 		System.out.println("pyCardNum : " + pyCardNum);
-		System.out.println("py_mNo : " + py_mNo);*/
+		System.out.println("py_mNo : " + py_mNo);
+		System.out.println("value : " + value);
 		
 		if(pyCardNum.equals("")) {
 			pyCardNum = "kakaopay";
@@ -334,7 +337,7 @@ public class PaymentController {
 		
 		Payment py = new Payment();
 		py.setPy_mNo(Integer.parseInt(py_mNo));
-		py.setPyPrice(pyPrice);
+		py.setPyPrice(value);
 		py.setPyCardNum(pyCardNum);
 		
 		Member m = (Member) request.getSession().getAttribute("loginUser2");
@@ -357,7 +360,24 @@ public class PaymentController {
 	
 	// 정기후원 결제페이지
 	@RequestMapping("directFund.pm")
-	public String directFund() {
+	public String directFund(HttpServletRequest request, HttpServletResponse response, Model model, HttpSession session) {
+		Member loginUser = (Member)session.getAttribute("loginUser2");
+		Member takeMember = new Member();
+		String mno_take = request.getParameter("mno_take");
+		String mnickname_take = request.getParameter("mnickname_take");
+		String maddress_take = request.getParameter("maddress_take");
+		String valueType = request.getParameter("valueType");
+		
+		takeMember.setMno(Integer.parseInt(mno_take));
+		takeMember.setmNickName(mnickname_take);
+		takeMember.setmAddress(maddress_take);
+		
+		System.out.println("후원대상자 : "+ takeMember);
+		System.out.println("후원자 번호 : "+ loginUser.getMno());
+		System.out.println("후원타입: "+ valueType);
+		
+		model.addAttribute("valueType", valueType);
+		model.addAttribute("takeMember", takeMember);
 	    return "payment/pay_directFund";
 	}
 
