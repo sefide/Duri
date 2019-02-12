@@ -150,6 +150,7 @@ p {font-size: 20px; text-align: center;}
 	font-size: 27px; 
 	font-weight: bold;
 	color: orange;
+	width: 50%; 
 }
 .resetBtn:hover {color: silver; cursor: pointer;}
 .deliveryBtn:hover {color: orange; cursor: pointer;}
@@ -203,13 +204,12 @@ p {font-size: 20px; text-align: center;}
 		<h1 align="center"><&nbsp;보유 물품 현황&nbsp;></h1>
 		<br><br>
 		
-		<div id="itemsList">
+		<div id="itemsList" style="height: 550px;">
 			<!-- 왼쪽 세로 물품 -->
 			<div id="items1" style="float: left; margin-left:30px;">
 				<!-- <div style="float: left;"><input type="radio"/></div>
 				<div style="float: left;">
-					<h3>&nbsp;&nbsp;
-		
+					<h3>&nbsp;&nbsp;생리대
 						<select>
 						<option>3</option>
 						<option>2</option>
@@ -217,39 +217,7 @@ p {font-size: 20px; text-align: center;}
 						</select>
 					</h3>
 				</div>
-				<br><br><br><br><br><br>
-				<div style="float: left;"><input type="radio"/></div>
-				<div style="float: left;">
-					<h3>&nbsp;&nbsp;스킨&로션
-						<select>
-						<option>3</option>
-						<option>2</option>
-						<option>1</option>
-						</select>
-					</h3>
-				</div>
-				<br><br><br><br><br><br>
-				<div style="float: left;"><input type="radio"/></div>
-				<div style="float: left;">
-					<h3>&nbsp;&nbsp;쌀
-						<select>
-						<option>3</option>
-						<option>2</option>
-						<option>1</option>
-						</select>
-					</h3>
-				</div>
-				<br><br><br><br><br><br>
-				<div style="float: left;"><input type="radio"/></div>
-				<div style="float: left;">
-					<h3>&nbsp;&nbsp;통조림
-						<select>
-						<option>3</option>
-						<option>2</option>
-						<option>1</option>
-						</select>
-					</h3>
-				</div> -->
+				<br><br><br><br>-->
 			</div>
 			
 			<!-- 가운데 세로 물품 -->
@@ -264,44 +232,11 @@ p {font-size: 20px; text-align: center;}
 						</select>
 					</h3>
 				</div>
-				<br><br><br><br><br><br>
-				<div style="float: left;"><input type="radio"/></div>
-				<div style="float: left;">
-					<h3>&nbsp;&nbsp;도서
-						<select>
-						<option>3</option>
-						<option>2</option>
-						<option>1</option>
-						</select>
-					</h3>
-				</div>
-				<br><br><br><br><br><br>
-				<div style="float: left;"><input type="radio"/></div>
-				<div style="float: left;">
-					<h3>&nbsp;&nbsp;라면
-						<select>
-						<option>3</option>
-						<option>2</option>
-						<option>1</option>
-						</select>
-					</h3>
-				</div>
-				<br><br><br><br><br><br>
-				<div style="float: left;"><input type="radio"/></div>
-				<div style="float: left;">
-					<h3>&nbsp;&nbsp;세제
-						<select>
-						<option>3</option>
-						<option>2</option>
-						<option>1</option>
-						</select>
-					</h3>
-				</div>
-				<br> -->
+				<br><br><br><br>-->
 			</div>
 			
 			<!-- 오른쪽 세로 물품 -->
-			<div id="items3" style="margin-left: 300px;">
+			<div id="items3" style="float: left; margin-left: 100px;">
 				<!-- <div style="float: left;"><input type="radio"/></div>
 				<div style="float: left;">
 					<h3>&nbsp;&nbsp;양말
@@ -312,67 +247,23 @@ p {font-size: 20px; text-align: center;}
 						</select>
 					</h3>
 				</div>
-				<br><br><br><br><br><br>
-				<div style="float: left;"><input type="radio"/></div>
-				<div style="float: left;">
-					<h3>&nbsp;&nbsp;학용품
-						<select>
-						<option>3</option>
-						<option>2</option>
-						<option>1</option>
-						</select>
-					</h3>
-				</div>
-				<br><br><br><br><br><br>
-				<div style="float: left;"><input type="radio"/></div>
-				<div style="float: left;">
-					<h3>&nbsp;&nbsp;스팸
-						<select>
-						<option>3</option>
-						<option>2</option>
-						<option>1</option>
-						</select>
-					</h3>
-				</div>
-				<br><br><br><br><br><br>
-				<div style="float: left;"><input type="radio"/></div>
-				<div style="float: left;">
-					<h3>&nbsp;&nbsp;샴푸&린스
-						<select>
-						<option>3</option>
-						<option>2</option>
-						<option>1</option>
-						</select>
-					</h3>
-				</div> -->
+				<br><br><br><br>-->
 			</div>
 		</div>
-		<!-- 페이징 -->
-		<div class="numbox pt40 pb50"> 
-			<span><a class="num" href="#">&lt;</a></span>
-			<span><a class="num on" href="#">1</a></span>
-			<span><a class="num" href="#">2</a></span>
-			<span><a class="num" href="#">3</a></span>
-			<span><a class="num" href="#">4</a></span>
-			<span><a class="num" href="#">5</a></span>
-			<span><a class="num" href="#">&gt;</a></span>
-		</div>
-		<br><br><br><br><br>
-		<div>
-			<div style="float: left; margin-left: 25%;" class="textBlack1">배송 받을 물품을&nbsp;</div>
+		<br><br><br>
+		<div style="height: 80px;">
+			<div style="float: left; margin-left: 24%" class="textBlack1">배송 받을 물품을&nbsp;</div>
 			<div style="float: left;" class="textOrange1">맞게 선택하셨나요?</div><br>
-			<div style="float: left; margin-left: 8%;" class="textBlack2" >배송 받을 주소가 변경되었다면&nbsp;</div>
+			<div style="float: left; margin-left: 7%" class="textBlack2" >배송 받을 주소가 변경되었다면&nbsp;</div>
 			<div style="float: left;" class="textOrange2">내 정보 수정</div>
 			<div style="float: left;" class="textBlack2">에서 꼭!수정해주세요!&nbsp;</div>
 		</div>
-		<br>
-		<!-- 취소, 배송받기 위에 선 표현 -->
-		<h2 class="ui dividing header">&nbsp;</h2><br>
+		<h4 class="ui dividing header"></h4>
 		<div align="center"><a class="resetBtn">취소</a></div>
 		<div align="center"><a class="deliveryBtn">배송받기</a></div>
 	</div>
 </div>
-
+<!-- 물품목록 모달 띄우기 E -->
 <div id="myModal2" class="modal2">
 	<!-- 내용 -->
 	<div class="modal-content2">
@@ -388,14 +279,8 @@ p {font-size: 20px; text-align: center;}
 	</div>	    
 </div>
 <script>
-
-	//클릭시 모달 가져오기(보유물품, 알림)
-	/* $(function () {
-        $("#modalBtn").click(function () {
-        	$("#myModal").css("display", "block");
-        });
-     }); */
      
+   //클릭시 모달 가져오기(알림)
 	$(function () {
         $("#modalBtn2").click(function () {
         	$("#myModal2").css("display", "block");
@@ -426,6 +311,7 @@ p {font-size: 20px; text-align: center;}
 		}
 	}
 
+	//클릭시 모달 가져오고
 	//보유하고 있는 물품명&수량 뿌리기
 	var mno = 0;
 	function items(mno){
@@ -449,20 +335,22 @@ p {font-size: 20px; text-align: center;}
 				for(var i in data.fundItemList){
 					/* console.log(data.fundItemList[i]); */
 					console.log(data.fundItemList[i].iname);
-					var test = "<div style='float: left;'><input type='radio'/></div><div style='float: left;'><h3>&nbsp;&nbsp;"+data.fundItemList[i].iname+"<select>	<option>3</option><option>2</option><option>1</option></select></h3></div><br><br><br><br><br><br>"
-					$itemsName1 = $("<h3>").text(data.fundItemList[i].iname);
-					if( i < 6){
-						
-						$items1.append(test);
-					} else if(i >= 6 && i < 12){
-						$items2.append(test);
+					console.log(data.ownlist[i]);
+					
+					var fundItemList= "<div style='float: left;'><input type='radio'/></div><div style='float: left;'><h3>&nbsp;&nbsp;"+data.fundItemList[i].iname+"<select>	<option>3</option><option>2</option><option>1</option></select></h3></div><br><br><br><br>"
+					if(i < 7){
+						$items1.append(fundItemList);
+					} else if(i >= 7 && i < 13){
+						$items2.append(fundItemList);
 					} else {
-						$items3.append(test);
+						$items3.append(fundItemList);
 					}
 					
-					//$itemsList.append($items1);
+					/* $itemsName1 = $("<h3>").text(data.fundItemList[i].iname);
+					$items1.append($itemsName1);
+					$itemsList.append($items1);
 					
-					/* $itemsName2 = $("<h3>").text(data.fundItemList[i].iname);
+					$itemsName2 = $("<h3>").text(data.fundItemList[i].iname);
 					$items2.append($itemsName2);
 					$itemsList.append($items2);
 					
@@ -482,5 +370,7 @@ p {font-size: 20px; text-align: center;}
 <!-- 물품목록 모달 띄우기 E -->
 
 </body>
+
+
 
 
