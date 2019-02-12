@@ -221,34 +221,10 @@ p {font-size: 20px; text-align: center;}
 			</div>
 			
 			<!-- 가운데 세로 물품 -->
-			<div id="items2" style="float: left; margin-left:80px;">
-				<!-- <div style="float: left;"><input type="radio"/></div>
-				<div style="float: left;">
-					<h3>&nbsp;&nbsp;속옷
-						<select>
-						<option>3</option>
-						<option>2</option>
-						<option>1</option>
-						</select>
-					</h3>
-				</div>
-				<br><br><br><br>-->
-			</div>
+			<div id="items2" style="float: left; margin-left:80px;"></div>
 			
 			<!-- 오른쪽 세로 물품 -->
-			<div id="items3" style="float: left; margin-left: 100px;">
-				<!-- <div style="float: left;"><input type="radio"/></div>
-				<div style="float: left;">
-					<h3>&nbsp;&nbsp;양말
-						<select>
-						<option>3</option>
-						<option>2</option>
-						<option>1</option>
-						</select>
-					</h3>
-				</div>
-				<br><br><br><br>-->
-			</div>
+			<div id="items3" style="float: left; margin-left: 100px;"></div>
 		</div>
 		<br><br><br>
 		<div style="height: 80px;">
@@ -260,10 +236,12 @@ p {font-size: 20px; text-align: center;}
 		</div>
 		<h4 class="ui dividing header"></h4>
 		<div align="center"><a class="resetBtn">취소</a></div>
-		<div align="center"><a class="deliveryBtn">배송받기</a></div>
+		<div align="center"><a onclick="getDelivery" class="deliveryBtn">배송받기</a></div>
 	</div>
 </div>
 <!-- 물품목록 모달 띄우기 E -->
+
+<!-- 알림 모달 띄우기 S -->
 <div id="myModal2" class="modal2">
 	<!-- 내용 -->
 	<div class="modal-content2">
@@ -278,6 +256,7 @@ p {font-size: 20px; text-align: center;}
 		</div>
 	</div>	    
 </div>
+<!-- 알림 모달 띄우기 E -->
 <script>
      
    //클릭시 모달 가져오기(알림)
@@ -299,7 +278,7 @@ p {font-size: 20px; text-align: center;}
 		});
 	});
 
-	//외부의 검은 화면 클릭 시 모달 창 닫기
+	/* //외부의 검은 화면 클릭 시 모달 창 닫기
 	var modal = document.getElementById("myModal");
 	var modal2 = document.getElementById("myModal2");
 	
@@ -309,7 +288,7 @@ p {font-size: 20px; text-align: center;}
 		}else if(event.target == modal2){
 			modal2.style.display = "none";
 		}
-	}
+	} */
 
 	//클릭시 모달 가져오고
 	//보유하고 있는 물품명&수량 뿌리기
@@ -334,29 +313,48 @@ p {font-size: 20px; text-align: center;}
 				
 				for(var i in data.fundItemList){
 					/* console.log(data.fundItemList[i]); */
-					console.log(data.fundItemList[i].iname);
-					console.log(data.ownlist[i]);
+					console.log(data.fundItemList[i].iname);//후원가능 물품 명 다 뽑기
+					console.log(data.ownlist[i]);//보유 물품 뽑기(번호, 수량 등)
 					
-					var fundItemList= "<div style='float: left;'><input type='radio'/></div><div style='float: left;'><h3>&nbsp;&nbsp;"+data.fundItemList[i].iname+"<select>	<option>3</option><option>2</option><option>1</option></select></h3></div><br><br><br><br>"
+					//물품명 뽑기
+					var fundItemList01= "<div style='float: left;'><input type='radio'/></div><div style='float: left;'><h3>&nbsp;&nbsp;"+data.fundItemList[i].iname;
+					var fundItemList02= "</h3></div><br><br><br><br>"
+					
+						//수량 뽑기
+						$itemsSelect = $("<select>");
+						$itemsSelect.append($("<option>").text(0));
+						var itemsOption = "";
+						//<select>	<option>3</option><option>2</option><option>1</option></select>
+						for(var o in data.ownlist){//보유물품리스트를 순서대로 인덱스를 줘서 정보 뽑기
+							console.log("보유물품번호 : " + data.ownlist[o].o_ino + "/ 후원물품번호 : " + data.fundItemList[i].ino);
+							if(data.ownlist[o].o_ino == data.fundItemList[i].ino){
+								console.log("if문 진입했습니다용")
+								var optionStart = "<option>";
+								var optionEnd = "</option>";
+								$itemsSelect.empty();
+								
+								for(var j = data.ownlist[o].ovalue; j >0; j--){
+									console.log("오 !!option 추가했다");
+									itemsOption = (optionStart+ j + optionEnd);
+									$itemsSelect.append(itemsOption);
+								}
+							}
+						}
+						
+					console.log($itemsSelect);
 					if(i < 7){
-						$items1.append(fundItemList);
+						$items1.append(fundItemList01);
+						$items1.append($itemsSelect);
+						$items1.append(fundItemList02);
 					} else if(i >= 7 && i < 13){
-						$items2.append(fundItemList);
+						$items2.append(fundItemList01);
+						$items2.append($itemsSelect);
+						$items2.append(fundItemList02);
 					} else {
-						$items3.append(fundItemList);
+						$items3.append(fundItemList01);
+						$items3.append($itemsSelect);
+						$items3.append(fundItemList02);
 					}
-					
-					/* $itemsName1 = $("<h3>").text(data.fundItemList[i].iname);
-					$items1.append($itemsName1);
-					$itemsList.append($items1);
-					
-					$itemsName2 = $("<h3>").text(data.fundItemList[i].iname);
-					$items2.append($itemsName2);
-					$itemsList.append($items2);
-					
-					$itemsName3 = $("<h3>").text(data.fundItemList[i].iname);
-					$items3.append($itemsName3);
-					$itemsList.append($items3); */
 				}
 				
 			},
@@ -367,7 +365,6 @@ p {font-size: 20px; text-align: center;}
 	}
 	
 </script>
-<!-- 물품목록 모달 띄우기 E -->
 
 </body>
 
