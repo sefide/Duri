@@ -109,7 +109,7 @@
                                             <td class="center">W</td>
                                             <td class="center">2018/10/11</td>
                                             <td class="center">제출</td>
-                                            <td class="center"><a href="adminHappyDetail.ad" class="btn btn-default btn-sm">상세보기</a></td>
+                                            <td class="center"><a href="adminHappyAccDetail.ad" class="btn btn-default btn-sm">상세보기</a></td>
                                         </tr>
                                         <tr class="odd gradeX">
                                             <td class="center">1</td>
@@ -119,7 +119,7 @@
                                             <td class="center">W</td>
                                             <td class="center">2018/10/11</td>
                                             <td class="center">제출</td>
-                                            <td class="center"><a href="adminHappyDetail.ad" class="btn btn-default btn-sm">상세보기</a></td>
+                                            <td class="center"><a href="adminHappyAccDetail.ad" class="btn btn-default btn-sm">상세보기</a></td>
                                         </tr>
                                         <tr class="odd gradeX">
                                             <td class="center">1</td>
@@ -129,7 +129,7 @@
                                             <td class="center">W</td>
                                             <td class="center">2018/10/11</td>
                                             <td class="center">미제출</td>
-                                            <td class="center"><a href="adminHappyDetail.ad" class="btn btn-default btn-sm">상세보기</a></td>
+                                            <td class="center"><a href="adminHappyAccDetail.ad" class="btn btn-default btn-sm">상세보기</a></td>
                                         </tr>
                                         
                                     </tbody>
@@ -171,7 +171,7 @@
                                             <td class="center">W</td>
                                             <td class="center">2018/10/11</td>
                                             <td class="center">제출</td>
-                                            <td class="center"><a href="adminHappyDetail.ad" class="btn btn-default btn-sm">상세보기</a></td>
+                                            <td class="center"><a href="adminHappyAccDetail.ad" class="btn btn-default btn-sm">상세보기</a></td>
                                         </tr>
                                         <tr class="odd gradeX">
                                             <td class="center">1</td>
@@ -181,7 +181,7 @@
                                             <td class="center">W</td>
                                             <td class="center">2018/10/11</td>
                                             <td class="center">제출</td>
-                                            <td class="center"><a href="adminHappyDetail.ad" class="btn btn-default btn-sm">상세보기</a></td>
+                                            <td class="center"><a href="adminHappyAccDetail.ad" class="btn btn-default btn-sm">상세보기</a></td>
                                         </tr>
                                         <tr class="odd gradeX">
                                             <td class="center">1</td>
@@ -191,7 +191,7 @@
                                             <td class="center">W</td>
                                             <td class="center">2018/10/11</td>
                                             <td class="center">미제출</td>
-                                            <td class="center"><a href="adminHappyDetail.ad" class="btn btn-default btn-sm">상세보기</a></td>
+                                            <td class="center"><a href="adminHappyAccDetail.ad" class="btn btn-default btn-sm">상세보기</a></td>
                                         </tr>
                                         
                                     </tbody>

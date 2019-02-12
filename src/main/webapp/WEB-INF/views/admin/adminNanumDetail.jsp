@@ -26,7 +26,6 @@
        <c:forEach var="row" items="${NanumDetailList}">
         <div id="page-wrapper" >
 		  <div class="header"> 
-		<div id="NanumDetailnum" style="display: none;"></div>
                         <h1 class="page-header">
                             	<strong style="color: #212259;">${row.mName}</strong>님의 상세페이지
                         </h1>
@@ -43,6 +42,10 @@
 										<tr>
 											<td class="total">아이디</td>
 											<td>${row.mid}</td>
+										</tr>
+										<tr>
+											<td class="total">닉네임</td>
+											<td>${row.mNickName}</td>
 										</tr>
 										<tr>
 											<td class="total">성별</td>
@@ -93,7 +96,7 @@
                             	<strong style="color: #212259;">${row.mName}</strong>님의 후원내역
                         </h1>
              <br><br> 
-             </c:forEach>
+            </c:forEach>
 			<!-- /. ROW  -->
             <div class="row">
                 <div class="col-md-12">

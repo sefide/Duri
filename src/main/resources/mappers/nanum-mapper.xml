@@ -68,7 +68,7 @@
         ORDER BY SYSDATE DESC) 
 	</select> 
 	
-	<!-- 진행중인 금액 크라우드 펀딩 개수 조회 -->
+	<!-- 정기후원 개수 조회 -->
 	<select id="selectDirectFundCount" resultType="_int">
 		SELECT COUNT(*)
 		FROM FUNDING f, FUNDHISTORY fh

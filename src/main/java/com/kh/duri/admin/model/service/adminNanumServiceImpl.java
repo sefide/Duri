@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import com.kh.duri.admin.model.dao.adminNanumDao;
 import com.kh.duri.admin.model.exception.ListException;
 import com.kh.duri.admin.model.vo.Donatelist;
-import com.kh.duri.member.model.vo.Member;
+import com.kh.duri.admin.model.vo.adminMember;
 
 @Service
 public class adminNanumServiceImpl implements adminNanumService{
@@ -21,9 +21,9 @@ public class adminNanumServiceImpl implements adminNanumService{
 	
 	//나눔두리 전체목록
 	@Override
-	public List<Member> adminNanumList() throws ListException {
+	public List<adminMember> adminNanumList() throws ListException {
 		
-		List<Member> list = and.adminNanumList(sqlsession);
+		List<adminMember> list = and.adminNanumList(sqlsession);
 		
 		return list;
 	}
@@ -39,9 +39,9 @@ public class adminNanumServiceImpl implements adminNanumService{
 
 	//나눔두리 상세조회-기본정보
 	@Override
-	public List<Member> adminNanumDetailList(Member m) throws ListException {
+	public List<adminMember> adminNanumDetailList(adminMember m) throws ListException {
 
-		List<Member> list = and.adminNanumDetailList(sqlsession, m);
+		List<adminMember> list = and.adminNanumDetailList(sqlsession, m);
 		
 		return list;
 	}

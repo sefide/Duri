@@ -66,7 +66,9 @@
                                             <c:if test="${row.mprNew != null}">
                                             <td class="center">Y</td>
                                             </c:if>
-                                            <td class="center"><a href="adminHappyTotalDetail.ad" class="btn btn-default btn-sm">상세보기</a></td>
+                                            <td class="center">
+                                            <a class="btn btn-default btn-sm HappyDetail">상세보기</a>
+                                            </td>
                                         </tr>
                                     </c:forEach>
                                     </tbody>
@@ -83,5 +85,13 @@
         <!-- /. PAGE WRAPPER  -->
 
                <jsp:include page="include/admintableFooter.jsp"/>
+               
+     <script type="text/javascript">
+    	$(".HappyDetail").click(function () {
+			var num = $(this).parent().parent().children().eq(1).text();
+			location.href= "adminHappyDetail.ad?num="+num; 
+		});
+    
+    </script>
 </body>
 </html>
