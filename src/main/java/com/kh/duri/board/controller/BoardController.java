@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.duri.board.model.exception.DonateListException;
@@ -80,11 +81,39 @@ public class BoardController {
 		
 		
 	}
+
+	@RequestMapping("long_donate_detail.bo")
+	public ModelAndView request(Member m, ModelAndView mv,HttpSession session){ 
 	
-	@RequestMapping("long_donate_datail.bo")
+	
+			System.out.println("member : "+m);
+			
+			Member longDetail = null; 
+			
+			
+			longDetail = bs.longDanateDetail(m); //받아온 아이디와 비밀번호로 로그인 정보 조회
+				
+			session.setAttribute("longDetail", longDetail);	//세션에 뿌려주기
+				
+				mv.setViewName("redirect:longDonate.bo"); //위처럼 redirect로 뷰페이지이름연결할거랑 똑같음
+	
+			
+
+		
+		return mv;
+		
+
+		}
+
+
+
+	
+	
+	@RequestMapping("longDonate.bo")
 	public String eunji7() {
 		return "board/about_long";
 	}
+	
 	
 	@RequestMapping("cloud_money_datail.bo")
 	public String eunji8() {

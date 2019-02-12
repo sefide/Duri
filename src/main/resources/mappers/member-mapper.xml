@@ -68,6 +68,12 @@
 		WHERE MTAKESTATUS = '1'
 		OR MTAKESTATUS = '2'
 	</select>
+	
+	<select id="selectLongList" resultMap="memberResultSet" resultType="Member">
+		SELECT *
+		FROM MEMBER
+		WHERE MNO = ${mno}
+	</select>
 
 
 	

@@ -38,6 +38,17 @@ public class boardServiceImpl implements boardService {
 		return doList;
 	}
 
+	@Override
+	public Member longDanateDetail(Member m) {
+
+		Member longDetail = bd.longDonateDetail(sqlSession, m);	//DAO로 Member 정보와 sqlSession 전송
+		
+		return longDetail;
+
+
+	}
+
+
 
 
 }
