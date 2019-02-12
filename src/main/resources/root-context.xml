@@ -38,6 +38,7 @@
 		<property name="password" value="dmswl1596" />
 
 
+
 	<!--  email 요청시는 SMTP -->
 		<property name="javaMailProperties">
 			<props>
@@ -48,5 +49,6 @@
 			</props>
 		</property>
 	</bean> 
+
 		
 </beans>
