@@ -15,9 +15,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.duri.Nanummember.model.exception.NanumException;
 import com.kh.duri.Nanummember.model.service.NanumMemberService;
+import com.kh.duri.Nanummember.model.vo.DirectFundHistory;
 import com.kh.duri.Nanummember.model.vo.Funding;
+import com.kh.duri.Nanummember.model.vo.Letter;
 import com.kh.duri.Nanummember.model.vo.PageInfo;
 import com.kh.duri.Nanummember.model.vo.Pagination;
+import com.kh.duri.Nanummember.model.vo.SelectDirectFund;
 import com.kh.duri.member.model.vo.Member;
 
 
@@ -41,30 +44,25 @@ public class NanumController {
 	public String selectCloudList(Model model, HttpServletRequest request, HttpServletResponse response) {
 		Member m = (Member)request.getSession().getAttribute("loginUser2");
 		int currentPage = 1;
-		int currentPage2 = 1;
-		
+		int currentPage2 = 1;		
 		if(request.getParameter("currentPage") != null) {
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
-		}
-		
+		}		
 		if(request.getParameter("currentPage2") != null) {
 			currentPage2 = Integer.parseInt(request.getParameter("currentPage2"));
-		}
-		
+		}		
 		try {
-			// 금액 크라우드 펀딩 개수 구하기 - 진행
 			int listCount = ns.getMoneyCloundListCount(m);
-			/*// 금액 크라우드 펀딩 개수 구하기 - 종료
-			int listCount2 = ns.getEndMoneyCloundListCount(m);*/
-			
+			int listCount2 = ns.getEndMoneyCloundListCount2(m);		
 			PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
-			/*PageInfo pi2 = Pagination.getPageInfo(currentPage2, listCount2);*/
-			
+			PageInfo pi2 = Pagination.getPageInfo(currentPage2, listCount2);			
 			List<Funding> fList = ns.selectMoneyCloud(m,pi);
-			
+			List<Funding> fList2 = ns.selectMoneyCloud2(m,pi2);		
 			model.addAttribute("fList",fList);
 			model.addAttribute("pi",pi);
-			return "Nanummember/mypage/mypage";
+			model.addAttribute("fList2",fList2);
+			model.addAttribute("pi2",pi2);			
+			return "Nanummember/mypage/mypage";			
 		} catch (NanumException e) {
 			model.addAttribute("msg", e.getMessage());
 			return "Nanummember/mypage/mypage";
@@ -79,26 +77,30 @@ public class NanumController {
 		
 		return "Nanummember/mypage/mypage";	
 	}
-	
-	
+		
 	//정기 후원 조회
 	@RequestMapping("mypageFund.nanum")
 	public String selectFundList(Model model, HttpServletRequest request, HttpServletResponse response) {
 		Member m = (Member)request.getSession().getAttribute("loginUser2");
 		int currentPage = 1;
-		
+		int currentPage2 = 1;		
 		if(request.getParameter("currentPage") != null) {
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
-		}	
-
+		}
+		if(request.getParameter("currentPage2") != null) {
+			currentPage = Integer.parseInt(request.getParameter("currentPage2"));
+		}
 		try {
 			int listCount = ns.getDirectFundListCount(m);
+			int listCount2 = ns.getDirectFundListCount2(m);			
 			PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
-			/*List<Funding> dfList = ns.selectDirectFund(m,pi);*/
-			
-			/*model.addAttribute("dfList",dfList);
-			model.addAttribute("pi",pi);*/
-			
+			PageInfo pi2 = Pagination.getPageInfo(currentPage2, listCount2);			
+			List<SelectDirectFund> dfList = ns.selectDirectFund(m,pi);
+			List<SelectDirectFund> dfList2 = ns.selectDirectFund2(m,pi2);
+			model.addAttribute("dfList",dfList);
+			model.addAttribute("pi",pi);
+			model.addAttribute("dfList2",dfList2);
+			model.addAttribute("pi2",pi2);
 			return "Nanummember/mypage/mypage_fund";
 		} catch (NanumException e) {			
 			e.printStackTrace();
@@ -106,9 +108,27 @@ public class NanumController {
 		}
 	}
 	
+	//감사편지 조회
 	@RequestMapping("mypageLetter.nanum")
-	public String Total5() {
-		return "Nanummember/mypage/mypage_letter";
+	public String selectLetterList(Model model, HttpServletRequest request, HttpServletResponse response) {
+		Member m = (Member)request.getSession().getAttribute("loginUser2");
+		int currentPage = 1;
+		if(request.getParameter("currentPage") != null) {
+			currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		}
+		try {
+			int listCount = ns.getDirectLetterListCount(m);
+			PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
+			List<Letter> dlList = ns.selectDirectLetter(m,pi);
+			model.addAttribute("dlList",dlList);
+			model.addAttribute("pi",pi);
+			return "Nanummember/mypage/mypage_letter";
+		} catch (NanumException e) {
+			e.printStackTrace();
+			return "Nanummember/mypage/mypage_letter";
+		}
+		
+		
 	}
 	
 	@RequestMapping("mypageLetterDetail.nanum")

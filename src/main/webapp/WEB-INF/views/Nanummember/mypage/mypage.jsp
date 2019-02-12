@@ -43,6 +43,10 @@
 		font-weight: bold;
 		font-size: 17px;
 	}
+	tr:hover{
+		cursor: pointer;
+		background : #f2f1ed;
+	}
 	tr{
 		height : 50px;
 	}
@@ -88,12 +92,13 @@
 				<div class="categotyBtn" onclick="MoneyCloud()" style="margin-right: 30px;">금액</div>
 				<div class="categotyBtn" onclick="#">물품</div>
 				</div>
-				<table>
+				<table id="MoneyCloudTbl">
 					<thead>
 						<tr>
-							<th style="width: 45%;">제목</th>
+							<th style="width: 40%;">제목</th>
 							<th style="width: 15%;">진행현황</th>
-							<th style="width: 30%;">내가 후원한 호인트</th>
+							<th style="width: 15%;">내가 후원한 호인트</th>
+							<th style="width: 15%;">후원 일시</th>
 							<th style="width: 15%;">100%달성여부</th>
 						</tr>
 					</thead>
@@ -103,6 +108,8 @@
 							<td><c:out value="${funding.fTitle}"/></td>
 							<td></td>
 							<td><c:out value="${funding.fhValue}"/></td>
+							
+							<td><c:out value="${funding.fhDate}"></c:out></td>
 							<c:choose>
 								<c:when test="${funding.fStatus eq 'GOAL'}">
 									<td>O</td>
@@ -151,8 +158,7 @@
 									<c:param name="currentPage" value="${ pi.currentPage + 1}"/>
 								</c:url>
 								<li><a href="${ blistEnd }">&gt;</a></li>
-							</c:if>
-							
+							</c:if>						
 						</ul>
 						</div>
 				</div>
@@ -166,45 +172,70 @@
 				<div class="categotyBtn" onclick="#">물품</div>
 				</div>
 				<table>
-					<thead>
+					<thead>					
 						<tr>
-							<th style="width: 45%;">제목</th>
+							<th style="width: 40%;">제목</th>
 							<th style="width: 15%;">진행현황</th>
-							<th style="width: 30%;">내가 후원한 호인트</th>
+							<th style="width: 15%;">내가 후원한 호인트</th>
+							<th style="width: 15%;">후원 일시</th>
 							<th style="width: 15%;">100%달성여부</th>
-						</tr>
+						</tr>					
 					</thead>
 					<tbody>
-						<tr>
-							<td>밀린 월세를 도와주세요</td>
-							<td>77%</td>
-							<td>10,000원</td>
-							<td>X</td>
+						<c:forEach items="${fList2}" var = "funding2" varStatus="">
+							<tr>
+							<td><c:out value="${funding2.fTitle}"/></td>
+							<td></td>
+							<td><c:out value="${funding2.fhValue}"/></td>
+							
+							<td><c:out value="${funding2.fhDate}"></c:out></td>
+							<c:choose>
+								<c:when test="${funding2.fStatus eq 'GOAL'}">
+									<td>O</td>
+								</c:when>
+								<c:otherwise>
+									<td>X</td>
+								</c:otherwise>
+							</c:choose>						
 						</tr>
-						<tr>
-							<td>계속해서 공부를 하고싶어요</td>
-							<td>100%</td>
-							<td>40,000원</td>
-							<td>O</td>
-						</tr>
-						<tr>
-							<td>제 동생의 간 수술비를 도와주세요</td>
-							<td>100%</td>
-							<td>20,000원</td>
-							<td>O</td>
-						</tr>
+						</c:forEach>
+						
 					</tbody>
 				</table>
 				<div class="col text-center">
 					<div class="block-27">
 						<ul>
+							<c:if test="${ pi2.currentPage <= 1 }">
 							<li><a href="#">&lt;</a></li>
-							<li class="active"><span>1</span></li>
-							<li><a href="#">2</a></li>
-							<li><a href="#">3</a></li>
-							<li><a href="#">4</a></li>
-							<li><a href="#">5</a></li>
-							<li><a href="#">&gt;</a></li>
+							</c:if>
+							<c:if test="${ pi2.currentPage > 1 }">
+								<c:url var="blistBack" value="mypage.nanum">
+									<c:param name="currentPage" value="${ pi2.currentPage - 1}"/>
+								</c:url>
+								<li><a href="${ blistBack }">&lt;</a></li>
+							</c:if>
+
+							<c:forEach var="p" begin="${ pi2.startPage }" end="${ pi2.endPage }">
+								<c:if test="${ p == pi2.currentPage }">
+									<li class="active"><a class="active" href="${ blistCheck }">${ p }</a></li>
+								</c:if>
+								<c:if test="${ p != pi2.currentPage }">
+									<c:url var="blistCheck" value="mypage.nanum">
+										<c:param name="currentPage" value="${p}"/>									
+									</c:url>
+									 <li><a href="${ blistCheck }">${ p }</a></li> 									
+								</c:if>
+							</c:forEach>
+							
+							<c:if test="${ pi2.currentPage >= pi2.maxPage }">
+								<li><a href="#">&gt;</a></li>
+							</c:if>
+							<c:if test="${ pi2.currentPage < pi2.maxPage }">
+								<c:url var="blistEnd" value="mypage.nanum">
+									<c:param name="currentPage" value="${ pi2.currentPage + 1}"/>
+								</c:url>
+								<li><a href="${ blistEnd }">&gt;</a></li>
+							</c:if>						
 						</ul>
 					</div>
 				</div>
@@ -223,7 +254,7 @@
 					type:"post",
 					data:{mno:mno},
 					success:function(data){
-						console.log(data.mno)	
+						console.log(data.mno);
 					},
 					error:function(status){
 						console.log(status);

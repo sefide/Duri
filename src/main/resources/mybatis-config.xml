@@ -16,6 +16,10 @@
 		
 		<typeAlias type="com.kh.duri.Nanummember.model.vo.Funding" alias="Funding"/>  	
 		<typeAlias type="com.kh.duri.Nanummember.model.vo.FundHistory" alias="FundHistory"/>  
+		<typeAlias type="com.kh.duri.Nanummember.model.vo.DirectFundHistory" alias="DirectFundHistory"/> 
+		<typeAlias type="com.kh.duri.Nanummember.model.vo.DirectFundHistoryDetail" alias="DirectFundHistoryDetail"/> 
+		<typeAlias type="com.kh.duri.Nanummember.model.vo.SelectDirectFund" alias="SelectDirectFund"/> 
+		<typeAlias type="com.kh.duri.Nanummember.model.vo.Letter" alias="Letter"/> 
 	</typeAliases>
 	
 	<mappers>
