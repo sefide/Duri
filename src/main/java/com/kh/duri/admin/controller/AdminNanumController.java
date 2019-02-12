@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.kh.duri.admin.model.exception.ListException;
 import com.kh.duri.admin.model.service.adminNanumService;
 import com.kh.duri.admin.model.vo.Donatelist;
-import com.kh.duri.member.model.vo.Member;
+import com.kh.duri.admin.model.vo.adminMember;
 
 @Controller
 public class AdminNanumController {
@@ -27,7 +27,7 @@ public class AdminNanumController {
 	public String adminNanumList(Model model,Model model2) {
 	
 		try {
-		List<Member>Nanumlist = ans.adminNanumList();
+		List<adminMember>Nanumlist = ans.adminNanumList();
 		List<Donatelist>Donatelist = ans.adminDonatelist();
 		
 		model.addAttribute("Nanumlist", Nanumlist);
@@ -45,11 +45,11 @@ public class AdminNanumController {
 	
 	//나눔두리 상세조회 - 기본정보
 	@RequestMapping("adminNanumDetail.ad")
-	public String adminNanumListDetail(HttpServletRequest request, HttpServletResponse response,Model model,Member m) {
+	public String adminNanumListDetail(HttpServletRequest request, HttpServletResponse response,Model model,adminMember m) {
 	 
 		int num = Integer.parseInt(request.getParameter("num"));
 		m.setMno(num);
-		List<Member> NanumDetailList;
+		List<adminMember> NanumDetailList;
 		try {
 			NanumDetailList = ans.adminNanumDetailList(m);
 			model.addAttribute("NanumDetailList", NanumDetailList);

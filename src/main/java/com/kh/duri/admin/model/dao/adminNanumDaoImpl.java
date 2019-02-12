@@ -7,14 +7,14 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.duri.admin.model.exception.ListException;
 import com.kh.duri.admin.model.vo.Donatelist;
-import com.kh.duri.member.model.vo.Member;
+import com.kh.duri.admin.model.vo.adminMember;
 
 @Repository
 public class adminNanumDaoImpl implements adminNanumDao{
 
 	//나눔두리 전체목록
 	@Override
-	public List<Member> adminNanumList(SqlSessionTemplate sqlsession) throws ListException{
+	public List<adminMember> adminNanumList(SqlSessionTemplate sqlsession) throws ListException{
 
 		return sqlsession.selectList("Admin.adminNanumList");
 	}
@@ -26,7 +26,7 @@ public class adminNanumDaoImpl implements adminNanumDao{
 	}
 	//나눔두리 상세조회 - 기본정보
 	@Override
-	public List<Member> adminNanumDetailList(SqlSessionTemplate sqlsession, Member m) throws ListException {
+	public List<adminMember> adminNanumDetailList(SqlSessionTemplate sqlsession, adminMember m) throws ListException {
 		
 		return sqlsession.selectList("Admin.adminNanumDetailList",m);
 	}

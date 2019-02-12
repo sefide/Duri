@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.duri.admin.model.dao.adminHappyDao;
 import com.kh.duri.admin.model.exception.ListException;
-import com.kh.duri.member.model.vo.Member;
+import com.kh.duri.admin.model.vo.adminMember;
 
 @Service
 public class adminHappyServiceImpl implements adminHappyService{
@@ -20,11 +20,20 @@ public class adminHappyServiceImpl implements adminHappyService{
 	
 	//행복두리 전체 목록
 	@Override
-	public List<Member> adminHappyList() throws ListException {
+	public List<adminMember> adminHappyList() throws ListException {
 		
-		List<Member> list = ahd.adminHappyList(sqlsession);
+		List<adminMember> list = ahd.adminHappyList(sqlsession);
 		
 		return list;
+	}
+
+	//행복두리 상세조회(기존회원)
+	@Override
+	public List<adminMember> adminHappyDetailList(adminMember m) throws ListException {
+		
+		List<adminMember> list = ahd.adminHappyDetailList(sqlsession, m);
+		
+		return null;
 	}
 
 }

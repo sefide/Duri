@@ -10,8 +10,10 @@
 		<typeAlias type="com.kh.duri.payment.model.vo.Point" alias="Point"/>	
 		<typeAlias type="com.kh.duri.payment.model.vo.DonateReceipt" alias="DonateReceipt"/>
 		<typeAlias type="com.kh.duri.payment.model.vo.Refund" alias="Refund"/>	
+		
 		<typeAlias type="com.kh.duri.admin.model.vo.Donatelist" alias="Donatelist"/>	
-		<typeAlias type="com.kh.duri.admin.model.vo.NanumDetailList" alias="NanumDetailList"/>	
+		<typeAlias type="com.kh.duri.admin.model.vo.adminMember" alias="adminMember"/>	
+		
 		<typeAlias type="com.kh.duri.Nanummember.model.vo.Funding" alias="Funding"/>  	
 		<typeAlias type="com.kh.duri.Nanummember.model.vo.FundHistory" alias="FundHistory"/>  
 	</typeAliases>
