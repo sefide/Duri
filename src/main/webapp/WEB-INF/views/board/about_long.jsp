@@ -40,6 +40,12 @@ b{
 	border-radius:10px;
 	height:180px;
 }
+#mpr{
+	height:150px;
+	border: 1px solid orange;
+	border-radius:8px;
+	padding:5px 5px; 
+}
   </style>
   <body>
     
@@ -54,16 +60,15 @@ b{
     <section class="ftco-section" style="padding:112px 0px 60px 0px">
     	<div class="container">
     		<div class="row d-flex">
-    			<div class="col-md-6 d-flex ftco-animate">
+    			<!-- <div class="col-md-6 d-flex ftco-animate">
     				<div class="img img-about align-self-stretch" style="background-image: url(/duri/resources/common/images/bg_33.jpg); width: 100%;"></div>
-    			</div>
-    			<div class="col-md-6 pl-md-5 ftco-animate" id="intro">
+    			</div>  -->
+    			<div style="float:left" class="col-md-12 pl-md-7 ftco-animate" id="intro">
     				<h2 class="mb-4">'${longDetail.mNickName}' 행복두리님의 자기소개</h2>
     				<p id="longDetail">${longDetail.mpr}</p>
-    				<h5><p>지역  : ${longDetail.mAddress}</p></h5>
-    				<h5><p>유형  : ${longDetail.mFundtype}</p></h5>
-    				<h5><p>남은기간  : <b>2019-01-01 ~ 2019-04-27</b></p></h5>
     			</div>
+
+    			
     		</div>
     	</div>
     </section>
