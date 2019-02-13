@@ -13,6 +13,6 @@ public interface adminNanumService {
 	//나눔두리 기부영수증 목록
 	List<Donatelist> adminDonatelist() throws ListException;
 	//나눔두리 상세보기 - 기본정보
-	List<adminMember> adminNanumDetailList(adminMember m) throws ListException;
+	adminMember NanumDetail(adminMember m) throws ListException;
 
 }

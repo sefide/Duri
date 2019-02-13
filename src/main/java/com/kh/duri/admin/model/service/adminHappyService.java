@@ -10,6 +10,6 @@ public interface adminHappyService {
 	//행복두리 전체목록
 	List<adminMember> adminHappyList() throws ListException;
 	//행복두리 상세보기(기존회원)
-	List<adminMember> adminHappyDetailList(adminMember m)throws ListException;
+	adminMember HappyDetail(adminMember m)throws ListException;
 
 }

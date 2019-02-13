@@ -40,7 +40,7 @@
                                 <a href="adminHappyAll.ad">행복두리 전체관리</a>
                             </li>
                             <li>
-                                <a href="adminHappy.ad">행복두리 승인관리</a>
+                                <a href="adminHappyAcc.ad">행복두리 승인관리</a>
                             </li>
 							</ul>
 						</li>	    
@@ -57,9 +57,15 @@
 						</li>	
                    
                     <li>
-                        <a href="adminCrowd.ad"  ><i class="fa fa-qrcode"></i>크라우드 펀딩 관리<span class="fa arrow"></span></a>
-                        
-                        
+                        <a href="#"  ><i class="fa fa-qrcode"></i>승인 관리<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="adminCrowd.ad">크라우드 펀딩 관리</a>
+                            </li>
+                            <li>
+                                <a href="adminRefund.ad">환불 관리</a>
+                            </li>
+                       </ul> 
                     </li>
                 </ul>
             </div>
