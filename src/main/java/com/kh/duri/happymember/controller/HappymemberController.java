@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.codec.multipart.SynchronossPartHttpMessageReader;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,6 +16,7 @@ import com.kh.duri.happymember.model.exception.MypageException;
 import com.kh.duri.happymember.model.service.HappymemberService;
 import com.kh.duri.happymember.model.vo.FundItemList;
 import com.kh.duri.happymember.model.vo.MyDonateItems;
+import com.kh.duri.member.model.vo.Member;
 
 @Controller
 public class HappymemberController {
@@ -62,11 +62,12 @@ public class HappymemberController {
 	@RequestMapping("getDelivery.happy")
 	public String getDelivery(HttpServletRequest request, HttpServletResponse response) {
 		String mno = request.getParameter("mno");
+		String address = request.getParameter("address");
 		String item = request.getParameter("item");
-		System.out.println("물품번호 : " + item);
-		
 		String itemAmount = request.getParameter("itemAmount");
-		System.out.println("개수 : " + itemAmount);
+		
+		/*System.out.println("물품번호 : " + item);
+		System.out.println("개수 : " + itemAmount);*/
 		
 		String[] itemNumArray;
 		itemNumArray = item.split(",");
@@ -82,9 +83,14 @@ public class HappymemberController {
 		}*/
 		
 		try {
-			int result = hs.getDelivery(itemNumArray, itemAmountArray, mno);
-			if(result > 0) {
-				return "redirect:selectDeliveryList.happy";
+			int updateResult = hs.getDelivery(itemNumArray, itemAmountArray, mno);
+			
+			//배송현황 추가하기
+			int insertResult1 = hs.insertDelivery(address, mno);
+					
+					
+			if(updateResult > 0 && insertResult1 > 0) {
+				return "redirect:insertDeliveryList.happy";
 			}
 			
 			
@@ -96,10 +102,29 @@ public class HappymemberController {
 	}
 	
 	
+	
+	/*//배송현황 목록 조회(페이징)
 	@RequestMapping("selectDeliveryList.happy")
-	public String test() {
-		return "happymember/mypage";
-	}
+	public String happyDeliveryList(HttpServletRequest request, HttpServletResponse response) {
+		Member m = (Member)request.getSession().getAttribute("loginUser");
+		int currentPage = 1;
+		
+		if(request.getParameter("currentPage") != null) {
+			currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		}
+		
+		try {
+			int listCount = hs.getDeliveryListCount(m);
+			
+			
+			
+			
+		} catch (MypageException e) {
+			request.setAttribute("msg", e.getMessage());
+			return "happymember/deliveryStatus";
+		}
+		return "happymember/deliveryStatus";
+	}*/
 	
 	
 	@RequestMapping("mypage.happy")

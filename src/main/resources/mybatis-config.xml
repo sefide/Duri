@@ -6,7 +6,6 @@
   <configuration>
 	<typeAliases>
 		<typeAlias type="com.kh.duri.member.model.vo.Member" alias="Member"/>
-		<typeAlias type="com.kh.duri.member.model.vo.Member" alias="HappyMember"/>	
 		<typeAlias type="com.kh.duri.payment.model.vo.Point" alias="Point"/>	
 		<typeAlias type="com.kh.duri.payment.model.vo.DonateReceipt" alias="DonateReceipt"/>
 		<typeAlias type="com.kh.duri.payment.model.vo.Refund" alias="Refund"/>	
@@ -22,6 +21,8 @@
 		<typeAlias type="com.kh.duri.Nanummember.model.vo.Letter" alias="Letter"/> 
 		<typeAlias type="com.kh.duri.board.model.vo.board" alias="Board"/>	
 		<typeAlias type="com.kh.duri.Nanummember.model.vo.FundInterest" alias="FundInterest"/> 
+		
+		<typeAlias type="com.kh.duri.happymember.model.vo.Delivery" alias="Delivery"/>	
 	</typeAliases>
 	
 	<mappers>

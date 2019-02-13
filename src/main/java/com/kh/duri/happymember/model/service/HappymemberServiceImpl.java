@@ -43,12 +43,30 @@ public class HappymemberServiceImpl implements HappymemberService {
 		return fundItemList;
 	}
 
+	//배송받을 물품 선택 후 수량 변경하기
 	@Override
 	public int getDelivery(String[] itemNumArray, String[] itemAmountArray, String mno) throws MypageException {
 		int result = hd.getDelivery(sqlSession, itemNumArray, itemAmountArray, mno );
 		
 		return result;
 	}
+
+	
+	//배송현황 추가하기
+	@Override
+	public int insertDelivery(String address, String mno) throws MypageException {
+		int insertResult1 = hd.insertDelivery(sqlSession, address, mno);
+		
+		return insertResult1;
+	}
+
+	/*//배송현황 목록 조회(페이징)
+	@Override
+	public int getDeliveryListCount(Member m) throws MypageException {
+		int listCount = hd.getDeliveryListCount(sqlSession, m);		
+		
+		return listCount;
+	}*/
 
 	
 

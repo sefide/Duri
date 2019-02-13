@@ -1,15 +1,14 @@
 package com.kh.duri.happymember.model.dao;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.duri.happymember.model.exception.MypageException;
+import com.kh.duri.happymember.model.vo.Delivery;
 import com.kh.duri.happymember.model.vo.FundItemList;
 import com.kh.duri.happymember.model.vo.MyDonateItems;
-import com.kh.duri.payment.model.exception.RefundException;
 
 @Repository
 public class HappymemberDaoImpl implements HappymemberDao{
@@ -43,6 +42,7 @@ public class HappymemberDaoImpl implements HappymemberDao{
 		return fundItemList;
 	}
 
+	//배송받을 물품 선택 후 수량 변경하기
 	@Override
 	public int getDelivery(SqlSessionTemplate sqlSession, String[] itemNumArray, String[] itemAmountArray, String mno)
 			throws MypageException {
@@ -70,6 +70,35 @@ public class HappymemberDaoImpl implements HappymemberDao{
 	}
 
 
+	//배송현황 추가하기
+	@Override
+	public int insertDelivery(SqlSessionTemplate sqlSession, String address, String mno) throws MypageException {
+		int insertResult1 = 0;
+		Delivery d = null;
+		
+		d = new Delivery();
+		d.setD_mno(Integer.parseInt(mno));
+		d.setDaddress(address);
+		insertResult1 = sqlSession.insert("HappyMember.insertDeliveryList", d);
+		
+		if(insertResult1 < 0) {
+			throw new MypageException("물품목록 추가 실패");
+		}
+	
+		return insertResult1;
+	}
+
+	
+	
+	
+	/*//배송현황 목록 조회(페이징)
+	@Override
+	public int getDeliveryListCount(SqlSessionTemplate sqlSession, Member m) throws MypageException {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+*/
 
 
 }
