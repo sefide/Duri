@@ -19,10 +19,10 @@ public class adminHappyDaoImpl implements adminHappyDao{
 	}
 	//행복두리 상세조회(기존회원)
 	@Override
-	public List<adminMember> adminHappyDetailList(SqlSessionTemplate sqlsession, adminMember m) throws ListException {
+	public adminMember HappyDetail(SqlSessionTemplate sqlsession, adminMember m) throws ListException {
 
 		
-		return sqlsession.selectList("Admin.adminHappyDetailList",m);
+		return sqlsession.selectOne("Admin.adminHappyDetail",m);
 	}
 
 }

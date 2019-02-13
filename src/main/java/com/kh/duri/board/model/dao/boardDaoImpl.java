@@ -62,6 +62,19 @@ public class boardDaoImpl implements boardDao {
 		return longDetail;
 	}
 
+	@Override
+	public int getMoneyListCount(SqlSessionTemplate sqlSession) {
+		int listCount = sqlSession.selectOne("Board.selectMoneyListCount");
+		
+		System.out.println("모든 회원 명수 : "+ listCount);
+		
+/*		if(listCount < 0) {
+			throw new DonateListException("모든 회원 명수 조회 실패");
+		}*/
+		
+		return listCount;
+	}
+
 
 
 

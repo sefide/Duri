@@ -8,12 +8,12 @@
 	<resultMap type="com.kh.duri.admin.model.vo.adminMember" id="adminMemberResultSet">
 		<id property="mno" column="MNO"></id>
 		<result property="mName" column="MNAME"/>
-		<result property="mNickName" column="MNICK"/>
+		<result property="mNick" column="MNICK"/>
 		<result property="mGender" column="MGENDER"/>
 		<result property="mPhone" column="MPHONE"/>
 		<result property="mid" column="MID"/>
 		<result property="mpwd" column="MPWD"/>
-		<result property="email" column="MEMAIL"/>
+		<result property="memail" column="MEMAIL"/>
 		<result property="mEnrollDate" column="MENROLLDATE"/>
 		<result property="mPoint" column="MPOINT"/>
 		<result property="mtype" column="MTYPE"/>
@@ -23,7 +23,7 @@
 		<result property="mBirthDay" column="MBIRTHDAY"/>
 		<result property="mAddress" column="MADDRESS"/>
 		<result property="mAcceptDate" column="MACCEPTDATE"/>
-		<result property="mPreAcceptDate" column="MPRACCEPTDATE"/>
+		<result property="mprAcceptDate" column="MPRACCEPTDATE"/>
 		<result property="mGoalNum" column="MGOALNUM"/>
 		<result property="mStatus" column="MSTATUS"/>
 		<result property="mTakeStatus" column="MTAKESTATUS"/>
@@ -51,7 +51,7 @@
 	
 	<!-- 나눔두리 전체목록 조회 -->
 	<select id="adminNanumList" resultMap="adminMemberResultSet" parameterType="adminMember" >
-		SELECT MNO,MID,MNAME,MNICK,MGENDER,MEMAIL,MGOALNUM FROM MEMBER WHERE MTYPE='N' AND MSTATUS='Y' ORDER BY MENROLLDATE
+		SELECT MNO,MID,MNAME,MNICK,MGENDER,MEMAIL,MGOALNUM FROM MEMBER WHERE MTYPE='N' AND MSTATUS='Y' ORDER BY MENROLLDATE 
 	</select>
 	<!-- 나눔두리 기부영수증 목록 조회 -->
 	<select id="adminDonateList" resultMap="donateResultSet" parameterType="Donatelist" >
@@ -59,16 +59,16 @@
 	</select>
 	<!-- 행복두리 전체목록 조회 -->
 	<select id="adminHappyList" resultMap="adminMemberResultSet" parameterType="adminMember" >
-		SELECT MNO,MID,MNICK,MGENDER,MEMAIL,MFUNDTYPE,MPRNEW FROM MEMBER WHERE MTYPE='H' AND MSTATUS='Y' ORDER BY MACCEPTDATE
+		SELECT MNO,MID,MNICK,MGENDER,MEMAIL,MFUNDTYPE,MPRNEW FROM MEMBER WHERE MTYPE='H' AND MSTATUS='Y' AND MACCEPTDATE IS NOT NULL ORDER BY MACCEPTDATE
 	
 	</select>
 	<!-- 나눔두리 상세목록 조회(기본정보) -->
-	<select id="adminNanumDetailList" resultMap="adminMemberResultSet" parameterType="adminMember" >
-		SELECT M.MNO,M.MNICK,M.MNAME,M.MID,M.MNICK,M.MGENDER,M.MPHONE,M.MEMAIL,M.MGOALNUM, (SELECT SUM(PVALUE) FROM POINT WHERE P_MNO=M.MNO ) AS PVALUE FROM MEMBER M WHERE M.MNO=#{mno}
+	<select id="adminNanumDetail" resultType="adminMember" parameterType="adminMember" >
+		SELECT M.MNO,M.MNICK,M.MNAME,M.MID,M.MGENDER,M.MPHONE,M.MEMAIL,M.MGOALNUM, (SELECT SUM(PVALUE) FROM POINT WHERE P_MNO=M.MNO ) AS PVALUE FROM MEMBER M WHERE M.MNO=#{mno}
 	</select>
 	<!-- 행복두리 상세목록 조회(기존회원-기본정보) -->
-	<select id="adminHappyDetailList" resultMap="adminMemberResultSet" parameterType="adminMember" >
-		SELECT M.MNO,M.MNICK,M.MNAME,M.MID,M.MGENDER,M.MPHONE,M.MEMAIL,M.MADDRESS,M.MFUNDTYPE,M.MACCEPTDATE,A.ADATE,M.MPRACCEPTDATE FROM MEMBER M JOIN ATTACHMENT A ON (A.A_MNO=M.MNO) AND A.ATYPE='R' WHERE M.MNO=#{mno}
+	<select id="adminHappyDetail" resultType="adminMember" parameterType="adminMember" >
+		SELECT M.MNO,M.MNICK,M.MPR,M.MPRNEW,M.MBIRTHDAY,M.MNAME,M.MID,M.MGENDER,M.MPHONE,M.MEMAIL,M.MADDRESS,M.MFUNDTYPE,M.MACCEPTDATE,A.ADATE,M.MPRACCEPTDATE FROM MEMBER M JOIN ATTACHMENT A ON (A.A_MNO=M.MNO) AND A.ATYPE='R' WHERE M.MNO=#{mno}
 	</select>
 	
 

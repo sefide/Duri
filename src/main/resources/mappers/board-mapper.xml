@@ -4,64 +4,34 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="Member">
-	<resultMap type="com.kh.duri.member.model.vo.Member" id="memberResultSet">
+<mapper namespace="Board">
+
+	<resultMap type="com.kh.duri.board.model.vo.board" id="boardResultSet">
 	<!-- property=컬럼명, column=필드명    반드시 일치! -->
-		<id property="mno" column="MNO"></id>
-		<result property="mName" column="MNAME"/>
-		<result property="mNickName" column="MNICK"/>
-		<result property="mGender" column="MGENDER"/>
-		<result property="mPhone" column="MPHONE"/>
-		<result property="mid" column="MID"/>
-		<result property="mpwd" column="MPWD"/>
-		<result property="email" column="MEMAIL"/>
-		<result property="mEnrollDate" column="MENROLLDATE"/>
-		<result property="mPoint" column="MPOINT"/>
-		<result property="mtype" column="MTYPE"/>
-		<result property="mFundtype" column="MFUNDTYPE"/>
-		<result property="mpr" column="MPR"/>
-		<result property="mprNew" column="MPRNEW"/>
-		<result property="mBirthDay" column="MBIRTHDAY"/>
-		<result property="mAddress" column="MADDRESS"/>
-		<result property="mAcceptDate" column="MACCEPTDATE"/>
-		<result property="mGoalNum" column="MGOALNUM"/>
-		<result property="mStatus" column="MSTATUS"/>
-		<result property="mTakeStatus" column="MTAKESTATUS"/>
-		<result property="dMoney" column="DHVALUE"/>
-      	<result property="cfMoney" column="FHVALUE"/>
+		<id property="fno" column="FNO"></id>
+		<result property="ftype" column="FTYPE"/>
+		<result property="fTitle" column="FTITLE"/>
+		<result property="fContent" column="FCONTENT"/>
+		<result property="fWriteDate" column="FWRITECONTENT"/>
+		<result property="fStartDate" column="FSTARTDATE"/>
+		<result property="fEndDate" column="FENDDATE"/>
+		<result property="fStatus" column="FSTATUS"/>
+		<result property="fValue" column="FVALUE"/>
+		<result property="fValueType" column="FVALUETYPE"/>
+		<result property="fWriter" column="FWRITER"/>
+
 	</resultMap>
 	
-	<select id="longDonateList" resultMap="memberResultSet" parameterType="board">
-		<!-- 로그인 함과 동시에 정기후원 금액, 일시후원 받은 총 누적액 불러오기 -->
-		SELECT MNO, MNAME, MNICK ,MGENDER ,MPHONE ,MID ,MPWD ,MEMAIL 
-		,MENROLLDATE ,MPOINT ,MTYPE ,MFUNDTYPE ,MPR ,MPRNEW ,MBIRTHDAY 
-		,MADDRESS ,MACCEPTDATE ,MGOALNUM ,MSTATUS ,MTAKESTATUS 
-        ,(SELECT SUM(DHVALUE) FROM MEMBER M  INNER JOIN DIRECTFUNDHISTORY DI ON(M.MNO = DI.DH_MNO_TAKE) 
-        	WHERE M.MID=#{mid}) AS DHVALUE
-        ,(SELECT SUM(FHVALUE) FROM MEMBER M JOIN FUNDHISTORY FH ON(FH.FH_MNO_GIVE = M.MNO) JOIN FUNDING F ON(F.FNO = FH.FH_FNO) 
-        	WHERE F.FWRITER=(SELECT MNO FROM MEMBER WHERE MID=#{mid}))AS FHVALUE
-		FROM MEMBER
-		WHERE MID=#{mid}
-		AND MPWD=#{mpwd}
-		AND MTYPE='H'
-	</select>
-	
-	<select id="loginNaCheck" resultMap="memberResultSet" parameterType="Member">
-		SELECT *
-		FROM MEMBER
-		WHERE MID=#{mid}
-		AND MPWD=#{mpwd}
-		AND MTYPE='N'
-	</select>
 
-
-	
+	<select id="selectMoneyListCount" parameterType="_int">
+		SELECT COUNT(*)
+		FROM FUNDING
+		WHERE FTYPE='MONEY'
+	</select>
 	
 	
 	
 </mapper>
-
-
 
 
 
