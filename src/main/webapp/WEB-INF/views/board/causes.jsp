@@ -39,7 +39,7 @@
       <div class="container">
       <div class="row">
 
-        <h3><a href="Eunji_cloudList.bo" id="money">금액후원</a><b> | </b><a href="Eunji_cloudList2.bo" id="thing">물품후원</a></h3>
+        <h3><a href="money_donate.bo" id="money">금액후원</a><b> | </b><a href="Eunji_cloudList2.bo" id="thing">물품후원</a></h3>
 
 		<div align="right" style="width:950px">
 		<label>지역 : </label>

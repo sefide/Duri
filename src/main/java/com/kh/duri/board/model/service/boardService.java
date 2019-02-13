@@ -15,4 +15,8 @@ public interface boardService {
 
 	Member longDanateDetail(Member m);
 
+	int getMoneyListCount();
+
+	List<Member> selectMoneyList(PageInfo pi);
+
 }

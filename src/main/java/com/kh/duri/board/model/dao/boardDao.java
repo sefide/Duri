@@ -18,4 +18,6 @@ public interface boardDao {
 
 	Member longDonateDetail(SqlSessionTemplate sqlSession, Member m);
 
+	int getMoneyListCount(SqlSessionTemplate sqlSession);
+
 }
