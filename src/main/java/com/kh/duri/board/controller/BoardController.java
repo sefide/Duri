@@ -106,6 +106,36 @@ public class BoardController {
 		}
 
 
+	
+	   @RequestMapping("money_donate.bo")
+	   public String moneyDonateList(Model model, HttpServletRequest request, HttpServletResponse response) throws DonateListException {
+	      int currentPage = 1;
+	      
+	      if(request.getParameter("currentPage") != null) {
+	         currentPage = Integer.parseInt(request.getParameter("currentPage"));
+	      }
+
+	      
+	         int listCount = bs.getMoneyListCount();
+			
+			PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
+			
+			System.out.println("크라우드펀딩 금액후원 명수 :  " + listCount);
+			
+
+			List<Member> moList;
+			
+			moList = bs.selectMoneyList(pi);
+			
+
+			model.addAttribute("moList", moList);
+			model.addAttribute("pi", pi);
+			return "board/causes";
+
+	         
+	      
+	      
+	   }
 
 	
 	

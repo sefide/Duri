@@ -29,6 +29,7 @@ public class boardServiceImpl implements boardService {
 		return listCount;
 	}
 
+	//정기후원자 목록 조회
 	@Override
 	public List<Member> selectDonateList(PageInfo pi) throws DonateListException {
 		List<Member> doList = bd.selectDonateList(sqlSession, pi);	//DAO로 Member 정보와 sqlSession 전송
@@ -36,6 +37,7 @@ public class boardServiceImpl implements boardService {
 		return doList;
 	}
 
+	//정기후원 상세페이지 조회
 	@Override
 	public Member longDanateDetail(Member m) {
 
@@ -44,6 +46,22 @@ public class boardServiceImpl implements boardService {
 		return longDetail;
 
 
+	}
+
+	//크라우드 펀딩 금액후원 갯수
+	@Override
+	public int getMoneyListCount() {
+		int listCount = bd.getMoneyListCount(sqlSession);
+		
+		return listCount;
+	}
+
+	
+	//크라우드 펀딩 금액후원 목록 조회
+	@Override
+	public List<Member> selectMoneyList(PageInfo pi) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 
