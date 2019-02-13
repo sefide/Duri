@@ -154,35 +154,56 @@ tr:hover{
 				<table>
 					<thead>
 						<tr>
-							<th style="width: 20%;">제목</th>
-							<th style="width: 80%;">진행현황</th>						
+							<th style="width: 20%;">행복두리</th>
+							<th style="width: 60%;">감사편지 제목</th>
+							<th style="width: 20%;">작성일</th>															
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<td>냥냥이</td>
-							<td>생리대가 부족했었는데 많은 행복두리님 덕분에 충분해졌습니다 감사해요</td>						
+						<c:forEach items="${mclList}" var = "mcl" varStatus="">
+							<tr>
+							<td><c:out value="${mcl.mNick}"/></td>
+							<td><c:out value="${mcl.leTitle}"/></td>							
+							<td><c:out value="${mcl.leWriteDate}"></c:out></td>					
 						</tr>
-						<tr>							
-							<td>뭉뭉이</td>
-							<td>5명의 동생들과 먹을 쌀이 부족했는데,,도와주셔서 밥을 먹게되어 행복해요</td>
-						</tr>
-						<tr>
-							<td>행복행복이</td>
-							<td>비누로 씼어 피부염이 났는데,,좋은 바디워시등을 선물해주셔서 나아가고있어요!</td>						
-						</tr>
+						</c:forEach>
+						
 					</tbody>
 				</table>
 				<div class="col text-center">
 					<div class="block-27">
 						<ul>
+							<c:if test="${ pi2.currentPage <= 1 }">
 							<li><a href="#">&lt;</a></li>
-							<li class="active"><span>1</span></li>
-							<li><a href="#">2</a></li>
-							<li><a href="#">3</a></li>
-							<li><a href="#">4</a></li>
-							<li><a href="#">5</a></li>
-							<li><a href="#">&gt;</a></li>
+							</c:if>
+							<c:if test="${ pi2.currentPage > 1 }">
+								<c:url var="blistBack" value="mypage.nanum">
+									<c:param name="currentPage" value="${ pi2.currentPage - 1}"/>
+								</c:url>
+								<li><a href="${ blistBack }">&lt;</a></li>
+							</c:if>
+
+							<c:forEach var="p" begin="${ pi2.startPage }" end="${ pi2.endPage }">
+								<c:if test="${ p == pi2.currentPage }">
+									<li class="active"><a class="active" href="${ blistCheck }">${ p }</a></li>
+								</c:if>
+								<c:if test="${ p != pi2.currentPage }">
+									<c:url var="blistCheck" value="mypage.nanum">
+										<c:param name="currentPage" value="${p}"/>									
+									</c:url>
+									 <li><a href="${ blistCheck }">${ p }</a></li> 									
+								</c:if>
+							</c:forEach>
+							
+							<c:if test="${ pi2.currentPage >= pi2.maxPage }">
+								<li><a href="#">&gt;</a></li>
+							</c:if>
+							<c:if test="${ pi2.currentPage < pi2.maxPage }">
+								<c:url var="blistEnd" value="mypage.nanum">
+									<c:param name="currentPage" value="${ pi2.currentPage + 1}"/>
+								</c:url>
+								<li><a href="${ blistEnd }">&gt;</a></li>
+							</c:if>						
 						</ul>
 					</div>
 				</div>
