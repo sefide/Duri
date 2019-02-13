@@ -7,12 +7,12 @@ public class adminMember implements Serializable{
 
 	private int mno;
 	private String mName;
-	private String mNickName;
+	private String mNick;
 	private String mGender;
 	private String mPhone;
 	private String mid;
 	private String mpwd;
-	private String email;
+	private String memail;
 	private Date mEnrollDate;
 	private int mPoint;
 	private String mtype;
@@ -22,7 +22,7 @@ public class adminMember implements Serializable{
 	private String mBirthDay;
 	private String mAddress;
 	private Date mAcceptDate;
-	private Date mPreAcceptDate;
+	private Date mprAcceptDate;
 	private int mGoalNum;
 	private String mStatus;
 	private String mTakeStatus;
@@ -35,6 +35,8 @@ public class adminMember implements Serializable{
 	private String atype;//R이 증빙서류
 	private int a_mno; //회원번호
 	private Date adate; //업로드 날짜
+	private String aFilePath;//파일경로
+	
 	
 	
 	
@@ -43,19 +45,19 @@ public class adminMember implements Serializable{
 
 
 
-	public adminMember(int mno, String mName, String mNickName, String mGender, String mPhone, String mid, String mpwd,
-			String email, Date mEnrollDate, int mPoint, String mtype, String mFundtype, String mpr, String mprNew,
-			String mBirthDay, String mAddress, Date mAcceptDate, Date mPreAcceptDate, int mGoalNum, String mStatus,
+	public adminMember(int mno, String mName, String mNick, String mGender, String mPhone, String mid, String mpwd,
+			String memail, Date mEnrollDate, int mPoint, String mtype, String mFundtype, String mpr, String mprNew,
+			String mBirthDay, String mAddress, Date mAcceptDate, Date mprAcceptDate, int mGoalNum, String mStatus,
 			String mTakeStatus, long pValue, String p_mNo, String atype, int a_mno, Date adate) {
 		super();
 		this.mno = mno;
 		this.mName = mName;
-		this.mNickName = mNickName;
+		this.mNick = mNick;
 		this.mGender = mGender;
 		this.mPhone = mPhone;
 		this.mid = mid;
 		this.mpwd = mpwd;
-		this.email = email;
+		this.memail = memail;
 		this.mEnrollDate = mEnrollDate;
 		this.mPoint = mPoint;
 		this.mtype = mtype;
@@ -65,7 +67,7 @@ public class adminMember implements Serializable{
 		this.mBirthDay = mBirthDay;
 		this.mAddress = mAddress;
 		this.mAcceptDate = mAcceptDate;
-		this.mPreAcceptDate = mPreAcceptDate;
+		this.mprAcceptDate = mprAcceptDate;
 		this.mGoalNum = mGoalNum;
 		this.mStatus = mStatus;
 		this.mTakeStatus = mTakeStatus;
@@ -80,11 +82,11 @@ public class adminMember implements Serializable{
 
 	@Override
 	public String toString() {
-		return "adminMember [mno=" + mno + ", mName=" + mName + ", mNickName=" + mNickName + ", mGender=" + mGender
-				+ ", mPhone=" + mPhone + ", mid=" + mid + ", mpwd=" + mpwd + ", email=" + email + ", mEnrollDate="
+		return "adminMember [mno=" + mno + ", mName=" + mName + ", mNick=" + mNick + ", mGender=" + mGender
+				+ ", mPhone=" + mPhone + ", mid=" + mid + ", mpwd=" + mpwd + ", memail=" + memail + ", mEnrollDate="
 				+ mEnrollDate + ", mPoint=" + mPoint + ", mtype=" + mtype + ", mFundtype=" + mFundtype + ", mpr=" + mpr
 				+ ", mprNew=" + mprNew + ", mBirthDay=" + mBirthDay + ", mAddress=" + mAddress + ", mAcceptDate="
-				+ mAcceptDate + ", mPreAcceptDate=" + mPreAcceptDate + ", mGoalNum=" + mGoalNum + ", mStatus=" + mStatus
+				+ mAcceptDate + ", mprAcceptDate=" + mprAcceptDate + ", mGoalNum=" + mGoalNum + ", mStatus=" + mStatus
 				+ ", mTakeStatus=" + mTakeStatus + ", pValue=" + pValue + ", p_mNo=" + p_mNo + ", atype=" + atype
 				+ ", a_mno=" + a_mno + ", adate=" + adate + "]";
 	}
@@ -115,14 +117,14 @@ public class adminMember implements Serializable{
 
 
 
-	public String getmNickName() {
-		return mNickName;
+	public String getmNick() {
+		return mNick;
 	}
 
 
 
-	public void setmNickName(String mNickName) {
-		this.mNickName = mNickName;
+	public void setmNick(String mNick) {
+		this.mNick = mNick;
 	}
 
 
@@ -175,14 +177,14 @@ public class adminMember implements Serializable{
 
 
 
-	public String getEmail() {
-		return email;
+	public String getmemail() {
+		return memail;
 	}
 
 
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setmemail(String memail) {
+		this.memail = memail;
 	}
 
 
@@ -295,14 +297,14 @@ public class adminMember implements Serializable{
 
 
 
-	public Date getmPreAcceptDate() {
-		return mPreAcceptDate;
+	public Date getmprAcceptDate() {
+		return mprAcceptDate;
 	}
 
 
 
-	public void setmPreAcceptDate(Date mPreAcceptDate) {
-		this.mPreAcceptDate = mPreAcceptDate;
+	public void setmprAcceptDate(Date mprAcceptDate) {
+		this.mprAcceptDate = mprAcceptDate;
 	}
 
 

@@ -1,5 +1,6 @@
 package com.kh.duri.admin.controller;
 
+
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -31,9 +32,13 @@ public class AdminHappyController {
 	public String admin18() {
 		return "admin/QnADetail";
 	}
-	@RequestMapping("adminHappy.ad")
+	@RequestMapping("adminHappyAcc.ad")
 	public String admin10() {
-		return "admin/adminHappy";
+		return "admin/adminHappyAcc";
+	}
+	@RequestMapping("adminRefund.ad")
+	public String admin19() {
+		return "admin/adminRefund";
 	}
 	//행복두리 전체 목록
 	@RequestMapping("adminHappyAll.ad")
@@ -54,16 +59,16 @@ public class AdminHappyController {
 		
 		
 	}
-	//행복두리 상세조회(전체목록에서 들어가는거임)////////////////////////템플릿깨짐시발~~~~~~~~~~~~~~~~~~~~`뷰에서 값만꺼내면됨~
+	//행복두리 상세조회(전체목록에서 들어가는거임)
 	@RequestMapping("adminHappyDetail.ad")
 	public String adminHappyDetailList(HttpServletRequest request, HttpServletResponse response,Model model,adminMember m) {
 		
 		int num = Integer.parseInt(request.getParameter("num"));
 		m.setMno(num);
-		List<adminMember> HappyDetailList;
+		adminMember HappyDetail;
 		try {
-			HappyDetailList = ahs.adminHappyDetailList(m);
-			model.addAttribute("HappyDetailList", HappyDetailList);
+			HappyDetail = ahs.HappyDetail(m);
+			model.addAttribute("HappyDetail", HappyDetail);
 			return "admin/adminHappyDetail";
 			
 		} catch (ListException e) {

@@ -13,6 +13,6 @@ public interface adminHappyDao {
 	List<adminMember> adminHappyList(SqlSessionTemplate sqlsession) throws ListException;
 
 	//행복두리 상세조회(기존회원)
-	List<adminMember> adminHappyDetailList(SqlSessionTemplate sqlsession, adminMember m)throws ListException;
+	adminMember HappyDetail(SqlSessionTemplate sqlsession, adminMember m)throws ListException;
 
 }

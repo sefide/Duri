@@ -15,7 +15,7 @@ public interface adminNanumDao {
 	//나눔두리 기부영수증목록
 	List<Donatelist> adminDonateList(SqlSessionTemplate sqlsession) throws ListException;
 	//나눔두리 상세조회 - 기본정보
-	List<adminMember> adminNanumDetailList(SqlSessionTemplate sqlsession, adminMember m) throws ListException;
+	adminMember NanumDetail(SqlSessionTemplate sqlsession, adminMember m) throws ListException;
 
 	
 }

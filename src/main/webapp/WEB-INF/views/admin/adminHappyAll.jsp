@@ -42,7 +42,7 @@
                                             <th>ID</th>
                                             <th>닉네임</th>
                                             <th>성별</th>
-                                            <th>Email</th>
+                                            <th>memail</th>
                                             <th>가입유형</th>
                                             <th>자소서 수정여부</th>
                                             <th>상세보기</th>
@@ -55,10 +55,10 @@
                                             <td>${status.count}</td>
                                             <td class="center" style="display: none;">${row.mno}</td>
                                             <td class="center">${row.mid}</td>
-                                            <td class="center">${row.mNickName}</td>
+                                            <td class="center">${row.mNick}</td>
                                             <c:if test="${row.mGender == 'F'}"><td class="center">여</td></c:if>
 											<c:if test="${row.mGender == 'M'}"><td class="center">남</td></c:if>
-                                            <td class="center">${row.email}</td>
+                                            <td class="center">${row.memail}</td>
                                             <td class="center">${row.mFundtype}</td>
                                             <c:if test="${row.mprNew == null}">
                                             <td class="center">N</td>
@@ -79,6 +79,9 @@
                 </div>
             </div>
                 <!-- /. ROW  -->
+                
+                
+                
         </div>
             <!-- /. PAGE INNER  -->
         </div>

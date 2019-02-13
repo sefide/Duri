@@ -22,12 +22,11 @@
 <body>
     <div id="wrapper">
        <jsp:include page="include/adminNavi.jsp" />
-	
         <div id="page-wrapper" >
         
 		  <div class="header"> 
                         <h1 class="page-header">
-                            	fg님의 상세정보
+                            	<strong style="color: #c16624;">${HappyDetail.mName}</strong>님의 상세정보
                         </h1>
 		</div>
 		
@@ -36,46 +35,54 @@
             	<div class="row">
 				<div class="col-md-12">
 					<div class="panel panel-default">
-						<div class="panel-heading">EH님의 기본정보</div>
+						<div class="panel-heading">${HappyDetail.mName}님의 기본정보</div>
 						<div class="panel-body">
 							<div class="table-responsive">
 								<table class="table table-bordered">
 									<tbody>
 										<tr>
 											<td class="total">아이디</td>
-											<td>han419120</td>
+											<td>${HappyDetail.mid}</td>
 											<td class="total">생년월일</td>
-											<td>930504</td>
+											<td>20${HappyDetail.mBirthDay}</td>
 										</tr>
 										<tr>
 											<td class="total">이름</td>
-											<td>한의희</td>
+											<td>${HappyDetail.mName}</td>
 											<td class="total">주소</td>
-											<td>서울시 송파구 백제고분로11길 15</td>
+											<td>${HappyDetail.mAddress}</td>
 										</tr>
 										<tr>
 											<td class="total">닉네임</td>
-											<td>EH</td>
+											<td>${HappyDetail.mNick}</td>
 											<td class="total">가입유형</td>
-											<td>한부모가정</td>
+											<td>${HappyDetail.mFundtype}</td>
 										</tr>
 										<tr>
 											<td class="total">성별</td>
-											<td>W</td>
+											<c:if test="${HappyDetail.mGender == 'F'}"><td>여성</td></c:if>
+											<c:if test="${HappyDetail.mGender == 'M'}"><td>남성</td></c:if>
 											<td class="total">이메일</td>
-											<td>han419120@naver.com</td>
+											<td>${HappyDetail.memail}</td>
 										</tr>
 										<tr>
 											<td class="total">휴대전화</td>
-											<td>01055432010</td>
-											<td class="total">가입날짜</td>
-											<td>2019/01/12</td>
+											<c:if test="${HappyDetail.mPhone == null}"><td>없음</td></c:if>
+											<c:if test="${HappyDetail.mPhone != null}"><td>${HappyDetail.mPhone}</td></c:if>
+											
+											<td class="total">가입승인날짜</td>
+											<c:if test="${HappyDetail.mAcceptDate ==null}"><td>승인 전 신규회원</td></c:if>
+											<c:if test="${HappyDetail.mAcceptDate !=null}"><td>${HappyDetail.mAcceptDate}</td></c:if>
 										</tr>
 										<tr>
 											<td class="total">증빙서류 갱신일</td>
-											<td>2019/01/11</td>
+											<c:if test="${HappyDetail.adate ==null}"><td>승인 전 신규회원</td></c:if>
+											<c:if test="${HappyDetail.adate !=null}"><td>${HappyDetail.adate}</td></c:if>
 											<td class="total">자기소개 갱신일</td>
-											<td>2019/03/14</td>
+											<c:if test="${HappyDetail.mprAcceptDate ==null}"><td>승인 전 신규회원</td></c:if>
+											<c:if test="${HappyDetail.mprAcceptDate !=null}"><td>${HappyDetail.mprAcceptDate}</td></c:if>
+											
+											
 										</tr>
 										
 										
@@ -92,10 +99,9 @@
             	
             	
 			<h1 class="page-header">
-                            	df님의 후원 필수서류
+                            	<strong style="color: #c16624;">${HappyDetail.mName}</strong>님의 후원 필수서류
                         </h1>
-             
-		
+             <c:if test="${HappyDetail.mprNew != null}">
             		  <div class="row">
                     <div class="col-md-6">
                         <div class="panel panel-default">
@@ -105,30 +111,16 @@
                        
                         <div class="panel-body">
 		                  <div class="well">
-		                        <h4>저는 집이 없어요...</h4>
-		                        <p style="height: 550px;">
-		                        Lorem ipsum dolor sit amet, 
-		                        consectetur adipiscing elit. Vestibulum tincidunt 
-		                        est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, 
-		                        posuere lectus et, fringilla augue.
-		                        Lorem ipsum dolor sit amet, 
-		                        consectetur adipiscing elit. Vestibulum tincidunt 
-		                        est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, 
-		                        posuere lectus et, fringilla augue.
-		                        Lorem ipsum dolor sit amet, 
-		                        consectetur adipiscing elit. Vestibulum tincidunt 
-		                        est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, 
-		                        posuere lectus et, fringilla augue.
-		                        Lorem ipsum dolor sit amet, 
-		                        consectetur adipiscing elit. Vestibulum tincidunt 
-		                        est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, 
-		                        posuere lectus et, fringilla augue.
+		                        
+		                        <p style="height: 500px;">
+		                        <big>${HappyDetail.mpr}</big>
 		                        </p>
 		                    </div>
                 
                         </div>
                           </div>
                     </div>
+                    
                   <div class="col-md-6">
                         <div class="panel panel-default">
                         <div class="panel-heading">
@@ -137,24 +129,9 @@
                        
                         <div class="panel-body">
 		                  <div class="well">
-		                        <h4>저는 집이 없어요...</h4>
-		                        <p style="height: 550px;">
-		                        Lorem ipsum dolor sit amet, 
-		                        consectetur adipiscing elit. Vestibulum tincidunt 
-		                        est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, 
-		                        posuere lectus et, fringilla augue.
-		                        Lorem ipsum dolor sit amet, 
-		                        consectetur adipiscing elit. Vestibulum tincidunt 
-		                        est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, 
-		                        posuere lectus et, fringilla augue.
-		                        Lorem ipsum dolor sit amet, 
-		                        consectetur adipiscing elit. Vestibulum tincidunt 
-		                        est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, 
-		                        posuere lectus et, fringilla augue.
-		                        Lorem ipsum dolor sit amet, 
-		                        consectetur adipiscing elit. Vestibulum tincidunt 
-		                        est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, 
-		                        posuere lectus et, fringilla augue.
+		                        
+		                        <p style="height: 500px;">
+		                        <big>${HappyDetail.mprNew}</big>
 		                        </p>
 		                    </div>
                 
@@ -162,13 +139,38 @@
                           </div>
                     </div>
                 </div>
+                    </c:if>	  
+                    
+                    <c:if test="${HappyDetail.mprNew == null}">
+                    	  <div class="row">
+                    <div class="col-md-12">
+                        <div class="panel panel-default">
+                        <div class="panel-heading">
+                           	자기소개 글(원글)
+                        </div>
+                       
+                        <div class="panel-body">
+		                  <div class="well">
+		                        
+		                        <p style="height: 250px;">
+		                        <big>${HappyDetail.mpr}</big>
+		                        </p>
+		                    </div>
+                
+                        </div>
+                          </div>
+                    </div>
+                </div>
+                    </c:if>
                 <br>
                 <br>
+                 <c:if test="${HappyDetail.mprNew != null}">
                  <button type="button" class="btn btn-light btn-lg btn-block">반려하기</button>
 		  		 <button type="button" class="btn btn-warning btn-lg btn-block">승인하기</button>
+		  		 </c:if>
             	<br><br>	  
             	<br><br>		  
-            		  
+            	
             		  
             		  <div class="row">
                   
@@ -209,9 +211,9 @@
            <br><br><br> 
             
              <h1 class="page-header">
-                            	EH님의 후원내역
+                            	<strong style="color: #c16624;">${HappyDetail.mName}</strong>님의 후원내역
                         </h1>
-                        
+               
             <div class="row">
                 <div class="col-md-12">
                     <div class="panel panel-default">
