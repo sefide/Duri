@@ -14,11 +14,12 @@ public class Funding implements java.io.Serializable{
 	private int fValue;
 	private int fWriter;
 	private int fhValue;
+	private Date fhDate;
 	
 	public Funding() {}
 
 	public Funding(int fNo, String fType, String fTitle, String fContent, Date fWriteDate, Date fStartDate,
-			Date fEndDate, String fStatus, int fValue, int fWriter, int fhValue) {
+			Date fEndDate, String fStatus, int fValue, int fWriter, int fhValue, Date fhDate) {
 		super();
 		this.fNo = fNo;
 		this.fType = fType;
@@ -31,13 +32,15 @@ public class Funding implements java.io.Serializable{
 		this.fValue = fValue;
 		this.fWriter = fWriter;
 		this.fhValue = fhValue;
+		this.fhDate = fhDate;
 	}
 
 	@Override
 	public String toString() {
 		return "Funding [fNo=" + fNo + ", fType=" + fType + ", fTitle=" + fTitle + ", fContent=" + fContent
 				+ ", fWriteDate=" + fWriteDate + ", fStartDate=" + fStartDate + ", fEndDate=" + fEndDate + ", fStatus="
-				+ fStatus + ", fValue=" + fValue + ", fWriter=" + fWriter + ", fhValue=" + fhValue + "]";
+				+ fStatus + ", fValue=" + fValue + ", fWriter=" + fWriter + ", fhValue=" + fhValue + ", fhDate="
+				+ fhDate + "]";
 	}
 
 	public int getfNo() {
@@ -128,14 +131,23 @@ public class Funding implements java.io.Serializable{
 		this.fhValue = fhValue;
 	}
 
-	
+	public Date getFhDate() {
+		return fhDate;
+	}
+
+	public void setFhDate(Date fhDate) {
+		this.fhDate = fhDate;
+	}
 
 	
+		
+		
+	}
 
 
 
+
 	
 	
 	
 	
-}

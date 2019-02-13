@@ -49,36 +49,135 @@
 		<result property="fhFno" column="FH_FNO"/>
 		<result property="fhMnoGive" column="FH_MNO_GIVE"/>
 	</resultMap>
-	
-	<!-- 진행중인 금액 크라우드 펀딩 개수 조회 -->
+	<resultMap type="com.kh.duri.Nanummember.model.vo.DirectFundHistory" id="directFundHistoryResultSet">
+		<id property="dhNo" column="DHNO"/>
+		<result property="dhValue" column="DHVALUE"/>
+		<result property="dhStartDate" column="DHSTARTDATE"/>
+		<result property="dhStatus" column="DHSTATUS"/>
+		<result property="dhMnoTake" column="DH_MNO_TAKE"/>
+		<result property="dhMnoGive" column="DH_MNO_GIVE"/>		
+	</resultMap>
+	<resultMap type="com.kh.duri.Nanummember.model.vo.DirectFundHistoryDetail" id="directFundHistoryDetailResultSet">
+		<id property="dhdNo" column="DHDNO"/>
+		<result property="dhdDate" column="DHDDATE"/>
+		<result property="dhdValue" column="DHDDATE"/>
+		<result property="dhdCount" column="DHDCOUNT"/>
+		<result property="dhdDhno" column="DHD_DHNO"/>
+	</resultMap>
+	<resultMap type="com.kh.duri.Nanummember.model.vo.SelectDirectFund" id="directFundResultSet">
+		<result property="mNickName" column="nick"/>
+		<result property="value" column="value"/>
+		<result property="cnt" column="cnt"/>
+		<result property="sum" column="sum"/>
+	</resultMap>
+	<resultMap type="com.kh.duri.Nanummember.model.vo.Letter" id="letterResultSet">
+		<id property="leNo" column="LENO"/>
+		<result property="leMnoTake" column="LE_MNO_TAKE"/>
+		<result property="leMnoGive" column="LE_MNO_GIVE"/>
+		<result property="leTitle" column="LETITLE"/>
+		<result property="leContent" column="LECONTENT"/>
+		<result property="leWriteDate" column="LEWRITEDATE"/>
+		<result property="leType" column="LETYPE"/>
+		<result property="leStatus" column="LESTATUS"/>
+		<result property="mNick" column="MNICK"/>
+	</resultMap>
+		
+	<!-- 금액 크라우드 펀딩 개수 조회 (진행) -->
 	<select id="selectMoneyCloundListCount" resultType="_int">
 		SELECT COUNT(*)
 		FROM FUNDING f, FUNDHISTORY fh
-		WHERE f.FNO = fh.FH_FNO and fh.FH_MNO_GIVE = #{mno} and f.FTYPE= 'MONEY' 
+		<![CDATA[
+		WHERE f.FNO = fh.FH_FNO and fh.FH_MNO_GIVE = #{mno} and f.fstartdate <= SYSDATE and f.fenddate>= SYSDATE ]]>
+        and f.FTYPE= 'MONEY' 
 	</select>
 	
-	<!-- 진행중인 금액 크라우드 펀딩 조회 -->
+	<!-- 금액 크라우드 펀딩 조회 (진행) -->
 	<select id="selectMoneyCloud" resultMap="fundingResultSet" parameterType="Funding" resultType="list">
-		SELECT ROWNUM RNUM, FTITLE , FHVALUE ,FSTATUS, FSTARTDATE , FENDDATE
-		FROM(SELECT f.FTITLE , fh.FHVALUE , f.FSTATUS,  f.FSTARTDATE ,f.FENDDATE
-		FROM FUNDING f, FUNDHISTORY fh
+		SELECT ROWNUM RNUM, FTITLE , FHVALUE ,FSTATUS, FSTARTDATE , FENDDATE , FHDATE
+		FROM(SELECT f.FTITLE , fh.FHVALUE , f.FSTATUS,  f.FSTARTDATE ,f.FENDDATE , fh.FHDATE
+		FROM FUNDING f, FUNDHISTORY fh		
 		<![CDATA[
-		WHERE f.FNO = fh.FH_FNO and fh.FH_MNO_GIVE = #{mno} and f.FTYPE= 'MONEY' 
+		WHERE f.FNO = fh.FH_FNO and fh.FH_MNO_GIVE = #{mno}  and f.FTYPE= 'MONEY' 
 			and f.fstartdate <= SYSDATE and f.fenddate >= SYSDATE ]]>
-        ORDER BY SYSDATE DESC) 
+        ORDER BY fh.FHDATE DESC)
 	</select> 
 	
-	<!-- 정기후원 개수 조회 -->
-	<select id="selectDirectFundCount" resultType="_int">
+	<!-- 금액 크라우드 펀딩 개수 조회 (종료) -->
+	<select id="selectMoneyCloundListCount2" resultType="_int">
 		SELECT COUNT(*)
 		FROM FUNDING f, FUNDHISTORY fh
-		WHERE f.FNO = fh.FH_FNO and fh.FH_MNO_GIVE = #{mno} and f.FTYPE= 'MONEY' 
+		<![CDATA[
+		WHERE f.FNO = fh.FH_FNO and fh.FH_MNO_GIVE = #{mno} and f.fenddate < SYSDATE ]]>
+        and f.FTYPE= 'MONEY' 
 	</select>
 	
+	<!-- 금액 크라우드 펀딩 조회 (진행) -->
+	<select id="selectMoneyCloud2" resultMap="fundingResultSet" parameterType="Funding" resultType="list">
+		SELECT ROWNUM RNUM, FTITLE , FHVALUE ,FSTATUS, FSTARTDATE , FENDDATE , FHDATE
+		FROM(SELECT f.FTITLE , fh.FHVALUE , f.FSTATUS,  f.FSTARTDATE ,f.FENDDATE , fh.FHDATE
+		FROM FUNDING f, FUNDHISTORY fh		
+		<![CDATA[
+		WHERE f.FNO = fh.FH_FNO and fh.FH_MNO_GIVE = #{mno}  and f.FTYPE= 'MONEY' 
+			and f.fenddate < SYSDATE ]]>
+        ORDER BY fh.FHDATE DESC)
+	</select> 
 	
 	
-  
-  
+	
+	<!-- 정기후원 개수 조회 (진행) -->
+	<select id="selectDirectFundCount" resultType="_int">
+		SELECT COUNT(*)
+		FROM(
+		SELECT  M.MNICK , MAX(DH.DHVALUE) , COUNT(DHD.DHDCOUNT), SUM(DH.DHVALUE) 
+		FROM Member M, DIRECTFUNDHISTORY DH, DIRECTFUNDHISTORYDETAIL DHD
+		WHERE DH.DHSTATUS = 'Y'  AND DH.DHNO = DHD.DHD_DHNO AND DH.DH_MNO_GIVE = #{mno} AND 
+		    DH.DH_MNO_TAKE = M.MNO
+		GROUP BY M.MNICK)
+	</select>	
+	<!-- 정기후원  조회 (진행)-->
+	<select id="selectDirectFund" resultMap="directFundResultSet" parameterType="SelectDirectFund" resultType="list">
+		SELECT ROWNUM RNUM, nick, value, cnt, sum
+		FROM( SELECT  M.MNICK as nick, MAX(DH.DHVALUE) as value, COUNT(DHD.DHDCOUNT) as cnt, SUM(DH.DHVALUE) as sum 
+				FROM Member M, DIRECTFUNDHISTORY DH, DIRECTFUNDHISTORYDETAIL DHD
+				WHERE DH.DHSTATUS = 'Y'  AND DH.DHNO = DHD.DHD_DHNO AND DH.DH_MNO_GIVE = #{mno} AND 
+				    DH.DH_MNO_TAKE = M.MNO
+				GROUP BY M.MNICK	)
+	</select>
+	<!-- 정기후원 개수 조회 (종료) -->
+	<select id="selectDirectFundCount2" resultType="_int">
+		SELECT COUNT(*)
+		FROM(
+		SELECT  M.MNICK , MAX(DH.DHVALUE) , COUNT(DHD.DHDCOUNT), SUM(DH.DHVALUE) 
+		FROM Member M, DIRECTFUNDHISTORY DH, DIRECTFUNDHISTORYDETAIL DHD
+		WHERE DH.DHSTATUS = 'N'  AND DH.DHNO = DHD.DHD_DHNO AND DH.DH_MNO_GIVE = #{mno} AND 
+		    DH.DH_MNO_TAKE = M.MNO
+		GROUP BY M.MNICK)
+	</select>
+	<!-- 정기후원  조회 (진행)-->
+	<select id="selectDirectFund2" resultMap="directFundResultSet" parameterType="SelectDirectFund" resultType="list">
+		SELECT ROWNUM RNUM, nick, value, cnt, sum
+		FROM( SELECT  M.MNICK as nick, MAX(DH.DHVALUE) as value, COUNT(DHD.DHDCOUNT) as cnt, SUM(DH.DHVALUE) as sum 
+				FROM Member M, DIRECTFUNDHISTORY DH, DIRECTFUNDHISTORYDETAIL DHD
+				WHERE DH.DHSTATUS = 'N'  AND DH.DHNO = DHD.DHD_DHNO AND DH.DH_MNO_GIVE = #{mno} AND 
+				    DH.DH_MNO_TAKE = M.MNO
+				GROUP BY M.MNICK	)
+	</select>
+	<!-- 정기 감사편지 개수 조회 (진행)-->
+  	<select id="selectDirectLetterCount" resultType="_int">
+  		SELECT COUNT(*)
+		FROM LETTER L, MEMBER M
+		WHERE LESTATUS = 'Y' AND LETYPE = 2 AND L.LE_MNO_GIVE = #{mno} AND L.LE_MNO_TAKE = M.MNO
+  	</select>
+  	<!-- 정기 감사편지 조회 (진행)-->
+  	<select id="selectDirectLetter" resultMap="letterResultSet" parameterType="Letter" resultType="list">
+  		SELECT ROWNUM RNUM, MNICK, LETITLE, LEWRITEDATE
+		FROM(
+		SELECT M.MNICK, L.LETITLE, L.LEWRITEDATE
+		FROM LETTER L, MEMBER M
+		WHERE  LESTATUS = 'Y' AND LETYPE = 2 AND L.LE_MNO_GIVE = #{mno} AND
+		L.LE_MNO_TAKE = M.MNO
+		ORDER BY L.LEWRITEDATE DESC)
+  	</select>
   
  </mapper>
   

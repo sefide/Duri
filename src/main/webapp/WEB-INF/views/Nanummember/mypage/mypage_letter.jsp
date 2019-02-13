@@ -56,16 +56,9 @@
 		text-align: center;
 		display: table-cell;
         vertical-align: middle; 
-		background-color: #FFEDBF; 
-		/* border-top: 3px solid #FE9D35;
-		border-left: 3px solid #FE9D35; */
-		/* border-right: 1px solid #FE9D35; */	 
+		background-color: #FFEDBF;  
 		color: #FE9D35;
 		font-weight:bold;
-		/*margin-left : 10px;
-		margin-right: 10px;		
-		padding-left: 10px;
-		padding-right: 10px;  */
 		cursor:pointer;
 		text-align: center;
 		
@@ -74,10 +67,10 @@
 		color:  rgb(50, 147, 63);
 	}
 
-.hoverTr:hover{
-	background-color : rgb(249, 246, 234);
-	cursor: pointer;
-}
+tr:hover{
+		cursor: pointer;
+		background : #f2f1ed;
+	}
 </style>
 </head>
 <body>
@@ -98,34 +91,55 @@
 					<thead>
 						<tr>
 							<th style="width: 20%;">행복두리</th>
-							<th style="width: 80%;">감사편지 제목</th>
+							<th style="width: 60%;">감사편지 제목</th>
+							<th style="width: 20%;">작성일</th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr class="hoverTr" onclick="location.href='mypageLetterDetail.nanum'">
-							<td >공룡이</td>
-							<td>행복두리님 이번달 후원으로 다행히 급식비를 낼 수 있게 되었어요 감사합니다</td>						
+						<!-- <tr class="hoverTr" onclick="location.href='mypageLetterDetail.nanum'"> -->						
+						<c:forEach items="${dlList}" var = "dl" varStatus="">
+							<tr>
+							<td><c:out value="${dl.mNick}"/></td>
+							<td><c:out value="${dl.leTitle}"/></td>							
+							<td><c:out value="${dl.leWriteDate}"></c:out></td>					
 						</tr>
-						<tr class="hoverTr">						
-							<td>밍구밍구</td>
-							<td>이번 달 월세는 밀리지 않고 내서 불안하지 않게 잘 살고 있습니다! 감사해요</td>
-						</tr>
-						<tr class="hoverTr">
-							<td>링이1004</td>
-							<td>추운 겨울 나눔두리님 덕분에 연탄도 사고 따듯한 겨울 보내고 있어요</td>					
-						</tr>
+						</c:forEach>
 					</tbody>
 				</table>
 				<div class="col text-center">
 					<div class="block-27">
 						<ul>
+							<c:if test="${ pi.currentPage <= 1 }">
 							<li><a href="#">&lt;</a></li>
-							<li class="active"><span>1</span></li>
-							<li><a href="#">2</a></li>
-							<li><a href="#">3</a></li>
-							<li><a href="#">4</a></li>
-							<li><a href="#">5</a></li>
-							<li><a href="#">&gt;</a></li>
+							</c:if>
+							<c:if test="${ pi.currentPage > 1 }">
+								<c:url var="blistBack" value="mypage.nanum">
+									<c:param name="currentPage" value="${ pi.currentPage - 1}"/>
+								</c:url>
+								<li><a href="${ blistBack }">&lt;</a></li>
+							</c:if>
+
+							<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+								<c:if test="${ p == pi.currentPage }">
+									<li class="active"><a class="active" href="${ blistCheck }">${ p }</a></li>
+								</c:if>
+								<c:if test="${ p != pi.currentPage }">
+									<c:url var="blistCheck" value="mypage.nanum">
+										<c:param name="currentPage" value="${p}"/>									
+									</c:url>
+									 <li><a href="${ blistCheck }">${ p }</a></li> 									
+								</c:if>
+							</c:forEach>
+							
+							<c:if test="${ pi.currentPage >= pi.maxPage }">
+								<li><a href="#">&gt;</a></li>
+							</c:if>
+							<c:if test="${ pi.currentPage < pi.maxPage }">
+								<c:url var="blistEnd" value="mypage.nanum">
+									<c:param name="currentPage" value="${ pi.currentPage + 1}"/>
+								</c:url>
+								<li><a href="${ blistEnd }">&gt;</a></li>
+							</c:if>						
 						</ul>
 					</div>
 				</div>
