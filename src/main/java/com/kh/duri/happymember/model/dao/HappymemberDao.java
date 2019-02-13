@@ -16,5 +16,8 @@ public interface HappymemberDao {
 
 	ArrayList<FundItemList> fundItemList(SqlSessionTemplate sqlSession) throws MypageException;
 
+	int getDelivery(SqlSessionTemplate sqlSession, String[] itemNumArray, String[] itemAmountArray, String mno) throws MypageException;
+
+	
 	
 }

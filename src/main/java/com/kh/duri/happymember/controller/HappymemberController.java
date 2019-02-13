@@ -61,6 +61,7 @@ public class HappymemberController {
 	//배송받을 물품 선택 후 수량 변경하기
 	@RequestMapping("getDelivery.happy")
 	public String getDelivery(HttpServletRequest request, HttpServletResponse response) {
+		String mno = request.getParameter("mno");
 		String item = request.getParameter("item");
 		System.out.println("물품번호 : " + item);
 		
@@ -68,32 +69,38 @@ public class HappymemberController {
 		System.out.println("개수 : " + itemAmount);
 		
 		String[] itemNumArray;
-		itemNumArray = item.split("/");
+		itemNumArray = item.split(",");
 		
 		String[] itemAmountArray;
-		itemAmountArray = item.split(",");
+		itemAmountArray = itemAmount.split(",");
 		
-		for(int i = 0; i < itemNumArray.length; i++) {
+		/*for(int i = 0; i < itemNumArray.length; i++) {
 			System.out.println("itemArray[i] : " + itemNumArray[i]);
 		}
 		for(int i = 0; i < itemAmountArray.length; i++) {
 			System.out.println("itemAmountArray[i] : " + itemAmountArray[i]);
-		}
+		}*/
 		
-		/*try {
-			String[] itemNumArray = hs.getDeliveryNum(itemNumArray);
-			
-			String[] itemAmountArray = hs.getDeliveryAmoun
+		try {
+			int result = hs.getDelivery(itemNumArray, itemAmountArray, mno);
+			if(result > 0) {
+				return "redirect:selectDeliveryList.happy";
+			}
 			
 			
 		} catch (MypageException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}*/
-		
-		
+			request.setAttribute("msg", e.getMessage());
+			return "common/errorPage";
+		}
 		return "happymember/deliveryStatus";
 	}
+	
+	
+	@RequestMapping("selectDeliveryList.happy")
+	public String test() {
+		return "happymember/mypage";
+	}
+	
 	
 	@RequestMapping("mypage.happy")
 	public String happy1() {

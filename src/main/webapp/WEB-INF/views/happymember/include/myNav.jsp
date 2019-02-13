@@ -240,7 +240,7 @@ p {font-size: 20px; text-align: center;}
 			<div style="float: left;" class="textBlack2">에서 꼭!수정해주세요!&nbsp;</div>
 		</div>
 		<h4 class="ui dividing header"></h4>
-		<div align="center"><a class="resetBtn">취소</a></div>
+		<div align="center"><a onclick="selectReset();" class="resetBtn">취소</a></div>
 		<div align="center" onclick="getDelivery();"><a class="deliveryBtn">배송받기</a></div>
 	</div>
 </div>
@@ -324,7 +324,7 @@ p {font-size: 20px; text-align: center;}
 					console.log(data.ownlist[i]);//보유 물품 뽑기(번호, 수량 등)
 					
 					//물품명 뽑기
-					var fundItemList01= "<div style='float: left;'><input type='checkbox' name = 'item' value = "+data.fundItemList[i].ino+"/></div><div style='float: left;'><h3>&nbsp;&nbsp;"+data.fundItemList[i].iname;
+					var fundItemList01= "<div style='float: left;'><input type='checkbox' name = 'item' value = "+data.fundItemList[i].ino+"></div><div style='float: left;'><h3>&nbsp;&nbsp;"+data.fundItemList[i].iname;
 					var fundItemList02= "</h3></div><br><br><br><br>"
 					
 						//수량 뽑기
@@ -345,8 +345,12 @@ p {font-size: 20px; text-align: center;}
 									console.log("오 !!option 추가했다");
 									itemsOption = (optionStart+ j + optionEnd);
 									$itemsSelect.append(itemsOption);
+									
 								}
 							}
+							if(data.ownlist[o].ovalue == 0){
+								$itemsSelect.append($("<option>").text(0));
+							} 
 						}
 						
 					console.log($itemsSelect);
@@ -389,6 +393,10 @@ p {font-size: 20px; text-align: center;}
 			 
 	}
 	
+	//보유물품 - 취소 버튼 클릭 함수
+	function selectReset(){
+		$("#getDeliveryForm")[0].reset();
+	}
 	
 </script>
 

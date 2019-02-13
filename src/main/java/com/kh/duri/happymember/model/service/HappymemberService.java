@@ -16,6 +16,11 @@ public interface HappymemberService {
 	//후원물품 리스트
 	ArrayList<FundItemList> fundItemList() throws MypageException;
 
+	// 
+	int getDelivery(String[] itemNumArray, String[] itemAmountArray, String mno) throws MypageException;
+
+	
+
 
 	
 
