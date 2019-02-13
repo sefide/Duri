@@ -81,6 +81,18 @@
 		<result property="leStatus" column="LESTATUS"/>
 		<result property="mNick" column="MNICK"/>
 	</resultMap>
+	<resultMap type="com.kh.duri.Nanummember.model.vo.FundInterest" id="fundInterestResultSet">
+		<id property="flNo" column="FINO"/>
+		<result property="flDate" column="FIDATE"/>
+		<result property="flStatus" column="FISTATUS"/>
+		<result property="flType" column="FITYPE"/>
+		<result property="flMno" column="FI_MNO"/>
+		<result property="flFno" column="FI_FNO"/>
+		<result property="flMnoTake" column="FI_MNO_TAKE"/>
+		<result property="mNick" column="MNICK"/>
+		<result property="mpr" column="MPR"/>
+		<result property="fTitle" column="FTITLE"/>
+	</resultMap>
 		
 	<!-- 금액 크라우드 펀딩 개수 조회 (진행) -->
 	<select id="selectMoneyCloundListCount" resultType="_int">
@@ -117,10 +129,29 @@
 		FROM(SELECT f.FTITLE , fh.FHVALUE , f.FSTATUS,  f.FSTARTDATE ,f.FENDDATE , fh.FHDATE
 		FROM FUNDING f, FUNDHISTORY fh		
 		<![CDATA[
-		WHERE f.FNO = fh.FH_FNO and fh.FH_MNO_GIVE = #{mno}  and f.FTYPE= 'MONEY' 
-			and f.fenddate < SYSDATE ]]>
+		WHERE f.FNO = fh.FH_FNO and fh.FH_MNO_GIVE = #{mno}  and f.FTYPE= 'MONEY' and f.fenddate < SYSDATE ]]>
         ORDER BY fh.FHDATE DESC)
 	</select> 
+	
+	
+	<!-- 물품 크라우드 펀딩 개수 조회 (진행) -->
+	<select id="selectItemCloundListCount" resultType="_int">
+		SELECT COUNT(*)
+		FROM FUNDING f, FUNDHISTORY fh
+		<![CDATA[
+		WHERE f.FNO = fh.FH_FNO and fh.FH_MNO_GIVE = #{mno} and f.fstartdate <= SYSDATE and f.fenddate>= SYSDATE 
+		and f.FTYPE= 'ITEM' ]]>
+	</select>
+	
+	<!-- 물품 크라우드 펀딩  조회 (진행) -->
+	<select id="selectItemCloud" resultMap="fundingResultSet" parameterType="Funding" resultType="list">
+		SELECT ROWNUM RNUM, FTITLE , FHVALUE ,FSTATUS, FSTARTDATE , FENDDATE , FHDATE
+		FROM(SELECT f.FTITLE , fh.FHVALUE , f.FSTATUS,  f.FSTARTDATE ,f.FENDDATE , fh.FHDATE
+		FROM FUNDING f, FUNDHISTORY fh	
+		<![CDATA[	
+		WHERE f.FNO = fh.FH_FNO and fh.FH_MNO_GIVE = #{mno}  and f.FTYPE= 'ITEM' and f.fstartdate <= SYSDATE and f.fenddate >= SYSDATE ]]>
+		ORDER BY fh.FHDATE DESC)
+	</select>
 	
 	
 	
@@ -166,7 +197,7 @@
   	<select id="selectDirectLetterCount" resultType="_int">
   		SELECT COUNT(*)
 		FROM LETTER L, MEMBER M
-		WHERE LESTATUS = 'Y' AND LETYPE = 2 AND L.LE_MNO_GIVE = #{mno} AND L.LE_MNO_TAKE = M.MNO
+		WHERE LESTATUS = 'Y' AND LETYPE = 1 AND L.LE_MNO_GIVE = #{mno} AND L.LE_MNO_TAKE = M.MNO
   	</select>
   	<!-- 정기 감사편지 조회 (진행)-->
   	<select id="selectDirectLetter" resultMap="letterResultSet" parameterType="Letter" resultType="list">
@@ -174,10 +205,72 @@
 		FROM(
 		SELECT M.MNICK, L.LETITLE, L.LEWRITEDATE
 		FROM LETTER L, MEMBER M
-		WHERE  LESTATUS = 'Y' AND LETYPE = 2 AND L.LE_MNO_GIVE = #{mno} AND
+		WHERE  LESTATUS = 'Y' AND LETYPE = 1 AND L.LE_MNO_GIVE = #{mno} AND
 		L.LE_MNO_TAKE = M.MNO
 		ORDER BY L.LEWRITEDATE DESC)
   	</select>
-  
+  	<!-- 물품 크라우드 감사편지 개수 조회 (진행)-->
+  	<select id="selectMoneyCloudLetterCount" resultType="_int">
+  		SELECT COUNT(*)
+		FROM LETTER L, MEMBER M
+		WHERE LESTATUS = 'Y' AND LETYPE = 2 AND L.LE_MNO_GIVE = #{mno} AND L.LE_MNO_TAKE = M.MNO
+  	</select>
+  	<!-- 물품 크라우드 감사편지  조회  -->
+  	<select id="selectMoneyCloudLetter" resultMap="letterResultSet" parameterType="Letter" resultType="list">
+  		SELECT ROWNUM RNUM, MNICK, LETITLE, LEWRITEDATE
+		FROM(
+		SELECT M.MNICK, L.LETITLE, L.LEWRITEDATE
+		FROM LETTER L, MEMBER M
+		WHERE  LESTATUS = 'Y' AND LETYPE = 2 AND L.LE_MNO_GIVE = #{mno}  AND
+		L.LE_MNO_TAKE = M.MNO
+		ORDER BY L.LEWRITEDATE DESC)
+  	</select>
+  	<!-- 찜한 정기 후원 개수 조회 -->
+  	<select id="selectLikeDirectCount" resultType="_int">
+  		SELECT COUNT(*) 
+		FROM FUNDINTEREST FI, MEMBER M
+		WHERE FI.FISTATUS = 'Y' AND FI.FI_MNO = #{mno} AND FI.FI_MNO_TAKE = M.MNO
+  	</select>
+  	<!-- 찜한 정기 후원  조회 -->
+  	<select id="selectLikeDirect" resultMap="fundInterestResultSet" parameterType="FundInterest" resultType="list">
+  		SELECT ROWNUM RNUM ,MNICK, MPR ,FIDATE, FI_MNO_TAKE
+		FROM(
+		SELECT M.MNICK, M.MPR ,FI.FIDATE, FI.FI_MNO_TAKE
+		FROM FUNDINTEREST FI, MEMBER M 
+		WHERE FI.FISTATUS = 'Y' AND FI.FI_MNO = #{mno}  AND FI.FI_MNO_TAKE = M.MNO AND FI.FITYPE = 1 
+		ORDER BY FI.FIDATE)
+  	</select>
+  	<!-- 찜한 금액 크라우딩 개수 조회 -->
+  	<select id="selectLikeMoneyCount" resultType="_int">
+  		SELECT COUNT(*)
+		FROM FUNDINTEREST FI, MEMBER M 
+		WHERE FI.FISTATUS = 'Y' AND FI.FI_MNO =  #{mno}  AND FI.FI_MNO_TAKE = M.MNO AND FI.FITYPE = 1 
+		ORDER BY FI.FIDATE
+  	</select>
+  	<!-- 찜한 금액 크라우드 펀딩  조회 -->
+  	<select id="selectLikeMoneyCloud" resultMap="fundInterestResultSet" parameterType="FundInterest" resultType="list">
+  		SELECT ROWNUM RNUM, MNICK , FTITLE, FIDATE, FI_FNO
+		FROM(
+		SELECT  M.MNICK ,F.FTITLE, FI.FIDATE , FI.FI_FNO
+		FROM FUNDINTEREST FI, MEMBER M , FUNDING F
+		WHERE FI.FISTATUS = 'Y' AND FI.FI_MNO = #{mno}  AND FI.FITYPE = 2  AND F.FNO = FI.FI_FNO AND F.FWRITER = M.MNO
+		ORDER BY FI.FIDATE )
+  	</select>
+  	
+  	
+  	
+  	
+  	
+  	
+  	
+  	
+  	
+  	
+  	
+  	
+  	
+  	
+  	
+  	
  </mapper>
   

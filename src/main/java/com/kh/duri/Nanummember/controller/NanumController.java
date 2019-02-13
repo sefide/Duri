@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.kh.duri.Nanummember.model.exception.NanumException;
 import com.kh.duri.Nanummember.model.service.NanumMemberService;
 import com.kh.duri.Nanummember.model.vo.DirectFundHistory;
+import com.kh.duri.Nanummember.model.vo.FundInterest;
 import com.kh.duri.Nanummember.model.vo.Funding;
 import com.kh.duri.Nanummember.model.vo.Letter;
 import com.kh.duri.Nanummember.model.vo.PageInfo;
@@ -39,29 +40,42 @@ public class NanumController {
 		return "Nanummember/nanumMain";
 	}
 	
-	// 나눔두리 마이페이지(금액 크라우드 펀딩 - 진행/ 금액크라우드 펀딩- 종료)
+	// 나눔두리 마이페이지()
 	@RequestMapping("mypage.nanum")
 	public String selectCloudList(Model model, HttpServletRequest request, HttpServletResponse response) {
 		Member m = (Member)request.getSession().getAttribute("loginUser2");
-		int currentPage = 1;
-		int currentPage2 = 1;		
+		int currentPage = 1; // 진행중 금액 크라우드 펀딩
+		int currentPage2 = 1;	// 종료된 금액 크라우드
+		int currentPage3 = 1; //진행중 물품 크라우드
+		int currentPage4= 1;  //종료된 물품 크라우드
 		if(request.getParameter("currentPage") != null) {
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		}		
 		if(request.getParameter("currentPage2") != null) {
 			currentPage2 = Integer.parseInt(request.getParameter("currentPage2"));
-		}		
+		}	
+		if(request.getParameter("currentPage3") != null) {
+			currentPage3 = Integer.parseInt(request.getParameter("currentPage3"));
+		}	
+		if(request.getParameter("currentPage4") != null) {
+			currentPage4 = Integer.parseInt(request.getParameter("currentPage4"));
+		}	
 		try {
-			int listCount = ns.getMoneyCloundListCount(m);
-			int listCount2 = ns.getEndMoneyCloundListCount2(m);		
-			PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
-			PageInfo pi2 = Pagination.getPageInfo(currentPage2, listCount2);			
-			List<Funding> fList = ns.selectMoneyCloud(m,pi);
-			List<Funding> fList2 = ns.selectMoneyCloud2(m,pi2);		
-			model.addAttribute("fList",fList);
+			int MoneyCloudCount = ns.getMoneyCloundListCount(m);
+			int EndMoneyCloudCount = ns.getEndMoneyCloundListCount2(m);	
+			int ItemCloudCount = ns.getItemCloundListCount(m);
+			PageInfo pi = Pagination.getPageInfo(currentPage, MoneyCloudCount);
+			PageInfo pi2 = Pagination.getPageInfo(currentPage2, EndMoneyCloudCount);	
+			PageInfo pi3 = Pagination.getPageInfo(currentPage3, ItemCloudCount);
+			List<Funding> MoneyList = ns.selectMoneyCloud(m,pi);
+			List<Funding> EndMoneyList = ns.selectMoneyCloud2(m,pi2);	
+			List<Funding> ItemList = ns.selectItemCloud(m,pi3);
+			model.addAttribute("MoneyList",MoneyList);
 			model.addAttribute("pi",pi);
-			model.addAttribute("fList2",fList2);
-			model.addAttribute("pi2",pi2);			
+			model.addAttribute("EndMoneyList",EndMoneyList);
+			model.addAttribute("pi2",pi2);	
+			model.addAttribute("ItemList",ItemList);
+			model.addAttribute("pi3",pi3);	
 			return "Nanummember/mypage/mypage";			
 		} catch (NanumException e) {
 			model.addAttribute("msg", e.getMessage());
@@ -75,7 +89,7 @@ public class NanumController {
 		
 		System.out.println("ajax mno: "+mno);
 		
-		return "Nanummember/mypage/mypage";	
+		return "Nanummember/mypage/mypage_fund";	
 	}
 		
 	//정기 후원 조회
@@ -108,20 +122,29 @@ public class NanumController {
 		}
 	}
 	
-	//감사편지 조회
+	//감사편지 조회 (정기 - 진행/ 크라우드 - 금액)
 	@RequestMapping("mypageLetter.nanum")
 	public String selectLetterList(Model model, HttpServletRequest request, HttpServletResponse response) {
 		Member m = (Member)request.getSession().getAttribute("loginUser2");
 		int currentPage = 1;
+		int currentPage2 = 1;
 		if(request.getParameter("currentPage") != null) {
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		}
+		if(request.getParameter("currentPage2") != null) {
+			currentPage2 = Integer.parseInt(request.getParameter("currentPage2"));
+		}
 		try {
 			int listCount = ns.getDirectLetterListCount(m);
+			int listCount2 = ns.getMoneyCloudLetterListCount(m);
 			PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
+			PageInfo pi2 = Pagination.getPageInfo(currentPage2, listCount2);
 			List<Letter> dlList = ns.selectDirectLetter(m,pi);
+			List<Letter> mclList = ns.selectMoneyCloudLetter(m,pi2);
 			model.addAttribute("dlList",dlList);
 			model.addAttribute("pi",pi);
+			model.addAttribute("mclList",mclList);
+			model.addAttribute("pi2",pi2);
 			return "Nanummember/mypage/mypage_letter";
 		} catch (NanumException e) {
 			e.printStackTrace();
@@ -129,8 +152,7 @@ public class NanumController {
 		}
 		
 		
-	}
-	
+	}	
 	@RequestMapping("mypageLetterDetail.nanum")
 	public String Total11() {
 		return "Nanummember/mypage/mypage_letterDetail";
@@ -140,10 +162,38 @@ public class NanumController {
 	public String Total6() {
 		return "Nanummember/mypage/mypage_receipt";
 	}
-	
+	////찜한 후원 조회 (정기 / 크라우드 - 금액)
 	@RequestMapping("mypageLikefund.nanum")
-	public String Total7() {
-		return "Nanummember/mypage/mypage_likefund";
+	public String selectLikeFundList(Model model, HttpServletRequest request, HttpServletResponse response) {
+		Member m = (Member)request.getSession().getAttribute("loginUser2");
+		int currentPage = 1;
+		int currentPage2 = 1;
+		if(request.getParameter("currentPage") != null) {
+			currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		}
+		if(request.getParameter("currentPage2") != null) {
+			currentPage2 = Integer.parseInt(request.getParameter("currentPage2"));
+		}
+		try {
+			int listCount = ns.getLikeDirectListCount(m);
+			int listCount2 = ns.getLikeMoneyCloudListCount(m);
+			PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
+			PageInfo pi2 = Pagination.getPageInfo(currentPage2, listCount2);
+			List<FundInterest> dfList = ns.selectLikeDirect(m,pi);
+			List<FundInterest> mclList = ns.selectLikeMoneyCloud(m,pi2);
+			model.addAttribute("dfList",dfList);
+			model.addAttribute("pi",pi);
+			model.addAttribute("mclList",mclList);
+			model.addAttribute("pi2",pi2);
+			System.out.println("mclList"+mclList);
+			return "Nanummember/mypage/mypage_likefund";
+		} catch (NanumException e) {
+			e.printStackTrace();
+			return "Nanummember/mypage/mypage_likefund";
+		}
+		
+		
+		
 	}
 	
 	@RequestMapping("QnAList.nanum")
