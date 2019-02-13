@@ -45,7 +45,7 @@
                                             <th>이름</th>
                                             <th>닉네임</th>
                                             <th>성별</th>
-                                            <th>Email</th>
+                                            <th>memail</th>
                                             <th>회원등급</th>
                                             <th>상세보기</th>
                                         </tr>
@@ -58,10 +58,10 @@
                                             <td class="center" style="display: none;">${row.mno}</td>
                                             <td class="center">${row.mid}</td>
                                             <td class="center">${row.mName}</td>
-                                            <td class="center">${row.mNickName}</td>
+                                            <td class="center">${row.mNick}</td>
                                             <c:if test="${row.mGender == 'F'}"><td class="center">여</td></c:if>
 											<c:if test="${row.mGender == 'M'}"><td class="center">남</td></c:if>
-                                            <td class="center">${row.email}</td>
+                                            <td class="center">${row.memail}</td>
                                             <c:choose>
                                             	<c:when test="${row.mGoalNum <5}">
                                             		<td class="center">씨앗두리</td>

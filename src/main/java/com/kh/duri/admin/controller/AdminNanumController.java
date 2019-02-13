@@ -49,10 +49,10 @@ public class AdminNanumController {
 	 
 		int num = Integer.parseInt(request.getParameter("num"));
 		m.setMno(num);
-		List<adminMember> NanumDetailList;
+		adminMember NanumDetail;
 		try {
-			NanumDetailList = ans.adminNanumDetailList(m);
-			model.addAttribute("NanumDetailList", NanumDetailList);
+			NanumDetail = ans.NanumDetail(m);
+			model.addAttribute("NanumDetail", NanumDetail);
 		
 			return "admin/adminNanumDetail";
 		} catch (ListException e) {

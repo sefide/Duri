@@ -83,14 +83,15 @@
 <%@ include file="../../common/navi.jsp" %>
 <%@ include file="../include/header.jsp" %>
 <br><br><br><br>
-			<div class="contBox inner">
+	<div class="contBox inner">
 				<%@ include file="../include/tabMypage.jsp"%>
-
-			<div class="tableArea">
-				<div id="myTitle"> <i class="hourglass half icon"></i>진행중인 크라우드 펀딩</div>
+			
+			<!-- 진행중인 금액 크라우드 펀딩  -->
+			<div class="tableArea" id="MoneyCloudIng" style="display : block; ">
+				<div id="myTitle"> <i class="hourglass half icon"></i>진행중인 금액 크라우드 펀딩</div>
 				<div style="width: 96%; margin: 0 auto;">
-				<div class="categotyBtn" onclick="MoneyCloud()" style="margin-right: 30px;">금액</div>
-				<div class="categotyBtn" onclick="#">물품</div>
+				<div id="mBtn" class="categotyBtn" onclick="MoneyCloudIng()" style="margin-right: 30px; color: green;">금액</div>
+				<div id="iBtn" class="categotyBtn" onclick="ItemCloudIng()">물품</div>
 				</div>
 				<table id="MoneyCloudTbl">
 					<thead>
@@ -103,7 +104,7 @@
 						</tr>
 					</thead>
 					<tbody>
-						<c:forEach items="${fList}" var = "funding" varStatus="">
+						<c:forEach items="${MoneyList}" var = "funding" varStatus="">
 							<tr>
 							<td><c:out value="${funding.fTitle}"/></td>
 							<td></td>
@@ -121,10 +122,7 @@
 						</tr>
 						</c:forEach>
 					</tbody>
-				</table>
-				
-				
-				
+				</table>				
 				<div class="col text-center">
 					<div class="block-27">
 						<ul>
@@ -164,12 +162,89 @@
 				</div>
 			</div>
 			
+			<!-- 진행중인 물품 크라우드 펀딩  -->
+			<div class="tableArea" id="ItemCloudIng" style="display: none; ">
+				<div id="myTitle"> <i class="hourglass half icon"></i>진행중인 물품 크라우드 펀딩</div>
+				<div style="width: 96%; margin: 0 auto;">
+				<div id="mBtn" class="categotyBtn" onclick="MoneyCloudIng()" style="margin-right: 30px;">금액</div>
+				<div id="iBtn" class="categotyBtn" onclick="ItemCloudIng()">물품</div>
+				</div>
+				<table id="">
+					<thead>
+						<tr>
+							<th style="width: 40%;">제목</th>
+							<th style="width: 15%;">진행현황</th>
+							<th style="width: 15%;">내가 후원한 호인트</th>
+							<th style="width: 15%;">후원 일시</th>
+							<th style="width: 15%;">100%달성여부</th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach items="${ItemList}" var = "ItemList" varStatus="">
+							<tr>
+							<td><c:out value="${ItemList.fTitle}"/></td>
+							<td></td>
+							<td><c:out value="${ItemList.fhValue}"/></td>
+							
+							<td><c:out value="${ItemList.fhDate}"></c:out></td>
+							<c:choose>
+								<c:when test="${ItemList.fStatus eq 'GOAL'}">
+									<td>O</td>
+								</c:when>
+								<c:otherwise>
+									<td>X</td>
+								</c:otherwise>
+							</c:choose>						
+						</tr>
+						</c:forEach>
+					</tbody>
+				</table>				
+				<div class="col text-center">
+					<div class="block-27">
+						<ul>
+							<c:if test="${ pi3.currentPage <= 1 }">
+							<li><a href="#">&lt;</a></li>
+							</c:if>
+							<c:if test="${ pi3.currentPage > 1 }">
+								<c:url var="blistBack" value="mypage.nanum">
+									<c:param name="currentPage" value="${ pi3.currentPage - 1}"/>
+								</c:url>
+								<li><a href="${ blistBack }">&lt;</a></li>
+							</c:if>
+
+							<c:forEach var="p" begin="${ pi3.startPage }" end="${ pi3.endPage }">
+								<c:if test="${ p == pi3.currentPage }">
+									<li class="active"><a class="active" href="${ blistCheck }">${ p }</a></li>
+								</c:if>
+								<c:if test="${ p != pi3.currentPage }">
+									<c:url var="blistCheck" value="mypage.nanum">
+										<c:param name="currentPage" value="${p}"/>									
+									</c:url>
+									 <li><a href="${ blistCheck }">${ p }</a></li> 									
+								</c:if>
+							</c:forEach>
+							
+							<c:if test="${ pi3.currentPage >= pi3.maxPage }">
+								<li><a href="#">&gt;</a></li>
+							</c:if>
+							<c:if test="${ pi3.currentPage < pi3.maxPage }">
+								<c:url var="blistEnd" value="mypage.nanum">
+									<c:param name="currentPage" value="${ pi3.currentPage + 1}"/>
+								</c:url>
+								<li><a href="${ blistEnd }">&gt;</a></li>
+							</c:if>						
+						</ul>
+						</div>
+				</div>
+			</div>
 			
-			<div class="tableArea">
+
+			<!-- 종료된 금액 크라우드 펀딩 -->
+			<div class="tableArea" id="MoneyCloudEnd" style="display : block;">
 				<div id="myTitle"><i class="hourglass end icon"></i>종료된 크라우드 펀딩</div>
 				<div style="width: 96%; margin: 0 auto;">
-				<div class="categotyBtn" onclick="#" style="margin-right: 30px;">금액</div>
-				<div class="categotyBtn" onclick="#">물품</div>
+				<div id="emBtn" class="categotyBtn" onclick="#" style="margin-right: 30px; color: green;" >금액</div>
+				<div id="eiBtn" class="categotyBtn" onclick="#">물품</div>
 				</div>
 				<table>
 					<thead>					
@@ -182,7 +257,7 @@
 						</tr>					
 					</thead>
 					<tbody>
-						<c:forEach items="${fList2}" var = "funding2" varStatus="">
+						<c:forEach items="${EndMoneyList}" var = "funding2" varStatus="">
 							<tr>
 							<td><c:out value="${funding2.fTitle}"/></td>
 							<td></td>
@@ -240,28 +315,166 @@
 					</div>
 				</div>
 			</div>
-		</div>								
+			
+			<!-- 종료된 물품 크라우드 펀딩 -->
+			<div class="tableArea" id="ItemCloudEnd" style="display: none; ">
+				<div id="myTitle"><i class="hourglass end icon"></i>종료된 크라우드 펀딩</div>
+				<div style="width: 96%; margin: 0 auto;">
+				<div id="emBtn" class="categotyBtn" onclick="#" style="margin-right: 30px; color: green;">금액</div>
+				<div id="imBtn" class="categotyBtn" onclick="#">물품</div>
+				</div>
+				<table>
+					<thead>					
+						<tr>
+							<th style="width: 40%;">제목</th>
+							<th style="width: 15%;">진행현황</th>
+							<th style="width: 15%;">내가 후원한 호인트</th>
+							<th style="width: 15%;">후원 일시</th>
+							<th style="width: 15%;">100%달성여부</th>
+						</tr>					
+					</thead>
+					<tbody>
+						<c:forEach items="${EndMoneyList}" var = "funding2" varStatus="">
+							<tr>
+							<td><c:out value="${funding2.fTitle}"/></td>
+							<td></td>
+							<td><c:out value="${funding2.fhValue}"/></td>
+							
+							<td><c:out value="${funding2.fhDate}"></c:out></td>
+							<c:choose>
+								<c:when test="${funding2.fStatus eq 'GOAL'}">
+									<td>O</td>
+								</c:when>
+								<c:otherwise>
+									<td>X</td>
+								</c:otherwise>
+							</c:choose>						
+						</tr>
+						</c:forEach>
+						
+					</tbody>
+				</table>
+				<div class="col text-center">
+					<div class="block-27">
+						<ul>
+							<c:if test="${ pi2.currentPage <= 1 }">
+							<li><a href="#">&lt;</a></li>
+							</c:if>
+							<c:if test="${ pi2.currentPage > 1 }">
+								<c:url var="blistBack" value="mypage.nanum">
+									<c:param name="currentPage" value="${ pi2.currentPage - 1}"/>
+								</c:url>
+								<li><a href="${ blistBack }">&lt;</a></li>
+							</c:if>
+
+							<c:forEach var="p" begin="${ pi2.startPage }" end="${ pi2.endPage }">
+								<c:if test="${ p == pi2.currentPage }">
+									<li class="active"><a class="active" href="${ blistCheck }">${ p }</a></li>
+								</c:if>
+								<c:if test="${ p != pi2.currentPage }">
+									<c:url var="blistCheck" value="mypage.nanum">
+										<c:param name="currentPage" value="${p}"/>									
+									</c:url>
+									 <li><a href="${ blistCheck }">${ p }</a></li> 									
+								</c:if>
+							</c:forEach>
+							
+							<c:if test="${ pi2.currentPage >= pi2.maxPage }">
+								<li><a href="#">&gt;</a></li>
+							</c:if>
+							<c:if test="${ pi2.currentPage < pi2.maxPage }">
+								<c:url var="blistEnd" value="mypage.nanum">
+									<c:param name="currentPage" value="${ pi2.currentPage + 1}"/>
+								</c:url>
+								<li><a href="${ blistEnd }">&gt;</a></li>
+							</c:if>						
+						</ul>
+					</div>
+				</div>
+			</div>
+			
+					
+	</div>								
 			
 	<%@ include file="../include/myNav.jsp" %>
 	
 	<script type="text/javascript">
-			function MoneyCloud() {	
+			/* 진행중인 금액 크라우드 버튼 클릭시  */
+			function MoneyCloudIng() {	
 				var mno = ${ sessionScope.loginUser2.mno };
-				console.log("회원번호 : "+mno); 
-				
-				$ajax({
+				console.log("회원번호 : "+mno); 			
+				$.ajax({
 					url:"ItemClound.nanum",
 					type:"post",
 					data:{mno:mno},
 					success:function(data){
-						console.log(data.mno);
+						 $("#MoneyCloudIng").show(); 
+						 $("#ItemCloudIng").hide();
+						 $("#mBtn").css("color","green");
 					},
 					error:function(status){
 						console.log(status);
 					}				
 				});
-			}
-				
+			}	
+			//진행중인 물품 크라우드 버튼 클릭시
+			function ItemCloudIng() {	
+				var mno = ${ sessionScope.loginUser2.mno };
+				console.log("회원번호 : "+mno); 			
+				$.ajax({
+					url:"ItemClound.nanum",
+					type:"post",
+					data:{mno:mno},
+					success:function(data){
+						 $("#MoneyCloudIng").hide(); 
+						 $("#ItemCloudIng").show();
+						 $("#ItemCloudIng").find("#iBtn").css("color","green");
+						 
+					},
+					error:function(status){
+						console.log(status);
+					}				
+				});
+			}	
+			
+			/* //종료된 금액 크라우드 버튼 클릭시 
+			function MoneyCloudIng() {	
+				var mno = ${ sessionScope.loginUser2.mno };
+				console.log("회원번호 : "+mno); 			
+				$.ajax({
+					url:"ItemClound.nanum",
+					type:"post",
+					data:{mno:mno},
+					success:function(data){
+						 $("#MoneyCloudIng").show(); 
+						 $("#ItemCloudIng").hide();
+						 $("#mBtn").css("color","green");
+					},
+					error:function(status){
+						console.log(status);
+					}				
+				});
+			}	
+			//진행중인 물품 크라우드 버튼 클릭시
+			function ItemCloudIng() {	
+				var mno = ${ sessionScope.loginUser2.mno };
+				console.log("회원번호 : "+mno); 			
+				$.ajax({
+					url:"ItemClound.nanum",
+					type:"post",
+					data:{mno:mno},
+					success:function(data){
+						 $("#MoneyCloudIng").hide(); 
+						 $("#ItemCloudIng").show();
+						 $("#ItemCloudIng").find("#iBtn").css("color","green");
+						 
+					},
+					error:function(status){
+						console.log(status);
+					}				
+				});
+			} */
+			
 		</script>	
 </body>
 </html>

@@ -29,11 +29,11 @@ public class adminHappyServiceImpl implements adminHappyService{
 
 	//행복두리 상세조회(기존회원)
 	@Override
-	public List<adminMember> adminHappyDetailList(adminMember m) throws ListException {
+	public adminMember HappyDetail(adminMember m) throws ListException {
 		
-		List<adminMember> list = ahd.adminHappyDetailList(sqlsession, m);
+		adminMember HappyDetail = ahd.HappyDetail(sqlsession, m);
 		
-		return null;
+		return HappyDetail;
 	}
 
 }
