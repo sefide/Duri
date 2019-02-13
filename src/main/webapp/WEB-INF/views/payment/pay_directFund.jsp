@@ -1,157 +1,169 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import = "java.util.Date, java.text.SimpleDateFormat, java.util.Calendar" %>
+
+<% 
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyy년 MM월 dd일");
+	Calendar cal = Calendar.getInstance();
+ 	cal.add(Calendar.MONTH, 1);
+%>
+ 						
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
+
+<!-- import cdn -->
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+
 	<title>Insert title here</title>
       <!-- 공통 css 부분 -->
     <jsp:include page="../common/css.jsp"/>
       
     <style>
-    		#nav_back{
-    			background: #FFBB50; 
-    			height:83px; 
-    			box-shadow:0 0 6px 0 #B8B8B8; 
-    		}
-    		
-    		#bar1{
-    			width:98%; 
-    			margin: 2% auto; 
-    			border-top:1px solid #B8B8B8;
-    			height : 10px;
-    		}
-    		
-    		table {
-    			width : 95%;
-    			margin: 1%;
-    		}
-    		
-    		tr{
-    			height: 90px;
-    		}
-    		th{
-    			font-weight : 400;
-    			font-size : 20px;
-    			font-family: "Dosis", Arial, sans-serif;
-    		}
-    		td{	
-    			padding-left : 10px;
-    			font-weight : 300;
-    			font-size : 20px;
-    		}
-    		
-    		#sType{
-    			display: block;
-    			width : 100%;
-    			font-size : 20px;
-    		}
-    		#sTitle{
-    			display: block;
-    			font-size : 30px;
-    			font-weight : 600;
-    		}
-    		
-    		.d-flex{
-    			padding-left : 5%;
-    			margin: 1% 0;
-    		}
-    		
-    		#sponPoint{
-    			height :40px !important;
-    			border-radius : 5px;
-    			width :  160px;
-    			display : inline-block;
-    			margin-right : 2%;
-    		}
-    		
-    		#totaldiv{
-    			width : 82%;
-    			margin : 2% auto; 
-    		}
-    		
-    		#totalBox{
-    			width : 99%; 
-    			background: rgba(220,220,220,0.3); 
-    			margin : 2% auto; 
-    			padding: 4% 2%;
-    		}
-    		
-    		#txtSponValue{
-    			display : inline-block;
-    			font-weight : 500;
-    			font-size: 24px;
-    			margin-right : 20px;
-    		}
-    		#sponValue{
-    			display : inline-block;
-    			color : #FE9D35;
-    			font-weight : 500;
-    			font-size: 36px;
-    			margin-right : 10px;
-    		}
-    		.txtWon{
-    			display : inline-block;
-    			font-size : 25px;
-    			font-weight : 500;
-    		}
-    		
-    		#txtLeftValue{
-    			display : inline-block;
-    			margin-right : 22px;
-    		}
-    		#leftValue{
-    			display : inline-block;
-    			font-size: 22px;
-    			margin-right : 10px;
-    		}
-    		
-    		#seeTerms{
-    			padding : 0.6%;
-    			border-radius : 4px;
-    			background: rgba(150,150,150,0.4);
-    			font-size : 17px;
-    			font-weight : 500;
-    			cursor : pointer;
-    		}
-    		
-    		#btnBox{
-    			width : 99%;
-    			text-align : center;
-    		}
-    		
-    		#btnSpon{
-    			padding : 0.4em 4em;
-    			border-radius : 4px;
-    			background: #FE9D35;
-    			color : #ffff;
-    			font-weight : 700;
-    			font-size : 28px;
-    			cursor : pointer;
-    		}
-    		.txtWon{
-    			display : inline-block;
-    			font-size : 19px;
-    		}
-    		
-    		.txtColor_o{
-    			color : #FE9D35;
-    		}
-    		.txtColor_g{
-    			color : #32933F;
-    		}
-    		.txtBold{
-    			font-weight : 700;
-    		}
-    		.disInline{
-    			display: inline-block;
-    		}
-    		.txtInfo{
-    			font-size : 16px;
-    			font-weight : 400;
-    		}
+   		#nav_back{
+   			background: #FFBB50; 
+   			height:83px; 
+   			box-shadow:0 0 6px 0 #B8B8B8; 
+   		}
+   		
+   		#bar1{
+   			width:98%; 
+   			margin: 2% auto; 
+   			border-top:1px solid #B8B8B8;
+   			height : 10px;
+   		}
+   		
+   		table {
+   			width : 95%;
+   			margin: 1%;
+   		}
+   		
+   		tr{
+   			height: 90px;
+   		}
+   		th{
+   			font-weight : 400;
+   			font-size : 20px;
+   			font-family: "Dosis", Arial, sans-serif;
+   		}
+   		td{	
+   			padding-left : 10px;
+   			font-weight : 300;
+   			font-size : 20px;
+   		}
+   		
+   		#sType{
+   			display: block;
+   			width : 100%;
+   			font-size : 20px;
+   		}
+   		#sTitle{
+   			display: block;
+   			font-size : 30px;
+   			font-weight : 600;
+   		}
+   		
+   		.d-flex{
+   			padding-left : 5%;
+   			margin: 1% 0;
+   		}
+   		
+   		#sponPoint{
+   			height :40px !important;
+   			border-radius : 5px;
+   			width :  160px;
+   			display : inline-block;
+   			margin-right : 2%;
+   		}
+   		
+   		#totaldiv{
+   			width : 82%;
+   			margin : 2% auto; 
+   		}
+   		
+   		#totalBox{
+   			width : 99%; 
+   			background: rgba(220,220,220,0.3); 
+   			margin : 2% auto; 
+   			padding: 4% 2%;
+   		}
+   		
+   		#txtSponValue{
+   			display : inline-block;
+   			font-weight : 500;
+   			font-size: 24px;
+   			margin-right : 20px;
+   		}
+   		#sponValue{
+   			display : inline-block;
+   			color : #FE9D35;
+   			font-weight : 500;
+   			font-size: 36px;
+   			margin-right : 10px;
+   		}
+   		.txtWon{
+   			display : inline-block;
+   			font-size : 25px;
+   			font-weight : 500;
+   		}
+   		
+   		#txtLeftValue{
+   			display : inline-block;
+   			margin-right : 22px;
+   		}
+   		#leftValue{
+   			display : inline-block;
+   			font-size: 22px;
+   			margin-right : 10px;
+   		}
+   		
+   		#seeTerms{
+   			padding : 0.6%;
+   			border-radius : 4px;
+   			background: rgba(150,150,150,0.4);
+   			font-size : 17px;
+   			font-weight : 500;
+   			cursor : pointer;
+   		}
+   		
+   		#btnBox{
+   			width : 99%;
+   			text-align : center;
+   		}
+   		
+   		#btnSpon{
+   			padding : 0.4em 4em;
+   			border-radius : 4px;
+   			background: #FE9D35;
+   			color : #ffff;
+   			font-weight : 700;
+   			font-size : 28px;
+   			cursor : pointer;
+   		}
+   		.txtWon{
+   			display : inline-block;
+   			font-size : 19px;
+   		}
+   		
+   		.txtColor_o{
+   			color : #FE9D35;
+   		}
+   		.txtColor_g{
+   			color : #32933F;
+   		}
+   		.txtBold{
+   			font-weight : 700;
+   		}
+   		.disInline{
+   			display: inline-block;
+   		}
+   		.txtInfo{
+   			font-size : 16px;
+   			font-weight : 400;
+   		}
     		
     </style>
 </head>
@@ -204,9 +216,8 @@
     				<tr>
     					<th>후원 기간 </th>
     					<jsp:useBean id="now" class="java.util.Date" />
- 						<fmt:formatDate value="${now}" pattern="yyyy년 MM월" var="now" />
- 						<jsp:useBean id="next" class="java.util.Date" />
- 						<fmt:formatDate value="${next}" pattern="yyyy년 MM월 dd일" var="next" />
+ 						<fmt:formatDate value="${now}" pattern="yyyy년 MM월 dd일" var="now" />
+ 						
     					<td>${ now } ~ 
     						<br>
     						<div class ="txtInfo">정기 후원은 따로 후원 중지를 신청하지 않을 경우, 나눔두리의 후원 상태 종료 시 자동 종료됩니다.</div>
@@ -215,6 +226,11 @@
     				<tr>
     					<th>다음 후원일 </th>
     					<td>
+    					<%-- <jsp:useBean id="next" class="java.util.Date" />
+ 						<fmt:formatDate value="${next}" type = "DATE" pattern="yyyy년 MM월 dd일" var="next" />
+ 						<c:set var = "next" value = "<%= new Date(new Date().getTime()+30*60*60*24*1000) %>"/> --%>
+ 						
+ 						<c:set var = "next" value = "<%= sdf.format(cal.getTime())%>"/> 
     					<div> ${next} </div>
     					<div class ="txtInfo">( 매월 둘째 주 월요일 )</div>
     					</td>
@@ -292,8 +308,8 @@
 		function calValue(){
 			var sPoint = $("#sponPoint").val();
 			var mPoint = $("#myPoint").text();
-			mPoint = mPoint.substring(0,mPoint.length-1);
-			$("#sponValue").text(sPoint+"원");
+			//mPoint = mPoint.substring(0,mPoint.length-1);
+			$("#sponValue").text(sPoint);
 			$("#leftValue").text(mPoint-sPoint + "원");
 		}
 		
@@ -308,10 +324,42 @@
 			leftValue = leftValue.substring(0, leftValue.length-1);
 			if(leftValue < 0){
 				alert("포인트가 부족합니다. 충전해주세요. ");
-			}else if(!$("#chkinfo").is(":checked")){
-				alert("고유식별정보 약관에 동의해주세요.");
+			}else if(!$("#chkinfo1").is(":checked")){
+				alert("정기결제 약관에 동의해주세요.");
+			}else if(!$("#chkinfo2").is(":checked")){
+				alert("수수료 약관에 동의해주세요.");
 			}else {
-				alert("결제진행");
+				// IMP.request_pay(param, callback) 호출
+				var name = "${ giveM.mName }";
+				var phone = "${ giveM.mPhone }";
+				var email = "${ giveM.email }";
+				console.log("name : "+ name + "/ phone : "+ phone + "/ email : "+ email);
+				IMP.request_pay({ // param
+				    pg: "html5_inicis",
+				    pay_method: "card", // "card"만 지원됩니다 
+				    merchant_uid: "issue_billingkey_monthly_0001", // 빌링키 발급용 주문번호 'merchant_' + new Date().getTime(),
+				    customer_uid: "gildong_0001_1234", // 카드(빌링키)와 1:1로 대응하는 값
+				    name: "최초인증결제",
+				    amount: 0, // 0 으로 설정하여 빌링키 발급만 진행합니다.
+				    buyer_email: "gildong@gmail.com",
+				    buyer_name: name,
+				    buyer_tel: phone,
+				    buyer_postcode: "01181"
+				}, function (rsp) { // callback
+				    if (rsp.success) {
+				        // 빌링키 발급 성공
+				        jQuery.ajax({
+				            url: "https://www.myservice.com/billings/", // 서비스 웹서버
+				            method: "POST",
+				            headers: { "Content-Type": "application/json" },
+				            data: {
+				                customer_uid: "gildong_0001_1234", // 카드(빌링키)와 1:1로 대응하는 값
+				            }
+				        });
+				    } else {
+				        // 빌링키 발급 실패
+				    }
+				}); 
 			}
 		});
 	
