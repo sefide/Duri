@@ -1,4 +1,4 @@
-package com.kh.duri.member.controller;
+/*package com.kh.duri.member.controller;
 
 import java.util.Random;
 //인증키 생성
@@ -31,4 +31,4 @@ public class Tempkey {
         return sb.toString();
     }
 
-}
+}*/

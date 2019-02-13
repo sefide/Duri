@@ -1,4 +1,4 @@
-package com.kh.duri.member.controller;
+/*package com.kh.duri.member.controller;
 
 import java.io.UnsupportedEncodingException;
 
@@ -53,3 +53,4 @@ public class MailHandler {
 
 }
 
+*/
