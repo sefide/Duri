@@ -43,6 +43,15 @@ public class HappymemberServiceImpl implements HappymemberService {
 		return fundItemList;
 	}
 
+	@Override
+	public int getDelivery(String[] itemNumArray, String[] itemAmountArray, String mno) throws MypageException {
+		int result = hd.getDelivery(sqlSession, itemNumArray, itemAmountArray, mno );
+		
+		return result;
+	}
+
+	
+
 	
 	
 
