@@ -206,11 +206,15 @@ p {font-size: 20px; text-align: center;}
 		
 		<div id="itemsList" style="height: 550px;">
 			<!-- 왼쪽 세로 물품 -->
+			<form action="getDelivery.happy" id ="getDeliveryForm">
 			<div id="items1" style="float: left; margin-left:30px;">
-				<!-- <div style="float: left;"><input type="radio"/></div>
+				<!-- 
+				<div style="float: left;">
+					<input type="radio" name = "item" value = "생리대"/>
+				</div>
 				<div style="float: left;">
 					<h3>&nbsp;&nbsp;생리대
-						<select>
+						<select name = "amount" >
 						<option>3</option>
 						<option>2</option>
 						<option>1</option>
@@ -225,6 +229,7 @@ p {font-size: 20px; text-align: center;}
 			
 			<!-- 오른쪽 세로 물품 -->
 			<div id="items3" style="float: left; margin-left: 100px;"></div>
+			</form>
 		</div>
 		<br><br><br>
 		<div style="height: 80px;">
@@ -236,7 +241,7 @@ p {font-size: 20px; text-align: center;}
 		</div>
 		<h4 class="ui dividing header"></h4>
 		<div align="center"><a class="resetBtn">취소</a></div>
-		<div align="center"><a onclick="getDelivery" class="deliveryBtn">배송받기</a></div>
+		<div align="center" onclick="getDelivery();"><a class="deliveryBtn">배송받기</a></div>
 	</div>
 </div>
 <!-- 물품목록 모달 띄우기 E -->
@@ -277,6 +282,8 @@ p {font-size: 20px; text-align: center;}
 			$("#myModal2").css("display", "none");
 		});
 	});
+	
+	
 
 	/* //외부의 검은 화면 클릭 시 모달 창 닫기
 	var modal = document.getElementById("myModal");
@@ -317,13 +324,14 @@ p {font-size: 20px; text-align: center;}
 					console.log(data.ownlist[i]);//보유 물품 뽑기(번호, 수량 등)
 					
 					//물품명 뽑기
-					var fundItemList01= "<div style='float: left;'><input type='radio'/></div><div style='float: left;'><h3>&nbsp;&nbsp;"+data.fundItemList[i].iname;
+					var fundItemList01= "<div style='float: left;'><input type='checkbox' name = 'item' value = "+data.fundItemList[i].ino+"/></div><div style='float: left;'><h3>&nbsp;&nbsp;"+data.fundItemList[i].iname;
 					var fundItemList02= "</h3></div><br><br><br><br>"
 					
 						//수량 뽑기
-						$itemsSelect = $("<select>");
+						$itemsSelect = $("<select name = 'amount' id='amount'>");
 						$itemsSelect.append($("<option>").text(0));
 						var itemsOption = "";
+						
 						//<select>	<option>3</option><option>2</option><option>1</option></select>
 						for(var o in data.ownlist){//보유물품리스트를 순서대로 인덱스를 줘서 정보 뽑기
 							console.log("보유물품번호 : " + data.ownlist[o].o_ino + "/ 후원물품번호 : " + data.fundItemList[i].ino);
@@ -363,6 +371,24 @@ p {font-size: 20px; text-align: center;}
 			}
 		});
 	}
+	
+	//배송 받기 버튼 클릭 함수
+	function getDelivery(){
+		var item = [];
+		var itemAmount = [];
+		
+		$("input[name='item']:checked").each(function(){//=for문
+			item.push($(this).val());	//물품번호 가져오기
+			itemAmount.push($(this).parent().next().next($("#amout option:selected")).val());//select값(물품수량)가져오기
+
+		});
+			console.log("체크박스 값 : " + item);
+			console.log("개수 : " + itemAmount);
+		
+			location.href="getDelivery.happy?item="+item+"&itemAmount="+itemAmount+"&mno="+${loginUser.mno};
+			 
+	}
+	
 	
 </script>
 
