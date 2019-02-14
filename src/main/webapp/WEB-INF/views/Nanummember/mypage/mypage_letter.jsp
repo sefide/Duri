@@ -76,16 +76,16 @@ tr:hover{
 <body>
 <%@ include file="../../common/navi.jsp" %>
 <%@ include file="../include/header.jsp" %>
-<!-- #wrap {position:relative; width:100%;} -->
 <br><br><br><br>	
-			<div class="contBox inner">
+			<div class="contBox inner" id="fundIng" >
 				<%@ include file="../include/tabMypage.jsp"%>
-
-			<div class="tableArea">
-				<div id="myTitle"><i class="envelope icon"></i></i>정기 행복두리 편지</div>
+				
+			<!-- 진행중인 정기후원 편지 -->
+			<div class="tableArea" id="fundIngDiv">
+				<div id="myTitle"><i class="envelope icon"></i></i>진행 중인 정기 행복두리 편지</div>
 				<div style="width: 96%; margin: 0 auto;">
-				<div class="categotyBtn" onclick="#" style="margin-right: 30px;">진행중</div>
-				<div class="categotyBtn" onclick="#">종료</div>
+				<div id="fundIngBtn" class="categotyBtn" onclick="fundIng()" style="margin-right: 30px; color: green;">진행중</div>
+				<div id="fundEndBtn" class="categotyBtn" onclick="fundEnd()">종료</div>
 				</div>
 				<table>
 					<thead>
@@ -97,11 +97,11 @@ tr:hover{
 					</thead>
 					<tbody>
 						<!-- <tr class="hoverTr" onclick="location.href='mypageLetterDetail.nanum'"> -->						
-						<c:forEach items="${dlList}" var = "dl" varStatus="">
+						<c:forEach items="${fundLetter}" var = "fundLetter" >
 							<tr>
-							<td><c:out value="${dl.mNick}"/></td>
-							<td><c:out value="${dl.leTitle}"/></td>							
-							<td><c:out value="${dl.leWriteDate}"></c:out></td>					
+							<td><c:out value="${fundLetter.mNick}"/></td>
+							<td><c:out value="${fundLetter.leTitle}"/></td>							
+							<td><c:out value="${fundLetter.leWriteDate}"></c:out></td>					
 						</tr>
 						</c:forEach>
 					</tbody>
@@ -145,29 +145,30 @@ tr:hover{
 				</div>
 			</div>
 
-			<div class="tableArea">
-				<div id="myTitle"><i class="envelope outline icon"></i>크라우드펀딩 행복두리 편지</div>
+			<!-- 종료된 정기후원 편지 -->
+			<div class="tableArea" id="fundEndDiv"  style="display: none;">
+				<div id="myTitle"><i class="envelope icon"></i></i>종료된 정기 행복두리 편지</div>
 				<div style="width: 96%; margin: 0 auto;">
-				<div class="categotyBtn" onclick="#" style="margin-right: 30px;">금액</div>
-				<div class="categotyBtn" onclick="#">물품</div>
+				<div id="fundIngBtn" class="categotyBtn" onclick="fundIng()" style="margin-right: 30px;">진행중</div>
+				<div id="fundEndBtn" class="categotyBtn" onclick="fundEnd()">종료</div>
 				</div>
 				<table>
 					<thead>
 						<tr>
 							<th style="width: 20%;">행복두리</th>
 							<th style="width: 60%;">감사편지 제목</th>
-							<th style="width: 20%;">작성일</th>															
+							<th style="width: 20%;">작성일</th>
 						</tr>
 					</thead>
 					<tbody>
-						<c:forEach items="${mclList}" var = "mcl" varStatus="">
+						<!-- <tr class="hoverTr" onclick="location.href='mypageLetterDetail.nanum'"> -->						
+						 <c:forEach items="${endFundLetter}" var = "endFundLetter" >
 							<tr>
-							<td><c:out value="${mcl.mNick}"/></td>
-							<td><c:out value="${mcl.leTitle}"/></td>							
-							<td><c:out value="${mcl.leWriteDate}"></c:out></td>					
+							<td><c:out value="${endFundLetter.mNick}"/></td>
+							<td><c:out value="${endFundLetter.leTitle}"/></td>							
+							<td><c:out value="${endFundLetter.leWriteDate}"></c:out></td>					
 						</tr>
-						</c:forEach>
-						
+						</c:forEach> 
 					</tbody>
 				</table>
 				<div class="col text-center">
@@ -208,13 +209,218 @@ tr:hover{
 					</div>
 				</div>
 			</div>
-		</div>	
 
+			<!-- 금액 크라우드 편지  -->
+			<div class="tableArea" id="moneyDiv">
+				<div id="myTitle"><i class="envelope outline icon"></i> 금액 크라우드펀딩 행복두리 편지</div>
+				<div style="width: 96%; margin: 0 auto;">
+				<div id="moneyBtn" class="categotyBtn" onclick="moneyLetter()" style="margin-right: 30px; color: green;">금액</div>
+				<div id="itemBtn" class="categotyBtn" onclick="itemLetter()">물품</div>
+				</div>
+				<table>
+					<thead>
+						<tr>
+							<th style="width: 20%;">행복두리</th>
+							<th style="width: 60%;">감사편지 제목</th>
+							<th style="width: 20%;">작성일</th>															
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach items="${moneyCloudLetter}" var = "moneyCloudLetter" varStatus="">
+							<tr>
+							<td><c:out value="${moneyCloudLetter.mNick}"/></td>
+							<td><c:out value="${moneyCloudLetter.leTitle}"/></td>							
+							<td><c:out value="${moneyCloudLetter.leWriteDate}"></c:out></td>					
+						</tr>
+						</c:forEach>
+						
+					</tbody>
+				</table>
+				<div class="col text-center">
+					<div class="block-27">
+						<ul>
+							<c:if test="${ pi3.currentPage <= 1 }">
+							<li><a href="#">&lt;</a></li>
+							</c:if>
+							<c:if test="${ pi3.currentPage > 1 }">
+								<c:url var="blistBack" value="mypage.nanum">
+									<c:param name="currentPage" value="${ pi3.currentPage - 1}"/>
+								</c:url>
+								<li><a href="${ blistBack }">&lt;</a></li>
+							</c:if>
+
+							<c:forEach var="p" begin="${ pi3.startPage }" end="${ pi3.endPage }">
+								<c:if test="${ p == pi3.currentPage }">
+									<li class="active"><a class="active" href="${ blistCheck }">${ p }</a></li>
+								</c:if>
+								<c:if test="${ p != pi3.currentPage }">
+									<c:url var="blistCheck" value="mypage.nanum">
+										<c:param name="currentPage" value="${p}"/>									
+									</c:url>
+									 <li><a href="${ blistCheck }">${ p }</a></li> 									
+								</c:if>
+							</c:forEach>
+							
+							<c:if test="${ pi3.currentPage >= pi3.maxPage }">
+								<li><a href="#">&gt;</a></li>
+							</c:if>
+							<c:if test="${ pi3.currentPage < pi3.maxPage }">
+								<c:url var="blistEnd" value="mypage.nanum">
+									<c:param name="currentPage" value="${ pi3.currentPage + 1}"/>
+								</c:url>
+								<li><a href="${ blistEnd }">&gt;</a></li>
+							</c:if>						
+						</ul>
+					</div>
+				</div>
+			</div>
+			<!-- 물품 크라우드 편지  -->
+			<div class="tableArea" id="itemDiv" style="display: none; ">
+				<div id="myTitle"><i class="envelope outline icon"></i> 물품 크라우드펀딩 행복두리 편지</div>
+				<div style="width: 96%; margin: 0 auto;">
+				<div id="moneyBtn" class="categotyBtn" onclick="moneyLetter()" style="margin-right: 30px;">금액</div>
+				<div id="itemBtn" class="categotyBtn" onclick="itemLetter()">물품</div>
+				</div>
+				<table>
+					<thead>
+						<tr>
+							<th style="width: 20%;">행복두리</th>
+							<th style="width: 60%;">감사편지 제목</th>
+							<th style="width: 20%;">작성일</th>															
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach items="${itemCloudLetter}" var = "itemCloudLetter" varStatus="">
+							<tr>
+							<td><c:out value="${itemCloudLetter.mNick}"/></td>
+							<td><c:out value="${itemCloudLetter.leTitle}"/></td>							
+							<td><c:out value="${itemCloudLetter.leWriteDate}"></c:out></td>					
+						</tr>
+						</c:forEach>
+						
+					</tbody>
+				</table>
+				<div class="col text-center">
+					<div class="block-27">
+						<ul>
+							<c:if test="${ pi4.currentPage <= 1 }">
+							<li><a href="#">&lt;</a></li>
+							</c:if>
+							<c:if test="${ pi4.currentPage > 1 }">
+								<c:url var="blistBack" value="mypage.nanum">
+									<c:param name="currentPage" value="${ pi4.currentPage - 1}"/>
+								</c:url>
+								<li><a href="${ blistBack }">&lt;</a></li>
+							</c:if>
+
+							<c:forEach var="p" begin="${ pi4.startPage }" end="${ pi4.endPage }">
+								<c:if test="${ p == pi4.currentPage }">
+									<li class="active"><a class="active" href="${ blistCheck }">${ p }</a></li>
+								</c:if>
+								<c:if test="${ p != pi4.currentPage }">
+									<c:url var="blistCheck" value="mypage.nanum">
+										<c:param name="currentPage" value="${p}"/>									
+									</c:url>
+									 <li><a href="${ blistCheck }">${ p }</a></li> 									
+								</c:if>
+							</c:forEach>
+							
+							<c:if test="${ pi4.currentPage >= pi4.maxPage }">
+								<li><a href="#">&gt;</a></li>
+							</c:if>
+							<c:if test="${ pi4.currentPage < pi4.maxPage }">
+								<c:url var="blistEnd" value="mypage.nanum">
+									<c:param name="currentPage" value="${ pi4.currentPage + 1}"/>
+								</c:url>
+								<li><a href="${ blistEnd }">&gt;</a></li>
+							</c:if>						
+						</ul>
+					</div>
+				</div>
+			</div>
 			
 			
-	
-
+			
+			
+			
+			
+			
+		</div>
+		
 	<%@ include file="../include/myNav.jsp" %>
-
+	
+	
+		<script type="text/javascript">
+		// 진행중인 정기 후원 편지  버튼 클릭시  
+		function fundIng() {	
+			var mno = ${ sessionScope.loginUser2.mno };		
+			$.ajax({
+				url:"mypageLetter.nanum",
+				type:"post",
+				data:{mno:mno},
+				success:function(data){
+					 $("#fundIngDiv").show(); 
+					 $("#fundEndDiv").hide();
+					 $("#fundIngBtn").css("color","green");
+				},
+				error:function(status){
+					console.log(status);
+				}				
+			});
+		}	
+		//종료된  정기 후원 편지  버튼 클릭시
+		function fundEnd() {	
+			var mno = ${ sessionScope.loginUser2.mno };					
+			$.ajax({
+				url:"mypageLetter.nanum",
+				type:"post",
+				data:{mno:mno},
+				success:function(data){
+					 $("#fundIngDiv").hide(); 
+					 $("#fundEndDiv").show();
+					 $("#fundEndDiv").find("#fundEndBtn").css("color","green");					 
+				},
+				error:function(status){
+					console.log(status);
+				}				
+			});
+		}	
+		
+		// 금액 크라우드   버튼 클릭시  
+		function moneyLetter() {	
+			var mno = ${ sessionScope.loginUser2.mno };		
+			$.ajax({
+				url:"mypageLetter.nanum",
+				type:"post",
+				data:{mno:mno},
+				success:function(data){
+					 $("#moneyDiv").show(); 
+					 $("#itemDiv").hide();
+					 $("#moneyBtn").css("color","green");
+				},
+				error:function(status){
+					console.log(status);
+				}				
+			});
+		}	
+		// 물품 크라우드   버튼 클릭시 
+		function itemLetter() {	
+			var mno = ${ sessionScope.loginUser2.mno };					
+			$.ajax({
+				url:"mypageLetter.nanum",
+				type:"post",
+				data:{mno:mno},
+				success:function(data){
+					 $("#moneyDiv").hide(); 
+					 $("#itemDiv").show();
+					 $("#itemDiv").find("#itemBtn").css("color","green");					 
+				},
+				error:function(status){
+					console.log(status);
+				}				
+			});
+		}	
+		</script>
+		
 </body>
 </html>
