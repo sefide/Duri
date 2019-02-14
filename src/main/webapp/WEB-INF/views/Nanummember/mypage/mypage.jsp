@@ -104,15 +104,15 @@
 						</tr>
 					</thead>
 					<tbody>
-						<c:forEach items="${MoneyList}" var = "funding" varStatus="">
+						<c:forEach items="${moneyList}" var = "moneyList" varStatus="">
 							<tr>
-							<td><c:out value="${funding.fTitle}"/></td>
+							<td><c:out value="${moneyList.fTitle}"/></td>
 							<td></td>
-							<td><c:out value="${funding.fhValue}"/></td>
+							<td><c:out value="${moneyList.fhValue}"/></td>
 							
-							<td><c:out value="${funding.fhDate}"></c:out></td>
+							<td><c:out value="${moneyList.fhDate}"></c:out></td>
 							<c:choose>
-								<c:when test="${funding.fStatus eq 'GOAL'}">
+								<c:when test="${moneyList.fStatus eq 'GOAL'}">
 									<td>O</td>
 								</c:when>
 								<c:otherwise>
@@ -180,15 +180,15 @@
 						</tr>
 					</thead>
 					<tbody>
-						<c:forEach items="${ItemList}" var = "ItemList" varStatus="">
+						<c:forEach items="${itemList}" var = "itemList" varStatus="">
 							<tr>
-							<td><c:out value="${ItemList.fTitle}"/></td>
+							<td><c:out value="${itemList.fTitle}"/></td>
 							<td></td>
-							<td><c:out value="${ItemList.fhValue}"/></td>
+							<td><c:out value="${itemList.fhValue}"/></td>
 							
-							<td><c:out value="${ItemList.fhDate}"></c:out></td>
+							<td><c:out value="${itemList.fhDate}"></c:out></td>
 							<c:choose>
-								<c:when test="${ItemList.fStatus eq 'GOAL'}">
+								<c:when test="${itemList.fStatus eq 'GOAL'}">
 									<td>O</td>
 								</c:when>
 								<c:otherwise>
@@ -203,7 +203,7 @@
 					<div class="block-27">
 						<ul>
 							<c:if test="${ pi3.currentPage <= 1 }">
-							<li><a href="#">&lt;</a></li>
+								<li><a href="#"> &lt; </a></li>
 							</c:if>
 							<c:if test="${ pi3.currentPage > 1 }">
 								<c:url var="blistBack" value="mypage.nanum">
@@ -241,10 +241,10 @@
 
 			<!-- 종료된 금액 크라우드 펀딩 -->
 			<div class="tableArea" id="MoneyCloudEnd" style="display : block;">
-				<div id="myTitle"><i class="hourglass end icon"></i>종료된 크라우드 펀딩</div>
+				<div id="myTitle"><i class="hourglass end icon"></i>종료된 금액 크라우드 펀딩</div>
 				<div style="width: 96%; margin: 0 auto;">
-				<div id="emBtn" class="categotyBtn" onclick="#" style="margin-right: 30px; color: green;" >금액</div>
-				<div id="eiBtn" class="categotyBtn" onclick="#">물품</div>
+				<div id="emBtn" class="categotyBtn" onclick="MoneyCloudEnd()" style="margin-right: 30px; color: green;" >금액</div>
+				<div id="eiBtn" class="categotyBtn" onclick="ItemCloudEnd()">물품</div>
 				</div>
 				<table>
 					<thead>					
@@ -257,15 +257,15 @@
 						</tr>					
 					</thead>
 					<tbody>
-						<c:forEach items="${EndMoneyList}" var = "funding2" varStatus="">
+						<c:forEach items="${endMoneyList}" var = "endMoneyList" varStatus="">
 							<tr>
-							<td><c:out value="${funding2.fTitle}"/></td>
+							<td><c:out value="${endMoneyList.fTitle}"/></td>
 							<td></td>
-							<td><c:out value="${funding2.fhValue}"/></td>
+							<td><c:out value="${endMoneyList.fhValue}"/></td>
 							
-							<td><c:out value="${funding2.fhDate}"></c:out></td>
+							<td><c:out value="${endMoneyList.fhDate}"></c:out></td>
 							<c:choose>
-								<c:when test="${funding2.fStatus eq 'GOAL'}">
+								<c:when test="${endMoneyList.fStatus eq 'GOAL'}">
 									<td>O</td>
 								</c:when>
 								<c:otherwise>
@@ -318,10 +318,10 @@
 			
 			<!-- 종료된 물품 크라우드 펀딩 -->
 			<div class="tableArea" id="ItemCloudEnd" style="display: none; ">
-				<div id="myTitle"><i class="hourglass end icon"></i>종료된 크라우드 펀딩</div>
+				<div id="myTitle"><i class="hourglass end icon"></i>종료된 물품 크라우드 펀딩</div>
 				<div style="width: 96%; margin: 0 auto;">
-				<div id="emBtn" class="categotyBtn" onclick="#" style="margin-right: 30px; color: green;">금액</div>
-				<div id="imBtn" class="categotyBtn" onclick="#">물품</div>
+				<div id="emBtn" class="categotyBtn" onclick="MoneyCloudEnd()" style="margin-right: 30px; ">금액</div>
+				<div id="eiBtn" class="categotyBtn" onclick="ItemCloudEnd()">물품</div>
 				</div>
 				<table>
 					<thead>					
@@ -334,15 +334,15 @@
 						</tr>					
 					</thead>
 					<tbody>
-						<c:forEach items="${EndMoneyList}" var = "funding2" varStatus="">
+						<c:forEach items="${endItemList}" var = "endItemList" varStatus="">
 							<tr>
-							<td><c:out value="${funding2.fTitle}"/></td>
+							<td><c:out value="${endItemList.fTitle}"/></td>
 							<td></td>
-							<td><c:out value="${funding2.fhValue}"/></td>
+							<td><c:out value="${endItemList.fhValue}"/></td>
 							
-							<td><c:out value="${funding2.fhDate}"></c:out></td>
+							<td><c:out value="${endItemList.fhDate}"></c:out></td>
 							<c:choose>
-								<c:when test="${funding2.fStatus eq 'GOAL'}">
+								<c:when test="${endItemList.fStatus eq 'GOAL'}">
 									<td>O</td>
 								</c:when>
 								<c:otherwise>
@@ -357,21 +357,21 @@
 				<div class="col text-center">
 					<div class="block-27">
 						<ul>
-							<c:if test="${ pi2.currentPage <= 1 }">
+							<c:if test="${ pi4.currentPage <= 1 }">
 							<li><a href="#">&lt;</a></li>
 							</c:if>
-							<c:if test="${ pi2.currentPage > 1 }">
+							<c:if test="${ pi4.currentPage > 1 }">
 								<c:url var="blistBack" value="mypage.nanum">
-									<c:param name="currentPage" value="${ pi2.currentPage - 1}"/>
+									<c:param name="currentPage" value="${ pi4.currentPage - 1}"/>
 								</c:url>
 								<li><a href="${ blistBack }">&lt;</a></li>
 							</c:if>
 
-							<c:forEach var="p" begin="${ pi2.startPage }" end="${ pi2.endPage }">
-								<c:if test="${ p == pi2.currentPage }">
+							<c:forEach var="p" begin="${ pi4.startPage }" end="${ pi4.endPage }">
+								<c:if test="${ p == pi4.currentPage }">
 									<li class="active"><a class="active" href="${ blistCheck }">${ p }</a></li>
 								</c:if>
-								<c:if test="${ p != pi2.currentPage }">
+								<c:if test="${ p != pi4.currentPage }">
 									<c:url var="blistCheck" value="mypage.nanum">
 										<c:param name="currentPage" value="${p}"/>									
 									</c:url>
@@ -379,12 +379,12 @@
 								</c:if>
 							</c:forEach>
 							
-							<c:if test="${ pi2.currentPage >= pi2.maxPage }">
+							<c:if test="${ pi4.currentPage >= pi4.maxPage }">
 								<li><a href="#">&gt;</a></li>
 							</c:if>
-							<c:if test="${ pi2.currentPage < pi2.maxPage }">
+							<c:if test="${ pi4.currentPage < pi4.maxPage }">
 								<c:url var="blistEnd" value="mypage.nanum">
-									<c:param name="currentPage" value="${ pi2.currentPage + 1}"/>
+									<c:param name="currentPage" value="${ pi4.currentPage + 1}"/>
 								</c:url>
 								<li><a href="${ blistEnd }">&gt;</a></li>
 							</c:if>						
@@ -399,12 +399,11 @@
 	<%@ include file="../include/myNav.jsp" %>
 	
 	<script type="text/javascript">
-			/* 진행중인 금액 크라우드 버튼 클릭시  */
+			// 진행중인 금액 크라우드 버튼 클릭시  
 			function MoneyCloudIng() {	
-				var mno = ${ sessionScope.loginUser2.mno };
-				console.log("회원번호 : "+mno); 			
+				var mno = ${ sessionScope.loginUser2.mno };		
 				$.ajax({
-					url:"ItemClound.nanum",
+					url:"mypage.nanum",
 					type:"post",
 					data:{mno:mno},
 					success:function(data){
@@ -419,17 +418,15 @@
 			}	
 			//진행중인 물품 크라우드 버튼 클릭시
 			function ItemCloudIng() {	
-				var mno = ${ sessionScope.loginUser2.mno };
-				console.log("회원번호 : "+mno); 			
+				var mno = ${ sessionScope.loginUser2.mno };					
 				$.ajax({
-					url:"ItemClound.nanum",
+					url:"mypage.nanum",
 					type:"post",
 					data:{mno:mno},
 					success:function(data){
 						 $("#MoneyCloudIng").hide(); 
 						 $("#ItemCloudIng").show();
-						 $("#ItemCloudIng").find("#iBtn").css("color","green");
-						 
+						 $("#ItemCloudIng").find("#iBtn").css("color","green");					 
 					},
 					error:function(status){
 						console.log(status);
@@ -437,43 +434,40 @@
 				});
 			}	
 			
-			/* //종료된 금액 크라우드 버튼 클릭시 
-			function MoneyCloudIng() {	
-				var mno = ${ sessionScope.loginUser2.mno };
-				console.log("회원번호 : "+mno); 			
+			//종료된 금액 크라우드 버튼 클릭시 
+			function MoneyCloudEnd() {	
+				var mno = ${ sessionScope.loginUser2.mno };		
 				$.ajax({
-					url:"ItemClound.nanum",
+					url:"mypage.nanum",
 					type:"post",
 					data:{mno:mno},
 					success:function(data){
-						 $("#MoneyCloudIng").show(); 
-						 $("#ItemCloudIng").hide();
-						 $("#mBtn").css("color","green");
+						 $("#MoneyCloudEnd").show(); 
+						 $("#ItemCloudEnd").hide();
+						 $("#emBtn").css("color","green");
 					},
 					error:function(status){
 						console.log(status);
 					}				
 				});
 			}	
-			//진행중인 물품 크라우드 버튼 클릭시
-			function ItemCloudIng() {	
-				var mno = ${ sessionScope.loginUser2.mno };
-				console.log("회원번호 : "+mno); 			
+			//종료된 물품 크라우드 버튼 클릭시
+			function ItemCloudEnd() {	
+				var mno = ${ sessionScope.loginUser2.mno };			
 				$.ajax({
-					url:"ItemClound.nanum",
+					url:"mypage.nanum",
 					type:"post",
 					data:{mno:mno},
 					success:function(data){
-						 $("#MoneyCloudIng").hide(); 
-						 $("#ItemCloudIng").show();
-						 $("#ItemCloudIng").find("#iBtn").css("color","green");
-						 
+						 $("#MoneyCloudEnd").hide(); 
+						 $("#ItemCloudEnd").show();
+						 $("#ItemCloudEnd").find("#eiBtn").css("color","green");						 
 					},
 					error:function(status){
 						console.log(status);
 					}				
 				});
-			} */
+			} 
 			
 		</script>	
 </body>

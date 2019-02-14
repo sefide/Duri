@@ -99,12 +99,12 @@
 						</tr>
 					</thead>
 					<tbody>
-						<c:forEach items="${dfList}" var = "df" varStatus="">
+						<c:forEach items="${fundIngList}" var = "fundIngList">
 							<tr>
-								<td><c:out value="${df.mNickName}"/></td>
-								<td><c:out value="${df.value}"/> 원 </td>
-								<td><c:out value="${df.cnt}"/> 달 째</td>
-								<td><c:out value="${df.sum}"/> 원</td>
+								<td><c:out value="${fundIngList.mNickName}"/></td>
+								<td><c:out value="${fundIngList.value}"/> 원 </td>
+								<td><c:out value="${fundIngList.cnt}"/> 달 째</td>
+								<td><c:out value="${fundIngList.sum}"/> 원</td>
 							</tr>
 						</c:forEach>
 					</tbody>
@@ -161,12 +161,12 @@
 						</tr>
 					</thead>
 					<tbody>
-						<c:forEach items="${dfList2}" var = "df2" varStatus="">
+						<c:forEach items="${fundEndList}" var = "fundEndList" varStatus="">
 							<tr>
-								<td><c:out value="${df2.mNickName}"/></td>
-								<td><c:out value="${df2.value}"/> 원 </td>
-								<td><c:out value="${df2.cnt}"/> 달 </td>
-								<td><c:out value="${df2.sum}"/> 원</td>
+								<td><c:out value="${fundEndList.mNickName}"/></td>
+								<td><c:out value="${fundEndList.value}"/> 원 </td>
+								<td><c:out value="${fundEndList.cnt}"/> 달 </td>
+								<td><c:out value="${fundEndList.sum}"/> 원</td>
 							</tr>
 						</c:forEach>
 					</tbody>
