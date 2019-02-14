@@ -71,7 +71,10 @@
 	<insert id="insertDeliveryList">
 		INSERT INTO DELIVERY VALUES (SEQ_D_NO.NEXTVAL, #{daddress}, SYSDATE, 'www.naver.com', #{d_mno})
 	</insert>
-	
+	<!-- 배송목록 상세 정보 추기하기 -->
+	<insert id="insertDeliveryDetailList">
+		INSERT INTO DELIVERYDETAIL VALUES (SEQ_DD_NO.NEXTVAL, #{ddvalue}, SEQ_D_NO.CURRVAL, #{dd_ino})
+	</insert>
 </mapper>
 
 

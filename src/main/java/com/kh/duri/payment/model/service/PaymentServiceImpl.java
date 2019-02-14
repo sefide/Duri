@@ -5,6 +5,7 @@ import java.util.List;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import com.kh.duri.member.model.vo.Member;
 import com.kh.duri.payment.model.dao.PaymentDao;
@@ -18,7 +19,7 @@ import com.kh.duri.payment.model.vo.Payment;
 import com.kh.duri.payment.model.vo.Point;
 import com.kh.duri.payment.model.vo.Refund;
 
-@Component
+@Service
 public class PaymentServiceImpl implements PaymentService {
 	@Autowired
 	private SqlSessionTemplate sqlSession;

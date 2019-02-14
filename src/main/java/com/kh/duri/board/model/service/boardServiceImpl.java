@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
 import com.kh.duri.board.model.dao.boardDao;
 import com.kh.duri.board.model.exception.DonateListException;
@@ -13,7 +14,7 @@ import com.kh.duri.board.model.vo.Board;
 import com.kh.duri.member.model.vo.Member;
 import com.kh.duri.payment.model.vo.PageInfo;
 
-@Component
+@Service
 public class boardServiceImpl implements boardService {
 	@Autowired
 	private SqlSessionTemplate sqlSession;

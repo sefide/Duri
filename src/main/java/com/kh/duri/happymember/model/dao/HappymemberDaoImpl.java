@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.duri.happymember.model.exception.MypageException;
 import com.kh.duri.happymember.model.vo.Delivery;
+import com.kh.duri.happymember.model.vo.DeliveryDetail;
 import com.kh.duri.happymember.model.vo.FundItemList;
 import com.kh.duri.happymember.model.vo.MyDonateItems;
 
@@ -30,7 +31,7 @@ public class HappymemberDaoImpl implements HappymemberDao{
 
 	//후원물품 리스트
 	@Override
-	public ArrayList<FundItemList> fundItemList(SqlSessionTemplate sqlSession) throws MypageException {
+	public ArrayList<FundItemList> selectfundItemList(SqlSessionTemplate sqlSession) throws MypageException {
 
 		ArrayList<FundItemList> fundItemList = null;
 		/*int ino = fil.getIno();*/
@@ -74,9 +75,8 @@ public class HappymemberDaoImpl implements HappymemberDao{
 	@Override
 	public int insertDelivery(SqlSessionTemplate sqlSession, String address, String mno) throws MypageException {
 		int insertResult1 = 0;
-		Delivery d = null;
+		Delivery d = new Delivery();
 		
-		d = new Delivery();
 		d.setD_mno(Integer.parseInt(mno));
 		d.setDaddress(address);
 		insertResult1 = sqlSession.insert("HappyMember.insertDeliveryList", d);
@@ -88,17 +88,34 @@ public class HappymemberDaoImpl implements HappymemberDao{
 		return insertResult1;
 	}
 
-	
-	
-	
-	/*//배송현황 목록 조회(페이징)
+	//배송현황 상세 정보 추가하기
 	@Override
-	public int getDeliveryListCount(SqlSessionTemplate sqlSession, Member m) throws MypageException {
-		// TODO Auto-generated method stub
-		return 0;
+	public int insertDeliveryDetail(SqlSessionTemplate sqlSession, String[] itemNumArray, String[] itemAmountArray)
+			throws MypageException {
+		int insertResult2 = 0;
+		DeliveryDetail dd = null;
+		
+		for(int i=0; i < itemNumArray.length; i++) {
+			String num = itemNumArray[i];
+			String amount = itemAmountArray[i];
+			
+			dd = new DeliveryDetail();
+			dd.setDd_ino(Integer.parseInt(num));
+			dd.setDdvalue(Integer.parseInt(amount));
+			insertResult2 = sqlSession.insert("HappyMember.insertDeliveryDetailList", dd);
+		}
+	
+		return insertResult2;
 	}
 
-*/
+	//배송현황 목록 개수 조회
+	@Override
+	public int selectDeliveryListCount(SqlSessionTemplate sqlSession, Delivery d) {
+	
+		return (Integer) null;//수정하기!
+	}
+
+
 
 
 }
