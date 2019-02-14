@@ -19,8 +19,8 @@ public interface PaymentDao {
 
 
 	// 나눔두리 - 포인트 히스토리 갯수 세기
-	int getPointListCount(SqlSessionTemplate sqlSession, Member m) throws PointHistoryException;
-	int getSearchPointListCount(SqlSessionTemplate sqlSession, Member m) throws PointHistoryException;
+	int selectPointListCount(SqlSessionTemplate sqlSession, Member m) throws PointHistoryException;
+	int selectSearchPointListCount(SqlSessionTemplate sqlSession, Member m) throws PointHistoryException;
 
 	// 나눔두리 - 포인트 히스토리 가져오기 
 	List<Point> selectPointHistory(SqlSessionTemplate sqlSession, Member m, PageInfo pi) throws PointHistoryException;
@@ -29,8 +29,8 @@ public interface PaymentDao {
 	List<Point> searchPointHistory(SqlSessionTemplate sqlSession, Member m, PageInfo pi) throws PointHistoryException;
 	
 	// 나눔두리 - 기부금영수증 발급내역 갯수 세기
-	int getReceiptListCount(SqlSessionTemplate sqlSession, Member m) throws ReceiptException;
-	int getSearchReceiptListCount(SqlSessionTemplate sqlSession, Member m) throws ReceiptException;
+	int selectReceiptListCount(SqlSessionTemplate sqlSession, Member m) throws ReceiptException;
+	int selectSearchReceiptListCount(SqlSessionTemplate sqlSession, Member m) throws ReceiptException;
 	
 	// 나눔두리 - 기부금영수증 발급내역 보기
 	List<DonateReceipt> selectDonateReceiptHistory(SqlSessionTemplate sqlSession, Member m, PageInfo pi) throws ReceiptException;
@@ -39,7 +39,7 @@ public interface PaymentDao {
 	List<DonateReceipt> searchDonateReceipt(SqlSessionTemplate sqlSession, Member m, PageInfo pi) throws ReceiptException;
 
 	// 나눔,행복두리 - 환급목록 갯수 세기
-	int getListCount(SqlSessionTemplate sqlSession, Member m) throws RefundException;
+	int selectListCount(SqlSessionTemplate sqlSession, Member m) throws RefundException;
 
 	// 나눔,행복두리 - 환급목록 가져오기
 	List<Refund> selectRefundList(SqlSessionTemplate sqlSession, Member m, PageInfo pi) throws RefundException;

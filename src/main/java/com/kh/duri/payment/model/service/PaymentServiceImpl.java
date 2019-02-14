@@ -29,15 +29,15 @@ public class PaymentServiceImpl implements PaymentService {
 	
 	// 나눔두리 - 포인트 히스토리 갯수 세기
 	@Override
-	public int getPointListCount(Member m) throws PointHistoryException {
-		int listCount = pd.getPointListCount(sqlSession ,m);
+	public int selectPointListCount(Member m) throws PointHistoryException {
+		int listCount = pd.selectPointListCount(sqlSession ,m);
 		
 		return listCount;
 	}
 	// 나눔두리 - 포인트 히스토리 갯수 세기 - 기간별 검색
 	@Override
-	public int getSearchPointListCount(Member m) throws PointHistoryException {
-		int listCount = pd.getSearchPointListCount(sqlSession ,m);
+	public int selectSearchPointListCount(Member m) throws PointHistoryException {
+		int listCount = pd.selectSearchPointListCount(sqlSession ,m);
 		
 		return listCount;
 	}
@@ -60,15 +60,15 @@ public class PaymentServiceImpl implements PaymentService {
 
 	// 나눔두리 - 기부금영수증 발급내역 갯수 세기
 	@Override
-	public int getReceiptListCount(Member m) throws ReceiptException {
-		int listCount = pd.getReceiptListCount(sqlSession ,m);
+	public int selectReceiptListCount(Member m) throws ReceiptException {
+		int listCount = pd.selectReceiptListCount(sqlSession ,m);
 		
 		return listCount;
 	}
 	// 나눔두리 - 기부금영수증 발급내역 갯수 세기 - 기간별 검색
 	@Override
-	public int getSearchReceiptListCount(Member m) throws ReceiptException {
-		int listCount = pd.getSearchReceiptListCount(sqlSession ,m);
+	public int selectSearchReceiptListCount(Member m) throws ReceiptException {
+		int listCount = pd.selectSearchReceiptListCount(sqlSession ,m);
 		
 		return listCount;
 	}
@@ -92,8 +92,8 @@ public class PaymentServiceImpl implements PaymentService {
 	
 	// 나눔,행복두리 - 환급목록 갯수 세기
 	@Override
-	public int getListCount(Member m) throws RefundException {
-		int listCount = pd.getListCount(sqlSession ,m);
+	public int selectListCount(Member m) throws RefundException {
+		int listCount = pd.selectListCount(sqlSession ,m);
 		
 		return listCount;
 	}

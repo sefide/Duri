@@ -25,7 +25,6 @@
 	
 	<resultMap type="com.kh.duri.payment.model.vo.DonateReceipt" id="donateReceiptResultSet">
 		<id property="drNo" column="DRNO"></id>
-		<result property="drRegistNum" column="DRREGISTNUM"/>
 		<result property="drApplyDate" column="DRAPPLYDATE"/>
 		<result property="drDonateDate" column="DRDONATEDATE"/>
 		<result property="drValue" column="DRVALUE"/>
@@ -134,7 +133,7 @@
 	<!-- 나눔두리 - 기간별 기부금 영수증 발급내역 수 세기 -->
 	<select id="selectSearchReceiptListCount" resultType="_int">
 		SELECT COUNT(*)
-		FROM DONATERECEIPT
+		FROM DONATERECEIPT DR
 		<![CDATA[
 		WHERE DR.DR_MNO=#{mno}
 		AND TO_DATE(#{mPhone}, 'YYYY-MM-DD') < DR.DRAPPLYDATE 
@@ -143,7 +142,7 @@
 	
 	<!-- 나눔두리 - 기부금 영수증 발급내역 select -->
 	<select id="donateReceiptHistory" resultMap="donateReceiptResultSet" parameterType="DonateReceipt">
-		SELECT ROWNUM RNUM, DRNO, DRREGISTNUM, DRAPPLYDATE, DRDONATEDATE, DRVALUE, DR_MNO, MNAME
+		SELECT ROWNUM RNUM, DRNO, DRAPPLYDATE, DRDONATEDATE, DRVALUE, DR_MNO, MNAME
 		FROM (SELECT *
         FROM DONATERECEIPT DR
         JOIN MEMBER M ON (M.MNO = DR.DR_MNO)
@@ -153,7 +152,7 @@
 	
 	<!-- 나눔두리 - 기간별 기부금 영수증 발급내역 select -->
 	<select id="searchDonateReceipt" resultMap="donateReceiptResultSet" parameterType="DonateReceipt">
-       SELECT ROWNUM RNUM, DRNO, DRREGISTNUM, DRAPPLYDATE, DRDONATEDATE, DRVALUE, DR_MNO, MNAME
+       SELECT ROWNUM RNUM, DRNO, DRAPPLYDATE, DRDONATEDATE, DRVALUE, DR_MNO, MNAME
 		FROM ( SELECT *
 		FROM DONATERECEIPT DR
 		JOIN MEMBER M ON (M.MNO = DR.DR_MNO)

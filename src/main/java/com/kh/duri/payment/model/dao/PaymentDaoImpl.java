@@ -22,7 +22,7 @@ public class PaymentDaoImpl implements PaymentDao {
 
 	// 나눔두리 - 포인트 히스토리 갯수 세기
 	@Override
-	public int getPointListCount(SqlSessionTemplate sqlSession, Member m) throws PointHistoryException {
+	public int selectPointListCount(SqlSessionTemplate sqlSession, Member m) throws PointHistoryException {
 		int listCount = sqlSession.selectOne("Point.selectPointListCount", m);
 		
 		System.out.println("포인트 히스토리 수 : "+ listCount);
@@ -34,7 +34,7 @@ public class PaymentDaoImpl implements PaymentDao {
 	}
 	// 나눔두리 - 포인트 히스토리 갯수 세기 - 기간별 검색
 	@Override
-	public int getSearchPointListCount(SqlSessionTemplate sqlSession, Member m) throws PointHistoryException {
+	public int selectSearchPointListCount(SqlSessionTemplate sqlSession, Member m) throws PointHistoryException {
 		int listCount = sqlSession.selectOne("Point.selectSearchPointListCount", m);
 		
 		System.out.println("포인트 히스토리 수 : "+ listCount);
@@ -79,7 +79,7 @@ public class PaymentDaoImpl implements PaymentDao {
 	
 	// 나눔두리 - 기부금영수증 발급내역 갯수 세기
 	@Override
-	public int getReceiptListCount(SqlSessionTemplate sqlSession, Member m) throws ReceiptException {
+	public int selectReceiptListCount(SqlSessionTemplate sqlSession, Member m) throws ReceiptException {
 		int listCount = sqlSession.selectOne("Point.selectReceiptListCount", m);
 		
 		System.out.println("기부금 영수증 수 : "+ listCount);
@@ -91,7 +91,7 @@ public class PaymentDaoImpl implements PaymentDao {
 	}
 	// 나눔두리 - 기부금영수증 발급내역 갯수 세기 - 기간별 검색 시 
 	@Override
-	public int getSearchReceiptListCount(SqlSessionTemplate sqlSession, Member m) throws ReceiptException {
+	public int selectSearchReceiptListCount(SqlSessionTemplate sqlSession, Member m) throws ReceiptException {
 		int listCount = sqlSession.selectOne("Point.selectSearchReceiptListCount", m);
 		
 		System.out.println("기부금 영수증 수 : "+ listCount);
@@ -137,7 +137,7 @@ public class PaymentDaoImpl implements PaymentDao {
 
 	// 나눔,행복두리 - 환급목록 갯수 세기
 	@Override
-	public int getListCount(SqlSessionTemplate sqlSession, Member m) throws RefundException {
+	public int selectListCount(SqlSessionTemplate sqlSession, Member m) throws RefundException {
 		int listCount = sqlSession.selectOne("Point.selectRefundListCount", m);
 		
 		//System.out.println("환급 내역 수 : "+ listCount);
