@@ -179,14 +179,16 @@ p {font-size: 20px; text-align: center;}
 		</div>
 		
 		<!-- 네비 가운데 -->
-		<div class="box-center" style="float: left;"><input type="hidden" name="mno" value="${loginUser.mno}"/></div>
+		<div class="box-center" style="float: left;">
+		<input type="hidden" name="mno" value="${loginUser.mno}"/>
+		</div>
 		
 		<!-- 네비 오른쪽 -->
 		<div class="box-right">
 			<!-- Trigger/Open The Modal -->
 			<span><a class="a-tag" href="pointReturnListHappy.pm" style="margin-right: 80px;">포인트 환급</a></span>
 
-			<span><a class="a-tag" id="modalBtn" onclick="items(${loginUser.mno},${loginUser.mAddress});">보유물품</a></span><br>
+			<span><a class="a-tag" id="modalBtn" onclick="items(${loginUser.mno}<%-- ,${loginUser.mAddress} --%>);">보유물품</a></span><br>
 			<span><a class="a-tag" href="myInfoModifyHappy.happy" style="margin-right: 80px;">내 정보 수정</a></span>
 			<span><a class="a-tag" id="modalBtn2">알림</a></span><br>
 		</div>
@@ -203,7 +205,12 @@ p {font-size: 20px; text-align: center;}
                                                        
 		<h1 align="center"><&nbsp;보유 물품 현황&nbsp;></h1>
 		<br><br>
-		
+		<c:if test = "${ !empty loginUser.mAddress }">
+			<c:out value = "${ loginUser.mAddress }"/>
+		</c:if>
+		<c:if test = "${ empty loginUser.mAddress }">
+			<c:out value = "주소가 비어있엉 "/>
+		</c:if>
 		<div id="itemsList" style="height: 550px;">
 			<!-- 왼쪽 세로 물품 -->
 			<form action="getDelivery.happy" id ="getDeliveryForm">
@@ -299,12 +306,10 @@ p {font-size: 20px; text-align: center;}
 
 	//클릭시 모달 가져오고
 	//보유하고 있는 물품명&수량 뿌리기
-	var address = "";
-	var mno = 0;
 	function items(mno){
 		$("#myModal").css("display", "block");
 		console.log("ajax 회원번호 : " + mno);
-		console.log("ajax 회원주소 : " + address);
+		/* console.log("ajax 회원주소 : " + address); */
 		
 		$.ajax({
 			url:"donateItemList.happy",
@@ -380,10 +385,13 @@ p {font-size: 20px; text-align: center;}
 	}
 	
 	//배송 받기 버튼 클릭 함수
+	//배송 현황 목록 추가
+	//배송 상세 현황 목록 추가
 	function getDelivery(){
 		var item = [];
 		var itemAmount = [];
-				
+		var address = "${ loginUser.mAddress }";
+		
 		$("input[name='item']:checked").each(function(){//=for문
 			item.push($(this).val());	//물품번호 가져오기
 			itemAmount.push($(this).parent().next().next($("#amout option:selected")).val());//select값(물품수량)가져오기
@@ -392,7 +400,7 @@ p {font-size: 20px; text-align: center;}
 			console.log("체크박스 값 : " + item);
 			console.log("개수 : " + itemAmount);
 		
-			location.href="getDelivery.happy?item="+item+"&itemAmount="+itemAmount+"&mno="+${loginUser.mno}/* +"&address="+${loginUser.mAddress} */ ;
+			location.href="getDelivery.happy?item="+item+"&itemAmount="+itemAmount+"&mno="+${loginUser.mno} + "&address="+ address;
 			/* console.log("주소 : " + (${loginUser.mAddress})); */
 	}
 	

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.duri.happymember.model.exception.MypageException;
 import com.kh.duri.happymember.model.service.HappymemberService;
+import com.kh.duri.happymember.model.vo.Delivery;
 import com.kh.duri.happymember.model.vo.FundItemList;
 import com.kh.duri.happymember.model.vo.MyDonateItems;
 import com.kh.duri.member.model.vo.Member;
@@ -42,7 +43,7 @@ public class HappymemberController {
 		try {
 			ownlist = hs.donateItemList(mdi);	//보유물품 리스트
 			
-			fundItemList = hs.fundItemList();	//후원물품 리스트
+			fundItemList = hs.selectfundItemList();	//후원물품 리스트
 			
 			System.out.println("controller 보유물품리스트 : " + ownlist);
 			System.out.println("controller 후원물품리스트 : " + fundItemList);
@@ -59,6 +60,13 @@ public class HappymemberController {
 	}
 
 	//배송받을 물품 선택 후 수량 변경하기
+	//배송현황 추가하기 
+	//배송현황 상세 테이블에 추가하기
+	//메소드 추가하기
+	//물품정보(물품번호, 수량) /  회원번호 
+	//방금 추가된 배송번호 찾아내기
+	//배송번호 포함해서 행 insert 
+	//행에 필요한 정보 : 물품정보(물품번호, 수량) /배송번호/  회원번호 
 	@RequestMapping("getDelivery.happy")
 	public String getDelivery(HttpServletRequest request, HttpServletResponse response) {
 		String mno = request.getParameter("mno");
@@ -75,23 +83,14 @@ public class HappymemberController {
 		String[] itemAmountArray;
 		itemAmountArray = itemAmount.split(",");
 		
-		/*for(int i = 0; i < itemNumArray.length; i++) {
-			System.out.println("itemArray[i] : " + itemNumArray[i]);
-		}
-		for(int i = 0; i < itemAmountArray.length; i++) {
-			System.out.println("itemAmountArray[i] : " + itemAmountArray[i]);
-		}*/
-		
 		try {
-			int updateResult = hs.getDelivery(itemNumArray, itemAmountArray, mno);
+			int result = hs.getDelivery(itemNumArray, itemAmountArray, mno, address);
 			
-			//배송현황 추가하기
-			int insertResult1 = hs.insertDelivery(address, mno);
-					
-					
-			if(updateResult > 0 && insertResult1 > 0) {
-				return "redirect:insertDeliveryList.happy";
+			if(result == 1) {
+				System.out.println("물품 목록 추가 성공!");
+				return "happymember/deliveryStatus";
 			}
+			
 			
 			
 		} catch (MypageException e) {
@@ -101,12 +100,15 @@ public class HappymemberController {
 		return "happymember/deliveryStatus";
 	}
 	
-	
-	
-	/*//배송현황 목록 조회(페이징)
+	//배송현황 목록 개수 조회
 	@RequestMapping("selectDeliveryList.happy")
 	public String happyDeliveryList(HttpServletRequest request, HttpServletResponse response) {
 		Member m = (Member)request.getSession().getAttribute("loginUser");
+		int mno = m.getMno();
+		
+		Delivery d = new Delivery();
+		d.setD_mno(mno);
+		
 		int currentPage = 1;
 		
 		if(request.getParameter("currentPage") != null) {
@@ -114,7 +116,7 @@ public class HappymemberController {
 		}
 		
 		try {
-			int listCount = hs.getDeliveryListCount(m);
+			int listCount = hs.selectDeliveryListCount(d);
 			
 			
 			
@@ -124,7 +126,13 @@ public class HappymemberController {
 			return "happymember/deliveryStatus";
 		}
 		return "happymember/deliveryStatus";
-	}*/
+	}
+	
+	
+	
+	
+	
+	
 	
 	
 	@RequestMapping("mypage.happy")
