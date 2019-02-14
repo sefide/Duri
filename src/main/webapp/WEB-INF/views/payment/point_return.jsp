@@ -195,7 +195,16 @@
 	.row tr:nth-child(even) {
 	    background: none;
 	}
+	#checkAccount{
+		text-decoration : none;
+		font-size : 18px;
+		color : #FE9D35;
+	}
 	
+	#checkAccount:hover{
+		text-decoration : underline;
+		color : black;
+	}
 
 </style>
 </head>
@@ -213,12 +222,12 @@
     <section class="ftco-section">
     	<div class="container">
     		<div class="row d-flex">
-    			<div id="myTitle"> <i class="bookmark outline icon"></i>후원포인트 환급하기 </div>
+    			<div id="myTitle"> <i class="bookmark outline icon"></i>후원포인트 환불하기 </div>
     		</div>
     		<div id = "bar1"></div>
     		<div class ="row d-flex"> 
     			<div class = "d-flex-left">
- 	  			<h4 class ="" id = "subTitle">> 환급포인트</h4>
+ 	  			<h4 class ="" id = "subTitle">> 환불포인트</h4>
  	  			
  	  			<form id = "returnHappyForm" action = "execPointReturnHappy.pm" method = "post" >
  	  			<input type = "hidden" value = "n" name = "memberType">
@@ -228,12 +237,12 @@
     						<td id = "myPoint">${ sessionScope.loginUser2.mPoint }원</td>
     					</tr>
     					<tr>
-    						<th>환급 금액</th>
+    						<th>환불 금액</th>
     						<td><input class="form-control" type = "text" name = "returnValue" id = "returnValue">원
     							<div class="form-check">
 							  <input class="form-check-input" type="checkbox" value="" id="allPoint">
 							  <label class="form-check-label" for="allPoint" id = "txtAllPoint">
-							 	  모든 포인트 사용하기
+							 	  모든 포인트 환불하기
 							  </label>
 							</div>
     						</td>
@@ -241,7 +250,7 @@
     				</table>
     				
     				<div id = "bar2"></div>
-    				<h4 class ="" id = "subTitle">> 환급받을 계좌</h4>
+    				<h4 class ="" id = "subTitle">> 환불받을 계좌</h4>
     				
     				<table>
     					<tr>
@@ -263,12 +272,14 @@
     					</tr>
     					<tr>
     						<th>계좌번호</th>
-    						<td id = "td_account"><input class="form-control inputTxt" type = "text" name = "returnAccount" id = "returnAccount">원</td>
+    						<td id = "td_account"><input class="form-control inputTxt" type = "text" name = "returnAccount" id = "returnAccount">
+    						</td>
+    						
     					</tr>
     					<tr>
     						<th>예금주명</th>
     						<td><input class="form-control inputTxt" type = "text" name = "accountName" id = "accountName" placeholder = "이름을 입력해주세요.">
-    						
+    						<a id = "checkAccount" href = "#">계좌 인증하기</a>
     						</td>
     					
     					</tr>
@@ -280,19 +291,19 @@
     			<div class = "d-flex-right">
     				<div class = "back-right">
     					<input type ="checkbox" id= "chkinfo1"><label for = "chkinfo1">수수료 약관동의</label> <br>
-	    				<a>포인트 결제 시 부과했던 후원 수수료는 환급되지 않습니다. </a><br><br> 
-						<p style = "margin-left : 1%;"> *환급받을 계좌 정보를 정확히 입력해주세요. <br> 
-						계좌번호와 예금주명이 다를 경우 환급이 제대로 되지 않을 수 있습니다.  </p>
+	    				<a>포인트 결제 시 부과했던 후원 수수료는 환불되지 않습니다. </a><br><br> 
+						<p style = "margin-left : 1%;"> *환불받을 계좌 정보를 정확히 입력해주세요. <br> 
+						계좌번호와 예금주명이 다를 경우 환불이 제대로 되지 않을 수 있습니다.  </p>
 	    				<div class= "flexBox valueBox">
 	    					<div class = "d-left">현재 보유포인트 </div><div class = "d-right" id = "txtChargeValue">${ sessionScope.loginUser2.mPoint }원</div>
-	    					<div id = "txtTotalValue">환급 금액</div><div class = "txtColor_o d-right" id = "totalValue">0</div><p class = "txtright">원</p>
+	    					<div id = "txtTotalValue">환불 금액</div><div class = "txtColor_o d-right" id = "totalValue">0</div><p class = "txtright">원</p>
 	    					<div id = "bar3"></div>
 	    					<div class = "d-left">잔여포인트 </div><div class = "d-right" id = "txtFees">${ sessionScope.loginUser2.mPoint }원</div>
 	    					
 	    				</div>
     				</div>
     				<div id = "back-btn">
-    					<a id = "btnPay">환급받기 </a>
+    					<a id = "btnPay">환불받기 </a>
     				</div>
     			</div>
     		</div>
@@ -309,6 +320,10 @@
 	<jsp:include page="../common/loader.jsp"></jsp:include>
 	
 	<script>
+	var checkAcc = 0; // 계좌인증 확인여부 
+	// 1이면 체크함
+	// 0이면 체크 안함 
+	
 	$(document).ready(function() {
 		/* 후원 포인트 입력 시 */
 		$("#returnValue").change(function(){
@@ -341,7 +356,7 @@
 		
 		function changeFreePoint() {
 			var mPoint = ${ sessionScope.loginUser2.mPoint }; /* 현재 보유포인트 */
-			var returnValue = $("#returnValue").val(); /* 환급금액 */
+			var returnValue = $("#returnValue").val(); /* 환불금액 */
 			
 			$("#txtFees").text((mPoint-returnValue)+"원");
 		}
@@ -404,11 +419,11 @@
 		console.log(accountNum);
 		console.log(numberTest.test(returnPoint)); //false
 		if( numberTest.test(returnPoint)){
-			alert("환급금액을 숫자로만 입력해주세요.");
+			alert("환불금액을 숫자로만 입력해주세요.");
 		}else if( numberTest.test(accountNum)){
 			alert("계좌번호를 숫자로만 입력해주세요.");
 		}else if(Number($("#txtFees").text()) < 0){
-			alert("환급 금액이 부족합니다.");
+			alert("환불 금액이 부족합니다.");
 		}else {
 			$("#returnHappyForm").submit();
 		}

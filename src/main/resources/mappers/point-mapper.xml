@@ -64,6 +64,8 @@
 		<result property="mGoalNum" column="MGOALNUM"/>
 		<result property="mStatus" column="MSTATUS"/>
 		<result property="mTakeStatus" column="MTAKESTATUS"/>
+		<result property="dMoney" column="DHVALUE"/>
+      	<result property="cfMoney" column="FHVALUE"/>
 	</resultMap>
 	
 	<resultMap type="com.kh.duri.payment.model.vo.Payment" id="paymentResultSet">
@@ -180,7 +182,7 @@
 	
 	<!-- 나눔,행복두리 - 환급 insert -->
 	<insert id = "insertRefund">
-		INSERT INTO REFUND VALUES (SEQ_R_NO.NEXTVAL, #{rBank}, #{rAccount}, #{r_mNo}, #{rValue}, SYSDATE, DEFAULT)
+		INSERT INTO REFUND VALUES (SEQ_R_NO.NEXTVAL, #{rBank}, #{rAccount}, #{rName},#{r_mNo}, #{rValue}, SYSDATE, DEFAULT)
 	</insert>
 	
 	<!-- 환급 테이블 현재 SEQ_R_NO 값 구하기 -->
@@ -198,11 +200,26 @@
 		INSERT INTO POINT VALUES (SEQ_P_NO.NEXTVAL, 'U', #{rValue}, SYSDATE, '환급', #{r_mNo}, null, null, #{rNo}, null)
 	</insert>
 	
-	<!-- 회원번호로 로그인 유저 정보 가져오기 -->
-	<select id="loginUserCheck" resultMap="memberResultSet" parameterType="Member">
+	<!-- 회원번호로 행복두리 로그인 유저 정보 가져오기 -->
+	<select id="loginHaCheck" resultMap="memberResultSet" parameterType="Member">
+		SELECT MNO, MNAME, MNICK ,MGENDER ,MPHONE ,MID ,MPWD ,MEMAIL 
+		,MENROLLDATE ,MPOINT ,MTYPE ,MFUNDTYPE ,MPR ,MPRNEW ,MBIRTHDAY 
+		,MADDRESS ,MACCEPTDATE ,MGOALNUM ,MSTATUS ,MTAKESTATUS 
+        ,(SELECT SUM(DHVALUE) FROM MEMBER M  INNER JOIN DIRECTFUNDHISTORY DI ON(M.MNO = DI.DH_MNO_TAKE) 
+        	WHERE M.MID=#{mid}) AS DHVALUE
+        ,(SELECT SUM(FHVALUE) FROM MEMBER M JOIN FUNDHISTORY FH ON(FH.FH_MNO_GIVE = M.MNO) JOIN FUNDING F ON(F.FNO = FH.FH_FNO) 
+        	WHERE F.FWRITER=(SELECT MNO FROM MEMBER WHERE MID=#{mid}))AS FHVALUE
+		FROM MEMBER
+		WHERE MNO=#{mno}
+		AND MTYPE='H'
+	</select>
+	
+	<!-- 회원번호로 나눔두리 로그인 유저 정보 가져오기 -->
+	<select id="loginNaCheck" resultMap="memberResultSet" parameterType="Member">
 		SELECT *
 		FROM MEMBER
 		WHERE MNO=#{mno}
+		AND MTYPE='N'
 	</select>
 	
 	<!-- 나눔두리 - 결제 insert -->
