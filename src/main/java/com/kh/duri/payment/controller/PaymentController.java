@@ -66,7 +66,7 @@ public class PaymentController {
 		Member m = (Member) request.getSession().getAttribute("loginUser2");
 		String sm = request.getParameter("startMonth")+"-01";
 		String em = request.getParameter("endMonth");
-		System.out.println("어허 " + em.substring(5, 7));
+		//System.out.println("어허 " + em.substring(5, 7));
 		if(em.substring(5, 7).equals("04") ||em.substring(5, 7).equals("06")||em.substring(5, 7).equals("09")||em.substring(5, 7).equals("11")) {
 			em = em + "-30";
 		}else if (em.substring(5, 7).equals("02")) {
@@ -349,7 +349,7 @@ public class PaymentController {
 			loginUser = ps.insertPayment(m, py);
 			
 			session.setAttribute("loginUser2", loginUser);
-			model.addAttribute("msg", "후원이 완료되었습니다.");
+			model.addAttribute("msg", "포인트 충전이 완료되었습니다.");
 		    return "payment/pay_success"; 
 		    
 		} catch (PaymentException e) {

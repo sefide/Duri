@@ -14,6 +14,10 @@
 <head>
 <meta charset="UTF-8">
 
+<!-- semantic ui -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+<script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+
 <!-- import cdn -->
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
@@ -114,7 +118,7 @@
    			display : inline-block;
    			margin-right : 22px;
    		}
-   		#leftValue{
+   		#nextValue{
    			display : inline-block;
    			font-size: 22px;
    			margin-right : 10px;
@@ -164,6 +168,13 @@
    			font-size : 16px;
    			font-weight : 400;
    		}
+   		
+   		#alertRedTxt{
+   			display: inline-block;
+   	 		color: orangered;
+   	 		visibility : hidden;
+   	 		font-size : 18px;
+   		}
     		
     </style>
 </head>
@@ -203,14 +214,14 @@
     					<td class = "txtColor_o txtBold">${ giveM.mName }</td>
     				</tr>
     				<tr>
-    					<th>현재보유 포인트</th>
-    					<td><span id = "myPoint">${ giveM.mPoint }</span> 원</td>
+    					<th>후원금 사용 타입</th>
+    					<td><span style ="color : gray; font-weight : 400;">${ valueType }</span></td>
     				</tr>
     				<tr>
-    					<th>후원포인트</th>
-    					<td><input class="form-control" type = "text" name = "point" id = "sponPoint">원
+    					<th>후원금액</th>
+    					<td><input class="form-control" type = "text" name = "point" id = "sponPoint">원 &nbsp;&nbsp;&nbsp;<div id = "alertRedTxt"><i class="exclamation circle small icon"></i>10,000원 이상의 금액을 입력해주세요.</div>
     						<br>
-    						<div class = "txtInfo disInline"><div class = "txtColor_g disInline">최소 1,000원 이상</div> 후원할 수 있으며 매월 둘째 주 월요일에 <div class = "txtColor_g disInline">포인트 자동 결제</div>후 <div class = "txtColor_g disInline">자동 후원</div> 됩니다. </div>
+    						<div class = "txtInfo disInline"><div class = "txtColor_g disInline">최소 10,000원 이상</div> 후원할 수 있으며<div class = "txtColor_g disInline">후원 시작일</div>로부터 한달 간격으로 <div class = "txtColor_g disInline">정기결제</div>가 진행됩니다.</div>
     					</td>
     				</tr>
     				<tr>
@@ -251,11 +262,11 @@
     		
     			<div id = "totalBox">
 	    			<div align = "right">
-	    				<div id = "txtSponValue">총 후원 포인트 </div> <div id = "sponValue">0 </div> <div class = "txtWon"> 원</div>
+	    				<div id = "txtSponValue">후원 금액 </div> <div id = "sponValue">0 </div> <div class = "txtWon"> 원</div>
 	    			</div>
 	    			<div id = "bar1"></div>
 	    			<div align = "right">
-	    				<div id = "txtLeftValue">후원 후 잔여포인트 </div> <div id = "leftValue">10000원 </div>
+	    				<div id = "txtLeftValue">다음 후원금액 </div> <div id = "nextValue">10000원 </div>
 	    			</div>
     			</div>
     		</div>
@@ -278,27 +289,22 @@
   <!-- loader -->
    <jsp:include page="../common/loader.jsp"></jsp:include>
   <script>
+  var alertRed = 0;
   $(document).ready(function() {
-		/* 모든 포인트 쓰기 선택 할 시  */
-		$("#allPoint").change(function(){
-			var mypoint = $("#myPoint").text();
-			var pointlength = mypoint.length-1;
-			mypoint = mypoint.substring(0,pointlength);
-			mypoint = mypoint.split(",");
-			console.log(mypoint);
-		    var mypointt = mypoint.join();
-			console.log(mypointt);
-			if($("#allPoint").is(":checked")){
-				$("#sponPoint").val(mypointt);
-				$("#sponValue").text(mypointt);
-				calValue();
-			}
-			
-		});
-		
 		/* 후원포인트 금액 변경 시 */
 		$("#sponPoint").change(function(){
 			calValue();
+		}).focusout(function(){
+			var sponPoint = $("#sponPoint").val();
+			if(sponPoint.length < 5){
+				 $('#sponPoint').css('border', '1px solid red').focus();
+				 $("#alertRedTxt").css("visibility", "visible");
+				 alertRed = 1;
+			}else {
+				alertRed = 0;
+				 $('#sponPoint').css('border', '1px solid lightgray');
+				 $("#alertRedTxt").css("visibility", "hidden");
+			}
 		});
 		
 		var IMP = window.IMP;
@@ -310,10 +316,8 @@
 	/* 후원포인트, 잔여포인트 계산 및 표시 */
 	function calValue(){
 		var sPoint = $("#sponPoint").val();
-		var mPoint = $("#myPoint").text();
-		//mPoint = mPoint.substring(0,mPoint.length-1);
 		$("#sponValue").text(sPoint);
-		$("#leftValue").text(mPoint-sPoint + "원");
+		$("#leftValue").text(sPoint + "원");
 	}
 	
 	/* 약관 팝업창 보여주기 */
@@ -347,6 +351,9 @@
 			alert("정기결제 약관에 동의해주세요.");
 		}else if(!$("#chkinfo2").is(":checked")){
 			alert("수수료 약관에 동의해주세요.");
+		}else if(alertRed == 1){
+			//alert("10000원 이상부터 정기후원이 가능합니다.");
+			$('#sponPoint').css('border', '1px solid red').focus()
 		}else {
 			var mno = "${ giveM.mno }";
 			var name = "${ giveM.mName }";

@@ -75,59 +75,7 @@
   <!-- loader -->
    <jsp:include page="../common/loader.jsp"></jsp:include>
   <script>
-		$(document).ready(function() {
-			/* 모든 포인트 쓰기 선택 할 시  */
-			$("#allPoint").change(function(){
-				var mypoint = $("#myPoint").text();
-				var pointlength = mypoint.length-1;
-				mypoint = mypoint.substring(0,pointlength);
-				mypoint = mypoint.split(",");
-				console.log(mypoint);
-			    var mypointt = mypoint.join();
-				console.log(mypointt);
-				if($("#allPoint").is(":checked")){
-					$("#sponPoint").val(mypointt);
-					$("#sponValue").text(mypointt);
-					calValue();
-				}
-				
-			});
-			
-			/* 후원포인트 금액 변경 시 */
-			$("#sponPoint").change(function(){
-				calValue();
-			});
-			
-			
-		});
-		
-		/* 후원포인트, 잔여포인트 계산 및 표시 */
-		function calValue(){
-			var sPoint = $("#sponPoint").val();
-			var mPoint = $("#myPoint").text();
-			mPoint = mPoint.substring(0,mPoint.length-1);
-			$("#sponValue").text(sPoint+"원");
-			$("#leftValue").text(mPoint-sPoint + "원");
-		}
-		
-		/* 약관 팝업창 보여주기 */
-		$("#seeTerms").click(function(){
-			alert("약관보여주기 ");
-		});
-		
-		/* 후원하기 버튼 클릭 시  */
-		$("#btnSpon").click(function(){
-			var leftValue = $("#leftValue").text();
-			leftValue = leftValue.substring(0, leftValue.length-1);
-			if(leftValue < 0){
-				alert("포인트가 부족합니다. 충전해주세요. ");
-			}else if(!$("#chkinfo").is(":checked")){
-				alert("고유식별정보 약관에 동의해주세요.");
-			}else {
-				alert("결제진행");
-			}
-		});
-	
+
 	</script>
   
 </body>

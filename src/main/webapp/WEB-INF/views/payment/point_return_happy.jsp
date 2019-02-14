@@ -221,7 +221,7 @@
 		    							<div class="form-check">
 									  <input class="form-check-input" type="checkbox" value="" id="allPoint">
 									  <label class="form-check-label" for="allPoint" id = "txtAllPoint">
-									 	  모든 포인트 사용하기
+									 	  모든 포인트 환급받기
 									  </label>
 									</div>
 		    						</td>

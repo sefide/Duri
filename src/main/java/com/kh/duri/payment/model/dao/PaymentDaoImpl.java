@@ -179,7 +179,12 @@ public class PaymentDaoImpl implements PaymentDao {
 		}else {
 			r_No = sqlSession.selectOne("Point.selectRefundCurVal");
 			resultPoint = sqlSession.update("Point.updateRefundPoint", r);
-			loginUser = sqlSession.selectOne("Point.loginUserCheck", m);
+			
+			if(m.getMtype().equals("H")) { // 행복두리
+				loginUser = sqlSession.selectOne("Point.loginHaCheck", m);
+			}else {  // 나눔두리 
+				loginUser = sqlSession.selectOne("Point.loginNaCheck", m);
+			}
 			
 			if(resultPoint <= 0 || loginUser == null || r_No == 0) {
 				throw new RefundException("포인트 변경을 실패했습니다.");
@@ -213,7 +218,11 @@ public class PaymentDaoImpl implements PaymentDao {
 			resultPoint = sqlSession.update("Point.updatePaymentPoint", py);
 			
 			// 3. 포인트 증가시켜서 회원정보 업데이트
-			loginUser = sqlSession.selectOne("Point.loginUserCheck", m);
+			if(m.getMtype().equals("H")) { // 행복두리
+				loginUser = sqlSession.selectOne("Point.loginHaCheck", m);
+			}else {  // 나눔두리 
+				loginUser = sqlSession.selectOne("Point.loginNaCheck", m);
+			}
 			
 			if(resultPoint <= 0 || loginUser == null || py_No == 0) {
 				throw new PaymentException("포인트 변경을 실패했습니다.");

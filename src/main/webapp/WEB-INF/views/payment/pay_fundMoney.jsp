@@ -9,131 +9,131 @@
     <jsp:include page="../common/css.jsp"/>
       
     <style>
-    		#nav_back{
-    			background: #FFBB50; 
-    			height:83px; 
-    			box-shadow:0 0 6px 0 #B8B8B8; 
-    		}
-    		
-    		#bar1{
-    			width:98%; 
-    			margin: 2% auto; 
-    			border-top:1px solid #B8B8B8;
-    			height : 10px;
-    		}
-    		
-    		table {
-    			width : 80%;
-    			margin: 1%;
-    		}
-    		
-    		tr{
-    			height: 55px;
-    		}
-    		th{
-    			font-weight : 400;
-    			font-size : 20px;
-    			font-family: "Dosis", Arial, sans-serif;
-    		}
-    		td{
-    			font-weight : 300;
-    			font-size : 20px;
-    		}
-    		
-    		#sType{
-    			display: block;
-    			width : 100%;
-    			font-size : 20px;
-    		}
-    		#sTitle{
-    			display: block;
-    			font-size : 30px;
-    			font-weight : 500;
-    		}
-    		
-    		.d-flex{
-    			padding-left : 5%;
-    			margin: 1% 0;
-    		}
-    		
-    		#sponPoint{
-    			height :40px !important;
-    			border-radius : 5px;
-    			width :  160px;
-    			display : inline-block;
-    			margin-right : 2%;
-    		}
-    		
-    		#ipinFirst, #ipinSecond{
-    			height : 40px !important;
-    			border-radius : 5px;
-    			width : 150px;
-    			display : inline;
-    		}
-    		
-    		#totalBox{
-    			width : 82%; 
-    			background: rgba(220,220,220,0.3); 
-    			margin : 2% auto; 
-    			padding: 5% 2%;
-    		}
-    		
-    		#txtSponValue{
-    			display : inline-block;
-    			font-weight : 500;
-    			font-size: 24px;
-    			margin-right : 20px;
-    		}
-    		#sponValue{
-    			display : inline-block;
-    			color : #FE9D35;
-    			font-weight : 500;
-    			font-size: 36px;
-    			margin-right : 10px;
-    		}
-    		.txtWon{
-    			display : inline-block;
-    			font-size : 25px;
-    			font-weight : 500;
-    		}
-    		
-    		#txtLeftValue{
-    			display : inline-block;
-    			margin-right : 22px;
-    		}
-    		#leftValue{
-    			display : inline-block;
-    			font-size: 22px;
-    			margin-right : 10px;
-    		}
-    		
-    		#seeTerms{
-    			padding : 5%;
-    			border-radius : 4px;
-    			background: rgba(150,150,150,0.4);
-    			font-size : 17px;
-    			font-weight : 500;
-    			cursor : pointer;
-    		}
-    		
-    		#btnBox{
-    			width : 99%;
-    			text-align : center;
-    		}
-    		
-    		#btnSpon{
-    			padding : 0.4em 4em;
-    			border-radius : 4px;
-    			background: #FE9D35;
-    			color : #ffff;
-    			font-weight : 700;
-    			font-size : 28px;
-    			cursor : pointer;
-    		}
-    		.txtWon{
-    			display : inline-block;
-    			font-size : 19px;
-    		}
+   		#nav_back{
+   			background: #FFBB50; 
+   			height:83px; 
+   			box-shadow:0 0 6px 0 #B8B8B8; 
+   		}
+   		
+   		#bar1{
+   			width:98%; 
+   			margin: 2% auto; 
+   			border-top:1px solid #B8B8B8;
+   			height : 10px;
+   		}
+   		
+   		table {
+   			width : 80%;
+   			margin: 1%;
+   		}
+   		
+   		tr{
+   			height: 55px;
+   		}
+   		th{
+   			font-weight : 400;
+   			font-size : 20px;
+   			font-family: "Dosis", Arial, sans-serif;
+   		}
+   		td{
+   			font-weight : 300;
+   			font-size : 20px;
+   		}
+   		
+   		#sType{
+   			display: block;
+   			width : 100%;
+   			font-size : 20px;
+   		}
+   		#sTitle{
+   			display: block;
+   			font-size : 30px;
+   			font-weight : 500;
+   		}
+   		
+   		.d-flex{
+   			padding-left : 5%;
+   			margin: 1% 0;
+   		}
+   		
+   		#sponPoint{
+   			height :40px !important;
+   			border-radius : 5px;
+   			width :  160px;
+   			display : inline-block;
+   			margin-right : 2%;
+   		}
+   		
+   		#ipinFirst, #ipinSecond{
+   			height : 40px !important;
+   			border-radius : 5px;
+   			width : 150px;
+   			display : inline;
+   		}
+   		
+   		#totalBox{
+   			width : 82%; 
+   			background: rgba(220,220,220,0.3); 
+   			margin : 2% auto; 
+   			padding: 5% 2%;
+   		}
+   		
+   		#txtSponValue{
+   			display : inline-block;
+   			font-weight : 500;
+   			font-size: 24px;
+   			margin-right : 20px;
+   		}
+   		#sponValue{
+   			display : inline-block;
+   			color : #FE9D35;
+   			font-weight : 500;
+   			font-size: 36px;
+   			margin-right : 10px;
+   		}
+   		.txtWon{
+   			display : inline-block;
+   			font-size : 25px;
+   			font-weight : 500;
+   		}
+   		
+   		#txtLeftValue{
+   			display : inline-block;
+   			margin-right : 22px;
+   		}
+   		#leftValue{
+   			display : inline-block;
+   			font-size: 22px;
+   			margin-right : 10px;
+   		}
+   		
+   		#seeTerms{
+   			padding : 5%;
+   			border-radius : 4px;
+   			background: rgba(150,150,150,0.4);
+   			font-size : 17px;
+   			font-weight : 500;
+   			cursor : pointer;
+   		}
+   		
+   		#btnBox{
+   			width : 99%;
+   			text-align : center;
+   		}
+   		
+   		#btnSpon{
+   			padding : 0.4em 4em;
+   			border-radius : 4px;
+   			background: #FE9D35;
+   			color : #ffff;
+   			font-weight : 700;
+   			font-size : 28px;
+   			cursor : pointer;
+   		}
+   		.txtWon{
+   			display : inline-block;
+   			font-size : 19px;
+   		}
     		
     </style>
 </head>
@@ -190,6 +190,10 @@
     				<tr>
     					<th>후원 펀딩</th>
     					<td colspan = "2" >동생은 몸이 아프니까, 형이 대신 해줘야지...</td>
+    				</tr>
+    				<tr>
+    					<th>후원 유형</th>
+    					<td colspan = "2" >의료비</td>
     				</tr>
     				<tr>
     					<th>나눔두리</th>
@@ -251,6 +255,9 @@
    <jsp:include page="../common/loader.jsp"></jsp:include>
   <script>
 		$(document).ready(function() {
+			/* 주민등록번호 입력창 숨겨두기 */
+			$(".ipin").css("display","none");
+			
 			/* 모든 포인트 쓰기 선택 할 시  */
 			$("#allPoint").change(function(){
 				var mypoint = $("#myPoint").text();
