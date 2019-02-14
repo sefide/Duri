@@ -186,7 +186,7 @@ p {font-size: 20px; text-align: center;}
 			<!-- Trigger/Open The Modal -->
 			<span><a class="a-tag" href="pointReturnListHappy.pm" style="margin-right: 80px;">포인트 환급</a></span>
 
-			<span><a class="a-tag" id="modalBtn" onclick="items(${loginUser.mno});">보유물품</a></span><br>
+			<span><a class="a-tag" id="modalBtn" onclick="items(${loginUser.mno},${loginUser.mAddress});">보유물품</a></span><br>
 			<span><a class="a-tag" href="myInfoModifyHappy.happy" style="margin-right: 80px;">내 정보 수정</a></span>
 			<span><a class="a-tag" id="modalBtn2">알림</a></span><br>
 		</div>
@@ -299,10 +299,12 @@ p {font-size: 20px; text-align: center;}
 
 	//클릭시 모달 가져오고
 	//보유하고 있는 물품명&수량 뿌리기
+	var address = "";
 	var mno = 0;
 	function items(mno){
 		$("#myModal").css("display", "block");
 		console.log("ajax 회원번호 : " + mno);
+		console.log("ajax 회원주소 : " + address);
 		
 		$.ajax({
 			url:"donateItemList.happy",
@@ -349,6 +351,7 @@ p {font-size: 20px; text-align: center;}
 								}
 							}
 							if(data.ownlist[o].ovalue == 0){
+								$itemsSelect.empty();
 								$itemsSelect.append($("<option>").text(0));
 							} 
 						}
@@ -380,7 +383,7 @@ p {font-size: 20px; text-align: center;}
 	function getDelivery(){
 		var item = [];
 		var itemAmount = [];
-		
+				
 		$("input[name='item']:checked").each(function(){//=for문
 			item.push($(this).val());	//물품번호 가져오기
 			itemAmount.push($(this).parent().next().next($("#amout option:selected")).val());//select값(물품수량)가져오기
@@ -389,13 +392,14 @@ p {font-size: 20px; text-align: center;}
 			console.log("체크박스 값 : " + item);
 			console.log("개수 : " + itemAmount);
 		
-			location.href="getDelivery.happy?item="+item+"&itemAmount="+itemAmount+"&mno="+${loginUser.mno};
-			 
+			location.href="getDelivery.happy?item="+item+"&itemAmount="+itemAmount+"&mno="+${loginUser.mno}/* +"&address="+${loginUser.mAddress} */ ;
+			/* console.log("주소 : " + (${loginUser.mAddress})); */
 	}
 	
 	//보유물품 - 취소 버튼 클릭 함수
 	function selectReset(){
 		$("#getDeliveryForm")[0].reset();
+		
 	}
 	
 </script>

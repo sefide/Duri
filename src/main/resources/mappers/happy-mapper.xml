@@ -43,6 +43,14 @@
 		<result property="iname" column="INAME"/>
 		<result property="iprice" column="IPRICE"/>
 	</resultMap>
+	
+	<resultMap type="com.kh.duri.happymember.model.vo.Delivery" id="DeliveryResultSet">
+		<id property="dno" column="DNO"></id>
+		<result property="daddress" column="DADDRESS"/>
+		<result property="ddate" column="DDATE"/>
+		<result property="dlink" column="DLINK"/>
+		<result property="d_mno" column="D_MNO"/>
+	</resultMap>
 
 	<!-- 보유물품 리스트 조회-->
 	<select id="selectDonateItemList" resultMap="donateItemsResultSet" parameterType="_int">
@@ -55,11 +63,14 @@
 		SELECT * 
 		FROM FUNDITEM
 	</select>
-	
+	<!-- 보유물품 수량 업데이트(차감) -->
 	<update id="updateItemAmount">
 		UPDATE OWNITEM SET OVALUE = OVALUE-#{ovalue} WHERE O_MNO=#{o_mno} AND O_INO=#{o_ino}
 	</update>
-	
+	<!-- 배송목록에 정보(물품번호, 수량)추가하기 -->
+	<insert id="insertDeliveryList">
+		INSERT INTO DELIVERY VALUES (SEQ_D_NO.NEXTVAL, #{daddress}, SYSDATE, 'www.naver.com', #{d_mno})
+	</insert>
 	
 </mapper>
 

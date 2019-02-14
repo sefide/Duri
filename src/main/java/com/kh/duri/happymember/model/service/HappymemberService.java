@@ -16,8 +16,15 @@ public interface HappymemberService {
 	//후원물품 리스트
 	ArrayList<FundItemList> fundItemList() throws MypageException;
 
-	// 
+	//배송받을 물품 선택 후 수량 변경하기
 	int getDelivery(String[] itemNumArray, String[] itemAmountArray, String mno) throws MypageException;
+
+	//배송현황 추가하기
+	int insertDelivery(String address, String mno) throws MypageException;
+
+
+	/*//배송현황 목록 조회(페이징)
+	int getDeliveryListCount(Member m) throws MypageException;*/
 
 	
 

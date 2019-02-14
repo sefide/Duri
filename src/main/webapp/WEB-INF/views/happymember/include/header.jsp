@@ -1,13 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <header>
+
+<!-- semantic ui -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+<script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+
 	<!-- <div class="inner">inner S -->
 		
 		<!-- 로그인 후 -->
 		<div class="myNavBox">
-			<span class="mumyNavBox-logout"><a href="logout.me">로그아웃</a></span>
+			<span class="mumyNavBox-logout"><i class="large lock open icon"></i><a href="logout.me">로그아웃</a></span>
 		</div>
 		
+		<div class="d-day">
+			<span class="d-day-count"><i class="bullhorn icon"></i>증빙서류 재 제출 D-day : 15일</span>
+		</div>
 		
 
 

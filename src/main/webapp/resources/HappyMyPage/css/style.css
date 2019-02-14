@@ -11,12 +11,17 @@
 header {position:relative; height:80px; border-bottom:2px solid #e7bf55;}
 header h1 {text-align:center;}
 
-header .myNavBox {position:absolute; top:23px; left:83%;}
+header .myNavBox {position:absolute; top:23px; left:83%; float: left;}
 header .myNavBox span.mumyNavBox-logout a {font-size: 20px; font-weight: 500; color: black;}
 header .myNavBox span {display:inline-block; margin-left:10px; height:30px; line-height:30px; padding-left:34px;}
+header .myNavBox span i {color: #737373;}
 header .myNavBox span.mu11 {background:url(../images/gnb/mult04.png) no-repeat 0 0; }
-header .myNavBox span.mumyNavBox-logout {background:url(../images/gnb/mult04.png) no-repeat 0 0; }
+/* header .myNavBox span.mumyNavBox-logout {background:url(../images/gnb/mult04.png) no-repeat 0 0; } */
 header .multBoxL2 {position:absolute; top:0; left:120px;}
+
+header .d-day {text-align: right; margin-right: 20%; padding-top: 22px;}
+header .d-day span.d-day-count {font-size: 20px; font-weight: 600; color: darkorange; margin-top: 5%;}
+header .d-day span i {color: #737373;}
 
 header .multBoxR {position:absolute; top:10px; right:0;}
 header .multBoxR span {display:inline-block; margin-left:10px; height:30px; line-height:30px; padding-left:34px;}
