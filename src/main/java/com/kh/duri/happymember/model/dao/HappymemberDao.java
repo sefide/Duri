@@ -29,7 +29,10 @@ public interface HappymemberDao {
 	int insertDeliveryDetail(SqlSessionTemplate sqlSession, String[] itemNumArray, String[] itemAmountArray) throws MypageException;
 
 	//배송현황 목록 개수 조회
-	int selectDeliveryListCount(SqlSessionTemplate sqlSession, Delivery d);
+	int selectDeliveryListCount(SqlSessionTemplate sqlSession, Delivery d) throws MypageException;
+
+	//정기후원 목록 조회하기 개수 조회
+	int selectLongDonateCount(SqlSessionTemplate sqlSession, Member m) throws MypageException;
 
 	
 

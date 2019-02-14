@@ -46,6 +46,8 @@ public class HappymemberServiceImpl implements HappymemberService {
 	}
 
 	//배송받을 물품 선택 후 수량 변경하기
+	//배송현황 추가하기
+	//배송현황 상세 정보 추가하기
 	@Override
 	public int getDelivery(String[] itemNumArray, String[] itemAmountArray, String mno, String address) throws MypageException {
 		int updateResult = hd.getDelivery(sqlSession, itemNumArray, itemAmountArray, mno );
@@ -61,31 +63,20 @@ public class HappymemberServiceImpl implements HappymemberService {
 		return result;
 	}
 
-	
-	/*//배송현황 추가하기
-	@Override
-	public int insertDelivery(String address, String mno) throws MypageException {
-		
-		int insertResult1 = hd.insertDelivery(sqlSession, address, mno);
-		int insertResult2 = hd.insertDeliveryDetail(sqlSession, address, mno);
-		
-		if
-		return insertResult1;
-	}
-
-	//배송현황 상세 정보 추가하기
-	@Override
-	public int insertDeliveryDetail(String[] itemNumArray, String[] itemAmountArray) throws MypageException {
-		int insertResult2 = hd.insertDeliveryDetail(sqlSession, itemNumArray, itemAmountArray);
-		
-		return insertResult2;
-	}*/
 
 	//배송현황 목록 개수 조회
 	@Override
 	public int selectDeliveryListCount(Delivery d) throws MypageException {
 		int listCount = hd.selectDeliveryListCount(sqlSession, d);
 		
+		
+		return listCount;
+	}
+
+	//정기후원 목록 조회하기 개수 조회
+	@Override
+	public int selectLongDonateCount(Member m) throws MypageException {
+		int listCount = hd.selectLongDonateCount(sqlSession, m);
 		
 		return listCount;
 	}
