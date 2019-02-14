@@ -4,9 +4,9 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="Board">
+<mapper namespace="Boards">
 
-	<resultMap type="com.kh.duri.board.model.vo.board" id="boardResultSet">
+	<resultMap type="com.kh.duri.board.model.vo.Board" id="boardResultSet">
 	<!-- property=컬럼명, column=필드명    반드시 일치! -->
 		<id property="fno" column="FNO"></id>
 		<result property="ftype" column="FTYPE"/>
@@ -22,13 +22,48 @@
 
 	</resultMap>
 	
+		<resultMap type="com.kh.duri.board.model.vo.Board" id="boardlistSet">
+	<!-- property=컬럼명, column=필드명    반드시 일치! -->
+		<id property="fno" column="FNO"></id>
+		<result property="rnum" column="RNUM"/>
+		<result property="ftype" column="FTYPE"/>
+		<result property="fTitle" column="FTITLE"/>
+		<result property="fContent" column="FCONTENT"/>
+		<result property="fStartDate" column="FSTARTDATE"/>
+		<result property="fEndDate" column="FENDDATE"/>
+		<result property="fStatus" column="FSTATUS"/>
+		<result property="fValue" column="FVALUE"/>
+		<result property="fValueType" column="FVALUETYPE"/>
+		<result property="mNick" column="MNICK"/>
+		<result property="mFundType" column="MFUNDTYPE"/>
+		<result property="mAddress" column="MADDRESS"/>
+		
 
-	<select id="selectMoneyListCount" parameterType="_int">
+	</resultMap>
+	
+
+	<select id="selectMoneyListCount" resultType="_int">
 		SELECT COUNT(*)
 		FROM FUNDING
 		WHERE FTYPE='MONEY'
 	</select>
 	
+	<select id="selectMoneyList" resultMap="boardlistSet" parameterType="Board">
+		SELECT ROWNUM RNUM, FNO, FTITLE,FVALUE, FSTARTDATE, FENDDATE, FCONTENT,FVALUETYPE, FSTATUS, MNICK, MFUNDTYPE, MADDRESS
+		FROM( SELECT ROWNUM RNUM,FNO, FTITLE, FVALUE, FSTARTDATE, FENDDATE, FCONTENT,FVALUETYPE, FSTATUS, MNICK, MFUNDTYPE, MADDRESS
+     		  FROM (SELECT F.FNO, F.FTITLE, F.FVALUE, F.FSTARTDATE, F.FENDDATE, F.FCONTENT,F.FVALUETYPE, F.FSTATUS, M.MNICK, M.MFUNDTYPE, M.MADDRESS
+            		FROM FUNDING F
+            		JOIN MEMBER M ON (M.MNO = F.FWRITER)
+            		WHERE F.FTYPE='MONEY'
+            		ORDER BY F.FNO))
+	</select>
+	
+	
+	<select id="selectMoneyDetail" resultMap="boardlistSet" parameterType="Board">
+		SELECT *
+		FROM FUNDING
+		WHERE FNO = ${fno}
+	</select>
 	
 	
 </mapper>

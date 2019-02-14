@@ -19,7 +19,7 @@
 		<typeAlias type="com.kh.duri.Nanummember.model.vo.DirectFundHistoryDetail" alias="DirectFundHistoryDetail"/> 
 		<typeAlias type="com.kh.duri.Nanummember.model.vo.SelectDirectFund" alias="SelectDirectFund"/> 
 		<typeAlias type="com.kh.duri.Nanummember.model.vo.Letter" alias="Letter"/> 
-		<typeAlias type="com.kh.duri.board.model.vo.board" alias="Board"/>	
+		<typeAlias type="com.kh.duri.board.model.vo.Board" alias="Board"/>	
 		<typeAlias type="com.kh.duri.Nanummember.model.vo.FundInterest" alias="FundInterest"/> 
 		
 		<typeAlias type="com.kh.duri.happymember.model.vo.Delivery" alias="Delivery"/>	

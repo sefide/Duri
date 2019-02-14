@@ -5,6 +5,7 @@ import java.util.List;
 import org.mybatis.spring.SqlSessionTemplate;
 
 import com.kh.duri.board.model.exception.DonateListException;
+import com.kh.duri.board.model.vo.Board;
 import com.kh.duri.member.model.vo.Member;
 import com.kh.duri.payment.model.vo.PageInfo;
 
@@ -19,5 +20,9 @@ public interface boardDao {
 	Member longDonateDetail(SqlSessionTemplate sqlSession, Member m);
 
 	int getMoneyListCount(SqlSessionTemplate sqlSession);
+
+	List<Board> selectMoneyList(SqlSessionTemplate sqlSession, PageInfo pi) throws DonateListException;
+
+	Board moneyDetail(SqlSessionTemplate sqlSession, Board b);
 
 }
