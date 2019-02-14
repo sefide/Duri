@@ -1,6 +1,5 @@
 package com.kh.duri.board.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -11,17 +10,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.duri.board.model.exception.DonateListException;
 import com.kh.duri.board.model.service.boardService;
-import com.kh.duri.member.model.exception.LoginException;
+import com.kh.duri.board.model.vo.Board;
 import com.kh.duri.member.model.vo.Member;
-import com.kh.duri.payment.model.exception.PointHistoryException;
 import com.kh.duri.payment.model.vo.PageInfo;
 import com.kh.duri.payment.model.vo.Pagination;
-import com.kh.duri.payment.model.vo.Point;
 
 @Controller
 public class BoardController {
@@ -46,6 +42,7 @@ public class BoardController {
 		return "happymember/cloudWrite";
 	}
 	
+	//정기후원 목록 불러오기
 	@RequestMapping("long_donate.bo")
 	public String longDonateList(Model model, HttpServletRequest request, HttpServletResponse response) {
 		int currentPage = 1;
@@ -82,8 +79,9 @@ public class BoardController {
 		
 	}
 
+	//정기후원 상세페이지
 	@RequestMapping("long_donate_detail.bo")
-	public ModelAndView request(Member m, ModelAndView mv,HttpSession session){ 
+	public ModelAndView longDonate(Member m, ModelAndView mv,HttpSession session){ 
 	
 	
 			System.out.println("member : "+m);
@@ -106,7 +104,7 @@ public class BoardController {
 		}
 
 
-	
+	//금액후원 조회
 	   @RequestMapping("money_donate.bo")
 	   public String moneyDonateList(Model model, HttpServletRequest request, HttpServletResponse response) throws DonateListException {
 	      int currentPage = 1;
@@ -123,7 +121,7 @@ public class BoardController {
 			System.out.println("크라우드펀딩 금액후원 명수 :  " + listCount);
 			
 
-			List<Member> moList;
+			List<Board> moList;
 			
 			moList = bs.selectMoneyList(pi);
 			
@@ -138,6 +136,32 @@ public class BoardController {
 	   }
 
 	
+
+	
+	
+	@RequestMapping("cloud_money_datail.bo")
+	public ModelAndView moneyDetail(Board b, ModelAndView mv,HttpSession session){ 
+		
+		
+		System.out.println("Board : "+b);
+		
+		Board moneyDetail = null; 
+		
+		
+		moneyDetail = bs.moneyDetailOne(b); //받아온 아이디와 비밀번호로 로그인 정보 조회
+			
+		session.setAttribute("moneyDetail", moneyDetail);	//세션에 뿌려주기
+			
+			mv.setViewName("redirect:moneyDetail.bo"); //위처럼 redirect로 뷰페이지이름연결할거랑 똑같음
+
+		
+
+	
+	return mv;
+	
+
+	}
+	
 	
 	@RequestMapping("longDonate.bo")
 	public String eunji7() {
@@ -145,7 +169,7 @@ public class BoardController {
 	}
 	
 	
-	@RequestMapping("cloud_money_datail.bo")
+	@RequestMapping("moneyDetail.bo")
 	public String eunji8() {
 		return "board/about_money";
 	}

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
  <head>
@@ -7,6 +8,7 @@
     <meta charset="utf-8">
        <!-- 공통 css 부분 -->
       <jsp:include page="../common/css.jsp"/>
+
   </head>
   <style>
   	a{
@@ -25,6 +27,19 @@
 		padding:3px 3px;
 		border-radius:8px;
 	}
+	
+	#goMoDetail{
+		background:white;
+		font-weight:bold;
+		font-size:20px;
+		color:black;
+		border:1px solid white;
+		cursor:pointer;
+		
+	}
+	
+
+
   </style>
   <body>
     
@@ -60,91 +75,37 @@
 
       </div>
 
+		
       	<div class="row">
-      		<div class="col-md-4 ftco-animate">
+      	   <c:forEach var="mo" items="${moList}">
+      		<div class="col-md-4 ftco-animate" >
       			<div class="cause-entry">
-    					<a href="#" class="img" style="background-image: url(/duri/resources/common/images/cause-1.jpg);"></a>
-    					<div class="text p-3 p-md-4">
-    						<h3><a href="cloud_money_datail.bo">저는 집이 무섭습니다.</a></h3>
-    						<p>wewe1596 행복두리의 사연</p>
-    						<span class="donation-time mb-3 d-block">Last donation 1w ago</span>
-                <div class="progress custom-progress-success">
-                  <div class="progress-bar bg-primary" role="progressbar" style="width: 28%" aria-valuenow="28" aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
-               <a>46%</a><a style="float:right">500,000원</a>
-    					</div>
-    				</div>
+      			<!-- style="background-image: url(/duri/resources/common/images/cause-1.jpg);" -->
+      			<c:if test="${mo.fValueType eq '생활비' }">
+    					<a href="#" class="img" style="background-image: url(/duri/resources/fundFiles/funding_ex_img04.jpg);"></a>
+    			</c:if>
+    			<c:if test="${mo.fValueType eq '교육비' }">
+    					<a href="#" class="img" style="background-image: url(/duri/resources/fundFiles/funding_ex_img_school.jpg);"></a>
+    			</c:if>
+    			<c:if test="${mo.fValueType eq '의료비' }">
+    					<a href="#" class="img" style="background-image: url(/duri/resources/fundFiles/funding_ex_img_doctor.jpg);"></a>
+    			</c:if>
+    			<form action="cloud_money_datail.bo" id="sub1" name="sub1" id="moneyForm" method="POST">
+    				<div class="text p-3 p-md-4">
+    					<input type="hidden" value="${mo.fno}"/>
+    					<h3><input type="submit" id="goMoDetail" value="${mo.fTitle }"/></h3>
+    					<p>' ${mo.mNick} ' 행복두리의 사연</p>
+    					<span class="donation-time mb-3 d-block" style="color:black">${mo.mFundType}</span>
+	                	<div class="progress custom-progress-success">
+	                    <div class="progress-bar bg-primary" role="progressbar" style="width: 28%" aria-valuenow="28" aria-valuemin="0" aria-valuemax="100"></div>
+	                	</div>
+	               		<a>46%</a><a style="float:right">${mo.fValue}원</a>
+	    			</div>
+	    		</form>
+    			</div>
       		</div>
-      		<div class="col-md-4 ftco-animate">
-      			<div class="cause-entry">
-    					<a href="#" class="img" style="background-image: url(/duri/resources/common/images/cause-2.jpg);"></a>
-    					<div class="text p-3 p-md-4">
-    						<h3><a href="#">Clean water for the urban area</a></h3>
-    						<p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life</p>
-    						<span class="donation-time mb-3 d-block">Last donation 1w ago</span>
-                <div class="progress custom-progress-success">
-                  <div class="progress-bar bg-primary" role="progressbar" style="width: 28%" aria-valuenow="28" aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
-                <span class="fund-raised d-block">$12,000 raised of $30,000</span>
-    					</div>
-    				</div>
-      		</div>
-      		<div class="col-md-4 ftco-animate">
-      			<div class="cause-entry">
-    					<a href="#" class="img" style="background-image: url(/duri/resources/common/images/cause-3.jpg);"></a>
-    					<div class="text p-3 p-md-4">
-    						<h3><a href="#">Clean water for the urban area</a></h3>
-    						<p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life</p>
-    						<span class="donation-time mb-3 d-block">Last donation 1w ago</span>
-                <div class="progress custom-progress-success">
-                  <div class="progress-bar bg-primary" role="progressbar" style="width: 28%" aria-valuenow="28" aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
-                <span class="fund-raised d-block">$12,000 raised of $30,000</span>
-    					</div>
-    				</div>
-      		</div>
-      		<div class="col-md-4 ftco-animate">
-      			<div class="cause-entry">
-    					<a href="#" class="img" style="background-image: url(/duri/resources/common/images/cause-4.jpg);"></a>
-    					<div class="text p-3 p-md-4">
-    						<h3><a href="#">Clean water for the urban area</a></h3>
-    						<p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life</p>
-    						<span class="donation-time mb-3 d-block">Last donation 1w ago</span>
-                <div class="progress custom-progress-success">
-                  <div class="progress-bar bg-primary" role="progressbar" style="width: 28%" aria-valuenow="28" aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
-                <span class="fund-raised d-block">$12,000 raised of $30,000</span>
-    					</div>
-    				</div>
-      		</div>
-      		<div class="col-md-4 ftco-animate">
-      			<div class="cause-entry">
-    					<a href="#" class="img" style="background-image: url(/duri/resources/common/images/cause-5.jpg);"></a>
-    					<div class="text p-3 p-md-4">
-    						<h3><a href="#">Clean water for the urban area</a></h3>
-    						<p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life</p>
-    						<span class="donation-time mb-3 d-block">Last donation 1w ago</span>
-                <div class="progress custom-progress-success">
-                  <div class="progress-bar bg-primary" role="progressbar" style="width: 28%" aria-valuenow="28" aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
-                <span class="fund-raised d-block">$12,000 raised of $30,000</span>
-    					</div>
-    				</div>
-      		</div>
-      		<div class="col-md-4 ftco-animate">
-      			<div class="cause-entry">
-    					<a href="#" class="img" style="background-image: url(/duri/resources/common/images/cause-6.jpg);"></a>
-    					<div class="text p-3 p-md-4">
-    						<h3><a href="#">Clean water for the urban area</a></h3>
-    						<p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life</p>
-    						<span class="donation-time mb-3 d-block">Last donation 1w ago</span>
-                <div class="progress custom-progress-success">
-                  <div class="progress-bar bg-primary" role="progressbar" style="width: 28%" aria-valuenow="28" aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
-                <span class="fund-raised d-block">$12,000 raised of $30,000</span>
-    					</div>
-    				</div>
-      		</div>
+      		</c:forEach>
+      	
         </div>
         <div class="row mt-5">
           <div class="col text-center">
@@ -164,34 +125,7 @@
       </div>
     </section>
 
-    <!-- <section class="ftco-section-3 img" style="background-image: url(/duri/resources/common/images/bg_3.jpg);">
-    	<div class="overlay"></div>
-    	<div class="container">
-    		<div class="row d-md-flex">
-    		<div class="col-md-6 d-flex ftco-animate">
-    			<div class="img img-2 align-self-stretch" style="background-image: url(/duri/resources/common/images/bg_4.jpg);"></div>
-    		</div>
-    		<div class="col-md-6 volunteer pl-md-5 ftco-animate">
-    			<h3 class="mb-3">Be a volunteer</h3>
-    			<form action="#" class="volunter-form">
-            <div class="form-group">
-              <input type="text" class="form-control" placeholder="Your Name">
-            </div>
-            <div class="form-group">
-              <input type="text" class="form-control" placeholder="Your Email">
-            </div>
-            <div class="form-group">
-              <textarea name="" id="" cols="30" rows="3" class="form-control" placeholder="Message"></textarea>
-            </div>
-            <div class="form-group">
-              <input type="submit" value="Send Message" class="btn btn-white py-3 px-5">
-            </div>
-          </form>
-    		</div>    			
-    		</div>
-    	</div>
-    </section>
-		 -->
+
 
   <!-- footer  -->
    <jsp:include page="../common/footer.jsp"></jsp:include>
@@ -199,6 +133,12 @@
 
   <!-- loader -->
    <jsp:include page="../common/loader.jsp"></jsp:include>
-    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> 
+    <script>
+    function goMoneyDetail(){
+    	$("#moneyForm").submit();	
+    	
+    }
+    </script>
   </body>
 </html>

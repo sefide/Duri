@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.duri.board.model.dao.boardDao;
 import com.kh.duri.board.model.exception.DonateListException;
+import com.kh.duri.board.model.vo.Board;
 import com.kh.duri.member.model.vo.Member;
 import com.kh.duri.payment.model.vo.PageInfo;
 
@@ -59,9 +60,17 @@ public class boardServiceImpl implements boardService {
 	
 	//크라우드 펀딩 금액후원 목록 조회
 	@Override
-	public List<Member> selectMoneyList(PageInfo pi) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Board> selectMoneyList(PageInfo pi) throws DonateListException {
+		List<Board> moList = bd.selectMoneyList(sqlSession, pi);	//DAO로 Member 정보와 sqlSession 전송
+		
+		return moList;
+	}
+
+	@Override
+	public Board moneyDetailOne(Board b) {
+		Board moneyDetail = bd.moneyDetail(sqlSession, b);	//DAO로 Member 정보와 sqlSession 전송
+		
+		return moneyDetail ;
 	}
 
 

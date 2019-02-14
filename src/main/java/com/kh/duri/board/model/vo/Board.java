@@ -2,8 +2,8 @@ package com.kh.duri.board.model.vo;
 
 import java.sql.Date;
 
-public class board {
-
+public class Board {
+	private int rnum;
 	private int fno;
 	private String ftype;
 	private String fTitle;
@@ -15,12 +15,17 @@ public class board {
 	private int fValue;
 	private String fValueType;
 	private int fWriter;
+	private String mNick;
+	private String mAddress;
+	private String mFundType;
 	
-	public board() {}
+	public Board() {}
 
-	public board(int fno, String ftype, String fTitle, String fContent, Date fWriterDate, Date fStartDate,
-			Date fEndDate, String fStatus, int fValue, String fValueType, int fWriter) {
+	public Board(int rnum, int fno, String ftype, String fTitle, String fContent, Date fWriterDate, Date fStartDate,
+			Date fEndDate, String fStatus, int fValue, String fValueType, int fWriter, String mNick, String mAddress,
+			String mFundType) {
 		super();
+		this.rnum = rnum;
 		this.fno = fno;
 		this.ftype = ftype;
 		this.fTitle = fTitle;
@@ -32,6 +37,17 @@ public class board {
 		this.fValue = fValue;
 		this.fValueType = fValueType;
 		this.fWriter = fWriter;
+		this.mNick = mNick;
+		this.mAddress = mAddress;
+		this.mFundType = mFundType;
+	}
+
+	public int getRnum() {
+		return rnum;
+	}
+
+	public void setRnum(int rnum) {
+		this.rnum = rnum;
 	}
 
 	public int getFno() {
@@ -122,14 +138,38 @@ public class board {
 		this.fWriter = fWriter;
 	}
 
+	public String getmNick() {
+		return mNick;
+	}
+
+	public void setmNick(String mNick) {
+		this.mNick = mNick;
+	}
+
+	public String getmAddress() {
+		return mAddress;
+	}
+
+	public void setmAddress(String mAddress) {
+		this.mAddress = mAddress;
+	}
+
+	public String getmFundType() {
+		return mFundType;
+	}
+
+	public void setmFundType(String mFundType) {
+		this.mFundType = mFundType;
+	}
+
 	@Override
 	public String toString() {
-		return "board [fno=" + fno + ", ftype=" + ftype + ", fTitle=" + fTitle + ", fContent=" + fContent
-				+ ", fWriterDate=" + fWriterDate + ", fStartDate=" + fStartDate + ", fEndDate=" + fEndDate
+		return "Board [rnum=" + rnum + ", fno=" + fno + ", ftype=" + ftype + ", fTitle=" + fTitle + ", fContent="
+				+ fContent + ", fWriterDate=" + fWriterDate + ", fStartDate=" + fStartDate + ", fEndDate=" + fEndDate
 				+ ", fStatus=" + fStatus + ", fValue=" + fValue + ", fValueType=" + fValueType + ", fWriter=" + fWriter
-				+ "]";
+				+ ", mNick=" + mNick + ", mAddress=" + mAddress + ", mFundType=" + mFundType + "]";
 	}
-	
+
 	
 	
 }

@@ -46,6 +46,7 @@
 		AND MTYPE='H'
 	</select>
 	
+	<!-- 로그인 나눔두리 -->
 	<select id="loginNaCheck" resultMap="memberResultSet" parameterType="Member">
 		SELECT *
 		FROM MEMBER
