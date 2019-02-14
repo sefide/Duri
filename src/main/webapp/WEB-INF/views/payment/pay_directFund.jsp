@@ -278,90 +278,141 @@
   <!-- loader -->
    <jsp:include page="../common/loader.jsp"></jsp:include>
   <script>
-		$(document).ready(function() {
-			/* 모든 포인트 쓰기 선택 할 시  */
-			$("#allPoint").change(function(){
-				var mypoint = $("#myPoint").text();
-				var pointlength = mypoint.length-1;
-				mypoint = mypoint.substring(0,pointlength);
-				mypoint = mypoint.split(",");
-				console.log(mypoint);
-			    var mypointt = mypoint.join();
-				console.log(mypointt);
-				if($("#allPoint").is(":checked")){
-					$("#sponPoint").val(mypointt);
-					$("#sponValue").text(mypointt);
-					calValue();
-				}
-				
-			});
-			
-			/* 후원포인트 금액 변경 시 */
-			$("#sponPoint").change(function(){
+  $(document).ready(function() {
+		/* 모든 포인트 쓰기 선택 할 시  */
+		$("#allPoint").change(function(){
+			var mypoint = $("#myPoint").text();
+			var pointlength = mypoint.length-1;
+			mypoint = mypoint.substring(0,pointlength);
+			mypoint = mypoint.split(",");
+			console.log(mypoint);
+		    var mypointt = mypoint.join();
+			console.log(mypointt);
+			if($("#allPoint").is(":checked")){
+				$("#sponPoint").val(mypointt);
+				$("#sponValue").text(mypointt);
 				calValue();
-			});
-			
-			
-		});
-		
-		/* 후원포인트, 잔여포인트 계산 및 표시 */
-		function calValue(){
-			var sPoint = $("#sponPoint").val();
-			var mPoint = $("#myPoint").text();
-			//mPoint = mPoint.substring(0,mPoint.length-1);
-			$("#sponValue").text(sPoint);
-			$("#leftValue").text(mPoint-sPoint + "원");
-		}
-		
-		/* 약관 팝업창 보여주기 */
-		$("#seeTerms").click(function(){
-			alert("약관보여주기 ");
-		});
-		
-		/* 후원하기 버튼 클릭 시  */
-		$("#btnSpon").click(function(){
-			var leftValue = $("#leftValue").text();
-			leftValue = leftValue.substring(0, leftValue.length-1);
-			if(leftValue < 0){
-				alert("포인트가 부족합니다. 충전해주세요. ");
-			}else if(!$("#chkinfo1").is(":checked")){
-				alert("정기결제 약관에 동의해주세요.");
-			}else if(!$("#chkinfo2").is(":checked")){
-				alert("수수료 약관에 동의해주세요.");
-			}else {
-				// IMP.request_pay(param, callback) 호출
-				var name = "${ giveM.mName }";
-				var phone = "${ giveM.mPhone }";
-				var email = "${ giveM.email }";
-				console.log("name : "+ name + "/ phone : "+ phone + "/ email : "+ email);
-				IMP.request_pay({ // param
-				    pg: "html5_inicis",
-				    pay_method: "card", // "card"만 지원됩니다 
-				    merchant_uid: "issue_billingkey_monthly_0001", // 빌링키 발급용 주문번호 'merchant_' + new Date().getTime(),
-				    customer_uid: "gildong_0001_1234", // 카드(빌링키)와 1:1로 대응하는 값
-				    name: "최초인증결제",
-				    amount: 0, // 0 으로 설정하여 빌링키 발급만 진행합니다.
-				    buyer_email: "gildong@gmail.com",
-				    buyer_name: name,
-				    buyer_tel: phone,
-				    buyer_postcode: "01181"
-				}, function (rsp) { // callback
-				    if (rsp.success) {
-				        // 빌링키 발급 성공
-				        jQuery.ajax({
-				            url: "https://www.myservice.com/billings/", // 서비스 웹서버
-				            method: "POST",
-				            headers: { "Content-Type": "application/json" },
-				            data: {
-				                customer_uid: "gildong_0001_1234", // 카드(빌링키)와 1:1로 대응하는 값
-				            }
-				        });
-				    } else {
-				        // 빌링키 발급 실패
-				    }
-				}); 
 			}
+			
 		});
+		
+		/* 후원포인트 금액 변경 시 */
+		$("#sponPoint").change(function(){
+			calValue();
+		});
+		
+		var IMP = window.IMP;
+		IMP.init('imp35475580'); 
+		
+	});
+ 	 var jb = jQuery.noConflict();
+ 	 
+	/* 후원포인트, 잔여포인트 계산 및 표시 */
+	function calValue(){
+		var sPoint = $("#sponPoint").val();
+		var mPoint = $("#myPoint").text();
+		//mPoint = mPoint.substring(0,mPoint.length-1);
+		$("#sponValue").text(sPoint);
+		$("#leftValue").text(mPoint-sPoint + "원");
+	}
+	
+	/* 약관 팝업창 보여주기 */
+	$("#seeTerms").click(function(){
+		alert("약관보여주기 ");
+	});
+	
+	/* billing 고유번호 생성 */
+	function generateUUID() {
+	    var d = new Date().getTime();
+	    if(Date.now){
+	        d = Date.now(); //high-precision timer
+	    }
+	    var uuid = 'xxxxxx'.replace(/[xy]/g, function(c) {
+	        var r = (d + Math.random()*16)%16 | 0;
+	        d = Math.floor(d/16);
+	        return (c=='x' ? r : (r&0x3|0x8)).toString(16);
+	    });
+	    return uuid;
+	};
+	
+	/* 후원하기 버튼 클릭 시  */
+	$("#btnSpon").click(function(){
+		var leftValue = $("#leftValue").text();
+		var randomUid = generateUUID();
+		
+		leftValue = leftValue.substring(0, leftValue.length-1);
+		if(leftValue < 0){
+			alert("포인트가 부족합니다. 충전해주세요. ");
+		}else if(!$("#chkinfo1").is(":checked")){
+			alert("정기결제 약관에 동의해주세요.");
+		}else if(!$("#chkinfo2").is(":checked")){
+			alert("수수료 약관에 동의해주세요.");
+		}else {
+			var mno = "${ giveM.mno }";
+			var name = "${ giveM.mName }";
+			var phone = "${ giveM.mPhone }";
+			var email = "${ giveM.email }";
+			console.log("name : "+ name + "/ phone : "+ phone + "/ email : "+ email);
+			// 빌링키 발급과 동시에 결제를 진행하려면 amount 필드에 금액 파라메터를 전달하여 결제창에 결제될 금액이 표시되도록하고 
+			// 빌링키 발급과 동시에 /subscribe/payments/again API를 호출하여 결제승인처리를 하면 구매자로하여금 혼선이 없습니다.
+			
+			// IMP.request_pay(param, callback) 호출
+			IMP.request_pay({ // param
+			    pg: "html5_inicis",
+			    pay_method: "card", // "card"만 지원됩니다 
+			    merchant_uid: 'merchant_' + new Date().getTime(), // 빌링키 발급용 주문번호
+			    customer_uid: mno + randomUid, // 카드(빌링키)와 1:1로 대응하는 값
+			    name: "최초인증결제",
+			    amount: 0, // 0 으로 설정하여 빌링키 발급만 진행합니다.
+			    buyer_email: email,
+			    buyer_name: name,
+			    buyer_tel: "010-7630-9011"
+			    //buyer_postcode: "01181"
+			}, function (rsp) { // callback
+			    if (rsp.success) {
+			        // 빌링키 발급 성공
+			        console.log("빌링키 발급 성공");
+			        console.log(rsp);
+			        console.log("고유ID : "+ rsp.imp_uid);
+			        console.log("상점 거래ID : "+ rsp.merchant_uid);
+			        console.log("상점 거래ID : "+ rsp.customer_uid);
+			        /* jb.ajax({
+				        url: "https://api.iamport.kr/users/getToken",
+			            method: "post", // POST method
+			            contentType : 'application/json',
+			            headers: { "Content-Type": "application/json" }, // "Content-Type": "application/json"
+			            data: {
+			                imp_key: "none", // REST API키
+			                imp_secret: "none" // REST API Secret
+			            }, success:function(data){
+			            	console.log(data);
+			            	console.log(data.access_token );
+			            	
+			            }, error:function(data){
+							console.log("토큰 값 가져오기 통신실패");
+							console.log(data);
+						}
+			        }); */
+			        
+			        
+			      /*   $.ajax({
+			            url: "directFundGetBilling.pm", // 서비스 웹서버
+			            //method: "POST",
+			            type: "post",
+			            //headers: { "Content-Type": "application/json" },
+			            data: {
+			                customer_uid: mno + randomUid, // 카드(빌링키)와 1:1로 대응하는 값
+			            }
+			        });  */
+			        
+			    } else {
+			        // 빌링키 발급 실패
+			    	console.log("빌링키 발급 실패");
+			    	console.log(rsp);
+			    }
+			}); 
+		}
+	});
 	
 	</script>
   

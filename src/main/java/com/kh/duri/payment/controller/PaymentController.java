@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.duri.member.model.vo.Member;
 import com.kh.duri.payment.model.exception.PaymentException;
@@ -380,7 +382,17 @@ public class PaymentController {
 		model.addAttribute("takeMember", takeMember);
 	    return "payment/pay_directFund";
 	}
-
+	
+	@RequestMapping("directFundGetBilling.pm")
+	public @ResponseBody String directFundGetBilling(@RequestParam String customer_uid, HttpServletRequest request, HttpServletResponse response) {
+		//String customer_uid  = request.getParameter("customer_uid");
+		System.out.println("customer_uid : "+ customer_uid);
+		return null;
+		
+		
+	}
+	
+	
 	// 물품 후원 결제페이지
 	@RequestMapping("fundItem.pm")
 	public String fundItem() {
