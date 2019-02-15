@@ -42,7 +42,7 @@ public class PaymentController {
 		}
 
 		try {
-			int listCount = ps.getPointListCount(m);
+			int listCount = ps.selectPointListCount(m);
 			
 			PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
 			
@@ -87,7 +87,7 @@ public class PaymentController {
 		
 		List<Point> phList;
 		try {
-			int listCount = ps.getSearchPointListCount(m);
+			int listCount = ps.selectSearchPointListCount(m);
 			
 			PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
 			System.out.println("Controller : endPage :"+ pi.getEndPage());
@@ -120,7 +120,7 @@ public class PaymentController {
 		
 		List<DonateReceipt> drList;
 		try {
-			int listCount = ps.getReceiptListCount(m);
+			int listCount = ps.selectReceiptListCount(m);
 			
 			PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
 			
@@ -167,7 +167,7 @@ public class PaymentController {
 		
 		List<DonateReceipt> drList;
 		try {
-			int listCount = ps.getReceiptListCount(m);
+			int listCount = ps.selectSearchReceiptListCount(m);
 			
 			PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
 			
@@ -198,7 +198,7 @@ public class PaymentController {
 		}
 		
 		try {
-			int listCount = ps.getListCount(m);
+			int listCount = ps.selectListCount(m);
 			
 			PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
 			
@@ -239,7 +239,7 @@ public class PaymentController {
 		}
 		System.out.println("m :" + m);
 		String rValue = request.getParameter("returnValue");
-		String rBank = request.getParameter("returnBank");
+		String rBank = request.getParameter("Bank");
 		String[] rAccountArr = request.getParameterValues("returnAccount");
 		String rName = request.getParameter("accountName");
 		String rAccount = "";
@@ -259,6 +259,7 @@ public class PaymentController {
 		r.setrAccount(rAccount);
 		r.setrName(rName);
 		
+		System.out.println("controller : "+ r);
 		try {
 			Member loginUser = ps.insertRefund(r, m);
 			
@@ -288,7 +289,7 @@ public class PaymentController {
 		}
 		
 		try {
-			int listCount = ps.getListCount(m);
+			int listCount = ps.selectListCount(m);
 			
 			PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
 			

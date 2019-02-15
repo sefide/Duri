@@ -102,6 +102,7 @@
 		color : black;
 		font-weight : 600;
 		font-size : 18px;
+	    width: 144px;
 	}
 	tr{
 		height : 85px;
@@ -149,7 +150,7 @@
 		display:flex;
 		flex-wrap : wrap;
 		width : 97%;
-		margin: 245px 1% 1% 1%;
+		margin: 403px 1% 1% 1%;
 	}
 	.d-left{
 		width : 49%;
@@ -183,7 +184,24 @@
 	h1, h2, h3, h4  {
 		color: #333;
 	}
-
+	#checkAccount{
+		display : inline-block;
+		text-decoration : none;
+		font-size : 18px;
+		color : #FE9D35;
+		cursor : pointer;
+	}
+	
+	#checkAccount:hover{
+		text-decoration : underline;
+		color : black;
+		cursor : pointer;
+	}
+	.check{
+		text-decoration : none;
+		font-size : 24px;
+		color : gray;
+	}
 </style>
 </head>
 <body>
@@ -212,8 +230,8 @@
 		 	  			<input type = "hidden" value = "h" name = "memberType">
 		    				<table>
 		    					<tr>
-		    						<th>현재 보유포인트</th>
-		    						<td id = "myPoint">${ sessionScope.loginUser.mPoint }원</td>
+		    						<th>보유포인트</th>
+		    						<td id = "myPoint"> ${ sessionScope.loginUser.mPoint }원</td>
 		    					</tr>
 		    					<tr>
 		    						<th>환급 금액</th>
@@ -235,31 +253,41 @@
 		    					<tr>
 		    						<th>은행</th>
 		    						<td>
-		    							<select name = "returnBank" class="form-control inputTxt" id="returnBankSelect">
+		    							<select class="form-control inputTxt" id="returnBank">
 		    								<option>은행을 선택해주세요 .</option>
-		    								<option value = "농협">농협</option>
-		    								<option value = "국민은행">국민은행</option>
-		    								<option value = "신한은행">신한은행</option>
-		    								<option value = "우리은행">우리은행</option>
-		    								<option value = "기업은행">기업은행</option>
-		    								<option value = "KEB하나은행">KEB하나은행</option>
-		    								<option value = "대구은행">대구은행</option>
-		    								<option value = "부산은행">부산은행</option>
-		    								<option value = "우체국">우체국</option>
+		    								<option value = "004">국민은행</option>
+		    								<option value = "020">우리은행</option>
+		    								<option value = "011">농협</option>
+		    								<option value = "012">지역농협</option>
+		    								<option value = "088">신한은행</option>
+		    								<option value = "003">기업은행</option>
+		    								<option value = "081">KEB하나은행</option>
+		    								<option value = "031">대구은행</option>
+		    								<option value = "032">부산은행</option>
+		    								<option value = "005">외환은행</option>
 		    							</select>
+		    							<input type = "hidden" id = "Bank" name = "Bank" >
 		    						</td>
 		    					</tr>
 		    					<tr>
 		    						<th>계좌번호</th>
-		    						<td id = "td_account">
-		    							<input class="form-control inputAcc" type = "text" name = "returnAccount" id = "returnAccount" maxlength = "3" numberOnly> - 
-		    							<input class="form-control inputAcc" type = "text" name = "returnAccount" id = "returnAccount" maxlength = "3" numberOnly> - 
-		    							<input class="form-control inputAcc" type = "text" name = "returnAccount" id = "returnAccount" maxlength = "6" numberOnly>
+		    						<td id = "td_account"><input class="form-control inputTxt" type = "text" name = "returnAccount" id = "returnAccount">
+		    						<a id = "check">* '-' 를 제외하고 입력해주세요.</a>
 		    						</td>
+		    						
+		    					</tr>
+		    					<tr>
+		    						<th>생년월일</th>
+		    						<td id = "birthDaytxt"><input class="form-control inputTxt" type = "text" name = "birthDay" id = "birthDay">
+		    						<a id = "check">* 주민번호 앞자리만 입력해주세요. "950822"</a>
+		    						</td>
+		    						
 		    					</tr>
 		    					<tr>
 		    						<th>예금주명</th>
-		    						<td><input class="form-control inputTxt" type = "text" name = "accountName" id = "accountName" placeholder = "이름을 입력해주세요."></td>
+		    						<td><input class="form-control inputTxt" type = "text" name = "accountName" id = "accountName" placeholder = "이름을 입력해주세요.">
+		    						<div id = "checkAccount" onclick = "fnSearchAccessToken();">계좌 인증하기</div>
+		    						</td>
 		    					</tr>
 		    				</table>
 		 	  			</form>
@@ -299,6 +327,22 @@
 	<jsp:include page="../common/loader.jsp"></jsp:include>
 	
 	<script>
+	var reqDate = new Date();
+	var year = reqDate.getFullYear() +"";
+	var month = (reqDate.getMonth() + 1) > 10?reqDate.getMonth() + 1 + "":"0" + (reqDate.getMonth() + 1);
+	var date = (reqDate.getDate() > 10?reqDate.getDate() + "":"0" + reqDate.getDate());
+	var hour = reqDate.getHours() > 9?reqDate.getHours() + "":"0" + reqDate.getHours();
+	var min = reqDate.getMinutes() > 10?reqDate.getMinutes() + "":"0" + reqDate.getMinutes();
+	var sec = reqDate.getSeconds() > 10?reqDate.getSeconds() + "":"0" + reqDate.getSeconds();
+	
+	console.log(hour);
+	console.log(min);
+	console.log(sec);
+	var currentTime = year + month + date + hour + min + sec;
+	console.log(currentTime);
+	
+	var checkAcc = 0; // 계좌인증 확인여부 
+	
 	$(document).ready(function() {
 		/* 후원 포인트 입력 시 */
 		$("#returnValue").change(function(){
@@ -336,50 +380,105 @@
 			$("#txtFees").text(mPoint-returnValue);
 		}
 		
-		/* 은행 종류에 따라 계좌번호 형식 바꾸기 */
-		/* td_account */
-		$("#returnBankSelect").change(function(){
-			var bankName = $("#returnBankSelect option:selected").val();
-			var contents = "";
-			if(bankName == "신한은행"){
-				$("#td_account").html("");
-				contents = "<input class='form-control inputAcc' type = 'text' name = 'returnAccount' id = 'returnAccount' maxlength = '3' numberOnly> - <input class='form-control inputAcc' type = 'text' name = 'returnAccount' id = 'returnAccount' maxlength = '3' numberOnly> - <input class='form-control inputAcc' type = 'text' name = 'returnAccount' id = 'returnAccount' maxlength = '6' numberOnly>" ;
-			}else if(bankName == "국민은행"){
-				$("#td_account").html("");
-				contents = "<input class='form-control inputAcc' type = 'text' name = 'returnAccount' id = 'returnAccount' maxlength = '6' numberOnly> - <input class='form-control inputAcc' type = 'text' name = 'returnAccount' id = 'returnAccount' maxlength = '2' numberOnly> - <input class='form-control inputAcc' type = 'text' name = 'returnAccount' id = 'returnAccount' maxlength = '6' numberOnly>" ;
-			}else if(bankName == "농협"){
-				$("#td_account").html("");
-				contents = "<input class='form-control inputAcc' type = 'text' name = 'returnAccount' id = 'returnAccount' maxlength = '4' numberOnly> - <input class='form-control inputAcc' type = 'text' name = 'returnAccount' id = 'returnAccount' maxlength = '2' numberOnly> - <input class='form-control inputAcc' type = 'text' name = 'returnAccount' id = 'returnAccount' maxlength = '6' numberOnly>" ;
-			}else if(bankName == "우리은행"){
-				$("#td_account").text("");
-				contents = "<input class='form-control inputAcc' type = 'text' name = 'returnAccount' id = 'returnAccount' maxlength = '4' numberOnly> - <input class='form-control inputAcc' type = 'text' name = 'returnAccount' id = 'returnAccount' maxlength = '3' numberOnly> - <input class='form-control inputAcc' type = 'text' name = 'returnAccount' id = 'returnAccount' maxlength = '6' numberOnly>" ;
-			}else if(bankName == "기업은행"){
-				$("#td_account").text("");
-				contents = "<input class='form-control inputAcc' type = 'text' name = 'returnAccount' id = 'returnAccount' maxlength = '3' numberOnly> - <input class='form-control inputAcc' type = 'text' name = 'returnAccount' id = 'returnAccount' maxlength = '6' numberOnly> - <input class='form-control inputAcc' type = 'text' name = 'returnAccount' id = 'returnAccount' maxlength = '2' numberOnly> - <input class='form-control inputAcc' type = 'text' name = 'returnAccount' id = 'returnAccount' maxlength = '3' numberOnly>" ;
-			}else if(bankName == "KEB하나은행"){
-				$("#td_account").text("");
-				contents = "<input class='form-control inputAcc' type = 'text' name = 'returnAccount' id = 'returnAccount' maxlength = '3' numberOnly> - <input class='form-control inputAcc' type = 'text' name = 'returnAccount' id = 'returnAccount' maxlength = '6' numberOnly> - <input class='form-control inputAcc' type = 'text' name = 'returnAccount' id = 'returnAccount' maxlength = '5' numberOnly>" ;
-			}else if(bankName == "대구은행"){
-				$("#td_account").text("");
-				contents = "<input class='form-control inputAcc' type = 'text' name = 'returnAccount' id = 'returnAccount' maxlength = '3' numberOnly> - <input class='form-control inputAcc' type = 'text' name = 'returnAccount' id = 'returnAccount' maxlength = '2' numberOnly> - <input class='form-control inputAcc' type = 'text' name = 'returnAccount' id = 'returnAccount' maxlength = '6' numberOnly> - <input class='form-control inputAcc' type = 'text' name = 'returnAccount' id = 'returnAccount' maxlength = '1' numberOnly>" ;
-			}else if(bankName == "부산은행"){
-				$("#td_account").text("");
-				contents = "<input class='form-control inputAcc' type = 'text' name = 'returnAccount' id = 'returnAccount' maxlength = '3' numberOnly> - <input class='form-control inputAcc' type = 'text' name = 'returnAccount' id = 'returnAccount' maxlength = '4' numberOnly> - <input class='form-control inputAcc' type = 'text' name = 'returnAccount' id = 'returnAccount' maxlength = '4' numberOnly> - <input class='form-control inputAcc' type = 'text' name = 'returnAccount' id = 'returnAccount' maxlength = '2' numberOnly>" ;
-			}else if(bankName == "우체국"){
-				$("#td_account").text("");
-				contents = "<input class='form-control inputAcc' type = 'text' name = 'returnAccount' id = 'returnAccount' maxlength = '6' numberOnly> - <input class='form-control inputAcc' type = 'text' name = 'returnAccount' id = 'returnAccount' maxlength = '2' numberOnly> - <input class='form-control inputAcc' type = 'text' name = 'returnAccount' id = 'returnAccount' maxlength = '6' numberOnly>" ;
-			}
-			$("#td_account").html(contents);
-
-			
-		});
-		
 		$("input:text[numberOnly]").on("keyup", function() {
 		    $(this).val($(this).val().replace(/[^0-9]/g,""));
 		});
 		
 	});
 	
+	var tokenStr = "";
+	var user_seq_no;
+	function fnSearchAccessToken() {
+		//$("#bank_code_std").val($("#bankcode").val());
+		//$("#account_num").val($("#accnum").val());
+		var client_id = "l7xx5a2b2c2836b54004ba419824d3a84b3f";
+		var client_secret = "39ed8dfb10d145a189376c95addd2986";
+		var grant_type = "client_credentials";
+		var scope = "oob";
+		$.ajax({
+			url : "https://testapi.open-platform.or.kr/oauth/2.0/token",
+			type : "POST",
+			//cache: false,
+			contenType : "application/json",
+			data : {
+				"client_id" : client_id,
+				"client_secret" : client_secret,
+				"grant_type" : grant_type,
+				"scope" : scope
+			},
+			dataType : "json",
+			success : function(data, data2, data3) {
+				console.log("토큰 발급 성공 ");
+				console.log(data);
+				console.log(data2);
+				console.log(data3);
+				var list = JSON.parse(data3.responseText);
+				tokenStr = list.access_token;
+				//user_seq_no = list.user_seq_no;
+				//console.log("tokenStr : "+ tokenStr);
+				//console.log("user_seq_no : "+ user_seq_no);
+				fnSearchRealName();
+			},
+			error : function(data, data2, data3) {
+				alert('error!!!');
+			}
+		});
+	}
+	/* 계좌실명조회API */
+	function fnSearchRealName() {
+		//var account_holder_name = ${ loginUser2.mName};
+		var bank_code_std = $("#returnBank").val();
+		var bank_Name = $("#returnBank option:selected").text();
+		var account_num = $("#returnAccount").val();
+		var account_holder_info = $("#birthDay").val();
+		var tran_dtime = currentTime;
+		var access_token = "Bearer " + tokenStr;
+		var resData = {
+			"bank_code_std" : bank_code_std,
+			"account_num" : account_num,
+			"account_holder_info" : account_holder_info,
+			//"account_holder_name" : account_holder_name,
+			"tran_dtime" : tran_dtime
+		};
+		console.log("returnBank : "+ bank_code_std);
+		console.log("account_num : "+ account_num);
+		console.log("account_holder_info : "+ account_holder_info);
+		console.log("tran_dtime : "+ tran_dtime);
+		console.log("access_token : "+ access_token);
+		console.log("bank_Name : "+ bank_Name);
+		$.ajax({
+			url : "https://testapi.open-platform.or.kr/v1.0/inquiry/real_name",
+			beforeSend : function(request) {
+				request.setRequestHeader("Authorization",
+						access_token);
+			},
+			type : "POST",
+			data : JSON.stringify(resData),
+			dataType : "json",
+			success : function(data, data2, data3) { 
+				console.log("서버 통신 성공");
+				console.log(data)
+				console.log($("#accountName").val());
+				if (data.account_holder_name == $("#accountName").val()) {
+					alert('인증 성공!!!');
+					$("#checkAccount").hide();
+					$("#accountName").attr("readonly","readonly");
+					$("#returnAccount").attr("readonly","readonly");
+					$("#returnBank").not(":selected").attr("disabled", "disabled");
+					checkAcc = 1;
+					$("#Bank").val(bank_Name);
+
+				} else {
+					alert('인증 실패');
+				}
+			},
+			error : function(data, data2, data3) {
+				alert('error!!!');
+			}
+		});
+	}
+	
+	/* 환급받기 버튼 */
 	$("#back-btn").click(function(){
 		/* 유효성 검사 */
 		var numberTest = /[^0-9]/g; /* 숫자로만 이뤄지기 */
@@ -400,24 +499,6 @@
 		
 		
 	});
-	
-	
-	/* $("input:text[numberOnly]").on("focus", function() {
-	    var x = $(this).val();
-	    x = removeCommas(x);
-	    $(this).val(x);
-	}).on("focusout", function() {
-	    var x = $(this).val();
-	    if(x && x.length > 0) {
-	        if(!$.isNumeric(x)) {
-	            x = x.replace(/[^0-9]/g,"");
-	        }
-	        x = addCommas(x);
-	        $(this).val(x);
-	    }
-	})
- */
-
 	</script>
 </body>
 </html>

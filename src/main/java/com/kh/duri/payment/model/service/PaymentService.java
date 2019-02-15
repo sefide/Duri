@@ -16,8 +16,8 @@ import com.kh.duri.payment.model.vo.Refund;
 public interface PaymentService {
 
 	// 나눔두리 - 포인트 히스토리 갯수 세기
-	int getPointListCount(Member m) throws PointHistoryException;
-	int getSearchPointListCount(Member m) throws PointHistoryException;
+	int selectPointListCount(Member m) throws PointHistoryException;
+	int selectSearchPointListCount(Member m) throws PointHistoryException;
 	
 	// 나눔두리 - 포인트 히스토리 가져오기 
 	List<Point> selectPointHistory(Member m, PageInfo pi) throws PointHistoryException;
@@ -26,8 +26,8 @@ public interface PaymentService {
 	List<Point> searchPointHistory(Member m, PageInfo pi) throws PointHistoryException;
 
 	// 나눔두리 - 기부금영수증 발급내역 갯수 세기
-	int getReceiptListCount(Member m) throws ReceiptException;
-	int getSearchReceiptListCount(Member m) throws ReceiptException;
+	int selectReceiptListCount(Member m) throws ReceiptException;
+	int selectSearchReceiptListCount(Member m) throws ReceiptException;
 	
 	// 나눔두리 - 기부금영수증 발급내역 보기
 	List<DonateReceipt> selectDonateReceiptHistory(Member m, PageInfo pi) throws ReceiptException;
@@ -36,7 +36,7 @@ public interface PaymentService {
 	List<DonateReceipt> searchDonateReceipt(Member m, PageInfo pi) throws ReceiptException;
 
 	// 나눔,행복두리 - 환급목록 갯수 세기
-	int getListCount(Member m) throws RefundException;
+	int selectListCount(Member m) throws RefundException;
 	
 	// 나눔,행복두리 - 환급목록 가져오기 
 	List<Refund> selectRefundList(Member m, PageInfo pi) throws RefundException;
