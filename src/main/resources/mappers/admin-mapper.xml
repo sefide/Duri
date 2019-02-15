@@ -27,17 +27,12 @@
 		<result property="mGoalNum" column="MGOALNUM"/>
 		<result property="mStatus" column="MSTATUS"/>
 		<result property="mTakeStatus" column="MTAKESTATUS"/>
-		<result property="pValue" column="PVALUE"/>
-		<result property="p_mNo" column="P_MNO"/>
-		<result property="atype" column="ATYPE"/>
-		<result property="a_mno" column="A_MNO"/>
-		<result property="adate" column="ADATE"/>
+		
 		
 	</resultMap>
 	
 	<resultMap type="com.kh.duri.admin.model.vo.Donatelist" id="donateResultSet">
 		<id property="drNo" column="DRNO"></id>
-		<result property="drRegistNum" column="DRREGISTNUM"/>
 		<result property="drApplyDate" column="DRAPPLYDATE"/>
 		<result property="drDonateDate" column="DRDONATEDATE"/>
 		<result property="drValue" column="DRVALUE"/>
@@ -49,13 +44,15 @@
 	
 	
 	
+	
+	
 	<!-- 나눔두리 전체목록 조회 -->
 	<select id="adminNanumList" resultMap="adminMemberResultSet" parameterType="adminMember" >
 		SELECT MNO,MID,MNAME,MNICK,MGENDER,MEMAIL,MGOALNUM FROM MEMBER WHERE MTYPE='N' AND MSTATUS='Y' ORDER BY MENROLLDATE 
 	</select>
 	<!-- 나눔두리 기부영수증 목록 조회 -->
 	<select id="adminDonateList" resultMap="donateResultSet" parameterType="Donatelist" >
-		SELECT M.MID,M.MNAME,D.DRREGISTNUM,M.MPHONE,D.DRAPPLYDATE,D.DRVALUE,D.DRDONATEDATE FROM MEMBER M JOIN DONATERECEIPT D ON (M.MNO=D.DR_MNO) ORDER BY D.DRAPPLYDATE 
+		SELECT M.MID,M.MNAME,M.MPHONE,D.DRAPPLYDATE,D.DRVALUE,D.DRDONATEDATE FROM MEMBER M JOIN DONATERECEIPT D ON (M.MNO=D.DR_MNO) ORDER BY D.DRAPPLYDATE 
 	</select>
 	<!-- 행복두리 전체목록 조회 -->
 	<select id="adminHappyList" resultMap="adminMemberResultSet" parameterType="adminMember" >
@@ -70,9 +67,11 @@
 	<select id="adminHappyDetail" resultType="adminMember" parameterType="adminMember" >
 		SELECT M.MNO,M.MNICK,M.MPR,M.MPRNEW,M.MBIRTHDAY,M.MNAME,M.MID,M.MGENDER,M.MPHONE,M.MEMAIL,M.MADDRESS,M.MFUNDTYPE,M.MACCEPTDATE,A.ADATE,M.MPRACCEPTDATE FROM MEMBER M JOIN ATTACHMENT A ON (A.A_MNO=M.MNO) AND A.ATYPE='R' WHERE M.MNO=#{mno}
 	</select>
-	
-
-	
+	<!-- 환급 신청 목록 조회 -->
+	<!-- <select id="adminRefundList" resultType="RefundList" parameterType="RefundList">
+		SELECT M.MID,M.MNAME,R.RNAME,R.RDATE,R.RACCOUNT,R.RBANK,R.RVALUE,R.RSTATUS FROM MEMBER M JOIN REFUND R ON (M.MNO=R.R_MNO) WHERE R.RSTATUS=='N' ORDER BY R.RDATE
+	</select>
+	 -->
 	
 	
 	

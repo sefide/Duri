@@ -5,7 +5,6 @@ import java.sql.Date;
 public class Donatelist {
 
 	private int drNo;
-	private String drRegistNum;
 	private Date drApplyDate;
 	private Date drDonateDate;
 	private long drValue;
@@ -19,16 +18,15 @@ public class Donatelist {
 
 	@Override
 	public String toString() {
-		return "Donatelist [drNo=" + drNo + ", drRegistNum=" + drRegistNum + ", drApplyDate=" + drApplyDate
+		return "Donatelist [drNo=" + drNo + ", drRegistNum=" + ", drApplyDate=" + drApplyDate
 				+ ", drDonateDate=" + drDonateDate + ", drValue=" + drValue + ", dr_mNo=" + dr_mNo + ", dr_mid="
 				+ dr_mid + ", dr_mPhone=" + dr_mPhone + "]";
 	}
 
-	public Donatelist(int drNo, String drRegistNum, Date drApplyDate, Date drDonateDate, long drValue, String dr_mNo,
+	public Donatelist(int drNo, Date drApplyDate, Date drDonateDate, long drValue, String dr_mNo,
 			String dr_mid, String dr_mPhone) {
 		super();
 		this.drNo = drNo;
-		this.drRegistNum = drRegistNum;
 		this.drApplyDate = drApplyDate;
 		this.drDonateDate = drDonateDate;
 		this.drValue = drValue;
@@ -45,13 +43,6 @@ public class Donatelist {
 		this.drNo = drNo;
 	}
 
-	public String getDrRegistNum() {
-		return drRegistNum;
-	}
-
-	public void setDrRegistNum(String drRegistNum) {
-		this.drRegistNum = drRegistNum;
-	}
 
 	public Date getDrApplyDate() {
 		return drApplyDate;

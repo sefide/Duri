@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.kh.duri.admin.model.exception.ListException;
 import com.kh.duri.admin.model.service.adminHappyService;
+import com.kh.duri.admin.model.vo.RefundList;
 import com.kh.duri.admin.model.vo.adminMember;
 
 
@@ -33,12 +34,15 @@ public class AdminHappyController {
 		return "admin/QnADetail";
 	}
 	@RequestMapping("adminHappyAcc.ad")
-	public String admin10() {
+	public String adminHappyAccList() {
 		return "admin/adminHappyAcc";
 	}
+	//행복두리 환급 목록
 	@RequestMapping("adminRefund.ad")
-	public String admin19() {
+	public String adminRefundList() {
+		
 		return "admin/adminRefund";
+		
 	}
 	//행복두리 전체 목록
 	@RequestMapping("adminHappyAll.ad")
