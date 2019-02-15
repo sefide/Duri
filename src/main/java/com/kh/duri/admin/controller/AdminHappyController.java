@@ -26,7 +26,7 @@ public class AdminHappyController {
 
 
 	@RequestMapping("QnA.ad")
-	public String admin2() {
+	public String admin2() {  
 		return "admin/QnA";
 	}
 	@RequestMapping("QnADetail.ad")
