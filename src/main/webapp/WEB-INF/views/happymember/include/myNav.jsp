@@ -205,12 +205,7 @@ p {font-size: 20px; text-align: center;}
                                                        
 		<h1 align="center"><&nbsp;보유 물품 현황&nbsp;></h1>
 		<br><br>
-		<c:if test = "${ !empty loginUser.mAddress }">
-			<c:out value = "${ loginUser.mAddress }"/>
-		</c:if>
-		<c:if test = "${ empty loginUser.mAddress }">
-			<c:out value = "주소가 비어있엉 "/>
-		</c:if>
+		
 		<div id="itemsList" style="height: 550px;">
 			<!-- 왼쪽 세로 물품 -->
 			<form action="getDelivery.happy" id ="getDeliveryForm">
@@ -355,7 +350,7 @@ p {font-size: 20px; text-align: center;}
 									
 								}
 							}
-							if(data.ownlist[o].ovalue == 0){
+							if(data.ownlist[o].ovalue <= 0){
 								$itemsSelect.empty();
 								$itemsSelect.append($("<option>").text(0));
 							} 

@@ -18,6 +18,8 @@ import com.kh.duri.happymember.model.vo.Delivery;
 import com.kh.duri.happymember.model.vo.FundItemList;
 import com.kh.duri.happymember.model.vo.MyDonateItems;
 import com.kh.duri.member.model.vo.Member;
+import com.kh.duri.payment.model.vo.PageInfo;
+import com.kh.duri.payment.model.vo.Pagination;
 
 @Controller
 public class HappymemberController {
@@ -88,7 +90,7 @@ public class HappymemberController {
 			
 			if(result == 1) {
 				System.out.println("물품 목록 추가 성공!");
-				return "happymember/deliveryStatus";
+				return "redirect:deliveryOriginal.happy";
 			}
 			
 			
@@ -97,7 +99,7 @@ public class HappymemberController {
 			request.setAttribute("msg", e.getMessage());
 			return "common/errorPage";
 		}
-		return "happymember/deliveryStatus";
+		return "redirect:deliveryOriginal.happy";
 	}
 	
 	//배송현황 목록 개수 조회
@@ -123,13 +125,43 @@ public class HappymemberController {
 			
 		} catch (MypageException e) {
 			request.setAttribute("msg", e.getMessage());
-			return "happymember/deliveryStatus";
+			return "common/errorPage";
 		}
 		return "happymember/deliveryStatus";
 	}
 	
+	//정기후원 목록 조회하기
+	@RequestMapping("longDonate.happy")
+	public String selectLongDonate(HttpServletRequest request, HttpServletResponse response) {
+		Member m = (Member)request.getSession().getAttribute("loginUser");
+		int currentPage = 1;
+		
+		if(request.getParameter("currentPage") != null) {
+			currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		}
+		
+		try {
+			int listCount = hs.selectLongDonateCount(m);
+			
+			
+			
+			
+			
+			
+		} catch (MypageException e) {
+			e.printStackTrace();
+		}
+		
+		return "happymember/longDonate";
+	}
 	
 	
+	
+	//새로고침했을 때 insert다시 안되게 !
+	@RequestMapping("deliveryOriginal.happy")
+	public String deliveryOriginal() {
+		return "happymember/deliveryStatus";
+	}
 	
 	
 	
@@ -140,10 +172,6 @@ public class HappymemberController {
 		return "happymember/mypage";
 	}
 	
-	@RequestMapping("longDonate.happy")
-	public String happy2() {
-		return "happymember/longDonate";
-	}
 	
 	@RequestMapping("deliveryStatus.happy")
 	public String happy3() {

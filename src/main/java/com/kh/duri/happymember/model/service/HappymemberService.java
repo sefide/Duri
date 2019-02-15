@@ -29,6 +29,9 @@ public interface HappymemberService {
 	//배송현황 목록 개수 조회
 	int selectDeliveryListCount(Delivery d) throws MypageException;
 
+	//정기후원 목록 조회하기 개수 세기
+	int selectLongDonateCount(Member m) throws MypageException;
+
 
 	
 

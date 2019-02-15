@@ -44,7 +44,7 @@
 		<result property="iprice" column="IPRICE"/>
 	</resultMap>
 	
-	<resultMap type="com.kh.duri.happymember.model.vo.Delivery" id="DeliveryResultSet">
+	<resultMap type="com.kh.duri.happymember.model.vo.Delivery" id="deliveryResultSet">
 		<id property="dno" column="DNO"></id>
 		<result property="daddress" column="DADDRESS"/>
 		<result property="ddate" column="DDATE"/>
@@ -52,6 +52,16 @@
 		<result property="d_mno" column="D_MNO"/>
 	</resultMap>
 
+	<resultMap type="com.kh.duri.Nanummember.model.vo.DirectFundHistory" id="directFundHistoryResultSet">
+		<id property="dhno" column="DHNO"></id>
+		<result property="dhvalue" column="DHVALUE"/>
+		<result property="dhstartdate" column="DHSTARTDATE"/>
+		<result property="dhstatus" column="DHSTATUS"/>
+		<result property="dh_mno_take" column="DH_MNO_TAKE"/>
+		<result property="dh_mno_give" column="DH_MNO_GIVE"/>
+	</resultMap>
+	
+	
 	<!-- 보유물품 리스트 조회-->
 	<select id="selectDonateItemList" resultMap="donateItemsResultSet" parameterType="_int">
 		SELECT * 
@@ -75,6 +85,19 @@
 	<insert id="insertDeliveryDetailList">
 		INSERT INTO DELIVERYDETAIL VALUES (SEQ_DD_NO.NEXTVAL, #{ddvalue}, SEQ_D_NO.CURRVAL, #{dd_ino})
 	</insert>
+	<!-- 배송목록 개수 조회 -->
+	<select id="selectDeliveryListCount" resultMap="deliveryResultSet" parameterType="_int">
+		SELECT COUNT(*) 
+		FROM DELIVERY 
+		WHERE D_MNO = #{d_mno}
+	</select>
+	<!-- 정기후원 목록 개수 조회 -->
+	<select id="selectLongDonateCount" resultMap="directFundHistoryResultSet" parameterType="_int">
+		SELECT COUNT(*) 
+		FROM DIRECTFUNDHISTORY 
+		WHERE DH_MNO_TAKE = #{mno} 
+		AND DHSTATUS = 'Y'
+	</select>
 </mapper>
 
 
