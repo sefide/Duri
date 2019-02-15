@@ -1,12 +1,15 @@
 package com.kh.duri.happymember.model.service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import com.kh.duri.happymember.model.exception.MypageException;
 import com.kh.duri.happymember.model.vo.Delivery;
+import com.kh.duri.happymember.model.vo.DeliveryDetail;
 import com.kh.duri.happymember.model.vo.FundItemList;
 import com.kh.duri.happymember.model.vo.MyDonateItems;
 import com.kh.duri.member.model.vo.Member;
+import com.kh.duri.payment.model.vo.PageInfo;
 
 public interface HappymemberService {
 
@@ -27,10 +30,15 @@ public interface HappymemberService {
 	int insertDeliveryDetail(String[] itemNumArray, String[] itemAmountArray) throws MypageException;*/
 
 	//배송현황 목록 개수 조회
-	int selectDeliveryListCount(Delivery d) throws MypageException;
+	int selectDeliveryListCount(Member m) throws MypageException;
 
-	//정기후원 목록 조회하기 개수 세기
+	//정기후원 목록 개수 조회
 	int selectLongDonateCount(Member m) throws MypageException;
+
+	/*//배송현황 목록 가져오기
+	List<DeliveryDetail> selectDeliveryList(Member m, PageInfo pi) throws MypageException;*/
+
+
 
 
 	
