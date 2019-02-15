@@ -24,19 +24,20 @@ public class AdminNanumController {
 
 	//나눔두리 전체목록 + 기부영수증 목록
 	@RequestMapping("adminNanum.ad")
-	public String adminNanumList(Model model,Model model2) {
+	public String adminNanumList(Model model1,Model model2) {
 	
 		try {
 		List<adminMember>Nanumlist = ans.adminNanumList();
 		List<Donatelist>Donatelist = ans.adminDonatelist();
 		
-		model.addAttribute("Nanumlist", Nanumlist);
+		model1.addAttribute("Nanumlist", Nanumlist);
 		model2.addAttribute("Donatelist", Donatelist);
 		
 		return "admin/adminNanum";
 		
 		}catch(ListException e) {
-			model.addAttribute("msg", e.getMessage());
+			model1.addAttribute("msg", e.getMessage());
+			model2.addAttribute("msg", e.getMessage());
 			
 			return "admin/adminNanum";
 		}
