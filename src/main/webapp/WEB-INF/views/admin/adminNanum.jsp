@@ -104,7 +104,6 @@
                                             <th>No</th>
                                             <th>ID</th>
                                             <th>이름</th>
-                                            <th>생년월일</th>
                                             <th>휴대전화</th>
                                             <th>신청일자</th>
                                             <th>기부금액</th>
@@ -117,16 +116,6 @@
                                             <td class="center">${status.count}</td>
                                             <td class="center">${row.dr_mid}</td>
                                             <td class="center">${row.dr_mNo}</td>
-                                           
-                                           <c:choose>
-                                            <c:when test="${row.drRegistNum !=null}">
-	                                           <td class="center">
-	                                           		<c:out value="${fn:substring(row.drRegistNum,0,6)}"/>-
-	                                           		<c:out value="${fn:substring(row.drRegistNum,6,7)}"/>******
-	                                           	</td>
-                                           </c:when>
-                                           </c:choose>
-                                           
                                             <td class="center">${row.dr_mPhone}</td>
                                             <td class="center">${row.drApplyDate}</td>
                                             <td class="center">${row.drValue}원</td>

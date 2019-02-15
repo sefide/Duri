@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.duri.admin.model.exception.ListException;
+import com.kh.duri.admin.model.vo.RefundList;
 import com.kh.duri.admin.model.vo.adminMember;
 
 @Repository
@@ -24,5 +25,7 @@ public class adminHappyDaoImpl implements adminHappyDao{
 		
 		return sqlsession.selectOne("Admin.adminHappyDetail",m);
 	}
+	//행복두리 환급목록
+	
 
 }
