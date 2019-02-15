@@ -14,12 +14,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.duri.happymember.model.exception.MypageException;
 import com.kh.duri.happymember.model.service.HappymemberService;
-import com.kh.duri.happymember.model.vo.Delivery;
+import com.kh.duri.happymember.model.vo.DeliveryDetail;
 import com.kh.duri.happymember.model.vo.FundItemList;
 import com.kh.duri.happymember.model.vo.MyDonateItems;
 import com.kh.duri.member.model.vo.Member;
-import com.kh.duri.payment.model.vo.PageInfo;
-import com.kh.duri.payment.model.vo.Pagination;
 
 @Controller
 public class HappymemberController {
@@ -102,14 +100,12 @@ public class HappymemberController {
 		return "redirect:deliveryOriginal.happy";
 	}
 	
-	//배송현황 목록 개수 조회
+	//배송현황 목록 페이징
 	@RequestMapping("selectDeliveryList.happy")
 	public String happyDeliveryList(HttpServletRequest request, HttpServletResponse response) {
 		Member m = (Member)request.getSession().getAttribute("loginUser");
-		int mno = m.getMno();
-		
-		Delivery d = new Delivery();
-		d.setD_mno(mno);
+		String item = request.getParameter("item");
+		String itemAmount = request.getParameter("itemAmount");
 		
 		int currentPage = 1;
 		
@@ -118,9 +114,11 @@ public class HappymemberController {
 		}
 		
 		try {
-			int listCount = hs.selectDeliveryListCount(d);
+			int listCount = hs.selectDeliveryListCount(m);
 			
+			/*PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
 			
+			List<DeliveryDetail> ddList = hs.selectDeliveryList(m, pi);*/
 			
 			
 		} catch (MypageException e) {
@@ -160,7 +158,7 @@ public class HappymemberController {
 	//새로고침했을 때 insert다시 안되게 !
 	@RequestMapping("deliveryOriginal.happy")
 	public String deliveryOriginal() {
-		return "happymember/deliveryStatus";
+		return "redirect:selectDeliveryList.happy";
 	}
 	
 	

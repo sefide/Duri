@@ -51,6 +51,15 @@
 		<result property="dlink" column="DLINK"/>
 		<result property="d_mno" column="D_MNO"/>
 	</resultMap>
+	
+	<resultMap type="com.kh.duri.happymember.model.vo.DeliveryDetail" id="deliveryDetailResultSet">
+		<id property="ddno" column="DDNO"></id>
+		<result property="ddvalue" column="DDVALUE"/>
+		<result property="dd_dno" column="DD_DNO"/>
+		<result property="dd_ino" column="DD_INO"/>
+		<result property="dd_name" column="DD_NAME"/>
+	</resultMap>
+
 
 	<resultMap type="com.kh.duri.Nanummember.model.vo.DirectFundHistory" id="directFundHistoryResultSet">
 		<id property="dhno" column="DHNO"></id>
@@ -86,18 +95,29 @@
 		INSERT INTO DELIVERYDETAIL VALUES (SEQ_DD_NO.NEXTVAL, #{ddvalue}, SEQ_D_NO.CURRVAL, #{dd_ino})
 	</insert>
 	<!-- 배송목록 개수 조회 -->
-	<select id="selectDeliveryListCount" resultMap="deliveryResultSet" parameterType="_int">
+	<select id="selectDeliveryListCount" resultType="_int">
 		SELECT COUNT(*) 
 		FROM DELIVERY 
-		WHERE D_MNO = #{d_mno}
+		WHERE D_MNO = #{mno}
 	</select>
 	<!-- 정기후원 목록 개수 조회 -->
-	<select id="selectLongDonateCount" resultMap="directFundHistoryResultSet" parameterType="_int">
+	<select id="selectLongDonateCount" resultType="_int">
 		SELECT COUNT(*) 
 		FROM DIRECTFUNDHISTORY 
 		WHERE DH_MNO_TAKE = #{mno} 
 		AND DHSTATUS = 'Y'
 	</select>
+	<!-- <select id="selectDeliveryList">
+		
+		SELECT
+		(SELECT INAME AS DD_NAME
+		 FROM FUNDITEM FI, DELIVERYDETAIL DD, DELIVERY D
+		 WHERE FI.INO = DD.DD_INO AND DD.DD_DNO = D.DNO AND D.D_MNO = #{mno})
+		 , DDVALUE
+		 FROM DELIVERYDETAIL DD, DELIVERY D
+		 WHERE D.DNO = DD.DD_DNO
+		 AND D.D_MNO=#{mno}
+	</select> -->
 </mapper>
 
 

@@ -5,15 +5,17 @@ public class DeliveryDetail {
 	int ddvalue;
 	int dd_dno;
 	int dd_ino;
+	String dd_name;
 	
 	public DeliveryDetail() {}
 
-	public DeliveryDetail(int ddno, int ddvalue, int dd_dno, int dd_ino) {
+	public DeliveryDetail(int ddno, int ddvalue, int dd_dno, int dd_ino, String dd_name) {
 		super();
 		this.ddno = ddno;
 		this.ddvalue = ddvalue;
 		this.dd_dno = dd_dno;
 		this.dd_ino = dd_ino;
+		this.dd_name = dd_name;
 	}
 
 	public int getDdno() {
@@ -47,12 +49,22 @@ public class DeliveryDetail {
 	public void setDd_ino(int dd_ino) {
 		this.dd_ino = dd_ino;
 	}
+	
+	public String getDd_name() {
+		return dd_name;
+	}
+
+	public void setDd_name(String dd_name) {
+		this.dd_name = dd_name;
+	}
 
 	@Override
 	public String toString() {
 		return "DeliveryDetail [ddno=" + ddno + ", ddvalue=" + ddvalue + ", dd_dno=" + dd_dno + ", dd_ino=" + dd_ino
-				+ "]";
+				+ ", dd_name=" + dd_name + "]";
 	}
+
+	
 	
 	
 

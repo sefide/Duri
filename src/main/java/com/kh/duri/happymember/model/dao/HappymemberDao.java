@@ -1,14 +1,17 @@
 package com.kh.duri.happymember.model.dao;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
 
 import com.kh.duri.happymember.model.exception.MypageException;
 import com.kh.duri.happymember.model.vo.Delivery;
+import com.kh.duri.happymember.model.vo.DeliveryDetail;
 import com.kh.duri.happymember.model.vo.FundItemList;
 import com.kh.duri.happymember.model.vo.MyDonateItems;
 import com.kh.duri.member.model.vo.Member;
+import com.kh.duri.payment.model.vo.PageInfo;
 
 public interface HappymemberDao {
 
@@ -29,12 +32,15 @@ public interface HappymemberDao {
 	int insertDeliveryDetail(SqlSessionTemplate sqlSession, String[] itemNumArray, String[] itemAmountArray) throws MypageException;
 
 	//배송현황 목록 개수 조회
-	int selectDeliveryListCount(SqlSessionTemplate sqlSession, Delivery d) throws MypageException;
+	int selectDeliveryListCount(SqlSessionTemplate sqlSession, Member m) throws MypageException;
 
-	//정기후원 목록 조회하기 개수 조회
+	//정기후원 목록 개수 조회
 	int selectLongDonateCount(SqlSessionTemplate sqlSession, Member m) throws MypageException;
 
-	
+	/*//배송현황 목록 가져오기
+	List<DeliveryDetail> selectDeliveryList(SqlSessionTemplate sqlSession, Member m, PageInfo pi) throws MypageException;
+
+	*/
 
 	
 	

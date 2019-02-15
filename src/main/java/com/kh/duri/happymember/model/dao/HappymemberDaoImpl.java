@@ -1,7 +1,9 @@
 package com.kh.duri.happymember.model.dao;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -11,6 +13,7 @@ import com.kh.duri.happymember.model.vo.DeliveryDetail;
 import com.kh.duri.happymember.model.vo.FundItemList;
 import com.kh.duri.happymember.model.vo.MyDonateItems;
 import com.kh.duri.member.model.vo.Member;
+import com.kh.duri.payment.model.vo.PageInfo;
 
 @Repository
 public class HappymemberDaoImpl implements HappymemberDao{
@@ -111,11 +114,10 @@ public class HappymemberDaoImpl implements HappymemberDao{
 
 	//배송현황 목록 개수 조회
 	@Override
-	public int selectDeliveryListCount(SqlSessionTemplate sqlSession, Delivery d) throws MypageException {
+	public int selectDeliveryListCount(SqlSessionTemplate sqlSession, Member m) throws MypageException {
 	
-		System.out.println("회원번호 : " + d.getD_mno());
-		int dmno = d.getD_mno();
-		int listCount = sqlSession.selectOne("HappyMember.selectDeliveryListCount", dmno);
+		System.out.println("회원번호 : " + m.getMno());
+		int listCount = sqlSession.selectOne("HappyMember.selectDeliveryListCount", m);
 		
 		System.out.println("물품 배송 현황 수 : " + listCount);
 		
@@ -132,7 +134,7 @@ public class HappymemberDaoImpl implements HappymemberDao{
 	public int selectLongDonateCount(SqlSessionTemplate sqlSession, Member m) throws MypageException {
 		int listCount = sqlSession.selectOne("HappyMember.selectLongDonateCount", m);
 		
-		System.out.println(m.getMno());
+		System.out.println("회원번호 : " + m.getMno());
 		System.out.println("정기후원 목록 개수 : " + listCount);
 		if(listCount < 0) {
 			throw new MypageException("정기후원 목록 개수 조회 실패");
@@ -140,4 +142,20 @@ public class HappymemberDaoImpl implements HappymemberDao{
 		
 		return listCount;
 	}
+
+	/*//배송현황 목록 가져오기
+	@Override
+	public List<DeliveryDetail> selectDeliveryList(SqlSessionTemplate sqlSession, Member m, PageInfo pi)
+			throws MypageException {
+		int offset = (pi.getCurrentPage()-1)*pi.getLimit();//Limit : 한 페이지에 보여줄 게시글 수
+		RowBounds rowBounds = new RowBounds(offset, pi.getLimit());
+		
+		
+		List<DeliveryDetail> ddList = sqlSession.selectList("HappyMember.selectDeliveryList", m, rowBounds);
+		
+		if(ddList == null) {
+			throw new MypageException("배송 현황 목록 조회 실패");
+		}
+		return ddList;
+	}*/
 }

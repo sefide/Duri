@@ -1,18 +1,19 @@
 package com.kh.duri.happymember.model.service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import com.kh.duri.happymember.model.dao.HappymemberDao;
 import com.kh.duri.happymember.model.exception.MypageException;
-import com.kh.duri.happymember.model.vo.Delivery;
+import com.kh.duri.happymember.model.vo.DeliveryDetail;
 import com.kh.duri.happymember.model.vo.FundItemList;
 import com.kh.duri.happymember.model.vo.MyDonateItems;
 import com.kh.duri.member.model.vo.Member;
+import com.kh.duri.payment.model.vo.PageInfo;
 
 @Service
 public class HappymemberServiceImpl implements HappymemberService {
@@ -66,20 +67,28 @@ public class HappymemberServiceImpl implements HappymemberService {
 
 	//배송현황 목록 개수 조회
 	@Override
-	public int selectDeliveryListCount(Delivery d) throws MypageException {
-		int listCount = hd.selectDeliveryListCount(sqlSession, d);
+	public int selectDeliveryListCount(Member m) throws MypageException {
+		int listCount = hd.selectDeliveryListCount(sqlSession, m);
 		
 		
 		return listCount;
 	}
 
-	//정기후원 목록 조회하기 개수 조회
+	//정기후원 목록 개수 조회
 	@Override
 	public int selectLongDonateCount(Member m) throws MypageException {
 		int listCount = hd.selectLongDonateCount(sqlSession, m);
 		
 		return listCount;
 	}
+/*
+	//배송현황 목록 가져오기
+	@Override
+	public List<DeliveryDetail> selectDeliveryList(Member m, PageInfo pi) throws MypageException {
+		List<DeliveryDetail> ddList = hd.selectDeliveryList(sqlSession, m, pi);
+		
+		return ddList;
+	}*/
 
 
 	
