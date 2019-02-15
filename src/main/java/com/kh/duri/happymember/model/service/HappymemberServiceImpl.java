@@ -7,6 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kh.duri.Nanummember.model.vo.DirectFundHistory;
 import com.kh.duri.happymember.model.dao.HappymemberDao;
 import com.kh.duri.happymember.model.exception.MypageException;
 import com.kh.duri.happymember.model.vo.DeliveryDetail;
@@ -89,6 +90,13 @@ public class HappymemberServiceImpl implements HappymemberService {
 		
 		return ddList;
 	}*/
+
+	//정기후원 목록 조회하기
+	@Override
+	public List<DirectFundHistory> selectDirectFundList(Member m, PageInfo pi) throws MypageException {
+		List<DirectFundHistory> directFundList = hd.selectDirectFundList(sqlSession, m, pi);
+		return null;
+	}
 
 
 	

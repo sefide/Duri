@@ -7,6 +7,7 @@ import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.kh.duri.Nanummember.model.vo.DirectFundHistory;
 import com.kh.duri.happymember.model.exception.MypageException;
 import com.kh.duri.happymember.model.vo.Delivery;
 import com.kh.duri.happymember.model.vo.DeliveryDetail;
@@ -141,6 +142,21 @@ public class HappymemberDaoImpl implements HappymemberDao{
 		}
 		
 		return listCount;
+	}
+
+	//정기후원 목록 조회하기
+	@Override
+	public List<DirectFundHistory> selectDirectFundList(SqlSessionTemplate sqlSession, Member m, PageInfo pi) throws MypageException {
+		int offset = (pi.getCurrentPage()-1)*pi.getLimit();//Limit : 한 페이지에 보여줄 게시글 수
+		RowBounds rowBounds = new RowBounds(offset, pi.getLimit());
+		
+		List<DirectFundHistory> directFundList = sqlSession.selectList("HappyMember.selectDirectFundList", m, rowBounds);
+		
+
+		if(directFundList == null) {
+			throw new MypageException("배송 현황 목록 조회 실패");
+		}
+		return directFundList;
 	}
 
 	/*//배송현황 목록 가져오기

@@ -2,6 +2,7 @@ package com.kh.duri.happymember.controller;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -12,11 +13,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.kh.duri.Nanummember.model.vo.DirectFundHistory;
 import com.kh.duri.happymember.model.exception.MypageException;
 import com.kh.duri.happymember.model.service.HappymemberService;
 import com.kh.duri.happymember.model.vo.DeliveryDetail;
 import com.kh.duri.happymember.model.vo.FundItemList;
 import com.kh.duri.happymember.model.vo.MyDonateItems;
+import com.kh.duri.payment.model.vo.PageInfo;
+import com.kh.duri.happymember.model.vo.Pagination;
 import com.kh.duri.member.model.vo.Member;
 
 @Controller
@@ -102,7 +106,7 @@ public class HappymemberController {
 	
 	//배송현황 목록 페이징
 	@RequestMapping("selectDeliveryList.happy")
-	public String happyDeliveryList(HttpServletRequest request, HttpServletResponse response) {
+	public String selectDeliveryList(HttpServletRequest request, HttpServletResponse response) {
 		Member m = (Member)request.getSession().getAttribute("loginUser");
 		String item = request.getParameter("item");
 		String itemAmount = request.getParameter("itemAmount");
@@ -141,7 +145,9 @@ public class HappymemberController {
 		try {
 			int listCount = hs.selectLongDonateCount(m);
 			
+			PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
 			
+			List<DirectFundHistory> directFundList = hs.selectDirectFundList(m, pi);
 			
 			
 			
