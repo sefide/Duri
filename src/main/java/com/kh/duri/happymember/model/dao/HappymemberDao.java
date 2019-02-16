@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
 
+import com.kh.duri.Nanummember.model.vo.DirectFundHistory;
 import com.kh.duri.happymember.model.exception.MypageException;
 import com.kh.duri.happymember.model.vo.Delivery;
 import com.kh.duri.happymember.model.vo.DeliveryDetail;
@@ -36,6 +37,9 @@ public interface HappymemberDao {
 
 	//정기후원 목록 개수 조회
 	int selectLongDonateCount(SqlSessionTemplate sqlSession, Member m) throws MypageException;
+
+	//정기후원 목록 조회하기
+	List<DirectFundHistory> selectDirectFundList(SqlSessionTemplate sqlSession, Member m, PageInfo pi) throws MypageException;
 
 	/*//배송현황 목록 가져오기
 	List<DeliveryDetail> selectDeliveryList(SqlSessionTemplate sqlSession, Member m, PageInfo pi) throws MypageException;
