@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -27,7 +28,7 @@
         <div id="page-wrapper" >
 		  <div class="header"> 
                         <h1 class="page-header">
-                            	EH님의 신규 크라우드 펀딩 게시글
+                            	<strong style="color: #c16624;">${CrowdMemInfo.mName}</strong>님의 신규 크라우드 <strong>금액</strong> 펀딩 게시글
                         </h1>
 		</div>
             <div id="page-inner"> 
@@ -39,41 +40,49 @@
 							<div class="table-responsive">
 								<table class="table table-bordered">
 									<tbody>
-										<tr>
+											<tr>
 											<td class="total">아이디</td>
-											<td>han419120</td>
+											<td>${CrowdMemInfo.mid}</td>
 											<td class="total">생년월일</td>
-											<td>930504</td>
+											<td>20${CrowdMemInfo.mBirthDay}</td>
 										</tr>
 										<tr>
 											<td class="total">이름</td>
-											<td>한의희</td>
+											<td>${CrowdMemInfo.mName}</td>
 											<td class="total">주소</td>
-											<td>서울시 송파구 백제고분로11길 15</td>
+											<td>${CrowdMemInfo.mAddress}</td>
 										</tr>
 										<tr>
 											<td class="total">닉네임</td>
-											<td>EH</td>
+											<td>${CrowdMemInfo.mNick}</td>
 											<td class="total">가입유형</td>
-											<td>한부모가정</td>
+											<td>${CrowdMemInfo.mFundtype}</td>
 										</tr>
 										<tr>
 											<td class="total">성별</td>
-											<td>W</td>
+											<c:if test="${CrowdMemInfo.mGender == 'F'}"><td>여성</td></c:if>
+											<c:if test="${CrowdMemInfo.mGender == 'M'}"><td>남성</td></c:if>
 											<td class="total">이메일</td>
-											<td>han419120@naver.com</td>
+											<td>${CrowdMemInfo.memail}</td>
 										</tr>
 										<tr>
 											<td class="total">휴대전화</td>
-											<td>01055432010</td>
-											<td class="total">가입날짜</td>
-											<td>2019/01/12</td>
+											<c:if test="${CrowdMemInfo.mPhone == null}"><td>없음</td></c:if>
+											<c:if test="${CrowdMemInfo.mPhone != null}"><td>${CrowdMemInfo.mPhone}</td></c:if>
+											
+											<td class="total">가입승인날짜</td>
+											<c:if test="${CrowdMemInfo.mAcceptDate ==null}"><td>승인 전 신규회원</td></c:if>
+											<c:if test="${CrowdMemInfo.mAcceptDate !=null}"><td>${CrowdMemInfo.mAcceptDate}</td></c:if>
 										</tr>
 										<tr>
 											<td class="total">증빙서류 갱신일</td>
-											<td>2019/01/11</td>
+											<c:if test="${CrowdMemInfo.adate ==null}"><td>승인 전 신규회원</td></c:if>
+											<c:if test="${CrowdMemInfo.adate !=null}"><td>${CrowdMemInfo.adate}</td></c:if>
 											<td class="total">자기소개 갱신일</td>
-											<td>2019/01/11</td>
+											<c:if test="${CrowdMemInfo.mprAcceptDate ==null}"><td>승인 전 신규회원</td></c:if>
+											<c:if test="${CrowdMemInfo.mprAcceptDate !=null}"><td>${CrowdMemInfo.mprAcceptDate}</td></c:if>
+											
+											
 										</tr>
 									</tbody>
 								</table>
@@ -99,23 +108,7 @@
 										</tr>
 										<tr>
 											<td>
-											Lorem ipsum dolor sit amet, 
-		                        consectetur adipiscing elit. Vestibulum tincidunt 
-		                        est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, 
-		                        posuere lectus et, fringilla augue.
-		                        Lorem ipsum dolor sit amet, 
-		                        consectetur adipiscing elit. Vestibulum tincidunt 
-		                        est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, 
-		                        posuere lectus et, fringilla augue.
-		                        Lorem ipsum dolor sit amet, 
-		                        consectetur adipiscing elit. Vestibulum tincidunt 
-		                        est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, 
-		                        posuere lectus et, fringilla augue.
-		                        Lorem ipsum dolor sit amet, 
-		                        consectetur adipiscing elit. Vestibulum tincidunt 
-		                        est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, 
-		                        posuere lectus et, fringilla augue.
-										
+											${CrowdMemInfo.mpr}
 											</td>
 										</tr>
 									</tbody>
@@ -140,34 +133,31 @@
             		<div class="row">
 				<div class="col-md-12">
 					<div class="panel panel-default">
-						<div class="panel-heading">신규 펀딩 게시글</div>
+						<div class="panel-heading">신규 금액 펀딩 게시글</div>
 						<div class="panel-body">
 							<div class="table-responsive">
 								<table class="table table-bordered">
 									<tbody>
 										<tr>
 											<td class="total">펀딩 제목</td>
-											<td>집이 없어여...</td>
+											<td>${CrowdFundInfo.fTitle}</td>
+										</tr>
+										
+										<tr>
+											<td class="total">후원 카테고리</td>
+											<td>${CrowdFundInfo.fValueType}</td>
 										</tr>
 										<tr>
-											<td class="total">후원 유형</td>
-											<td>한부모가정</td>
-										</tr>
-										<tr>
-											<td class="total">카테고리</td>
-											<td>의료비</td>
-										</tr>
-										<tr>
-											<td class="total">목표 금액 or 수량</td>
-											<td>300,000</td>
+											<td class="total">목표 금액 </td>
+											<td>${CrowdFundInfo.fValue}</td>
 										</tr>
 										<tr>
 											<td class="total">펀딩 등록 날짜</td>
-											<td>2019/01/00</td>
+											<td>${CrowdFundInfo.fWriteDate}</td>
 										</tr>
 										<tr>
 											<td class="total">펀딩 종료 날짜</td>
-											<td>2019/01/00</td>
+											<td>${CrowdFundInfo.fEndDate}</td>
 										</tr>
 										
 										<tr>
@@ -176,22 +166,7 @@
 										</tr>
 										<tr>
 										<td colspan="2">
-											Lorem ipsum dolor sit amet, 
-		                        consectetur adipiscing elit. Vestibulum tincidunt 
-		                        est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, 
-		                        posuere lectus et, fringilla augue.
-		                        Lorem ipsum dolor sit amet, 
-		                        consectetur adipiscing elit. Vestibulum tincidunt 
-		                        est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, 
-		                        posuere lectus et, fringilla augue.
-		                        Lorem ipsum dolor sit amet, 
-		                        consectetur adipiscing elit. Vestibulum tincidunt 
-		                        est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, 
-		                        posuere lectus et, fringilla augue.
-		                        Lorem ipsum dolor sit amet, 
-		                        consectetur adipiscing elit. Vestibulum tincidunt 
-		                        est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, 
-		                        posuere lectus et, fringilla augue.
+											${CrowdFundInfo.fContent}
 											</td>
 										</tr>
 									</tbody>
