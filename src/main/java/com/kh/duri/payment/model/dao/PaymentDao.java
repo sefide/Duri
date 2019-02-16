@@ -5,10 +5,12 @@ import java.util.List;
 import org.mybatis.spring.SqlSessionTemplate;
 
 import com.kh.duri.member.model.vo.Member;
+import com.kh.duri.payment.model.exception.DirectFundException;
 import com.kh.duri.payment.model.exception.PaymentException;
 import com.kh.duri.payment.model.exception.PointHistoryException;
 import com.kh.duri.payment.model.exception.ReceiptException;
 import com.kh.duri.payment.model.exception.RefundException;
+import com.kh.duri.payment.model.vo.DirectFundHist;
 import com.kh.duri.payment.model.vo.DonateReceipt;
 import com.kh.duri.payment.model.vo.PageInfo;
 import com.kh.duri.payment.model.vo.Payment;
@@ -49,9 +51,28 @@ public interface PaymentDao {
 	
 	// 나눔두리 - 후원포인트 충전하기
 	Member insertPayment(SqlSessionTemplate sqlSession, Member m, Payment py) throws PaymentException;
-
-
 	
+	// 나눔두리 - 정기후원 정보 입력하기 
+	int insertDirectFundHist(SqlSessionTemplate sqlSession, DirectFundHist dh) throws DirectFundException;
+
+	// DirectFundHistory seq번호 알아내기
+	int selectDirectFundCurVal(SqlSessionTemplate sqlSession) throws DirectFundException;
+	
+	// 나눔두리 - 정기후원 상세내역 입력하기 (1차)
+	int insertDirectFundDetail(SqlSessionTemplate sqlSession, DirectFundHist dh) throws DirectFundException;
+	
+	// DirectFundHistoryDetail seq번호 알아내기
+	int selectDirectFundDetailCurVal(SqlSessionTemplate sqlSession) throws DirectFundException;
+	
+	// 나눔두리 - Point이력에 정기후원 정보 입력하기
+	int insertPointDirect(SqlSessionTemplate sqlSession, DirectFundHist dh) throws DirectFundException;
+	
+	// 행복두리 - Point 업뎃하기
+	int updateDirecthPoint(SqlSessionTemplate sqlSession, DirectFundHist dh) throws DirectFundException;
+
+	// 나눔두리 - 다음 정기결제를 위한 merchant_id 값 가져오기
+	DirectFundHist selectDirectFundId(SqlSessionTemplate sqlSession, DirectFundHist dh) throws DirectFundException;
+		
 	
 	
 

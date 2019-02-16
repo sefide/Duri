@@ -355,10 +355,14 @@
 			//alert("10000원 이상부터 정기후원이 가능합니다.");
 			$('#sponPoint').css('border', '1px solid red').focus()
 		}else {
+			var tmno = "${ takeM.mno }";
 			var mno = "${ giveM.mno }";
 			var name = "${ giveM.mName }";
 			var phone = "${ giveM.mPhone }";
 			var email = "${ giveM.email }";
+			var price = $("#sponPoint").val();
+			var type = "${ valueType }";
+			
 			console.log("name : "+ name + "/ phone : "+ phone + "/ email : "+ email);
 			// 빌링키 발급과 동시에 결제를 진행하려면 amount 필드에 금액 파라메터를 전달하여 결제창에 결제될 금액이 표시되도록하고 
 			// 빌링키 발급과 동시에 /subscribe/payments/again API를 호출하여 결제승인처리를 하면 구매자로하여금 혼선이 없습니다.
@@ -383,39 +387,40 @@
 			        console.log("고유ID : "+ rsp.imp_uid);
 			        console.log("상점 거래ID : "+ rsp.merchant_uid);
 			        console.log("상점 거래ID : "+ rsp.customer_uid);
-			        /* jb.ajax({
-				        url: "https://api.iamport.kr/users/getToken",
-			            method: "post", // POST method
-			            contentType : 'application/json',
-			            headers: { "Content-Type": "application/json" }, // "Content-Type": "application/json"
-			            data: {
-			                imp_key: "none", // REST API키
-			                imp_secret: "none" // REST API Secret
-			            }, success:function(data){
-			            	console.log(data);
-			            	console.log(data.access_token );
-			            	
-			            }, error:function(data){
-							console.log("토큰 값 가져오기 통신실패");
-							console.log(data);
-						}
-			        }); */
 			        
-			        
-			      /*   $.ajax({
-			            url: "directFundGetBilling.pm", // 서비스 웹서버
+			        $.ajax({
+			            url: "directFundGetToken.pm", // 최초 결제 및 토큰 가져오기
 			            //method: "POST",
 			            type: "post",
-			            //headers: { "Content-Type": "application/json" },
+			           // headers: { "Content-Type": "application/json" },
 			            data: {
 			                customer_uid: mno + randomUid, // 카드(빌링키)와 1:1로 대응하는 값
+			                imp_uid : rsp.imp_uid,
+			                merchant_uid : 'merchant_' + new Date().getTime(),
+			                amount : 100
 			            }
-			        });  */
+			        }); 
+			        
+			        $.ajax({
+			            url: "subscribeDirectFund.pm", // 정기결제 예약 서버
+			            type: "post",
+			            data: {
+			                customer_uid: mno + randomUid, // 카드(빌링키)와 1:1로 대응하는 값
+			                imp_uid : rsp.imp_uid,
+			                merchant_uid : 'merchant_' + new Date().getTime()+'_sub',
+			                amount : 100,
+			                giveMember : mno,
+			                takeMember : tmno,
+			                type : type,
+			                price : price
+			            }
+			        });
 			        
 			    } else {
 			        // 빌링키 발급 실패
 			    	console.log("빌링키 발급 실패");
 			    	console.log(rsp);
+			    	alert("결제 실패 , 조금 뒤에 다시 결제를 시도해주세요. ");
 			    }
 			}); 
 		}
