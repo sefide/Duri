@@ -28,9 +28,7 @@
 		<typeAlias type="com.kh.duri.happymember.model.vo.MyDonateItems" alias="MyDonateItems"/>
 		<typeAlias type="com.kh.duri.happymember.model.vo.FundItemList" alias="FundItemList"/>
 		<typeAlias type="com.kh.duri.happymember.model.vo.Delivery" alias="Delivery"/>
-		
-		
-		
+		<typeAlias type="com.kh.duri.happymember.model.vo.DirectFundHistory" alias="HappyDirectFundHistory"/>
 		<typeAlias type="com.kh.duri.payment.model.vo.DirectFundHist" alias="DirectFundHist"/>	<!-- DirectFundHist :정기후원 (190216) -->
 		
 	</typeAliases>

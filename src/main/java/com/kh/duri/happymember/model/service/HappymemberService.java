@@ -3,7 +3,7 @@ package com.kh.duri.happymember.model.service;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.kh.duri.Nanummember.model.vo.DirectFundHistory;
+import com.kh.duri.happymember.model.vo.DirectFundHistory;
 import com.kh.duri.happymember.model.exception.MypageException;
 import com.kh.duri.happymember.model.vo.Delivery;
 import com.kh.duri.happymember.model.vo.DeliveryDetail;
@@ -39,8 +39,10 @@ public interface HappymemberService {
 	//정기후원 목록 조회하기
 	List<DirectFundHistory> selectDirectFundList(Member m, PageInfo pi) throws MypageException;
 
-	/*//배송현황 목록 가져오기
-	List<DeliveryDetail> selectDeliveryList(Member m, PageInfo pi) throws MypageException;*/
+	//배송현황 목록 조회하기
+	List<DeliveryDetail> selectDeliveryList(Member m, PageInfo pi) throws MypageException;
+
+	
 
 
 

@@ -77,18 +77,24 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr>
-					<td>1</td>
-					<td>생리대 중형(10개입)</td>
-					<td>2</td>
-					<td><a class="sbtn gy" href="#">조회하기</a></td>
-				</tr>
-				<tr>
-					<td>2</td>
-					<td>칫솔 치약 세트(칫솔1, 치약1)</td>
-					<td>3</td>
-					<td><a class="sbtn gy" href="#">조회하기</a></td>
-				</tr>
+				<c:if test="${ !empty deliveryList}">
+				<c:forEach items="${deliveryList }" var="deliveryList">
+					<tr>
+						<td><c:out value="${deliveryList.rnum }"/></td>
+						<td><c:out value="${deliveryList.dd_name }"/></td>
+						<td><c:out value="${deliveryList.ddvalue }"/></td>
+						<td>
+							<a id="deliveryBtn" class="sbtn gy" href="#"/>배송상태 보기</a>
+						</td>	
+					</tr>
+				</c:forEach>
+				</c:if>
+				
+				<c:if test="${ empty deliveryList}">
+					<tr>
+						<td colspan = "4"> 물품 배송 내역이 없습니다.  </td>
+					</tr>
+				</c:if>
 			</tbody>
 		</table>
 		
@@ -117,5 +123,14 @@
 </div><!--// Wrap E-->
 </c:if>
 
+<script>
+	$("#deliveryBtn").hover(function(){
+		$("#deliveryBtn").text("택배접수 완료");
+	},function(){
+		$("#deliveryBtn").text("배송상태 보기")
+	});
+	
+	
+</script>
 </body>
 </html>
