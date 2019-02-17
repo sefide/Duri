@@ -79,18 +79,22 @@
 			</tr>
 			</thead>
 			<tbody>
-			<tr>
-				<td>1</td>
-				<td>차인표님</td>
-				<td>50,000</td>
-				<td>2016-11-04 ~</td>
-			</tr>
-			<tr>
-				<td>2</td>
-				<td>신애라님</td>
-				<td>80,000</td>
-				<td>2016-10-20 ~</td>
-			</tr>
+				<c:if test="${!empty directFundList }">
+				<c:forEach items="${directFundList}" var="directList">
+					<tr>
+						<td><c:out value="${directList.rnum}"/></td>
+						<td><c:out value="${directList.dh_name_give}"/></td>
+						<td><c:out value="${directList.dhvalue}"/></td>
+						<td><c:out value="${directList.dhstartdate}"/></td>
+					</tr>
+				</c:forEach>
+				</c:if>
+				
+				<c:if test="${ empty directFundList }">
+					<tr>
+						<td colspan = "4"> 정기 후원 내역이 없습니다.  </td>
+					<tr>
+				</c:if>
 			</tbody>
 		</table>
 

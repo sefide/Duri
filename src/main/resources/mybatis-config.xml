@@ -28,7 +28,7 @@
 		<typeAlias type="com.kh.duri.happymember.model.vo.MyDonateItems" alias="MyDonateItems"/>
 		<typeAlias type="com.kh.duri.happymember.model.vo.FundItemList" alias="FundItemList"/>
 		<typeAlias type="com.kh.duri.happymember.model.vo.Delivery" alias="Delivery"/>
-		
+		<typeAlias type="com.kh.duri.happymember.model.vo.DirectFundHistory" alias="HappyDirectFundHistory"/>
 	</typeAliases>
 	
 	<mappers>

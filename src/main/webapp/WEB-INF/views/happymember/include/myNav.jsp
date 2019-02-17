@@ -402,6 +402,7 @@ p {font-size: 20px; text-align: center;}
 	//보유물품 - 취소 버튼 클릭 함수
 	function selectReset(){
 		$("#getDeliveryForm")[0].reset();
+		$("#myModal").css("display", "none");
 		
 	}
 	

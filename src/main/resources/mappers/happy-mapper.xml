@@ -58,16 +58,20 @@
 		<result property="dd_dno" column="DD_DNO"/>
 		<result property="dd_ino" column="DD_INO"/>
 		<result property="dd_name" column="DD_NAME"/>
+		<result property="rnum" column="RNUM"/>
+		<result property="dlink" column="DLINK"/>
 	</resultMap>
 
 
-	<resultMap type="com.kh.duri.Nanummember.model.vo.DirectFundHistory" id="directFundHistoryResultSet">
+	<resultMap type="com.kh.duri.happymember.model.vo.DirectFundHistory" id="happyDirectFundHistoryResultSet">
 		<id property="dhno" column="DHNO"></id>
 		<result property="dhvalue" column="DHVALUE"/>
 		<result property="dhstartdate" column="DHSTARTDATE"/>
 		<result property="dhstatus" column="DHSTATUS"/>
 		<result property="dh_mno_take" column="DH_MNO_TAKE"/>
 		<result property="dh_mno_give" column="DH_MNO_GIVE"/>
+		<result property="dh_name_give" column="DH_MNAME_GIVE"/>
+		<result property="rnum" column="RNUM"/>
 	</resultMap>
 	
 	
@@ -107,17 +111,25 @@
 		WHERE DH_MNO_TAKE = #{mno} 
 		AND DHSTATUS = 'Y'
 	</select>
-	<!-- <select id="selectDeliveryList">
-		
-		SELECT
-		(SELECT INAME AS DD_NAME
-		 FROM FUNDITEM FI, DELIVERYDETAIL DD, DELIVERY D
-		 WHERE FI.INO = DD.DD_INO AND DD.DD_DNO = D.DNO AND D.D_MNO = #{mno})
-		 , DDVALUE
-		 FROM DELIVERYDETAIL DD, DELIVERY D
-		 WHERE D.DNO = DD.DD_DNO
-		 AND D.D_MNO=#{mno}
-	</select> -->
+	<!-- 정기 후원 리스트 조회 -->
+	<select id="selectDirectFundList" parameterType="DirectFundHistory" resultMap="happyDirectFundHistoryResultSet">
+		SELECT ROWNUM RNUM, DH_MNAME_GIVE, DHVALUE, DHSTARTDATE 
+		FROM (SELECT M.MNAME AS DH_MNAME_GIVE ,DH.DHVALUE, DH.DHSTARTDATE 
+		FROM DIRECTFUNDHISTORY DH, MEMBER M 
+		WHERE DH.DH_MNO_GIVE = M.MNO 
+		AND DH.DH_MNO_TAKE = #{mno} 
+		AND DHSTATUS = 'Y' 
+		ORDER BY DH.DHSTARTDATE DESC) 
+	</select>
+	<!-- 배송 현황 목록 조회 -->
+	<select id="selectDeliveryList" parameterType="DeliveryDetail" resultMap="deliveryDetailResultSet">
+		SELECT ROWNUM RNUM, DD_NAME, DDVALUE, DLINK 
+		FROM (SELECT F.INAME AS DD_NAME, DD.DDVALUE, D.DLINK 
+		FROM DELIVERYDETAIL DD, FUNDITEM F, DELIVERY D 
+		WHERE DD.DD_INO = F.INO 
+		AND DD.DD_DNO = D.DNO 
+		AND D.D_MNO = #{mno}) 
+	</select>
 </mapper>
 
 

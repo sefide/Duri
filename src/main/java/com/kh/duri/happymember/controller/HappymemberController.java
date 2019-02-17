@@ -9,11 +9,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.kh.duri.Nanummember.model.vo.DirectFundHistory;
+import com.kh.duri.happymember.model.vo.DirectFundHistory;
 import com.kh.duri.happymember.model.exception.MypageException;
 import com.kh.duri.happymember.model.service.HappymemberService;
 import com.kh.duri.happymember.model.vo.DeliveryDetail;
@@ -92,7 +93,7 @@ public class HappymemberController {
 			
 			if(result == 1) {
 				System.out.println("물품 목록 추가 성공!");
-				return "redirect:deliveryOriginal.happy";
+				return "redirect:selectDeliveryList.happy";
 			}
 			
 			
@@ -101,40 +102,12 @@ public class HappymemberController {
 			request.setAttribute("msg", e.getMessage());
 			return "common/errorPage";
 		}
-		return "redirect:deliveryOriginal.happy";
-	}
-	
-	//배송현황 목록 페이징
-	@RequestMapping("selectDeliveryList.happy")
-	public String selectDeliveryList(HttpServletRequest request, HttpServletResponse response) {
-		Member m = (Member)request.getSession().getAttribute("loginUser");
-		String item = request.getParameter("item");
-		String itemAmount = request.getParameter("itemAmount");
-		
-		int currentPage = 1;
-		
-		if(request.getParameter("currentPage") != null) {
-			currentPage = Integer.parseInt(request.getParameter("currentPage"));
-		}
-		
-		try {
-			int listCount = hs.selectDeliveryListCount(m);
-			
-			/*PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
-			
-			List<DeliveryDetail> ddList = hs.selectDeliveryList(m, pi);*/
-			
-			
-		} catch (MypageException e) {
-			request.setAttribute("msg", e.getMessage());
-			return "common/errorPage";
-		}
-		return "happymember/deliveryStatus";
+		return "redirect:selectDeliveryList.happy";
 	}
 	
 	//정기후원 목록 조회하기
 	@RequestMapping("longDonate.happy")
-	public String selectLongDonate(HttpServletRequest request, HttpServletResponse response) {
+	public String selectLongDonate(Model model, HttpServletRequest request, HttpServletResponse response) {
 		Member m = (Member)request.getSession().getAttribute("loginUser");
 		int currentPage = 1;
 		
@@ -149,8 +122,12 @@ public class HappymemberController {
 			
 			List<DirectFundHistory> directFundList = hs.selectDirectFundList(m, pi);
 			
+			/*for(DirectFundHistory i : directFundList) {
+				System.out.println("정기후원 내역 : " + i);
+			}*/
 			
-			
+			model.addAttribute("directFundList", directFundList);
+			model.addAttribute("pi", pi);
 			
 		} catch (MypageException e) {
 			e.printStackTrace();
@@ -159,12 +136,45 @@ public class HappymemberController {
 		return "happymember/longDonate";
 	}
 	
+	//배송현황 목록 페이징
+		@RequestMapping("selectDeliveryList.happy")
+		public String selectDeliveryList(Model model, HttpServletRequest request, HttpServletResponse response) {
+			Member m = (Member)request.getSession().getAttribute("loginUser");
+			
+			int currentPage = 1;
+			
+			if(request.getParameter("currentPage") != null) {
+				currentPage = Integer.parseInt(request.getParameter("currentPage"));
+			}
+			
+			try {
+				int listCount = hs.selectDeliveryListCount(m);
+				
+				PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
+				
+				List<DeliveryDetail> deliveryList = hs.selectDeliveryList(m, pi);
+				
+				for(DeliveryDetail i : deliveryList) {
+					System.out.println("배송 현황 목록 : " + i);
+				}
+				
+				model.addAttribute("deliveryList", deliveryList);
+				model.addAttribute("pi", pi);
+				
+				
+			} catch (MypageException e) {
+				request.setAttribute("msg", e.getMessage());
+				return "common/errorPage";
+			}
+			return "happymember/deliveryStatus";
+		}
+	
 	
 	
 	//새로고침했을 때 insert다시 안되게 !
 	@RequestMapping("deliveryOriginal.happy")
 	public String deliveryOriginal() {
-		return "redirect:selectDeliveryList.happy";
+		return "happymember/deliveryStatus";
 	}
 	
 	
