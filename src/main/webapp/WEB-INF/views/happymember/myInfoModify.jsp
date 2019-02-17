@@ -1,4 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <% 
 	String bigtabon="2";
 %>
@@ -136,15 +139,14 @@ input, select{
 			<span>마이페이지 &gt; 내 정보 수정</span>
 		</div>
 		<br><br>
-<form class="ui form">
+<form class="ui form" id="updateForm" action="updateIntroduce.happy">
   <h4 class="ui dividing header"  style="margin:10px;">ID</h4>
 	<div class="field" style="margin:10px;">
     <div class="two fields">
       <div class="field">
-        <input type="text" name="shipping[first-name]" placeholder="아이디를 입력하세요." value="wewe1596" style="height:40px">
+        <input type="text" name="shipping[first-name]" placeholder="아이디를 입력하세요." value="${loginUser.mid }" style="height:40px">
       </div>
-        <div class="ui button" tabindex="0">중복확인</div>
-
+        <!-- <div class="ui button" tabindex="0">중복확인</div> -->
     </div>
   </div>
 
@@ -152,11 +154,11 @@ input, select{
 	<div class="field" style="margin:10px;">
     <div class="two fields">
       <div class="field">
-        <input type="password" name="shipping[first-name]" placeholder="비밀번호를 입력하세요.">
+        <input type="password" name="userPwd" id="userPwd" placeholder="비밀번호를 입력하세요.">
       </div>
 
       <div class="field">
-        <input type="password" name="shipping[last-name]"  placeholder="비밀번호를 확인하세요.">
+        <input type="password" id="userNewPwd" placeholder="비밀번호를 확인하세요.">
       </div>
     </div>
     </div>
@@ -167,11 +169,11 @@ input, select{
   <div class="field" style="margin:10px;">
     <div class="two fields">
       <div class="field">
-        <input type="text" name="shipping[first-name]" placeholder="이름을 입력하세요." value="박은지" style="height:40px">
+        <input type="text" name="userName" placeholder="이름을 입력하세요." value="${loginUser.mName }" style="height:40px">
       </div>
       
       <div class="field">
-        <input type="text" name="shipping[last-name]" placeholder="닉네임을 입력하세요.(실명가능)"  value="은디곤듀" style="height:40px">
+        <input type="text" name="userNick" placeholder="닉네임을 입력하세요.(실명가능)"  value="${loginUser.mNickName }" style="height:40px">
       </div>
     </div>
   </div>
@@ -183,9 +185,14 @@ input, select{
       <label>Gender</label>
       <select class="ui fluid dropdown">
         <option value="" selected disabled>선택</option>
-    	<option value="AL">남</option>
-        <option value="AL">여</option>
-
+        <c:if test="${loginUser.mGender eq 'M' }">
+    	<option value="male" selected>남</option>
+    	<option value="female" >여</option>
+    	</c:if>
+    	<c:if test="${loginUser.mGender eq 'F' }">
+    	<option value="male">남</option>
+        <option value="female" selected>여</option>
+		</c:if>
 
       </select>
     </div>
@@ -193,9 +200,12 @@ input, select{
       <label>Phone</label>
       <div class="ui field">
         <input type="hidden" name="country">
-      
-       
-			 <input type="text" name="shipping[first-name]" placeholder="(-)를 제외하고 입력하세요." value="01012345678" style="height:40px">
+        	<c:if test="${ empty loginUser.mPhone}">
+			 <input type="text" name="userPhone" placeholder="번호가 등록되어 있지 않습니다." style="height:40px">
+			</c:if>
+			<c:if test="${ !empty loginUser.mPhone}">
+			<input type="text" name="userPhone" placeholder="${loginUser.mPhone }" style="height:40px">
+			</c:if>
        </div>
     </div>
   </div>
@@ -205,7 +215,7 @@ input, select{
   <div class="fields"  style="margin:10px;">
     <div class="five wide field">
       <label>이메일주소</label><br>
-      <input type="text" name="email" maxlength="10" placeholder="이메일 주소를 입력해주세요." value="cjdrud123" style="height:40px">
+      <input type="text" name="userEmail1" maxlength="10" placeholder="이메일 주소를 입력해주세요." value="${(loginUser.email).substring(0,(loginUser.email).indexOf('@'))}" style="height:40px">
     </div>
      <div class="field">
      <label></label><label></label><br>
@@ -213,7 +223,7 @@ input, select{
     </div>
     <div class="three wide field">
       <label></label><br>
-      <input type="text" name="card[cvc]" maxlength="3" placeholder="직접입력"  value="naver.com" style="height:40px">
+      <input type="text" name="userEmail2" maxlength="3" placeholder="직접입력"  value="${(loginUser.email).substring(((loginUser.email).indexOf('@'))+1)}" style="height:40px">
     </div>
     <div class="seven wide field">
       <label></label><br>
@@ -246,12 +256,12 @@ input, select{
   <div class="fields" style="margin:10px;">
      <div class="five wide field">
        <label>주민등록번호</label>
-      <input type="text" name="email" maxlength="6" placeholder="" style="height:40px;">
+      <input type="text" name="userBirth" maxlength="6" placeholder="" style="height:40px;">
     </div>
 
     <div class="three wide field">
      
-      <input type="text" name="card[cvc]" maxlength="1" placeholder="" style="height:40px; width:40px"> <span>******</span>
+      <input type="text" name="userGender" maxlength="1" placeholder="" style="height:40px; width:40px"> <span>******</span>
     </div>
 
     
@@ -305,13 +315,18 @@ input, select{
    	<div class="field" style="margin:10px">
         <div class="field" >
         <label></label><br>
-   			<textarea name="memo" cols="230" rows="10" style="resize:none" placeholder="입력하신 자기소개는 정기후원 게시판에서 보여집니다." values="안녕하세요 자기소개입니다."></textarea>
+        <c:if test="${ !empty loginUser.mpr }">
+   			<textarea name="userPr" cols="230" rows="10" style="resize:none" placeholder="${loginUser.mpr }"></textarea>
+        </c:if>
+        <c:if test="${ empty loginUser.mpr }">
+        	<textarea name="userPr" cols="230" rows="10" style="resize:none" placeholder="입력하신 자기소개는 정기후원 게시판에서 보여집니다."></textarea>
+        </c:if>
         </div>
     </div>
 
   
   	<div align="center">
-		 <button class="ui primary button">
+		 <button class="ui primary button" onclick="update();">
 		   	수정하기
 		</button>
 		<button class="ui button" onclick="back();">
@@ -331,6 +346,10 @@ input, select{
 <script>
 	function back(){
 		history.back();
+	}
+	
+	function update(){
+		$("#updateForm").submit();
 	}
 </script>
 </body>

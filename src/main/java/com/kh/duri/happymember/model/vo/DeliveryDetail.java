@@ -1,5 +1,7 @@
 package com.kh.duri.happymember.model.vo;
 
+import java.sql.Date;
+
 public class DeliveryDetail {
 	int ddno;
 	int ddvalue;
@@ -8,10 +10,12 @@ public class DeliveryDetail {
 	String dd_name;
 	int rnum;
 	String dlink;
+	Date dd_date;
 	
 	public DeliveryDetail() {}
 
-	public DeliveryDetail(int ddno, int ddvalue, int dd_dno, int dd_ino, String dd_name, int rnum, String dlink) {
+	public DeliveryDetail(int ddno, int ddvalue, int dd_dno, int dd_ino, String dd_name, int rnum, String dlink,
+			Date dd_date) {
 		super();
 		this.ddno = ddno;
 		this.ddvalue = ddvalue;
@@ -20,6 +24,7 @@ public class DeliveryDetail {
 		this.dd_name = dd_name;
 		this.rnum = rnum;
 		this.dlink = dlink;
+		this.dd_date = dd_date;
 	}
 
 	public int getDdno() {
@@ -78,11 +83,22 @@ public class DeliveryDetail {
 		this.dlink = dlink;
 	}
 
+	public Date getDd_date() {
+		return dd_date;
+	}
+
+	public void setDd_date(Date dd_date) {
+		this.dd_date = dd_date;
+	}
+
 	@Override
 	public String toString() {
 		return "DeliveryDetail [ddno=" + ddno + ", ddvalue=" + ddvalue + ", dd_dno=" + dd_dno + ", dd_ino=" + dd_ino
-				+ ", dd_name=" + dd_name + ", rnum=" + rnum + ", dlink=" + dlink + "]";
+				+ ", dd_name=" + dd_name + ", rnum=" + rnum + ", dlink=" + dlink + ", dd_date=" + dd_date + "]";
 	}
+	
+	
 
+	
 	
 }

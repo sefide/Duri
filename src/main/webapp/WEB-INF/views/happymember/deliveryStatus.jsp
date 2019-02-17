@@ -61,8 +61,9 @@
 			<colgroup>
 				<col style="width:7%;"><!-- No -->
 				<col style="width:20%;"><!--  -->
-				<col style="width:10%;"><!--  -->
-				<col style="width:15%;"><!--  -->
+				<col style="width:9%;"><!--  -->
+				<col style="width:13%;"><!--  -->
+				<col style="width:13%;"><!--  -->
 				<!-- <col style="width:%;">
 				<col style="width:%;">
 				<col style="width:%;">
@@ -73,6 +74,7 @@
 					<th scope="col">No</th>
 					<th scope="col">물품명</th>
 					<th scope="col">개수</th>
+					<th scope="col">배송신청일</th>
 					<th scope="col">배송현황</th>
 				</tr>
 			</thead>
@@ -83,6 +85,7 @@
 						<td><c:out value="${deliveryList.rnum }"/></td>
 						<td><c:out value="${deliveryList.dd_name }"/></td>
 						<td><c:out value="${deliveryList.ddvalue }"/></td>
+						<td><c:out value="${deliveryList.dd_date }"/></td>
 						<td>
 							<a id="deliveryBtn" class="sbtn gy" href="#"/>배송상태 보기</a>
 						</td>	
@@ -92,20 +95,44 @@
 				
 				<c:if test="${ empty deliveryList}">
 					<tr>
-						<td colspan = "4"> 물품 배송 내역이 없습니다.  </td>
+						<td colspan = "5"> 물품 배송 내역이 없습니다.  </td>
 					</tr>
 				</c:if>
 			</tbody>
 		</table>
 		
 		<div class="numbox pt40 pb50"> 
-			<span><a class="num" href="#">&lt;</a></span>
-			<span><a class="num on" href="#">1</a></span>
-			<span><a class="num" href="#">2</a></span>
-			<span><a class="num" href="#">3</a></span>
-			<span><a class="num" href="#">4</a></span>
-			<span><a class="num" href="#">5</a></span>
-			<span><a class="num" href="#">&gt;</a></span>
+			<c:if test="${pi.currentPage <= 1 }">
+				<span><a class="num" href="#">&lt;</a></span>
+			</c:if>
+			<c:if test="${pi.currentPage > 1 }">
+				<c:url var="listBack" value="selectDeliveryList.happy">
+					<c:param name="currentPage" value="${pi.currentPage - 1 }"></c:param>
+				</c:url>
+				<span><a class="num" href="${ listBack}">&lt;</a></span>
+			</c:if>
+			
+			<c:forEach var="page" begin="${pi.startPage }" end="${pi.endPage }">
+				<c:if test="${page eq pi.currentPage }">
+					<span><a class="num on" href="${listCheck }">${page }</a></span>
+				</c:if>
+				<c:if test="${page ne pi.currentPage }">
+					<c:url var="listCheck" value="selectDeliveryList.happy">
+						<c:param name="currentPage" value="${page }"></c:param>
+					</c:url>
+					<span><a class="num" href="${listCheck }">${page }</a></span>
+				</c:if>
+			</c:forEach>
+			
+			<c:if test="${pi.currentPage >= pi.maxPage }">
+				<span><a class="num" href="#">&gt;</a></span>
+			</c:if>
+			<c:if test="${pi.currentPage < pi.maxPage }">
+				<c:url var="listEnd" value="selectDeliveryList.happy">
+					<c:param name="currentPage" value="${pi.currentPage + 1 }"></c:param>
+				</c:url>
+				<span><a class="num" href="${listEnd }">&gt;</a></span>
+			</c:if>
 		</div>
 		
 		<div style="height: 100px;"></div>
