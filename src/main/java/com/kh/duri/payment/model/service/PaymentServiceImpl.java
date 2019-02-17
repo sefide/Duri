@@ -9,10 +9,12 @@ import org.springframework.stereotype.Service;
 
 import com.kh.duri.member.model.vo.Member;
 import com.kh.duri.payment.model.dao.PaymentDao;
+import com.kh.duri.payment.model.exception.DirectFundException;
 import com.kh.duri.payment.model.exception.PaymentException;
 import com.kh.duri.payment.model.exception.PointHistoryException;
 import com.kh.duri.payment.model.exception.ReceiptException;
 import com.kh.duri.payment.model.exception.RefundException;
+import com.kh.duri.payment.model.vo.DirectFundHist;
 import com.kh.duri.payment.model.vo.DonateReceipt;
 import com.kh.duri.payment.model.vo.PageInfo;
 import com.kh.duri.payment.model.vo.Payment;
@@ -120,6 +122,45 @@ public class PaymentServiceImpl implements PaymentService {
 		Member loginUser = pd.insertPayment(sqlSession, m, py);		
 	
 		return loginUser;
+	}
+	
+	// 나눔두리 - 정기후원 내역 입력하기 (1차)
+	@Override
+	public int insertDirectFundHist(DirectFundHist dh) throws DirectFundException {
+		int result = 0;
+		// DirectFundHistory 입력
+		int result1 = pd.insertDirectFundHist(sqlSession, dh);
+		
+		// DirectFundHistory seq번호 알아내기
+		int resultDhNo = pd.selectDirectFundCurVal(sqlSession);
+		dh.setDhNo(resultDhNo);
+		
+		// DirectFundHistoryDetail에도 입력
+		int result2 = pd.insertDirectFundDetail(sqlSession, dh);
+		
+		// DirectFundHistoryDetail seq번호 알아내기
+		int resultDhdNo = pd.selectDirectFundDetailCurVal(sqlSession);
+		dh.setDhNo(resultDhdNo);
+		
+		// 나눔두리 - Point 이력 남기기
+		int result3 = pd.insertPointDirect(sqlSession, dh);
+		
+		// 행복두리 - Point 업뎃하기
+		int result4 = pd.updateDirecthPoint(sqlSession, dh);
+		
+		if(result1 > 0 && result2 > 0 && result3 > 0 && result4 > 0) {
+			result = 1;
+		}
+		
+		return result;
+	}
+	
+	// 나눔두리 - 다음 정기결제를 위한 merchant_id 값 가져오기
+	@Override
+	public DirectFundHist selectDirectFundId(DirectFundHist dh) throws DirectFundException {
+		DirectFundHist result = pd.selectDirectFundId(sqlSession, dh);
+		
+		return result;
 	}
 
 	

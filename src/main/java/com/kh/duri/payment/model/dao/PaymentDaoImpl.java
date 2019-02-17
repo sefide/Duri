@@ -7,10 +7,12 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.duri.member.model.vo.Member;
+import com.kh.duri.payment.model.exception.DirectFundException;
 import com.kh.duri.payment.model.exception.PaymentException;
 import com.kh.duri.payment.model.exception.PointHistoryException;
 import com.kh.duri.payment.model.exception.ReceiptException;
 import com.kh.duri.payment.model.exception.RefundException;
+import com.kh.duri.payment.model.vo.DirectFundHist;
 import com.kh.duri.payment.model.vo.DonateReceipt;
 import com.kh.duri.payment.model.vo.PageInfo;
 import com.kh.duri.payment.model.vo.Payment;
@@ -236,9 +238,94 @@ public class PaymentDaoImpl implements PaymentDao {
 		
 		return loginUser;
 	}
+	
+	
+	// 나눔두리 - 정기후원 정보 입력하기 
+	@Override
+	public int insertDirectFundHist(SqlSessionTemplate sqlSession, DirectFundHist dh) throws DirectFundException {
+		int result = sqlSession.insert("Point.insertDirectFundHist", dh);
+		
+		if(result == 0) {
+			throw new DirectFundException("정기후원 정보 입력에 실패했습니다.");
+		}
+		return result;
+	}
+	
+	// DirectFundHistory seq번호 알아내기
+	@Override
+	public int selectDirectFundCurVal(SqlSessionTemplate sqlSession) throws DirectFundException {
+		int result = sqlSession.selectOne("Point.selectDirectFundCurVal");
+		
+		if(result == 0) {
+			throw new DirectFundException("정기후원 번호를 가져오지 못했습니다.");
+		}
+		
+		return result;
+	}
 
+	// 나눔두리 - 정기후원 상세내역 입력하기 (1차)
+	@Override
+	public int insertDirectFundDetail(SqlSessionTemplate sqlSession, DirectFundHist dh) throws DirectFundException {
+		int result = sqlSession.insert("Point.insertDirectFundDetail", dh);
+		
+		if(result == 0) {
+			throw new DirectFundException("정기후원 정보 상세입력에 실패했습니다.");
+		}
+		
+		return result;
+	}
+
+	// DirectFundHistoryDetail seq번호 알아내기
+	@Override
+	public int selectDirectFundDetailCurVal(SqlSessionTemplate sqlSession) throws DirectFundException {
+		int result = sqlSession.selectOne("Point.selectDirectFundDetailCurVal");
+		
+		if(result == 0) {
+			throw new DirectFundException("정기후원 정보 입력에 실패했습니다.");
+		}
+		
+		return result;
+	}
 	
 
+	// 나눔두리 - Point이력에 정기후원 정보 입력하기
+	@Override
+	public int insertPointDirect(SqlSessionTemplate sqlSession, DirectFundHist dh) throws DirectFundException {
+		int result = sqlSession.insert("Point.insertPointDirect", dh);
+		
+		if(result == 0) {
+			throw new DirectFundException("정기후원 정보 입력에 실패했습니다.");
+		}
+		
+		return result;
+	}
+	
+	// 행복두리 - Point 업뎃하기
+	@Override
+	public int updateDirecthPoint(SqlSessionTemplate sqlSession, DirectFundHist dh) throws DirectFundException {
+		int result = sqlSession.update("Point.updateDirectPoint", dh);
+		
+		if(result == 0) {
+			throw new DirectFundException("행복두리 포인트 업데이트에 실패했습니다.");
+		}
+		
+		return result;
+	}
+
+	
+	// 나눔두리 - 다음 정기결제를 위한 merchant_id 값 가져오기
+	@Override
+	public DirectFundHist selectDirectFundId(SqlSessionTemplate sqlSession, DirectFundHist dh) throws DirectFundException {
+		DirectFundHist result = sqlSession.selectOne("Point.selectDirectFundId", dh);
+		
+		if(result == null) {
+			throw new DirectFundException("정기후원 내역을 조회할 수 없습니다.");
+		}
+		System.out.println("result : " + result);
+	
+		return result;
+	}
+	
 	
 	
 	

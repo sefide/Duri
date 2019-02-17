@@ -1,5 +1,12 @@
 package com.kh.duri.payment.controller;
 
+import static org.junit.Assert.assertEquals;
+
+import java.io.IOException;
+import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,18 +20,29 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.kh.duri.common.CommonUtils;
 import com.kh.duri.member.model.vo.Member;
+import com.kh.duri.payment.model.exception.DirectFundException;
 import com.kh.duri.payment.model.exception.PaymentException;
 import com.kh.duri.payment.model.exception.PointHistoryException;
 import com.kh.duri.payment.model.exception.ReceiptException;
 import com.kh.duri.payment.model.exception.RefundException;
 import com.kh.duri.payment.model.service.PaymentService;
+import com.kh.duri.payment.model.vo.DirectFundHist;
 import com.kh.duri.payment.model.vo.DonateReceipt;
 import com.kh.duri.payment.model.vo.PageInfo;
 import com.kh.duri.payment.model.vo.Pagination;
 import com.kh.duri.payment.model.vo.Payment;
 import com.kh.duri.payment.model.vo.Point;
 import com.kh.duri.payment.model.vo.Refund;
+import com.siot.IamportRestClient.IamportClient;
+import com.siot.IamportRestClient.exception.IamportResponseException;
+import com.siot.IamportRestClient.request.AgainPaymentData;
+import com.siot.IamportRestClient.request.ScheduleData;
+import com.siot.IamportRestClient.request.ScheduleEntry;
+import com.siot.IamportRestClient.response.AccessToken;
+import com.siot.IamportRestClient.response.IamportResponse;
+import com.siot.IamportRestClient.response.Schedule;
 
 @Controller
 public class PaymentController {
@@ -384,14 +402,176 @@ public class PaymentController {
 	    return "payment/pay_directFund";
 	}
 	
-	@RequestMapping("directFundGetBilling.pm")
-	public @ResponseBody String directFundGetBilling(@RequestParam String customer_uid, HttpServletRequest request, HttpServletResponse response) {
-		//String customer_uid  = request.getParameter("customer_uid");
-		System.out.println("customer_uid : "+ customer_uid);
+	@RequestMapping("directFundGetToken.pm")
+	public @ResponseBody String directFundGetToken(@RequestParam String customer_uid, @RequestParam String imp_uid, 
+			@RequestParam String merchant_uid, @RequestParam BigDecimal amount, HttpServletRequest request, HttpServletResponse response) {
+		//System.out.println("customer_uid : "+ customer_uid);
+		//System.out.println("imp_uid : "+ imp_uid);
+		
+		IamportClient iam = new IamportClient("2128480452188810", "auDtdoRqy5eWYjryBzpvoByL60yEzqGJUjc8I3yg9Nd76EFIe5dCGMoNNXsmn85hsipamYqvLDDSijAw");
+		try {
+			AccessToken at = iam.getAuth().getResponse();
+			System.out.println("token? : " + at.getToken());
+			System.out.println("================= 정기 후원 결제 ==================");
+			// 결제 요청하기 
+			AgainPaymentData again_data = new AgainPaymentData(customer_uid, merchant_uid, amount);
+			again_data.setName("정기후원 정기결제");
+
+			IamportResponse<com.siot.IamportRestClient.response.Payment> payment_response = iam.againPayment(again_data);
+			System.out.println("payment_response message: " + payment_response.getMessage());
+			System.out.println("payment_response code: " + payment_response.getCode());
+			
+			
+			if(payment_response.getCode() == 0) {
+				if(payment_response.getResponse().getStatus().equals("paid")) {
+					return "최초결제 완료되었습니다.";
+				}else {
+					return payment_response.getResponse().getFailReason();
+				}
+				//payment_response.getResponse().getFailReason()
+			}else {
+				return "카드사 요청에 실패하였습니다.";
+			}
+			
+		} catch (IamportResponseException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} 
 		return null;
 		
 		
 	}
+	
+	@RequestMapping("subscribeDirectFund.pm")
+	public @ResponseBody String subscribeDirectFund(@RequestParam String customer_uid, @RequestParam String imp_uid, 
+			@RequestParam String merchant_uid, @RequestParam BigDecimal amount, @RequestParam String price, @RequestParam String giveMember, @RequestParam String takeMember, 
+			@RequestParam String type, HttpServletRequest request, HttpServletResponse response) {
+			
+		System.out.println("merchant_uid : "+ merchant_uid);
+		IamportClient iam = new IamportClient("2128480452188810", "auDtdoRqy5eWYjryBzpvoByL60yEzqGJUjc8I3yg9Nd76EFIe5dCGMoNNXsmn85hsipamYqvLDDSijAw");
+		
+		try {
+			AccessToken at = iam.getAuth().getResponse();
+			System.out.println("token? : " + at.getToken());
+			
+			// 결제 예약하기
+			System.out.println("================= 정기 결제 예약 ==================");
+			ScheduleData schedule_data = new ScheduleData(customer_uid);
+			
+			Date today = new Date();
+			Date schedule_at = CommonUtils.getNextMonth(today);
+			System.out.println("today : " + today);
+			System.out.println("schedule_at : " + schedule_at);
+			
+			ScheduleEntry entry = new ScheduleEntry(merchant_uid, schedule_at, amount);
+			schedule_data.addSchedule(entry);
+			
+			IamportResponse<List<Schedule>> list = iam.subscribeSchedule(schedule_data);
+			//System.out.println("list message : " + list.getMessage());
+			System.out.println("list code : " + list.getCode());
+			
+			// DirectFundHist 객체 생성
+			DirectFundHist dh = new DirectFundHist();
+			dh.setDh_mNo_give(Integer.parseInt(giveMember));
+			dh.setDh_mNo_take(Integer.parseInt(takeMember));
+			dh.setDhBilling(customer_uid);
+			dh.setDhImpUid(imp_uid);
+			dh.setDhValue(price);
+			dh.setDhType(type);
+			
+			if(list.getCode() == 0) {
+				//DB에 저장 
+				int result = ps.insertDirectFundHist(dh);
+				
+				if(result > 0) {
+					request.setAttribute("msg", "정기후원이 완료되었습니다.");
+				    return "redirect:payment/pay_success"; 
+				}else {
+					return "정기후원 정보 DB저장 실패 ";
+				}
+				
+			}else {
+				return "카드사 요청에 실패하였습니다.";
+			}
+			
+		} catch (IamportResponseException e) {
+			e.printStackTrace();
+			return "정기결제 예약 실패";
+		} catch (IOException e) {
+			e.printStackTrace();
+			return "정기결제 예약 실패";
+		}catch (DirectFundException e) {
+			e.printStackTrace();
+			return e.getMessage();
+		}
+		
+	}
+	
+	// webHook - 예약된 결제가 완료되었을 때 요청되는 서버 (다음 결제 예약을 처리한다)
+	@RequestMapping("directFundCallback.pm")
+	public String directFundCallback(HttpServletRequest request, HttpServletResponse response, Model model, HttpSession session) {
+		System.out.println("webhook 이얏호 ");
+		String imp_uid = request.getParameter("imp_uid");
+		String merchant_uid = request.getParameter("merchant_uid");
+		String status = request.getParameter("status");
+		
+		System.out.println("imp_uid : "+ imp_uid);
+		System.out.println("merchant_uid : "+ merchant_uid);
+		System.out.println("status : "+ status);
+		
+		
+		DirectFundHist dh = new DirectFundHist();
+		dh.setDhImpUid(imp_uid);
+		
+		try {
+			DirectFundHist resultDirectFund = new DirectFundHist();
+			resultDirectFund = ps.selectDirectFundId(dh);
+			
+			if(resultDirectFund != null) {
+				// 다음 결제 예약하기
+				IamportClient iam = new IamportClient("2128480452188810", "auDtdoRqy5eWYjryBzpvoByL60yEzqGJUjc8I3yg9Nd76EFIe5dCGMoNNXsmn85hsipamYqvLDDSijAw");
+				
+				System.out.println("================= 정기 결제 예약 ==================");
+
+				String customer_uid = resultDirectFund.getDhBilling();
+				ScheduleData schedule_data = new ScheduleData(customer_uid);
+				
+				Date today = new Date();
+				Date schedule_at = CommonUtils.getNextMonth(today);
+				System.out.println("today : " + today);
+				System.out.println("schedule_at : " + schedule_at);
+				
+				BigDecimal amount = new BigDecimal("100");
+				String merchant_uid_new = "merchant_" + new Date().getTime()+"_sub";
+				
+				ScheduleEntry entry = new ScheduleEntry(merchant_uid_new, schedule_at, amount);
+				schedule_data.addSchedule(entry);
+				
+				IamportResponse<List<Schedule>> list = iam.subscribeSchedule(schedule_data);
+				System.out.println("list message : " + list.getMessage());
+				System.out.println("list code : " + list.getCode());				
+				
+				resultDirectFund.setDhImpUid(imp_uid);
+				
+				if(list.getCode() == 0) {
+					// 다음 회차 정기후원 내역 DB 저장하기 
+					
+					
+				}
+				
+			}
+		} catch (DirectFundException e) {
+			e.printStackTrace();
+		} catch (IamportResponseException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+	
 	
 	
 	// 물품 후원 결제페이지
@@ -405,6 +585,5 @@ public class PaymentController {
 	public String fundMoney() {
 	    return "payment/pay_fundMoney";
 	}
-
 
 }

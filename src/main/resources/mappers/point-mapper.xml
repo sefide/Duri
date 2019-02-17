@@ -75,6 +75,18 @@
 		<result property="py_mNo" column="PY_MNO"/>
 	</resultMap>
 	
+	<resultMap type="com.kh.duri.payment.model.vo.DirectFundHist" id="directFundHistResultSet">
+		<id property="dhNo" column="DHNO"></id>
+		<result property="dh_mNo_take" column="DH_MNO_TAKE"/>
+		<result property="dh_mNo_give" column="DH_MNO_GIVE"/>
+		<result property="dhValue" column="DHVALUE"/>
+		<result property="dhType" column="DHVALUETYPE"/>
+		<result property="dhBilling" column="DHBILLINGKEY"/>
+		<result property="dhImpUid" column="DHIMPUID"/>
+		<result property="dhStartDate" column="DHSTARTDATE"/>
+	</resultMap>
+	
+	
 	<!-- 나눔두리 - 포인트 이력 수 세기 -->
 	<select id="selectPointListCount" resultType="_int">
 		SELECT COUNT(*)
@@ -240,4 +252,42 @@
 	<insert id = "insertPointHistoryPayment">
 		INSERT INTO POINT VALUES (SEQ_P_NO.NEXTVAL, 'A', #{pyPrice}, SYSDATE, '결제', #{py_mNo}, #{pyNo}, null, null, null)
 	</insert>
+	
+	<!-- 나눔두리 - 정기후원 정보 insert -->
+	<insert id = "insertDirectFundHist">
+		INSERT INTO DIRECTFUNDHISTORY VALUES (SEQ_DH_NO.NEXTVAL, #{dhValue}, SYSDATE, DEFAULT, #{dhBilling}, #{dhImpUid}, #{dhType}, #{dh_mNo_take}, #{dh_mNo_give})
+	</insert>
+	
+	<!-- 정기후원 테이블 현재 SEQ_DH_NO 값 구하기 -->
+	<select id="selectDirectFundCurVal" resultType="_int">
+		SELECT SEQ_DH_NO.CURRVAL FROM DUAL
+	</select>
+	
+	<!-- 나눔두리 - 정기후원 1차 내역 insert -->
+	<insert id = "insertDirectFundDetail">
+		INSERT INTO DIRECTFUNDHISTORYDETAIL VALUES (SEQ_DHD_NO.NEXTVAL, SYSDATE, #{dhValue}, 1, #{dhNo})
+	</insert>
+	
+	<!-- 정기후원 테이블 현재 SEQ_DHD_NO 값 구하기 -->
+	<select id="selectDirectFundDetailCurVal" resultType="_int">
+		SELECT SEQ_DHD_NO.CURRVAL FROM DUAL
+	</select>
+	
+	<!-- 나눔두리 - Point이력에 정기후원 정보 입력하기 -->	
+	<insert id = "insertPointDirect">
+		INSERT INTO POINT VALUES (SEQ_P_NO.NEXTVAL, 'U', #{dhValue}, SYSDATE, '정기후원', #{dh_mNo_give}, null, #{dhNo}, null, null)
+	</insert>
+	
+	<!-- 행복두리 - Point 업뎃하기 -->
+	<update id = "updateDirectPoint">
+		UPDATE MEMBER SET MPOINT = MPOINT+#{dhValue} WHERE MNO=#{dh_mNo_take}
+	</update>
+	
+	<!-- 나눔두리 - 다음 정기결제를 위한 merchant_id 값 가져오기 -->
+	<select id = "selectDirectFundId" resultMap="directFundHistResultSet" parameterType="DirectFundHist">
+		SELECT * FROM DIRECTFUNDHISTORY WHERE DHIMPUID = #{ dhImpUid }
+	</select>
+	
+
+	
 </mapper>
