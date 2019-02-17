@@ -3,10 +3,12 @@ package com.kh.duri.payment.model.service;
 import java.util.List;
 
 import com.kh.duri.member.model.vo.Member;
+import com.kh.duri.payment.model.exception.DirectFundException;
 import com.kh.duri.payment.model.exception.PaymentException;
 import com.kh.duri.payment.model.exception.PointHistoryException;
 import com.kh.duri.payment.model.exception.ReceiptException;
 import com.kh.duri.payment.model.exception.RefundException;
+import com.kh.duri.payment.model.vo.DirectFundHist;
 import com.kh.duri.payment.model.vo.DonateReceipt;
 import com.kh.duri.payment.model.vo.PageInfo;
 import com.kh.duri.payment.model.vo.Payment;
@@ -46,6 +48,12 @@ public interface PaymentService {
 	
 	// 나눔두리 - 후원포인트 충전하기
 	Member insertPayment(Member m, Payment py) throws PaymentException;
+	
+	// 나눔두리 - 정기후원 내역 입력하기 (1차)
+	int insertDirectFundHist(DirectFundHist dh) throws DirectFundException;
+	
+	// 나눔두리 - 다음 정기결제를 위한 merchant_id 값 가져오기
+	DirectFundHist selectDirectFundId(DirectFundHist dh) throws DirectFundException;
 
 	
 		
