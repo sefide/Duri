@@ -118,6 +118,8 @@
                                     <thead>
                                         <tr>
                                             <th>No</th>
+                                            <th style="display: none;">펀딩글 넘버</th>
+                                            <th style="display: none;">작성자 번호</th>
                                             <th>펀딩 제목</th>
                                             <th>신청일자</th>
                                             <th>행복두리ID</th>
@@ -128,16 +130,20 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                       <c:forEach var="row" items="${adminGoodsFundingList }" varStatus="status">
                                        <tr class="odd gradeX">
-                                        	<td class="center">1</td>
-                                            <td class="center">집이 없어요...</td>
-                                            <td class="center">2018/03/11</td>
-                                            <td class="center">han419120</td>
-                                            <td class="center">한부모가정</td>
-                                            <td class="center">금액후원</td>
-                                            <td class="center">300,000</td>
-                                            <td class="center"> <a href="adminCrowdDetail.ad" class="btn btn-default btn-sm">승인하러하기</a></td>
+                                        	<td class="center">${status.count}</td>
+                                        	<td class="center" style="display: none;">${row.fNo}</td>
+                                        	<td class="center" style="display: none;">${row.fWriter}</td>
+                                            <td class="center">${row.fTitle}</td>
+                                            <td class="center">${row.fWriteDate}</td>
+                                            <td class="center">${row.mid}</td>
+                                            <td class="center">${row.mFundtype}</td>
+                                            <td class="center">${row.goodsName }</td>
+                                            <td class="center">총 ${row.totalCount}개</td>
+                                            <td class="center"> <a class="btn btn-default btn-sm adminMoneyFunding">승인하러하기</a></td>
                                         </tr>
+                                    </c:forEach>
                                     </tbody>
                                 </table>
                             </div>
