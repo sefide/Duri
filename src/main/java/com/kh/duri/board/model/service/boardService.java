@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.kh.duri.board.model.exception.DonateListException;
 import com.kh.duri.board.model.vo.Board;
+import com.kh.duri.board.model.vo.BoardItem;
 import com.kh.duri.member.model.vo.Member;
 import com.kh.duri.payment.model.vo.PageInfo;
 
@@ -21,5 +22,10 @@ public interface boardService {
 	List<Board> selectMoneyList(PageInfo pi) throws DonateListException;
 
 	Board moneyDetailOne(Board b);
+
+	int getThingListCount() throws DonateListException;
+
+	List<BoardItem> selectThingList(PageInfo pi);
+
 
 }

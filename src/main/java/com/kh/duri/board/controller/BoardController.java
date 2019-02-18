@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.kh.duri.board.model.exception.DonateListException;
 import com.kh.duri.board.model.service.boardService;
 import com.kh.duri.board.model.vo.Board;
+import com.kh.duri.board.model.vo.BoardItem;
 import com.kh.duri.member.model.vo.Member;
 import com.kh.duri.payment.model.vo.PageInfo;
 import com.kh.duri.payment.model.vo.Pagination;
@@ -152,7 +153,7 @@ public class BoardController {
 			
 		session.setAttribute("moneyDetail", moneyDetail);	//세션에 뿌려주기
 			
-			mv.setViewName("redirect:moneyDetail.bo"); //위처럼 redirect로 뷰페이지이름연결할거랑 똑같음
+		mv.setViewName("redirect:moneyDetail.bo"); //위처럼 redirect로 뷰페이지이름연결할거랑 똑같음
 
 		
 
@@ -161,6 +162,38 @@ public class BoardController {
 	
 
 	}
+	
+	   @RequestMapping("thing_donate.bo")
+	   public String thingDonateList(Model model, HttpServletRequest request, HttpServletResponse response) throws DonateListException {
+	      int currentPage = 1;
+	      
+	      if(request.getParameter("currentPage") != null) {
+	         currentPage = Integer.parseInt(request.getParameter("currentPage"));
+	      }
+
+	      
+	         int listCount = bs.getThingListCount();
+			
+			PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
+			
+			System.out.println("크라우드펀딩 금액후원 명수 :  " + listCount);
+			
+
+			List<BoardItem> thList;
+
+			
+			thList = bs.selectThingList(pi);
+			
+
+			model.addAttribute("thList", thList);
+			model.addAttribute("pi", pi);
+			return "board/causes2";
+
+	         
+	      
+	      
+	   }
+
 	
 	
 	@RequestMapping("longDonate.bo")
