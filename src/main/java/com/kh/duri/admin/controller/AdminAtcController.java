@@ -46,9 +46,9 @@ public class AdminAtcController {
 			}
 		
 	}
-	//크라우드 승인글 상세페이지
-	@RequestMapping("adminCrowdDetail.ad")
-	public String adminCrowdDetail(HttpServletRequest request, HttpServletResponse response,Model model1,Model model2,adminMember m, adminFundingList f) {
+	//크라우드 금액 승인글 상세페이지
+	@RequestMapping("adminCrowdDetailMoney.ad")
+	public String adminCrowdDetailMoney(HttpServletRequest request, HttpServletResponse response,Model model1,Model model2,adminMember m, adminFundingList f) {
 		
 		int fundingnum = Integer.parseInt(request.getParameter("fundingnum"));
 		int membernum = Integer.parseInt(request.getParameter("membernum"));
@@ -68,14 +68,48 @@ public class AdminAtcController {
 			model1.addAttribute("CrowdMemInfo", CrowdMemInfo);
 			model2.addAttribute("CrowdFundInfo", CrowdFundInfo);
 			
-			return "admin/adminCrowdDetail";
+			return "admin/adminCrowdDetailMoney";
 			
 		} catch (ListException e) {
 
 			model1.addAttribute("msg", e.getMessage());
 			model2.addAttribute("msg", e.getMessage());
 			
-			return "admin/adminCrowdDetail";
+			return "admin/adminCrowdDetailMoney";
+		}
+		
+		
+	}
+	//크라우드 물품 승인글 상세페이지
+	@RequestMapping("adminCrowdDetailGoods.ad")
+	public String adminCrowdDetailGoods(HttpServletRequest request, HttpServletResponse response,Model model1,Model model2,adminMember m, adminFundingList f) {
+		
+		int fundingnum = Integer.parseInt(request.getParameter("fundingnum"));
+		int membernum = Integer.parseInt(request.getParameter("membernum"));
+		
+		
+		
+		m.setMno(membernum);
+		f.setfNo(fundingnum);
+		
+		adminMember CrowdMemGoodsInfo;
+		List<adminFundingList> CrowdFundGoodsInfo;
+		
+		try {
+			CrowdMemGoodsInfo = aas.CrowdMemInfoDetail(m);
+			CrowdFundGoodsInfo = aas.CrowdFundGoodsInfo(f);
+			System.out.println("CrowdFundGoodsInfo:"+CrowdFundGoodsInfo);
+			model1.addAttribute("CrowdMemGoodsInfo", CrowdMemGoodsInfo);
+			model2.addAttribute("CrowdFundGoodsInfo", CrowdFundGoodsInfo);
+			
+			return "admin/adminCrowdDetailGoods";
+			
+		} catch (ListException e) {
+			
+			model1.addAttribute("msg", e.getMessage());
+			model2.addAttribute("msg", e.getMessage());
+			
+			return "admin/adminCrowdDetailGoods";
 		}
 		
 		

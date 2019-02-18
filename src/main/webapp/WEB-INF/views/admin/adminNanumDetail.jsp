@@ -112,8 +112,9 @@
                                             <th>행복두리ID</th>
                                             <th>카테고리</th>
                                             <th>후원 시작 날짜</th>
+                                            <th>매달 후원 날짜</th>
                                             <th>매달 후원 금액</th>
-                                            <th>매달 결제 날짜</th>
+                                            <th>총 결제 횟수</th>
                                             <th>누적 후원 금액</th>
                                             <th>현재 후원 상태</th>
                                         </tr>
@@ -124,32 +125,12 @@
                                             <td class="center">han419120</td>
                                             <td class="center">한부모가정</td>
                                             <td class="center">2018/03/11</td>
-                                            <td class="center">50,000</td>
-                                            <td class="center">11일</td>
-                                            <td class="center">300,000</td>
-                                            <td class="center">Y</td>
-                                        </tr>
-                                       <tr class="odd gradeX">
-                                            <td class="center">1</td>
-                                            <td class="center">han419120</td>
-                                            <td class="center">한부모가정</td>
                                             <td class="center">2018/03/11</td>
                                             <td class="center">50,000</td>
                                             <td class="center">11일</td>
                                             <td class="center">300,000</td>
                                             <td class="center">Y</td>
                                         </tr>
-                                       <tr class="odd gradeX">
-                                            <td class="center">1</td>
-                                            <td class="center">han419120</td>
-                                            <td class="center">한부모가정</td>
-                                            <td class="center">2018/03/11</td>
-                                            <td class="center">50,000</td>
-                                            <td class="center">11일</td>
-                                            <td class="center">300,000</td>
-                                            <td class="center">Y</td>
-                                        </tr>
-                                       
                                     </tbody>
                                 </table>
                             </div>
@@ -177,7 +158,7 @@
                                             <th>펀딩 시작 날짜</th>
                                             <th>펀딩 마감 날짜</th>
                                             <th>진행 상태(%)</th>
-                                            <th>목표 금액 or수량</th>
+                                            <th>후원금액</th>
                                             <th>상태</th>
                                         </tr>
                                     </thead>
@@ -192,27 +173,6 @@
                                             <td class="center">300,000</td>
                                             <td class="center">진행중</td>
                                         </tr>
-                                       <tr class="odd gradeX">
-                                            <td class="center">1</td>
-                                            <td class="center">han419120</td>
-                                            <td class="center">한부모가정</td>
-                                            <td class="center">2018/03/11</td>
-                                            <td class="center">2018/09/11</td>
-                                            <td class="center">34</td>
-                                            <td class="center">300,000</td>
-                                            <td class="center">마감</td>
-                                        </tr>
-                                       <tr class="odd gradeX">
-                                            <td class="center">1</td>
-                                            <td class="center">han419120</td>
-                                            <td class="center">한부모가정</td>
-                                            <td class="center">2018/03/11</td>
-                                            <td class="center">2018/09/11</td>
-                                            <td class="center">34</td>
-                                            <td class="center">300,000</td>
-                                            <td class="center">진행중</td>
-                                        </tr>
-                                       
                                     </tbody>
                                 </table>
                             </div>

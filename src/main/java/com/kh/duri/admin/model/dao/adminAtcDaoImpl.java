@@ -26,10 +26,15 @@ public class adminAtcDaoImpl implements adminAtcDao{
 	public adminMember CrowdMemInfoDetail(SqlSessionTemplate sqlsession, adminMember m) throws ListException {
 		return sqlsession.selectOne("Admin.CrowdMemInfoDetail",m);
 	}
-	//크라우드 펀딩 상세페이지 -펀딩정보
+	//크라우드 펀딩 상세페이지 -펀딩정보(금액)
 	@Override
 	public adminFundingList CrowdFundInfoDetail(SqlSessionTemplate sqlsession, adminFundingList f) throws ListException {
 		return sqlsession.selectOne("Admin.CrowdFundInfoDetail",f);
+	}
+	//크라우드 펀딩 상세페이지 -펀딩정보(물품)
+	@Override
+	public List<adminFundingList> CrowdFundGoodsInfo(SqlSessionTemplate sqlsession, adminFundingList f) throws ListException {
+		return sqlsession.selectList("Admin.CrowdFundGoodsInfo",f);
 	}
 	
 	

@@ -39,11 +39,17 @@ public class adminAtcServiceImpl implements adminAtcService{
 		return CrowdMemInfoDetail;
 	}
 	
-	//크라우드 펀딩 상세페이지 -펀딩정보
+	//크라우드 펀딩 상세페이지 -펀딩정보(금액)
 	@Override
 	public adminFundingList CrowdFundInfoDetail(adminFundingList f) throws ListException {
 		adminFundingList CrowdFundInfoDetail = aad.CrowdFundInfoDetail(sqlsession,f);
 		return CrowdFundInfoDetail;
+	}
+	//크라우드 펀딩 상세페이지 -펀딩정보(물품)
+	@Override
+	public List<adminFundingList> CrowdFundGoodsInfo(adminFundingList f) throws ListException {
+		List<adminFundingList> CrowdFundGoodsInfo = aad.CrowdFundGoodsInfo(sqlsession,f);
+		return CrowdFundGoodsInfo;
 	}
 
 }
