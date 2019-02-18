@@ -26,24 +26,13 @@ public class NanumMemberServiceImpl implements NanumMemberService {
 	private NanumMemberDao nd;
 
 
-	//찜한 정기 후원 개수 조회
-	@Override
-	public int getLikeDirectListCount(Member m) throws NanumException {
-		int listCount = nd.getLikeDirectListCount(sqlSession ,m);	
-		return listCount;
-	}
 	//찜한 정기 후원  조회
 	@Override
 	public List<FundInterest> selectLikeDirect(Member m, PageInfo pi) throws NanumException {
 		List<FundInterest> dlList = nd.selectLikeDirect(sqlSession,m,pi);
 		return dlList;
 	}
-	//찜한 금액 크라우드 펀딩 개수 조회
-	@Override
-	public int getLikeMoneyCloudListCount(Member m) throws NanumException {
-		int listCount = nd.getLikeMoneyCloudListCount(sqlSession ,m);	
-		return listCount;
-	}
+	
 	// 찜한 금액 크라우드 펀딩  조회
 	@Override
 	public List<FundInterest> selectLikeMoneyCloud(Member m, PageInfo pi2) throws NanumException {
@@ -88,6 +77,18 @@ public class NanumMemberServiceImpl implements NanumMemberService {
 	public HashMap<String, List<Letter>> selectLetterList(Member m, HashMap<String, PageInfo> paging) throws NanumException {
 		HashMap<String, List<Letter>> letterList = nd.selectLetterList(sqlSession,m,paging);
 		return letterList;
+	}
+	//감사편지 상세 가져오기
+	@Override
+	public List<Letter> selectLetterDetailList(int leNo) throws NanumException {
+		 List<Letter> letterDetailList = nd.selectLetterDetailList(sqlSession,leNo);
+		return letterDetailList;
+	}	
+	//찜한 후원  수 가져오기
+	@Override
+	public HashMap<String, Integer> getLikeListCount(Member m) throws NanumException {
+		 HashMap<String, Integer> LikeListCount = nd.getLikeListCount(sqlSession,m);
+		return LikeListCount;
 	}
 	
 	

@@ -179,8 +179,7 @@ public class NanumController {
 			List<Letter> fundLetter = letterList.get("fundLetter");
 			List<Letter> endFundLetter = letterList.get("endFundLetter");
 			List<Letter> moneyCloudLetter = letterList.get("moneyCloudLetter");
-			List<Letter> itemCloudLetter = letterList.get("itemCloudLetter");
-			
+			List<Letter> itemCloudLetter = letterList.get("itemCloudLetter");			
 			model.addAttribute("fundLetter",fundLetter);
 			model.addAttribute("pi",pi);
 			model.addAttribute("endFundLetter",endFundLetter);
@@ -188,7 +187,7 @@ public class NanumController {
 			model.addAttribute("moneyCloudLetter",moneyCloudLetter);
 			model.addAttribute("pi3",pi3);
 			model.addAttribute("itemCloudLetter",itemCloudLetter);
-			model.addAttribute("pi4",pi4);
+			model.addAttribute("pi4",pi4);	
 			return "Nanummember/mypage/mypage_letter";
 		} catch (NanumException e) {
 			e.printStackTrace();
@@ -197,25 +196,31 @@ public class NanumController {
 		
 		
 	}	
-	
-	
-	
-	
+
+	//감사편지 상세조회
 	@RequestMapping("mypageLetterDetail.nanum")
-	public String Total11() {
-		return "Nanummember/mypage/mypage_letterDetail";
+	public String Total11(Model model, HttpServletRequest request, HttpServletResponse response) {
+		int leNo = Integer.parseInt(request.getParameter("leNo"));
+		System.out.println("leNo"+leNo);
+		
+		try {
+			List<Letter> letterDetailList = ns.selectLetterDetailList(leNo);
+			model.addAttribute("letterDetailList",letterDetailList);		
+			System.out.println("letterDetailList"+letterDetailList);
+			return "Nanummember/mypage/mypage_letterDetail";
+			
+		} catch (NanumException e) {
+			e.printStackTrace();
+			return "Nanummember/mypage/mypage_letterDetail";
+		}
 	}
 	
-	@RequestMapping("mypageReceipt.nanum")
-	public String Total6() {
-		return "Nanummember/mypage/mypage_receipt";
-	}
-	////찜한 후원 조회 (정기 / 크라우드 - 금액)
+	//찜한 후원 조회
 	@RequestMapping("mypageLikefund.nanum")
 	public String selectLikeFundList(Model model, HttpServletRequest request, HttpServletResponse response) {
 		Member m = (Member)request.getSession().getAttribute("loginUser2");
-		int currentPage = 1;
-		int currentPage2 = 1;
+		int currentPage = 1; //정기
+		int currentPage2 = 1; //금액
 		if(request.getParameter("currentPage") != null) {
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		}
@@ -223,17 +228,22 @@ public class NanumController {
 			currentPage2 = Integer.parseInt(request.getParameter("currentPage2"));
 		}
 		try {
-			int listCount = ns.getLikeDirectListCount(m);
-			int listCount2 = ns.getLikeMoneyCloudListCount(m);
-			PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
-			PageInfo pi2 = Pagination.getPageInfo(currentPage2, listCount2);
-			List<FundInterest> dfList = ns.selectLikeDirect(m,pi);
+			HashMap<String, Integer> likeListCount = new HashMap<>();			
+			likeListCount = ns.getLikeListCount(m);	 //감사편지 개수 가져오기 	 likeDirectCount
+			int likeDirectCount = likeListCount.get("likeDirectCount");
+			int likeMoneyCount = likeListCount.get("likeMoneyCount");
+			
+			PageInfo pi = Pagination.getPageInfo(currentPage, likeDirectCount);
+			PageInfo pi2 = Pagination.getPageInfo(currentPage2, likeMoneyCount);
+			
+			/*List<FundInterest> dfList = ns.selectLikeDirect(m,pi);
 			List<FundInterest> mclList = ns.selectLikeMoneyCloud(m,pi2);
 			model.addAttribute("dfList",dfList);
 			model.addAttribute("pi",pi);
 			model.addAttribute("mclList",mclList);
 			model.addAttribute("pi2",pi2);
-			System.out.println("mclList"+mclList);
+			System.out.println("mclList"+mclList);*/
+			
 			return "Nanummember/mypage/mypage_likefund";
 		} catch (NanumException e) {
 			e.printStackTrace();
@@ -264,5 +274,9 @@ public class NanumController {
 		return "Nanummember/mypage/mypage_updateInfo";
 	}
 	
+/*	@RequestMapping("mypageReceipt.nanum")
+	public String Total6() {
+		return "Nanummember/mypage/mypage_receipt";
+	}*/
 	
 }

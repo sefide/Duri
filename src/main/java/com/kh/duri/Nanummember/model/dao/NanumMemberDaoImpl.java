@@ -135,20 +135,26 @@ public class NanumMemberDaoImpl implements NanumMemberDao {
 		letterList.put("itemCloudLetter", itemCloudLetter);	
 		return letterList;
 	}
-	
-	
-
-	
-	
-	//찜한 정기 후원 개수 조회
+	//감사편지 상세 가져오기
 	@Override
-	public int getLikeDirectListCount(SqlSessionTemplate sqlSession, Member m) throws NanumException {
-		int listCount = sqlSession.selectOne("Nanum.selectLikeDirectCount", m);
-		if(listCount < 0) {
-			throw new NanumException("찜한 정기후원 개수 조회 실패");
-		}	
-		return listCount;
+	public List<Letter> selectLetterDetailList(SqlSessionTemplate sqlSession, int leNo) throws NanumException {
+		 List<Letter> letterDetailList = sqlSession.selectList("Nanum.selectLetterDetail",leNo);
+		return letterDetailList;
 	}
+	
+	//찜한 후원 개수 가져오기
+	@Override
+	public HashMap<String, Integer> getLikeListCount(SqlSessionTemplate sqlSession, Member m) throws NanumException {
+		HashMap<String, Integer> getLikeCount = new HashMap<>(); 
+		int likeDirectCount=  sqlSession.selectOne("Nanum.selectLikeDirectCount",m); //정기후원 개수
+		int likeMoneyCount = sqlSession.selectOne("Nanum.selectLikeMoneyCount", m); //금액후원 개수
+		getLikeCount.put("likeDirectCount", likeDirectCount);			
+		getLikeCount.put("likeMoneyCount", likeMoneyCount);		
+		return getLikeCount;
+	}
+	
+		
+		
 	//찜한 정기 후원  조회
 	@Override
 	public List<FundInterest> selectLikeDirect(SqlSessionTemplate sqlSession, Member m, PageInfo pi) throws NanumException {
@@ -159,15 +165,6 @@ public class NanumMemberDaoImpl implements NanumMemberDao {
 			throw new NanumException("찜한 정기후원 존재 하지 않음");
 		}			
 		return dlList;
-	}
-	//찜한 금액 크라우드 펀딩 개수 조회
-	@Override
-	public int getLikeMoneyCloudListCount(SqlSessionTemplate sqlSession, Member m) throws NanumException {
-		int listCount = sqlSession.selectOne("Nanum.selectLikeMoneyCount", m);
-		if(listCount < 0) {
-			throw new NanumException("찜한 정기후원 개수 조회 실패");
-		}	
-		return listCount;
 	}
 	// 찜한 금액 크라우드 펀딩  조회
 	@Override
@@ -180,6 +177,8 @@ public class NanumMemberDaoImpl implements NanumMemberDao {
 		}			
 		return dlList;
 	}
+	
+	
 
 
 	

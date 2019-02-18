@@ -77,7 +77,7 @@ tr:hover{
 <%@ include file="../../common/navi.jsp" %>
 <%@ include file="../include/header.jsp" %>
 <br><br><br><br>	
-			<div class="contBox inner" id="fundIng" >
+		<div class="contBox inner" id="fundIng" >
 				<%@ include file="../include/tabMypage.jsp"%>
 				
 			<!-- 진행중인 정기후원 편지 -->
@@ -95,14 +95,13 @@ tr:hover{
 							<th style="width: 20%;">작성일</th>
 						</tr>
 					</thead>
-					<tbody>
-						<!-- <tr class="hoverTr" onclick="location.href='mypageLetterDetail.nanum'"> -->						
+					<tbody>									
 						<c:forEach items="${fundLetter}" var = "fundLetter" >
-							<tr>
-							<td><c:out value="${fundLetter.mNick}"/></td>
-							<td><c:out value="${fundLetter.leTitle}"/></td>							
-							<td><c:out value="${fundLetter.leWriteDate}"></c:out></td>					
-						</tr>
+							<tr onclick="goLetterDetail(${fundLetter.leNo});">
+								<td><c:out value="${fundLetter.mNick}"/></td>
+								<td><c:out value="${fundLetter.leTitle}"/></td>							
+								<td><c:out value="${fundLetter.leWriteDate}"></c:out></td>					
+							</tr>
 						</c:forEach>
 					</tbody>
 				</table>
@@ -160,14 +159,13 @@ tr:hover{
 							<th style="width: 20%;">작성일</th>
 						</tr>
 					</thead>
-					<tbody>
-						<!-- <tr class="hoverTr" onclick="location.href='mypageLetterDetail.nanum'"> -->						
+					<tbody>					
 						 <c:forEach items="${endFundLetter}" var = "endFundLetter" >
-							<tr>
-							<td><c:out value="${endFundLetter.mNick}"/></td>
-							<td><c:out value="${endFundLetter.leTitle}"/></td>							
-							<td><c:out value="${endFundLetter.leWriteDate}"></c:out></td>					
-						</tr>
+							<tr onclick="goLetterDetail(${endFundLetter.leNo});">
+								<td><c:out value="${endFundLetter.mNick}"/></td>
+								<td><c:out value="${endFundLetter.leTitle}"/></td>							
+								<td><c:out value="${endFundLetter.leWriteDate}"></c:out></td>					
+							</tr>
 						</c:forEach> 
 					</tbody>
 				</table>
@@ -227,11 +225,11 @@ tr:hover{
 					</thead>
 					<tbody>
 						<c:forEach items="${moneyCloudLetter}" var = "moneyCloudLetter" varStatus="">
-							<tr>
-							<td><c:out value="${moneyCloudLetter.mNick}"/></td>
-							<td><c:out value="${moneyCloudLetter.leTitle}"/></td>							
-							<td><c:out value="${moneyCloudLetter.leWriteDate}"></c:out></td>					
-						</tr>
+							<tr onclick="goLetterDetail(${moneyCloudLetter.leNo});">
+								<td><c:out value="${moneyCloudLetter.mNick}"/></td>
+								<td><c:out value="${moneyCloudLetter.leTitle}"/></td>							
+								<td><c:out value="${moneyCloudLetter.leWriteDate}"></c:out></td>					
+							</tr>
 						</c:forEach>
 						
 					</tbody>
@@ -274,6 +272,7 @@ tr:hover{
 					</div>
 				</div>
 			</div>
+			
 			<!-- 물품 크라우드 편지  -->
 			<div class="tableArea" id="itemDiv" style="display: none; ">
 				<div id="myTitle"><i class="envelope outline icon"></i> 물품 크라우드펀딩 행복두리 편지</div>
@@ -291,11 +290,11 @@ tr:hover{
 					</thead>
 					<tbody>
 						<c:forEach items="${itemCloudLetter}" var = "itemCloudLetter" varStatus="">
-							<tr>
-							<td><c:out value="${itemCloudLetter.mNick}"/></td>
-							<td><c:out value="${itemCloudLetter.leTitle}"/></td>							
-							<td><c:out value="${itemCloudLetter.leWriteDate}"></c:out></td>					
-						</tr>
+							<tr onclick="goLetterDetail(${itemCloudLetter.leNo});">
+								<td><c:out value="${itemCloudLetter.mNick}"/></td>
+								<td><c:out value="${itemCloudLetter.leTitle}"/></td>							
+								<td><c:out value="${itemCloudLetter.leWriteDate}"></c:out></td>					
+							</tr>
 						</c:forEach>
 						
 					</tbody>
@@ -340,11 +339,7 @@ tr:hover{
 			</div>
 			
 			
-			
-			
-			
-			
-			
+
 		</div>
 		
 	<%@ include file="../include/myNav.jsp" %>
@@ -420,6 +415,15 @@ tr:hover{
 				}				
 			});
 		}	
+		//편지 상세 보기로 가기
+		function goLetterDetail(leNo) {	
+			var leNo = leNo ;
+			console.log(leNo);
+			location.href="mypageLetterDetail.nanum?leNo="+leNo;
+		}
+		
+		
+		
 		</script>
 		
 </body>
