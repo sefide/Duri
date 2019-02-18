@@ -6,9 +6,6 @@
   <configuration>
 	<typeAliases>
 		<typeAlias type="com.kh.duri.member.model.vo.Member" alias="Member"/>
-		<typeAlias type="com.kh.duri.payment.model.vo.Point" alias="Point"/>	
-		<typeAlias type="com.kh.duri.payment.model.vo.DonateReceipt" alias="DonateReceipt"/>
-		<typeAlias type="com.kh.duri.payment.model.vo.Refund" alias="Refund"/>	
 	
 		<typeAlias type="com.kh.duri.admin.model.vo.Donatelist" alias="Donatelist"/>	
 		<typeAlias type="com.kh.duri.admin.model.vo.RefundList" alias="RefundList"/>	
@@ -30,6 +27,11 @@
 		<typeAlias type="com.kh.duri.happymember.model.vo.FundItemList" alias="FundItemList"/>
 		<typeAlias type="com.kh.duri.happymember.model.vo.Delivery" alias="Delivery"/>
 		<typeAlias type="com.kh.duri.happymember.model.vo.DirectFundHistory" alias="HappyDirectFundHistory"/>
+		<typeAlias type="com.kh.duri.happymember.model.vo.Funding" alias="HappyFunding"/> 
+		
+		<typeAlias type="com.kh.duri.payment.model.vo.Point" alias="Point"/>	
+		<typeAlias type="com.kh.duri.payment.model.vo.DonateReceipt" alias="DonateReceipt"/>
+		<typeAlias type="com.kh.duri.payment.model.vo.Refund" alias="Refund"/>	
 		<typeAlias type="com.kh.duri.payment.model.vo.DirectFundHist" alias="DirectFundHist"/>	<!-- DirectFundHist :정기후원 (190216) -->
 		
 	</typeAliases>
