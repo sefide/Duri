@@ -86,7 +86,7 @@
 <br><br><br><br>	
 			<div class="contBox inner">
 				<%@ include file="../include/tabMypage.jsp"%>
-
+			<!-- 찜한 정기행복두리  -->
 			<div class="tableArea">
 				<div id="myTitle"><i class="heart icon"></i>보고싶은 정기 행복두리</div>
 				<table>
@@ -98,11 +98,11 @@
 						</tr>
 					</thead>
 					<tbody>
-						<c:forEach items="${dfList}" var = "dfList" varStatus="">
+						<c:forEach items="${likeDirectList}" var = "likeDirectList" varStatus="">
 							<tr>
-							<td><c:out value="${dfList.mNick}"/></td>
-							<td title="${dfList.mpr}"><c:out value="${dfList.mpr}"/></td>						
-							<td><c:out value="${dfList.flDate}"></c:out></td>											
+							<td><c:out value="${likeDirectList.mNick}"/></td>
+							<td title="${likeDirectList.mpr}"><c:out value="${likeDirectList.mpr}"/></td>						
+							<td><c:out value="${likeDirectList.flDate}"></c:out></td>											
 						</tr>
 						</c:forEach>
 					</tbody>
@@ -145,12 +145,13 @@
 					</div>
 				</div>
 			</div>
-
-			<div class="tableArea">
-				<div id="myTitle"><i class="heart icon"></i>보고싶은 크라우드 펀딩</div>
+			
+			<!-- 찜한 금액 크라우드 펀딩 -->
+			<div class="tableArea" id="MoneyCloud" style="display : block;">
+				<div id="myTitle"><i class="heart icon"></i>보고싶은 금액 크라우드 펀딩</div>
 				<div style="width: 96%; margin: 0 auto;">
-				<div class="categotyBtn" onclick="#" style="margin-right: 30px;">금액</div>
-				<div class="categotyBtn" onclick="#">물품</div>
+				<div  id="mBtn" class="categotyBtn" onclick="MoneyCloud();" style="margin-right: 30px; color: green;">금액</div>
+				<div  id="iBtn" class="categotyBtn" onclick="ItemCloud();">물품</div>
 				</div>
 				<table>
 					<thead>
@@ -161,11 +162,11 @@
 						</tr>
 					</thead>
 					<tbody>
-						<c:forEach items="${mclList}" var = "mclList" varStatus="">
+						<c:forEach items="${likeMoneyList}" var = "likeMoneyList" varStatus="">
 							<tr>
-							<td><c:out value="${mclList.mNick}"/></td>
-							<td ><c:out value="${mclList.fTitle}"/></td>						
-							<td><c:out value="${mclList.flDate}"></c:out></td>											
+							<td><c:out value="${likeMoneyList.mNick}"/></td>
+							<td ><c:out value="${likeMoneyList.fTitle}"/></td>						
+							<td><c:out value="${likeMoneyList.flDate}"></c:out></td>											
 						</tr>
 						</c:forEach>
 					</tbody>
@@ -208,13 +209,111 @@
 					</div>
 				</div>
 			</div>
-		</div>								
-	
 			
-			
-	
+			<!-- 찜한 물품 크라우드 펀딩 -->
+			<div class="tableArea" id="ItemCloud" style="display: none;">
+				<div id="myTitle"><i class="heart icon"></i>보고싶은 물품 크라우드 펀딩</div>
+				<div style="width: 96%; margin: 0 auto;">
+				<div  id="mBtn" class="categotyBtn" onclick="MoneyCloud();" style="margin-right: 30px;">금액</div>
+				<div  id="iBtn" class="categotyBtn" onclick="ItemCloud();">물품</div>
+				</div>
+				<table>
+					<thead>
+						<tr>
+							<th style="width: 25%;">행복두리</th>
+							<th style="width: 80%;">크라우드 펀딩 제목</th>
+							<th style="width: 15%;">찜한 일시</th>								
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach items="${likeItemList}" var = "likeItemList" varStatus="">
+							<tr>
+							<td><c:out value="${likeItemList.mNick}"/></td>
+							<td ><c:out value="${likeItemList.fTitle}"/></td>						
+							<td><c:out value="${likeItemList.flDate}"></c:out></td>											
+						</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+				<div class="col text-center">
+					<div class="block-27">
+						<ul>
+							<c:if test="${ pi3.currentPage <= 1 }">
+							<li><a href="#">&lt;</a></li>
+							</c:if>
+							<c:if test="${ pi3.currentPage > 1 }">
+								<c:url var="blistBack" value="mypage.nanum">
+									<c:param name="currentPage" value="${ pi3.currentPage - 1}"/>
+								</c:url>
+								<li><a href="${ blistBack }">&lt;</a></li>
+							</c:if>
 
+							<c:forEach var="p" begin="${ pi3.startPage }" end="${ pi3.endPage }">
+								<c:if test="${ p == pi3.currentPage }">
+									<li class="active"><a class="active" href="${ blistCheck }">${ p }</a></li>
+								</c:if>
+								<c:if test="${ p != pi3.currentPage }">
+									<c:url var="blistCheck" value="mypage.nanum">
+										<c:param name="currentPage" value="${p}"/>									
+									</c:url>
+									 <li><a href="${ blistCheck }">${ p }</a></li> 									
+								</c:if>
+							</c:forEach>
+							
+							<c:if test="${ pi3.currentPage >= pi3.maxPage }">
+								<li><a href="#">&gt;</a></li>
+							</c:if>
+							<c:if test="${ pi3.currentPage < pi3.maxPage }">
+								<c:url var="blistEnd" value="mypage.nanum">
+									<c:param name="currentPage" value="${ pi3.currentPage + 1}"/>
+								</c:url>
+								<li><a href="${ blistEnd }">&gt;</a></li>
+							</c:if>						
+						</ul>
+					</div>
+				</div>
+			</div>
+			
+
+		</div>								
 	<%@ include file="../include/myNav.jsp" %>
+	<script>
+	// 금액 크라우드 버튼 클릭시  
+	function MoneyCloud() {	
+		var mno = ${ sessionScope.loginUser2.mno };		
+		$.ajax({
+			url:"mypage.nanum",
+			type:"post",
+			data:{mno:mno},
+			success:function(data){
+				 $("#MoneyCloud").show(); 
+				 $("#ItemCloud").hide();
+				 $("#mBtn").css("color","green");
+			},
+			error:function(status){
+				console.log(status);
+			}				
+		});
+	}	
+	//물품 크라우드 버튼 클릭시
+	function ItemCloud() {	
+		var mno = ${ sessionScope.loginUser2.mno };					
+		$.ajax({
+			url:"mypage.nanum",
+			type:"post",
+			data:{mno:mno},
+			success:function(data){
+				 $("#MoneyCloud").hide(); 
+				 $("#ItemCloud").show();
+				 $("#ItemCloud").find("#iBtn").css("color","green");					 
+			},
+			error:function(status){
+				console.log(status);
+			}				
+		});
+	}	
+	
+	</script>
 
 </body>
 </html>

@@ -13,7 +13,7 @@
 		<result property="mGender" column="MGENDER"/>
 		<result property="mPhone" column="MPHONE"/>
 		<result property="mid" column="MID"/>
-		<result property="mpwd" column="MPWD"/>
+		<result property="mpwd" column="MPWD"/> 
 		<result property="email" column="MEMAIL"/>
 		<result property="mEnrollDate" column="MENROLLDATE"/>
 		<result property="mPoint" column="MPOINT"/>
@@ -140,7 +140,7 @@
 		and f.FTYPE= 'ITEM' ]]>
 	</select>
 	<!-- 물품 크라우드 펀딩  조회 (진행) -->
-	<select id="selectItemCloud" resultMap="fundingResultSet" parameterType="Funding" resultType="list">
+	<select id="selectItemCloud" resultMap="fundingQ5ResultSet" parameterType="Funding" resultType="list">
 		SELECT ROWNUM RNUM, FTITLE , FHVALUE ,FSTATUS, FSTARTDATE , FENDDATE , FHDATE
 		FROM(SELECT f.FTITLE , fh.FHVALUE , f.FSTATUS,  f.FSTARTDATE ,f.FENDDATE , fh.FHDATE
 		FROM FUNDING f, FUNDHISTORY fh	
@@ -295,7 +295,7 @@
   	<select id="selectLikeMoneyCount" resultType="_int">
   		SELECT COUNT(*)
 		FROM FUNDINTEREST FI, MEMBER M 
-		WHERE FI.FISTATUS = 'Y' AND FI.FI_MNO =  #{mno}  AND FI.FI_MNO_TAKE = M.MNO AND FI.FITYPE = 1 
+		WHERE FI.FISTATUS = 'Y' AND FI.FI_MNO =  #{mno}  AND FI.FI_MNO_TAKE = M.MNO AND FI.FITYPE = 2 
 		ORDER BY FI.FIDATE
   	</select>
   	<!-- 찜한 금액 크라우드 펀딩  조회 -->
@@ -307,9 +307,22 @@
 		WHERE FI.FISTATUS = 'Y' AND FI.FI_MNO = #{mno}  AND FI.FITYPE = 2  AND F.FNO = FI.FI_FNO AND F.FWRITER = M.MNO
 		ORDER BY FI.FIDATE )
   	</select>
-  	
-  	
-  	
+  	<!-- 찜한 물품 크라우딩 개수 조회 -->
+  	<select id="selectLikeItemCount" resultType="_int">
+  		SELECT COUNT(*)
+		FROM FUNDINTEREST FI, MEMBER M 
+		WHERE FI.FISTATUS = 'Y' AND FI.FI_MNO =  #{mno}  AND FI.FI_MNO_TAKE = M.MNO AND FI.FITYPE = 3
+		ORDER BY FI.FIDATE
+  	</select>
+  	<!-- 찜한 물품 크라우딩 조회 -->
+  	<select id="selectLikeItemCloud" resultMap="fundInterestResultSet" parameterType="FundInterest" resultType="list">
+  		SELECT ROWNUM RNUM, MNICK , FTITLE, FIDATE, FI_FNO
+		FROM(
+		SELECT  M.MNICK ,F.FTITLE, FI.FIDATE , FI.FI_FNO
+		FROM FUNDINTEREST FI, MEMBER M , FUNDING F
+		WHERE FI.FISTATUS = 'Y' AND FI.FI_MNO = #{mno}  AND FI.FITYPE = 3  AND F.FNO = FI.FI_FNO AND F.FWRITER = M.MNO
+		ORDER BY FI.FIDATE )
+  	</select>
   	
   	
   	
