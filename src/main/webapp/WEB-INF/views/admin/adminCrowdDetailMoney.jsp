@@ -79,7 +79,7 @@
 											<c:if test="${CrowdMemInfo.adate ==null}"><td>승인 전 신규회원</td></c:if>
 											<c:if test="${CrowdMemInfo.adate !=null}"><td>${CrowdMemInfo.adate}</td></c:if>
 											<td class="total">자기소개 갱신일</td>
-											<c:if test="${CrowdMemInfo.mprAcceptDate ==null}"><td>승인 전 신규회원</td></c:if>
+											<c:if test="${CrowdMemInfo.mprAcceptDate ==null}"><td>-</td></c:if>
 											<c:if test="${CrowdMemInfo.mprAcceptDate !=null}"><td>${CrowdMemInfo.mprAcceptDate}</td></c:if>
 											
 											

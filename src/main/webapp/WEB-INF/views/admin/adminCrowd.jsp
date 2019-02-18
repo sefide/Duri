@@ -141,7 +141,7 @@
                                             <td class="center">${row.mFundtype}</td>
                                             <td class="center">${row.goodsName }</td>
                                             <td class="center">총 ${row.totalCount}개</td>
-                                            <td class="center"> <a class="btn btn-default btn-sm adminMoneyFunding">승인하러하기</a></td>
+                                            <td class="center"> <a class="btn btn-default btn-sm adminGoodsFunding">승인하러하기</a></td>
                                         </tr>
                                     </c:forEach>
                                     </tbody>
@@ -169,7 +169,13 @@
 			var fundingnum = $(this).parent().parent().children().eq(1).text();
 			var membernum = $(this).parent().parent().children().eq(2).text();
 		
-			location.href= "adminCrowdDetail.ad?membernum="+membernum+"&fundingnum="+fundingnum ; 
+			location.href= "adminCrowdDetailMoney.ad?membernum="+membernum+"&fundingnum="+fundingnum ; 
+		});
+    	$(".adminGoodsFunding").click(function () {
+			var fundingnum = $(this).parent().parent().children().eq(1).text();
+			var membernum = $(this).parent().parent().children().eq(2).text();
+		
+			location.href= "adminCrowdDetailGoods.ad?membernum="+membernum+"&fundingnum="+fundingnum ; 
 		});
     
     </script>

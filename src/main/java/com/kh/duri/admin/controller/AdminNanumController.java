@@ -51,6 +51,7 @@ public class AdminNanumController {
 		int num = Integer.parseInt(request.getParameter("num"));
 		m.setMno(num);
 		adminMember NanumDetail;
+		
 		try {
 			NanumDetail = ans.NanumDetail(m);
 			model.addAttribute("NanumDetail", NanumDetail);

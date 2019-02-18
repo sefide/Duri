@@ -42,9 +42,8 @@
                                             <th>ID</th>
                                             <th>닉네임</th>
                                             <th>성별</th>
-                                            <th>memail</th>
+                                            <th>email</th>
                                             <th>가입유형</th>
-                                            <th>자소서 수정여부</th>
                                             <th>상세보기</th>
                                         </tr>
                                     </thead>
@@ -60,12 +59,6 @@
 											<c:if test="${row.mGender == 'M'}"><td class="center">남</td></c:if>
                                             <td class="center">${row.memail}</td>
                                             <td class="center">${row.mFundtype}</td>
-                                            <c:if test="${row.mprNew == null}">
-                                            <td class="center">N</td>
-                                            </c:if>
-                                            <c:if test="${row.mprNew != null}">
-                                            <td class="center">Y</td>
-                                            </c:if>
                                             <td class="center">
                                             <a class="btn btn-default btn-sm HappyDetail">상세보기</a>
                                             </td>

@@ -14,7 +14,9 @@ public interface adminAtcService {
 	List<adminFundingList> adminGoodsFundingList() throws ListException;
 	//크라우드 펀딩 상세페이지 -회원정보
 	adminMember CrowdMemInfoDetail(adminMember m)throws ListException;
-	//크라우드 펀딩 상세페이지 -펀딩정보
+	//크라우드 펀딩 상세페이지 -펀딩정보(금액)
 	adminFundingList CrowdFundInfoDetail(adminFundingList f)throws ListException;
+	//크라우드 펀딩 상세페이지 - 펀딩정보(물품)
+	List<adminFundingList> CrowdFundGoodsInfo(adminFundingList f)throws ListException;
 
 }

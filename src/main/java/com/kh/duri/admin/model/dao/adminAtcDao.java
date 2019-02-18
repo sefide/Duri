@@ -16,7 +16,9 @@ public interface adminAtcDao {
 	List<adminFundingList> adminGoodsFundingList(SqlSessionTemplate sqlsession)throws ListException;
 	//크라우드 펀딩 상세페이지 -회원정보
 	adminMember CrowdMemInfoDetail(SqlSessionTemplate sqlsession, adminMember m)throws ListException;
-	//크라우드 펀딩 상세페이지 -펀딩정보
+	//크라우드 펀딩 상세페이지 -펀딩정보(금액)
 	adminFundingList CrowdFundInfoDetail(SqlSessionTemplate sqlsession, adminFundingList f)throws ListException;
+	//크라우드 펀딩 상세페이지 -펀딩정보(물품)
+	List<adminFundingList> CrowdFundGoodsInfo(SqlSessionTemplate sqlsession, adminFundingList f)throws ListException;
 	
 }
