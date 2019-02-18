@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.kh.duri.admin.model.exception.ListException;
 import com.kh.duri.admin.model.service.adminNanumService;
 import com.kh.duri.admin.model.vo.Donatelist;
+import com.kh.duri.admin.model.vo.adminDirectList;
+import com.kh.duri.admin.model.vo.adminFundingHistoryList;
+import com.kh.duri.admin.model.vo.adminFundingList;
 import com.kh.duri.admin.model.vo.adminMember;
 
 @Controller
@@ -44,22 +47,40 @@ public class AdminNanumController {
 	
 	}
 	
-	//나눔두리 상세조회 - 기본정보
+	//나눔두리 상세조회 
 	@RequestMapping("adminNanumDetail.ad")
-	public String adminNanumListDetail(HttpServletRequest request, HttpServletResponse response,Model model,adminMember m) {
+	public String adminNanumListDetail(HttpServletRequest request, HttpServletResponse response,
+			Model model,Model model1,Model model2,Model model3,
+			adminMember m,adminDirectList ad, adminFundingHistoryList ahf) {
 	 
 		int num = Integer.parseInt(request.getParameter("num"));
-		m.setMno(num);
 		adminMember NanumDetail;
+		List<adminDirectList> directList;
+		List<adminFundingHistoryList> fundingMoneyList;
+		List<adminFundingHistoryList> fundingGoodsList;
+		m.setMno(num);
+		ad.setDh_Mno_give(num);
+		ahf.setFh_Mno_Give(num);
 		
 		try {
 			NanumDetail = ans.NanumDetail(m);
+			directList = ans.directList(ad);
+			fundingMoneyList = ans.fundingMoneyList(ahf);
+			fundingGoodsList = ans.fundingGoodsList(ahf);
 			model.addAttribute("NanumDetail", NanumDetail);
-		
+			model1.addAttribute("directList", directList);
+			model2.addAttribute("fundingMoneyList", fundingMoneyList);
+			model3.addAttribute("fundingGoodsList", fundingGoodsList);
+			
+			
 			return "admin/adminNanumDetail";
+			
 		} catch (ListException e) {
 
 			model.addAttribute("msg", e.getMessage());
+			model1.addAttribute("msg", e.getMessage());
+			model2.addAttribute("msg", e.getMessage());
+			model3.addAttribute("msg", e.getMessage());
 			
 			return "admin/adminNanumDetail";
 		}

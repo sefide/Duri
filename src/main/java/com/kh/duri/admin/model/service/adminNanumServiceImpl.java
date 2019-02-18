@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import com.kh.duri.admin.model.dao.adminNanumDao;
 import com.kh.duri.admin.model.exception.ListException;
 import com.kh.duri.admin.model.vo.Donatelist;
+import com.kh.duri.admin.model.vo.adminDirectList;
+import com.kh.duri.admin.model.vo.adminFundingHistoryList;
 import com.kh.duri.admin.model.vo.adminMember;
 
 @Service
@@ -44,6 +46,30 @@ public class adminNanumServiceImpl implements adminNanumService{
 		adminMember NanumDetail = and.NanumDetail(sqlsession, m);
 		
 		return NanumDetail;
+	}
+	//나눔두리 상세보기 - 정기후원 내역
+	@Override
+	public List<adminDirectList> directList(adminDirectList ad) throws ListException {
+		
+		List<adminDirectList> directList =and.directList(sqlsession,ad);
+		
+		return directList;
+	}
+	//나눔두리 상세보기 - 크라우드 금액 펀딩 내역
+	@Override
+	public List<adminFundingHistoryList> fundingMoneyList(adminFundingHistoryList ahf) throws ListException {
+		
+		List<adminFundingHistoryList> fundingMoneyList =and.fundingMoneyList(sqlsession,ahf);
+		
+		return fundingMoneyList;
+	}
+	//나눔두리 상세보기 - 크라우드 물품 펀딩 내역	
+	@Override
+	public List<adminFundingHistoryList> fundingGoodsList(adminFundingHistoryList ahf) throws ListException {
+		
+		List<adminFundingHistoryList> fundingGoodsList =and.fundingGoodsList(sqlsession,ahf);
+		
+		return fundingGoodsList;
 	}
 	
 	
