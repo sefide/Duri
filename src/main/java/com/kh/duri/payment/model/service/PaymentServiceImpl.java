@@ -7,9 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
+import com.kh.duri.Nanummember.model.vo.FundHistory;
+import com.kh.duri.board.model.vo.Board;
 import com.kh.duri.member.model.vo.Member;
 import com.kh.duri.payment.model.dao.PaymentDao;
 import com.kh.duri.payment.model.exception.DirectFundException;
+import com.kh.duri.payment.model.exception.FundingException;
 import com.kh.duri.payment.model.exception.PaymentException;
 import com.kh.duri.payment.model.exception.PointHistoryException;
 import com.kh.duri.payment.model.exception.ReceiptException;
@@ -163,6 +166,62 @@ public class PaymentServiceImpl implements PaymentService {
 		return result;
 	}
 
+	// 금액 후원 결제페이지 - 펀딩정보 select
+	@Override
+	public Board selectFundMoney(Board b) throws FundingException {
+		Board resultBoard = pd.selectFundMoney(sqlSession, b);
+		
+		return resultBoard;
+	}
+	
+	// 금액 후원 진행 - 펀딩내역 insert
+	@Override
+	public Member insertFundMoneyHistory(FundHistory fh, String check, String fWriter) throws FundingException {
+		// 후원 내역 입력하고
+		int result1 = pd.insertFundMoneyHistory(sqlSession, fh);
+		int result2 = 1;
+		System.out.println("service check : "+ check);
+		if(check.equals("1")) {
+			// 기부금 영수증 발급내역 넣고
+			result2 = pd.insertDonateReceipt(sqlSession, fh);
+		}
+		
+		Member m = new Member();
+		m.setMno(Integer.parseInt(fWriter));
+		m.setmPoint(fh.getFhValue());
+
+		System.out.println("service m : " + m);
+		// 포인트 업데이트 (행복두리)
+		int result3 = pd.updateMoneyhPoint(sqlSession, m);
+
+		
+		m.setMno(fh.getFhMnoGive());
+		// 포인트 업데이트 (나눔두리)
+		int result4 = pd.updateMoneynPoint(sqlSession, m);
+
+		m.setMno(fh.getFhMnoGive());
+		// 업데이트된 로그인 유저 조회 (나눔두리)
+		Member resultM = pd.selectLoginnMember(sqlSession, m);
+
+		// 후원내역번호 알아내기 select 
+		int resultFhNo = pd.selectFundHistCurVal(sqlSession);
+		
+		fh.setFhNo(resultFhNo);
+		// 포인트 이력 남기기 insert (나눔두리)
+		int result6 = pd.insertFundMoneynPoint(sqlSession, fh);
+		
+		// 포인트 이력 남기기 insert (행복두리)
+		fh.setFhMnoGive(Integer.parseInt(fWriter));
+		int result5 = pd.insertFundMoneyhPoint(sqlSession, fh);
+		
+		
+		if(result1 > 0 && result2 > 0 && result3 > 0 && result4 > 0 && resultM != null) {
+			return resultM;
+		}else {
+			return null;
+		}
+		
+	}
 	
 
 	

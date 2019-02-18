@@ -1,11 +1,7 @@
 package com.kh.duri.payment.controller;
 
-import static org.junit.Assert.assertEquals;
-
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -20,9 +16,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.kh.duri.Nanummember.model.vo.FundHistory;
+import com.kh.duri.board.model.vo.Board;
 import com.kh.duri.common.CommonUtils;
 import com.kh.duri.member.model.vo.Member;
 import com.kh.duri.payment.model.exception.DirectFundException;
+import com.kh.duri.payment.model.exception.FundingException;
 import com.kh.duri.payment.model.exception.PaymentException;
 import com.kh.duri.payment.model.exception.PointHistoryException;
 import com.kh.duri.payment.model.exception.ReceiptException;
@@ -572,7 +571,69 @@ public class PaymentController {
 		return null;
 	}
 	
+
+	// 금액 후원 결제페이지 
+	@RequestMapping("fundMoney.pm")
+	public String fundMoney(@RequestParam String fno, HttpServletRequest request, HttpServletResponse response, Model model) {
+		System.out.println("fno : " + fno);
+		
+		Board f = new Board();
+		f.setFno(Integer.parseInt(fno));
+		
+		Board resultBoard;
+		try {
+			resultBoard = ps.selectFundMoney(f);
+			
+			model.addAttribute("f" ,resultBoard);
+			System.out.println("controlle page뿌리기 f : "+ f);
+			return "payment/pay_fundMoney";
+			
+		} catch (FundingException e) {
+			model.addAttribute("msg" ,e.getMessage());
+			return "";
+		}
+	}
 	
+	// 금액 후원 진행 
+	@RequestMapping("execfundMoney.pm")
+	public String execfundMoney(@RequestParam String fno , HttpServletRequest request, HttpServletResponse response, Model model, HttpSession session) {
+		Member m = (Member)session.getAttribute("loginUser2");
+		String check = request.getParameter("checkDonate");
+		String fValue = request.getParameter("point");
+		String fWriter = request.getParameter("fWriter");
+		String ipin1;
+		String ipin2;
+		
+		System.out.println("fno : " + fno);
+		System.out.println("m : " + m);
+		System.out.println("fValue : " + fValue);
+		System.out.println("fWriter : " + fWriter);
+		if(check.equals("1")) {
+			ipin1 = request.getParameter("ipin1");
+			ipin2 = request.getParameter("ipin2");
+			System.out.println("ipin1 : " + ipin1);
+			System.out.println("ipin2 : " + ipin2);
+			
+		}
+
+		FundHistory fh = new FundHistory();
+		fh.setFhFno(Integer.parseInt(fno));
+		fh.setFhValue(Integer.parseInt(fValue));
+		fh.setFhMnoGive(m.getMno());
+
+		try {
+			Member resultM = ps.insertFundMoneyHistory(fh, check, fWriter);
+			
+			session.setAttribute("loginUser2", resultM);
+			model.addAttribute("msg", "펀딩이 완료되었습니다.");
+		    return "payment/pay_success";
+			
+		} catch (FundingException e) {
+			model.addAttribute("msg", e.getMessage());
+		    return "payment/pay_success";
+		}
+		
+	}
 	
 	// 물품 후원 결제페이지
 	@RequestMapping("fundItem.pm")
@@ -580,10 +641,5 @@ public class PaymentController {
 	    return "payment/pay_fundItem";
 	}
 
-	// 금액 후원 결제페이지 
-	@RequestMapping("fundMoney.pm")
-	public String fundMoney() {
-	    return "payment/pay_fundMoney";
-	}
 
 }

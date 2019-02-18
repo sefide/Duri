@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -212,85 +214,96 @@
 			</div>
     	</div>
     </div>
+    
+    <!-- 후원자(로그인한 나눔두리) -->
+    <c:set var = "giveM" value = "${ sessionScope.loginUser2 }"></c:set>
+    
     <section class="ftco-section">
     	<div class="container">
     		<div class="row d-flex">
     			<div class = "ftco-animate" id = "sType">금액후원</div>  
-    			<h3 class = "ftco-animate" id = "sTitle">동생은 몸이 아프니까, 형이 대신 해줘야지...</h3>
+    			<h3 class = "ftco-animate" id = "sTitle">${ f.fTitle }</h3>
     		</div>
     		<div id = "bar1"></div>
     		<div class ="row d-flex"> 
     			<h4 class ="ftco-animate">> 후원 금액</h4>
     		</div>
-    		<div class ="row d-flex"> 
-    			<table>
-    				<tr>
-    					<th>현재보유 포인트</th>
-    					<td colspan = "2" ><span id = "myPoint">10000원</span></td>
-    				</tr>
-    				<tr>
-    					<th>후원포인트</th>
-    					<td><input class="form-control" type = "text" name = "point" id = "sponPoint">원</td>
-    					<td>
-    						<div class="form-check">
-						  <input class="form-check-input" type="checkbox" value="" id="allPoint">
-						  <label class="form-check-label" for="allPoint">
-						 	  모든 포인트 사용하기
-						  </label>
-						</div>
-    					</td>
-    				</tr>
-    			</table>
-    		</div>
+    		<form action = "execfundMoney.pm" method = "post" id = "fundMoneyForm">
+    		<input type = "hidden" name = "fno" value ="${ f.fno }">
+    		<input type = "hidden" name = "fWriter" value ="${ f.fWriter }">
+    		<input type = "hidden" name = "checkDonate" value ="0" id = "checkDonate">
+    			<div class ="row d-flex"> 
+	    			<table>
+	    				<tr>
+	    					<th>현재보유 포인트</th>
+	    					<td colspan = "2" ><span id = "myPoint">${ giveM.mPoint }원</span></td>
+	    				</tr>
+	    				<tr>
+	    					<th>후원포인트</th>
+	    					<td><input class="form-control" type = "text" name = "point" id = "sponPoint">원</td>
+	    					<td>
+	    						<div class="form-check">
+							  <input class="form-check-input" type="checkbox" value="" id="allPoint">
+							  <label class="form-check-label" for="allPoint">
+							 	  모든 포인트 사용하기
+							  </label>
+							</div>
+	    					</td>
+	    				</tr>
+	    			</table>
+	    		</div>
+	    		
+	    		<div id = "bar1"></div>
+	    		
+	    		<div class ="row d-flex"> 
+	    			<h4 class ="ftco-animate" id = "">> 후원 정보</h4>
+	    			<p style = "margin-left : 1%;"> * 후원자 정보 수정을 원한다면 회원정보 수정을 해주세요. </p>
+	    		</div>
+	    		<div class ="row d-flex"> 
+	    			<table>
+	    				<tr>
+	    					<th>행복두리</th>
+	    					<td colspan = "2" >${ f.mNick }</td>
+	    				</tr>
+	    				<tr>
+	    					<th>후원 펀딩</th>
+	    					<td colspan = "2" > ${ f.fTitle }</td>
+	    				</tr>
+	    				<tr>
+	    					<th>후원 유형</th>
+	    					<td colspan = "2" > ${ f.fValueType }</td>
+	    				</tr>
+	    				<tr>
+	    					<th>나눔두리</th>
+	    					<td colspan = "2" > ${ giveM.mNickName } (${ giveM.mName }님) </td>
+	    				</tr>
+	    				<tr>
+	    					<th>기부금영수증</th>
+	    					<td colspan = "2" >
+	    						<div class="form-check form-check-inline">
+		    						<input class="form-check-input" type="radio" name="sponReceip" id="yesReceip" value="Y">
+		 		 					<label class="form-check-label" for="yesReceip">발급</label>
+	 		 					</div>
+	 		 					<div class="form-check form-check-inline">
+	 		 						<input class="form-check-input" type="radio" name="sponReceip" id="noReceip" value="N" checked>
+	 		 						<label class="form-check-label" for="noReceip">미발급</label>
+	    						</div>
+	    					</td>
+	    				</tr>
+	    				<tr class = "ipin"> 
+	    					<th>주민등록번호</th>
+	    					<td colspan = "2"><input class="form-control" type = "text" maxlength = "6" id = "ipinFirst" name = "ipin1"> - 
+	    						<input class="form-control" type = "text" maxlength = "7" id = "ipinSecond" name = "ipin2"></td>
+	    				</tr>
+	    				<tr class = "ipin">
+	    					<td></td>
+	    					<td><a id = "seeTerms">* 기부금 영수증 발급 관련 약관에 동의해주세요 (클릭해주세요!) </a></td>
+	    				</tr>
+	    			</table>
+	    		</div>
     		
-    		<div id = "bar1"></div>
+    		</form>
     		
-    		<div class ="row d-flex"> 
-    			<h4 class ="ftco-animate" id = "">> 후원 정보</h4>
-    			<p style = "margin-left : 1%;"> * 후원자 정보 수정을 원한다면 회원정보 수정을 해주세요. </p>
-    		</div>
-    		<div class ="row d-flex"> 
-    			<table>
-    				<tr>
-    					<th>행복두리</th>
-    					<td colspan = "2" >응디곤듀</td>
-    				</tr>
-    				<tr>
-    					<th>후원 펀딩</th>
-    					<td colspan = "2" >동생은 몸이 아프니까, 형이 대신 해줘야지...</td>
-    				</tr>
-    				<tr>
-    					<th>후원 유형</th>
-    					<td colspan = "2" >의료비</td>
-    				</tr>
-    				<tr>
-    					<th>나눔두리</th>
-    					<td colspan = "2" >천샤다힝</td>
-    				</tr>
-    				<tr>
-    					<th>기부금영수증</th>
-    					<td colspan = "2" >
-    						<div class="form-check form-check-inline">
-	    						<input class="form-check-input" type="radio" name="sponReceip" id="yesReceip" value="Y">
-	 		 					<label class="form-check-label" for="yesReceip">발급</label>
- 		 					</div>
- 		 					<div class="form-check form-check-inline">
- 		 						<input class="form-check-input" type="radio" name="sponReceip" id="noReceip" value="N" checked>
- 		 						<label class="form-check-label" for="noReceip">미발급</label>
-    						</div>
-    					</td>
-    				</tr>
-    				<tr class = "ipin"> 
-    					<th>주민등록번호</th>
-    					<td colspan = "2"><input class="form-control" type = "text" maxlength = "6" id = "ipinFirst" name = "ipin1"> - 
-    						<input class="form-control" type = "text" maxlength = "7" id = "ipinSecond" name = "ipin2"></td>
-    				</tr>
-    				<tr class = "ipin">
-    					<td></td>
-    					<td><a id = "seeTerms">* 기부금 영수증 발급 관련 약관에 동의해주세요 (클릭!) </a></td>
-    				</tr>
-    			</table>
-    		</div>
     		<div id ="bar1"></div>
     		
     		
@@ -322,6 +335,7 @@
    <jsp:include page="../common/loader.jsp"></jsp:include>
   <script>
   var checkUsing = 1; /* 기부금영수증 발급 약관 확인 변수 */
+  var checkIpin = 0; /* 기부금영수증 발급인지 아닌지 확인 변수 */
   
 		$(document).ready(function() {
 			/* 주민등록번호 입력창 숨겨두기 */
@@ -349,9 +363,13 @@
 				if($("#yesReceip").is(":checked")){ // 발급
 					$(".ipin").css("display","");
 					checkUsing = 0;
+					checkIpin = 1; 
+					$("#checkDonate").val("1");
 				}else { // 미발급
 					$(".ipin").css("display","none");
 					checkUsing = 1;
+					checkIpin = 0; 
+					$("#checkDonate").val("0");
 					$("input:checkbox").prop("checked", false);
 				}
 				
@@ -370,8 +388,13 @@
 			var sPoint = $("#sponPoint").val();
 			var mPoint = $("#myPoint").text();
 			mPoint = mPoint.substring(0,mPoint.length-1);
-			$("#sponValue").text(sPoint+"원");
-			$("#leftValue").text(mPoint-sPoint + "원");
+			$("#sponValue").text(sPoint);
+			
+			if(isNaN(mPoint-sPoint)){
+				$("#leftValue").text("- 원");
+			}else{
+				$("#leftValue").text(mPoint-sPoint + "원");
+			}
 		}
 		
 		/* 약관 팝업창 보여주기 */
@@ -403,15 +426,31 @@
 		
 		/* 후원하기 버튼 클릭 시  */
 		$("#btnSpon").click(function(){
+			var numberTest = /[^0-9]/g; /* 숫자로만 이뤄지기 */
+			var resultValue = $("#sponPoint").val();
+			
+			var ipinTest01 = /\d{6}/; /* 숫자로만 6글자 이뤄지기 */
+			var ipinTest02 = /\d{7}/; /* 숫자로만 7글자 이뤄지기 */
+			var ipinFirst = $("#ipinFirst").val();
+			var ipinSecond = $("#ipinSecond").val();
+			
 			var leftValue = $("#leftValue").text();
 			leftValue = leftValue.substring(0, leftValue.length-1);
-			if(leftValue < 0){
+
+			if(resultValue == "" || numberTest.test(resultValue)){
+				alert("후원포인트를 정확히 입력해주세요. (숫자 이외의 글자 입력 불가)");
+			}else if(checkUsing == 1 && checkIpin == 1 && !ipinTest01.test(ipinFirst)) {
+				alert("주민번호 앞자리를 제대로 입력해주세요.");
+			}else if(checkUsing == 1 && checkIpin == 1 && !ipinTest02.test(ipinSecond)) {
+				alert("주민번호 뒷자리를 제대로 입력해주세요.");
+			}else if(leftValue < 0){
 				alert("포인트가 부족합니다. 충전해주세요. ");
 			}else if(checkUsing == 0){
 				alert("기부금 영수증 관련 약관에 동의해주세요.");
 				$("#seeTerms").focus();
 			}else {
-				alert("결제진행");
+				$("#fundMoneyForm").submit();
+				
 			}
 		});
 	
