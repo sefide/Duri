@@ -180,12 +180,15 @@ public class BoardController {
 			
 
 			List<BoardItem> thList;
+			List<BoardItem> thList2;
 
 			
 			thList = bs.selectThingList(pi);
+			thList2 = bs.selectThingList2(pi);
 			
 
 			model.addAttribute("thList", thList);
+			model.addAttribute("thList2", thList2);
 			model.addAttribute("pi", pi);
 			return "board/causes2";
 
@@ -194,6 +197,66 @@ public class BoardController {
 	      
 	   }
 
+	
+	   
+	@RequestMapping("cloud_thing_datail.bo")
+	public ModelAndView thingDetail(BoardItem bi, ModelAndView mv,HttpSession session){ 
+		
+		
+		System.out.println("BoardItem : "+bi);
+		
+		BoardItem thingDetail = null; 
+		List<BoardItem> thingDetail2 = null; 
+		
+		
+		thingDetail = bs.thingDetailOne(bi); //받아온 아이디와 비밀번호로 로그인 정보 조회
+		thingDetail2 = bs.thingDetailOne2(bi); //받아온 아이디와 비밀번호로 로그인 정보 조회
+			
+		session.setAttribute("thingDetail", thingDetail);	//세션에 뿌려주기
+		session.setAttribute("thingDetail2", thingDetail2);	//세션에 뿌려주기
+			
+		mv.setViewName("redirect:thingDetail.bo"); //위처럼 redirect로 뷰페이지이름연결할거랑 똑같음
+
+		
+
+	
+		return mv;
+	
+
+	}
+	 
+	
+	@RequestMapping("writeCloud.bo")
+	public ModelAndView writeCloud(Board b, ModelAndView mv,HttpSession session){ 
+		
+		
+		System.out.println("Board : "+b);
+		
+		/*BoardItem thingDetail = null; 
+		List<BoardItem> thingDetail2 = null; 
+		
+		
+		thingDetail = bs.thingDetailOne(bi); //받아온 아이디와 비밀번호로 로그인 정보 조회
+		thingDetail2 = bs.thingDetailOne2(bi); //받아온 아이디와 비밀번호로 로그인 정보 조회
+			
+		session.setAttribute("thingDetail", thingDetail);	//세션에 뿌려주기
+		session.setAttribute("thingDetail2", thingDetail2);	//세션에 뿌려주기*/
+			
+		mv.setViewName("redirect:writeCloud_page.bo"); //위처럼 redirect로 뷰페이지이름연결할거랑 똑같음
+
+		
+
+	
+		return mv;
+	
+
+	}
+	 
+	
+	@RequestMapping("writeCloud_page.bo")
+	public String eunji10() {
+		return "happymember/cloudWrite";
+	}
 	
 	
 	@RequestMapping("longDonate.bo")
@@ -207,8 +270,10 @@ public class BoardController {
 		return "board/about_money";
 	}
 	
-	@RequestMapping("cloud_thing_datail.bo")
+	@RequestMapping("thingDetail.bo")
 	public String eunji9() {
 		return "board/about_thing";
 	}
+	
+	
 }

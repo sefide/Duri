@@ -31,6 +31,10 @@
 	#listChoice{
 		display:none;
 	}
+	
+	#goalMoney,#goalMoney2,#goalMoney3,#goalMoney4,#goalThing,#goalThing2{
+		display:none;
+	}
 </style>
 </head>
 <body>
@@ -62,7 +66,7 @@
 			<span>마이페이지 &gt; 사연신청하기</span>
 		</div>
 		<br>
-		
+ <form action="writeCloud.bo" method="POST">	
 <table>
   <tr>
    <td>
@@ -72,6 +76,7 @@
       <td width="5"><img src="img/table_right.gif" width="5" height="30" /></td>
      </tr>
     </table>
+
    <table align="center">
      <tr>
       <td>&nbsp;</td>
@@ -90,7 +95,7 @@
       <td align="center" width="180px"><b>후원유형</b></td>
       <td><input type="radio" id="money" value="money" name="listChoice" size="100px">금액후원
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <input type="radio" id="stuff" value="stuff" name="listChoice">물품후원</td>
+      <input type="radio" id="item" value="item" name="listChoice">물품후원</td>
       <td>&nbsp;<br>
       <div id="button" class="textSilver">
 		* 물품으로 받을 수 있는 후원은 물품후원을 선택해주세요!<br><br>
@@ -98,35 +103,116 @@
      </tr>
      
 
-      <tr id="listChoice" height="1" bgcolor="#dddddd"><td colspan="4"></td></tr>
-     <tr id="listChoice">
+      <tr id="goalMoney" height="1" bgcolor="#dddddd"><td colspan="4"></td></tr>
+     <tr id="goalMoney2">
       <td>&nbsp;</td>
       <td align="center" style="height:50px;"><b>금액후원 유형 선택</b></td>
       <td>
-     	<select align="center" style="width:150px; height:30px;">
-     		<option>의료비</option>
-     		<option>교육비</option>
-     		<option>생활비</option>
+     	<select align="center" id="fValueType" name="fValueType" style="width:150px; height:30px;">
+     		<option value="의료비">의료비</option>
+     		<option value="교육비">교육비</option>
+     		<option value="생활비">생활비</option>
      	</select>
 	 </td>
-	 <td>&nbsp;<br>
-      <div id="button" class="textSilver">
-		* 펀딩종료 날짜는 현재 날짜 ~ 증빙서류 만료기간까지 가능합니다.
-		</div></td>
+	
      </tr>
-s
-     
-     
-      <tr height="1" bgcolor="#dddddd"><td colspan="4"></td></tr>
-    <tr>
+
+     <tr id="goalMoney3" height="1" bgcolor="#dddddd"><td colspan="4"></td></tr>
+    <tr id="goalMoney4">
       <td>&nbsp;</td>
       <td align="center" style="height:50px;"><b>목표치 금액</b></td>
       <td>
      	<div class="ui input ">
- 			<input type="number" style="height:25px; width:150px;">&nbsp;<b>원</b>
+ 			<input type="number" id="fValue" name="fValue" style="height:25px; width:150px;">&nbsp;<b>원</b>
 		</div>
 	 </td>
      </tr>
+     
+     
+       <tr id="goalThing" height="1" bgcolor="#dddddd"><td colspan="4"></td></tr>
+    <tr id="goalThing2">
+      <td>&nbsp;</td>
+      <td align="center" style="height:50px;"><b>목표물품설정</b></td>
+      <td style="width:800px;">
+     	<div class="ui input ">
+ 			<select align="center" style="width:160px; height:30px;">
+ 				<option disabled selected>선택</option>
+ 				<option value="1">생리대</option>
+ 				<option value="2">스킨로션세트</option>
+ 				<option value="3">라면</option>
+ 				<option value="4">쌀</option>
+ 				<option value="5">스팸</option>
+ 				<option value="6">학용품세트</option>
+ 				<option value="7">의류(속옷)</option>
+ 				<option value="8">의류(양말)</option>
+ 				<option value="9">주방세제</option>
+ 				<option value="10">샴푸린스</option>
+ 				<option value="11">비누</option>
+ 				<option value="12">치약칫솔</option>
+ 				<option value="13">수건</option>
+ 				<option value="14">이불</option>
+ 				<option value="15">물</option>
+ 				<option value="16">에프킬라</option>
+ 				<option value="17">휴지</option>
+ 				<option value="18">연탄10장</option>
+ 				<option value="19">클렌징폼&바디로션</option>
+ 			</select>
+ 			&nbsp;&nbsp;
+ 			<input type="text" id="thing1" maxlength="2" style=" width:65px"><b>개</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ 			
+ 				<select align="center" style="width:160px; height:30px;">
+ 				<option disabled selected>선택</option>
+ 				<option value="1">생리대</option>
+ 				<option value="2">스킨로션세트</option>
+ 				<option value="3">라면</option>
+ 				<option value="4">쌀</option>
+ 				<option value="5">스팸</option>
+ 				<option value="6">학용품세트</option>
+ 				<option value="7">의류(속옷)</option>
+ 				<option value="8">의류(양말)</option>
+ 				<option value="9">주방세제</option>
+ 				<option value="10">샴푸린스</option>
+ 				<option value="11">비누</option>
+ 				<option value="12">치약칫솔</option>
+ 				<option value="13">수건</option>
+ 				<option value="14">이불</option>
+ 				<option value="15">물</option>
+ 				<option value="16">에프킬라</option>
+ 				<option value="17">휴지</option>
+ 				<option value="18">연탄10장</option>
+ 				<option value="19">클렌징폼&바디로션</option>
+ 			</select>
+ 			&nbsp;&nbsp;
+ 			<input type="text" id="thing1" maxlength="2" style=" width:65px"><b>개</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ 				
+ 				<select align="center" style="width:160px; height:30px;">
+ 				<option disabled selected>선택</option>
+ 				<option value="1">생리대</option>
+ 				<option value="2">스킨로션세트</option>
+ 				<option value="3">라면</option>
+ 				<option value="4">쌀</option>
+ 				<option value="5">스팸</option>
+ 				<option value="6">학용품세트</option>
+ 				<option value="7">의류(속옷)</option>
+ 				<option value="8">의류(양말)</option>
+ 				<option value="9">주방세제</option>
+ 				<option value="10">샴푸린스</option>
+ 				<option value="11">비누</option>
+ 				<option value="12">치약칫솔</option>
+ 				<option value="13">수건</option>
+ 				<option value="14">이불</option>
+ 				<option value="15">물</option>
+ 				<option value="16">에프킬라</option>
+ 				<option value="17">휴지</option>
+ 				<option value="18">연탄10장</option>
+ 				<option value="19">클렌징폼&바디로션</option>
+ 			</select>
+ 			&nbsp;&nbsp;
+ 			<input type="text" id="thing1" maxlength="2" style=" width:65px"><b>개</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		</div>
+	 </td>
+     </tr>
+     
      
      
      <tr height="1" bgcolor="#dddddd"><td colspan="4"></td></tr>
@@ -135,14 +221,19 @@ s
       <td align="center" style="height:50px;"><b>펀딩 종료 기간</b></td>
       <td>
      	<select align="center" style="width:150px; height:30px;">
-     		<option>1개월</option>
-     		<option>3개월</option>
-     		<option>증빙서류 만료기간</option>
+     		<option value="" disabled selected>기간선택</option>
+     		<option>15일</option>
+     		<option>30일</option>
+     		<option>60일</option>
+     		<option>90일</option>
+     		<option>120일</option>
+     		<option>150일</option>
+     		<option>170일</option>
      	</select>
 	 </td>
 	 <td>&nbsp;<br>
       <div id="button" class="textSilver">
-		* 펀딩종료 날짜는 현재 날짜 ~ 증빙서류 만료기간까지 가능합니다.
+		* 펀딩종료 날짜는 관리자 승인 날짜로부터 ~ 선택일수까지입니다.
 		</div></td>
      </tr>
      <tr height="1" bgcolor="#dddddd"><td colspan="4"></td></tr>
@@ -161,18 +252,19 @@ s
 
      </tr>
     </table>
+
    </td>
   </tr>
  </table>
 	<div align="center">
-		 <button class="ui primary button">
+		 <button type="submit" class="ui primary button">
 		   	사연등록
 		</button>
 		<button class="ui button">
 		  	취소하기
 		</button>
 	</div>
-
+    </form>
 		
 		<div style="height: 100px;"></div>
 		
@@ -186,10 +278,33 @@ s
 
 </div><!--// Wrap E-->
 </c:if>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
-var animal = $(':input[name=animal]:radio:checked').val();
-console.log(animal);
-
+/*  var animal = $(':input[name=listChoice]:radio:checked').val();
+console.log(animal); 
+ */
+ $("input[type=radio]").click(function () {
+	    if($(this).prop("checked")) {   
+	    	if($(this).val()=="money"){
+	    		$("#goalMoney").show();
+	    		$("#goalMoney2").show();
+	    		$("#goalMoney3").show();
+	    		$("#goalMoney4").show();
+	    		$("#goalThing").hide();
+		    	$("#goalThing2").hide();
+	    		
+	    	}else{
+	    		$("#goalThing").show();
+		    	$("#goalThing2").show();
+		    	$("#goalMoney").hide();
+	    		$("#goalMoney2").hide();
+	    		$("#goalMoney3").hide();
+	    		$("#goalMoney4").hide();
+	    			
+	    			
+	    		}
+	    	}
+	});
 
 
 

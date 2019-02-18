@@ -89,6 +89,27 @@ public class boardServiceImpl implements boardService {
 		return thList;
 	}
 
+	@Override
+	public List<BoardItem> selectThingList2(PageInfo pi) {
+		List<BoardItem> thList2 = bd.selectThingList2(sqlSession, pi);	//DAO로 Member 정보와 sqlSession 전송
+		
+		return thList2;
+	}
+
+	@Override
+	public BoardItem thingDetailOne(BoardItem bi) {
+		BoardItem thingDetail = bd.thingDetailOne(sqlSession, bi);	//DAO로 Member 정보와 sqlSession 전송
+		
+		return thingDetail ;
+	}
+
+	@Override
+	public List<BoardItem> thingDetailOne2(BoardItem bi) {
+		List<BoardItem> thingDetail2 = bd.thingDetailOne2(sqlSession, bi);	//DAO로 Member 정보와 sqlSession 전송
+		
+		return thingDetail2 ;
+	}
+
 
 
 

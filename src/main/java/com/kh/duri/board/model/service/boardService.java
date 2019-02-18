@@ -27,5 +27,11 @@ public interface boardService {
 
 	List<BoardItem> selectThingList(PageInfo pi);
 
+	List<BoardItem> selectThingList2(PageInfo pi);
+
+	BoardItem thingDetailOne(BoardItem bi);
+
+	List<BoardItem> thingDetailOne2(BoardItem bi);
+
 
 }

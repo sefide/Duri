@@ -14,6 +14,7 @@ public class BoardItem {
 	private int fWriter;
 	private String mNick;
 	private String mAddress;
+	private String mFundType;
 	private String iName;
 	private String fdValue;
 	private String fd_ino;
@@ -21,8 +22,8 @@ public class BoardItem {
 	public BoardItem() {}
 
 	public BoardItem(int rnum, int fno, String fTitle, String fContent, Date fWriterDate, Date fStartDate,
-			Date fEndDate, String fStatus, int fWriter, String mNick, String mAddress, String iName, String fdValue,
-			String fd_ino) {
+			Date fEndDate, String fStatus, int fWriter, String mNick, String mAddress, String mFundType, String iName,
+			String fdValue, String fd_ino) {
 		super();
 		this.rnum = rnum;
 		this.fno = fno;
@@ -35,6 +36,7 @@ public class BoardItem {
 		this.fWriter = fWriter;
 		this.mNick = mNick;
 		this.mAddress = mAddress;
+		this.mFundType = mFundType;
 		this.iName = iName;
 		this.fdValue = fdValue;
 		this.fd_ino = fd_ino;
@@ -128,6 +130,14 @@ public class BoardItem {
 		this.mAddress = mAddress;
 	}
 
+	public String getmFundType() {
+		return mFundType;
+	}
+
+	public void setmFundType(String mFundType) {
+		this.mFundType = mFundType;
+	}
+
 	public String getiName() {
 		return iName;
 	}
@@ -157,10 +167,8 @@ public class BoardItem {
 		return "BoardItem [rnum=" + rnum + ", fno=" + fno + ", fTitle=" + fTitle + ", fContent=" + fContent
 				+ ", fWriterDate=" + fWriterDate + ", fStartDate=" + fStartDate + ", fEndDate=" + fEndDate
 				+ ", fStatus=" + fStatus + ", fWriter=" + fWriter + ", mNick=" + mNick + ", mAddress=" + mAddress
-				+ ", iName=" + iName + ", fdValue=" + fdValue + ", fd_ino=" + fd_ino + "]";
+				+ ", mFundType=" + mFundType + ", iName=" + iName + ", fdValue=" + fdValue + ", fd_ino=" + fd_ino + "]";
 	}
 
-	
-	
 	
 }
