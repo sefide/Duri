@@ -174,41 +174,40 @@ public class HappymemberController {
 	@RequestMapping("updateIntroduce.happy")
 	public String updateIntroduce(Model model, HttpServletRequest request, HttpServletResponse response) {
 		Member oldLoginUser = (Member) request.getSession().getAttribute("loginUser");
-		int mno = oldLoginUser.getMno();
-		String userPr = request.getParameter("userPr");
-		String userPwd = request.getParameter("userPwd");
-		String userName = request.getParameter("userName");
-		String userNick = request.getParameter("userNick");
-		String userPhone = request.getParameter("userPhone");
-		String userEmail1 = request.getParameter("userEmail1");
+		String userNewPr = request.getParameter("userNewPr");
 		
-		System.out.println("mno : " + mno);
-		System.out.println("userPr : " + userPr);
-		System.out.println("userPwd : " + userPwd);
-		System.out.println("userName : " + userName);
-		System.out.println("userNick : " + userNick);
-		System.out.println("userPhone : " + userPhone);
-		System.out.println("userEmail1 : " + userEmail1);
+		System.out.println("userNewPr : " + userNewPr);
 		
-		
-		
-		
-		
-		
+		oldLoginUser.setMprNew(userNewPr);
+				
+		try {
+			int result = hs.updateIntroduce(oldLoginUser);
+			
+			if(result > 1){
+				return "redirect:logngDonateRefresh.happy";
+			}
+			
+		} catch (MypageException e) {
+			request.setAttribute("msg", e.getMessage());
+		}
+	
 		
 		return "happymember/myInfoModifyHappy.happy";
 	}
 		
 		
 		
-	//새로고침했을 때 insert다시 안되게 !
+	//물품 배송 목록 새로고침했을 때 insert다시 안되게 !
 	@RequestMapping("deliveryOriginal.happy")
 	public String deliveryOriginal() {
 		return "happymember/deliveryStatus";
 	}
 	
-	
-	
+	//새로고침 - 자기소개 수정
+	@RequestMapping("logngDonateRefresh.happy")
+	public String logngDonateRefresh() {
+		return "happymember/longDonate";
+	}
 	
 	
 	@RequestMapping("mypage.happy")

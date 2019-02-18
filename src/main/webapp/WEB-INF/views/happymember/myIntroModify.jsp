@@ -130,7 +130,7 @@ input, select{
 			내 공고 목록
 			<span>홈 &gt; 마이페이지 &gt; 내 공고 목록</span>
 		</div> -->
-		
+<form id="updatePrForm" action="updateIntroduce.happy">	
 		<div class="titNavi">
 			<div style="float: left;"><h1><i class="chevron right icon"></i>자기소개 수정</h1></div>
 			<span>마이페이지 &gt; 자기소개 수정</span>
@@ -138,42 +138,47 @@ input, select{
 		<br><br>
 
     
-     <h4 class="ui dividing header" style="margin:10px; font-size:10px">자기소개 기존</h4>
+     <h4 class="ui dividing header" style="margin:10px;">현재 자기소개</h4>
    	<div class="field" style="margin:10px" style="float:left">
         <div class="field" >
         <label></label><br>
-   			<textarea name="memo" cols="180" rows="10" style="resize:none" placeholder="입력하신 자기소개는 정기후원 게시판에서 보여집니다." values="안녕하세요 자기소개입니다." readonly>안녕하세요 자기소개입니다.</textarea>
+   			<textarea name="memo" cols="174" rows="10" style="resize:none" placeholder="입력하신 자기소개는 정기후원 게시판에서 보여집니다." readonly>${loginUser.mpr }</textarea>
         </div>
     </div>
     
-      <h4 class="ui dividing header" style="margin:10px; font-size:10px">자기소개 수정란</h4>
+      <h4 class="ui dividing header" style="margin:10px;">자기소개 수정란</h4>
        <div class="field" style="margin:10px" style="float:left">
         <div class="field" >
         <label></label><br>
-   			<textarea name="memo" cols="180" rows="10" style="resize:none" placeholder="입력하신 자기소개로 수정됩니다."></textarea>
+   			<textarea name="userNewPr" cols="174" rows="10" style="resize:none" placeholder="입력하신 자기소개로 수정됩니다."></textarea>
         </div>
     </div>
-
-  
-
+	
+	<div align="center">
+		<c:if test="${ empty loginUser.mprNew }">
+		 <button onclick="updatePr();" class="ui primary button">수정하기</button>
+		</c:if>
+		<%-- <c:if test="${ !empty loginUser.mprNew }">
+		 <button onclick="return failUpdatePr();" class="ui primary button">수정하기</button>
+		</c:if> --%>
+		<button onclick="return back();" class="ui button">취소하기</button>
+	</div>
 </form>
 
-	
-  	<div align="center">
-		 <button class="ui primary button">
-		   	수정하기
-		</button>
-		<button onclick="back();" class="ui button">
-		  	취소하기
-		</button>
-	</div>	
-		
 	</div><!--// inner E-->
 
 </div>
 </div>
 <script>
 	function back(){
+		history.back();
+		return false;
+	}
+	
+	function updatePr(){
+		$("#updatePrForm").submit();
+		console.log("성공");
+		alert("자기소개 수정이 신청되었습니다. 승인을 기다려 주세요!");
 		history.back();
 	}
 </script>
