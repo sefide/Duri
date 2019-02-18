@@ -29,6 +29,9 @@ public class adminFundingList {
 	private int iPrice;//물품가격
 	
 	
+	private String goodsName;
+	private int totalCount;
+	
 	//Member
 	private int mno;
 	private String mid;
@@ -47,15 +50,15 @@ public class adminFundingList {
 				+ ", fWriteDate=" + fWriteDate + ", fStartDate=" + fStartDate + ", fEndDate=" + fEndDate + ", fStatus="
 				+ fStatus + ", fValue=" + fValue + ", fValueType=" + fValueType + ", fWriter=" + fWriter + ", fdNo="
 				+ fdNo + ", fdValue=" + fdValue + ", fd_Fno=" + fd_Fno + ", fd_Ino=" + fd_Ino + ", iNo=" + iNo
-				+ ", iName=" + iName + ", iPrice=" + iPrice + ", mno=" + mno + ", mid=" + mid + ", mFundtype="
-				+ mFundtype + ", mStatus=" + mStatus + "]";
+				+ ", iName=" + iName + ", iPrice=" + iPrice + ", goodsName=" + goodsName + ", totalCount=" + totalCount
+				+ ", mno=" + mno + ", mid=" + mid + ", mFundtype=" + mFundtype + ", mStatus=" + mStatus + "]";
 	}
 
 
 	public adminFundingList(int fNo, String fType, String fTitle, String fContent, Date fWriteDate, Date fStartDate,
 			Date fEndDate, String fStatus, int fValue, String fValueType, int fWriter, int fdNo, int fdValue,
-			int fd_Fno, int fd_Ino, int iNo, String iName, int iPrice, int mno, String mid, String mFundtype,
-			String mStatus) {
+			int fd_Fno, int fd_Ino, int iNo, String iName, int iPrice, String goodsName, int totalCount, int mno,
+			String mid, String mFundtype, String mStatus) {
 		super();
 		this.fNo = fNo;
 		this.fType = fType;
@@ -75,6 +78,8 @@ public class adminFundingList {
 		this.iNo = iNo;
 		this.iName = iName;
 		this.iPrice = iPrice;
+		this.goodsName = goodsName;
+		this.totalCount = totalCount;
 		this.mno = mno;
 		this.mid = mid;
 		this.mFundtype = mFundtype;
@@ -262,6 +267,26 @@ public class adminFundingList {
 	}
 
 
+	public String getGoodsName() {
+		return goodsName;
+	}
+
+
+	public void setGoodsName(String goodsName) {
+		this.goodsName = goodsName;
+	}
+
+
+	public int getTotalCount() {
+		return totalCount;
+	}
+
+
+	public void setTotalCount(int totalCount) {
+		this.totalCount = totalCount;
+	}
+
+
 	public int getMno() {
 		return mno;
 	}
@@ -300,6 +325,7 @@ public class adminFundingList {
 	public void setmStatus(String mStatus) {
 		this.mStatus = mStatus;
 	}
+
 
 	
 

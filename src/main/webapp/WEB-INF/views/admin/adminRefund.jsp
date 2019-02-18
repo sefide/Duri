@@ -129,12 +129,7 @@
 				print();
 			}
     		
-    		function complete().click(function () {
-				
-			}) {
-				
-			}
-    
+    		
     </script>
 </body>
 </html>
