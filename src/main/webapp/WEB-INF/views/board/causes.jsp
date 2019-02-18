@@ -54,7 +54,7 @@
       <div class="container">
       <div class="row">
 
-        <h3><a href="money_donate.bo" id="money">금액후원</a><b> | </b><a href="Eunji_cloudList2.bo" id="thing">물품후원</a></h3>
+        <h3><a href="money_donate.bo" id="money">금액후원</a><b> | </b><a href="thing_donate.bo" id="thing">물품후원</a></h3>
 
 		<div align="right" style="width:950px">
 		<label>지역 : </label>
@@ -90,9 +90,9 @@
     			<c:if test="${mo.fValueType eq '의료비' }">
     					<a href="#" class="img" style="background-image: url(/duri/resources/fundFiles/funding_ex_img_doctor.jpg);"></a>
     			</c:if>
-    			<form action="cloud_money_datail.bo" id="sub1" name="sub1" id="moneyForm" method="POST">
+    			<form action="cloud_money_datail.bo" name="sub1" id="moneyForm" method="POST">
     				<div class="text p-3 p-md-4">
-    					<input type="hidden" value="${mo.fno}"/>
+    					<input type="hidden" name="fno" id="fno" value="${mo.fno}"/>
     					<h3><input type="submit" id="goMoDetail" value="${mo.fTitle }"/></h3>
     					<p>' ${mo.mNick} ' 행복두리의 사연</p>
     					<span class="donation-time mb-3 d-block" style="color:black">${mo.mFundType}</span>

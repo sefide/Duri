@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.kh.duri.board.model.dao.boardDao;
 import com.kh.duri.board.model.exception.DonateListException;
 import com.kh.duri.board.model.vo.Board;
+import com.kh.duri.board.model.vo.BoardItem;
 import com.kh.duri.member.model.vo.Member;
 import com.kh.duri.payment.model.vo.PageInfo;
 
@@ -73,6 +74,22 @@ public class boardServiceImpl implements boardService {
 		
 		return moneyDetail ;
 	}
+
+	@Override
+	public int getThingListCount() throws DonateListException {
+		int listCount = bd.getThingListCount(sqlSession);
+		
+		return listCount;
+	}
+
+	@Override
+	public List<BoardItem> selectThingList(PageInfo pi) {
+		List<BoardItem> thList = bd.selectThingList(sqlSession, pi);	//DAO로 Member 정보와 sqlSession 전송
+		
+		return thList;
+	}
+
+
 
 
 

@@ -41,11 +41,33 @@
 
 	</resultMap>
 	
+	<resultMap type="com.kh.duri.board.model.vo.BoardItem" id="thingBoardlistSet">
+	<!-- property=컬럼명, column=필드명    반드시 일치! -->
+		<id property="fno" column="FNO"></id>
+		<result property="rnum" column="RNUM"/>
+		<result property="fTitle" column="FTITLE"/>
+		<result property="fContent" column="FCONTENT"/>
+		<result property="fWriterDate" column="FWRITERDATE"/>
+		<result property="fStartDate" column="FSTARTDATE"/>
+		<result property="fEndDate" column="FENDDATE"/>
+		<result property="fStatus" column="FSTATUS"/>
+		<result property="fWriter" column="FWRITER"/>
+		<result property="iName" column="INAME"/>
+		<result property="mNick" column="MNICK"/>
+		<result property="mAddress" column="MADDRESS"/>
+		<result property="fdValue" column="FDVALUE"/>
+		<result property="fd_ino" column="FD_INO"/>
+
+
+	</resultMap>
+	
 
 	<select id="selectMoneyListCount" resultType="_int">
 		SELECT COUNT(*)
 		FROM FUNDING
 		WHERE FTYPE='MONEY'
+		AND FSTATUS != 'END'
+		AND FSTATUS != 'YET' 
 	</select>
 	
 	<select id="selectMoneyList" resultMap="boardlistSet" parameterType="Board">
@@ -61,9 +83,37 @@
 	
 	<select id="selectMoneyDetail" resultMap="boardlistSet" parameterType="Board">
 		SELECT *
-		FROM FUNDING
-		WHERE FNO = ${fno}
+		FROM FUNDING F
+		JOIN MEMBER M ON (M.MNO = F.FWRITER)
+		WHERE F.FNO = ${fno}
 	</select>
+	
+	<select id="selectThingListCount" resultType="_int">
+		SELECT COUNT(*)
+		FROM FUNDING
+		WHERE FTYPE='ITEM'
+		AND FSTATUS != 'END'
+		AND FSTATUS != 'YET' 
+	</select>
+	
+	
+	<select id="selectThingList" resultMap="thingBoardlistSet" parameterType="BoardItem">
+		SELECT ROWNUM RNUM, FNO, FTITLE , FCONTENT , FSTARTDATE , FENDDATE, FSTATUS , FWRITER, MNICK , MADDRESS, INAME, FDVALUE, FD_INO
+		FROM( SELECT ROWNUM RNUM, FNO, FTITLE , FCONTENT , FSTARTDATE , FENDDATE, FSTATUS , FWRITER, MNICK , MADDRESS, INAME, FDVALUE, FD_INO
+     		  FROM (SELECT F.FNO, F.FTITLE , F.FCONTENT , F.FSTARTDATE , F.FENDDATE, F.FSTATUS , F.FWRITER, M.MNICK , M.MADDRESS, FI.INAME, FD.FDVALUE, FD.FD_INO
+            		FROM FUNDING F , MEMBER M , FUNDITEM FI, FUNDINGDETAIL FD
+                    WHERE M.MNO = F.FWRITER
+                    AND FD.FD_INO = FI.INO
+                    AND F.FNO = FD.FD_FNO
+                    AND F.FTYPE = 'ITEM'
+                    AND F.FSTATUS != 'END'
+                    AND F.FSTATUS != 'YET'
+            		ORDER BY F.FNO))
+	</select>
+	
+	
+
+	
 	
 	
 </mapper>

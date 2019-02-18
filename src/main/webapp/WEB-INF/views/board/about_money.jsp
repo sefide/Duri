@@ -39,13 +39,25 @@
     <section class="ftco-section">
     	<div class="container">
     		<div class="row d-flex">
-    			<div class="col-md-6 d-flex ftco-animate">
-    				<div class="img img-about align-self-stretch" style="background-image: url(/duri/resources/common/images/bg_3.jpg); width: 100%;"></div>
-    			</div>
+    			<c:if test="${moneyDetail.fValueType eq '생활비' }">
+	    			<div class="col-md-6 d-flex ftco-animate">
+	    				<div class="img img-about align-self-stretch" style="background-image: url(/duri/resources/fundFiles/funding_ex_img04.jpg); width: 100%;"></div>
+	    			</div>
+    			</c:if>
+    			<c:if test="${moneyDetail.fValueType eq '교육비' }">
+    				<div class="col-md-6 d-flex ftco-animate">
+	    				<div class="img img-about align-self-stretch" style="background-image:url(/duri/resources/fundFiles/funding_ex_img_school.jpg); width: 100%;"></div>
+	    			</div>
+    			</c:if>
+    			<c:if test="${moneyDetail.fValueType eq '의료비' }">
+    				<div class="col-md-6 d-flex ftco-animate">
+	    				<div class="img img-about align-self-stretch" style="background-image:url(/duri/resources/fundFiles/funding_ex_img_doctor.jpg); width: 100%;"></div>
+	    			</div>
+    			</c:if>
     			<div class="col-md-6 pl-md-5 ftco-animate">
-    				<h2 class="mb-4">${moneyDetail.mNick } 행복두리님의 사연</h2>
+    				<h2 class="mb-4">'${moneyDetail.mNick }' 행복두리님의 사연</h2>
     				<h3 class="mb-4">${moneyDetail.fTitle }</h3>
-    				<%-- <p${moneyDetail.fContent}</p> --%>
+    				 <p>${moneyDetail.fContent}</p>
     				<p>지역  : ${moneyDetail.mAddress }</p>
     				<p>남은기간  : <b>${moneyDetail.fStartDate } ~ ${moneyDetail.fEndDate }</b></p>
     			</div>
@@ -76,7 +88,7 @@
                     <div class="text">
               	<h3 class="mb-4">후원유형</h3>
               	<p style="font-weight:bold;">다양한 형태의 후원유형<br>행복두리가 선택한 후원유형</p>
-              	<p class="bg-white px-3 py-2 mt-4" style="font-weight:bold;" align="center">교육비</p>
+              	<p class="bg-white px-3 py-2 mt-4" style="font-weight:bold;" align="center">${moneyDetail.fValueType}</p>
               </div>
             </div>
           </div>
@@ -97,7 +109,7 @@
       <div class="container">
       	<div class="row justify-content-center mb-5 pb-3">
           <div class="col-md-7 heading-section ftco-animate text-center">
-            <h2 class="mb-4">'wewe1596' 행복두리의 후원내역</h2>
+            <h2 class="mb-4">'${moneyDetail.mNick}' 행복두리의 후원내역</h2>
             <p>지금까지 행복두리가 많은 나눔두리들에게 나눔받은 후원내역입니다. </p>
           </div>
         </div>
