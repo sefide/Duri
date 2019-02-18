@@ -124,7 +124,7 @@ public class HappymemberDaoImpl implements HappymemberDao{
 		System.out.println("회원번호 : " + m.getMno());
 		int listCount = sqlSession.selectOne("HappyMember.selectDeliveryListCount", m);
 		
-		System.out.println("물품 배송 현황 수 : " + listCount);
+		/*System.out.println("물품 배송 현황 수 : " + listCount);*/
 		
 		if(listCount < 0){
 			throw new MypageException("물품 배송 현황 수 조회 실패");
@@ -139,8 +139,8 @@ public class HappymemberDaoImpl implements HappymemberDao{
 	public int selectLongDonateCount(SqlSessionTemplate sqlSession, Member m) throws MypageException {
 		int listCount = sqlSession.selectOne("HappyMember.selectLongDonateCount", m);
 		
-		System.out.println("회원번호 : " + m.getMno());
-		System.out.println("정기후원 목록 개수 : " + listCount);
+		
+		/*System.out.println("정기후원 목록 개수 : " + listCount);*/
 		if(listCount < 0) {
 			throw new MypageException("정기후원 목록 개수 조회 실패");
 		}
@@ -160,7 +160,7 @@ public class HappymemberDaoImpl implements HappymemberDao{
 			throw new MypageException("정기후원 목록이 존재하지 않습니다.");
 		}
 		
-		System.out.println("정기후원 리스트 수 : " + directFundList.size());
+		/*System.out.println("정기후원 리스트 수 : " + directFundList.size());*/
 		return directFundList;
 	}
 
@@ -176,7 +176,7 @@ public class HappymemberDaoImpl implements HappymemberDao{
 		if(deliveryList == null) {
 			System.out.println("배송 목록이 존재하지 않습니다.");
 		}
-		System.out.println("배송 현황 리스트 수 : " + deliveryList.size());
+		/*System.out.println("배송 현황 리스트 수 : " + deliveryList.size());*/
 		
 		return deliveryList;
 	}

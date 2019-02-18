@@ -50,8 +50,8 @@ public class HappymemberController {
 			
 			fundItemList = hs.selectfundItemList();	//후원물품 리스트
 			
-			System.out.println("controller 보유물품리스트 : " + ownlist);
-			System.out.println("controller 후원물품리스트 : " + fundItemList);
+			/*System.out.println("controller 보유물품리스트 : " + ownlist);
+			System.out.println("controller 후원물품리스트 : " + fundItemList);*/
 			
 			
 			hmap.put("ownlist", ownlist);
@@ -92,7 +92,7 @@ public class HappymemberController {
 			int result = hs.getDelivery(itemNumArray, itemAmountArray, mno, address);
 			
 			if(result == 1) {
-				System.out.println("물품 목록 추가 성공!");
+				/*System.out.println("물품 목록 추가 성공!");*/
 				return "redirect:selectDeliveryList.happy";
 			}
 			
@@ -130,47 +130,77 @@ public class HappymemberController {
 			model.addAttribute("pi", pi);
 			
 		} catch (MypageException e) {
-			e.printStackTrace();
+			request.setAttribute("msg", e.getMessage());
 		}
 		
 		return "happymember/longDonate";
 	}
 	
 	//배송현황 목록 페이징
-		@RequestMapping("selectDeliveryList.happy")
-		public String selectDeliveryList(Model model, HttpServletRequest request, HttpServletResponse response) {
-			Member m = (Member)request.getSession().getAttribute("loginUser");
+	@RequestMapping("selectDeliveryList.happy")
+	public String selectDeliveryList(Model model, HttpServletRequest request, HttpServletResponse response) {
+		Member m = (Member)request.getSession().getAttribute("loginUser");
 			
-			int currentPage = 1;
+		int currentPage = 1;
 			
-			if(request.getParameter("currentPage") != null) {
-				currentPage = Integer.parseInt(request.getParameter("currentPage"));
-			}
-			
-			try {
-				int listCount = hs.selectDeliveryListCount(m);
-				
-				PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
-				
-				List<DeliveryDetail> deliveryList = hs.selectDeliveryList(m, pi);
-				
-				for(DeliveryDetail i : deliveryList) {
-					System.out.println("배송 현황 목록 : " + i);
-				}
-				
-				model.addAttribute("deliveryList", deliveryList);
-				model.addAttribute("pi", pi);
-				
-				
-			} catch (MypageException e) {
-				request.setAttribute("msg", e.getMessage());
-				return "common/errorPage";
-			}
-			return "happymember/deliveryStatus";
+		if(request.getParameter("currentPage") != null) {
+			currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		}
+			
+		try {
+			int listCount = hs.selectDeliveryListCount(m);
+				
+			PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
+				
+			List<DeliveryDetail> deliveryList = hs.selectDeliveryList(m, pi);
+				
+			/*for(DeliveryDetail i : deliveryList) {
+				System.out.println("배송 현황 목록 : " + i);
+			}*/
+				
+			model.addAttribute("deliveryList", deliveryList);
+			model.addAttribute("pi", pi);
+				
+				
+		} catch (MypageException e) {
+			request.setAttribute("msg", e.getMessage());
+			return "common/errorPage";
+		}
+		return "happymember/deliveryStatus";
+	}
 	
 	
-	
+	//자기소개 수정
+	@RequestMapping("updateIntroduce.happy")
+	public String updateIntroduce(Model model, HttpServletRequest request, HttpServletResponse response) {
+		Member oldLoginUser = (Member) request.getSession().getAttribute("loginUser");
+		int mno = oldLoginUser.getMno();
+		String userPr = request.getParameter("userPr");
+		String userPwd = request.getParameter("userPwd");
+		String userName = request.getParameter("userName");
+		String userNick = request.getParameter("userNick");
+		String userPhone = request.getParameter("userPhone");
+		String userEmail1 = request.getParameter("userEmail1");
+		
+		System.out.println("mno : " + mno);
+		System.out.println("userPr : " + userPr);
+		System.out.println("userPwd : " + userPwd);
+		System.out.println("userName : " + userName);
+		System.out.println("userNick : " + userNick);
+		System.out.println("userPhone : " + userPhone);
+		System.out.println("userEmail1 : " + userEmail1);
+		
+		
+		
+		
+		
+		
+		
+		return "happymember/myInfoModifyHappy.happy";
+	}
+		
+		
+		
 	//새로고침했을 때 insert다시 안되게 !
 	@RequestMapping("deliveryOriginal.happy")
 	public String deliveryOriginal() {

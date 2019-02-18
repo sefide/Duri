@@ -42,6 +42,8 @@ public interface HappymemberService {
 	//배송현황 목록 조회하기
 	List<DeliveryDetail> selectDeliveryList(Member m, PageInfo pi) throws MypageException;
 
+
+
 	
 
 

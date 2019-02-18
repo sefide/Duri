@@ -73,7 +73,7 @@
 			<thead>
 			<tr>
 				<th scope="col">No</th>
-				<th scope="col">나눔두리님</th>
+				<th scope="col">나눔두리</th>
 				<th scope="col">후원금액</th>
 				<th scope="col">후원 시작 날짜</th>
 			</tr>
@@ -83,9 +83,9 @@
 				<c:forEach items="${directFundList}" var="directList">
 					<tr>
 						<td><c:out value="${directList.rnum}"/></td>
-						<td><c:out value="${directList.dh_name_give}"/></td>
+						<td><c:out value="${directList.dh_name_give}&nbsp;님" escapeXml="false"/></td>
 						<td><c:out value="${directList.dhvalue}"/></td>
-						<td><c:out value="${directList.dhstartdate}"/></td>
+						<td><c:out value="${directList.dhstartdate}&nbsp;~" escapeXml="false"/></td>
 					</tr>
 				</c:forEach>
 				</c:if>
@@ -99,13 +99,37 @@
 		</table>
 
 		<div class="numbox pt40 pb50"> 
+			<c:if test="${pi.currentPage <= 1 }">
 			<span><a class="num" href="#">&lt;</a></span>
-			<span><a class="num on" href="#">1</a></span>
-			<span><a class="num" href="#">2</a></span>
-			<span><a class="num" href="#">3</a></span>
-			<span><a class="num" href="#">4</a></span>
-			<span><a class="num" href="#">5</a></span>
-			<span><a class="num" href="#">&gt;</a></span>
+			</c:if>
+			<c:if test="${pi.currentPage > 1 }">
+				<c:url var="listBack" value="longDonate.happy">
+					<c:param name="currentPage" value="${pi.currentPage - 1 }"></c:param>
+				</c:url>
+				<span><a class="num" href="${listBack }">&lt;</a></span>
+			</c:if>
+			<!-- var : 현재 반복 횟수에 해당하는 변수의 이름 -->
+			<c:forEach var="page" begin="${pi.startPage }" end="${pi.endPage }">
+				<c:if test="${page eq pi.currentPage }">
+					<span><a class="num on" href="${listCheck }">${page }</a></span>
+				</c:if>
+				<c:if test="${page ne pi.currentPage }">
+					<c:url var="listCheck" value="longDonate.happy">
+						<c:param name="currentPage" value="${page }"></c:param>
+					</c:url>
+					<span><a class="num" href="${ listCheck}">${page }</a></span>
+				</c:if>
+			</c:forEach>
+			
+			<c:if test="${pi.currentPage >= pi.maxPage }">
+				<span><a class="num" href="#">&gt;</a></span>
+			</c:if>
+			<c:if test="${pi.currentPage < pi.maxPage}">
+				<c:url var="listEnd" value="longDonate.happy">
+					<c:param name="currentPage" value="${ pi.currentPage + 1}"></c:param>
+				</c:url>
+				<span><a class="num" href="${ listEnd}">&gt;</a></span>
+			</c:if>
 		</div>
 		
 		

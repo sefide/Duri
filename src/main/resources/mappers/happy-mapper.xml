@@ -60,6 +60,7 @@
 		<result property="dd_name" column="DD_NAME"/>
 		<result property="rnum" column="RNUM"/>
 		<result property="dlink" column="DLINK"/>
+		<result property="dd_date" column="DDATE"/>
 	</resultMap>
 
 
@@ -112,7 +113,7 @@
 		AND DHSTATUS = 'Y'
 	</select>
 	<!-- 정기 후원 리스트 조회 -->
-	<select id="selectDirectFundList" parameterType="DirectFundHistory" resultMap="happyDirectFundHistoryResultSet">
+	<select id="selectDirectFundList" resultMap="happyDirectFundHistoryResultSet" parameterType="DirectFundHistory">
 		SELECT ROWNUM RNUM, DH_MNAME_GIVE, DHVALUE, DHSTARTDATE 
 		FROM (SELECT M.MNAME AS DH_MNAME_GIVE ,DH.DHVALUE, DH.DHSTARTDATE 
 		FROM DIRECTFUNDHISTORY DH, MEMBER M 
@@ -122,13 +123,14 @@
 		ORDER BY DH.DHSTARTDATE DESC) 
 	</select>
 	<!-- 배송 현황 목록 조회 -->
-	<select id="selectDeliveryList" parameterType="DeliveryDetail" resultMap="deliveryDetailResultSet">
-		SELECT ROWNUM RNUM, DD_NAME, DDVALUE, DLINK 
-		FROM (SELECT F.INAME AS DD_NAME, DD.DDVALUE, D.DLINK 
+	<select id="selectDeliveryList" resultMap="deliveryDetailResultSet" parameterType="DeliveryDetail">
+		SELECT ROWNUM RNUM, DD_NAME, DDVALUE, DDATE, DLINK 
+		FROM (SELECT F.INAME AS DD_NAME, DD.DDVALUE, D.DDATE, D.DLINK 
 		FROM DELIVERYDETAIL DD, FUNDITEM F, DELIVERY D 
 		WHERE DD.DD_INO = F.INO 
 		AND DD.DD_DNO = D.DNO 
-		AND D.D_MNO = #{mno}) 
+		AND D.D_MNO = #{mno}
+		ORDER BY D.DDATE DESC)
 	</select>
 </mapper>
 
