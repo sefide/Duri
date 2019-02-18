@@ -6,25 +6,33 @@ public class DirectFundHistory implements java.io.Serializable {
 	private int dhno; //정기후원내역번호
 	private int dhvalue; //후원금액
 	private Date dhstartdate; //시작날짜
-	private String dhstatus; //상태
-	private int dh_mno_take; //후원대상자 번호
-	private int dh_mno_give; //후원자번호
-	private String dh_name_give; //후원자 이름
+	private String dhstatus;	//후원 상태
+	private String dhbillingkey;
+	private String dhvaluetype;
+	private String dh_mno_take;//후원대상자 번호
+	private int dh_mno_give;//후원자번호
 	private int rnum;
+	private String dh_name_give;
+	private int sum;
+	private int cnt;
 	
 	public DirectFundHistory() {}
 
-	public DirectFundHistory(int dhno, int dhvalue, Date dhstartdate, String dhstatus, int dh_mno_take, int dh_mno_give,
-			String dh_name_give, int rnum) {
+	public DirectFundHistory(int dhno, int dhvalue, Date dhstartdate, String dhstatus, String dhbillingkey,
+			String dhvaluetype, String dh_mno_take, int dh_mno_give, int rnum, String dh_name_give, int sum, int cnt) {
 		super();
 		this.dhno = dhno;
 		this.dhvalue = dhvalue;
 		this.dhstartdate = dhstartdate;
 		this.dhstatus = dhstatus;
+		this.dhbillingkey = dhbillingkey;
+		this.dhvaluetype = dhvaluetype;
 		this.dh_mno_take = dh_mno_take;
 		this.dh_mno_give = dh_mno_give;
-		this.dh_name_give = dh_name_give;
 		this.rnum = rnum;
+		this.dh_name_give = dh_name_give;
+		this.sum = sum;
+		this.cnt = cnt;
 	}
 
 	public int getDhno() {
@@ -59,11 +67,27 @@ public class DirectFundHistory implements java.io.Serializable {
 		this.dhstatus = dhstatus;
 	}
 
-	public int getDh_mno_take() {
+	public String getDhbillingkey() {
+		return dhbillingkey;
+	}
+
+	public void setDhbillingkey(String dhbillingkey) {
+		this.dhbillingkey = dhbillingkey;
+	}
+
+	public String getDhvaluetype() {
+		return dhvaluetype;
+	}
+
+	public void setDhvaluetype(String dhvaluetype) {
+		this.dhvaluetype = dhvaluetype;
+	}
+
+	public String getDh_mno_take() {
 		return dh_mno_take;
 	}
 
-	public void setDh_mno_take(int dh_mno_take) {
+	public void setDh_mno_take(String dh_mno_take) {
 		this.dh_mno_take = dh_mno_take;
 	}
 
@@ -75,14 +99,6 @@ public class DirectFundHistory implements java.io.Serializable {
 		this.dh_mno_give = dh_mno_give;
 	}
 
-	public String getDh_name_give() {
-		return dh_name_give;
-	}
-
-	public void setDh_name_give(String dh_name_give) {
-		this.dh_name_give = dh_name_give;
-	}
-
 	public int getRnum() {
 		return rnum;
 	}
@@ -91,11 +107,36 @@ public class DirectFundHistory implements java.io.Serializable {
 		this.rnum = rnum;
 	}
 
+	public String getDh_name_give() {
+		return dh_name_give;
+	}
+
+	public void setDh_name_give(String dh_name_give) {
+		this.dh_name_give = dh_name_give;
+	}
+
+	public int getSum() {
+		return sum;
+	}
+
+	public void setSum(int sum) {
+		this.sum = sum;
+	}
+
+	public int getCnt() {
+		return cnt;
+	}
+
+	public void setCnt(int cnt) {
+		this.cnt = cnt;
+	}
+
 	@Override
 	public String toString() {
 		return "DirectFundHistory [dhno=" + dhno + ", dhvalue=" + dhvalue + ", dhstartdate=" + dhstartdate
-				+ ", dhstatus=" + dhstatus + ", dh_mno_take=" + dh_mno_take + ", dh_mno_give=" + dh_mno_give
-				+ ", dh_name_give=" + dh_name_give + ", rnum=" + rnum + "]";
+				+ ", dhstatus=" + dhstatus + ", dhbillingkey=" + dhbillingkey + ", dhvaluetype=" + dhvaluetype
+				+ ", dh_mno_take=" + dh_mno_take + ", dh_mno_give=" + dh_mno_give + ", rnum=" + rnum + ", dh_name_give="
+				+ dh_name_give + ", sum=" + sum + ", cnt=" + cnt + "]";
 	}
 
 	

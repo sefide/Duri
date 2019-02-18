@@ -99,6 +99,14 @@ public class HappymemberServiceImpl implements HappymemberService {
 		return deliveryList;
 	}
 
+	//자기소개 수정
+	@Override
+	public int updateIntroduce(Member oldLoginUser) throws MypageException {
+		int result = hd.updateIntroduce(sqlSession, oldLoginUser);
+		
+		return result;
+	}
+
 
 	
 

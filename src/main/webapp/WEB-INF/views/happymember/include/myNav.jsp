@@ -313,7 +313,8 @@ p {font-size: 20px; text-align: center;}
 			success:function(data){
 				console.log(data.ownlist);
 				console.log(data.fundItemList);
-	
+
+				
 				$itemsList = $("#itemsList");
 				$items1 = $("#items1");
 				$items2 = $("#items2");
@@ -370,6 +371,7 @@ p {font-size: 20px; text-align: center;}
 						$items3.append($itemsSelect);
 						$items3.append(fundItemList02);
 					}
+					
 				}
 				
 			},
@@ -403,7 +405,7 @@ p {font-size: 20px; text-align: center;}
 	function selectReset(){
 		$("#getDeliveryForm")[0].reset();
 		$("#myModal").css("display", "none");
-		
+		//$itemsList.empty();
 	}
 	
 </script>

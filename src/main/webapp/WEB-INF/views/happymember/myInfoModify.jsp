@@ -139,7 +139,7 @@ input, select{
 			<span>마이페이지 &gt; 내 정보 수정</span>
 		</div>
 		<br><br>
-<form class="ui form" id="updateForm" action="updateIntroduce.happy">
+<form class="ui form" id="updateForm" action="">
   <h4 class="ui dividing header"  style="margin:10px;">ID</h4>
 	<div class="field" style="margin:10px;">
     <div class="two fields">
@@ -292,7 +292,7 @@ input, select{
   
     
     
-   <h4 class="ui dividing header" style="margin:10px; font-size:10px">증빙서류</h4>
+   <h4 class="ui dividing header" style="margin:10px;">증빙서류</h4>
    <div class="fields" style="margin:10px">
 
       <div class="two field" style="width:300px;">
@@ -310,20 +310,7 @@ input, select{
    			<input type="file" >
         </div>
     </div>
-    
-     <h4 class="ui dividing header" style="margin:10px; font-size:10px">자기소개</h4>
-   	<div class="field" style="margin:10px">
-        <div class="field" >
-        <label></label><br>
-        <c:if test="${ !empty loginUser.mpr }">
-   			<textarea name="userPr" cols="230" rows="10" style="resize:none" placeholder="${loginUser.mpr }"></textarea>
-        </c:if>
-        <c:if test="${ empty loginUser.mpr }">
-        	<textarea name="userPr" cols="230" rows="10" style="resize:none" placeholder="입력하신 자기소개는 정기후원 게시판에서 보여집니다."></textarea>
-        </c:if>
-        </div>
-    </div>
-
+    <br><br><br><br>
   
   	<div align="center">
 		 <button class="ui primary button" onclick="update();">

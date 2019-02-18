@@ -181,4 +181,17 @@ public class HappymemberDaoImpl implements HappymemberDao{
 		return deliveryList;
 	}
 
+	//자기소개 수정
+	@Override
+	public int updateIntroduce(SqlSessionTemplate sqlSession, Member oldLoginUser) throws MypageException {
+		int result = sqlSession.update("HappyMember.updateIntroduce", oldLoginUser);
+		System.out.println("회원번너너너너너너넌호 : " + oldLoginUser.getMno());
+		System.out.println("자기소개 : " + oldLoginUser.getMprNew());
+		
+		if(result < 0) {
+			throw new MypageException("자기소개 수정 실패");
+		}
+		return result;
+	}
+
 }

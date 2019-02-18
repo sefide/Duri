@@ -44,6 +44,9 @@ public interface HappymemberDao {
 	//배송현황 목록 가져오기
 	List<DeliveryDetail> selectDeliveryList(SqlSessionTemplate sqlSession, Member m, PageInfo pi) throws MypageException;
 
+	//자기소개 수정
+	int updateIntroduce(SqlSessionTemplate sqlSession, Member oldLoginUser) throws MypageException;
+
 	
 
 	
