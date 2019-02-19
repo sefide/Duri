@@ -11,6 +11,53 @@
     <title>행복두리 승인페이지</title>
 	 <jsp:include page="include/adminStyle.jsp"/>
 	 
+	 
+<script type="text/javascript">
+
+//환불전ajax
+function refundbefore(pg) {
+		
+		$.ajax({
+			url : "${pageContext.request.contextPath}/adminRefund.ad",
+			type :"get",
+			success : function (data) {
+				
+				var beforeListHtml = [];
+				var no =0;
+				for(var i=0; i<10; i++){
+					beforeListHtml.push('<tr>');
+					beforeListHtml.push('	<th scope="row">' + (i+1) + '</th>');
+					beforeListHtml.push('	<td class="center">' +data[i].mid + '</td>');
+					beforeListHtml.push('	<td class="center">' +data[i].mname + '</td>');
+					beforeListHtml.push('	<td class="center">' +data[i].rName+ '</td>');
+					beforeListHtml.push('	<td class="center">' +data[i].rDate+ '</td>');
+					beforeListHtml.push('	<td class="center">' +data[i].rAccount+ '</td>');
+					beforeListHtml.push('	<td class="center">' +data[i].rBank+"은행"+ '</td>');
+					beforeListHtml.push('	<td class="center">' +data[i].rValue+"원"+'</td>');
+					beforeListHtml.push('	<td class="center"><a href="complete()" class="btn btn-warning btn-sm">환급완료</a></td>');
+					beforeListHtml.push('</tr>');
+					
+
+				}
+				$("#beforeList").html("");//이전틀 지우고
+				$("#beforeList").append(beforeListHtml.join(""));//""를 기준으로 배열에 담긴 데이터 꺼내오기
+				
+				
+				 addBtnEvent();//버튼 함수 불러오기
+				 
+				 
+				 
+			}
+		});
+	}
+
+
+$(function () {
+	refundbefore(1);
+}); 
+
+</script>
+	 
 </head>
 <body>
      <jsp:include page="include/adminNavi.jsp"/>
@@ -48,25 +95,13 @@
                                             <th></th>
                                         </tr>
                                     </thead>
-                                    <tbody>
-                                   <c:forEach var="row" items="${adminRefundList }" varStatus="status">
-                                        <tr class="odd gradeX">
-                                            <td class="center">${status.count}</td>
-                                            <td class="center">${row.mid}</td>
-                                            <td class="center">${row.mname}</td>
-                                            <td class="center">${row.rName}</td>
-                                            <td class="center">${row.rDate}</td>
-                                            <td class="center">${row.rAccount}</td>
-                                            <td class="center">${row.rBank}은행</td>
-                                            <td class="center">${row.rValue}원</td>
-                                            <td class="center"><a href="complete()" class="btn btn-warning btn-sm">환급완료</a></td>
-                                        </tr>
-                                       
-                                    </c:forEach>
+                                    <tbody id="beforeList">
+                                   
                                     </tbody>
+                               		 
                                 </table>
-                               	 <button onclick="Refundprint()">인쇄하기</button>
                             </div>
+                                <button onclick="Refundprint()">인쇄하기</button>
                         </div>
                     </div>
                     <!--End Advanced Tables -->
