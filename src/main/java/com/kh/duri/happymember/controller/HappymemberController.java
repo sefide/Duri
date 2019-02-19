@@ -19,6 +19,7 @@ import com.kh.duri.happymember.model.exception.MypageException;
 import com.kh.duri.happymember.model.service.HappymemberService;
 import com.kh.duri.happymember.model.vo.DeliveryDetail;
 import com.kh.duri.happymember.model.vo.FundItemList;
+import com.kh.duri.happymember.model.vo.Funding;
 import com.kh.duri.happymember.model.vo.MyDonateItems;
 import com.kh.duri.payment.model.vo.PageInfo;
 import com.kh.duri.happymember.model.vo.Pagination;
@@ -105,7 +106,7 @@ public class HappymemberController {
 		return "redirect:selectDeliveryList.happy";
 	}
 	
-	//정기후원 목록 조회하기
+	//정기후원 목록 개수 조회, 목록 페이징
 	@RequestMapping("longDonate.happy")
 	public String selectLongDonate(Model model, HttpServletRequest request, HttpServletResponse response) {
 		Member m = (Member)request.getSession().getAttribute("loginUser");
@@ -130,13 +131,13 @@ public class HappymemberController {
 			model.addAttribute("pi", pi);
 			
 		} catch (MypageException e) {
-			request.setAttribute("msg", e.getMessage());
+			model.addAttribute("msg", e.getMessage());
 		}
 		
 		return "happymember/longDonate";
 	}
 	
-	//배송현황 목록 페이징
+	//배송현황 목록 개수 조회, 목록 페이징
 	@RequestMapping("selectDeliveryList.happy")
 	public String selectDeliveryList(Model model, HttpServletRequest request, HttpServletResponse response) {
 		Member m = (Member)request.getSession().getAttribute("loginUser");
@@ -163,7 +164,7 @@ public class HappymemberController {
 				
 				
 		} catch (MypageException e) {
-			request.setAttribute("msg", e.getMessage());
+			model.addAttribute("msg", e.getMessage());
 			return "common/errorPage";
 		}
 		return "happymember/deliveryStatus";
@@ -183,18 +184,42 @@ public class HappymemberController {
 		try {
 			int result = hs.updateIntroduce(oldLoginUser);
 			
-			if(result > 1){
+			if(result > 0){
 				return "redirect:logngDonateRefresh.happy";
 			}
 			
 		} catch (MypageException e) {
-			request.setAttribute("msg", e.getMessage());
+			model.addAttribute("msg", e.getMessage());
 		}
 	
 		
 		return "happymember/myInfoModifyHappy.happy";
 	}
+	
+	/*//물품후원 목록 개수 조회, 목록 페이징
+	@RequestMapping("itemDonateList.happy")
+	public @ResponseBody String itemDonateList(@RequestParam  Model model, HttpServletRequest request, HttpServletResponse response){
+		Member m = (Member)request.getSession().getAttribute("loginUser");
 		
+		int currentPage = 1;
+		
+		if(request.getParameter("currentPage") != null) {
+			currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		}
+		
+		try {
+			int listCount = hs.selectItemDonateCount(m);
+			
+			PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
+			
+			List<Funding> itemDonateList = hs.selectItemDonateList(m, pi);
+			
+		} catch (MypageException e) {
+			model.addAttribute("msg", e.getMessage());
+		}
+		
+		return "happymember/mypage";
+	}*/
 		
 		
 	//물품 배송 목록 새로고침했을 때 insert다시 안되게 !

@@ -10,6 +10,7 @@ import com.kh.duri.happymember.model.exception.MypageException;
 import com.kh.duri.happymember.model.vo.Delivery;
 import com.kh.duri.happymember.model.vo.DeliveryDetail;
 import com.kh.duri.happymember.model.vo.FundItemList;
+import com.kh.duri.happymember.model.vo.Funding;
 import com.kh.duri.happymember.model.vo.MyDonateItems;
 import com.kh.duri.member.model.vo.Member;
 import com.kh.duri.payment.model.vo.PageInfo;
@@ -32,21 +33,27 @@ public interface HappymemberDao {
 	//배송현황 상세 정보 추가하기
 	int insertDeliveryDetail(SqlSessionTemplate sqlSession, String[] itemNumArray, String[] itemAmountArray) throws MypageException;
 
-	//배송현황 목록 개수 조회
-	int selectDeliveryListCount(SqlSessionTemplate sqlSession, Member m) throws MypageException;
-
 	//정기후원 목록 개수 조회
 	int selectLongDonateCount(SqlSessionTemplate sqlSession, Member m) throws MypageException;
 
-	//정기후원 목록 조회하기
+	//정기후원 목록 조회
 	List<DirectFundHistory> selectDirectFundList(SqlSessionTemplate sqlSession, Member m, PageInfo pi) throws MypageException;
+	
+	//배송현황 목록 개수 조회
+	int selectDeliveryListCount(SqlSessionTemplate sqlSession, Member m) throws MypageException;
 
-	//배송현황 목록 가져오기
+	//배송현황 목록 조회
 	List<DeliveryDetail> selectDeliveryList(SqlSessionTemplate sqlSession, Member m, PageInfo pi) throws MypageException;
 
 	//자기소개 수정
 	int updateIntroduce(SqlSessionTemplate sqlSession, Member oldLoginUser) throws MypageException;
 
+	/*//물품후원 목록 개수 조회
+	int selectItemDonateCount(SqlSessionTemplate sqlSession, Member m) throws MypageException;
+
+	//물품후원 목록 조회
+	List<Funding> selectItemDonateList(SqlSessionTemplate sqlSession, Member m, PageInfo pi) throws MypageException;
+*/
 	
 
 	

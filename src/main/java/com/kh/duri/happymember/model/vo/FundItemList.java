@@ -1,6 +1,6 @@
 package com.kh.duri.happymember.model.vo;
 
-public class FundItemList {
+public class FundItemList implements java.io.Serializable{
 	private int ino;
 	private String iname;
 	private int iprice;

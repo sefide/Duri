@@ -1,4 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <% 
 	String bigtabon="2";
 %>
@@ -179,7 +182,6 @@ input, select{
 		$("#updatePrForm").submit();
 		console.log("성공");
 		alert("자기소개 수정이 신청되었습니다. 승인을 기다려 주세요!");
-		history.back();
 	}
 </script>
 </body>

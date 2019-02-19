@@ -65,16 +65,18 @@
 			<caption>문의내역 리스트입니다.</caption>
 			<colgroup>
 				<col style="width:6%;"><!-- No -->
-				<col style="width:14%;"><!--  -->
-				<col style="width:30%;"><!--  -->
 				<col style="width:15%;"><!--  -->
-				<col style="width:10%;"><!--  -->
+				<col style="width:25%;"><!--  -->
+				<col style="width:15%;"><!--  -->
+				<col style="width:20%;"><!--  -->
 			</colgroup>
 			<thead>
 			<tr>
 				<th scope="col">No</th>
 				<th scope="col">나눔두리</th>
 				<th scope="col">후원금액</th>
+				<th scope="col">후원누적금액</th>
+				<th scope="col">후원회차</th>
 				<th scope="col">후원 시작 날짜</th>
 			</tr>
 			</thead>
@@ -84,7 +86,9 @@
 					<tr>
 						<td><c:out value="${directList.rnum}"/></td>
 						<td><c:out value="${directList.dh_name_give}&nbsp;님" escapeXml="false"/></td>
-						<td><c:out value="${directList.dhvalue}"/></td>
+						<td><c:out value="${directList.dhvalue}원" escapeXml="false"/></td>
+						<td><c:out value="${directList.sum}원" escapeXml="false"/></td>
+						<td><c:out value="${directList.cnt}회" escapeXml="false"/></td>
 						<td><c:out value="${directList.dhstartdate}&nbsp;~" escapeXml="false"/></td>
 					</tr>
 				</c:forEach>
@@ -92,7 +96,7 @@
 				
 				<c:if test="${ empty directFundList }">
 					<tr>
-						<td colspan = "4"> 정기 후원 내역이 없습니다.  </td>
+						<td colspan = "6"> 정기 후원 내역이 없습니다.  </td>
 					<tr>
 				</c:if>
 			</tbody>

@@ -12,6 +12,7 @@ import com.kh.duri.happymember.model.dao.HappymemberDao;
 import com.kh.duri.happymember.model.exception.MypageException;
 import com.kh.duri.happymember.model.vo.DeliveryDetail;
 import com.kh.duri.happymember.model.vo.FundItemList;
+import com.kh.duri.happymember.model.vo.Funding;
 import com.kh.duri.happymember.model.vo.MyDonateItems;
 import com.kh.duri.member.model.vo.Member;
 import com.kh.duri.payment.model.vo.PageInfo;
@@ -65,7 +66,22 @@ public class HappymemberServiceImpl implements HappymemberService {
 		return result;
 	}
 
-
+	//정기후원 목록 개수 조회
+		@Override
+		public int selectLongDonateCount(Member m) throws MypageException {
+			int listCount = hd.selectLongDonateCount(sqlSession, m);
+			
+			return listCount;
+		}
+		
+	//정기후원 목록 조회
+	@Override
+	public List<DirectFundHistory> selectDirectFundList(Member m, PageInfo pi) throws MypageException {
+		List<DirectFundHistory> directFundList = hd.selectDirectFundList(sqlSession, m, pi);
+			
+		return directFundList;
+	}	
+	
 	//배송현황 목록 개수 조회
 	@Override
 	public int selectDeliveryListCount(Member m) throws MypageException {
@@ -75,23 +91,7 @@ public class HappymemberServiceImpl implements HappymemberService {
 		return listCount;
 	}
 
-	//정기후원 목록 개수 조회
-	@Override
-	public int selectLongDonateCount(Member m) throws MypageException {
-		int listCount = hd.selectLongDonateCount(sqlSession, m);
-		
-		return listCount;
-	}
-
-	//정기후원 목록 조회하기
-	@Override
-	public List<DirectFundHistory> selectDirectFundList(Member m, PageInfo pi) throws MypageException {
-		List<DirectFundHistory> directFundList = hd.selectDirectFundList(sqlSession, m, pi);
-		
-		return directFundList;
-	}
-
-	//배송현황 목록 가져오기
+	//배송현황 목록 조회
 	@Override
 	public List<DeliveryDetail> selectDeliveryList(Member m, PageInfo pi) throws MypageException {
 		List<DeliveryDetail> deliveryList = hd.selectDeliveryList(sqlSession, m, pi);
@@ -106,6 +106,22 @@ public class HappymemberServiceImpl implements HappymemberService {
 		
 		return result;
 	}
+
+	/*//물품후원 목록 개수 조회
+	@Override
+	public int selectItemDonateCount(Member m) throws MypageException {
+		int listCount = hd.selectItemDonateCount(sqlSession, m);
+		
+		return listCount;
+	}
+
+	//물품후원 목록 조회
+	@Override
+	public List<Funding> selectItemDonateList(Member m, PageInfo pi) throws MypageException {
+		List<Funding> itemDonateList = hd.selectItemDonateList(sqlSession, m, pi);
+		
+		return itemDonateList;
+	}*/
 
 
 	

@@ -2,7 +2,7 @@ package com.kh.duri.happymember.model.vo;
 
 import java.sql.Date;
 
-public class DeliveryDetail {
+public class DeliveryDetail implements java.io.Serializable {
 	int ddno;
 	int ddvalue;
 	int dd_dno;

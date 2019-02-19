@@ -2,7 +2,7 @@ package com.kh.duri.happymember.model.vo;
 
 import com.kh.duri.payment.model.vo.PageInfo;
 
-public class Pagination {
+public class Pagination implements java.io.Serializable{
 	//PageInfo를 리턴하는 메소드
 	public static PageInfo getPageInfo(int currentPage, int listCount) {
 		PageInfo pi = null;

@@ -12,6 +12,7 @@ import com.kh.duri.happymember.model.exception.MypageException;
 import com.kh.duri.happymember.model.vo.Delivery;
 import com.kh.duri.happymember.model.vo.DeliveryDetail;
 import com.kh.duri.happymember.model.vo.FundItemList;
+import com.kh.duri.happymember.model.vo.Funding;
 import com.kh.duri.happymember.model.vo.MyDonateItems;
 import com.kh.duri.member.model.vo.Member;
 import com.kh.duri.payment.model.vo.PageInfo;
@@ -117,24 +118,7 @@ public class HappymemberDaoImpl implements HappymemberDao{
 		return insertResult2;
 	}
 
-	//배송현황 목록 개수 조회
-	@Override
-	public int selectDeliveryListCount(SqlSessionTemplate sqlSession, Member m) throws MypageException {
-	
-		System.out.println("회원번호 : " + m.getMno());
-		int listCount = sqlSession.selectOne("HappyMember.selectDeliveryListCount", m);
-		
-		/*System.out.println("물품 배송 현황 수 : " + listCount);*/
-		
-		if(listCount < 0){
-			throw new MypageException("물품 배송 현황 수 조회 실패");
-		}
-		
-		return listCount;
-
-	}
-
-	//정기후원 목록 조회하기 개수 조회
+	//정기후원 목록 개수 조회
 	@Override
 	public int selectLongDonateCount(SqlSessionTemplate sqlSession, Member m) throws MypageException {
 		int listCount = sqlSession.selectOne("HappyMember.selectLongDonateCount", m);
@@ -148,7 +132,7 @@ public class HappymemberDaoImpl implements HappymemberDao{
 		return listCount;
 	}
 
-	//정기후원 목록 조회하기
+	//정기후원 목록 조회
 	@Override
 	public List<DirectFundHistory> selectDirectFundList(SqlSessionTemplate sqlSession, Member m, PageInfo pi) throws MypageException {
 		int offset = (pi.getCurrentPage()-1)*pi.getLimit();//Limit : 한 페이지에 보여줄 게시글 수
@@ -163,8 +147,25 @@ public class HappymemberDaoImpl implements HappymemberDao{
 		/*System.out.println("정기후원 리스트 수 : " + directFundList.size());*/
 		return directFundList;
 	}
+	
+	//배송현황 목록 개수 조회
+	@Override
+	public int selectDeliveryListCount(SqlSessionTemplate sqlSession, Member m) throws MypageException {
+		
+		/*System.out.println("회원번호 : " + m.getMno());*/
+		int listCount = sqlSession.selectOne("HappyMember.selectDeliveryListCount", m);
+			
+		/*System.out.println("물품 배송 현황 수 : " + listCount);*/
+			
+		if(listCount < 0){
+			throw new MypageException("물품 배송 현황 수 조회 실패");
+		}
+			
+		return listCount;
 
-	//배송현황 목록 가져오기
+	}
+
+	//배송현황 목록 조회
 	@Override
 	public List<DeliveryDetail> selectDeliveryList(SqlSessionTemplate sqlSession, Member m, PageInfo pi)
 			throws MypageException {
@@ -185,13 +186,42 @@ public class HappymemberDaoImpl implements HappymemberDao{
 	@Override
 	public int updateIntroduce(SqlSessionTemplate sqlSession, Member oldLoginUser) throws MypageException {
 		int result = sqlSession.update("HappyMember.updateIntroduce", oldLoginUser);
-		System.out.println("회원번너너너너너너넌호 : " + oldLoginUser.getMno());
+		/*System.out.println("회원번너너너너너너넌호 : " + oldLoginUser.getMno());
 		System.out.println("자기소개 : " + oldLoginUser.getMprNew());
+		System.out.println("정보 : " + result);*/
 		
 		if(result < 0) {
 			throw new MypageException("자기소개 수정 실패");
 		}
 		return result;
 	}
+
+	/*//물품후원 목록 개수 조회
+	@Override
+	public int selectItemDonateCount(SqlSessionTemplate sqlSession, Member m) throws MypageException {
+		int listCount = sqlSession.selectOne("HappyMember.selectItemDonateCount", m);
+		
+		if(listCount < 0) {
+			throw new MypageException("물품후원 개수 조회 실패");
+		}
+		
+		return listCount;
+	}
+
+	//물품후원 목록 조회
+	@Override
+	public List<Funding> selectItemDonateList(SqlSessionTemplate sqlSession, Member m, PageInfo pi)
+			throws MypageException {
+		int offset = (pi.getCurrentPage()-1)*pi.getLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getLimit());
+		
+		List<Funding> itemDonateList = sqlSession.selectList("HappyMember.selectItemDonateList", m, rowBounds);
+		
+		if(itemDonateList == null) {
+			throw new MypageException("물품후원 목록 조회 실패");
+		}
+		
+		return itemDonateList;
+	}*/
 
 }
