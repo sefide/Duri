@@ -93,6 +93,12 @@
 		<result property="mpr" column="MPR"/>
 		<result property="fTitle" column="FTITLE"/>
 	</resultMap>
+	<resultMap type="com.kh.duri.Nanummember.model.vo.FundItem" id="fundItemResultSet">
+		<id property="iNo" column="INO"/>
+		<result property="iName" column="INAME"/>
+		<result property="iPrice" column="IPRICE"/>
+		<result property="fNo" column="FNO"/> 
+	</resultMap>	
 		
 	<!-- 금액 크라우드 펀딩 개수 조회 (진행) -->
 	<select id="selectMoneyCloundListCount" resultType="_int">
@@ -141,13 +147,26 @@
 	</select>
 	<!-- 물품 크라우드 펀딩  조회 (진행) -->
 	<select id="selectItemCloud" resultMap="fundingResultSet" parameterType="Funding" resultType="list">
-		SELECT ROWNUM RNUM, FTITLE , FHVALUE ,FSTATUS, FSTARTDATE , FENDDATE , FHDATE
-		FROM(SELECT f.FTITLE , fh.FHVALUE , f.FSTATUS,  f.FSTARTDATE ,f.FENDDATE , fh.FHDATE
+		SELECT ROWNUM RNUM, FNO, FTITLE , FHVALUE ,FSTATUS, FSTARTDATE , FENDDATE , FHDATE
+		FROM(SELECT f.fno, f.FTITLE , fh.FHVALUE , f.FSTATUS,  f.FSTARTDATE ,f.FENDDATE , fh.FHDATE
 		FROM FUNDING f, FUNDHISTORY fh	
 		<![CDATA[	
 		WHERE f.FNO = fh.FH_FNO and fh.FH_MNO_GIVE = #{mno}  and f.FTYPE= 'ITEM' and f.fstartdate <= SYSDATE and f.fenddate >= SYSDATE ]]>
 		ORDER BY fh.FHDATE DESC)
 	</select>
+	<!-- 진행하는 물품크라우드 펀딩 - 물품 뽑기 -->
+	<select id="selectIngItem" resultType="list" parameterType="NanumFundItem">
+		SELECT F.FNO,  FI.INAME , FH.FH_MNO_GIVE
+		FROM FUNDING F, FUNDITEM FI, FUNDHISTORY FH, FUNDHISTORYDETAIL FHD
+		WHERE F.FNO = FH.FH_FNO AND FH.FHNO = FHD.FHD_FHNO AND FHD.FHD_INO = FI.INO
+		AND F.FNO= #{fno} AND FH.FH_MNO_GIVE = #{mno}
+		GROUP BY F.FNO,FI.INAME,FH.FH_MNO_GIVE
+		ORDER BY FNO  	
+	</select>
+	
+	
+	
+	
 	<!-- 물품 크라우드 펀딩 개수 조회 (종료)  -->
 	<select id="selectEndItemCloundListCount" resultType="_int">
 		SELECT COUNT(*)
@@ -158,8 +177,8 @@
 	</select>
 	<!-- 물품 크라우드 펀딩  조회 (종료) -->
 	<select id="selectEndItemCloud" resultMap="fundingResultSet" parameterType="Funding" resultType="list">
-		SELECT ROWNUM RNUM, FTITLE , FHVALUE ,FSTATUS, FSTARTDATE , FENDDATE , FHDATE
-		FROM(SELECT f.FTITLE , fh.FHVALUE , f.FSTATUS,  f.FSTARTDATE ,f.FENDDATE , fh.FHDATE
+		SELECT ROWNUM RNUM, FNO, FTITLE , FHVALUE ,FSTATUS, FSTARTDATE , FENDDATE , FHDATE
+		FROM(SELECT f.fno, f.FTITLE , fh.FHVALUE , f.FSTATUS,  f.FSTARTDATE ,f.FENDDATE , fh.FHDATE
 		FROM FUNDING f, FUNDHISTORY fh	
 		<![CDATA[	
 		WHERE f.FNO = fh.FH_FNO and fh.FH_MNO_GIVE = #{mno}  and f.FTYPE= 'ITEM' AND f.fenddate < SYSDATE ]]>

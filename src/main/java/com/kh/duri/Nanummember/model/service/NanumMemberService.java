@@ -6,6 +6,7 @@ import java.util.List;
 import com.kh.duri.Nanummember.model.exception.NanumException;
 import com.kh.duri.Nanummember.model.vo.DirectFundHistory;
 import com.kh.duri.Nanummember.model.vo.FundInterest;
+import com.kh.duri.Nanummember.model.vo.FundItem;
 import com.kh.duri.Nanummember.model.vo.Funding;
 import com.kh.duri.Nanummember.model.vo.Letter;
 import com.kh.duri.Nanummember.model.vo.PageInfo;
@@ -32,6 +33,11 @@ public interface NanumMemberService {
 	HashMap<String, Integer> getLikeListCount(Member m) throws NanumException;
 	//찜한 후원 가져오기 
 	HashMap<String, List<FundInterest>> selectLikeFundList(Member m, HashMap<String, PageInfo> paging) throws NanumException;
+	//종료된 물품 크라우드 펀딩 - 물품 가져오기
+	HashMap<String, FundItem> selectEndItem(Member m, int fno) throws NanumException;
+	
+	
+	
 	
 
 	
