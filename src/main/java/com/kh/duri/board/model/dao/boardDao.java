@@ -30,5 +30,11 @@ public interface boardDao {
 
 	List<BoardItem> selectThingList(SqlSessionTemplate sqlSession, PageInfo pi);
 
+	List<BoardItem> selectThingList2(SqlSessionTemplate sqlSession, PageInfo pi);
+
+	BoardItem thingDetailOne(SqlSessionTemplate sqlSession, BoardItem bi);
+
+	List<BoardItem> thingDetailOne2(SqlSessionTemplate sqlSession, BoardItem bi);
+
 
 }

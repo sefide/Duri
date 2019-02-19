@@ -55,6 +55,7 @@
 		<result property="iName" column="INAME"/>
 		<result property="mNick" column="MNICK"/>
 		<result property="mAddress" column="MADDRESS"/>
+		<result property="mFundType" column="MFUNDTYPE"/>
 		<result property="fdValue" column="FDVALUE"/>
 		<result property="fd_ino" column="FD_INO"/>
 
@@ -98,9 +99,21 @@
 	
 	
 	<select id="selectThingList" resultMap="thingBoardlistSet" parameterType="BoardItem">
-		SELECT ROWNUM RNUM, FNO, FTITLE , FCONTENT , FSTARTDATE , FENDDATE, FSTATUS , FWRITER, MNICK , MADDRESS, INAME, FDVALUE, FD_INO
-		FROM( SELECT ROWNUM RNUM, FNO, FTITLE , FCONTENT , FSTARTDATE , FENDDATE, FSTATUS , FWRITER, MNICK , MADDRESS, INAME, FDVALUE, FD_INO
-     		  FROM (SELECT F.FNO, F.FTITLE , F.FCONTENT , F.FSTARTDATE , F.FENDDATE, F.FSTATUS , F.FWRITER, M.MNICK , M.MADDRESS, FI.INAME, FD.FDVALUE, FD.FD_INO
+		SELECT ROWNUM RNUM, FNO, FTITLE , FCONTENT , FSTARTDATE , FENDDATE, FSTATUS , FWRITER, MNICK , MADDRESS, MFUNDTYPE 
+		FROM( SELECT ROWNUM RNUM, FNO, FTITLE , FCONTENT , FSTARTDATE , FENDDATE, FSTATUS , FWRITER, MNICK , MADDRESS, MFUNDTYPE 
+      	  	  FROM (SELECT FNO, FTITLE , FCONTENT , FSTARTDATE , FENDDATE, FSTATUS , FWRITER, MNICK , MADDRESS, MFUNDTYPE 
+	            	FROM FUNDING F , MEMBER M
+		            WHERE M.MNO = F.FWRITER
+		            AND F.FTYPE='ITEM'
+		            AND F.FSTATUS != 'END'
+		            AND F.FSTATUS != 'YET' 
+		            ORDER BY F.FNO))
+	</select>
+	
+	<select id="selectThingList2" resultMap="thingBoardlistSet" parameterType="BoardItem">
+	SELECT ROWNUM RNUM,FNO,INAME, FDVALUE, FD_INO
+		FROM( SELECT ROWNUM RNUM,FNO,INAME, FDVALUE, FD_INO
+     		  FROM (SELECT F.FNO,FI.INAME, FD.FDVALUE, FD.FD_INO
             		FROM FUNDING F , MEMBER M , FUNDITEM FI, FUNDINGDETAIL FD
                     WHERE M.MNO = F.FWRITER
                     AND FD.FD_INO = FI.INO
@@ -111,7 +124,32 @@
             		ORDER BY F.FNO))
 	</select>
 	
+	<select id="selectThingDetail" resultMap="thingBoardlistSet" parameterType="BoardItem">
+		SELECT ROWNUM RNUM, FNO, FTITLE , FCONTENT , FSTARTDATE , FENDDATE, FSTATUS , FWRITER, MNICK , MADDRESS, MFUNDTYPE 
+		FROM( SELECT ROWNUM RNUM, FNO, FTITLE , FCONTENT , FSTARTDATE , FENDDATE, FSTATUS , FWRITER, MNICK , MADDRESS, MFUNDTYPE 
+		      FROM (SELECT FNO, FTITLE , FCONTENT , FSTARTDATE , FENDDATE, FSTATUS , FWRITER, MNICK , MADDRESS, MFUNDTYPE 
+		            FROM FUNDING F , MEMBER M
+		            WHERE M.MNO = F.FWRITER
+		            AND F.FTYPE='ITEM'
+		            AND F.FSTATUS != 'END'
+		            AND F.FSTATUS != 'YET' 
+		            AND F.FNO = ${fno}))
+	</select>
 	
+	<select id="selectThingDetail2" resultMap="thingBoardlistSet" parameterType="BoardItem">
+		SELECT ROWNUM RNUM,FNO,INAME, FDVALUE, FD_INO
+				FROM( SELECT ROWNUM RNUM,FNO,INAME, FDVALUE, FD_INO
+		     		  FROM (SELECT F.FNO,FI.INAME, FD.FDVALUE, FD.FD_INO
+		            		FROM FUNDING F , MEMBER M , FUNDITEM FI, FUNDINGDETAIL FD
+		                    WHERE M.MNO = F.FWRITER
+		                    AND FD.FD_INO = FI.INO
+		                    AND F.FNO = FD.FD_FNO
+		                    AND F.FTYPE = 'ITEM'
+		                    AND F.FSTATUS != 'END'
+		                    AND F.FSTATUS != 'YET'
+		                    AND F.FNO = ${fno}
+		            		ORDER BY F.FNO))
+	</select>
 
 	
 	
