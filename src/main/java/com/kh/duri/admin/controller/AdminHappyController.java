@@ -77,7 +77,7 @@ public class AdminHappyController {
 		
 		
 	}
-	//행복두리 [기존회원(1)/신규회원(3)] 상세페이지 (공통페이지)
+	//행복두리 [기존회원(1)/신규회원(3)] 상세페이지 (공통페이지)  
 	@RequestMapping("adminHappyDetail.ad")
 	public String adminHappyDetailList(HttpServletRequest request, HttpServletResponse response,Model model,adminMember m) {
 		
