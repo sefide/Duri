@@ -140,7 +140,7 @@
 		and f.FTYPE= 'ITEM' ]]>
 	</select>
 	<!-- 물품 크라우드 펀딩  조회 (진행) -->
-	<select id="selectItemCloud" resultMap="fundingQ5ResultSet" parameterType="Funding" resultType="list">
+	<select id="selectItemCloud" resultMap="fundingResultSet" parameterType="Funding" resultType="list">
 		SELECT ROWNUM RNUM, FTITLE , FHVALUE ,FSTATUS, FSTARTDATE , FENDDATE , FHDATE
 		FROM(SELECT f.FTITLE , fh.FHVALUE , f.FSTATUS,  f.FSTARTDATE ,f.FENDDATE , fh.FHDATE
 		FROM FUNDING f, FUNDHISTORY fh	
