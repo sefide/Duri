@@ -15,14 +15,14 @@ public class Funding implements java.io.Serializable{
 	private int fvalue;
 	private String fvaluetype;
 	private int fwriter;
-	private int count;
+	private String fitemname;
 	private int rnum;
 	
 	public Funding() {}
 
 	public Funding(int fno, String ftype, String ftitle, String fcontent, Date fwritedate, Date fstartdate,
-			Date fenddate, String fleftday, String fstatus, int fvalue, String fvaluetype, int fwriter, int count,
-			int rnum) {
+			Date fenddate, String fleftday, String fstatus, int fvalue, String fvaluetype, int fwriter,
+			String fitemname, int rnum) {
 		super();
 		this.fno = fno;
 		this.ftype = ftype;
@@ -36,7 +36,7 @@ public class Funding implements java.io.Serializable{
 		this.fvalue = fvalue;
 		this.fvaluetype = fvaluetype;
 		this.fwriter = fwriter;
-		this.count = count;
+		this.fitemname = fitemname;
 		this.rnum = rnum;
 	}
 
@@ -136,12 +136,12 @@ public class Funding implements java.io.Serializable{
 		this.fwriter = fwriter;
 	}
 
-	public int getCount() {
-		return count;
+	public String getFitemname() {
+		return fitemname;
 	}
 
-	public void setCount(int count) {
-		this.count = count;
+	public void setFitemname(String fitemname) {
+		this.fitemname = fitemname;
 	}
 
 	public int getRnum() {
@@ -157,8 +157,9 @@ public class Funding implements java.io.Serializable{
 		return "Funding [fno=" + fno + ", ftype=" + ftype + ", ftitle=" + ftitle + ", fcontent=" + fcontent
 				+ ", fwritedate=" + fwritedate + ", fstartdate=" + fstartdate + ", fenddate=" + fenddate + ", fleftday="
 				+ fleftday + ", fstatus=" + fstatus + ", fvalue=" + fvalue + ", fvaluetype=" + fvaluetype + ", fwriter="
-				+ fwriter + ", count=" + count + ", rnum=" + rnum + "]";
+				+ fwriter + ", fitemname=" + fitemname + ", rnum=" + rnum + "]";
 	}
 
+	
 	
 }

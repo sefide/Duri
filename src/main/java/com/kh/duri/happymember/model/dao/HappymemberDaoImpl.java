@@ -196,7 +196,7 @@ public class HappymemberDaoImpl implements HappymemberDao{
 		return result;
 	}
 
-	/*//물품후원 목록 개수 조회
+	//물품후원 목록 개수 조회
 	@Override
 	public int selectItemDonateCount(SqlSessionTemplate sqlSession, Member m) throws MypageException {
 		int listCount = sqlSession.selectOne("HappyMember.selectItemDonateCount", m);
@@ -210,18 +210,20 @@ public class HappymemberDaoImpl implements HappymemberDao{
 
 	//물품후원 목록 조회
 	@Override
-	public List<Funding> selectItemDonateList(SqlSessionTemplate sqlSession, Member m, PageInfo pi)
+	public List<Funding> selectItemDonateList(SqlSessionTemplate sqlSession, int mno, PageInfo pi)
 			throws MypageException {
 		int offset = (pi.getCurrentPage()-1)*pi.getLimit();
 		RowBounds rowBounds = new RowBounds(offset, pi.getLimit());
 		
-		List<Funding> itemDonateList = sqlSession.selectList("HappyMember.selectItemDonateList", m, rowBounds);
+		List<Funding> itemDonateList = sqlSession.selectList("HappyMember.selectItemDonateList", mno, rowBounds);
 		
 		if(itemDonateList == null) {
 			throw new MypageException("물품후원 목록 조회 실패");
 		}
 		
+		System.out.println("itemDonateList 개수 : " + itemDonateList.size());
+		
 		return itemDonateList;
-	}*/
+	}
 
 }

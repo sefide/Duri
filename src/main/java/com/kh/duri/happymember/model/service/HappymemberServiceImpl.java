@@ -107,7 +107,7 @@ public class HappymemberServiceImpl implements HappymemberService {
 		return result;
 	}
 
-	/*//물품후원 목록 개수 조회
+	//물품후원 목록 개수 조회
 	@Override
 	public int selectItemDonateCount(Member m) throws MypageException {
 		int listCount = hd.selectItemDonateCount(sqlSession, m);
@@ -117,11 +117,11 @@ public class HappymemberServiceImpl implements HappymemberService {
 
 	//물품후원 목록 조회
 	@Override
-	public List<Funding> selectItemDonateList(Member m, PageInfo pi) throws MypageException {
-		List<Funding> itemDonateList = hd.selectItemDonateList(sqlSession, m, pi);
+	public List<Funding> selectItemDonateList(int mno, PageInfo pi) throws MypageException {
+		List<Funding> itemDonateList = hd.selectItemDonateList(sqlSession, mno, pi);
 		
 		return itemDonateList;
-	}*/
+	}
 
 
 	

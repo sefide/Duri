@@ -92,7 +92,7 @@
 		<result property="fvalue" column="FVALUE"/>
 		<result property="fvaluetype" column="FVALUETYPE"/>
 		<result property="fwriter" column="FWRITER"/>
-		<result property="count" column="COUNT"/>
+		<result property="fitemname" column="FITEMNAME"/>
 		<result property="rnum" column="RNUM"/>
 	</resultMap>
 	
@@ -159,16 +159,27 @@
 		WHERE MNO = #{mno}
 	</update>
 	<!-- 물품후원 목록 개수 조회 -->
-	<!-- <select id="selectItemDonateCount" resultType="_int">
+	<select id="selectItemDonateCount" resultType="_int">
 		SELECT COUNT(*) 
 		FROM FUNDING 
 		WHERE FWRITER = #{mno} 
 		AND FTYPE = 'ITEM'
-	</select> -->
+	</select>
 	<!-- 물품후원 목록 조회 -->
-	<!-- <select id="selectItemDonateList" resultMap="happyFundingResultSet" parameterType="Funding">
-	
-	</select> -->
+	<select id="selectItemDonateList" resultMap="happyFundingResultSet" parameterType="Funding">
+		SELECT DISTINCT ROWNUM RNUM, FNO, FTITLE, FCONTENT, FITEMNAME, FSTARTDATE, FENDDATE, FSTATUS 
+		FROM (SELECT DISTINCT F.FNO, F.FTITLE, F.FCONTENT, 
+			(SELECT LISTAGG(CAST(FI2.INAME as varchar2(50)),',') WITHIN GROUP (ORDER BY FD2.FD_FNO) 
+			FROM FUNDINGDETAIL FD2 JOIN FUNDITEM FI2 ON(FI2.INO = FD2.FD_INO) 
+			WHERE F.FNO = FD2.FD_FNO GROUP BY FD2.FD_FNO) AS FITEMNAME,
+			F.FSTARTDATE, F.FENDDATE, F.FSTATUS 
+			FROM FUNDING F JOIN FUNDINGDETAIL FD ON(F.FNO=FD.FD_FNO) 
+			JOIN FUNDITEM FI ON(FD.FD_INO=FI.INO) 
+			WHERE F.FWRITER = #{mno}
+			AND FTYPE = 'ITEM' 
+			ORDER BY FNO DESC)
+		ORDER BY FNO DESC
+	</select>
 </mapper>
 
 

@@ -40,12 +40,11 @@ public interface HappymemberService {
 	//자기소개 수정
 	int updateIntroduce(Member oldLoginUser) throws MypageException;
 
-	/*//물품후원 목록 개수 조회
+	//물품후원 목록 개수 조회
 	int selectItemDonateCount(Member m) throws MypageException;
 
 	//물품후원 목록 조회
-	List<Funding> selectItemDonateList(Member m, PageInfo pi) throws MypageException;
-*/
+	List<Funding> selectItemDonateList(int mno, PageInfo pi) throws MypageException;
 
 
 	
