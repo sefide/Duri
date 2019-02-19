@@ -219,30 +219,42 @@ public class NanumController {
 	@RequestMapping("mypageLikefund.nanum")
 	public String selectLikeFundList(Model model, HttpServletRequest request, HttpServletResponse response) {
 		Member m = (Member)request.getSession().getAttribute("loginUser2");
-		int currentPage = 1; //정기
-		int currentPage2 = 1; //금액
+		int currentPage = 1;
+		int currentPage2 = 1; 
+		int currentPage3 = 1;
 		if(request.getParameter("currentPage") != null) {
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		}
 		if(request.getParameter("currentPage2") != null) {
 			currentPage2 = Integer.parseInt(request.getParameter("currentPage2"));
 		}
+		if(request.getParameter("currentPage3") != null) {
+			currentPage3 = Integer.parseInt(request.getParameter("currentPage3"));
+		}
 		try {
 			HashMap<String, Integer> likeListCount = new HashMap<>();			
-			likeListCount = ns.getLikeListCount(m);	 //감사편지 개수 가져오기 	 likeDirectCount
+			likeListCount = ns.getLikeListCount(m);	 //감사편지 개수 가져오기 	 
 			int likeDirectCount = likeListCount.get("likeDirectCount");
-			int likeMoneyCount = likeListCount.get("likeMoneyCount");
-			
+			int likeMoneyCount = likeListCount.get("likeMoneyCount");		
+			int likeItemCount = likeListCount.get("likeItemCount");
 			PageInfo pi = Pagination.getPageInfo(currentPage, likeDirectCount);
 			PageInfo pi2 = Pagination.getPageInfo(currentPage2, likeMoneyCount);
-			
-			/*List<FundInterest> dfList = ns.selectLikeDirect(m,pi);
-			List<FundInterest> mclList = ns.selectLikeMoneyCloud(m,pi2);
-			model.addAttribute("dfList",dfList);
+			PageInfo pi3 = Pagination.getPageInfo(currentPage3, likeItemCount);
+			HashMap<String, PageInfo> paging = new HashMap<>();
+			paging.put("pi", pi);
+			paging.put("pi2", pi2);
+			paging.put("pi3", pi3);
+			HashMap<String, List<FundInterest>> likeFundList =  new HashMap<String, List<FundInterest>>();
+			likeFundList = ns.selectLikeFundList(m,paging);	//찜한 후원가져오기 		
+			List<FundInterest> likeDirectList = likeFundList.get("likeDirectList");
+			List<FundInterest> likeMoneyList = likeFundList.get("likeMoneyList");
+			List<FundInterest> likeItemList = likeFundList.get("likeItemList");
+			model.addAttribute("likeDirectList",likeDirectList);
 			model.addAttribute("pi",pi);
-			model.addAttribute("mclList",mclList);
+			model.addAttribute("likeMoneyList",likeMoneyList);
 			model.addAttribute("pi2",pi2);
-			System.out.println("mclList"+mclList);*/
+			model.addAttribute("likeItemList",likeItemList);
+			model.addAttribute("pi3",pi3);
 			
 			return "Nanummember/mypage/mypage_likefund";
 		} catch (NanumException e) {

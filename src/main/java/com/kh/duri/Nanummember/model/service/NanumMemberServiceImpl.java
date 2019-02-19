@@ -25,23 +25,6 @@ public class NanumMemberServiceImpl implements NanumMemberService {
 	@Autowired
 	private NanumMemberDao nd;
 
-
-	//찜한 정기 후원  조회
-	@Override
-	public List<FundInterest> selectLikeDirect(Member m, PageInfo pi) throws NanumException {
-		List<FundInterest> dlList = nd.selectLikeDirect(sqlSession,m,pi);
-		return dlList;
-	}
-	
-	// 찜한 금액 크라우드 펀딩  조회
-	@Override
-	public List<FundInterest> selectLikeMoneyCloud(Member m, PageInfo pi2) throws NanumException {
-		List<FundInterest> dlList = nd.selectLikeMoneyCloud(sqlSession,m,pi2);
-		return dlList;
-	}
-	
-	
-	
 	//크라우드 펀딩 수 가져오기
 	@Override
 	public HashMap<String, Integer> getCloudCont(Member m) throws NanumException {
@@ -89,6 +72,12 @@ public class NanumMemberServiceImpl implements NanumMemberService {
 	public HashMap<String, Integer> getLikeListCount(Member m) throws NanumException {
 		 HashMap<String, Integer> LikeListCount = nd.getLikeListCount(sqlSession,m);
 		return LikeListCount;
+	}
+	//찜한 후원 가져오기
+	@Override
+	public HashMap<String, List<FundInterest>> selectLikeFundList(Member m, HashMap<String, PageInfo> paging) throws NanumException {
+		HashMap<String, List<FundInterest>> likeFundList = nd.selectLikeFundList(sqlSession,m,paging);
+		return likeFundList;
 	}
 	
 	

@@ -13,20 +13,7 @@ import com.kh.duri.Nanummember.model.vo.SelectDirectFund;
 import com.kh.duri.member.model.vo.Member;
 
 public interface NanumMemberService {
-	
-	/*// 찜한 정기 후원 개수 조회
-	int getLikeDirectListCount(Member m)throws NanumException;
-	// 찜한 금액 크라우드 펀딩 개수 조회
-	int getLikeMoneyCloudListCount(Member m) throws NanumException;*/
 		
-	// 찜한 정기 후원  조회
-	List<FundInterest> selectLikeDirect(Member m, PageInfo pi) throws NanumException;
-	
-	// 찜한 금액 크라우드 펀딩  조회
-	List<FundInterest> selectLikeMoneyCloud(Member m, PageInfo pi2)throws NanumException;
-	
-	
-	
 	//크라우드 펀딩 수 가져오기
 	HashMap<String, Integer> getCloudCont(Member m) throws NanumException;	
 	//크라우드 펀딩 가져오기
@@ -43,6 +30,8 @@ public interface NanumMemberService {
 	List<Letter> selectLetterDetailList(int leNo) throws NanumException;
 	//찜한 후원  수 가져오기
 	HashMap<String, Integer> getLikeListCount(Member m) throws NanumException;
+	//찜한 후원 가져오기 
+	HashMap<String, List<FundInterest>> selectLikeFundList(Member m, HashMap<String, PageInfo> paging) throws NanumException;
 	
 
 	

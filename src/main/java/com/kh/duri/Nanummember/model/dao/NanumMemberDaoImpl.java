@@ -148,35 +148,42 @@ public class NanumMemberDaoImpl implements NanumMemberDao {
 		HashMap<String, Integer> getLikeCount = new HashMap<>(); 
 		int likeDirectCount=  sqlSession.selectOne("Nanum.selectLikeDirectCount",m); //정기후원 개수
 		int likeMoneyCount = sqlSession.selectOne("Nanum.selectLikeMoneyCount", m); //금액후원 개수
+		int likeItemCount = sqlSession.selectOne("Nanum.selectLikeItemCount",m); // 물품후원 개수 
 		getLikeCount.put("likeDirectCount", likeDirectCount);			
 		getLikeCount.put("likeMoneyCount", likeMoneyCount);		
+		getLikeCount.put("likeItemCount", likeItemCount);		
 		return getLikeCount;
 	}
 	
-		
-		
-	//찜한 정기 후원  조회
+	//찜한 후원 가져오기
 	@Override
-	public List<FundInterest> selectLikeDirect(SqlSessionTemplate sqlSession, Member m, PageInfo pi) throws NanumException {
+	public HashMap<String, List<FundInterest>> selectLikeFundList(SqlSessionTemplate sqlSession, Member m, HashMap<String, PageInfo> paging) throws NanumException {
+		PageInfo pi = paging.get("pi");
+		PageInfo pi2 = paging.get("pi2");	
+		PageInfo pi3 = paging.get("pi3");
 		int offset = (pi.getCurrentPage() -1 ) *pi.getLimit();
 		RowBounds rowBounds = new RowBounds(offset, pi.getLimit());		
-		List<FundInterest> dlList = sqlSession.selectList("Nanum.selectLikeDirect",m,rowBounds);		
-		if(dlList == null) {
-			throw new NanumException("찜한 정기후원 존재 하지 않음");
-		}			
-		return dlList;
+		List<FundInterest> likeDirectList = sqlSession.selectList("Nanum.selectLikeDirect",m,rowBounds);	
+		
+		int offset2 = (pi2.getCurrentPage() -1 ) *pi2.getLimit();
+		RowBounds rowBounds2 = new RowBounds(offset2, pi2.getLimit());		
+		List<FundInterest> likeMoneyList = sqlSession.selectList("Nanum.selectLikeMoneyCloud",m,rowBounds2);		
+		
+		int offset3 = (pi3.getCurrentPage() -1 ) *pi3.getLimit();
+		RowBounds rowBounds3 = new RowBounds(offset3, pi3.getLimit());		
+		List<FundInterest> likeItemList = sqlSession.selectList("Nanum.selectLikeItemCloud",m,rowBounds3);			
+		HashMap<String, List<FundInterest>> likeFundList = new HashMap<>();
+		likeFundList.put("likeDirectList", likeDirectList);
+		likeFundList.put("likeMoneyList", likeMoneyList);
+		likeFundList.put("likeItemList", likeItemList);	
+		return likeFundList;
 	}
-	// 찜한 금액 크라우드 펀딩  조회
-	@Override
-	public List<FundInterest> selectLikeMoneyCloud(SqlSessionTemplate sqlSession, Member m, PageInfo pi2) throws NanumException {
-		int offset = (pi2.getCurrentPage() -1 ) *pi2.getLimit();
-		RowBounds rowBounds = new RowBounds(offset, pi2.getLimit());		
-		List<FundInterest> dlList = sqlSession.selectList("Nanum.selectLikeMoneyCloud",m,rowBounds);		
-		if(dlList == null) {
-			throw new NanumException("찜한 금액 크라우드펀딩 존재 하지 않음");
-		}			
-		return dlList;
-	}
+		
+		
+
+	
+	
+	
 	
 	
 
