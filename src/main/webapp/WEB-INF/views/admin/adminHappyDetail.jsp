@@ -22,15 +22,22 @@
 <body>
     <div id="wrapper">
        <jsp:include page="include/adminNavi.jsp" />
+	
+	
+	
+       
         <div id="page-wrapper" >
-        
 		  <div class="header"> 
                         <h1 class="page-header">
+                        <c:if test="${HappyDetail.mTakeStatus == 1 }">
                             	<strong style="color: #c16624;">${HappyDetail.mName}</strong>님의 상세정보
+                         </c:if>
+                        <c:if test="${HappyDetail.mTakeStatus == 3 }">
+                            	<strong style="color: #c16624;">${HappyDetail.mName}</strong>님의 가입정보
+                         </c:if>
+                       
                         </h1>
 		</div>
-		
-		
             <div id="page-inner"> 
             	<div class="row">
 				<div class="col-md-12">
@@ -85,7 +92,6 @@
 											
 										</tr>
 										
-										
 									</tbody>
 								</table>
 							</div>
@@ -101,18 +107,19 @@
 			<h1 class="page-header">
                             	<strong style="color: #c16624;">${HappyDetail.mName}</strong>님의 후원 필수서류
                         </h1>
-             <c:if test="${HappyDetail.mprNew != null}">
+             
+			<!-- /. ROW  -->
             		  <div class="row">
                     <div class="col-md-6">
                         <div class="panel panel-default">
                         <div class="panel-heading">
-                           	자기소개 글(원글)
+                           	자기소개 글
                         </div>
                        
                         <div class="panel-body">
 		                  <div class="well">
 		                        
-		                        <p style="height: 500px;">
+		                        <p style="height: 550px;">
 		                        <big>${HappyDetail.mpr}</big>
 		                        </p>
 		                    </div>
@@ -120,81 +127,13 @@
                         </div>
                           </div>
                     </div>
-                    
-                  <div class="col-md-6">
-                        <div class="panel panel-default">
-                        <div class="panel-heading">
-                           	자기소개 글(갱신 글)
-                        </div>
-                       
-                        <div class="panel-body">
-		                  <div class="well">
-		                        
-		                        <p style="height: 500px;">
-		                        <big>${HappyDetail.mprNew}</big>
-		                        </p>
-		                    </div>
-                
-                        </div>
-                          </div>
-                    </div>
-                </div>
-                    </c:if>	  
-                    
-                    <c:if test="${HappyDetail.mprNew == null}">
-                    	  <div class="row">
-                    <div class="col-md-12">
-                        <div class="panel panel-default">
-                        <div class="panel-heading">
-                           	자기소개 글(원글)
-                        </div>
-                       
-                        <div class="panel-body">
-		                  <div class="well">
-		                        
-		                        <p style="height: 250px;">
-		                        <big>${HappyDetail.mpr}</big>
-		                        </p>
-		                    </div>
-                
-                        </div>
-                          </div>
-                    </div>
-                </div>
-                    </c:if>
-                <br>
-                <br>
-                 <c:if test="${HappyDetail.mprNew != null}">
-                 <button type="button" class="btn btn-light btn-lg btn-block">반려하기</button>
-		  		 <button type="button" class="btn btn-warning btn-lg btn-block">승인하기</button>
-		  		 </c:if>
-            	<br><br>	  
-            	<br><br>		  
-            	
-            		  
-            		  <div class="row">
-                  
                     <div class="col-md-6">
                         <div class="panel panel-default">
                         <div class="panel-heading">
-                            	증빙 서류(원본)
+                            	증빙 서류
                         </div>
                        
-                        <div class="panel-body" style="height: 700px;">
-                       	
-		                 <img src="/duri/resources/admin/img/happy.PNG" style="width: 100%; height: 100%;">
-		               
-                            </div>
-                            </div>
-                    </div>
-                    
-                    <div class="col-md-6">
-                        <div class="panel panel-default">
-                        <div class="panel-heading">
-                            	증빙 서류(갱신서류)
-                        </div>
-                       
-                        <div class="panel-body" style="height: 700px;">
+                        <div class="panel-body" style="height: 650px;">
                        	
 		                 <img src="/duri/resources/admin/img/happy.PNG" style="width: 100%; height: 100%;">
 		               
@@ -204,136 +143,12 @@
                 </div>
 	
 		<br><br><br>
-            	
+          <c:if test="${HappyDetail.mTakeStatus == 3 }"> 	
           <button type="button" class="btn btn-light btn-lg btn-block">반려하기</button>
 		  <button type="button" class="btn btn-warning btn-lg btn-block">승인하기</button>
            
            <br><br><br> 
-            
-             <h1 class="page-header">
-                            	<strong style="color: #c16624;">${HappyDetail.mName}</strong>님의 후원내역
-                        </h1>
-               
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                             	정기 후원 내역 
-                        </div>
-                        <div class="panel-body">
-                            <div >
-                                <table class="table table-striped table-bordered table-hover dataTables-example">
-                                    <thead>
-                                        <tr>
-                                            <th>No</th>
-                                            <th>나눔두리ID</th>
-                                            <th>후원 시작 날짜</th>
-                                            <th>매달 후원 금액</th>
-                                            <th>매달 후원 날짜</th>
-                                            <th>누적 후원 금액</th>
-                                            <th>현재 후원 상태</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                       <tr class="odd gradeX">
-                                            <td class="center">1</td>
-                                            <td class="center">han419120</td>
-                                            <td class="center">2018/03/11</td>
-                                            <td class="center">50,000</td>
-                                            <td class="center">11일</td>
-                                            <td class="center">300,000</td>
-                                            <td class="center">Y</td>
-                                        </tr>
-                                       <tr class="odd gradeX">
-                                            <td class="center">1</td>
-                                            <td class="center">han419120</td>
-                                            <td class="center">2018/03/11</td>
-                                            <td class="center">50,000</td>
-                                            <td class="center">11일</td>
-                                            <td class="center">300,000</td>
-                                            <td class="center">Y</td>
-                                        </tr>
-                                       <tr class="odd gradeX">
-                                            <td class="center">1</td>
-                                            <td class="center">han419120</td>
-                                            <td class="center">2018/03/11</td>
-                                            <td class="center">50,000</td>
-                                            <td class="center">11일</td>
-                                            <td class="center">300,000</td>
-                                            <td class="center">Y</td>
-                                        </tr>
-                                       
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                             	크라우드 펀딩 후원 내역 
-                        </div>
-                        <div class="panel-body">
-                            <div >
-                                <table class="table table-striped table-bordered table-hover dataTables-example">
-                                    <thead>
-                                        <tr>
-                                            <th>No</th>
-                                            <th>펀딩제목</th>
-                                            <th>카테고리</th>
-                                            <th>펀딩 시작 날짜</th>
-                                            <th>펀딩 마감 날짜</th>
-                                            <th>진행 상태(%)</th>
-                                            <th>목표금액or수량</th>
-                                            <th>상태</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                       <tr class="odd gradeX">
-                                            <td class="center">1</td>
-                                            <td class="center">돈이 없어요</td>
-                                            <td class="center">금액후원</td>
-                                            <td class="center">2018/04/15</td>
-                                            <td class="center">2018/10/15</td>
-                                            <td class="center">35</td>
-                                            <td class="center">300,000</td>
-                                            <td class="center">진행중</td>
-                                        </tr>
-                                       <tr class="odd gradeX">
-                                            <td class="center">1</td>
-                                            <td class="center">생리대 없어요</td>
-                                            <td class="center">물품후원</td>
-                                            <td class="center">2018/04/15</td>
-                                            <td class="center">2018/10/15</td>
-                                            <td class="center">35</td>
-                                            <td class="center">300</td>
-                                            <td class="center">진행중</td>
-                                        </tr>
-                                       <tr class="odd gradeX">
-                                            <td class="center">1</td>
-                                            <td class="center">돈이 없어요</td>
-                                            <td class="center">금액후원</td>
-                                            <td class="center">2018/04/15</td>
-                                            <td class="center">2018/10/15</td>
-                                            <td class="center">35</td>
-                                            <td class="center">300,000</td>
-                                            <td class="center">진행중</td>
-                                        </tr>
-                                       
-                                       
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <br><br>
-            <button type="button" class="btn btn-primary btn-lg btn-block" onclick="location.href='adminHappyAll.ad'">목록으로 가기</button>
-            <br><br>
+          </c:if> 
         </div>
     </div>
              <!-- /. PAGE INNER  -->

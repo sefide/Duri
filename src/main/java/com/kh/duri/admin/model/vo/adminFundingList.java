@@ -12,6 +12,7 @@ public class adminFundingList {
 	private Date fWriteDate;//작성일
 	private Date fStartDate;//시작일
 	private Date fEndDate;//종료일
+	private String fLeftDay;//기간
 	private String fStatus;//상태
 	private int fValue;//목표금액
 	private String fValueType;//후원유형
@@ -44,21 +45,10 @@ public class adminFundingList {
 	}
 
 
-	@Override
-	public String toString() {
-		return "adminFundingList [fNo=" + fNo + ", fType=" + fType + ", fTitle=" + fTitle + ", fContent=" + fContent
-				+ ", fWriteDate=" + fWriteDate + ", fStartDate=" + fStartDate + ", fEndDate=" + fEndDate + ", fStatus="
-				+ fStatus + ", fValue=" + fValue + ", fValueType=" + fValueType + ", fWriter=" + fWriter + ", fdNo="
-				+ fdNo + ", fdValue=" + fdValue + ", fd_Fno=" + fd_Fno + ", fd_Ino=" + fd_Ino + ", iNo=" + iNo
-				+ ", iName=" + iName + ", iPrice=" + iPrice + ", goodsName=" + goodsName + ", totalCount=" + totalCount
-				+ ", mno=" + mno + ", mid=" + mid + ", mFundtype=" + mFundtype + ", mStatus=" + mStatus + "]";
-	}
-
-
 	public adminFundingList(int fNo, String fType, String fTitle, String fContent, Date fWriteDate, Date fStartDate,
-			Date fEndDate, String fStatus, int fValue, String fValueType, int fWriter, int fdNo, int fdValue,
-			int fd_Fno, int fd_Ino, int iNo, String iName, int iPrice, String goodsName, int totalCount, int mno,
-			String mid, String mFundtype, String mStatus) {
+			Date fEndDate, String fLeftDay, String fStatus, int fValue, String fValueType, int fWriter, int fdNo,
+			int fdValue, int fd_Fno, int fd_Ino, int iNo, String iName, int iPrice, String goodsName, int totalCount,
+			int mno, String mid, String mFundtype, String mStatus) {
 		super();
 		this.fNo = fNo;
 		this.fType = fType;
@@ -67,6 +57,7 @@ public class adminFundingList {
 		this.fWriteDate = fWriteDate;
 		this.fStartDate = fStartDate;
 		this.fEndDate = fEndDate;
+		this.fLeftDay = fLeftDay;
 		this.fStatus = fStatus;
 		this.fValue = fValue;
 		this.fValueType = fValueType;
@@ -84,6 +75,18 @@ public class adminFundingList {
 		this.mid = mid;
 		this.mFundtype = mFundtype;
 		this.mStatus = mStatus;
+	}
+
+
+	@Override
+	public String toString() {
+		return "adminFundingList [fNo=" + fNo + ", fType=" + fType + ", fTitle=" + fTitle + ", fContent=" + fContent
+				+ ", fWriteDate=" + fWriteDate + ", fStartDate=" + fStartDate + ", fEndDate=" + fEndDate + ", fLeftDay="
+				+ fLeftDay + ", fStatus=" + fStatus + ", fValue=" + fValue + ", fValueType=" + fValueType + ", fWriter="
+				+ fWriter + ", fdNo=" + fdNo + ", fdValue=" + fdValue + ", fd_Fno=" + fd_Fno + ", fd_Ino=" + fd_Ino
+				+ ", iNo=" + iNo + ", iName=" + iName + ", iPrice=" + iPrice + ", goodsName=" + goodsName
+				+ ", totalCount=" + totalCount + ", mno=" + mno + ", mid=" + mid + ", mFundtype=" + mFundtype
+				+ ", mStatus=" + mStatus + "]";
 	}
 
 
@@ -154,6 +157,16 @@ public class adminFundingList {
 
 	public void setfEndDate(Date fEndDate) {
 		this.fEndDate = fEndDate;
+	}
+
+
+	public String getfLeftDay() {
+		return fLeftDay;
+	}
+
+
+	public void setfLeftDay(String fLeftDay) {
+		this.fLeftDay = fLeftDay;
 	}
 
 
@@ -328,7 +341,6 @@ public class adminFundingList {
 
 
 	
-
 	
 	
 	

@@ -42,11 +42,12 @@ public class adminFundingHistoryList {
 		private String MFundType;//대상타입
 		private String MTakeStatus;//후원대상자상태
 
-		//FUNDINGDETAIL
-		private int fdNo;//상세구분번호
-		private int fdValue;//물품수량
-		private int fd_Fno;//펀딩글번호
-		private int fd_Ino;//물품번호
+		
+		
+		//FUNDITEM
+		private int iNo;//물품번호
+		private String iName;//물품명
+		private int iPrice;//물품가격
 		
 		public adminFundingHistoryList() {
 
@@ -55,8 +56,8 @@ public class adminFundingHistoryList {
 		public adminFundingHistoryList(int fhNo, Date fhDate, int fhValue, int fh_fNo, int fh_Mno_Give, int fhdNo,
 				int fhdItemValue, int fhd_fhNo, int fhd_iNo, int fNo, String fType, String fTitle, String fContent,
 				Date fWriteDate, Date fStartDate, Date fEndDate, String fStatus, int fValue, String fValueType,
-				int fWriter, int mno, String mid, String mType, String mFundType, String mTakeStatus, int fdNo,
-				int fdValue, int fd_Fno, int fd_Ino) {
+				int fWriter, int mno, String mid, String mType, String mFundType, String mTakeStatus, int iNo,
+				String iName, int iPrice) {
 			super();
 			this.fhNo = fhNo;
 			this.fhDate = fhDate;
@@ -83,10 +84,9 @@ public class adminFundingHistoryList {
 			MType = mType;
 			MFundType = mFundType;
 			MTakeStatus = mTakeStatus;
-			this.fdNo = fdNo;
-			this.fdValue = fdValue;
-			this.fd_Fno = fd_Fno;
-			this.fd_Ino = fd_Ino;
+			this.iNo = iNo;
+			this.iName = iName;
+			this.iPrice = iPrice;
 		}
 
 		@Override
@@ -97,8 +97,8 @@ public class adminFundingHistoryList {
 					+ ", fTitle=" + fTitle + ", fContent=" + fContent + ", fWriteDate=" + fWriteDate + ", fStartDate="
 					+ fStartDate + ", fEndDate=" + fEndDate + ", fStatus=" + fStatus + ", fValue=" + fValue
 					+ ", fValueType=" + fValueType + ", fWriter=" + fWriter + ", Mno=" + Mno + ", Mid=" + Mid
-					+ ", MType=" + MType + ", MFundType=" + MFundType + ", MTakeStatus=" + MTakeStatus + ", fdNo="
-					+ fdNo + ", fdValue=" + fdValue + ", fd_Fno=" + fd_Fno + ", fd_Ino=" + fd_Ino + "]";
+					+ ", MType=" + MType + ", MFundType=" + MFundType + ", MTakeStatus=" + MTakeStatus + ", iNo=" + iNo
+					+ ", iName=" + iName + ", iPrice=" + iPrice + "]";
 		}
 
 		public int getFhNo() {
@@ -301,39 +301,30 @@ public class adminFundingHistoryList {
 			MTakeStatus = mTakeStatus;
 		}
 
-		public int getFdNo() {
-			return fdNo;
+		public int getiNo() {
+			return iNo;
 		}
 
-		public void setFdNo(int fdNo) {
-			this.fdNo = fdNo;
+		public void setiNo(int iNo) {
+			this.iNo = iNo;
 		}
 
-		public int getFdValue() {
-			return fdValue;
+		public String getiName() {
+			return iName;
 		}
 
-		public void setFdValue(int fdValue) {
-			this.fdValue = fdValue;
+		public void setiName(String iName) {
+			this.iName = iName;
 		}
 
-		public int getFd_Fno() {
-			return fd_Fno;
+		public int getiPrice() {
+			return iPrice;
 		}
 
-		public void setFd_Fno(int fd_Fno) {
-			this.fd_Fno = fd_Fno;
+		public void setiPrice(int iPrice) {
+			this.iPrice = iPrice;
 		}
 
-		public int getFd_Ino() {
-			return fd_Ino;
-		}
-
-		public void setFd_Ino(int fd_Ino) {
-			this.fd_Ino = fd_Ino;
-		}
-
-		
 		
 		
 
