@@ -97,7 +97,7 @@
               <div class="text">
               	<h3 class="mb-4">후원하기</h3>
               	<p style="font-weight:bold;">행복두리에게 올 한해 따뜻하게 </br>지낼 수 있는 행복을 선물하세요.</p>
-              	<p><a href="fundMoney.pm" class="btn btn-white px-3 py-2 mt-2" style="font-weight:bold;">후원하러가기</a></p>
+              	<p><a href="fundMoney.pm?fno=${moneyDetail.fno}" class="btn btn-white px-3 py-2 mt-2" style="font-weight:bold;">후원하러가기</a></p>
               </div>
             </div>
           </div>

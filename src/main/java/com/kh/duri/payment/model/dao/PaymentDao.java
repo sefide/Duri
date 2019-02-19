@@ -4,8 +4,11 @@ import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
 
+import com.kh.duri.Nanummember.model.vo.FundHistory;
+import com.kh.duri.board.model.vo.Board;
 import com.kh.duri.member.model.vo.Member;
 import com.kh.duri.payment.model.exception.DirectFundException;
+import com.kh.duri.payment.model.exception.FundingException;
 import com.kh.duri.payment.model.exception.PaymentException;
 import com.kh.duri.payment.model.exception.PointHistoryException;
 import com.kh.duri.payment.model.exception.ReceiptException;
@@ -72,6 +75,20 @@ public interface PaymentDao {
 
 	// 나눔두리 - 다음 정기결제를 위한 merchant_id 값 가져오기
 	DirectFundHist selectDirectFundId(SqlSessionTemplate sqlSession, DirectFundHist dh) throws DirectFundException;
+	
+	// 금액 후원 결제페이지 - 펀딩정보 select
+	Board selectFundMoney(SqlSessionTemplate sqlSession, Board b) throws FundingException;
+	
+	// 금액 후원 진행 - 펀딩내역 insert
+	// 펀딩내역 insert
+	int insertFundMoneyHistory(SqlSessionTemplate sqlSession, FundHistory fh) throws FundingException;
+	int insertDonateReceipt(SqlSessionTemplate sqlSession, FundHistory fh) throws FundingException;
+	int updateMoneyhPoint(SqlSessionTemplate sqlSession, Member m) throws FundingException;
+	int updateMoneynPoint(SqlSessionTemplate sqlSession, Member m) throws FundingException;
+	Member selectLoginnMember(SqlSessionTemplate sqlSession, Member m) throws FundingException;
+	int insertFundMoneynPoint(SqlSessionTemplate sqlSession, FundHistory fh) throws FundingException;
+	int insertFundMoneyhPoint(SqlSessionTemplate sqlSession, FundHistory fh) throws FundingException;
+	int selectFundHistCurVal(SqlSessionTemplate sqlSession) throws FundingException;
 		
 	
 	

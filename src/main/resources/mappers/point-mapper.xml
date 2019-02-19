@@ -86,6 +86,22 @@
 		<result property="dhStartDate" column="DHSTARTDATE"/>
 	</resultMap>
 	
+	<resultMap type="com.kh.duri.board.model.vo.Board" id="boardResultSet">
+		<id property="fno" column="FNO"></id>
+		<result property="ftype" column="FTYPE"/>
+		<result property="fTitle" column="FTITLE"/>
+		<result property="fContent" column="FCONTENT"/>
+		<result property="fStartDate" column="FSTARTDATE"/>
+		<result property="fEndDate" column="FENDDATE"/>
+		<result property="fStatus" column="FSTATUS"/>
+		<result property="fValue" column="FVALUE"/>
+		<result property="fValueType" column="FVALUETYPE"/>
+		<result property="fWriter" column="FWRITER"/>
+		<result property="mNick" column="MNICK"/>
+		<result property="mFundType" column="MFUNDTYPE"/>
+		<result property="mAddress" column="MADDRESS"/>
+	</resultMap>
+	
 	
 	<!-- 나눔두리 - 포인트 이력 수 세기 -->
 	<select id="selectPointListCount" resultType="_int">
@@ -288,6 +304,49 @@
 		SELECT * FROM DIRECTFUNDHISTORY WHERE DHIMPUID = #{ dhImpUid }
 	</select>
 	
-
+	
+	<!-- 금액 후원 결제페이지 - 펀딩정보 select -->
+	<select id = "selectFundMoney" resultMap="boardResultSet" parameterType="Board">
+		SELECT F.FNO, F.FTITLE, F.FVALUE, F.FSTARTDATE, F.FENDDATE, F.FCONTENT,F.FVALUETYPE, F.FSTATUS, M.MNICK, M.MFUNDTYPE, M.MADDRESS, F.FWRITER
+		FROM FUNDING F
+		JOIN MEMBER M ON (M.MNO = F.FWRITER)
+		WHERE FNO = #{fno}
+	</select>
+	
+	<!-- 금액후원 내역 insert -->
+	<insert id = "insertFundMoneyHistory">
+		INSERT INTO FUNDHISTORY VALUES(SEQ_FH_NO.NEXTVAL, SYSDATE, #{fhValue}, #{fhFno}, #{fhMnoGive})
+	</insert>
+	
+	<!-- 기부금영수증 추가 - 금액후원 -->
+	<insert id = "insertDonateReceipt">
+		INSERT INTO DONATERECEIPT VALUES(SEQ_DR_NO.NEXTVAL, SYSDATE, SYSDATE, #{fhValue}, #{fhMnoGive})
+	</insert>
+	
+	<!-- 포인트 update (행복두리) -->
+	<update id = "updateMoneyhPoint">
+		UPDATE MEMBER SET MPOINT = MPOINT+#{mPoint} WHERE MNO=#{mno} AND MTYPE ='H'
+	</update>
+	
+	<!-- 포인트 update (나눔두리) -->
+	<update id = "updateMoneynPoint">
+		UPDATE MEMBER SET MPOINT = MPOINT-#{mPoint} WHERE MNO=#{mno} AND MTYPE = 'N'
+	</update>
+	
+	<!-- 포인트 이력 -나눔두리 insert -->
+	<insert id = "insertFundMoneynPoint">
+		INSERT INTO POINT VALUES (SEQ_P_NO.NEXTVAL, 'U', #{fhValue}, SYSDATE, '펀딩', #{fhMnoGive}, null, null, null, #{fhNo})
+	</insert>
+	
+	<!-- 포인트 이력 -행복두리 insert -->
+	<insert id = "insertFundMoneyhPoint">
+		INSERT INTO POINT VALUES (SEQ_P_NO.NEXTVAL, 'A', #{fhValue}, SYSDATE, '펀딩', #{fhMnoGive}, null, null, null, #{fhNo})
+	</insert>
+	
+	<!-- 현재 SEQ_FH_NO 값 구하기 -->
+	<select id="selectFundHistCurVal" resultType="_int">
+		SELECT SEQ_FH_NO.CURRVAL FROM DUAL
+	</select>
+	
 	
 </mapper>

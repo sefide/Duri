@@ -2,8 +2,11 @@ package com.kh.duri.payment.model.service;
 
 import java.util.List;
 
+import com.kh.duri.Nanummember.model.vo.FundHistory;
+import com.kh.duri.board.model.vo.Board;
 import com.kh.duri.member.model.vo.Member;
 import com.kh.duri.payment.model.exception.DirectFundException;
+import com.kh.duri.payment.model.exception.FundingException;
 import com.kh.duri.payment.model.exception.PaymentException;
 import com.kh.duri.payment.model.exception.PointHistoryException;
 import com.kh.duri.payment.model.exception.ReceiptException;
@@ -54,6 +57,12 @@ public interface PaymentService {
 	
 	// 나눔두리 - 다음 정기결제를 위한 merchant_id 값 가져오기
 	DirectFundHist selectDirectFundId(DirectFundHist dh) throws DirectFundException;
+	
+	// 금액 후원 결제페이지 - 펀딩정보 select
+	Board selectFundMoney(Board b) throws FundingException;
+	
+	// 금액 후원 진행 - 펀딩내역 insert
+	Member insertFundMoneyHistory(FundHistory fh, String check, String fWriter) throws FundingException;
 
 	
 		

@@ -6,8 +6,11 @@ import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.kh.duri.Nanummember.model.vo.FundHistory;
+import com.kh.duri.board.model.vo.Board;
 import com.kh.duri.member.model.vo.Member;
 import com.kh.duri.payment.model.exception.DirectFundException;
+import com.kh.duri.payment.model.exception.FundingException;
 import com.kh.duri.payment.model.exception.PaymentException;
 import com.kh.duri.payment.model.exception.PointHistoryException;
 import com.kh.duri.payment.model.exception.ReceiptException;
@@ -323,6 +326,113 @@ public class PaymentDaoImpl implements PaymentDao {
 		}
 		System.out.println("result : " + result);
 	
+		return result;
+	}
+	
+	// 금액 후원 결제페이지 - 펀딩정보 select
+	@Override
+	public Board selectFundMoney(SqlSessionTemplate sqlSession, Board b) throws FundingException {
+		Board resultBoard = sqlSession.selectOne("Point.selectFundMoney", b);
+		
+		if(resultBoard == null) {
+			throw new FundingException("금액후원 정보를 조회할 수 없습니다. ");
+		}
+		
+		return resultBoard;
+	}
+	
+	// 금액 후원 진행 - 펀딩내역 insert
+	@Override
+	public int insertFundMoneyHistory(SqlSessionTemplate sqlSession, FundHistory fh) throws FundingException {
+		int result = sqlSession.insert("Point.insertFundMoneyHistory", fh);
+		
+		if(result == 0) {
+			throw new FundingException("로그인 정보를 가져올 수 없습니다. ");
+		}
+		
+		return result;
+	}
+
+	// 기부금 영수증 발급내역 insert
+	@Override
+	public int insertDonateReceipt(SqlSessionTemplate sqlSession, FundHistory fh) throws FundingException {
+		int result = sqlSession.insert("Point.insertDonateReceipt", fh);
+		
+		if(result == 0) {
+			throw new FundingException("로그인 정보를 가져올 수 없습니다. ");
+		}
+		
+		return result;
+	}
+	
+	// 포인트 update (행복두리)
+	@Override
+	public int updateMoneyhPoint(SqlSessionTemplate sqlSession, Member m) throws FundingException {
+		int result = sqlSession.update("Point.updateMoneyhPoint", m);
+		
+		if(result == 0) {
+			throw new FundingException("로그인 정보를 가져올 수 없습니다. ");
+		}
+		
+		return result;
+	}
+	
+	// 포인트 update (나눔두리)
+	@Override
+	public int updateMoneynPoint(SqlSessionTemplate sqlSession, Member m) throws FundingException {
+		int result = sqlSession.update("Point.updateMoneynPoint", m);
+		
+		if(result == 0) {
+			throw new FundingException("로그인 정보를 가져올 수 없습니다. ");
+		}
+		
+		return result;
+	}
+	
+	// 로그인 유저 select (나눔두리)
+	@Override
+	public Member selectLoginnMember(SqlSessionTemplate sqlSession, Member m) throws FundingException {
+		System.out.println("m : " + m.getMno());
+		Member resultM = sqlSession.selectOne("Point.loginNaCheck", m);
+
+		if(resultM == null) {
+			throw new FundingException("로그인 정보를 가져올 수 없습니다. ");
+		}
+		
+		return resultM;
+	}
+	
+	@Override
+	public int insertFundMoneynPoint(SqlSessionTemplate sqlSession, FundHistory fh) throws FundingException {
+		int result = sqlSession.insert("Point.insertFundMoneynPoint", fh);
+		
+		if(result == 0) {
+			throw new FundingException("포인트 이력을 업데이트하지 못하였습니다. ");
+		}
+		
+		return result;
+	}
+	
+	@Override
+	public int insertFundMoneyhPoint(SqlSessionTemplate sqlSession, FundHistory fh) throws FundingException {
+		int result = sqlSession.insert("Point.insertFundMoneyhPoint", fh);
+		
+		if(result == 0) {
+			throw new FundingException("포인트 이력을 업데이트하지 못하였습니다. ");
+		}
+		
+		return result;
+	}
+	
+	// 후원내역번호 알아내기 select 
+	@Override
+	public int selectFundHistCurVal(SqlSessionTemplate sqlSession) throws FundingException {
+		int result = sqlSession.selectOne("Point.selectFundHistCurVal");
+		
+		if(result == 0) {
+			throw new FundingException("후원내역 번호를 조회하지 못했습니다.");
+		}
+		
 		return result;
 	}
 	
