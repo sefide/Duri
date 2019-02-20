@@ -48,12 +48,12 @@ public interface HappymemberDao {
 	//자기소개 수정
 	int updateIntroduce(SqlSessionTemplate sqlSession, Member oldLoginUser) throws MypageException;
 
-	/*//물품후원 목록 개수 조회
+	//물품후원 목록 개수 조회
 	int selectItemDonateCount(SqlSessionTemplate sqlSession, Member m) throws MypageException;
 
 	//물품후원 목록 조회
-	List<Funding> selectItemDonateList(SqlSessionTemplate sqlSession, Member m, PageInfo pi) throws MypageException;
-*/
+	List<Funding> selectItemDonateList(SqlSessionTemplate sqlSession, int mno, PageInfo pi) throws MypageException;
+
 	
 
 	

@@ -196,31 +196,40 @@ public class HappymemberController {
 		return "happymember/myInfoModifyHappy.happy";
 	}
 	
-	/*//물품후원 목록 개수 조회, 목록 페이징
+	//물품후원 목록 개수 조회, 목록 페이징
 	@RequestMapping("itemDonateList.happy")
-	public @ResponseBody String itemDonateList(@RequestParam  Model model, HttpServletRequest request, HttpServletResponse response){
+	public @ResponseBody HashMap<String, Object> itemDonateList(@RequestParam int currentPage, Model model, HttpServletRequest request, HttpServletResponse response){
 		Member m = (Member)request.getSession().getAttribute("loginUser");
-		
-		int currentPage = 1;
+		int mno = m.getMno();
 		
 		if(request.getParameter("currentPage") != null) {
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		}
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
 		
 		try {
 			int listCount = hs.selectItemDonateCount(m);
 			
 			PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
 			
-			List<Funding> itemDonateList = hs.selectItemDonateList(m, pi);
+			List<Funding> itemDonateList = hs.selectItemDonateList(mno, pi);
+			
+			for(Funding i : itemDonateList) {
+				System.out.println("물훔푸원 목록 : " + i);
+			}
+	
+			map.put("itemDonateList", itemDonateList);
+			map.put("pi", pi);
+			return map;
 			
 		} catch (MypageException e) {
-			model.addAttribute("msg", e.getMessage());
+			map.put("msg", e.getMessage());
+			return map;
 		}
 		
-		return "happymember/mypage";
-	}*/
-		
+	}
+	
 		
 	//물품 배송 목록 새로고침했을 때 insert다시 안되게 !
 	@RequestMapping("deliveryOriginal.happy")
