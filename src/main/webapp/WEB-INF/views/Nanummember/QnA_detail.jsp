@@ -108,7 +108,7 @@ td {
 		<table class="listTable">
 			<tr>
 				<td class="tableTitle">제목</td>
-				<td colspan="3" style=""><c:out value="${QnADetail.qTitle}"/> </td>
+				<td colspan="3" style="" ><c:out value="${QnADetail.qTitle}"/> </td>
 			</tr>
 			<tr>
 				<td class="tableTitle">작성자</td>
@@ -120,7 +120,7 @@ td {
 				<td class="tableTitle">내용</td>
 			</tr>
 			<tr>
-				<td colspan="4"><textarea rows="8" cols="150"><c:out value="${QnADetail.qContent}"/></textarea> </td>
+				<td colspan="4"><textarea rows="8" cols="150" readonly="readonly"><c:out value="${QnADetail.qContent}"/></textarea> </td>
 			</tr>			
 		</table>
 	</div>
@@ -135,7 +135,15 @@ td {
 				<td class="tableTitle">두리두리 답변</td>
 			</tr>
 			<tr>
-				<td></td>
+				<c:choose>
+					<c:when test="${QnAList.qAnswer == NULL }">
+						<td>답변이 아직 미 등록상태입니다. 기다려 주세요.</td>
+					</c:when>
+					<c:otherwise>
+						<td><c:out value="${QnADetail.qAnswer}"/></td>
+					</c:otherwise>
+				</c:choose>
+				
 			</tr>
 		</table>
 	</div>
@@ -145,10 +153,18 @@ td {
 		class="ui orange basic button"  style="font-size: 20px; margin-right : 10px;">목록으로 되돌아가기</button>
 	<%-- <c:out value="${sessionScope.loginUser2.mno }"/> --%>
 	<c:if test="${ sessionScope.loginUser2.mno eq QnADetail.q_mNo}"> 
-	<button 
+	<button onclick="deleteQnA(${QnADetail.qNo});"
 		class="ui orange basic button" style="font-size: 20px; margin-left : 10px;">삭제하기</button>
 	</c:if>	
 	</div>
 	</c:forEach>
+	<script type="text/javascript">
+		function deleteQnA(qNo) {
+			var qNo = qNo;
+			location.href='deleteQnA.nanum?qNo='+qNo;
+		}
+	</script>
+	
+	
 </body>
 </html>

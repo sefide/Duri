@@ -206,6 +206,18 @@ public class NanumMemberDaoImpl implements NanumMemberDao {
 		List<QnA> QnADetail = sqlSession.selectList("QnADetail",qNo);
 		return QnADetail;
 	}
+	//QnA 작성
+	@Override
+	public int insertQnA(SqlSessionTemplate sqlSession, QnA q) throws NanumException {
+		int result = sqlSession.insert("Nanum.insertQnA",q);
+		return result;
+	}
+	//QnA 삭제
+	@Override
+	public int deleteQnA(SqlSessionTemplate sqlSession, int qNo) throws NanumException {
+		int result = sqlSession.insert("Nanum.deletetQnA",qNo);
+		return result;
+	}
 		
 		
 

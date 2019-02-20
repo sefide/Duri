@@ -105,6 +105,18 @@ public class NanumMemberServiceImpl implements NanumMemberService {
 		List<QnA> QnADetail = nd.selectQnADetail(sqlSession,qNo);
 		return QnADetail;
 	}
+	//QnA 작성
+	@Override
+	public int insertQnA(QnA q) throws NanumException {
+		int result = nd.insertQnA(sqlSession,q);
+		return result;
+	}
+	//QnA 삭제
+	@Override
+	public int deleteQnA(int qNo) throws NanumException {
+		int result = nd.deleteQnA(sqlSession,qNo);
+		return result;
+	}
 	
 	
 	

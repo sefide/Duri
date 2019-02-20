@@ -42,6 +42,10 @@ public interface NanumMemberService {
 	List<QnA> selectQnAList(Member m, PageInfo pi) throws NanumException;
 	//QnA 상세 가져오기
 	List<QnA> selectQnADetail(int qNo) throws NanumException;
+	//QnA 작성
+	int insertQnA(QnA q)throws NanumException;
+	//QnA 삭제
+	int deleteQnA(int qNo)throws NanumException;
 	
 	
 	
