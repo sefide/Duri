@@ -2,6 +2,7 @@ package com.kh.duri.payment.controller;
 
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -29,8 +30,10 @@ import com.kh.duri.payment.model.exception.PointHistoryException;
 import com.kh.duri.payment.model.exception.ReceiptException;
 import com.kh.duri.payment.model.exception.RefundException;
 import com.kh.duri.payment.model.service.PaymentService;
+import com.kh.duri.payment.model.vo.BoardItemValue;
 import com.kh.duri.payment.model.vo.DirectFundHist;
 import com.kh.duri.payment.model.vo.DonateReceipt;
+import com.kh.duri.payment.model.vo.FundItemDetail;
 import com.kh.duri.payment.model.vo.PageInfo;
 import com.kh.duri.payment.model.vo.Pagination;
 import com.kh.duri.payment.model.vo.Payment;
@@ -403,6 +406,7 @@ public class PaymentController {
 	    return "payment/pay_directFund";
 	}
 	
+	// 정기결제 토큰값 가져오기
 	@RequestMapping("directFundGetToken.pm")
 	public @ResponseBody String directFundGetToken(@RequestParam String customer_uid, @RequestParam String imp_uid, 
 			@RequestParam String merchant_uid, @RequestParam BigDecimal amount, HttpServletRequest request, HttpServletResponse response) {
@@ -425,6 +429,7 @@ public class PaymentController {
 			
 			if(payment_response.getCode() == 0) {
 				if(payment_response.getResponse().getStatus().equals("paid")) {
+					System.out.println("최초결제 완료");
 					return "최초결제 완료되었습니다.";
 				}else {
 					return payment_response.getResponse().getFailReason();
@@ -444,6 +449,7 @@ public class PaymentController {
 		
 	}
 	
+	// 정기결제 예약하기
 	@RequestMapping("subscribeDirectFund.pm")
 	public @ResponseBody String subscribeDirectFund(@RequestParam String customer_uid, @RequestParam String imp_uid, 
 			@RequestParam String merchant_uid, @RequestParam BigDecimal amount, @RequestParam String price, @RequestParam String giveMember, @RequestParam String takeMember, 
@@ -470,7 +476,7 @@ public class PaymentController {
 			
 			IamportResponse<List<Schedule>> list = iam.subscribeSchedule(schedule_data);
 			//System.out.println("list message : " + list.getMessage());
-			System.out.println("list code : " + list.getCode());
+			System.out.println("예약 list code : " + list.getCode());
 			
 			// DirectFundHist 객체 생성
 			DirectFundHist dh = new DirectFundHist();
@@ -487,25 +493,36 @@ public class PaymentController {
 				
 				if(result > 0) {
 					request.setAttribute("msg", "정기후원이 완료되었습니다.");
-				    return "redirect:payment/pay_success"; 
+				    return "redirect:goSuccessPage.pm"; 
 				}else {
-					return "정기후원 정보 DB저장 실패 ";
+					request.setAttribute("msg", "정기후원 정보 DB저장 실패 ");
+				    return "redirect:goSuccessPage.pm"; 
 				}
 				
 			}else {
-				return "카드사 요청에 실패하였습니다.";
+				request.setAttribute("msg", "카드사 요청에 실패하였습니다.");
+			    return "redirect:goSuccessPage.pm"; 
 			}
 			
 		} catch (IamportResponseException e) {
 			e.printStackTrace();
-			return "정기결제 예약 실패";
+			request.setAttribute("msg","정기결제 예약 실패");
+		    return "redirect:goSuccessPage.pm";
 		} catch (IOException e) {
-			e.printStackTrace();
-			return "정기결제 예약 실패";
+			request.setAttribute("msg", "정기결제 예약 실패");
+		    return "redirect:goSuccessPage.pm";
 		}catch (DirectFundException e) {
-			e.printStackTrace();
-			return e.getMessage();
+			request.setAttribute("msg", "정기결제 실패");
+		    return "redirect:goSuccessPage.pm";
 		}
+		
+	}
+	
+	@RequestMapping("goSuccessPage.pm")
+	public String goSuccessPage(HttpServletRequest request, HttpServletResponse response, Model model, HttpSession session) {
+		System.out.println("정기후원에 참여해주셔서 감사합니다.");
+		request.setAttribute("msg", request.getParameter("msg"));
+		return "payment/pay_success";
 		
 	}
 	
@@ -660,7 +677,85 @@ public class PaymentController {
 	
 	// 물품 후원 진행 
 	@RequestMapping("execfundItem.pm")
-	public String execfundItem() {
+	public String execfundItem(HttpServletRequest request, HttpServletResponse response, Model model, HttpSession session) {
+		System.out.println("Hello");
+		Member m = (Member)session.getAttribute("loginUser2");
+		String check = request.getParameter("checkDonate");
+		String totalValue = request.getParameter("totalValue");
+		String fno = request.getParameter("fno");
+		String[] itemNo = request.getParameterValues("itemNo");
+		String[] itemNum = request.getParameterValues("itemNum");
+		String[] itemSumPrice = request.getParameterValues("itemSumPrice");
+		String fWriter = request.getParameter("fWriter");
+		String[] leftValue = request.getParameterValues("leftValue");
+		String ipin1;
+		String ipin2;
+		
+		System.out.println("fno : " + fno);
+		System.out.println("m : " + m);
+		System.out.println("totalValue : " + totalValue);
+		System.out.println("fWriter : " + fWriter);
+		System.out.println("itemNo : " );
+		for (String i : itemNo) {
+			System.out.println(i);
+		}
+		System.out.println("leftValue : " );
+		for (String i : leftValue) {
+			System.out.println(i);
+		}
+		System.out.println("itemNum : " );
+		for (String i : itemNum) {
+			System.out.println(i);
+		}
+		System.out.println("itemSumPrice : ");
+		for (String i : itemSumPrice) {
+			System.out.println(i);
+		}
+		if(check.equals("1")) {
+			ipin1 = request.getParameter("ipin1");
+			ipin2 = request.getParameter("ipin2");
+			System.out.println("ipin1 : " + ipin1);
+			System.out.println("ipin2 : " + ipin2);
+			
+		}
+		
+		FundHistory fh = new FundHistory();
+		fh.setFhFno(Integer.parseInt(fno));
+		fh.setFhMnoGive(m.getMno());
+		fh.setFhValue(Integer.parseInt(totalValue));
+		
+		FundItemDetail fhd = null;
+		
+		ArrayList<FundItemDetail> fhdList = new ArrayList<FundItemDetail>();
+		
+		int j = 0;
+		int count = 0;
+		for(int i = 0; i < itemNum.length; i++) {
+			if(itemNum[i].equals(leftValue[i])) {
+				count++;
+			}
+			if(itemNum[i].equals("0")) {
+			}else {
+				fhd = new FundItemDetail();
+				fhd.setFno(Integer.parseInt(fno));
+				fhd.setFhd_iNo(Integer.parseInt(itemNo[j]));
+				fhd.setFhdItemValue(itemNum[i]);
+				fhdList.add(fhd);
+				System.out.println("i : " + i + "/ j : "+ j);
+				j++;
+			}
+			
+		}
+		
+		System.out.println(fhdList);
+		System.out.println("count : " + count);
+		System.out.println("itemNo : " + itemNo.length);
+		int isGoal = 0; // 후원 달성여부 체크 변수
+		if(count == itemNo.length) {
+			isGoal = 1; // 후원 달성 
+		}
+		Member resultM = ps.insertFundItemHistory(fh, fhdList, check, fWriter, isGoal);
+		
 	    return "payment/pay_success";
 	}
 }

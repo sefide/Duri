@@ -97,7 +97,7 @@
    			display : inline-block;
    			margin-right : 22px;
    		}
-   		#leftValue{
+   		.txtValue{
    			display : inline-block;
    			font-size: 22px;
    			margin-right : 10px;
@@ -287,31 +287,31 @@
     						<div class="form-check">
     						
 	    					<c:if test ="${leftV eq 0}">
-	    						<input class="form-check-input chkItem" type="checkbox" id="chkitem${ status.index }" disabled>
+	    						<input class="form-check-input chkItem" type="checkbox" name = "itemNo" value = "${ biList.iNo }" id="chkitem${ status.index }" disabled>
 	    					</c:if>
 		    				<c:if test ="${leftV ne 0}">
-	    						<input class="form-check-input chkItem" type="checkbox" id="chkitem${ status.index }" >
+	    						<input class="form-check-input chkItem" type="checkbox" name = "itemNo" value = "${ biList.iNo }" id="chkitem${ status.index }" >
 		    				</c:if>
 						  
-						  <label class="form-check-label txtitem" for="chkitem1" >
+						  <label class="form-check-label txtitem" for="chkitem${ status.index }" >
 						 	  ${ biList.iName }
 						  </label>
 							</div>
     					</td>
     					<td></td>
     					<td id = "tdRight">
-	    					<input class="form-control item" type = "text" name = "item${ status.index }" id = "item${ status.index }" value = "1">개
+	    					<input class="form-control item" type = "text" name = "itemNum" id = "item${ status.index }" value = "0">개
 	    					<input type = "hidden" name = "price${ status.index }" value = "${ biList.iPrice }" id = "itemPrice">
     					</td>
-    					<td style = "width: 200px;"><p class = "itemValue" id = "itemValue${ status.index }">${ biList.iPrice }</p>
+    					<td style = "width: 200px;"><p class = "itemValue" id = "itemValue${ status.index }">0</p>
     					<p class = "txtItemValue">원</p></td>
-    					<input type = "hidden" name = "itemSumPrice${ status.index }" value = "0" id = "itemSumPrice">
     				</tr>
+    				<input type = "hidden" name = "itemSumPrice" value = "0" id = "itemSumPrice${ status.index }"> <!-- 물품 총 후원값 -->
     				<tr>
     					<td  style = "padding-left: 20px;" colspan = "3"><p id = "leftItemValue${ status.index }">남은 수량 : ${leftV}개 </p></td>
-    					<input type = "hidden"  id = "leftValue${ status.index }" value ="${leftV}">
-    					<td> <p  class = "itemPriceTxt" id = "itemPriceTxt${ status.index }">${ biList.iPrice } x 1 </p></td>
+    					<td> <p  class = "itemPriceTxt" id = "itemPriceTxt${ status.index }">${ biList.iPrice } x 0 </p></td>
     				</tr>
+   					<input type = "hidden"  name = "leftValue" id = "leftValue${ status.index }" value ="${leftV}"> <!-- 물품별 남은 수량 -->
     				
     				<c:if test="${!status.last}">
     				<tr class = "bar3">
@@ -321,12 +321,16 @@
     					<td colspan = "4"></td>
     				</tr>
     				</c:if>
-    				
+    				<c:if test="${status.last}">
+    					<input type = "hidden" name = "fno" value ="${biList.fno}">
+    				</c:if>
 	    			</c:forEach>
     			</c:if>
     				
     			</table>
-    			<input type = "hidden" id = "totalValue" value = "0">
+    			<input type = "hidden" name = "totalValue" value = "0" id = "totalValue" >
+    			<input type = "hidden" name = "checkDonate" value ="0" id = "checkDonate">
+    			<input type = "hidden" name = "fWriter" value ="${b.fWriter}" id = "fWriter">
     		</form>
     			
     		</div>
@@ -384,10 +388,11 @@
     			</div>
     			<div id = "bar1"></div>
     			<div align = "right">
-    				<div id = "txtLeftValue">현재 보유포인트 </div> <div id = "leftValue">${giveM.mPoint}원 </div>
+    				<div id = "txtLeftValue">현재 보유포인트 </div> <div class ="txtValue" id = "myValue">${giveM.mPoint}원 </div>
     			</div>
     			<div align = "right">
-    				<div id = "txtLeftValue">후원 후 잔여포인트 </div> <div id = "leftValue">10000원 </div>
+    				<div id = "txtLeftValue">후원 후 잔여포인트 </div> <div class ="txtValue" id = "leftValue">${giveM.mPoint}원 </div>
+    				<input type = "hidden" id = "leftValueInput" value = "${giveM.mPoint}">
     			</div>
     		</div>
     		<div id = "btnBox">
@@ -412,8 +417,6 @@
   var checkIpin = 0; /* 기부금영수증 발급인지 아닌지 확인 변수 */
   
 		$(document).ready(function() {
-			//calValue(); // 추후에 주석처리하기 
-			
 			/* 주민등록번호 입력창 숨겨두기 */
 			$(".ipin").css("display","none");
 			
@@ -423,18 +426,15 @@
 					$(".ipin").css("display","");
 					checkUsing = 0;
 					checkIpin = 1; 
+					$("#checkDonate").val("1");
 				}else {  // 미발급
 					$(".ipin").css("display","none");
 					checkUsing = 1;
 					checkIpin = 0; 
 					$("input:checkbox").prop("checked", false);
+					$("#checkDonate").val("0");
 				}
 				
-			});
-			
-			/* 후원포인트 금액 변경 시 */
-			$("#sponPoint").change(function(){
-				//calValue();
 			});
 			
 		});
@@ -449,49 +449,41 @@
   			var itemPrice = $(this).next().val() // 금액
   			var leftCount = $("#leftValue" + thisId).val();
   			
-  			console.log("leftCount : "+ leftCount);
-  			console.log("itemCount : "+ itemCount);
   			if(Number(itemCount) > Number(leftCount)){
   				$(this).val("1");
   			}else {
-  				$("#itemPriceTxt"+ thisId).text(itemPrice +"x" + itemCount);
+  				$("#itemPriceTxt"+ thisId).text(itemPrice +" x " + itemCount);
   	  			$("#itemValue"+ thisId).text(itemPrice*itemCount);
-  	  			$("#itemSumPrice").val(itemPrice*itemCount);
+  	  			$("#itemSumPrice"+ thisId).val(itemPrice*itemCount);
   			}
   			
+  			calValue();
   		});
   		
   		/* 물품 체크박스 선택 시 */
   		$(".chkItem").change(function(){
-  			var thisId = $(this).attr("id");
-  			var Idlength = thisId.length;
-  			thisId = thisId.substring(Idlength-1,Idlength);
-  			
-  			console.log("thisId : " + thisId);
-  			var value = $("#itemSumPrice"+thisId).val();
-  			console.log("value : " + value);
-  			var total = $("#sponValue").text();
-  			console.log("total : " + total);
-  			
-  			if($(this).is(":checked")){
-  				total += value;
-  				$("#sponValue").text(total);
-  			}else {
-  				total -= value;
-  				$("#sponValue").text(total);
-  			}
+  			calValue();
   		});
-		
+  		
 		/* 후원포인트, 잔여포인트 계산 및 표시 */
 		function calValue(){
-			var itemValue1 = Number($("#itemValue1").text());
-			var itemValue2 = Number($("#itemValue2").text());
-			var itemValue3 = Number($("#itemValue3").text());
-			var totalValue = itemValue1+ itemValue2 +itemValue3;
-			$("#sponValue").text(totalValue);
+			var total = 0;
+			$("input:checked").each(function() {
+				var thisId = $(this).attr("id");
+	  			var Idlength = thisId.length;
+	  			thisId = thisId.substring(Idlength-1,Idlength);
+	  			
+	  			var value = Number($("#itemValue"+thisId).text());
+	  			total += value;
+			});
 			
-			//후원 후 잔여포인트 계산 필요
-			//$("#leftValue").text(mPoint-sPoint + "원");
+			var mPoint = ${giveM.mPoint};
+			var leftValue = mPoint - total;
+			$("#totalValue").val(total);
+			$("#sponValue").text(total);
+			$("#leftValue").text(leftValue +"원");
+			$("#leftValueInput").val(leftValue);
+			
 		}
 		
 		/* 약관 팝업창 보여주기 */
@@ -532,10 +524,13 @@
 			var ipinFirst = $("#ipinFirst").val();
 			var ipinSecond = $("#ipinSecond").val();
 			
-			var leftValue = $("#leftValue").text();
-			leftValue = leftValue.substring(0, leftValue.length-1);
+			var leftValue = $("#leftValueInput").val();
+
+			var totalValue = Number($("#totalValue").val());
 			
-			if(checkUsing == 1 && checkIpin == 1 && !ipinTest01.test(ipinFirst)) {
+			if(totalValue == 0){
+				alert("후원물품을 선택해주세요.");
+			}else if(checkUsing == 1 && checkIpin == 1 && !ipinTest01.test(ipinFirst)) {
 				alert("주민번호 앞자리를 제대로 입력해주세요.");
 			}else if(checkUsing == 1 && checkIpin == 1 && !ipinTest02.test(ipinSecond)) {
 				alert("주민번호 뒷자리를 제대로 입력해주세요.");
@@ -545,7 +540,7 @@
 				alert("기부금 영수증 관련 약관에 동의해주세요.");
 				$("#seeTerms").focus();
 			}else {
-				alert("후원진행");
+				$("#fundItemform").submit();
 			}
 		});
 	

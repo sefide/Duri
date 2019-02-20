@@ -1,5 +1,6 @@
 package com.kh.duri.payment.model.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -22,6 +23,7 @@ import com.kh.duri.payment.model.exception.RefundException;
 import com.kh.duri.payment.model.vo.BoardItemValue;
 import com.kh.duri.payment.model.vo.DirectFundHist;
 import com.kh.duri.payment.model.vo.DonateReceipt;
+import com.kh.duri.payment.model.vo.FundItemDetail;
 import com.kh.duri.payment.model.vo.PageInfo;
 import com.kh.duri.payment.model.vo.Payment;
 import com.kh.duri.payment.model.vo.Point;
@@ -240,6 +242,33 @@ public class PaymentServiceImpl implements PaymentService {
 		hmap.put("biList", biList);
 		hmap.put("b", b);
 		return hmap;
+	}
+	
+	// 물품 후원 진행 - 펀딩내역 insert
+	@Override
+	public Member insertFundItemHistory(FundHistory fh, ArrayList<FundItemDetail> fhdList, String check,
+			String fWriter, int isGoal) {
+		// 100% 달성 시 GOAL로 바꾸고, 마감일 변경 - 금액물품둘다
+	    // 후원자 GoalNum +1 하기
+		System.out.println("check : "+ check); // 0이면 미발급 , 1이면 발급
+		System.out.println("isGoal : "+ isGoal);  // 0이면 미달성, 1이면 달성
+		
+		Member m = new Member();
+
+		if(isGoal == 1) { // 100% 달성 시 
+			// 해당 펀딩글 GOAL로 바꾸고, 마감일 변경 - 금액물품둘다
+			m.setMno(fh.getFhMnoGive());
+		    // 후원자 GoalNum +1 하기
+			
+		}
+		
+		// 후원내역 입력하고 (fundHistory/ fundHistoryDetail)
+		// 기부금 영수증 (DonateReceipt)
+		// member 포인트 업데이트 (나눔행복) (Member)
+		// 포인트 이력 insert  (Point)
+		// 업데이트된 나눔두리 유저 세션 업데이트
+
+		return null;
 	}
 	
 
