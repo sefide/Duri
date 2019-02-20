@@ -1,9 +1,11 @@
 package com.kh.duri.payment.model.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import com.kh.duri.Nanummember.model.vo.FundHistory;
 import com.kh.duri.board.model.vo.Board;
+import com.kh.duri.board.model.vo.BoardItem;
 import com.kh.duri.member.model.vo.Member;
 import com.kh.duri.payment.model.exception.DirectFundException;
 import com.kh.duri.payment.model.exception.FundingException;
@@ -63,6 +65,9 @@ public interface PaymentService {
 	
 	// 금액 후원 진행 - 펀딩내역 insert
 	Member insertFundMoneyHistory(FundHistory fh, String check, String fWriter) throws FundingException;
+	
+	// 물품 후원 결제페이지 - 펀딩정보 select
+	HashMap<String, Object> selectFundItem(BoardItem bi) throws FundingException;
 
 	
 		

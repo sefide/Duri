@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -153,6 +155,7 @@
    		
    		#tdRight{
    			text-align : right;
+		    padding-left: 30%;
    			padding-right : 3%;
    		}
    		
@@ -161,7 +164,7 @@
    			height : 20px;
    		}
    		.bar3{
-   			height : 40px;
+   			height : 20px;
    		}
    		#leftItemValue{
    			color : #FE9D35;
@@ -206,12 +209,19 @@
    			width : 75px;
    			cursor : pointer;
    		}	
+   		
+   		.itemPriceTxt{
+   			color : #AFAFAF;
+   			font-size : 20px;
+   		}
     </style>
 </head>
 <body>
     <!-- 네비바 -->
 	<jsp:include page="../common/navi.jsp"/>
    
+   	<c:set var = "giveM" value = "${ sessionScope.loginUser2 }"/>
+	<c:set var = "leftV" value = "0"/>
     <!-- 약관 팝업창 -->
      <div class = "pop" id = "pop_div">
     	<div class = "pop_inner">
@@ -250,78 +260,75 @@
     	<div class="container">
     		<div class="row d-flex">
     			<div class = "ftco-animate" id = "sType">물품후원</div>  
-    			<h3 class = "ftco-animate" id = "sTitle">깔창 생리대에서 벗어나고 싶어요...</h3>
+    			<h3 class = "ftco-animate" id = "sTitle">${b.fTitle}</h3>
     		</div>
     		<div id = "bar1"></div>
     		<div class ="row d-flex"> 
     			<h4 class ="ftco-animate">> 후원 물품</h4>
     		</div>
     		<div class ="row d-flex"> 
+    		<form id = "fundItemform" action = "execfundItem.pm" method = "post" style ="width: 100%;">
     			<table>
-    				<tr>
-    					<td>
+    			<c:if test = "${ !empty biList }">
+	    			<c:forEach var="biList" items="${ biList }" varStatus="status">
+	    			
+	    			<c:if test ="${ empty biList.sumItemValue }">
+    					<c:set var = "leftV" value = "${biList.fdValue}"/>
+    				</c:if>
+    				<c:if test ="${ !empty biList.sumItemValue }">
+    					<c:set var = "leftV" value = "${ biList.fdValue - biList.sumItemValue }"/>
+    				</c:if>
+    				
+	    			<tr class = "bar3">
+    					<td colspan = "4"></td>
+    				</tr>
+	    			<tr>
+    					<td style = "padding-left: 20px;">
     						<div class="form-check">
-						  <input class="form-check-input" type="checkbox" id="chkitem1">
+    						
+	    					<c:if test ="${leftV eq 0}">
+	    						<input class="form-check-input chkItem" type="checkbox" id="chkitem${ status.index }" disabled>
+	    					</c:if>
+		    				<c:if test ="${leftV ne 0}">
+	    						<input class="form-check-input chkItem" type="checkbox" id="chkitem${ status.index }" >
+		    				</c:if>
+						  
 						  <label class="form-check-label txtitem" for="chkitem1" >
-						 	  라면
+						 	  ${ biList.iName }
 						  </label>
-						</div>
+							</div>
     					</td>
     					<td></td>
-    					<td id = "tdRight"><input class="form-control item" type = "text" name = "item1" id = "item1">개</td>
-    					<td><p class = "itemValue" id = "itemValue1">1500</p><p class = "txtItemValue">원</p></td>
+    					<td id = "tdRight">
+	    					<input class="form-control item" type = "text" name = "item${ status.index }" id = "item${ status.index }" value = "1">개
+	    					<input type = "hidden" name = "price${ status.index }" value = "${ biList.iPrice }" id = "itemPrice">
+    					</td>
+    					<td style = "width: 200px;"><p class = "itemValue" id = "itemValue${ status.index }">${ biList.iPrice }</p>
+    					<p class = "txtItemValue">원</p></td>
+    					<input type = "hidden" name = "itemSumPrice${ status.index }" value = "0" id = "itemSumPrice">
     				</tr>
     				<tr>
-    					<td colspan = "4"><p id = "leftItemValue">남은 수량 : 1개 </p></td>
+    					<td  style = "padding-left: 20px;" colspan = "3"><p id = "leftItemValue${ status.index }">남은 수량 : ${leftV}개 </p></td>
+    					<input type = "hidden"  id = "leftValue${ status.index }" value ="${leftV}">
+    					<td> <p  class = "itemPriceTxt" id = "itemPriceTxt${ status.index }">${ biList.iPrice } x 1 </p></td>
     				</tr>
+    				
+    				<c:if test="${!status.last}">
     				<tr class = "bar3">
     					<td colspan = "4"></td>
     				</tr>
     				<tr class = "bar2">
     					<td colspan = "4"></td>
     				</tr>
+    				</c:if>
     				
+	    			</c:forEach>
+    			</c:if>
     				
-    				<tr>
-    					<td>
-    						<div class="form-check">
-						  <input class="form-check-input" type="checkbox" id="chkitem1">
-						  <label class="form-check-label txtitem" for="chkitem1" >
-						 	  라면
-						  </label>
-						</div>
-    					</td>
-    					<td></td>
-    					<td id = "tdRight"><input class="form-control item" type = "text" name = "item1" id = "item1">개</td>
-    					<td><p class = "itemValue" id= "itemValue2">1500</p><p class = "txtItemValue">원</p></td>
-    				</tr>
-    				<tr>
-    					<td colspan = "4"><p id = "leftItemValue">남은 수량 : 1개 </p></td>
-    				</tr>
-    				<tr class = "bar3">
-    					<td colspan = "4"></td>
-    				</tr>
-    				<tr class = "bar2">
-    					<td colspan = "4"></td>
-    				</tr>
-    				
-    				<tr>
-    					<td>
-    						<div class="form-check">
-						  <input class="form-check-input" type="checkbox" id="chkitem1">
-						  <label class="form-check-label txtitem" for="chkitem1">
-						 	  라면
-						  </label>
-						</div>
-    					</td>
-    					<td></td>
-    					<td id = "tdRight"><input class="form-control item" type = "text" name = "item1" id = "item1">개</td>
-    					<td><p class = "itemValue" id = "itemValue3">1500</p><p class = "txtItemValue">원</p></td>
-    				</tr>
-    				<tr>
-    					<td colspan = "4"><p id = "leftItemValue">남은 수량 : 1개 </p></td>
-    				</tr>
     			</table>
+    			<input type = "hidden" id = "totalValue" value = "0">
+    		</form>
+    			
     		</div>
     		
     		<div id = "bar1"></div>
@@ -334,15 +341,15 @@
     			<table>
     				<tr>
     					<th>행복두리</th>
-    					<td colspan = "2" >응디곤듀</td>
+    					<td colspan = "2" >${b.mNick}</td>
     				</tr>
     				<tr>
     					<th>후원 펀딩</th>
-    					<td colspan = "2" >깔창 생리대에서 벗어나고 싶어요...</td>
+    					<td colspan = "2" >${b.fTitle}</td>
     				</tr>
     				<tr>
     					<th>나눔두리</th>
-    					<td colspan = "2" >천샤다힝</td>
+    					<td colspan = "2" >${giveM.mNickName}</td>
     				</tr>
     				<tr>
     					<th>기부금영수증</th>
@@ -377,7 +384,7 @@
     			</div>
     			<div id = "bar1"></div>
     			<div align = "right">
-    				<div id = "txtLeftValue">현재 보유포인트 </div> <div id = "leftValue">10000원 </div>
+    				<div id = "txtLeftValue">현재 보유포인트 </div> <div id = "leftValue">${giveM.mPoint}원 </div>
     			</div>
     			<div align = "right">
     				<div id = "txtLeftValue">후원 후 잔여포인트 </div> <div id = "leftValue">10000원 </div>
@@ -402,9 +409,10 @@
    <jsp:include page="../common/loader.jsp"></jsp:include>
   <script>
   var checkUsing = 1;  /* 기부금영수증 발급 약관 확인 변수 */
+  var checkIpin = 0; /* 기부금영수증 발급인지 아닌지 확인 변수 */
   
 		$(document).ready(function() {
-			calValue(); // 추후에 주석처리하기 
+			//calValue(); // 추후에 주석처리하기 
 			
 			/* 주민등록번호 입력창 숨겨두기 */
 			$(".ipin").css("display","none");
@@ -414,9 +422,11 @@
 				if($("#yesReceip").is(":checked")){
 					$(".ipin").css("display","");
 					checkUsing = 0;
+					checkIpin = 1; 
 				}else {  // 미발급
 					$(".ipin").css("display","none");
 					checkUsing = 1;
+					checkIpin = 0; 
 					$("input:checkbox").prop("checked", false);
 				}
 				
@@ -424,10 +434,53 @@
 			
 			/* 후원포인트 금액 변경 시 */
 			$("#sponPoint").change(function(){
-				calValue();
+				//calValue();
 			});
 			
 		});
+  
+  		/* 물품후원갯수 선택 시 */
+  		$(".item").blur(function(){
+  			var thisId = $(this).attr("id");
+  			var Idlength = thisId.length;
+  			thisId = thisId.substring(Idlength-1,Idlength);
+  			
+  			var itemCount = $(this).val();  // 갯수
+  			var itemPrice = $(this).next().val() // 금액
+  			var leftCount = $("#leftValue" + thisId).val();
+  			
+  			console.log("leftCount : "+ leftCount);
+  			console.log("itemCount : "+ itemCount);
+  			if(Number(itemCount) > Number(leftCount)){
+  				$(this).val("1");
+  			}else {
+  				$("#itemPriceTxt"+ thisId).text(itemPrice +"x" + itemCount);
+  	  			$("#itemValue"+ thisId).text(itemPrice*itemCount);
+  	  			$("#itemSumPrice").val(itemPrice*itemCount);
+  			}
+  			
+  		});
+  		
+  		/* 물품 체크박스 선택 시 */
+  		$(".chkItem").change(function(){
+  			var thisId = $(this).attr("id");
+  			var Idlength = thisId.length;
+  			thisId = thisId.substring(Idlength-1,Idlength);
+  			
+  			console.log("thisId : " + thisId);
+  			var value = $("#itemSumPrice"+thisId).val();
+  			console.log("value : " + value);
+  			var total = $("#sponValue").text();
+  			console.log("total : " + total);
+  			
+  			if($(this).is(":checked")){
+  				total += value;
+  				$("#sponValue").text(total);
+  			}else {
+  				total -= value;
+  				$("#sponValue").text(total);
+  			}
+  		});
 		
 		/* 후원포인트, 잔여포인트 계산 및 표시 */
 		function calValue(){
@@ -468,11 +521,25 @@
 			$("input:checkbox").prop("checked", false);
 		}
 		
+		
 		/* 후원하기 버튼 클릭 시  */
 		$("#btnSpon").click(function(){
+			var numberTest = /[^0-9]/g; /* 숫자로만 이뤄지기 */
+			var resultValue = $("#sponValue").val();
+			
+			var ipinTest01 = /\d{6}/; /* 숫자로만 6글자 이뤄지기 */
+			var ipinTest02 = /\d{7}/; /* 숫자로만 7글자 이뤄지기 */
+			var ipinFirst = $("#ipinFirst").val();
+			var ipinSecond = $("#ipinSecond").val();
+			
 			var leftValue = $("#leftValue").text();
 			leftValue = leftValue.substring(0, leftValue.length-1);
-			if(leftValue < 0){
+			
+			if(checkUsing == 1 && checkIpin == 1 && !ipinTest01.test(ipinFirst)) {
+				alert("주민번호 앞자리를 제대로 입력해주세요.");
+			}else if(checkUsing == 1 && checkIpin == 1 && !ipinTest02.test(ipinSecond)) {
+				alert("주민번호 뒷자리를 제대로 입력해주세요.");
+			}else if(leftValue < 0){
 				alert("포인트가 부족합니다. 충전해주세요.");
 			}else if(checkUsing == 0){
 				alert("기부금 영수증 관련 약관에 동의해주세요.");

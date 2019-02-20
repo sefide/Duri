@@ -1,5 +1,6 @@
 package com.kh.duri.payment.model.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.duri.Nanummember.model.vo.FundHistory;
 import com.kh.duri.board.model.vo.Board;
+import com.kh.duri.board.model.vo.BoardItem;
 import com.kh.duri.member.model.vo.Member;
 import com.kh.duri.payment.model.dao.PaymentDao;
 import com.kh.duri.payment.model.exception.DirectFundException;
@@ -17,6 +19,7 @@ import com.kh.duri.payment.model.exception.PaymentException;
 import com.kh.duri.payment.model.exception.PointHistoryException;
 import com.kh.duri.payment.model.exception.ReceiptException;
 import com.kh.duri.payment.model.exception.RefundException;
+import com.kh.duri.payment.model.vo.BoardItemValue;
 import com.kh.duri.payment.model.vo.DirectFundHist;
 import com.kh.duri.payment.model.vo.DonateReceipt;
 import com.kh.duri.payment.model.vo.PageInfo;
@@ -221,6 +224,22 @@ public class PaymentServiceImpl implements PaymentService {
 			return null;
 		}
 		
+	}
+
+	// 물품 후원 결제페이지 - 펀딩정보 select
+	@Override
+	public HashMap<String, Object> selectFundItem(BoardItem bi) throws FundingException {
+
+		// 후원글 정보 불러오기
+		BoardItem b = pd.selectFundItemBoard(sqlSession, bi);
+		
+		// 후원물품 정보 불러오기
+		List<BoardItemValue> biList = pd.selectFundItem(sqlSession, bi);
+		
+		HashMap<String, Object> hmap = new HashMap<String, Object>();
+		hmap.put("biList", biList);
+		hmap.put("b", b);
+		return hmap;
 	}
 	
 

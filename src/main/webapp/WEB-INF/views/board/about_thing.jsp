@@ -86,7 +86,7 @@
               <div class="text">
               	<h3 class="mb-4">후원하기</h3>
               	<p>행복두리에게 올 한해 따뜻하게 </br>지낼 수 있는 행복을 선물하세요.</p>
-              	<p><a href="fundItem.pm" class="btn btn-white px-3 py-2 mt-2">후원하러가기</a></p>
+              	<p><a href="fundItem.pm?fno=${thingDetail2[0].fno}" class="btn btn-white px-3 py-2 mt-2">후원하러가기</a></p>
               </div>
             </div>
           </div>
