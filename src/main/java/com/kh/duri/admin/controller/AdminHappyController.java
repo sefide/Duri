@@ -25,14 +25,7 @@ public class AdminHappyController {
 
 
 
-	@RequestMapping("QnA.ad")
-	public String admin2() {  
-		return "admin/QnA";
-	}
-	@RequestMapping("QnADetail.ad")
-	public String admin18() {
-		return "admin/QnADetail";
-	}
+	
 	//행복두리 환급 목록
 	@RequestMapping("adminRefund.ad")
 	public String adminRefundList() {
@@ -91,7 +84,6 @@ public class AdminHappyController {
 			HappyDetail = ahs.HappyDetail(m);
 			model.addAttribute("HappyDetail", HappyDetail);
 			
-			System.out.println(HappyDetail);
 			return "admin/adminHappyDetail";
 			
 		} catch (ListException e) {

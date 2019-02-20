@@ -48,10 +48,10 @@
                         <a href="#" ><i class="fa fa-edit"></i>Q&A 관리<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="Ajin_QnA_list.nanum">나눔두리 Q&A</a>
+                                <a href="QnAList.nanum">나눔두리 Q&A</a>
                             </li>
                             <li>
-                                <a href="QnA.ad">행복두리 Q&A</a>
+                                <a href="adminQnA">행복두리 Q&A</a>
                             </li>
 							</ul>
 						</li>	

@@ -53,7 +53,7 @@
                                             <td class="center">이거 다시 올려도되나여?</td>
                                             <td class="center">han419120</td>
                                             <td class="center">2018/03/11</td>
-                                            <td class="center"> <a href="QnADetail.ad" class="btn btn-default btn-sm">답변하러하기</a></td>
+                                            <td class="center"> <a href="adminQnADetail.ad" class="btn btn-default btn-sm">답변하러하기</a></td>
                                         </tr>
                                        <tr class="odd gradeX">
                                         	<td class="center">1</td>
@@ -61,7 +61,7 @@
                                             <td class="center">이거 다시 올려도되나여?</td>
                                             <td class="center">han419120</td>
                                             <td class="center">2018/03/11</td>
-                                            <td class="center"> <a href="QnADetail.ad" class="btn btn-default btn-sm">답변하러하기</a></td>
+                                            <td class="center"> <a href="adminQnADetail.ad" class="btn btn-default btn-sm">답변하러하기</a></td>
                                         </tr>
                                        <tr class="odd gradeX">
                                         	<td class="center">1</td>
@@ -69,7 +69,7 @@
                                             <td class="center">이거 다시 올려도되나여?</td>
                                             <td class="center">han419120</td>
                                             <td class="center">2018/03/11</td>
-                                            <td class="center"> <a href="QnADetail.ad" class="btn btn-default btn-sm">답변하러하기</a></td>
+                                            <td class="center"> <a href="adminQnADetail.ad" class="btn btn-default btn-sm">답변하러하기</a></td>
                                         </tr>
                                       
                                     </tbody>

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 import com.kh.duri.admin.model.exception.ListException;
 import com.kh.duri.admin.model.vo.adminFundingList;
 import com.kh.duri.admin.model.vo.adminMember;
+import com.kh.duri.admin.model.vo.adminQnA;
 
 @Repository
 public class adminAtcDaoImpl implements adminAtcDao{
@@ -35,6 +36,11 @@ public class adminAtcDaoImpl implements adminAtcDao{
 	@Override
 	public List<adminFundingList> CrowdFundGoodsInfo(SqlSessionTemplate sqlsession, adminFundingList f) throws ListException {
 		return sqlsession.selectList("Admin.CrowdFundGoodsInfo",f);
+	}
+	//관리자 행복두리 Q&A 목록
+	@Override
+	public List<adminQnA> adminQnAList(SqlSessionTemplate sqlsession) throws ListException {
+		return sqlsession.selectList("Admin.adminQnAList");
 	}
 	
 	
