@@ -223,7 +223,7 @@
                                             <th>펀딩제목</th>
                                             <th>펀딩 시작 날짜</th>
                                             <th>펀딩 마감 날짜</th>
-                                            <th>진행 상태(%)</th>
+                                            <th>펀딩 후원 날짜</th>
                                             <th>후원물품</th>
                                             <th>후원물품갯수</th>
                                             <th>상태</th>
@@ -238,10 +238,20 @@
                                             <td class="center">${row.fTitle }</td>
                                             <td class="center">${row.fStartDate }</td>
                                             <td class="center">${row.fEndDate }</td>
-                                            <td class="center">쿼리또라이야</td>
-                                            <td class="center">상태값적기</td>
-                                            <td class="center">쿼리또라이야</td>
-                                            <td class="center">쿼리또라이야</td>
+                                            <td class="center">${row.fhDate }</td>
+                                            <td class="center">${row.iName }</td>
+                                            <td class="center">${row.fhdItemValue }개</td>
+                                           <c:choose>
+                                            	<c:when test="${row.fStatus=='ING' }">
+                                            	 <td class="center">펀딩 진행중</td>
+                                            	</c:when>
+                                            	<c:when test="${row.fStatus=='GOAL' }">
+                                            	 <td class="center">펀딩 목표달성 종료</td>
+                                            	</c:when>
+                                            	<c:otherwise>
+                                            	 <td class="center">펀딩 기간만료 종료</td>
+                                            	</c:otherwise>
+                                            </c:choose>
                                         </tr>
                                      </c:forEach>
                                     </tbody>

@@ -157,8 +157,8 @@
 											<td>${CrowdFundGoodsInfo[0].fWriteDate}</td>
 										</tr>
 										<tr>
-											<td class="total">펀딩 종료 날짜</td>
-											<td>${CrowdFundGoodsInfo[0].fEndDate}</td>
+											<td class="total">펀딩 설정 기간</td>
+											<td>${CrowdFundGoodsInfo[0].fLeftDay}일</td>
 										</tr>
 										
 										<tr>

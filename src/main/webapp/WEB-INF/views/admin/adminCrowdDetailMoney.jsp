@@ -149,15 +149,15 @@
 										</tr>
 										<tr>
 											<td class="total">목표 금액 </td>
-											<td>${CrowdFundInfo.fValue}</td>
+											<td>${CrowdFundInfo.fValue}원</td>
 										</tr>
 										<tr>
 											<td class="total">펀딩 등록 날짜</td>
 											<td>${CrowdFundInfo.fWriteDate}</td>
 										</tr>
 										<tr>
-											<td class="total">펀딩 종료 날짜</td>
-											<td>${CrowdFundInfo.fEndDate}</td>
+											<td class="total">펀딩 설정기간</td>
+											<td>${CrowdFundInfo.fLeftDay}일</td>
 										</tr>
 										
 										<tr>

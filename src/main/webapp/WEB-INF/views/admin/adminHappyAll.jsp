@@ -39,7 +39,9 @@
                                         <tr>
                                             <th>No</th>
                                             <th style="display: none;">회원번호</th>
+                                            <th style="display: none;">회원분류번호</th>
                                             <th>ID</th>
+                                            <th>이름</th>
                                             <th>닉네임</th>
                                             <th>성별</th>
                                             <th>email</th>
@@ -53,7 +55,9 @@
                                         <tr class="odd gradeX">
                                             <td>${status.count}</td>
                                             <td class="center" style="display: none;">${row.mno}</td>
+                                            <td class="center" style="display: none;">${row.mTakeStatus}</td>
                                             <td class="center">${row.mid}</td>
+                                            <td class="center">${row.mName}</td>
                                             <td class="center">${row.mNick}</td>
                                             <c:if test="${row.mGender == 'F'}"><td class="center">여</td></c:if>
 											<c:if test="${row.mGender == 'M'}"><td class="center">남</td></c:if>
@@ -84,8 +88,9 @@
                
      <script type="text/javascript">
     	$(".HappyDetail").click(function () {
-			var num = $(this).parent().parent().children().eq(1).text();
-			location.href= "adminHappyDetail.ad?num="+num; 
+			var Mnonum = $(this).parent().parent().children().eq(1).text();
+			var Statusnum = $(this).parent().parent().children().eq(2).text();
+			location.href= "adminHappyDetail.ad?Mnonum="+Mnonum+"&Statusnum="+Statusnum; 
 		});
     
     </script>

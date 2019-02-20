@@ -44,7 +44,7 @@
 	
 	
 	
-	
+	<!-- ***************나눔두리 관련 쿼리********************** -->
 	
 	<!-- 나눔두리 전체목록 조회 -->
 	<select id="adminNanumList" resultMap="adminMemberResultSet" parameterType="adminMember" >
@@ -56,13 +56,6 @@
 	<select id="adminDonateList" resultMap="donateResultSet" parameterType="Donatelist" >
 		SELECT M.MID,M.MNAME,M.MPHONE,D.DRAPPLYDATE,D.DRVALUE,D.DRDONATEDATE 
 		FROM MEMBER M JOIN DONATERECEIPT D ON (M.MNO=D.DR_MNO) ORDER BY D.DRAPPLYDATE 
-	</select>
-	<!-- 행복두리 전체목록 조회 -->
-	<select id="adminHappyList" resultMap="adminMemberResultSet" parameterType="adminMember" >
-		SELECT MNO,MID,MNICK,MGENDER,MEMAIL,MFUNDTYPE,MPRNEW 
-		FROM MEMBER 
-		WHERE MTYPE='H' AND MSTATUS='Y' AND MACCEPTDATE IS NOT NULL ORDER BY MACCEPTDATE
-	
 	</select>
 	<!-- 나눔두리 상세목록 조회(기본정보) -->
 	<select id="adminNanumDetail" resultType="adminMember" parameterType="adminMember" >
@@ -86,21 +79,45 @@
 	</select>
 	<!-- 나눔두리 상세목록 크라우드 물품 펀딩 리스트-->
 	<select id="adminNanumDetailfundingGoodsList" resultType="adminFundingHistoryList" parameterType="adminFundingHistoryList" >
-		SELECT M.MID, M.MFUNDTYPE,F.FTITLE,F.FSTARTDATE,F.FENDDATE,F.FSTATUS,FD.FDVALUE,
-		(SELECT LISTAGG(CAST(FA2.INAME as varchar2(15)),',') WITHIN GROUP (ORDER BY FD_FNO)
-		FROM FUNDINGDETAIL FA1 JOIN FUNDITEM FA2 ON(FA2.INO=FA1.FD_INO) 
-        WHERE F.FNO = FD_FNO GROUP BY FD_FNO) AS GOODSNAME
-		FROM FUNDING F JOIN FUNDHISTORY FH ON(F.FNO=FH.FH_FNO)
-		JOIN MEMBER M ON(F.FWRITER=M.MNO) JOIN FUNDINGDETAIL FD ON(FD.FD_FNO=F.FNO)
-		JOIN FUNDITEM FI ON(FD.FD_INO=FI.INO)
+		SELECT M.MID, M.MFUNDTYPE,F.FTITLE,F.FSTARTDATE,F.FENDDATE,F.FSTATUS,FHD.FHDITEMVALUE,FI.INAME,FH.FHDATE
+		FROM FUNDING F 
+		JOIN FUNDHISTORY FH ON(F.FNO=FH.FH_FNO)
+		JOIN MEMBER M ON(F.FWRITER=M.MNO) 
+		JOIN FUNDHISTORYDETAIL FHD ON(FHD.FHD_FHNO=FH.FHNO)
+		JOIN FUNDITEM FI ON (FI.INO=FHD.FHD_INO)
 		WHERE FH.FH_MNO_GIVE=#{fh_Mno_Give} AND F.FTYPE='ITEM' ORDER BY FH.FHDATE DESC
 	</select>
-	<!-- 행복두리 상세목록 조회(기존회원-기본정보) -->
-	<select id="adminHappyDetail" resultType="adminMember" parameterType="adminMember" >
-		SELECT M.MNO,M.MNICK,M.MPR,M.MPRNEW,M.MBIRTHDAY,M.MNAME,M.MID,M.MGENDER,M.MPHONE,M.MEMAIL,M.MADDRESS,M.MFUNDTYPE,M.MACCEPTDATE,A.ADATE,M.MPRACCEPTDATE 
-		FROM MEMBER M JOIN ATTACHMENT A ON (A.A_MNO=M.MNO) AND A.ATYPE='R' 
-		WHERE  A.ADATE IS NOT NULL AND M.MNO=#{mno}
+	
+	
+	<!-- ***************행복두리 관련 쿼리********************** -->
+	
+	<!-- 행복두리 전체목록 조회 -->
+	<select id="adminHappyList" resultMap="adminMemberResultSet" parameterType="adminMember" >
+		SELECT MNO,MID,MNICK,MGENDER,MEMAIL,MFUNDTYPE,MNAME,MTAKESTATUS
+		FROM MEMBER 
+		WHERE MTYPE='H' AND MSTATUS='Y' AND MTAKESTATUS =1 ORDER BY MACCEPTDATE
 	</select>
+	<!-- 행복두리 [기존회원(1)/신규회원(3)] 상세페이지 (공통페이지)-->
+	<select id="adminHappyDetail" resultType="adminMember" parameterType="adminMember" >
+		SELECT DISTINCT M.MNO,M.MTAKESTATUS,M.MNICK,M.MPR,M.MBIRTHDAY,M.MNAME,M.MID,M.MGENDER,M.MPHONE,M.MEMAIL,
+		M.MADDRESS,M.MFUNDTYPE,M.MACCEPTDATE,A.ADATE,A.ASTATUS,M.MPRACCEPTDATE 
+		FROM MEMBER M JOIN ATTACHMENT A ON (A.A_MNO=M.MNO) AND A.ATYPE='R' 
+		WHERE M.MNO=#{mno} AND M.MTAKESTATUS =#{mTakeStatus}
+	 <if test="mTakeStatus==1">
+			AND A.ADATE IS NOT NULL
+	 </if>
+	</select>
+	<!-- 행복두리 승인페이지- 신규목록 -->
+	<select id="adminHappyNewList" resultMap="adminMemberResultSet" parameterType="adminMember" >
+		SELECT MNO,MID,MNICK,MGENDER,MEMAIL,MFUNDTYPE,MNAME,MTAKESTATUS
+		FROM MEMBER 
+		WHERE MTYPE='H' AND MSTATUS='Y' AND MTAKESTATUS =3 ORDER BY MENROLLDATE
+	</select>
+	
+	
+	
+	
+	<!-- ***************크라우드 펀딩 관련 쿼리********************** -->
 	<!-- 크라우드 금액 펀딩 승인목록 -->
 	<select id="adminMoneyCrowdList" resultType="adminFundingList" parameterType="adminFundingList" >
 		SELECT F.FNO,F.FWRITER,F.FTITLE,F.FWRITEDATE,M.MID,M.MFUNDTYPE,F.FVALUETYPE,F.FVALUE 
@@ -118,8 +135,6 @@
 		JOIN FUNDITEM FI ON(FI.INO=FD.FD_INO)
 		WHERE F.FSTATUS='YET' AND F.FTYPE='ITEM' ORDER BY F.FWRITEDATE 
 	</select>
-	
-	
 	<!-- 크라우드 펀딩 상세페이지 -회원정보 -->
 	<select id="CrowdMemInfoDetail" resultType="adminMember"  >
 		SELECT M.MNO,M.MNICK,M.MPR,M.MBIRTHDAY,M.MNAME,M.MID,M.MGENDER,M.MPHONE,M.MEMAIL,M.MADDRESS,M.MFUNDTYPE,M.MACCEPTDATE,A.ADATE,M.MPRACCEPTDATE 
@@ -128,13 +143,13 @@
 	</select>
 	<!-- 크라우드 펀딩 상세페이지 -펀딩정보(금액)-->
 	<select id="CrowdFundInfoDetail" resultType="adminFundingList" parameterType="adminFundingList" >
-		SELECT FTITLE,FVALUETYPE,FVALUE,FWRITEDATE,FENDDATE,FCONTENT 
+		SELECT FTITLE,FVALUETYPE,FVALUE,FWRITEDATE,FLEFTDAY,FCONTENT 
 		FROM FUNDING 
 		WHERE FSTATUS='YET' AND FTYPE='MONEY' AND FNO=#{fNo} 
 	</select>
 	<!-- 크라우드 펀딩 상세페이지 -펀딩정보(물품)-->
 	<select id="CrowdFundGoodsInfo" resultType="adminFundingList" parameterType="adminFundingList" >
-		SELECT F.FNO,F.FTITLE,F.FWRITEDATE,F.FENDDATE,F.FCONTENT,FI.INAME,FD.FDVALUE
+		SELECT F.FNO,F.FTITLE,F.FWRITEDATE,F.FLEFTDAY,F.FCONTENT,FI.INAME,FD.FDVALUE
 		FROM FUNDING F JOIN FUNDINGDETAIL FD ON (F.FNO=FD.FD_FNO)
 		JOIN FUNDITEM FI ON(FI.INO=FD.FD_INO)
 		WHERE F.FSTATUS='YET' AND F.FTYPE='ITEM' AND FNO=#{fNo}

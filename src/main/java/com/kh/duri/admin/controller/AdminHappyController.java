@@ -33,10 +33,6 @@ public class AdminHappyController {
 	public String admin18() {
 		return "admin/QnADetail";
 	}
-	@RequestMapping("adminHappyAcc.ad")
-	public String adminHappyAccList() {
-		return "admin/adminHappyAcc";
-	}
 	//행복두리 환급 목록
 	@RequestMapping("adminRefund.ad")
 	public String adminRefundList() {
@@ -44,7 +40,25 @@ public class AdminHappyController {
 		return "admin/adminRefund";
 		
 	}
-	//행복두리 전체 목록
+	//행복두리 승인목록 조회
+	@RequestMapping("adminHappyAcc.ad")
+	public String adminHappyAccList(Model model) {
+		List<adminMember>HappyNewList ; //신규목록
+		try {
+			HappyNewList = ahs.adminHappyNewList();
+			
+			model.addAttribute("HappyNewList", HappyNewList);
+			
+			return "admin/adminHappyAcc";
+			
+			}catch(ListException e) {
+				model.addAttribute("msg", e.getMessage());
+				
+				return "admin/adminHappyAcc";
+			}
+		
+	}
+	//행복두리 전체 목록 조회
 	@RequestMapping("adminHappyAll.ad")
 	public String adminHappyAllList(Model model) {
 		
@@ -63,16 +77,21 @@ public class AdminHappyController {
 		
 		
 	}
-	//행복두리 상세조회(전체목록에서 들어가는거임)
+	//행복두리 [기존회원(1)/신규회원(3)] 상세페이지 (공통페이지)  
 	@RequestMapping("adminHappyDetail.ad")
 	public String adminHappyDetailList(HttpServletRequest request, HttpServletResponse response,Model model,adminMember m) {
 		
-		int num = Integer.parseInt(request.getParameter("num"));
-		m.setMno(num);
+		int Mnonum = Integer.parseInt(request.getParameter("Mnonum"));
+		String Statusnum = request.getParameter("Statusnum");
+		m.setMno(Mnonum);
+		m.setmTakeStatus(Statusnum);
+		
 		adminMember HappyDetail;
 		try {
 			HappyDetail = ahs.HappyDetail(m);
 			model.addAttribute("HappyDetail", HappyDetail);
+			
+			System.out.println(HappyDetail);
 			return "admin/adminHappyDetail";
 			
 		} catch (ListException e) {
