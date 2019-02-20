@@ -10,6 +10,7 @@ import com.kh.duri.admin.model.dao.adminAtcDao;
 import com.kh.duri.admin.model.exception.ListException;
 import com.kh.duri.admin.model.vo.adminFundingList;
 import com.kh.duri.admin.model.vo.adminMember;
+import com.kh.duri.admin.model.vo.adminQnA;
 
 @Service
 public class adminAtcServiceImpl implements adminAtcService{
@@ -50,6 +51,12 @@ public class adminAtcServiceImpl implements adminAtcService{
 	public List<adminFundingList> CrowdFundGoodsInfo(adminFundingList f) throws ListException {
 		List<adminFundingList> CrowdFundGoodsInfo = aad.CrowdFundGoodsInfo(sqlsession,f);
 		return CrowdFundGoodsInfo;
+	}
+	//관리자 행복두리 Q&A 목록
+	@Override
+	public List<adminQnA> adminQnAList() throws ListException {
+		List<adminQnA>list = aad.adminQnAList(sqlsession);
+		return list;
 	}
 
 }

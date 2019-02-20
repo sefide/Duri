@@ -13,6 +13,7 @@
 		<typeAlias type="com.kh.duri.admin.model.vo.adminFundingList" alias="adminFundingList"/>	
 		<typeAlias type="com.kh.duri.admin.model.vo.adminDirectList" alias="adminDirectList"/>	
 		<typeAlias type="com.kh.duri.admin.model.vo.adminFundingHistoryList" alias="adminFundingHistoryList"/>	
+		<typeAlias type="com.kh.duri.admin.model.vo.adminQnA" alias="adminQnA"/>	
 		
 		<typeAlias type="com.kh.duri.Nanummember.model.vo.Funding" alias="Funding"/>  	
 		<typeAlias type="com.kh.duri.Nanummember.model.vo.FundHistory" alias="FundHistory"/>  

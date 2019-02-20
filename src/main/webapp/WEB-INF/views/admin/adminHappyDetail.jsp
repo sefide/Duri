@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -86,7 +87,8 @@
 											<c:if test="${HappyDetail.adate ==null}"><td>승인 전 신규회원</td></c:if>
 											<c:if test="${HappyDetail.adate !=null}"><td>${HappyDetail.adate}</td></c:if>
 											<td class="total">자기소개 갱신일</td>
-											<c:if test="${HappyDetail.mprAcceptDate ==null}"><td>승인 전 신규회원</td></c:if>
+											<c:if test="${HappyDetail.mprAcceptDate ==null && HappyDetail.mTakeStatus == 3}"><td>승인 전 신규회원</td></c:if>
+											<c:if test="${HappyDetail.mprAcceptDate ==null && HappyDetail.mTakeStatus == 1}"><td>가입시 등록 후 변경없음</td></c:if>
 											<c:if test="${HappyDetail.mprAcceptDate !=null}"><td>${HappyDetail.mprAcceptDate}</td></c:if>
 											
 											
@@ -119,7 +121,7 @@
                         <div class="panel-body">
 		                  <div class="well">
 		                        
-		                        <p style="height: 550px;">
+		                        <p style="height: 600px;">
 		                        <big>${HappyDetail.mpr}</big>
 		                        </p>
 		                    </div>
@@ -133,9 +135,14 @@
                             	증빙 서류
                         </div>
                        
-                        <div class="panel-body" style="height: 650px;">
-                       	
-		                 <img src="/duri/resources/admin/img/happy.PNG" style="width: 100%; height: 100%;">
+                        <div class="panel-body" style="height: 700px; text-align: center;">
+                        
+
+
+						<img style="height: 650px; width: 600px;" src="resources/${HappyDetail.aFilePath}/${HappyDetail.achangeName}.jpg" onclick="OnloadImg(this.src)">
+
+
+						
 		               
                             </div>
                             </div>
@@ -155,5 +162,27 @@
             </div>
     
     <jsp:include page="include/admintableFooter.jsp" />
+    
+    		                 <script>
+
+ function OnloadImg(url){
+
+  var img=new Image();
+
+  img.src=url;
+
+  var img_width=img.width;
+
+  var win_width=img.width+25;
+
+  var height=img.height+30;
+
+  var OpenWindow=window.open('','_blank', 'width='+img_width+', height='+height+', menubars=no, scrollbars=auto');
+
+  OpenWindow.document.write("<style>body{margin:0px;}</style><img src='"+url+"' width='"+win_width+"'>");
+
+ }
+
+</script>
 </body>
 </html>

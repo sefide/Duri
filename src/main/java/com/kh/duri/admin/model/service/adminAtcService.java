@@ -5,6 +5,7 @@ import java.util.List;
 import com.kh.duri.admin.model.exception.ListException;
 import com.kh.duri.admin.model.vo.adminFundingList;
 import com.kh.duri.admin.model.vo.adminMember;
+import com.kh.duri.admin.model.vo.adminQnA;
 
 public interface adminAtcService {
 
@@ -18,5 +19,7 @@ public interface adminAtcService {
 	adminFundingList CrowdFundInfoDetail(adminFundingList f)throws ListException;
 	//크라우드 펀딩 상세페이지 - 펀딩정보(물품)
 	List<adminFundingList> CrowdFundGoodsInfo(adminFundingList f)throws ListException;
+	//관리자 행복두리 Q&A 목록
+	List<adminQnA> adminQnAList()throws ListException;
 
 }

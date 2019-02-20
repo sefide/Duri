@@ -14,6 +14,7 @@ import com.kh.duri.admin.model.exception.ListException;
 import com.kh.duri.admin.model.service.adminAtcService;
 import com.kh.duri.admin.model.vo.adminFundingList;
 import com.kh.duri.admin.model.vo.adminMember;
+import com.kh.duri.admin.model.vo.adminQnA;
 
 
 
@@ -116,13 +117,36 @@ public class AdminAtcController {
 	}
 	
 	
-	
+	//관리자 메인페이지
 	@RequestMapping("adminMain.ad")
 	public String adminMain() {
 		return "admin/adminMain";
 	}
-
 	
+	//관리자 행복두리 Q&A 목록
+	@RequestMapping("adminQnA.ad")
+	public String adminQnAList(Model model) {  
+		
+		try {
+			List<adminQnA>adminQnAList = aas.adminQnAList();
+			
+			model.addAttribute("adminQnAList", adminQnAList);
+			
+			return "admin/adminQnA";
+			
+			}catch(ListException e) {
+				model.addAttribute("msg", e.getMessage());
+				
+				return "admin/adminQnA";
+			}
+		
+		
+	}
+	//관리자 행복두리 Q&A상세보기
+	@RequestMapping("adminQnADetail.ad")
+	public String adminQnADetail() {
+		return "admin/adminQnADetail";
+	}
 	
 	
 }

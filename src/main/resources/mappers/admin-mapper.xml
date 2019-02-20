@@ -99,12 +99,15 @@
 	</select>
 	<!-- 행복두리 [기존회원(1)/신규회원(3)] 상세페이지 (공통페이지)-->
 	<select id="adminHappyDetail" resultType="adminMember" parameterType="adminMember" >
-		SELECT DISTINCT M.MNO,M.MTAKESTATUS,M.MNICK,M.MPR,M.MBIRTHDAY,M.MNAME,M.MID,M.MGENDER,M.MPHONE,M.MEMAIL,
-		M.MADDRESS,M.MFUNDTYPE,M.MACCEPTDATE,A.ADATE,A.ASTATUS,M.MPRACCEPTDATE 
+		SELECT M.MNO,M.MTAKESTATUS,M.MNICK,M.MPR,M.MBIRTHDAY,M.MNAME,M.MID,M.MGENDER,M.MPHONE,M.MEMAIL,
+		M.MADDRESS,M.MFUNDTYPE,M.MACCEPTDATE,A.ADATE,A.ASTATUS,M.MPRACCEPTDATE,A.ACHANGENAME,A.AFILEPATH
 		FROM MEMBER M JOIN ATTACHMENT A ON (A.A_MNO=M.MNO) AND A.ATYPE='R' 
 		WHERE M.MNO=#{mno} AND M.MTAKESTATUS =#{mTakeStatus}
 	 <if test="mTakeStatus==1">
 			AND A.ADATE IS NOT NULL
+	 </if>
+	 <if test="mTakeStatus==3">
+			AND A.ACHANGENAME!='EMPTY' 
 	 </if>
 	</select>
 	<!-- 행복두리 승인페이지- 신규목록 -->
@@ -156,10 +159,12 @@
 	</select>
 	
 	
+	<!-- *****************Q&A관련쿼리********************* -->
 	
-	
-	
-	
+	<!-- 관리자 행복두리 Q&A 목록 -->
+	<select id="adminQnAList" resultType="adminQnA" parameterType="adminQnA" >
+		
+	</select>
 	
 	
 	
