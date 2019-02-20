@@ -23,6 +23,7 @@ import com.kh.duri.happymember.model.vo.Funding;
 import com.kh.duri.happymember.model.vo.MyDonateItems;
 import com.kh.duri.payment.model.vo.PageInfo;
 import com.kh.duri.happymember.model.vo.Pagination;
+import com.kh.duri.happymember.model.vo.Qna;
 import com.kh.duri.member.model.vo.Member;
 
 @Controller
@@ -177,7 +178,7 @@ public class HappymemberController {
 		Member oldLoginUser = (Member) request.getSession().getAttribute("loginUser");
 		String userNewPr = request.getParameter("userNewPr");
 		
-		System.out.println("userNewPr : " + userNewPr);
+		/*System.out.println("userNewPr : " + userNewPr);*/
 		
 		oldLoginUser.setMprNew(userNewPr);
 				
@@ -193,7 +194,7 @@ public class HappymemberController {
 		}
 	
 		
-		return "happymember/myInfoModifyHappy.happy";
+		return "happymember/myIntroModify.happy";
 	}
 	
 	//물품후원 목록 개수 조회, 목록 페이징
@@ -267,25 +268,84 @@ public class HappymemberController {
 		
 		if(request.getAttribute("currentPage") != null) {
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
-			
+		}
 			try {
 				int listCount = hs.selectQnaListCount(m);
 				
-				/*PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
+				PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
 				
-				List<E>*/
+				List<Qna> qnaList = hs.selectQnaList(m, pi);
 				
+				/*for(Qna i : qnaList) {
+					System.out.println("qnaList : " + i);
+				}*/
 				
+				model.addAttribute("qnaList", qnaList);
+				model.addAttribute("pi", pi);
 				
 			} catch (MypageException e) {
 				model.addAttribute("msg", e.getMessage());
 				return "common/errorPage";
 			}
-		}
+	
 		return "happymember/qna";
 	}
 	
+	//Q&A 작성
+	@RequestMapping("myQnaInsert.happy")
+	public String insertQna(Model model, HttpServletRequest request, HttpServletResponse response) {
+		Member m = (Member) request.getSession().getAttribute("loginUser");
+		int mno = m.getMno();
 		
+		String qnaTitle = request.getParameter("qnaTitle");
+		String qnaContent = request.getParameter("qnaContent");
+		
+		Qna q = new Qna();
+		q.setQ_mno(mno);
+		q.setQtitle(qnaTitle);
+		q.setQcontent(qnaContent);
+		
+		try {
+			int result = hs.insertQna(q);
+			
+			if(result > 0) {
+				return "redirect:qnaInsertOriginal.happy";
+			}
+			
+			
+			
+		} catch (MypageException e) {
+			model.addAttribute("msg", e.getMessage());
+			return "common/errorPage";
+		}
+		
+		return "happymember/qna";
+	}
+	
+	
+	//Q&A 상세보기 
+	
+	/*//감사편지 보낼 정기후원자 닉네임 뽑기
+	@RequestMapping("thankyouLetter.happy")
+	public String selectNanumNick(Model model, HttpServletRequest request, HttpServletResponse response) {
+		Member m = (Member)request.getSession().getAttribute("loginUser");
+		
+		try {
+			List<Member> nanumNicks = hs.selectNanumNick(m);
+			
+			
+			
+			
+		} catch (MypageException e) {
+			model.addAttribute("msg", e.getMessage());
+			return "common/errorPage";
+		}
+		
+		
+		return "happymember/thankyouLetter";
+	}
+	*/
+	
 	//물품 배송 목록 새로고침했을 때 insert다시 안되게 !
 	@RequestMapping("deliveryOriginal.happy")
 	public String deliveryOriginal() {
@@ -298,6 +358,16 @@ public class HappymemberController {
 		return "happymember/longDonate";
 	}
 	
+	//새로고침 - Q&A 작성
+	@RequestMapping("qnaInsertOriginal.happy")
+	public String qnaInsertOriginal() {
+		return "happymember/qna";
+	}
+		
+	@RequestMapping("qnaInsert.happy")
+	public String qnaInsert() {
+		return "happymember/qnaInsert";
+	}
 	
 	@RequestMapping("mypage.happy")
 	public String happy1() {
@@ -320,11 +390,6 @@ public class HappymemberController {
 		return "happymember/qnaDetail";
 	}
 	
-	@RequestMapping("qnaInsert.happy")
-	public String happy7() {
-		return "happymember/qnaInsert";
-	}
-
 	@RequestMapping("proofDocument.happy")
 	public String happy8() {
 		return "happymember/proofDocument";

@@ -19,7 +19,7 @@
 	.textOrange {color: orange; font-weight: 600;} */
 </style>
 
-<title>마이페이지>문의하기</title>
+<title>마이페이지>Q&A>Q&A작성</title>
 <!-- 감사편지 쓰기 -->
 
 </head>
@@ -40,7 +40,7 @@
 	<div class="contBox inner"><!-- inner S -->
 	 
 		<%@ include file="include/tabMypage.jsp" %>
-
+<form id="qnaInsertForm" action="myQnaInsert.happy">
 		<div style="float: left; margin-left: 35px;">
 			<h1><i class="chevron right icon"></i>TO. 둘이두리님 궁금해요</h1>
 		</div>
@@ -52,7 +52,7 @@
 			<div>
 				<button class="ui button">제목</button>&nbsp;&nbsp;
 				<div class="ui input" style="width: 39.5%;">
-					<input type="text" placeholder="제목을 입력해주세요">
+					<input type="text" name="qnaTitle" placeholder="제목을 입력해주세요">
 				</div>
 			</div>
 			<br>
@@ -61,7 +61,7 @@
 			<!-- Q&A : 내용 -->
 			<div>
 				<div class="field">
-				    <textarea style="width: 92%; height: 600px;"></textarea>
+				    <textarea name="qnaContent" style="width: 92%; height: 600px;"></textarea>
 				 </div>
 			</div>
 		</div>
@@ -69,10 +69,10 @@
 		<div style="height: 100px;"></div>
 		
 		<div id="button">
-			<button onclick="location.href='qna.happy'" class="massive ui instagram button">문의하기 완료</button>&nbsp;&nbsp;&nbsp;&nbsp;
-			<button style="width: 21%;" class="massive ui button">취소하기</button>
+			<button onclick="qnaInsert();" class="massive ui instagram button">문의하기 완료</button>&nbsp;&nbsp;&nbsp;&nbsp;
+			<button onclick="return back();" style="width: 21%;" class="massive ui button">취소하기</button>
 		</div>
-
+</form>
 	</div><!--// inner E-->
 </div>
 
@@ -82,6 +82,21 @@
 </div><!--// Wrap E-->
 </c:if>
 
+<script>
+	function back(){
+		history.back();
+		return false;
+	}
+	
+	function qnaInsert(){
+		alert("자기소개 수정이 신청되었습니다. 승인을 기다려 주세요!");
+		 $("#qnaInsertForm").submit();
+		 console("성공"); 
+	}
+
+	
+	
+</script>
 
 </body>
 </html>

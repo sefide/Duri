@@ -66,9 +66,10 @@
 			<colgroup>
 				<col style="width:6%;"><!-- No -->
 				<col style="width:15%;"><!--  -->
-				<col style="width:25%;"><!--  -->
 				<col style="width:15%;"><!--  -->
-				<col style="width:20%;"><!--  -->
+				<col style="width:15%;"><!--  -->
+				<col style="width:15%;"><!--  -->
+				<col style="width:15%;"><!--  -->
 			</colgroup>
 			<thead>
 			<tr>
@@ -85,7 +86,7 @@
 				<c:forEach items="${directFundList}" var="directList">
 					<tr>
 						<td><c:out value="${directList.rnum}"/></td>
-						<td><c:out value="${directList.dh_name_give}&nbsp;님" escapeXml="false"/></td>
+						<td><c:out value="${directList.dh_nick_give}&nbsp;님" escapeXml="false"/></td>
 						<td><c:out value="${directList.dhvalue}원" escapeXml="false"/></td>
 						<td><c:out value="${directList.sum}원" escapeXml="false"/></td>
 						<td><c:out value="${directList.cnt}회" escapeXml="false"/></td>
@@ -103,6 +104,10 @@
 		</table>
 
 		<div class="numbox pt40 pb50"> 
+			<c:url var="firstList" value="longDonate.happy">
+				<c:param name="currentPage" value="${pi.startPage }"></c:param>
+			</c:url>
+			<span><a class="num" href="${firstList }">&lt;&lt;</a></span>
 			<c:if test="${pi.currentPage <= 1 }">
 			<span><a class="num" href="#">&lt;</a></span>
 			</c:if>
@@ -134,6 +139,10 @@
 				</c:url>
 				<span><a class="num" href="${ listEnd}">&gt;</a></span>
 			</c:if>
+			<c:url var="endList" value="longDonate.happy">
+				<c:param name="currentPage" value="${pi.endPage }"></c:param>
+			</c:url>
+			<span><a class="num" href="${endList }">&gt;&gt;</a></span>
 		</div>
 		
 		

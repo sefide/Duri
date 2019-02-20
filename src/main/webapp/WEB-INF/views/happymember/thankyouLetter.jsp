@@ -53,9 +53,14 @@
 			<!-- 감사편지 쓰기 : 나눔두리 이름 -->
 			<div style="float: left;">
 				&nbsp;<button class="ui button">나눔두리님</button>&nbsp;&nbsp;
-				<div class="ui input" style="width: 330px;">
+				<select class="ui search dropdown">
+				<c:forEach items="" var="">
+				  <option value=""><c:out value=""></c:out></option>
+				 </c:forEach>
+				</select>
+				<!-- <div class="ui input" style="width: 330px;">
 					<input type="text" placeholder="감사편지를 전할 나눔두리님의 이름을 써주세요.">
-				</div>
+				</div> -->
 				<!-- 나눔두리~제목 사이 여백 -->
 				<div style="width: 90px; float: left;"></div>
 			</div>
