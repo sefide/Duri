@@ -10,6 +10,7 @@ import com.kh.duri.Nanummember.model.vo.FundItem;
 import com.kh.duri.Nanummember.model.vo.Funding;
 import com.kh.duri.Nanummember.model.vo.Letter;
 import com.kh.duri.Nanummember.model.vo.PageInfo;
+import com.kh.duri.Nanummember.model.vo.QnA;
 import com.kh.duri.Nanummember.model.vo.SelectDirectFund;
 import com.kh.duri.member.model.vo.Member;
 
@@ -35,6 +36,12 @@ public interface NanumMemberService {
 	HashMap<String, List<FundInterest>> selectLikeFundList(Member m, HashMap<String, PageInfo> paging) throws NanumException;
 	//종료된 물품 크라우드 펀딩 - 물품 가져오기
 	HashMap<String, FundItem> selectEndItem(Member m, int fno) throws NanumException;
+	//QnA 개수 가져오기
+	int getQnAListCount(Member m) throws NanumException;
+	//QnA 목록 가져오기
+	List<QnA> selectQnAList(Member m, PageInfo pi) throws NanumException;
+	//QnA 상세 가져오기
+	List<QnA> selectQnADetail(int qNo) throws NanumException;
 	
 	
 	

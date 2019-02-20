@@ -100,55 +100,61 @@ td {
 	</div>
 	
 	<!-- QnA 내용 -->
-	<c:forEach items="${QnADetail}" var="QnADetail">
+	
 	<div class="QnA-nocie">
-		<div id="myTitle"><i class="question icon"></i>QnA 상세보기</div>
+		<div id="myTitle"><i class="question icon"></i>QnA 등록하기</div>
 	</div>
 	<div class="QnA-list">
 		<table class="listTable">
 			<tr>
 				<td class="tableTitle">제목</td>
-				<td colspan="3" style=""><c:out value="${QnADetail.qTitle}"/> </td>
+				<td  style="width: 100%;">
+				<div class="ui input" style="width: 90%;"><input type="text" placeholder="제목을 입력하여 주세요" maxlength="49" id="qTitle"></div></td>
 			</tr>
-			<tr>
+			<%-- <tr>
 				<td class="tableTitle">작성자</td>
-				<td><c:out value="${QnADetail.mNick}"/></td>
+				<td></td>
 				<td class="tableTitle">작성일</td>
 				<td><c:out value="${QnADetail.qDate}"/></td>
-			</tr>
+			</tr> --%>
 			<tr>
 				<td class="tableTitle">내용</td>
 			</tr>
 			<tr>
-				<td colspan="4"><textarea rows="8" cols="150"><c:out value="${QnADetail.qContent}"/></textarea> </td>
+				<td colspan="2"><textarea rows="8" cols="150" placeholder="내용을 입력하여 주세요"  onKeyup="len_chk()" name="qCont"></textarea> </td>
 			</tr>			
 		</table>
 	</div>
 	
-	<!-- 댓글 내용 -->
-	<div class="QnA-nocie">
-		<div id="myTitle" style="margin-bottom: 0px;"><i class="lightbulb outline icon"></i>두리두리 답변</div>
-	</div>
-	<div class="QnA-list">
-		<table class="answerTable">
-			<tr>
-				<td class="tableTitle">두리두리 답변</td>
-			</tr>
-			<tr>
-				<td></td>
-			</tr>
-		</table>
-	</div>
 	
 	<div align="center" style="margin-top: 80px;"> 
-	<button onclick="location.href='QnAList.nanum'"  
-		class="ui orange basic button"  style="font-size: 20px; margin-right : 10px;">목록으로 되돌아가기</button>
-	<%-- <c:out value="${sessionScope.loginUser2.mno }"/> --%>
-	<c:if test="${ sessionScope.loginUser2.mno eq QnADetail.q_mNo}"> 
-	<button 
-		class="ui orange basic button" style="font-size: 20px; margin-left : 10px;">삭제하기</button>
-	</c:if>	
+	<button onclick="#"  
+		class="ui orange basic button"  style="font-size: 20px; margin-right : 10px;">등록하기</button>
 	</div>
-	</c:forEach>
+	<script>
+	//제목 50자 미만
+	$(document).ready(function(){
+	    $('#qTitle').keyup(function(){
+	        if ($(this).val().length > $(this).attr('maxlength')) {
+	            alert('제목은 50자 미만까지만 쓰실수 있습니당!');
+	            $(this).val($(this).val().substr(0, $(this).attr('maxlength')));
+	        }
+	    });
+	});
+	//내용 790자 미만
+	function len_chk(){  
+  		/* var frm = document.qCont; */   
+  		 var frm = $("textarea[name='qCont']");
+
+  		if(frm.value.length > 1580){  
+       	alert("글자수는 한글790자로 제한됩니다.!");  
+       	frm.value = frm.value.substring(0,1580);  
+       	frm.focus();  } 
+  		} 
+	
+</script>
+
+
+
 </body>
 </html>

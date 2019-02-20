@@ -25,6 +25,7 @@ import com.kh.duri.Nanummember.model.vo.Funding;
 import com.kh.duri.Nanummember.model.vo.Letter;
 import com.kh.duri.Nanummember.model.vo.PageInfo;
 import com.kh.duri.Nanummember.model.vo.Pagination;
+import com.kh.duri.Nanummember.model.vo.QnA;
 import com.kh.duri.Nanummember.model.vo.SelectDirectFund;
 import com.kh.duri.member.model.vo.Member;
 
@@ -74,10 +75,10 @@ public class NanumController {
 			int itemCount = cloudCount.get("itemCount");
 			int endItemCount = cloudCount.get("endItemCount");
 			//페이징			
-			PageInfo pi = Pagination.getPageInfo(currentPage, moneyCount);
-			PageInfo pi2 = Pagination.getPageInfo(currentPage2, moneyCount);
-			PageInfo pi3 = Pagination.getPageInfo(currentPage3, itemCount);
-			PageInfo pi4 = Pagination.getPageInfo(currentPage4, endItemCount);
+			PageInfo pi = Pagination.getPageInfo(currentPage, moneyCount, 3);
+			PageInfo pi2 = Pagination.getPageInfo(currentPage2, moneyCount, 3);
+			PageInfo pi3 = Pagination.getPageInfo(currentPage3, itemCount, 3);
+			PageInfo pi4 = Pagination.getPageInfo(currentPage4, endItemCount, 3);
 			HashMap<String, PageInfo> paging = new HashMap<>();
 			paging.put("pi", pi);
 			paging.put("pi2", pi2);
@@ -104,8 +105,8 @@ public class NanumController {
 					/*endItem.put(fno, ingItem);*/
 			}
 			}
-			System.out.println("itemList : "+itemList);
-			System.out.println("endItemList : "+endItemList);
+			/*System.out.println("itemList : "+itemList);
+			System.out.println("endItemList : "+endItemList);*/
 			
 			model.addAttribute("moneyList",moneyList);
 			model.addAttribute("pi",pi);
@@ -139,8 +140,8 @@ public class NanumController {
 			fundCount = ns.getFundCount(m);	 //정기후원 개수 가져오기 	
 			int fundIng = fundCount.get("fundIng"); 
 			int fundEnd = fundCount.get("fundEnd"); 
-			PageInfo pi = Pagination.getPageInfo(currentPage, fundIng);
-			PageInfo pi2 = Pagination.getPageInfo(currentPage2, fundEnd);		
+			PageInfo pi = Pagination.getPageInfo(currentPage, fundIng, 3);
+			PageInfo pi2 = Pagination.getPageInfo(currentPage2, fundEnd, 3);		
 			HashMap<String, PageInfo> paging = new HashMap<>();
 			paging.put("pi", pi);
 			paging.put("pi2", pi2);
@@ -186,10 +187,10 @@ public class NanumController {
 			int endFundLetterCount = letterCount.get("endFundLetterCount");
 			int moneyCloudLetterCount = letterCount.get("moneyCloudLetterCount");
 			int itemCloudLetterCount = letterCount.get("itemCloudLetterCount");
-			PageInfo pi = Pagination.getPageInfo(currentPage, fundLetterCount); 
-			PageInfo pi2 = Pagination.getPageInfo(currentPage2, endFundLetterCount); 
-			PageInfo pi3 = Pagination.getPageInfo(currentPage3, moneyCloudLetterCount);
-			PageInfo pi4 = Pagination.getPageInfo(currentPage4, itemCloudLetterCount);
+			PageInfo pi = Pagination.getPageInfo(currentPage, fundLetterCount, 3); 
+			PageInfo pi2 = Pagination.getPageInfo(currentPage2, endFundLetterCount, 3); 
+			PageInfo pi3 = Pagination.getPageInfo(currentPage3, moneyCloudLetterCount, 3);
+			PageInfo pi4 = Pagination.getPageInfo(currentPage4, itemCloudLetterCount, 3);
 			HashMap<String, PageInfo> paging = new HashMap<>();
 			paging.put("pi", pi);
 			paging.put("pi2", pi2);
@@ -222,12 +223,10 @@ public class NanumController {
 	@RequestMapping("mypageLetterDetail.nanum")
 	public String Total11(Model model, HttpServletRequest request, HttpServletResponse response) {
 		int leNo = Integer.parseInt(request.getParameter("leNo"));
-		System.out.println("leNo"+leNo);
 		
 		try {
 			List<Letter> letterDetailList = ns.selectLetterDetailList(leNo);
 			model.addAttribute("letterDetailList",letterDetailList);		
-			System.out.println("letterDetailList"+letterDetailList);
 			return "Nanummember/mypage/mypage_letterDetail";
 			
 		} catch (NanumException e) {
@@ -258,9 +257,9 @@ public class NanumController {
 			int likeDirectCount = likeListCount.get("likeDirectCount");
 			int likeMoneyCount = likeListCount.get("likeMoneyCount");		
 			int likeItemCount = likeListCount.get("likeItemCount");
-			PageInfo pi = Pagination.getPageInfo(currentPage, likeDirectCount);
-			PageInfo pi2 = Pagination.getPageInfo(currentPage2, likeMoneyCount);
-			PageInfo pi3 = Pagination.getPageInfo(currentPage3, likeItemCount);
+			PageInfo pi = Pagination.getPageInfo(currentPage, likeDirectCount, 3);
+			PageInfo pi2 = Pagination.getPageInfo(currentPage2, likeMoneyCount, 3);
+			PageInfo pi3 = Pagination.getPageInfo(currentPage3, likeItemCount, 3);
 			HashMap<String, PageInfo> paging = new HashMap<>();
 			paging.put("pi", pi);
 			paging.put("pi2", pi2);
@@ -287,19 +286,44 @@ public class NanumController {
 		
 	}
 	
+	//QnA 목록 조회
 	@RequestMapping("QnAList.nanum")
-	public String Total8() {
-		return "Nanummember/QnA_list";
+	public String selectQnaList(Model model, HttpServletRequest request, HttpServletResponse response) {
+		Member m = (Member)request.getSession().getAttribute("loginUser2");
+		int currentPage = 1;
+		if(request.getParameter("currentPage") != null) {
+			currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		} 	 		
+		try {
+			int QnAListCount = ns.getQnAListCount(m);
+			PageInfo pi = Pagination.getPageInfo(currentPage, QnAListCount, 10);
+			List<QnA> QnAList =  ns.selectQnAList(m,pi);	//QnA 목록 가져오기 				
+			model.addAttribute("QnAList",QnAList);
+			model.addAttribute("pi",pi);
+			return "Nanummember/QnA_list";			
+		} catch (NanumException e) {
+			e.printStackTrace();
+			return "Nanummember/QnA_list";
+		}
+	}
+	//QnA 상세 조회
+	@RequestMapping("QnADetail.nanum")
+	public String selectQnADetail(Model model, HttpServletRequest request, HttpServletResponse response) {
+		int qNo = Integer.parseInt(request.getParameter("qNo"));	
+		List<QnA> QnADetail;
+		try {
+			QnADetail = ns.selectQnADetail(qNo);
+			model.addAttribute("QnADetail", QnADetail);
+			return "Nanummember/QnA_detail";
+		} catch (NanumException e) {
+			e.printStackTrace();
+			return "Nanummember/QnA_detail";
+		}
 	}
 	
 	@RequestMapping("QnAInsert.nanum")
 	public String Total9() {
 		return "Nanummember/QnA_insert";
-	}
-	
-	@RequestMapping("QnADetail.nanum")
-	public String Total10() {
-		return "Nanummember/QnA_detail";
 	}
 	
 	@RequestMapping("updateInfo.nanum")

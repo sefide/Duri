@@ -15,6 +15,7 @@ import com.kh.duri.Nanummember.model.vo.FundItem;
 import com.kh.duri.Nanummember.model.vo.Funding;
 import com.kh.duri.Nanummember.model.vo.Letter;
 import com.kh.duri.Nanummember.model.vo.PageInfo;
+import com.kh.duri.Nanummember.model.vo.QnA;
 import com.kh.duri.Nanummember.model.vo.SelectDirectFund;
 import com.kh.duri.member.model.vo.Member;
 
@@ -85,6 +86,24 @@ public class NanumMemberServiceImpl implements NanumMemberService {
 	public HashMap<String, FundItem> selectEndItem(Member m, int fno) throws NanumException {
 		 HashMap<String, FundItem> endItem = nd.selectEndItem(sqlSession,m,fno);
 		return endItem;
+	}
+	//QnA 개수 가져오기
+	@Override
+	public int getQnAListCount(Member m) throws NanumException {
+		int QnAListCount = nd.getQnAListCount(sqlSession,m);
+		return QnAListCount;
+	}
+	//QnA 목록 가져오기
+	@Override
+	public List<QnA> selectQnAList(Member m, PageInfo pi) throws NanumException {
+		List<QnA> QnAList = nd.selectQnAList(sqlSession,pi,m);
+		return QnAList;
+	}
+	//QnA 상세 가져오기
+	@Override
+	public List<QnA> selectQnADetail(int qNo) throws NanumException {
+		List<QnA> QnADetail = nd.selectQnADetail(sqlSession,qNo);
+		return QnADetail;
 	}
 	
 	

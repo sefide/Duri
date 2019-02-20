@@ -112,7 +112,7 @@ tr:hover{
 							<li><a href="#">&lt;</a></li>
 							</c:if>
 							<c:if test="${ pi.currentPage > 1 }">
-								<c:url var="blistBack" value="mypage.nanum">
+								<c:url var="blistBack" value="mypageLetter.nanum">
 									<c:param name="currentPage" value="${ pi.currentPage - 1}"/>
 								</c:url>
 								<li><a href="${ blistBack }">&lt;</a></li>
@@ -123,7 +123,7 @@ tr:hover{
 									<li class="active"><a class="active" href="${ blistCheck }">${ p }</a></li>
 								</c:if>
 								<c:if test="${ p != pi.currentPage }">
-									<c:url var="blistCheck" value="mypage.nanum">
+									<c:url var="blistCheck" value="mypageLetter.nanum">
 										<c:param name="currentPage" value="${p}"/>									
 									</c:url>
 									 <li><a href="${ blistCheck }">${ p }</a></li> 									
@@ -134,7 +134,7 @@ tr:hover{
 								<li><a href="#">&gt;</a></li>
 							</c:if>
 							<c:if test="${ pi.currentPage < pi.maxPage }">
-								<c:url var="blistEnd" value="mypage.nanum">
+								<c:url var="blistEnd" value="mypageLetter.nanum">
 									<c:param name="currentPage" value="${ pi.currentPage + 1}"/>
 								</c:url>
 								<li><a href="${ blistEnd }">&gt;</a></li>
@@ -176,7 +176,7 @@ tr:hover{
 							<li><a href="#">&lt;</a></li>
 							</c:if>
 							<c:if test="${ pi2.currentPage > 1 }">
-								<c:url var="blistBack" value="mypage.nanum">
+								<c:url var="blistBack" value="mypageLetter.nanum">
 									<c:param name="currentPage" value="${ pi2.currentPage - 1}"/>
 								</c:url>
 								<li><a href="${ blistBack }">&lt;</a></li>
@@ -187,7 +187,7 @@ tr:hover{
 									<li class="active"><a class="active" href="${ blistCheck }">${ p }</a></li>
 								</c:if>
 								<c:if test="${ p != pi2.currentPage }">
-									<c:url var="blistCheck" value="mypage.nanum">
+									<c:url var="blistCheck" value="mypageLetter.nanum">
 										<c:param name="currentPage" value="${p}"/>									
 									</c:url>
 									 <li><a href="${ blistCheck }">${ p }</a></li> 									
@@ -198,7 +198,7 @@ tr:hover{
 								<li><a href="#">&gt;</a></li>
 							</c:if>
 							<c:if test="${ pi2.currentPage < pi2.maxPage }">
-								<c:url var="blistEnd" value="mypage.nanum">
+								<c:url var="blistEnd" value="mypageLetter.nanum">
 									<c:param name="currentPage" value="${ pi2.currentPage + 1}"/>
 								</c:url>
 								<li><a href="${ blistEnd }">&gt;</a></li>
@@ -241,7 +241,7 @@ tr:hover{
 							<li><a href="#">&lt;</a></li>
 							</c:if>
 							<c:if test="${ pi3.currentPage > 1 }">
-								<c:url var="blistBack" value="mypage.nanum">
+								<c:url var="blistBack" value="mypageLetter.nanum">
 									<c:param name="currentPage" value="${ pi3.currentPage - 1}"/>
 								</c:url>
 								<li><a href="${ blistBack }">&lt;</a></li>
@@ -252,7 +252,7 @@ tr:hover{
 									<li class="active"><a class="active" href="${ blistCheck }">${ p }</a></li>
 								</c:if>
 								<c:if test="${ p != pi3.currentPage }">
-									<c:url var="blistCheck" value="mypage.nanum">
+									<c:url var="blistCheck" value="mypageLetter.nanum">
 										<c:param name="currentPage" value="${p}"/>									
 									</c:url>
 									 <li><a href="${ blistCheck }">${ p }</a></li> 									
@@ -263,7 +263,7 @@ tr:hover{
 								<li><a href="#">&gt;</a></li>
 							</c:if>
 							<c:if test="${ pi3.currentPage < pi3.maxPage }">
-								<c:url var="blistEnd" value="mypage.nanum">
+								<c:url var="blistEnd" value="mypageLetter.nanum">
 									<c:param name="currentPage" value="${ pi3.currentPage + 1}"/>
 								</c:url>
 								<li><a href="${ blistEnd }">&gt;</a></li>
@@ -306,7 +306,7 @@ tr:hover{
 							<li><a href="#">&lt;</a></li>
 							</c:if>
 							<c:if test="${ pi4.currentPage > 1 }">
-								<c:url var="blistBack" value="mypage.nanum">
+								<c:url var="blistBack" value="mypageLetter.nanum">
 									<c:param name="currentPage" value="${ pi4.currentPage - 1}"/>
 								</c:url>
 								<li><a href="${ blistBack }">&lt;</a></li>
@@ -317,7 +317,7 @@ tr:hover{
 									<li class="active"><a class="active" href="${ blistCheck }">${ p }</a></li>
 								</c:if>
 								<c:if test="${ p != pi4.currentPage }">
-									<c:url var="blistCheck" value="mypage.nanum">
+									<c:url var="blistCheck" value="mypageLetter.nanum">
 										<c:param name="currentPage" value="${p}"/>									
 									</c:url>
 									 <li><a href="${ blistCheck }">${ p }</a></li> 									
@@ -328,7 +328,7 @@ tr:hover{
 								<li><a href="#">&gt;</a></li>
 							</c:if>
 							<c:if test="${ pi4.currentPage < pi4.maxPage }">
-								<c:url var="blistEnd" value="mypage.nanum">
+								<c:url var="blistEnd" value="mypageLetter.nanum">
 									<c:param name="currentPage" value="${ pi4.currentPage + 1}"/>
 								</c:url>
 								<li><a href="${ blistEnd }">&gt;</a></li>
@@ -418,7 +418,6 @@ tr:hover{
 		//편지 상세 보기로 가기
 		function goLetterDetail(leNo) {	
 			var leNo = leNo ;
-			console.log(leNo);
 			location.href="mypageLetterDetail.nanum?leNo="+leNo;
 		}
 		
