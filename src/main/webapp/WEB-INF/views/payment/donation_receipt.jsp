@@ -248,19 +248,36 @@
 	    			<% 
 	    			beforeDate = format.parse((String)pageContext.getAttribute("now")); 
 	    			%>
-				
-	    			<c:forEach var="dr" items="${drList}">
+					
+	    			<c:forEach var="dr" items="${drList}" varStatus="status">
 	    				<fmt:formatDate var="newDate" type = "date" value="${dr.drApplyDate}" pattern="yyyy-MM"/>
 	    				<c:set var ="Applydate" value = "${newDate}"/>
 	    				<% newDate = format.parse((String)pageContext.getAttribute("newDate")); 
-	    				
-	    				if(newDate.compareTo(beforeDate) < 0){%>
+	    				System.out.println("허 : " +newDate.compareTo(beforeDate));%>
+	    				<c:if test = "${ status.index eq 0}">
+		    				<div id = "month01">
+							<div class = "month-view">
+		    					<div class = "month-bar-left"></div>
+		    					<div class = "month">${newDate}</div>
+		    					<div class = "month-bar-right"></div>
+		    				</div>
+		    				<div class = "cont-view">
+	    					<table>
+	    						<tr class = "thth">
+	    							<th>No</th>
+	    							<th>기부자명</th>
+	    							<th>기부금액</th>
+	    							<th>기부일시</th>
+	    							<th>발급 신청일</th>
+	    						</tr>
+	    				</c:if>	
+	    				<%if(newDate.compareTo(beforeDate) < 0){%>
 	    				<c:if test = "${ dr.rnum != 1}">
 		    					</table>
 			    				</div>
 			    			</div>
 	    				</c:if>	
-	    						
+	    				<c:if test = "${ status.index ne 0}">	
 	    				<div id = "month01">
 							<div class = "month-view">
 		    					<div class = "month-bar-left"></div>
@@ -276,7 +293,7 @@
 	    							<th>기부일시</th>
 	    							<th>발급 신청일</th>
 	    						</tr>
-	    				
+	    				</c:if>
 	    				<% } %>
 	    						<tr class = "">
 	    							<td>${dr.rnum}</td>

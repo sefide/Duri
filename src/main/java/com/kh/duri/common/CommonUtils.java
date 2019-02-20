@@ -11,7 +11,7 @@ public class CommonUtils {
 		
 		// 3분 뒤 (test용)
 		cal.add(Calendar.MINUTE, 3);
-		cal.add(Calendar.DATE, 60);
+		//cal.add(Calendar.DATE, 60);
 		// 한달 뒤
 		//cal.add(Calendar.MONTH, 1);
 		

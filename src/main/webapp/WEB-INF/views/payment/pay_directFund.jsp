@@ -550,7 +550,7 @@
 			    merchant_uid: 'merchant_' + new Date().getTime(), // 빌링키 발급용 주문번호
 			    customer_uid: mno + randomUid, // 카드(빌링키)와 1:1로 대응하는 값
 			    name: "최초인증결제",
-			    amount: 0, // 0 으로 설정하여 빌링키 발급만 진행합니다.
+			    amount: price, // 0 으로 설정하여 빌링키 발급만 진행합니다.
 			    buyer_email: email,
 			    buyer_name: name,
 			    buyer_tel: "010-7630-9011"
@@ -575,7 +575,7 @@
 			                merchant_uid : 'merchant_' + new Date().getTime(),
 			                amount : 100
 			            }
-			        }); 
+			        });  
 			        
 			        $.ajax({
 			            url: "subscribeDirectFund.pm", // 정기결제 예약 서버
@@ -592,6 +592,13 @@
 			            }
 			        });
 			        
+			        location.href = "goSuccessPage.pm";
+			      /*   location.href = "directFundGetToken.pm?customer_uid="+ mno + randomUid + "&imp_uid=" + rsp.imp_uid + "&merchant_uid="+ 'merchant_' + new Date().getTime()
+			        		+ "&amount=" + 100;
+			        
+			        location.href = "subscribeDirectFund.pm?customer_uid="+ mno + randomUid + "&imp_uid=" + rsp.imp_uid + "&merchant_uid="+ 'merchant_' + new Date().getTime()+'_sub'
+	        		+ "&amount=" + 100 + "&giveMember=" + mno + "&takeMember=" + tmno + "&type=" + type + "&price=" + price; */
+			      /*   */
 			    } else {
 			        // 빌링키 발급 실패
 			    	console.log("빌링키 발급 실패");

@@ -57,7 +57,7 @@
     <section class="ftco-section">
     	<div class="container">
     		<div align = "center">
-    			<img src = "../../resources/images/duri_logo.png" width = "300px;" alt= "duri_logo">
+    			<img src = "resources/common/images/nanum_logo.png" width = "300px;" alt= "duri_logo">
     			<div id = "msgHappy">" 나눔두리의 소중한 마음으로 놀라운 변화가 일어납니다. "</div>
     			
     			<div id = "msgBox">

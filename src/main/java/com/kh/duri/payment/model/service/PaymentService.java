@@ -1,5 +1,6 @@
 package com.kh.duri.payment.model.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -15,6 +16,7 @@ import com.kh.duri.payment.model.exception.ReceiptException;
 import com.kh.duri.payment.model.exception.RefundException;
 import com.kh.duri.payment.model.vo.DirectFundHist;
 import com.kh.duri.payment.model.vo.DonateReceipt;
+import com.kh.duri.payment.model.vo.FundItemDetail;
 import com.kh.duri.payment.model.vo.PageInfo;
 import com.kh.duri.payment.model.vo.Payment;
 import com.kh.duri.payment.model.vo.Point;
@@ -68,6 +70,9 @@ public interface PaymentService {
 	
 	// 물품 후원 결제페이지 - 펀딩정보 select
 	HashMap<String, Object> selectFundItem(BoardItem bi) throws FundingException;
+	
+	// 물품 후원 진행 - 펀딩내역 insert
+	Member insertFundItemHistory(FundHistory fh, ArrayList<FundItemDetail> fhdList, String check, String fWriter, int isGoal);
 
 	
 		
