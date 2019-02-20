@@ -96,6 +96,17 @@
 		<result property="rnum" column="RNUM"/>
 	</resultMap>
 	
+	<resultMap type="com.kh.duri.happymember.model.vo.Qna" id="happyQnaResultSet">
+		<id property="qno" column="QNO"></id>
+		<result property="qdate" column="QDATE"/>
+		<result property="qtitle" column="QTITLE"/>
+		<result property="qcontent" column="QCONTENT"/>
+		<result property="qanswer" column="QANSWER"/>
+		<result property="qwriter" column="QWRITER"/>
+		<result property="q_mno" column="Q_MNO"/>
+		<result property="rnum" column="RNUM"/>
+	</resultMap>
+	
 	<!-- 보유물품 리스트 조회-->
 	<select id="selectDonateItemList" resultMap="donateItemsResultSet" parameterType="_int">
 		SELECT * 
@@ -179,6 +190,29 @@
 			AND FTYPE = 'ITEM' 
 			ORDER BY FNO DESC)
 		ORDER BY FNO DESC
+	</select>
+	<!-- 금액후원 목록 개수 조회 -->
+	<select id="selectMoneyDonateCount" resultType="_int">
+		SELECT COUNT(*) 
+		FROM FUNDING
+		WHERE FWRITER = #{mno} 
+		AND FTYPE = 'MONEY'
+	</select>
+	<!-- 금액후원 목록 조회 -->
+	<select id="selectMoneyDonateList" resultMap="happyFundingResultSet" parameterType="Funding">
+		SELECT DISTINCT ROWNUM RNUM, FNO, FTITLE, FCONTENT, FVALUE, FSTARTDATE, FENDDATE, FSTATUS 
+		FROM (SELECT FNO, FTITLE, FCONTENT, FVALUE, FSTARTDATE, FENDDATE, FSTATUS 
+			FROM FUNDING 
+			WHERE FWRITER = #{mno} 
+			AND FTYPE = 'MONEY' 
+			ORDER BY FNO DESC)
+	</select>
+	<!-- Q&A 목록 개수 조회 -->
+	<select id="selectQnaListCount" resultType="_int">
+		SELECT COUNT(*) 
+		FROM QNA 
+		WHERE QWRITER = 'H' 
+		AND Q_MNO = #{mno}
 	</select>
 </mapper>
 

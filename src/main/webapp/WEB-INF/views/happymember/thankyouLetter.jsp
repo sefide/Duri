@@ -19,7 +19,7 @@
 	.textOrange {color: orange; font-weight: 600;} */
 </style>
 
-<title>감사편지 쓰기</title>
+<title>마이페이지>감사편지 쓰기</title>
 <!-- 감사편지 쓰기 -->
 
 </head>

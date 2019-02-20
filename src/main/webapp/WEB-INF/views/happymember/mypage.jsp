@@ -61,9 +61,9 @@
 		<table class="boardList mt30">
 			<colgroup>
 				<col style="width:6%;"><!-- No -->
-				<col style="width:8%;"><!--  -->
-				<col style="width:20%;"><!--  -->
 				<col style="width:10%;"><!--  -->
+				<col style="width:20%;"><!--  -->
+				<col style="width:6%;"><!--  -->
 				<col style="width:13%;"><!--  -->
 				<col style="width:7%;"><!--  -->
 			</colgroup>
@@ -72,7 +72,7 @@
 				<th scope="col">No</th>
 				<th scope="col">제목</th>
 				<th scope="col">내용</th>
-				<th scope="col">물품명</th>
+				<th scope="col">신청물품</th>
 				<th scope="col">진행기간</th>
 				<th scope="col">진행상태</th>
 			</tr>
@@ -97,9 +97,6 @@
 					종료&nbsp;<i class="red circle icon"></i>&nbsp;&nbsp;
 					승인대기중&nbsp;<i class="yellow circle icon"></i>&nbsp;&nbsp;
 					목표달성종료&nbsp;<i class="blue circle icon"></i>
-					<!-- <img src="/duri/resources/HappyMyPage/images/status/ing.PNG" width="26px" height="25px" alt="진행중"> -->
-					<!-- <img src="/duri/resources/HappyMyPage/images/status/finish.PNG" width="23px" height="24px" alt="종료"> -->
-					<!-- <img src="/duri/resources/HappyMyPage/images/status/wating.PNG" width="22px" height="24px" alt="승인대기중"> -->
 				</h4>
 			</div>
 			<span>마이페이지 &gt; 내 사연 &gt; 금액 후원 현황</span>
@@ -111,40 +108,29 @@
 		<table class="boardList mt30">
 			<colgroup>
 				<col style="width:6%;"><!-- No -->
-				<col style="width:14%;"><!--  -->
-				<col style="width:30%;"><!--  -->
-				<col style="width:15%;"><!--  -->
 				<col style="width:10%;"><!--  -->
+				<col style="width:20%;"><!--  -->
+				<col style="width:6%;"><!--  -->
+				<col style="width:13%;"><!--  -->
+				<col style="width:7%;"><!--  -->
 			</colgroup>
 			<thead>
 			<tr>
 				<th scope="col">No</th>
 				<th scope="col">제목</th>
 				<th scope="col">내용</th>
-				<th scope="col">기간</th>
+				<th scope="col">목표금액</th>
+				<th scope="col">진행기간</th>
 				<th scope="col">진행상태</th>
 			</tr>
 			</thead>
-			<tbody>
-			<tr>
-				<td>1</td>
-				<td>수학공부 잘 하고 싶어요</td>
-				<td class="tleft"><a href="cloudMoneyDetail.happy">제 꿈은 수학자입니다. 그런데 교과서 살 돈이 모자라서 늘 짝꿍 책을 같이 보다..</a></td>
-				<td>2018-11-04 ~ 2019-01-04</td>
-				<td><!-- <img src="/duri/resources/HappyMyPage/images/status/ing.PNG" width="25px" height="25px" alt="진행중"></td> -->
-					<i class="green circle icon" alt="진행중"></i>
-			</tr>
+			<tbody id="moneyTbody">
+				<!-- moneyTable() ajax 페이징 -->
 			</tbody>
 		</table>
 
-		<div class="numbox pt40 pb50"> 
-			<span><a class="num" href="#">&lt;</a></span>
-			<span><a class="num on" href="#">1</a></span>
-			<span><a class="num" href="#">2</a></span>
-			<span><a class="num" href="#">3</a></span>
-			<span><a class="num" href="#">4</a></span>
-			<span><a class="num" href="#">5</a></span>
-			<span><a class="num" href="#">&gt;</a></span>
+		<div class="numbox pt40 pb50" id="moneyPageArea"> 
+			<!-- moneyTable() ajax 페이징 -->
 		</div>
 		
 		<div style="height: 100px;"></div>
@@ -166,6 +152,7 @@
 <script>
 	
 	//물품후원 목록 조회
+	var currentPage = 1;
 	function itemTable(currentPage){
 		/* console.log("currentPage는? : " + currentPage); */
 		
@@ -174,8 +161,8 @@
 			type:"get",
 			data:{currentPage:currentPage},
 			success:function(data){
-				/* console.log("리스트 : " + data.itemDonateList[0].fitemname);
-				console.log("페이징 : " + data.pi.startPage); */
+				 console.log("리스트 : " + data.itemDonateList.length);
+				/*console.log("페이징 : " + data.pi.startPage); */
 		      
 				
 				//테이블 리스트 띄우기
@@ -189,22 +176,30 @@
 			        startDate = sd.getFullYear() + '-' + ('0' + (sd.getMonth() + 1)).slice(-2) + '-' + ('0' + (sd.getDate())).slice(-2);
 			        endDate = ed.getFullYear() + '-' + ('0' + (ed.getMonth() + 1)).slice(-2) + '-' + ('0' + (ed.getDate())).slice(-2);
 			        //제목,내용 길이 제한
-					var title = (data.itemDonateList[i].ftitle).substring(0, 11);
-					var content = (data.itemDonateList[i].fcontent).substring(0, 25);
+					var title = (data.itemDonateList[i].ftitle).substring(0, 10);
+					var content = (data.itemDonateList[i].fcontent).substring(0, 30);
+					var item = (data.itemDonateList[i].fitemname).substring(0, 8);
 					
-			        itemTbodyHtml.push('<tr>');
+			
+					itemTbodyHtml.push('<tr>');
 					itemTbodyHtml.push('<td>'+data.itemDonateList[i].rnum+'</td>');
-				if(data.itemDonateList[i].ftitle.length > 11){
+				if(data.itemDonateList[i].ftitle.length > 10){
 					itemTbodyHtml.push('<td>'+title+'...</td>');
 				}else{
 					itemTbodyHtml.push('<td>'+data.itemDonateList[i].ftitle+'</td>');
 				}
-				if(data.itemDonateList[i].fcontent.length > 25){
+				
+				if(data.itemDonateList[i].fcontent.length > 30){
 					itemTbodyHtml.push('<td><a href="cloudThingDetail.happy">'+content+'...</a></td>');
 				}else{
 					itemTbodyHtml.push('<td><a href="cloudThingDetail.happy">'+data.itemDonateList[i].fcontent+'</a></td>');
 				}	
+				if(data.itemDonateList[i].fitemname.length > 8){
+					itemTbodyHtml.push('<td>'+item+'...</td>');
+				}else{
 					itemTbodyHtml.push('<td>'+data.itemDonateList[i].fitemname+'</td>');
+				}
+				
 					itemTbodyHtml.push('<td>'+startDate+'~'+endDate+'</td>');
 				if(data.itemDonateList[i].fstatus == 'ING'){
 					itemTbodyHtml.push('<td><i class="green circle icon" alt="진행중"></i></td>');
@@ -216,13 +211,18 @@
 					itemTbodyHtml.push('<td><i class="yellow circle icon" alt="승인전"></i></td>');
 				} 
 					itemTbodyHtml.push('</tr>');
+				
+			}	
+				if(data.itemDonateList.length == 0){
+					itemTbodyHtml.push('<tr>');
+					itemTbodyHtml.push('<td colspan="6"> 물품후원 신청 내역이 없습니다.</td>');
+					itemTbodyHtml.push('</tr>');
 				}
-	
-				$("#itemTbody").html("");//깨끗히 비우고
-				$("#itemTbody").append(itemTbodyHtml.join(''));//''를 기준으로push된거 넣기
-				
-				
-				
+
+					$("#itemTbody").html("");//깨끗히 비우고
+					$("#itemTbody").append(itemTbodyHtml.join(''));//''를 기준으로push된거 넣기
+					
+					
 				//페이징 처리
 				var itemTbodyPageHtml = [];	
 				var currentPage = data.pi.currentPage;
@@ -253,12 +253,12 @@
 				
 				$("#itemPageArea").html("");
 				$("#itemPageArea").append(itemTbodyPageHtml.join(''));
-				
+			
 			
 			},
 			error:function(data){
-				console.log("데이터 통신 실패");
-				alert("실패");
+				console.log("물품후원 페이징 통신 실패");
+				alert("물품후원 페이징 통신 실패");
 				
 				
 			}
@@ -266,13 +266,110 @@
 		});
 	}
 	
-	/* //금액후원 목록 조회
-	function moneyTable(){
+	//금액후원 목록 조회
+	function moneyTable(currentPage){
+		/* console.log("금액currentPage는?" + currentPage); */
 		
-	} */
+		$.ajax({
+			url:"moneyDonateList.happy",
+			type:"get",
+			data:{currentPage:currentPage},
+			success:function(data){
+				console.log("성공!");
+				
+				
+				//테이블 리스트 띄우기
+				var moneyTbodyHtml = [];//테이블 html 담을 배열생성
+				
+				for(var i = 0; i < data.moneyDonateList.length; i++){
+					//날짜변환
+					var sd = new Date(data.moneyDonateList[i].fstartdate);
+					var	ed = new Date(data.moneyDonateList[i].fenddate);
+			        var startDate = "";		var endDate = "";
+			        startDate = sd.getFullYear() + '-' + ('0' + (sd.getMonth() + 1)).slice(-2) + '-' + ('0' + (sd.getDate())).slice(-2);
+			        endDate = ed.getFullYear() + '-' + ('0' + (ed.getMonth() + 1)).slice(-2) + '-' + ('0' + (ed.getDate())).slice(-2);
+			        //제목,내용 길이 제한
+					var title = (data.moneyDonateList[i].ftitle).substring(0, 10);
+					var content = (data.moneyDonateList[i].fcontent).substring(0, 30);
+					
+					moneyTbodyHtml.push('<tr>');
+					moneyTbodyHtml.push('<td>'+data.moneyDonateList[i].rnum+'</td>');
+				if(data.moneyDonateList[i].ftitle.length > 10){
+					moneyTbodyHtml.push('<td>'+title+'...</td>');
+				}else{
+					moneyTbodyHtml.push('<td>'+data.moneyDonateList[i].ftitle+'</td>');
+				}
+				if(data.moneyDonateList[i].fcontent.length > 30){
+					moneyTbodyHtml.push('<td><a href="cloudThingDetail.happy">'+content+'...</a></td>');
+				}else{
+					moneyTbodyHtml.push('<td><a href="cloudThingDetail.happy">'+data.moneyDonateList[i].fcontent+'</a></td>');
+				}	
+					moneyTbodyHtml.push('<td>'+data.moneyDonateList[i].fvalue+'</td>');
+					moneyTbodyHtml.push('<td>'+startDate+'~'+endDate+'</td>');
+				if(data.moneyDonateList[i].fstatus == 'ING'){
+					moneyTbodyHtml.push('<td><i class="green circle icon" alt="진행중"></i></td>');
+				}else if(data.moneyDonateList[i].fstatus == 'END'){
+					moneyTbodyHtml.push('<td><i class="red circle icon" alt="기간종료"></i></td>');
+				}else if(data.moneyDonateList[i].fstatus == 'GOAL'){
+					moneyTbodyHtml.push('<td><i class="blue circle icon" alt="달성되어종료"></i></td>');
+				}else{
+					moneyTbodyHtml.push('<td><i class="yellow circle icon" alt="승인전"></i></td>');
+				} 
+					moneyTbodyHtml.push('</tr>');
+				
+			}	
+				if(data.moneyDonateList.length == 0){
+					moneyTbodyHtml.push('<tr>');
+					moneyTbodyHtml.push('<td colspan="6"> 금액후원 신청 내역이 없습니다.</td>');
+					moneyTbodyHtml.push('</tr>');
+				}
+
+					$("#moneyTbody").html("");//깨끗히 비우고
+					$("#moneyTbody").append(moneyTbodyHtml.join(''));//''를 기준으로push된거 넣기
+					
+					
+				//페이징 처리
+				var moneyTbodyPageHtml = [];	
+				var currentPage = data.pi.currentPage;
+				//<<, <버튼 만들기
+				moneyTbodyPageHtml.push('<span><a class="num" onclick="itemTable(1);">&lt;&lt;</a></span>');
+			if(currentPage <= 1){
+				moneyTbodyPageHtml.push('<span><a class="num" disabled>&lt;</a></span>');
+			}else{//1보다 큰 수의 페이지면
+				moneyTbodyPageHtml.push('<span><a class="num" onclick="itemTable('+(currentPage-1)+')">&lt;</a></span>');
+			}
+			
+				//숫자 버튼 만들기
+			for(var i = data.pi.startPage; i <= data.pi.endPage; i++ ){
+				if(i == currentPage){
+					moneyTbodyPageHtml.push('<span><a class="num on" disabled>'+i+'</a></span>');
+				}else{
+					moneyTbodyPageHtml.push('<span><a class="num" onclick="itemTable('+i+')">'+i+'</a></span>');
+				}
+			}
+				//>>, >버튼 만들기
+				if(currentPage >= data.pi.maxPage){
+					moneyTbodyPageHtml.push('<span><a class="num" disabled>&gt;</a></span>');
+				}else{
+					moneyTbodyPageHtml.push('<span><a class="num" onclick="itemTable('+(currentPage+1)+')">&gt;</a></span>');
+				}
+				moneyTbodyPageHtml.push('<span><a class="num" onclick="itemTable('+data.pi.maxPage+');">&gt;&gt;</a></span>');
+				
+				
+				$("#moneyPageArea").html("");
+				$("#moneyPageArea").append(moneyTbodyPageHtml.join(''));
+				
+			},
+			error:function(data){
+				console.log("금액후원 페이징 통신 실패");
+				alert("금액후원 페이징 통신 실패");
+			}
+		});
+	} 
 
 	$(function (){
 		itemTable(1);
+		moneyTable(1);
 	});
 
 </script>

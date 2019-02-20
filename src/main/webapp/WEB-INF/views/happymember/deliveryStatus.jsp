@@ -18,7 +18,7 @@
 	.textOrange {color: orange; font-weight: 600;}
 </style>
 
-<title>물품 배송현황</title>
+<title>마이페이지>물품 배송현황</title>
 <!--  배송현황 목록 -->
 </head>
 <body>

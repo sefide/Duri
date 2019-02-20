@@ -46,6 +46,15 @@ public interface HappymemberService {
 	//물품후원 목록 조회
 	List<Funding> selectItemDonateList(int mno, PageInfo pi) throws MypageException;
 
+	//금액후원 목록 개수 조회
+	int selectMoneyDonateCount(Member m) throws MypageException;
+
+	//금액후원 목록 조회
+	List<Funding> selectMoneyDonateList(Member m, PageInfo pi) throws MypageException;
+
+	//Q&A 목록 개수 조회
+	int selectQnaListCount(Member m) throws MypageException;
+
 
 	
 

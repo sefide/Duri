@@ -123,6 +123,30 @@ public class HappymemberServiceImpl implements HappymemberService {
 		return itemDonateList;
 	}
 
+	//금액후원 목록 개수 조회
+	@Override
+	public int selectMoneyDonateCount(Member m) throws MypageException {
+		int listCount = hd.selectMoneyDonateCount(sqlSession, m);
+		
+		return listCount;
+	}
+
+	//금액후원 목록 조회
+	@Override
+	public List<Funding> selectMoneyDonateList(Member m, PageInfo pi) throws MypageException {
+		List<Funding> moneyDonateList = hd.selectMoneyDonateList(sqlSession, m, pi);
+		
+		return moneyDonateList;
+	}
+
+	//Q&A 목록 개수 조회
+	@Override
+	public int selectQnaListCount(Member m) throws MypageException {
+		int listCount = hd.selectQnaListCount(sqlSession, m);
+		
+		return listCount;
+	}
+
 
 	
 

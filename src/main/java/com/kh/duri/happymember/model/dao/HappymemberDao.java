@@ -54,6 +54,15 @@ public interface HappymemberDao {
 	//물품후원 목록 조회
 	List<Funding> selectItemDonateList(SqlSessionTemplate sqlSession, int mno, PageInfo pi) throws MypageException;
 
+	//금액후원 목록 개수 조회
+	int selectMoneyDonateCount(SqlSessionTemplate sqlSession, Member m) throws MypageException;
+
+	//금액후원 목록 조회
+	List<Funding> selectMoneyDonateList(SqlSessionTemplate sqlSession, Member m, PageInfo pi) throws MypageException;
+
+	//Q&A 목록 개수 조회
+	int selectQnaListCount(SqlSessionTemplate sqlSession, Member m)throws MypageException;
+
 	
 
 	

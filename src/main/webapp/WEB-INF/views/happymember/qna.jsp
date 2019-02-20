@@ -18,7 +18,7 @@
 	.textOrange {color: orange; font-weight: 600;} */
 </style>
 
-<title>나의 문의내역</title>
+<title>마이페이지>나의 문의내역</title>
 <!-- Q&A -->
 </head>
 <body>
@@ -52,7 +52,6 @@
 		<br>
 		
 		<table class="boardList mt30">
-			<caption>문의내역 리스트입니다.</caption>
 			<colgroup>
 				<col style="width:6%;"><!-- No -->
 				<col style="width:17%;"><!--  -->
@@ -74,12 +73,6 @@
 				<td>증빙서류를 기간 내에 내지 못했어요</td>
 				<td class="tleft"><a href="qnaDetail.happy">안녕하세요! 증빙서류를 제 기간 내에 내지 못했습니다</a></td>
 				<td><i class="green circle icon" alt="답변완료"></i></td>
-			</tr>
-			<tr>
-				<td>2</td>
-				<td>동생도 같이 후원 받을 수 있나요?</td>
-				<td class="tleft"><a href="qnaDetail.happy">동생이 올 해에 11살이 되었습니다. 동생도 저와 같이 후원을 받을 수 있을까요?</a></td>
-				<td><i class="yellow circle icon" alt="답변 중"></i></td>
 			</tr>
 			</tbody>
 		</table>
