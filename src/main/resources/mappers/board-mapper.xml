@@ -11,6 +11,7 @@
 		<id property="fno" column="FNO"></id>
 		<result property="ftype" column="FTYPE"/>
 		<result property="fTitle" column="FTITLE"/>
+		<result property="fWriter" column="FWRITER"/>
 		<result property="fContent" column="FCONTENT"/>
 		<result property="fWriteDate" column="FWRITECONTENT"/>
 		<result property="fStartDate" column="FSTARTDATE"/>
@@ -62,7 +63,7 @@
 
 	</resultMap>
 	
-
+	<!-- 금액후원 리스트 갯수 조회 -->
 	<select id="selectMoneyListCount" resultType="_int">
 		SELECT COUNT(*)
 		FROM FUNDING
@@ -71,6 +72,7 @@
 		AND FSTATUS != 'YET' 
 	</select>
 	
+	<!-- 금액후원 리스트 조회 -->
 	<select id="selectMoneyList" resultMap="boardlistSet" parameterType="Board">
 		SELECT ROWNUM RNUM, FNO, FTITLE,FVALUE, FSTARTDATE, FENDDATE, FCONTENT,FVALUETYPE, FSTATUS, MNICK, MFUNDTYPE, MADDRESS
 		FROM( SELECT ROWNUM RNUM,FNO, FTITLE, FVALUE, FSTARTDATE, FENDDATE, FCONTENT,FVALUETYPE, FSTATUS, MNICK, MFUNDTYPE, MADDRESS
@@ -78,17 +80,20 @@
             		FROM FUNDING F
             		JOIN MEMBER M ON (M.MNO = F.FWRITER)
             		WHERE F.FTYPE='MONEY'
+            		AND FSTATUS != 'END'
+					AND FSTATUS != 'YET' 
             		ORDER BY F.FNO))
 	</select>
 	
-	
+	<!-- 금액후원 상세보기 조회 -->
 	<select id="selectMoneyDetail" resultMap="boardlistSet" parameterType="Board">
 		SELECT *
 		FROM FUNDING F
 		JOIN MEMBER M ON (M.MNO = F.FWRITER)
-		WHERE F.FNO = ${fno}
+		WHERE F.FNO = #{fno}
 	</select>
 	
+	<!-- 물품후원 게시글 갯수 조회 -->
 	<select id="selectThingListCount" resultType="_int">
 		SELECT COUNT(*)
 		FROM FUNDING
@@ -97,7 +102,7 @@
 		AND FSTATUS != 'YET' 
 	</select>
 	
-	
+	<!-- 물품후원 펀딩글 리스트 조회 -->
 	<select id="selectThingList" resultMap="thingBoardlistSet" parameterType="BoardItem">
 		SELECT ROWNUM RNUM, FNO, FTITLE , FCONTENT , FSTARTDATE , FENDDATE, FSTATUS , FWRITER, MNICK , MADDRESS, MFUNDTYPE 
 		FROM( SELECT ROWNUM RNUM, FNO, FTITLE , FCONTENT , FSTARTDATE , FENDDATE, FSTATUS , FWRITER, MNICK , MADDRESS, MFUNDTYPE 
@@ -110,6 +115,7 @@
 		            ORDER BY F.FNO))
 	</select>
 	
+	<!-- 물품후원 펀딩글 물품종류 및 갯수 리스트 조회 -->
 	<select id="selectThingList2" resultMap="thingBoardlistSet" parameterType="BoardItem">
 	SELECT ROWNUM RNUM,FNO,INAME, FDVALUE, FD_INO
 		FROM( SELECT ROWNUM RNUM,FNO,INAME, FDVALUE, FD_INO
@@ -124,6 +130,7 @@
             		ORDER BY F.FNO))
 	</select>
 	
+	<!-- 물품후원 상세보기 조회 (펀딩글)-->
 	<select id="selectThingDetail" resultMap="thingBoardlistSet" parameterType="BoardItem">
 		SELECT ROWNUM RNUM, FNO, FTITLE , FCONTENT , FSTARTDATE , FENDDATE, FSTATUS , FWRITER, MNICK , MADDRESS, MFUNDTYPE 
 		FROM( SELECT ROWNUM RNUM, FNO, FTITLE , FCONTENT , FSTARTDATE , FENDDATE, FSTATUS , FWRITER, MNICK , MADDRESS, MFUNDTYPE 
@@ -133,9 +140,10 @@
 		            AND F.FTYPE='ITEM'
 		            AND F.FSTATUS != 'END'
 		            AND F.FSTATUS != 'YET' 
-		            AND F.FNO = ${fno}))
+		            AND F.FNO = #{fno}))
 	</select>
 	
+	<!-- 물품후원 물품 종류 및 갯수 상세보기 리스트 조회 -->
 	<select id="selectThingDetail2" resultMap="thingBoardlistSet" parameterType="BoardItem">
 		SELECT ROWNUM RNUM,FNO,INAME, FDVALUE, FD_INO
 				FROM( SELECT ROWNUM RNUM,FNO,INAME, FDVALUE, FD_INO
@@ -147,10 +155,16 @@
 		                    AND F.FTYPE = 'ITEM'
 		                    AND F.FSTATUS != 'END'
 		                    AND F.FSTATUS != 'YET'
-		                    AND F.FNO = ${fno}
+		                    AND F.FNO = #{fno}
 		            		ORDER BY F.FNO))
 	</select>
 
+
+	<!-- 크라우드 펀딩 글 작성 -->
+	<insert id="insertCloud">
+		INSERT INTO FUNDING 
+		VALUES(SEQ_FH_NO.NEXTVAL,#{ftype},#{fTitle},#{fContent}, SYSDATE, null, SYSDATE,'YET', #{fValue}, #{fValueType}, #{fWriter})
+	</insert>
 	
 	
 	

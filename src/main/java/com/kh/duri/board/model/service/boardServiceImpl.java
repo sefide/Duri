@@ -110,6 +110,13 @@ public class boardServiceImpl implements boardService {
 		return thingDetail2 ;
 	}
 
+	@Override
+	public int insertCloud(Board b) {
+		int result = bd.insertCloud(sqlSession,b);
+		
+		return result;	
+	}
+
 
 
 

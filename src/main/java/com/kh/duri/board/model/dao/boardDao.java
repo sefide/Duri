@@ -36,5 +36,7 @@ public interface boardDao {
 
 	List<BoardItem> thingDetailOne2(SqlSessionTemplate sqlSession, BoardItem bi);
 
+	int insertCloud(SqlSessionTemplate sqlSession, Board b);
+
 
 }

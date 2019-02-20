@@ -184,6 +184,12 @@ public class boardDaoImpl implements boardDao {
 		return thingDetail2;
 	}
 
+	@Override
+	public int insertCloud(SqlSessionTemplate sqlSession, Board b) {
+
+		return sqlSession.insert("Boards.insertCloud",b);
+	}
+
 
 
 
