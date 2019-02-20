@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import com.kh.duri.board.model.dao.boardDao;
+import com.kh.duri.board.model.exception.BoardException;
 import com.kh.duri.board.model.exception.DonateListException;
 import com.kh.duri.board.model.vo.Board;
 import com.kh.duri.board.model.vo.BoardItem;
@@ -111,7 +112,7 @@ public class boardServiceImpl implements boardService {
 	}
 
 	@Override
-	public int insertCloud(Board b) {
+	public int insertCloud(Board b) throws BoardException {
 		int result = bd.insertCloud(sqlSession,b);
 		
 		return result;	
