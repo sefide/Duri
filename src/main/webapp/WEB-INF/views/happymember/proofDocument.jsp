@@ -19,7 +19,7 @@
 	.textOrange {color: orange; font-weight: 600;} */
 </style>
 
-<title>증빙서류 관리</title>
+<title>마이페이지>증빙서류 관리</title>
 <!-- 증빙서류 -->
 </head>
 <body>

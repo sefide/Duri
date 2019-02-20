@@ -12,7 +12,7 @@
 <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
-<title>사연신청하기</title>
+<title>마이페이지>내사연>사연신청하기</title>
 <!-- 정기후원 -->
 
 

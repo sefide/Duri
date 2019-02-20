@@ -215,9 +215,9 @@ public class HappymemberController {
 			
 			List<Funding> itemDonateList = hs.selectItemDonateList(mno, pi);
 			
-			for(Funding i : itemDonateList) {
+			/*for(Funding i : itemDonateList) {
 				System.out.println("물훔푸원 목록 : " + i);
-			}
+			}*/
 	
 			map.put("itemDonateList", itemDonateList);
 			map.put("pi", pi);
@@ -228,6 +228,61 @@ public class HappymemberController {
 			return map;
 		}
 		
+	}
+	
+	//금액후원 목록 개수 조회, 목록 페이징
+	@RequestMapping("moneyDonateList.happy")
+	public @ResponseBody HashMap<String, Object> moneyDonateList(@RequestParam int currentPage, Model model, HttpServletRequest request, HttpServletResponse response){
+		Member m = (Member)request.getSession().getAttribute("loginUser");
+		
+		if(request.getParameter("currentPage") != null) {
+			currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		}
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		try {
+			int listCount = hs.selectMoneyDonateCount(m);
+			
+			PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
+			
+			List<Funding> moneyDonateList = hs.selectMoneyDonateList(m, pi);
+			
+			map.put("moneyDonateList", moneyDonateList);
+			map.put("pi", pi);
+			return map;
+			
+		} catch (MypageException e) {
+			map.put("msg", e.getMessage());
+			return map;
+		}
+	} 
+	
+	//Q&A 목록 개수 조회, 목록 페이징
+	@RequestMapping("qna.happy")
+	public String selectQnaList(Model model, HttpServletRequest request, HttpServletResponse response) {
+		Member m = (Member)request.getSession().getAttribute("loginUser");
+		
+		int currentPage = 1;
+		
+		if(request.getAttribute("currentPage") != null) {
+			currentPage = Integer.parseInt(request.getParameter("currentPage"));
+			
+			try {
+				int listCount = hs.selectQnaListCount(m);
+				
+				/*PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
+				
+				List<E>*/
+				
+				
+				
+			} catch (MypageException e) {
+				model.addAttribute("msg", e.getMessage());
+				return "common/errorPage";
+			}
+		}
+		return "happymember/qna";
 	}
 	
 		
@@ -258,11 +313,6 @@ public class HappymemberController {
 	@RequestMapping("thankyouLetter.happy")
 	public String happy4() {
 		return "happymember/thankyouLetter";
-	}
-	
-	@RequestMapping("qna.happy")
-	public String happy5() {
-		return "happymember/qna";
 	}
 	
 	@RequestMapping("qnaDetail.happy")

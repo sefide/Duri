@@ -221,9 +221,55 @@ public class HappymemberDaoImpl implements HappymemberDao{
 			throw new MypageException("물품후원 목록 조회 실패");
 		}
 		
-		System.out.println("itemDonateList 개수 : " + itemDonateList.size());
+		/*System.out.println("itemDonateList 개수 : " + itemDonateList.size());*/
 		
 		return itemDonateList;
+	}
+
+	//금액후원 목록 개수 조회
+	@Override
+	public int selectMoneyDonateCount(SqlSessionTemplate sqlSession, Member m) throws MypageException {
+		int listCount = sqlSession.selectOne("HappyMember.selectMoneyDonateCount", m);
+		
+		/*System.out.println("금액후원 개수  : " + listCount);*/
+		if(listCount < 0) {
+			throw new MypageException("금액후원 개수 조회 실패");
+		}
+		return listCount;
+	}
+
+	//금액후원 목록 조회
+	@Override
+	public List<Funding> selectMoneyDonateList(SqlSessionTemplate sqlSession, Member m, PageInfo pi)
+			throws MypageException {
+		int offset = (pi.getCurrentPage()-1)*pi.getLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getLimit());
+		
+		List<Funding> moneyDonateList = sqlSession.selectList("HappyMember.selectMoneyDonateList", m, rowBounds);
+		
+		if(moneyDonateList == null) {
+			throw new MypageException("금액후원 목록 조회 실패");
+		}
+		
+		/*System.out.println("금액후원 목록 수 : " + moneyDonateList.size());
+		for(Funding i : moneyDonateList){
+			System.out.println("리스트 잘 뽑히나? : " + i);
+		}*/
+		
+		return moneyDonateList;
+	}
+
+	//Q&A 목록 개수 조회
+	@Override
+	public int selectQnaListCount(SqlSessionTemplate sqlSession, Member m) throws MypageException {
+		int listCount = sqlSession.selectOne("HappyMember.selectQnaListCount", m);
+		
+		System.out.println("Q&A 개수 조회 : " + listCount);
+		
+		if(listCount < 0) {
+			throw new MypageException("Q&A 목록 개수 조회 실패");
+		}
+		return listCount;
 	}
 
 }

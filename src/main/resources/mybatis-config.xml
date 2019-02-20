@@ -31,6 +31,7 @@
 		<typeAlias type="com.kh.duri.happymember.model.vo.Delivery" alias="Delivery"/>
 		<typeAlias type="com.kh.duri.happymember.model.vo.DirectFundHistory" alias="HappyDirectFundHistory"/>
 		<typeAlias type="com.kh.duri.happymember.model.vo.Funding" alias="HappyFunding"/> 
+		<typeAlias type="com.kh.duri.happymember.model.vo.Qna" alias="HappyQna"/> 
 		
 		<typeAlias type="com.kh.duri.payment.model.vo.Point" alias="Point"/>	
 		<typeAlias type="com.kh.duri.payment.model.vo.DonateReceipt" alias="DonateReceipt"/>
