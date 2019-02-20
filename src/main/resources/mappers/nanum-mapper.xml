@@ -99,6 +99,16 @@
 		<result property="iPrice" column="IPRICE"/>
 		<result property="fNo" column="FNO"/> 
 	</resultMap>	
+	<resultMap type="com.kh.duri.Nanummember.model.vo.QnA" id="QnAResultSet">
+		<id property="qNo" column="QNO"/>
+		<result property="qDate" column="QDATE"/>
+		<result property="qTitle" column="QTITLE"/>
+		<result property="qContent" column="QCONTENT"/>
+		<result property="qAnswer" column="QANSWER"/>
+		<result property="qWriter" column="QWRITER"/>
+		<result property="q_mNo" column="Q_MNO"/>
+		<result property="mNick" column="MNICK"/>
+	</resultMap>
 		
 	<!-- 금액 크라우드 펀딩 개수 조회 (진행) -->
 	<select id="selectMoneyCloundListCount" resultType="_int">
@@ -343,11 +353,27 @@
 		ORDER BY FI.FIDATE )
   	</select>
   	
-  	
-  	
-  	
-  	
-  	
+  	<!-- QnA 개수 조회 -->
+  	<select id="QnAListCount" resultType="_int">
+  		SELECT COUNT(*)
+		FROM QNA
+		WHERE QWRITER = 'N'
+  	</select>
+  	<!-- QnA 조회 -->
+  	<select id="QnAList" resultMap="QnAResultSet" parameterType="NanumQnA" resultType="list">
+  		SELECT ROWNUM RNUM, QNO,QDATE,QTITLE,QCONTENT,QANSWER,QWRITER, MNICK
+		FROM(
+		SELECT Q.QNO,Q.QDATE,Q.QTITLE,Q.QCONTENT,Q.QANSWER,Q.QWRITER, M.MNICK
+		FROM QNA Q JOIN MEMBER M ON(Q.Q_MNO = M.MNO)
+		WHERE QWRITER = 'N' 
+		ORDER BY QDATE DESC) 
+  	</select>
+  	<!-- QnA 상세 조회  -->
+  	<select id="QnADetail" resultMap="QnAResultSet" parameterType="NanumQnA" resultType="list">
+  		SELECT *
+		FROM QNA Q JOIN MEMBER M ON(Q.Q_MNO = M.MNO)
+		WHERE QWRITER = 'N' AND Q.QNO = #{qNo}
+  	</select>
   	
   	
   	

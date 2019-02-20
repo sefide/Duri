@@ -114,7 +114,7 @@
 							<li><a href="#">&lt;</a></li>
 							</c:if>
 							<c:if test="${ pi.currentPage > 1 }">
-								<c:url var="blistBack" value="mypage.nanum">
+								<c:url var="blistBack" value="mypageLikefund.nanum">
 									<c:param name="currentPage" value="${ pi.currentPage - 1}"/>
 								</c:url>
 								<li><a href="${ blistBack }">&lt;</a></li>
@@ -125,7 +125,7 @@
 									<li class="active"><a class="active" href="${ blistCheck }">${ p }</a></li>
 								</c:if>
 								<c:if test="${ p != pi.currentPage }">
-									<c:url var="blistCheck" value="mypage.nanum">
+									<c:url var="blistCheck" value="mypageLikefund.nanum">
 										<c:param name="currentPage" value="${p}"/>									
 									</c:url>
 									 <li><a href="${ blistCheck }">${ p }</a></li> 									
@@ -136,7 +136,7 @@
 								<li><a href="#">&gt;</a></li>
 							</c:if>
 							<c:if test="${ pi.currentPage < pi.maxPage }">
-								<c:url var="blistEnd" value="mypage.nanum">
+								<c:url var="blistEnd" value="mypageLikefund.nanum">
 									<c:param name="currentPage" value="${ pi.currentPage + 1}"/>
 								</c:url>
 								<li><a href="${ blistEnd }">&gt;</a></li>
@@ -178,7 +178,7 @@
 							<li><a href="#">&lt;</a></li>
 							</c:if>
 							<c:if test="${ pi2.currentPage > 1 }">
-								<c:url var="blistBack" value="mypage.nanum">
+								<c:url var="blistBack" value="mypageLikefund.nanum">
 									<c:param name="currentPage" value="${ pi2.currentPage - 1}"/>
 								</c:url>
 								<li><a href="${ blistBack }">&lt;</a></li>
@@ -189,7 +189,7 @@
 									<li class="active"><a class="active" href="${ blistCheck }">${ p }</a></li>
 								</c:if>
 								<c:if test="${ p != pi2.currentPage }">
-									<c:url var="blistCheck" value="mypage.nanum">
+									<c:url var="blistCheck" value="mypageLikefund.nanum">
 										<c:param name="currentPage" value="${p}"/>									
 									</c:url>
 									 <li><a href="${ blistCheck }">${ p }</a></li> 									
@@ -200,7 +200,7 @@
 								<li><a href="#">&gt;</a></li>
 							</c:if>
 							<c:if test="${ pi2.currentPage < pi2.maxPage }">
-								<c:url var="blistEnd" value="mypage.nanum">
+								<c:url var="blistEnd" value="mypageLikefund.nanum">
 									<c:param name="currentPage" value="${ pi2.currentPage + 1}"/>
 								</c:url>
 								<li><a href="${ blistEnd }">&gt;</a></li>
@@ -242,7 +242,7 @@
 							<li><a href="#">&lt;</a></li>
 							</c:if>
 							<c:if test="${ pi3.currentPage > 1 }">
-								<c:url var="blistBack" value="mypage.nanum">
+								<c:url var="blistBack" value="mypageLikefund.nanum">
 									<c:param name="currentPage" value="${ pi3.currentPage - 1}"/>
 								</c:url>
 								<li><a href="${ blistBack }">&lt;</a></li>
@@ -253,7 +253,7 @@
 									<li class="active"><a class="active" href="${ blistCheck }">${ p }</a></li>
 								</c:if>
 								<c:if test="${ p != pi3.currentPage }">
-									<c:url var="blistCheck" value="mypage.nanum">
+									<c:url var="blistCheck" value="mypageLikefund.nanum">
 										<c:param name="currentPage" value="${p}"/>									
 									</c:url>
 									 <li><a href="${ blistCheck }">${ p }</a></li> 									
@@ -264,7 +264,7 @@
 								<li><a href="#">&gt;</a></li>
 							</c:if>
 							<c:if test="${ pi3.currentPage < pi3.maxPage }">
-								<c:url var="blistEnd" value="mypage.nanum">
+								<c:url var="blistEnd" value="mypageLikefund.nanum">
 									<c:param name="currentPage" value="${ pi3.currentPage + 1}"/>
 								</c:url>
 								<li><a href="${ blistEnd }">&gt;</a></li>

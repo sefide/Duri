@@ -102,9 +102,12 @@ tr:hover{
 		</ul>		
 	</div>
 	<!-- QnA 리스트 -->
+	
 	<div class="QnA-list">
+		 <c:if test="${ !empty sessionScope.loginUser2 }">
 		<button onclick="location.href='QnAInsert.nanum'" 
-			class="ui orange basic button" style="float: right; margin-right: 50px;" >글 작성하기</button>		
+			class="ui orange basic button" style="float: right; margin-right: 50px;" >글 작성하기</button>		 
+		</c:if>
 		<br><br>
 		<div class="tableArea">
 				<table>
@@ -118,73 +121,71 @@ tr:hover{
 						</tr>
 					</thead>
 					<tbody>
-						<tr onclick="location.href='QnADetail.nanum'">
-							<td>1</td>
-							<td>기부금 영수증에대해 궁금해요</td>
-							<td>나누미왕</td>
-							<td>2019-01-06</td>
-							<td>O</td>
+						<c:forEach items="${QnAList}" var = "QnAList" varStatus="">
+							<tr onclick="goQnADetail(${QnAList.qNo});">
+							<td><c:out value="${QnAList.rnum}"/></td>
+							<td><c:out value="${QnAList.qTitle}"/></td>							
+							<td><c:out value="${QnAList.mNick}"></c:out></td>
+							<td><c:out value="${QnAList.qDate}"></c:out></td>
+							<c:choose>
+								<c:when test="${QnAList.qAnswer == NULL }">
+									<td>X</td>
+								</c:when>
+								<c:otherwise>
+									<td>O</td>
+								</c:otherwise>
+							</c:choose>						
 						</tr>
-						<tr>
-							<td>2</td>
-							<td>기부금 영수증에대해 궁금해요</td>
-							<td>나누미왕</td>
-							<td>2019-01-06</td>
-							<td>O</td>
-						</tr>
-						<tr>
-							<td>3</td>
-							<td>기부금 영수증에대해 궁금해요</td>
-							<td>나누미왕</td>
-							<td>2019-01-06</td>
-							<td>O</td>
-						</tr>
-						<tr>
-							<td>3</td>
-							<td>기부금 영수증에대해 궁금해요</td>
-							<td>나누미왕</td>
-							<td>2019-01-06</td>
-							<td>O</td>
-						</tr>
-						<tr>
-							<td>3</td>
-							<td>기부금 영수증에대해 궁금해요</td>
-							<td>나누미왕</td>
-							<td>2019-01-06</td>
-							<td>O</td>
-						</tr>
-						<tr>
-							<td>3</td>
-							<td>기부금 영수증에대해 궁금해요</td>
-							<td>나누미왕</td>
-							<td>2019-01-06</td>
-							<td>O</td>
-						</tr>
-						<tr>
-							<td>3</td>
-							<td>기부금 영수증에대해 궁금해요</td>
-							<td>나누미왕</td>
-							<td>2019-01-06</td>
-							<td>O</td>
-						</tr>
-					</tbody>
+						</c:forEach> 
+					</tbody>	
 				</table>
 				<div class="col text-center">
 					<div class="block-27">
 						<ul>
+							<c:if test="${ pi.currentPage <= 1 }">
 							<li><a href="#">&lt;</a></li>
-							<li class="active"><span>1</span></li>
-							<li><a href="#">2</a></li>
-							<li><a href="#">3</a></li>
-							<li><a href="#">4</a></li>
-							<li><a href="#">5</a></li>
-							<li><a href="#">&gt;</a></li>
+							</c:if>
+							<c:if test="${ pi.currentPage > 1 }">
+								<c:url var="blistBack" value="QnAList.nanum">
+									<c:param name="currentPage" value="${ pi.currentPage - 1}"/>
+								</c:url>
+								<li><a href="${ blistBack }">&lt;</a></li>
+							</c:if>
+
+							<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+								<c:if test="${ p == pi.currentPage }">
+									<li class="active"><a class="active" href="${ blistCheck }">${ p }</a></li>
+								</c:if>
+								<c:if test="${ p != pi.currentPage }">
+									<c:url var="blistCheck" value="QnAList.nanum">
+										<c:param name="currentPage" value="${p}"/>									
+									</c:url>
+									 <li><a href="${ blistCheck }">${ p }</a></li> 									
+								</c:if>
+							</c:forEach>
+							
+							<c:if test="${ pi.currentPage >= pi.maxPage }">
+								<li><a href="#">&gt;</a></li>
+							</c:if>
+							<c:if test="${ pi.currentPage < pi.maxPage }">
+								<c:url var="blistEnd" value="QnAList.nanum">
+									<c:param name="currentPage" value="${ pi.currentPage + 1}"/>
+								</c:url>
+								<li><a href="${ blistEnd }">&gt;</a></li>
+							</c:if>						
 						</ul>
-					</div>
-				</div>
+						</div>
 			</div>	
 	</div>
+	<script>
+	//편지 상세 보기로 가기
+	function goQnADetail(qNo) {	
+		var qNo = qNo ;
+		console.log(qNo);
+		location.href="QnADetail.nanum?qNo="+qNo;
+	}
 	
+	</script>
 	
 </body>
 </html>

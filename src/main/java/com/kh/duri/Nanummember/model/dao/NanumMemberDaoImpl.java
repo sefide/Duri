@@ -13,6 +13,7 @@ import com.kh.duri.Nanummember.model.vo.FundItem;
 import com.kh.duri.Nanummember.model.vo.Funding;
 import com.kh.duri.Nanummember.model.vo.Letter;
 import com.kh.duri.Nanummember.model.vo.PageInfo;
+import com.kh.duri.Nanummember.model.vo.QnA;
 import com.kh.duri.Nanummember.model.vo.SelectDirectFund;
 import com.kh.duri.member.model.vo.Member;
 
@@ -184,6 +185,26 @@ public class NanumMemberDaoImpl implements NanumMemberDao {
 	public HashMap<String, FundItem> selectEndItem(SqlSessionTemplate sqlSession, Member m, int fno) throws NanumException {
 		FundItem endItem = sqlSession.selectOne("Nanum.selectIngItem",fno);
 		return null;
+	}
+	//QnA 개수 가져오기
+	@Override
+	public int getQnAListCount(SqlSessionTemplate sqlSession, Member m) throws NanumException {
+		int QnAListCount = sqlSession.selectOne("Nanum.QnAListCount",m);
+		return QnAListCount;
+	}
+	//QnA 목록 가져오기
+	@Override
+	public List<QnA> selectQnAList(SqlSessionTemplate sqlSession, PageInfo pi, Member m) throws NanumException {
+		int offset = (pi.getCurrentPage() -1 ) *pi.getLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getLimit());		
+		List<QnA> QnAList = sqlSession.selectList("Nanum.QnAList",m,rowBounds);
+		return QnAList;
+	}
+	//QnA 상세 가져오기
+	@Override
+	public List<QnA> selectQnADetail(SqlSessionTemplate sqlSession, int qNo) throws NanumException {
+		List<QnA> QnADetail = sqlSession.selectList("QnADetail",qNo);
+		return QnADetail;
 	}
 		
 		
