@@ -174,14 +174,33 @@ public class PaymentServiceImpl implements PaymentService {
 	// 금액 후원 결제페이지 - 펀딩정보 select
 	@Override
 	public Board selectFundMoney(Board b) throws FundingException {
+		// 해당 금액후원글 정보  select
 		Board resultBoard = pd.selectFundMoney(sqlSession, b);
+		
+		// 해당 금액후원글 펀딩 후원 누적액 select
+		int curValue = pd.selectFundMoneyCulValue(sqlSession, b);
+		
+		resultBoard.setFdValue(curValue);
 		
 		return resultBoard;
 	}
 	
 	// 금액 후원 진행 - 펀딩내역 insert
 	@Override
-	public Member insertFundMoneyHistory(FundHistory fh, String check, String fWriter) throws FundingException {
+	public Member insertFundMoneyHistory(FundHistory fh, String check, String fWriter, int isGoal) throws FundingException {
+		// 후원 100% 달성 시 
+		int resultGoal1 = 0;
+		int resultGoal2 = 0;
+		if(isGoal == 1) { // 100% 달성 시 
+			System.out.println("후원 목표 달성 !!!!!!!!");
+			// 해당 펀딩글 GOAL로 바꾸고, 마감일 변경 - 금액물품둘다
+			resultGoal1 = pd.updateFundingGoal(sqlSession, fh);
+			
+		    // 후원자 GoalNum +1 하기
+			resultGoal2 = pd.updateMemberGoalNum(sqlSession, fh);
+			
+		}
+
 		// 후원 내역 입력하고
 		int result1 = pd.insertFundMoneyHistory(sqlSession, fh);
 		int result2 = 1;
@@ -213,11 +232,11 @@ public class PaymentServiceImpl implements PaymentService {
 		
 		fh.setFhNo(resultFhNo);
 		// 포인트 이력 남기기 insert (나눔두리)
-		int result6 = pd.insertFundMoneynPoint(sqlSession, fh);
+		int result6 = pd.insertFundnPoint(sqlSession, fh);
 		
 		// 포인트 이력 남기기 insert (행복두리)
 		fh.setFhMnoGive(Integer.parseInt(fWriter));
-		int result5 = pd.insertFundMoneyhPoint(sqlSession, fh);
+		int result5 = pd.insertFundhPoint(sqlSession, fh);
 		
 		
 		if(result1 > 0 && result2 > 0 && result3 > 0 && result4 > 0 && resultM != null) {
@@ -247,28 +266,73 @@ public class PaymentServiceImpl implements PaymentService {
 	// 물품 후원 진행 - 펀딩내역 insert
 	@Override
 	public Member insertFundItemHistory(FundHistory fh, ArrayList<FundItemDetail> fhdList, String check,
-			String fWriter, int isGoal) {
+			String fWriter, int isGoal) throws FundingException {
 		// 100% 달성 시 GOAL로 바꾸고, 마감일 변경 - 금액물품둘다
 	    // 후원자 GoalNum +1 하기
 		System.out.println("check : "+ check); // 0이면 미발급 , 1이면 발급
 		System.out.println("isGoal : "+ isGoal);  // 0이면 미달성, 1이면 달성
 		
 		Member m = new Member();
-
+		m.setMno(fh.getFhMnoGive());
+		
+		int resultGoal1 = 0;
+		int resultGoal2 = 0;
 		if(isGoal == 1) { // 100% 달성 시 
+			System.out.println("후원 목표 달성 !!!!!!!!");
 			// 해당 펀딩글 GOAL로 바꾸고, 마감일 변경 - 금액물품둘다
-			m.setMno(fh.getFhMnoGive());
+			resultGoal1 = pd.updateFundingGoal(sqlSession, fh);
+			
 		    // 후원자 GoalNum +1 하기
+			resultGoal2 = pd.updateMemberGoalNum(sqlSession, fh);
 			
 		}
 		
 		// 후원내역 입력하고 (fundHistory/ fundHistoryDetail)
+		int result1 = pd.insertFundItemHistory(sqlSession, fh);
+		
+		// 방금 insert한 후원내역 번호 가져와서 
+		int fhd_fhNo = pd.selectFundHistCurVal(sqlSession);
+		
+		int result2 = 0;
+		for(int i = 0; i < fhdList.size(); i++) {
+			fhdList.get(i).setFhd_fhNo(fhd_fhNo);
+			result2 += pd.insertFundItemHistoryDetail(sqlSession, fhdList.get(i));
+		}
+		
+		int result3 = 0;
 		// 기부금 영수증 (DonateReceipt)
-		// member 포인트 업데이트 (나눔행복) (Member)
+		if(check.equals("1")) {
+			result3 = pd.insertDonateReceipt(sqlSession, fh);
+		}
+		
+		// 나눔두리 포인트 업데이트
+		m.setmPoint(fh.getFhValue());
+		int result4 = pd.updateMoneynPoint(sqlSession, m);
+		
+		// 행복두리 소유 물품 업데이트
+		int result5 = 0;
+		for(int i = 0; i < fhdList.size(); i++) {
+			fhdList.get(i).setFhd_fhNo(fhd_fhNo);
+			fhdList.get(i).setFhd_mNo_take(Integer.parseInt(fWriter));
+			result5 = pd.updateHappyOwnItem(sqlSession, fhdList.get(i));
+			
+			System.out.println("result5 : "+ result5);
+			// 행복두리 소유 물품 추가하기
+			if(result5 == 0) {
+				pd.insertHappyOwnItem(sqlSession, fhdList.get(i));
+			}
+		}
+		
 		// 포인트 이력 insert  (Point)
+		fh.setFhNo(fhd_fhNo);
+		int result6 = pd.insertFundnPoint(sqlSession, fh);
+		int result7 = pd.insertFundhPoint(sqlSession, fh);
+		
+		m.setMno(fh.getFhMnoGive());
 		// 업데이트된 나눔두리 유저 세션 업데이트
+		Member resultM = pd.selectLoginnMember(sqlSession, m);
 
-		return null;
+		return resultM;
 	}
 	
 

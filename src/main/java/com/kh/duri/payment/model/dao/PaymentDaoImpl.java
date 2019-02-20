@@ -19,6 +19,7 @@ import com.kh.duri.payment.model.exception.RefundException;
 import com.kh.duri.payment.model.vo.BoardItemValue;
 import com.kh.duri.payment.model.vo.DirectFundHist;
 import com.kh.duri.payment.model.vo.DonateReceipt;
+import com.kh.duri.payment.model.vo.FundItemDetail;
 import com.kh.duri.payment.model.vo.PageInfo;
 import com.kh.duri.payment.model.vo.Payment;
 import com.kh.duri.payment.model.vo.Point;
@@ -343,6 +344,15 @@ public class PaymentDaoImpl implements PaymentDao {
 		return resultBoard;
 	}
 	
+
+	// 물품 후원 결제페이지 - 후원물품정보 select
+	@Override
+	public int selectFundMoneyCulValue(SqlSessionTemplate sqlSession, Board b) {
+		int result = sqlSession.selectOne("Point.selectFundMoneyCulValue", b);
+		System.out.println("dao 현재 누적 후원금 :" + result);
+		return result;
+	}
+	
 	// 금액 후원 진행 - 펀딩내역 insert
 	@Override
 	public int insertFundMoneyHistory(SqlSessionTemplate sqlSession, FundHistory fh) throws FundingException {
@@ -382,6 +392,7 @@ public class PaymentDaoImpl implements PaymentDao {
 	// 포인트 update (나눔두리)
 	@Override
 	public int updateMoneynPoint(SqlSessionTemplate sqlSession, Member m) throws FundingException {
+		System.out.println("업데이트할 나눔두리 회원번호 : "+ m.getMno());
 		int result = sqlSession.update("Point.updateMoneynPoint", m);
 		
 		if(result == 0) {
@@ -406,8 +417,8 @@ public class PaymentDaoImpl implements PaymentDao {
 	
 	// 포인트 이력 update() - 나눔두리 
 	@Override
-	public int insertFundMoneynPoint(SqlSessionTemplate sqlSession, FundHistory fh) throws FundingException {
-		int result = sqlSession.insert("Point.insertFundMoneynPoint", fh);
+	public int insertFundnPoint(SqlSessionTemplate sqlSession, FundHistory fh) throws FundingException {
+		int result = sqlSession.insert("Point.insertFundnPoint", fh);
 		
 		if(result == 0) {
 			throw new FundingException("포인트 이력을 업데이트하지 못하였습니다. ");
@@ -418,8 +429,8 @@ public class PaymentDaoImpl implements PaymentDao {
 
 	// 포인트 이력 update() - 행복두리
 	@Override
-	public int insertFundMoneyhPoint(SqlSessionTemplate sqlSession, FundHistory fh) throws FundingException {
-		int result = sqlSession.insert("Point.insertFundMoneyhPoint", fh);
+	public int insertFundhPoint(SqlSessionTemplate sqlSession, FundHistory fh) throws FundingException {
+		int result = sqlSession.insert("Point.insertFundhPoint", fh);
 		
 		if(result == 0) {
 			throw new FundingException("포인트 이력을 업데이트하지 못하였습니다. ");
@@ -463,6 +474,76 @@ public class PaymentDaoImpl implements PaymentDao {
 		System.out.println("Dao biList : " + biList);
 		return biList;
 	}
+	
+	// 펀딩 100% 시 펀딩정보 업데이트
+	@Override
+	public int updateFundingGoal(SqlSessionTemplate sqlSession, FundHistory fh) throws FundingException {
+		int result = sqlSession.update("Point.updateFundingGoal", fh);
+
+		if(result == 0) {
+			throw new FundingException("크라우드 펀딩 달성 설정에 실패했습니다. - 펀딩글");
+		}
+		
+		return result;
+	}
+	
+	// 펀딩 100% 시 나눔두리 정보 업데이트
+	@Override
+	public int updateMemberGoalNum(SqlSessionTemplate sqlSession, FundHistory fh) throws FundingException {
+		int result = sqlSession.update("Point.updateMemberGoalNum", fh);
+		
+		if(result == 0) {
+			throw new FundingException("크라우드 펀딩 달성 설정에 실패했습니다. - 회원");
+		}
+		
+		return result;
+		
+	}
+	
+	// 펀딩내역 insert (FundHistory) - 물품후원
+	@Override
+	public int insertFundItemHistory(SqlSessionTemplate sqlSession, FundHistory fh) throws FundingException {
+		int result = sqlSession.insert("Point.insertFundItemHistory", fh);
+		
+		if(result == 0) {
+			throw new FundingException("물품 후원내역 입력에 실패했습니다.");
+		}
+		
+		return result;
+	}
+	
+	// 펀딩내역 insert (FundHistoryDetail) - 물품후원
+	@Override
+	public int insertFundItemHistoryDetail(SqlSessionTemplate sqlSession, FundItemDetail fid)
+			throws FundingException {
+		int result = sqlSession.insert("Point.insertFundItemHistoryDetail", fid);
+		
+		if(result == 0) {
+			throw new FundingException("물품 후원 상세내역 입력에 실패했습니다.");
+		}
+		
+		return result;
+	}
+	
+	// 행복두리 소유물품 업데이트 (갯수)
+	@Override
+	public int updateHappyOwnItem(SqlSessionTemplate sqlSession, FundItemDetail fid) throws FundingException {
+		int result = sqlSession.insert("Point.updateHappyOwnItem", fid);
+		
+		return result;
+	}
+	
+	// 행복두리 소유물품 추가 (새로운 소유물품)
+	@Override
+	public void insertHappyOwnItem(SqlSessionTemplate sqlSession, FundItemDetail fid) throws FundingException {
+		int result = sqlSession.insert("Point.insertHappyOwnItem", fid);
+		
+		if(result == 0) {
+			throw new FundingException("후원 물품을 행복두리에게 보내는데 실패했습니다. (추가)");
+		}
+		
+	}
+	
 
 	
 	
