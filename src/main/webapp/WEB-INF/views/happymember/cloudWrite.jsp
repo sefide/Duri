@@ -10,9 +10,11 @@
 <!-- semantic ui -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
 <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
-<title>정기후원</title>
+<title>사연신청하기</title>
 <!-- 정기후원 -->
+
 
 <style>
 	a {color: #333;}
@@ -69,7 +71,7 @@
 			<span>마이페이지 &gt; 사연신청하기</span>
 		</div>
 		<br>
- <form action="writeCloud.bo" method="POST">	
+ <form action="writeCloud.bo" id="goCloud" method="POST">	
 <table>
   <tr>
    <td>
@@ -82,11 +84,14 @@
 
    <table align="center">
      <tr>
-      <td>&nbsp;</td>
+      <td>&nbsp;
+      	<input type="hidden" name ="fWriter" value="${sessionScope.loginUser.mno}">
+      	<input type="hidden" name ="mNickName" value="${sessionScope.loginUser.mNickName}">
+      </td>
       <td align="center" style="height:50px;"><b>제목</b></td>
       <td>
       	<div class="ui input">
- 			<input type="text">
+ 			<input type="text" name="fTitle">
 		</div>
 	</td>
       <td>&nbsp;</td>
@@ -96,9 +101,9 @@
     <tr>
       <td>&nbsp;</td>
       <td align="center" width="180px"><b>후원유형</b></td>
-      <td><input type="radio" id="money" value="money" name="listChoice" size="100px">금액후원
+      <td><input type="radio" id="MONEY" value="MONEY" name="ftype" size="100px">금액후원
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <input type="radio" id="item" value="item" name="listChoice">물품후원</td>
+      <input type="radio" id="ITEM" value="ITEM" name="ftype">물품후원</td>
       <td>&nbsp;<br>
       <div id="button" class="textSilver">
 		* 물품으로 받을 수 있는 후원은 물품후원을 선택해주세요!<br><br>
@@ -138,7 +143,7 @@
       <td align="center" style="height:50px;"><b>목표물품설정</b></td>
       <td style="width:800px;">
      	<div class="ui input ">
- 			<select align="center" style="width:160px; height:30px;">
+ 			<select align="center" name="fd_ino" style="width:160px; height:30px;">
  				<option disabled selected>선택</option>
  				<option value="1">생리대</option>
  				<option value="2">스킨로션세트</option>
@@ -161,9 +166,9 @@
  				<option value="19">클렌징폼&바디로션</option>
  			</select>
  			&nbsp;&nbsp;
- 			<input type="text" id="thing1" maxlength="2" style=" width:65px"><b>개</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ 			<input type="text" id="thing1" name="fdValue" maxlength="2" style=" width:65px"><b>개</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
  			
- 				<select align="center" style="width:160px; height:30px;">
+ 				<select align="center" name="fd_ino" style="width:160px; height:30px;">
  				<option disabled selected>선택</option>
  				<option value="1">생리대</option>
  				<option value="2">스킨로션세트</option>
@@ -186,9 +191,9 @@
  				<option value="19">클렌징폼&바디로션</option>
  			</select>
  			&nbsp;&nbsp;
- 			<input type="text" id="thing1" maxlength="2" style=" width:65px"><b>개</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ 			<input type="text" id="thing1" name="fdValue" maxlength="2" style=" width:65px"><b>개</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
  				
- 				<select align="center" style="width:160px; height:30px;">
+ 				<select align="center" name="fd_ino" style="width:160px; height:30px;">
  				<option disabled selected>선택</option>
  				<option value="1">생리대</option>
  				<option value="2">스킨로션세트</option>
@@ -211,7 +216,7 @@
  				<option value="19">클렌징폼&바디로션</option>
  			</select>
  			&nbsp;&nbsp;
- 			<input type="text" id="thing1" maxlength="2" style=" width:65px"><b>개</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ 			<input type="text" id="thing1" name="fdValue" maxlength="2" style=" width:65px"><b>개</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 		</div>
 	 </td>
      </tr>
@@ -223,7 +228,7 @@
       <td>&nbsp;</td>
       <td align="center" style="height:50px;"><b>펀딩 종료 기간</b></td>
       <td>
-     	<select align="center" style="width:150px; height:30px;">
+     	<select align="center" name="fd_ino" style="width:150px; height:30px;">
      		<option value="" disabled selected>기간선택</option>
      		<option>15일</option>
      		<option>30일</option>
@@ -245,7 +250,7 @@
      <tr>
       <td>&nbsp;</td>
       <td align="center" style="height:300px;"><b>후원 게시글 내용</b></td>
-      <td><textarea name="memo" cols="110" rows="18" style="resize:none"></textarea></td>
+      <td><textarea name="fContent" cols="110" rows="18" style="resize:none"></textarea></td>
       <td>&nbsp;</td>
      </tr>
      <tr height="1" bgcolor="#dddddd"><td colspan="4"></td></tr>
@@ -260,9 +265,9 @@
   </tr>
  </table>
 	<div align="center">
-		 <button type="submit" class="ui primary button">
+		 <div onclick="return writeCloud();" class="ui primary button">
 		   	사연등록
-		</button>
+		</div>
 		<button class="ui button">
 		  	취소하기
 		</button>
@@ -288,7 +293,7 @@ console.log(animal);
  */
  $("input[type=radio]").click(function () {
 	    if($(this).prop("checked")) {   
-	    	if($(this).val()=="money"){
+	    	if($(this).val()=="MONEY"){
 	    		$("#goalMoney").show();
 	    		$("#goalMoney2").show();
 	    		$("#goalMoney3").show();
@@ -309,6 +314,22 @@ console.log(animal);
 	    	}
 	});
 
+
+ 
+function writeCloud(){
+	swal({
+		  title: "작성완료!",
+		  text: "관리자 승인을 기다려주세요!",
+		  icon: "success",
+		  
+		  
+		}).then(function(){
+			$("#goCloud").submit();
+		});
+	
+	
+}
+	
 
 
 

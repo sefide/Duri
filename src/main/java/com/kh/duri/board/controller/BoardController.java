@@ -163,6 +163,8 @@ public class BoardController {
 
 	}
 	
+	
+	//물품후원 리스트 조회
 	   @RequestMapping("thing_donate.bo")
 	   public String thingDonateList(Model model, HttpServletRequest request, HttpServletResponse response) throws DonateListException {
 	      int currentPage = 1;
@@ -176,7 +178,7 @@ public class BoardController {
 			
 			PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
 			
-			System.out.println("크라우드펀딩 금액후원 명수 :  " + listCount);
+			System.out.println("크라우드펀딩 물품후원  :  " + listCount);
 			
 
 			List<BoardItem> thList;
@@ -198,7 +200,8 @@ public class BoardController {
 	   }
 
 	
-	   
+	
+	//물품후원 상세조회
 	@RequestMapping("cloud_thing_datail.bo")
 	public ModelAndView thingDetail(BoardItem bi, ModelAndView mv,HttpSession session){ 
 		
@@ -209,11 +212,11 @@ public class BoardController {
 		List<BoardItem> thingDetail2 = null; 
 		
 		
-		thingDetail = bs.thingDetailOne(bi); //받아온 아이디와 비밀번호로 로그인 정보 조회
-		thingDetail2 = bs.thingDetailOne2(bi); //받아온 아이디와 비밀번호로 로그인 정보 조회
+		thingDetail = bs.thingDetailOne(bi); //물품펀딩글 받아오기(fundging)
+		thingDetail2 = bs.thingDetailOne2(bi);//물품만 받아오기(fundgindDetail & fundItem)
 			
-		session.setAttribute("thingDetail", thingDetail);	//세션에 뿌려주기
-		session.setAttribute("thingDetail2", thingDetail2);	//세션에 뿌려주기
+		session.setAttribute("thingDetail", thingDetail);	
+		session.setAttribute("thingDetail2", thingDetail2);	
 			
 		mv.setViewName("redirect:thingDetail.bo"); //위처럼 redirect로 뷰페이지이름연결할거랑 똑같음
 
@@ -225,32 +228,52 @@ public class BoardController {
 
 	}
 	 
-	
+	//펀딩글 작성(행복두리)
 	@RequestMapping("writeCloud.bo")
 	public ModelAndView writeCloud(Board b, ModelAndView mv,HttpSession session){ 
-		
-		
-		System.out.println("Board : "+b);
-		
-		/*BoardItem thingDetail = null; 
-		List<BoardItem> thingDetail2 = null; 
-		
-		
-		thingDetail = bs.thingDetailOne(bi); //받아온 아이디와 비밀번호로 로그인 정보 조회
-		thingDetail2 = bs.thingDetailOne2(bi); //받아온 아이디와 비밀번호로 로그인 정보 조회
-			
-		session.setAttribute("thingDetail", thingDetail);	//세션에 뿌려주기
-		session.setAttribute("thingDetail2", thingDetail2);	//세션에 뿌려주기*/
-			
-		mv.setViewName("redirect:writeCloud_page.bo"); //위처럼 redirect로 뷰페이지이름연결할거랑 똑같음
 
+			System.out.println("Board : "+b);
+			
+			int writeCloud = 0; 		
 		
+			
+			writeCloud = bs.insertCloud(b); //받아온 아이디와 비밀번호로 로그인 정보 조회
+			
+			if(writeCloud > 0) {
+				
+				mv.setViewName("redirect:mypage.happy"); //위처럼 redirect로 뷰페이지이름연결할거랑 똑같음
+				
+			}else {
+				
+				session.setAttribute("b", b);	
+				mv.setViewName("redirect:writeCloud.bo"); //위처럼 redirect로 뷰페이지이름연결할거랑 똑같음
+				
+			}
 
-	
+
 		return mv;
-	
 
 	}
+	
+	
+	//펀딩글 작성(행복두리)
+	/*@RequestMapping("writeCloud2.bo")
+	public ModelAndView writeCloud2(Board b, ModelAndView mv,HttpSession session){ 
+
+			System.out.println("Board : "+b);
+			
+			int writeCloud = 0; 		
+		
+			
+		
+			
+
+
+		return mv;
+
+	}
+	*/
+	
 	 
 	
 	@RequestMapping("writeCloud_page.bo")

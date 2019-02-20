@@ -78,7 +78,7 @@
               	<div class="progress custom-progress-success" style="background-color:white">
   	      			<div id="bar2" class="progress-bar" role="progressbar" style="width:43%" aria-valuenow="28" aria-valuemin="0" aria-valuemax="100"></div>
         		</div>
-               	<strong class="number" data-number="1432805" style="font-size:20px">0</strong>
+               	<strong class="number" data-number="${moneyDetail.fValue }" style="font-size:20px">0</strong>
                 <span>190명의 나눔두리가 후원하였습니다.</span>
               </div>
             </div>

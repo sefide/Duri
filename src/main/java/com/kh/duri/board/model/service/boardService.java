@@ -33,5 +33,7 @@ public interface boardService {
 
 	List<BoardItem> thingDetailOne2(BoardItem bi);
 
+	int insertCloud(Board b);
+
 
 }

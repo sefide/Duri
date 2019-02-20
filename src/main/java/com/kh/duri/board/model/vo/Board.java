@@ -18,12 +18,16 @@ public class Board {
 	private String mNick;
 	private String mAddress;
 	private String mFundType;
+	private int fdValue;
+	private int fd_ino;
+
 	
 	public Board() {}
 
+
 	public Board(int rnum, int fno, String ftype, String fTitle, String fContent, Date fWriterDate, Date fStartDate,
 			Date fEndDate, String fStatus, int fValue, String fValueType, int fWriter, String mNick, String mAddress,
-			String mFundType) {
+			String mFundType, int fdValue, int fd_ino) {
 		super();
 		this.rnum = rnum;
 		this.fno = fno;
@@ -40,136 +44,193 @@ public class Board {
 		this.mNick = mNick;
 		this.mAddress = mAddress;
 		this.mFundType = mFundType;
+		this.fdValue = fdValue;
+		this.fd_ino = fd_ino;
 	}
+
 
 	public int getRnum() {
 		return rnum;
 	}
 
+
 	public void setRnum(int rnum) {
 		this.rnum = rnum;
 	}
+
 
 	public int getFno() {
 		return fno;
 	}
 
+
 	public void setFno(int fno) {
 		this.fno = fno;
 	}
+
 
 	public String getFtype() {
 		return ftype;
 	}
 
+
 	public void setFtype(String ftype) {
 		this.ftype = ftype;
 	}
+
 
 	public String getfTitle() {
 		return fTitle;
 	}
 
+
 	public void setfTitle(String fTitle) {
 		this.fTitle = fTitle;
 	}
+
 
 	public String getfContent() {
 		return fContent;
 	}
 
+
 	public void setfContent(String fContent) {
 		this.fContent = fContent;
 	}
+
 
 	public Date getfWriterDate() {
 		return fWriterDate;
 	}
 
+
 	public void setfWriterDate(Date fWriterDate) {
 		this.fWriterDate = fWriterDate;
 	}
+
 
 	public Date getfStartDate() {
 		return fStartDate;
 	}
 
+
 	public void setfStartDate(Date fStartDate) {
 		this.fStartDate = fStartDate;
 	}
+
 
 	public Date getfEndDate() {
 		return fEndDate;
 	}
 
+
 	public void setfEndDate(Date fEndDate) {
 		this.fEndDate = fEndDate;
 	}
+
 
 	public String getfStatus() {
 		return fStatus;
 	}
 
+
 	public void setfStatus(String fStatus) {
 		this.fStatus = fStatus;
 	}
+
 
 	public int getfValue() {
 		return fValue;
 	}
 
+
 	public void setfValue(int fValue) {
 		this.fValue = fValue;
 	}
+
 
 	public String getfValueType() {
 		return fValueType;
 	}
 
+
 	public void setfValueType(String fValueType) {
 		this.fValueType = fValueType;
 	}
+
 
 	public int getfWriter() {
 		return fWriter;
 	}
 
+
 	public void setfWriter(int fWriter) {
 		this.fWriter = fWriter;
 	}
+
 
 	public String getmNick() {
 		return mNick;
 	}
 
+
 	public void setmNick(String mNick) {
 		this.mNick = mNick;
 	}
+
 
 	public String getmAddress() {
 		return mAddress;
 	}
 
+
 	public void setmAddress(String mAddress) {
 		this.mAddress = mAddress;
 	}
+
 
 	public String getmFundType() {
 		return mFundType;
 	}
 
+
 	public void setmFundType(String mFundType) {
 		this.mFundType = mFundType;
 	}
+
+
+	public int getFdValue() {
+		return fdValue;
+	}
+
+
+	public void setFdValue(int fdValue) {
+		this.fdValue = fdValue;
+	}
+
+
+	public int getFd_ino() {
+		return fd_ino;
+	}
+
+
+	public void setFd_ino(int fd_ino) {
+		this.fd_ino = fd_ino;
+	}
+
 
 	@Override
 	public String toString() {
 		return "Board [rnum=" + rnum + ", fno=" + fno + ", ftype=" + ftype + ", fTitle=" + fTitle + ", fContent="
 				+ fContent + ", fWriterDate=" + fWriterDate + ", fStartDate=" + fStartDate + ", fEndDate=" + fEndDate
 				+ ", fStatus=" + fStatus + ", fValue=" + fValue + ", fValueType=" + fValueType + ", fWriter=" + fWriter
-				+ ", mNick=" + mNick + ", mAddress=" + mAddress + ", mFundType=" + mFundType + "]";
+				+ ", mNick=" + mNick + ", mAddress=" + mAddress + ", mFundType=" + mFundType + ", fdValue=" + fdValue
+				+ ", fd_ino=" + fd_ino + "]";
 	}
 
+
+
+	
 	
 	
 }
