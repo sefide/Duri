@@ -69,7 +69,8 @@
 		FROM FUNDING
 		WHERE FTYPE='MONEY'
 		AND FSTATUS != 'END'
-		AND FSTATUS != 'YET' 
+		AND FSTATUS != 'YET'
+		AND FSTATUS != 'GOAL'  
 	</select>
 	
 	<!-- 금액후원 리스트 조회 -->
@@ -80,8 +81,9 @@
             		FROM FUNDING F
             		JOIN MEMBER M ON (M.MNO = F.FWRITER)
             		WHERE F.FTYPE='MONEY'
-            		AND FSTATUS != 'END'
-					AND FSTATUS != 'YET' 
+            		AND F.FSTATUS != 'END'
+					AND F.FSTATUS != 'YET'
+					AND F.FSTATUS != 'GOAL'  
             		ORDER BY F.FNO))
 	</select>
 	
@@ -99,7 +101,8 @@
 		FROM FUNDING
 		WHERE FTYPE='ITEM'
 		AND FSTATUS != 'END'
-		AND FSTATUS != 'YET' 
+		AND FSTATUS != 'YET'
+		AND FSTATUS != 'GOAL' 
 	</select>
 	
 	<!-- 물품후원 펀딩글 리스트 조회 -->
@@ -111,7 +114,8 @@
 		            WHERE M.MNO = F.FWRITER
 		            AND F.FTYPE='ITEM'
 		            AND F.FSTATUS != 'END'
-		            AND F.FSTATUS != 'YET' 
+		            AND F.FSTATUS != 'YET'
+		            AND F.FSTATUS != 'GOAL' 
 		            ORDER BY F.FNO))
 	</select>
 	
@@ -127,6 +131,7 @@
                     AND F.FTYPE = 'ITEM'
                     AND F.FSTATUS != 'END'
                     AND F.FSTATUS != 'YET'
+                    AND F.FSTATUS != 'GOAL' 
             		ORDER BY F.FNO))
 	</select>
 	
@@ -139,7 +144,8 @@
 		            WHERE M.MNO = F.FWRITER
 		            AND F.FTYPE='ITEM'
 		            AND F.FSTATUS != 'END'
-		            AND F.FSTATUS != 'YET' 
+		            AND F.FSTATUS != 'YET'
+		            AND F.FSTATUS != 'GOAL' 
 		            AND F.FNO = #{fno}))
 	</select>
 	
@@ -155,6 +161,7 @@
 		                    AND F.FTYPE = 'ITEM'
 		                    AND F.FSTATUS != 'END'
 		                    AND F.FSTATUS != 'YET'
+		                    AND F.FSTATUS != 'GOAL' 
 		                    AND F.FNO = #{fno}
 		            		ORDER BY F.FNO))
 	</select>

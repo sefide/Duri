@@ -10,8 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kh.duri.board.model.exception.BoardException;
 import com.kh.duri.board.model.exception.DonateListException;
 import com.kh.duri.board.model.service.boardService;
 import com.kh.duri.board.model.vo.Board;
@@ -230,26 +232,23 @@ public class BoardController {
 	 
 	//펀딩글 작성(행복두리)
 	@RequestMapping("writeCloud.bo")
-	public ModelAndView writeCloud(Board b, ModelAndView mv,HttpSession session){ 
+	public ModelAndView writeCloud(@RequestParam(required=false)Board b, ModelAndView mv,HttpSession session){ 
+		try {
+			System.out.println("Board : " + b);
 
-			System.out.println("Board : "+b);
-			
-			int writeCloud = 0; 		
-		
-			
-			writeCloud = bs.insertCloud(b); //받아온 아이디와 비밀번호로 로그인 정보 조회
-			
-			if(writeCloud > 0) {
-				
-				mv.setViewName("redirect:mypage.happy"); //위처럼 redirect로 뷰페이지이름연결할거랑 똑같음
-				
-			}else {
-				
-				session.setAttribute("b", b);	
-				mv.setViewName("redirect:writeCloud.bo"); //위처럼 redirect로 뷰페이지이름연결할거랑 똑같음
-				
+			int writeCloud = 0;
+
+			writeCloud = bs.insertCloud(b); // 받아온 아이디와 비밀번호로 로그인 정보 조회
+
+			if (writeCloud > 0) {
+				System.out.println("내사연페이지ㅣ로 이동");
+				mv.setViewName("redirect:mypage.happy"); // 위처럼 redirect로 뷰페이지이름연결할거랑 똑같음
+
 			}
+		} catch (BoardException e) {
+			mv.setViewName("redirect:writeCloud2.bo"); // 위처럼 redirect로 뷰페이지이름연결할거랑 똑같음
 
+		}
 
 		return mv;
 
@@ -275,6 +274,12 @@ public class BoardController {
 	*/
 	
 	 
+	
+	@RequestMapping("writeCloud2.bo")
+	public String eunji11() {
+		return "common/cloudWrite";
+	}
+	
 	
 	@RequestMapping("writeCloud_page.bo")
 	public String eunji10() {

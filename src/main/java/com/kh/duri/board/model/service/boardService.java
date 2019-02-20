@@ -2,6 +2,7 @@ package com.kh.duri.board.model.service;
 
 import java.util.List;
 
+import com.kh.duri.board.model.exception.BoardException;
 import com.kh.duri.board.model.exception.DonateListException;
 import com.kh.duri.board.model.vo.Board;
 import com.kh.duri.board.model.vo.BoardItem;
@@ -33,7 +34,7 @@ public interface boardService {
 
 	List<BoardItem> thingDetailOne2(BoardItem bi);
 
-	int insertCloud(Board b);
+	int insertCloud(Board b) throws BoardException;
 
 
 }

@@ -25,6 +25,21 @@ public class Board {
 	public Board() {}
 
 
+	public Board(String ftype, String fTitle, String fContent, int fValue, String fValueType, int fWriter, String mNick, int fdValue, int fd_ino) {
+		super();
+		this.ftype = ftype;
+		this.fTitle = fTitle;
+		this.fContent = fContent;
+		this.fValue = fValue;
+		this.fValueType = fValueType;
+		this.fWriter = fWriter;
+		this.mNick = mNick;
+		this.fdValue = fdValue;
+		this.fd_ino = fd_ino;
+	}
+
+	
+	
 	public Board(int rnum, int fno, String ftype, String fTitle, String fContent, Date fWriterDate, Date fStartDate,
 			Date fEndDate, String fStatus, int fValue, String fValueType, int fWriter, String mNick, String mAddress,
 			String mFundType, int fdValue, int fd_ino) {

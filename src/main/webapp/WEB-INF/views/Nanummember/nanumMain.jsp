@@ -103,7 +103,7 @@ body {
 							후원</h3>
 						<p style="">여러 나눔두리에게 도움을 청하는 행복두리에게 행복을 나눠주세요</p>
 						<p>
-							<a href="Eunji_cloudList.bo" class="btn btn-white px-3 py-2 mt-2" id="gofund"
+							<a href="money_donate.bo" class="btn btn-white px-3 py-2 mt-2" id="gofund"
 								style="font-family: Nanum Pen Script;">행복 나눔하기</a>
 						</p>
 					</div>

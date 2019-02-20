@@ -71,22 +71,22 @@
 			<span>마이페이지 &gt; 사연신청하기</span>
 		</div>
 		<br>
- <form action="writeCloud.bo" id="goCloud" method="POST">	
+ <form action="writeCloud.bo" id="goCloud" method="get">	
 <table>
   <tr>
    <td>
-    <table width="100%" cellpadding="0" cellspacing="0" border="0">
+<!--     <table width="100%" cellpadding="0" cellspacing="0" border="0">
      <tr style="background:url('img/table_mid.gif') repeat-x; text-align:center;">
       <td width="5"><img src="img/table_left.gif" width="5" height="30" /></td>
       <td width="5"><img src="img/table_right.gif" width="5" height="30" /></td>
      </tr>
-    </table>
+    </table> -->
 
    <table align="center">
      <tr>
       <td>&nbsp;
       	<input type="hidden" name ="fWriter" value="${sessionScope.loginUser.mno}">
-      	<input type="hidden" name ="mNickName" value="${sessionScope.loginUser.mNickName}">
+      	<input type="hidden" name ="mNick" value="${sessionScope.loginUser.mNickName}">
       </td>
       <td align="center" style="height:50px;"><b>제목</b></td>
       <td>
@@ -168,7 +168,7 @@
  			&nbsp;&nbsp;
  			<input type="text" id="thing1" name="fdValue" maxlength="2" style=" width:65px"><b>개</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
  			
- 				<select align="center" name="fd_ino" style="width:160px; height:30px;">
+ 				<select align="center" name="" style="width:160px; height:30px;">
  				<option disabled selected>선택</option>
  				<option value="1">생리대</option>
  				<option value="2">스킨로션세트</option>
@@ -191,9 +191,9 @@
  				<option value="19">클렌징폼&바디로션</option>
  			</select>
  			&nbsp;&nbsp;
- 			<input type="text" id="thing1" name="fdValue" maxlength="2" style=" width:65px"><b>개</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ 			<input type="text" id="thing1" name="" maxlength="2" style=" width:65px"><b>개</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
  				
- 				<select align="center" name="fd_ino" style="width:160px; height:30px;">
+ 				<select align="center" name="" style="width:160px; height:30px;">
  				<option disabled selected>선택</option>
  				<option value="1">생리대</option>
  				<option value="2">스킨로션세트</option>
@@ -216,7 +216,7 @@
  				<option value="19">클렌징폼&바디로션</option>
  			</select>
  			&nbsp;&nbsp;
- 			<input type="text" id="thing1" name="fdValue" maxlength="2" style=" width:65px"><b>개</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ 			<input type="text" id="thing1" name="" maxlength="2" style=" width:65px"><b>개</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 		</div>
 	 </td>
      </tr>
@@ -228,8 +228,8 @@
       <td>&nbsp;</td>
       <td align="center" style="height:50px;"><b>펀딩 종료 기간</b></td>
       <td>
-     	<select align="center" name="fd_ino" style="width:150px; height:30px;">
-     		<option value="" disabled selected>기간선택</option>
+     	<select align="center" style="width:150px; height:30px;">
+     		<option disabled selected>기간선택</option>
      		<option>15일</option>
      		<option>30일</option>
      		<option>60일</option>
@@ -265,9 +265,9 @@
   </tr>
  </table>
 	<div align="center">
-		 <div onclick="return writeCloud();" class="ui primary button">
+		 <button type="submit" class="ui primary button">
 		   	사연등록
-		</div>
+		</button>
 		<button class="ui button">
 		  	취소하기
 		</button>
@@ -288,9 +288,7 @@
 </c:if>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
-/*  var animal = $(':input[name=listChoice]:radio:checked').val();
-console.log(animal); 
- */
+
  $("input[type=radio]").click(function () {
 	    if($(this).prop("checked")) {   
 	    	if($(this).val()=="MONEY"){
@@ -316,23 +314,20 @@ console.log(animal);
 
 
  
-function writeCloud(){
-	swal({
-		  title: "작성완료!",
-		  text: "관리자 승인을 기다려주세요!",
-		  icon: "success",
-		  
-		  
-		}).then(function(){
-			$("#goCloud").submit();
-		});
-	
-	
-}
-	
+/* 	function writeCloud(){
+		/* swal({
+			  title: "작성완료!",
+			  text: "관리자 승인을 기다려주세요!",
+			  icon: "success"
+			  }).then(function(){ */
+			/* 	$("#goCloud").submit(); */
+			/* 	console.log("yes");
+		
+		
+	}
 
-
-
+				});
+				 */
 
 </script>
 </body>

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
 
+import com.kh.duri.board.model.exception.BoardException;
 import com.kh.duri.board.model.exception.DonateListException;
 import com.kh.duri.board.model.vo.Board;
 import com.kh.duri.board.model.vo.BoardItem;
@@ -36,7 +37,7 @@ public interface boardDao {
 
 	List<BoardItem> thingDetailOne2(SqlSessionTemplate sqlSession, BoardItem bi);
 
-	int insertCloud(SqlSessionTemplate sqlSession, Board b);
+	int insertCloud(SqlSessionTemplate sqlSession, Board b) throws BoardException;
 
 
 }
