@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.duri.Nanummember.model.vo.FundHistory;
 import com.kh.duri.board.model.vo.Board;
+import com.kh.duri.board.model.vo.BoardItem;
 import com.kh.duri.member.model.vo.Member;
 import com.kh.duri.payment.model.exception.DirectFundException;
 import com.kh.duri.payment.model.exception.FundingException;
@@ -15,6 +16,7 @@ import com.kh.duri.payment.model.exception.PaymentException;
 import com.kh.duri.payment.model.exception.PointHistoryException;
 import com.kh.duri.payment.model.exception.ReceiptException;
 import com.kh.duri.payment.model.exception.RefundException;
+import com.kh.duri.payment.model.vo.BoardItemValue;
 import com.kh.duri.payment.model.vo.DirectFundHist;
 import com.kh.duri.payment.model.vo.DonateReceipt;
 import com.kh.duri.payment.model.vo.PageInfo;
@@ -347,7 +349,7 @@ public class PaymentDaoImpl implements PaymentDao {
 		int result = sqlSession.insert("Point.insertFundMoneyHistory", fh);
 		
 		if(result == 0) {
-			throw new FundingException("로그인 정보를 가져올 수 없습니다. ");
+			throw new FundingException("후원정보를 입력할 수 없습니다. ");
 		}
 		
 		return result;
@@ -359,7 +361,7 @@ public class PaymentDaoImpl implements PaymentDao {
 		int result = sqlSession.insert("Point.insertDonateReceipt", fh);
 		
 		if(result == 0) {
-			throw new FundingException("로그인 정보를 가져올 수 없습니다. ");
+			throw new FundingException("기부금영수증 발급이력을 입력할 수 없습니다. ");
 		}
 		
 		return result;
@@ -402,6 +404,7 @@ public class PaymentDaoImpl implements PaymentDao {
 		return resultM;
 	}
 	
+	// 포인트 이력 update() - 나눔두리 
 	@Override
 	public int insertFundMoneynPoint(SqlSessionTemplate sqlSession, FundHistory fh) throws FundingException {
 		int result = sqlSession.insert("Point.insertFundMoneynPoint", fh);
@@ -412,7 +415,8 @@ public class PaymentDaoImpl implements PaymentDao {
 		
 		return result;
 	}
-	
+
+	// 포인트 이력 update() - 행복두리
 	@Override
 	public int insertFundMoneyhPoint(SqlSessionTemplate sqlSession, FundHistory fh) throws FundingException {
 		int result = sqlSession.insert("Point.insertFundMoneyhPoint", fh);
@@ -436,7 +440,30 @@ public class PaymentDaoImpl implements PaymentDao {
 		return result;
 	}
 	
+	// 물품 후원 결제페이지 - 후원글 정보 select
+	@Override
+	public BoardItem selectFundItemBoard(SqlSessionTemplate sqlSession, BoardItem bi) throws FundingException {
+		BoardItem b = sqlSession.selectOne("Point.selectFundItemBoard", bi);
+		
+		if(b == null) {
+			throw new FundingException("후원글 정보를 조회할 수 없습니다. ");
+		}
+		System.out.println("Dao b : " + b);
+		return b;
+	}
 	
+	// 물품 후원 결제페이지 - 후원물품정보 select
+	@Override
+	public List<BoardItemValue> selectFundItem(SqlSessionTemplate sqlSession, BoardItem bi) throws FundingException {
+		List<BoardItemValue> biList = sqlSession.selectList("Point.selectFundItem", bi);
+		
+		if(biList == null) {
+			throw new FundingException("물품후원 정보를 조회할 수 없습니다. ");
+		}
+		System.out.println("Dao biList : " + biList);
+		return biList;
+	}
+
 	
 	
 	

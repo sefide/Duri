@@ -3,6 +3,7 @@ package com.kh.duri.payment.controller;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.duri.Nanummember.model.vo.FundHistory;
 import com.kh.duri.board.model.vo.Board;
+import com.kh.duri.board.model.vo.BoardItem;
 import com.kh.duri.common.CommonUtils;
 import com.kh.duri.member.model.vo.Member;
 import com.kh.duri.payment.model.exception.DirectFundException;
@@ -637,9 +639,28 @@ public class PaymentController {
 	
 	// 물품 후원 결제페이지
 	@RequestMapping("fundItem.pm")
-	public String fundItem() {
-	    return "payment/pay_fundItem";
+	public String fundItem(@RequestParam String fno, HttpServletRequest request, HttpServletResponse response, Model model) {
+		System.out.println("fno : "+ fno);
+		
+		BoardItem bi = new BoardItem();
+		bi.setFno(Integer.parseInt(fno));
+		
+		try {
+			HashMap<String, Object> hmap = ps.selectFundItem(bi);
+			
+			model.addAttribute("biList", hmap.get("biList"));
+			model.addAttribute("b", hmap.get("b"));
+			
+		    return "payment/pay_fundItem";
+		} catch (FundingException e) {
+			e.printStackTrace();
+			return "common/errorPage";
+		} 
 	}
-
-
+	
+	// 물품 후원 진행 
+	@RequestMapping("execfundItem.pm")
+	public String execfundItem() {
+	    return "payment/pay_success";
+	}
 }

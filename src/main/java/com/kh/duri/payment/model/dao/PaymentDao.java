@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 
 import com.kh.duri.Nanummember.model.vo.FundHistory;
 import com.kh.duri.board.model.vo.Board;
+import com.kh.duri.board.model.vo.BoardItem;
 import com.kh.duri.member.model.vo.Member;
 import com.kh.duri.payment.model.exception.DirectFundException;
 import com.kh.duri.payment.model.exception.FundingException;
@@ -13,6 +14,7 @@ import com.kh.duri.payment.model.exception.PaymentException;
 import com.kh.duri.payment.model.exception.PointHistoryException;
 import com.kh.duri.payment.model.exception.ReceiptException;
 import com.kh.duri.payment.model.exception.RefundException;
+import com.kh.duri.payment.model.vo.BoardItemValue;
 import com.kh.duri.payment.model.vo.DirectFundHist;
 import com.kh.duri.payment.model.vo.DonateReceipt;
 import com.kh.duri.payment.model.vo.PageInfo;
@@ -89,6 +91,12 @@ public interface PaymentDao {
 	int insertFundMoneynPoint(SqlSessionTemplate sqlSession, FundHistory fh) throws FundingException;
 	int insertFundMoneyhPoint(SqlSessionTemplate sqlSession, FundHistory fh) throws FundingException;
 	int selectFundHistCurVal(SqlSessionTemplate sqlSession) throws FundingException;
+
+	// 물품 후원 결제페이지 - 후원글 정보 select
+	BoardItem selectFundItemBoard(SqlSessionTemplate sqlSession, BoardItem bi) throws FundingException;
+	// 물품 후원 결제페이지 - 후원물품정보 select
+	List<BoardItemValue> selectFundItem(SqlSessionTemplate sqlSession, BoardItem bi) throws FundingException;
+
 		
 	
 	

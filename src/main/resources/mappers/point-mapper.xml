@@ -103,6 +103,39 @@
 	</resultMap>
 	
 	
+	<resultMap type="com.kh.duri.board.model.vo.BoardItem" id="boardItemResultSet">
+		<id property="fno" column="FNO"></id>
+		<result property="rnum" column="RNUM"/>
+		<result property="fTitle" column="FTITLE"/>
+		<result property="fContent" column="FCONTENT"/>
+		<result property="fWriterDate" column="FWRITERDATE"/>
+		<result property="fStartDate" column="FSTARTDATE"/>
+		<result property="fEndDate" column="FENDDATE"/>
+		<result property="fStatus" column="FSTATUS"/>
+		<result property="fWriter" column="FWRITER"/>
+		<result property="iName" column="INAME"/>
+		<result property="mNick" column="MNICK"/>
+		<result property="mAddress" column="MADDRESS"/>
+		<result property="mFundType" column="MFUNDTYPE"/>
+		<result property="fdValue" column="FDVALUE"/>
+		<result property="fd_ino" column="FD_INO"/>
+	</resultMap>
+	
+	
+	<resultMap type="com.kh.duri.payment.model.vo.BoardItemValue" id="boardItemValueResultSet">
+		<id property="fdno" column="FDNO"></id>
+		<result property="fno" column="FNO"/>
+		<result property="fTitle" column="FTITLE"/>
+		<result property="fStatus" column="FSTATUS"/>
+		<result property="fWriter" column="FWRITER"/>
+		<result property="mNick" column="MNICK"/>
+		<result property="iNo" column="INO"/>
+		<result property="iName" column="INAME"/>
+		<result property="iPrice" column="IPRICE"/>
+		<result property="fdValue" column="FDVALUE"/>
+		<result property="sumItemValue" column="SUMVALUE"/>
+	</resultMap>
+	
 	<!-- 나눔두리 - 포인트 이력 수 세기 -->
 	<select id="selectPointListCount" resultType="_int">
 		SELECT COUNT(*)
@@ -348,5 +381,24 @@
 		SELECT SEQ_FH_NO.CURRVAL FROM DUAL
 	</select>
 	
+	<!-- 후원글 정보 가져오기 - 물품후원 -->
+	<select id="selectFundItemBoard" resultMap="boardItemResultSet" parameterType="BoardItem">
+		SELECT FNO, FTITLE, FWRITER, MNICK
+		FROM FUNDING F
+		JOIN MEMBER M ON (M.MNO = F.FWRITER)
+		WHERE FNO = #{fno}
+	</select>
+	
+	<!-- 후원물품 정보  가져오기 - 물품후원글 -->
+	<select id="selectFundItem" resultMap="boardItemValueResultSet" parameterType="BoardItem">
+		SELECT DISTINCT FNO, FDNO, FDVALUE, INO, INAME, IPRICE, SUM(FHDITEMVALUE) AS SUMVALUE
+		FROM FUNDINGDETAIL FD
+		JOIN FUNDITEM FI ON (FD.FD_INO = FI.INO)
+		LEFT OUTER JOIN FUNDHISTORYDETAIL FHD ON (FHD.FHD_INO = FD.FD_INO)
+		JOIN FUNDING F ON (F.FNO = FD.FD_FNO)
+		WHERE FNO = #{fno}
+		GROUP BY FNO, FDNO, FDVALUE, INO, INAME, IPRICE, FNO
+	</select>
+
 	
 </mapper>
