@@ -8,6 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import com.kh.duri.Nanummember.model.exception.NanumException;
 import com.kh.duri.Nanummember.model.vo.DirectFundHistory;
 import com.kh.duri.Nanummember.model.vo.FundInterest;
+import com.kh.duri.Nanummember.model.vo.FundItem;
 import com.kh.duri.Nanummember.model.vo.Funding;
 import com.kh.duri.Nanummember.model.vo.Letter;
 import com.kh.duri.Nanummember.model.vo.PageInfo;
@@ -34,6 +35,8 @@ public interface NanumMemberDao {
 	HashMap<String, Integer> getLikeListCount(SqlSessionTemplate sqlSession, Member m) throws NanumException;
 	//찜한 후원  가져오기
 	HashMap<String, List<FundInterest>> selectLikeFundList(SqlSessionTemplate sqlSession, Member m, HashMap<String, PageInfo> paging) throws NanumException;
+	//종료된 물품 크라우드 펀딩 - 물품 가져오기
+	HashMap<String, FundItem> selectEndItem(SqlSessionTemplate sqlSession, Member m, int fno)throws NanumException;
 	
 	
 	

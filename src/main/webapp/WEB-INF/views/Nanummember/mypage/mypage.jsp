@@ -174,7 +174,7 @@
 						<tr>
 							<th style="width: 40%;">제목</th>
 							<th style="width: 15%;">진행현황</th>
-							<th style="width: 15%;">내가 후원한 호인트</th>
+							<th style="width: 15%;">내가 후원한 물품</th>
 							<th style="width: 15%;">후원 일시</th>
 							<th style="width: 15%;">100%달성여부</th>
 						</tr>
@@ -328,7 +328,7 @@
 						<tr>
 							<th style="width: 40%;">제목</th>
 							<th style="width: 15%;">진행현황</th>
-							<th style="width: 15%;">내가 후원한 호인트</th>
+							<th style="width: 15%;">내가 후원한 물품</th>
 							<th style="width: 15%;">후원 일시</th>
 							<th style="width: 15%;">100%달성여부</th>
 						</tr>					

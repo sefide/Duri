@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.duri.Nanummember.model.exception.NanumException;
 import com.kh.duri.Nanummember.model.vo.FundInterest;
+import com.kh.duri.Nanummember.model.vo.FundItem;
 import com.kh.duri.Nanummember.model.vo.Funding;
 import com.kh.duri.Nanummember.model.vo.Letter;
 import com.kh.duri.Nanummember.model.vo.PageInfo;
@@ -177,6 +178,12 @@ public class NanumMemberDaoImpl implements NanumMemberDao {
 		likeFundList.put("likeMoneyList", likeMoneyList);
 		likeFundList.put("likeItemList", likeItemList);	
 		return likeFundList;
+	}
+	//종료된 물품 크라우드 펀딩 - 물품 가져오기
+	@Override
+	public HashMap<String, FundItem> selectEndItem(SqlSessionTemplate sqlSession, Member m, int fno) throws NanumException {
+		FundItem endItem = sqlSession.selectOne("Nanum.selectIngItem",fno);
+		return null;
 	}
 		
 		

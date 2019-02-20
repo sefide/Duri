@@ -1,5 +1,6 @@
 package com.kh.duri.Nanummember.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,6 +20,7 @@ import com.kh.duri.Nanummember.model.exception.NanumException;
 import com.kh.duri.Nanummember.model.service.NanumMemberService;
 import com.kh.duri.Nanummember.model.vo.DirectFundHistory;
 import com.kh.duri.Nanummember.model.vo.FundInterest;
+import com.kh.duri.Nanummember.model.vo.FundItem;
 import com.kh.duri.Nanummember.model.vo.Funding;
 import com.kh.duri.Nanummember.model.vo.Letter;
 import com.kh.duri.Nanummember.model.vo.PageInfo;
@@ -86,6 +88,25 @@ public class NanumController {
 			List<Funding>endMoneyList = cloudList.get("endMoneyList");
 			List<Funding>itemList = cloudList.get("itemList");
 			List<Funding>endItemList = cloudList.get("endItemList");
+			//물품을 가져와 보자!
+			HashMap<String,FundItem> ingItem = new HashMap<String,FundItem>(); //진행중인 물품 크라우드 펀딩 - 물품 리스트
+			HashMap<String,FundItem> endItem = new HashMap<String,FundItem>(); //종료된 물품 크라우드 펀딩 - 물품 리스트			
+		/*	if(itemList.get(0) != null ) { //진행중인 물품 크라우드 펀딩이 있을경우
+				for(int i = 0; i<itemList.size(); i++) {
+					ingItem = ns.selectIngItem(m,itemList.get(0));
+					ingItem.put(key, value)
+				}
+			}*/
+			if(endItemList.get(0) != null ) { //종료된 물품 크라우드 펀딩이 있을경우
+				for(int i = 0; i<endItemList.size(); i++) {
+					int fno = endItemList.get(0).getfNo();
+					ingItem = ns.selectEndItem(m,fno);
+					/*endItem.put(fno, ingItem);*/
+			}
+			}
+			System.out.println("itemList : "+itemList);
+			System.out.println("endItemList : "+endItemList);
+			
 			model.addAttribute("moneyList",moneyList);
 			model.addAttribute("pi",pi);
 			model.addAttribute("endMoneyList",endMoneyList);
@@ -94,8 +115,8 @@ public class NanumController {
 			model.addAttribute("pi3",pi3);	
 			model.addAttribute("endItemList",endItemList);
 			model.addAttribute("pi4",pi4);		
-			return "Nanummember/mypage/mypage";			
-		} catch (NanumException e) {
+			return "Nanummember/mypage/mypage";	
+		}catch (NanumException e) {
 			model.addAttribute("msg", e.getMessage());
 			return "Nanummember/mypage/mypage";
 		}		
