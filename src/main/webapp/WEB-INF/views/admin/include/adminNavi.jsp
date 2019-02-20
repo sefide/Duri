@@ -51,7 +51,7 @@
                                 <a href="QnAList.nanum">나눔두리 Q&A</a>
                             </li>
                             <li>
-                                <a href="adminQnA">행복두리 Q&A</a>
+                                <a href="adminQnA.ad">행복두리 Q&A</a>
                             </li>
 							</ul>
 						</li>	

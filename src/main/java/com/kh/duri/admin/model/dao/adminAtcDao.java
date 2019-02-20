@@ -23,5 +23,7 @@ public interface adminAtcDao {
 	List<adminFundingList> CrowdFundGoodsInfo(SqlSessionTemplate sqlsession, adminFundingList f)throws ListException;
 	//관리자 행복두리 Q&A 목록
 	List<adminQnA> adminQnAList(SqlSessionTemplate sqlsession)throws ListException;
+	//관리자 행복두리 Q&A 상세보기
+	adminQnA adminQnADetail(SqlSessionTemplate sqlsession, adminQnA q)throws ListException;
 	
 }

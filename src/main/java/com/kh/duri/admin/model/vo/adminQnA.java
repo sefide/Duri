@@ -9,7 +9,7 @@ public class adminQnA {
 	private Date qDate;//작성일시
 	private String qTitle;//제목
 	private String qContent;//내용
-	private String qType;//구분
+	private String qAnswer;//답변
 	private String qWriter;//작성회원구분
 	private int q_Mno;//회원번호
 	
@@ -38,7 +38,7 @@ public class adminQnA {
 
 
 
-	public adminQnA(int qNo, Date qDate, String qTitle, String qContent, String qType, String qWriter, int q_Mno,
+	public adminQnA(int qNo, Date qDate, String qTitle, String qContent, String qAnswer, String qWriter, int q_Mno,
 			int mno, String mName, String mNick, String mPhone, String mid, String mpwd, String mtype, String mFundtype,
 			String mpr, String mprNew, String mStatus, String mTakeStatus) {
 		super();
@@ -46,7 +46,7 @@ public class adminQnA {
 		this.qDate = qDate;
 		this.qTitle = qTitle;
 		this.qContent = qContent;
-		this.qType = qType;
+		this.qAnswer = qAnswer;
 		this.qWriter = qWriter;
 		this.q_Mno = q_Mno;
 		this.mno = mno;
@@ -68,7 +68,7 @@ public class adminQnA {
 	@Override
 	public String toString() {
 		return "adminQnA [qNo=" + qNo + ", qDate=" + qDate + ", qTitle=" + qTitle + ", qContent=" + qContent
-				+ ", qType=" + qType + ", qWriter=" + qWriter + ", q_Mno=" + q_Mno + ", mno=" + mno + ", mName=" + mName
+				+ ", qAnswer=" + qAnswer + ", qWriter=" + qWriter + ", q_Mno=" + q_Mno + ", mno=" + mno + ", mName=" + mName
 				+ ", mNick=" + mNick + ", mPhone=" + mPhone + ", mid=" + mid + ", mpwd=" + mpwd + ", mtype=" + mtype
 				+ ", mFundtype=" + mFundtype + ", mpr=" + mpr + ", mprNew=" + mprNew + ", mStatus=" + mStatus
 				+ ", mTakeStatus=" + mTakeStatus + "]";
@@ -124,14 +124,14 @@ public class adminQnA {
 
 
 
-	public String getqType() {
-		return qType;
+	public String getqAnswer() {
+		return qAnswer;
 	}
 
 
 
-	public void setqType(String qType) {
-		this.qType = qType;
+	public void setqAnswer(String qAnswer) {
+		this.qAnswer = qAnswer;
 	}
 
 

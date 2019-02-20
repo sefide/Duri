@@ -144,8 +144,32 @@ public class AdminAtcController {
 	}
 	//관리자 행복두리 Q&A상세보기
 	@RequestMapping("adminQnADetail.ad")
-	public String adminQnADetail() {
-		return "admin/adminQnADetail";
+	public String adminQnADetail(HttpServletRequest request, HttpServletResponse response,Model model,adminQnA q) {
+		
+		int Mnonum = Integer.parseInt(request.getParameter("Mnonum"));
+		int Qnanum = Integer.parseInt(request.getParameter("Qnanum"));
+		
+	
+		
+		q.setQ_Mno(Mnonum);
+		q.setqNo(Qnanum);
+		
+		adminQnA adminQnADetail;
+		
+		try {
+			adminQnADetail = aas.adminQnADetail(q);
+			
+			model.addAttribute("adminQnADetail", adminQnADetail);
+			return "admin/adminQnADetail";
+			
+		} catch (ListException e) {
+			
+			model.addAttribute("msg", e.getMessage());
+			
+			return "admin/adminQnADetail";
+		}
+		
+	
 	}
 	
 	

@@ -163,7 +163,15 @@
 	
 	<!-- 관리자 행복두리 Q&A 목록 -->
 	<select id="adminQnAList" resultType="adminQnA" parameterType="adminQnA" >
-		
+		SELECT Q.Q_MNO,Q.QNO,Q.QDATE,Q.QTITLE,Q.QANSWER,M.MID,M.MNAME,M.MNO
+		FROM QNA Q JOIN MEMBER M ON(M.MNO=Q.Q_MNO)  
+		WHERE QWRITER='H' ORDER BY Q.QDATE DESC,Q.QANSWER NULLS FIRST 
+	</select>
+	<!-- 관리자 행복두리 Q&A 상세보기  -->
+	<select id="adminQnADetail" resultType="adminQnA" parameterType="adminQnA" >
+		SELECT Q.QNO,Q.Q_MNO,Q.QDATE,Q.QTITLE,Q.QCONTENT,M.MID,M.MNAME,Q.QWRITER
+		FROM QNA Q JOIN MEMBER M ON(M.MNO=Q.Q_MNO)  
+		WHERE Q.QWRITER='H' AND Q.Q_MNO=#{q_Mno} AND Q.QNO=#{qNo}
 	</select>
 	
 	
