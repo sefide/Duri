@@ -64,5 +64,23 @@ public class adminAtcServiceImpl implements adminAtcService{
 		adminQnA adminQnADetail = aad.adminQnADetail(sqlsession,q);
 		return adminQnADetail;
 	}
+	//관리자 나눔두리 Q&A 목록
+	@Override
+	public List<adminQnA> adminNanumQnAList() throws ListException {
+		List<adminQnA>list = aad.adminNanumQnAList(sqlsession);
+		return list;
+	}
+	//관리자 나눔두리 Q&A 상세보기
+	@Override
+	public adminQnA adminNanumQnADetail(adminQnA q) throws ListException {
+		adminQnA adminNanumQnADetail = aad.adminNanumQnADetail(sqlsession,q);
+		return adminNanumQnADetail;
+	}
+	//관리자 나눔두리 Q&A 댓글달기
+	@Override
+	public int insertReply(adminQnA q) throws ListException {
+		int result = aad.insertReply(sqlsession,q);
+		return result;
+	}
 
 }

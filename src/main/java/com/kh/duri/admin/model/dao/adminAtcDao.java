@@ -25,5 +25,11 @@ public interface adminAtcDao {
 	List<adminQnA> adminQnAList(SqlSessionTemplate sqlsession)throws ListException;
 	//관리자 행복두리 Q&A 상세보기
 	adminQnA adminQnADetail(SqlSessionTemplate sqlsession, adminQnA q)throws ListException;
+	//관리자 나눔두리 Q&A 목록
+	List<adminQnA> adminNanumQnAList(SqlSessionTemplate sqlsession) throws ListException;
+	//관리자 나눔두리 Q&A 상세보기
+	adminQnA adminNanumQnADetail(SqlSessionTemplate sqlsession, adminQnA q)throws ListException;
+	//관리자 나눔두리 Q&A 댓글달기
+	int insertReply(SqlSessionTemplate sqlsession, adminQnA q)throws ListException;
 	
 }

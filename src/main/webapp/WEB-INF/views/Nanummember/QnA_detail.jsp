@@ -136,7 +136,7 @@ td {
 			</tr>
 			<tr>
 				<c:choose>
-					<c:when test="${QnAList.qAnswer == NULL }">
+					<c:when test="${empty QnAList.qAnswer }   ">
 						<td>답변이 아직 미 등록상태입니다. 기다려 주세요.</td>
 					</c:when>
 					<c:otherwise>
@@ -159,6 +159,7 @@ td {
 	</div>
 	</c:forEach>
 	<script type="text/javascript">
+		//삭제하기 버튼 클릭
 		function deleteQnA(qNo) {
 			var qNo = qNo;
 			location.href='deleteQnA.nanum?qNo='+qNo;

@@ -377,8 +377,10 @@
   	<insert id="insertQnA">
   		INSERT INTO QNA VALUES(SEQ_Q_NO.NEXTVAL, SYSDATE,#{qTitle},#{qContent},DEFAULT,'N',#{q_mNo})
   	</insert>
-  	
-  	
+  	<!-- QnA 삭제 -->
+  	<delete id="deletetQnA">
+  		DELETE FROM QNA WHERE QNO = #{qNo}
+  	</delete>
   	
   	
   	

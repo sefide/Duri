@@ -348,12 +348,29 @@ public class NanumController {
 	@RequestMapping("deleteQnA.nanum")
 	public String deleteQnA(Model model, HttpServletRequest request, HttpServletResponse response) {
 		int qNo = Integer.parseInt(request.getParameter("qNo"));
-		System.out.println("삭제 controller 들어왔당ㅎㅎ qNo :"+qNo);
-		int result = ns.deleteQnA(qNo);
-		return "redirect:QnAList.nanum";
+		try {
+			int result = ns.deleteQnA(qNo);
+			return "redirect:QnAList.nanum";
+		} catch (NanumException e) {
+			e.printStackTrace();
+			return "redirect:QnAList.nanum";
+		}
 	}
 	
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	/* ----------------------나눔두리 회원정보 수정 ----------------------*/
 	@RequestMapping("updateInfo.nanum")
 	public String Total12() {
 		return "Nanummember/mypage/mypage_updateInfo";
