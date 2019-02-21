@@ -26,6 +26,9 @@
 <title>둘이두리</title>
 <jsp:include page="../common/css.jsp"/>
 <style>
+	#box-right{
+		line-height : 0px !important;
+	}
 	.ftco-section {
     	padding: 4em 0;
     }
