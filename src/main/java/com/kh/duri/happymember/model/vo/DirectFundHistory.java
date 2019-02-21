@@ -12,14 +12,14 @@ public class DirectFundHistory implements java.io.Serializable {
 	private String dh_mno_take;//후원대상자 번호
 	private int dh_mno_give;//후원자번호
 	private int rnum;
-	private String dh_name_give;
+	private String dh_nick_give;
 	private int sum;
 	private int cnt;
 	
 	public DirectFundHistory() {}
 
 	public DirectFundHistory(int dhno, int dhvalue, Date dhstartdate, String dhstatus, String dhbillingkey,
-			String dhvaluetype, String dh_mno_take, int dh_mno_give, int rnum, String dh_name_give, int sum, int cnt) {
+			String dhvaluetype, String dh_mno_take, int dh_mno_give, int rnum, String dh_nick_give, int sum, int cnt) {
 		super();
 		this.dhno = dhno;
 		this.dhvalue = dhvalue;
@@ -30,7 +30,7 @@ public class DirectFundHistory implements java.io.Serializable {
 		this.dh_mno_take = dh_mno_take;
 		this.dh_mno_give = dh_mno_give;
 		this.rnum = rnum;
-		this.dh_name_give = dh_name_give;
+		this.dh_nick_give = dh_nick_give;
 		this.sum = sum;
 		this.cnt = cnt;
 	}
@@ -107,12 +107,12 @@ public class DirectFundHistory implements java.io.Serializable {
 		this.rnum = rnum;
 	}
 
-	public String getDh_name_give() {
-		return dh_name_give;
+	public String getDh_nick_give() {
+		return dh_nick_give;
 	}
 
-	public void setDh_name_give(String dh_name_give) {
-		this.dh_name_give = dh_name_give;
+	public void setDh_nick_give(String dh_nick_give) {
+		this.dh_nick_give = dh_nick_give;
 	}
 
 	public int getSum() {
@@ -135,8 +135,8 @@ public class DirectFundHistory implements java.io.Serializable {
 	public String toString() {
 		return "DirectFundHistory [dhno=" + dhno + ", dhvalue=" + dhvalue + ", dhstartdate=" + dhstartdate
 				+ ", dhstatus=" + dhstatus + ", dhbillingkey=" + dhbillingkey + ", dhvaluetype=" + dhvaluetype
-				+ ", dh_mno_take=" + dh_mno_take + ", dh_mno_give=" + dh_mno_give + ", rnum=" + rnum + ", dh_name_give="
-				+ dh_name_give + ", sum=" + sum + ", cnt=" + cnt + "]";
+				+ ", dh_mno_take=" + dh_mno_take + ", dh_mno_give=" + dh_mno_give + ", rnum=" + rnum + ", dh_nick_give="
+				+ dh_nick_give + ", sum=" + sum + ", cnt=" + cnt + "]";
 	}
 
 	

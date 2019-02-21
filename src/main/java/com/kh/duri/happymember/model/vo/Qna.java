@@ -2,7 +2,7 @@ package com.kh.duri.happymember.model.vo;
 
 import java.sql.Date;
 
-public class Qna {
+public class Qna implements java.io.Serializable{
 	int qno;
 	Date qdate;
 	String qtitle;

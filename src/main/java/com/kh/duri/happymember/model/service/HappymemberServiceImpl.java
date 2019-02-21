@@ -14,6 +14,7 @@ import com.kh.duri.happymember.model.vo.DeliveryDetail;
 import com.kh.duri.happymember.model.vo.FundItemList;
 import com.kh.duri.happymember.model.vo.Funding;
 import com.kh.duri.happymember.model.vo.MyDonateItems;
+import com.kh.duri.happymember.model.vo.Qna;
 import com.kh.duri.member.model.vo.Member;
 import com.kh.duri.payment.model.vo.PageInfo;
 
@@ -146,6 +147,30 @@ public class HappymemberServiceImpl implements HappymemberService {
 		
 		return listCount;
 	}
+
+	//Q&A 목록 조회
+	@Override
+	public List<Qna> selectQnaList(Member m, PageInfo pi) throws MypageException {
+		List<Qna> qnaList = hd.selectQnaList(sqlSession, m, pi);
+		
+		return qnaList;
+	}
+
+	//Q&A 작성
+	@Override
+	public int insertQna(Qna q) throws MypageException {
+		int result = hd.insertQna(sqlSession, q);
+		
+		return result;
+	}
+
+	/*//감사편지 보낼 정기후원자 닉네임 뽑기
+	@Override
+	public List<Member> selectNanumNick(Member m) throws MypageException {
+		List<Member> nanumNicks = hd.selectNanumNick(sqlSession, m);
+		
+		return nanumNicks;
+	}*/
 
 
 	

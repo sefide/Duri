@@ -175,6 +175,7 @@
 			        var startDate = "";		var endDate = "";
 			        startDate = sd.getFullYear() + '-' + ('0' + (sd.getMonth() + 1)).slice(-2) + '-' + ('0' + (sd.getDate())).slice(-2);
 			        endDate = ed.getFullYear() + '-' + ('0' + (ed.getMonth() + 1)).slice(-2) + '-' + ('0' + (ed.getDate())).slice(-2);
+			       
 			        //제목,내용 길이 제한
 					var title = (data.itemDonateList[i].ftitle).substring(0, 10);
 					var content = (data.itemDonateList[i].fcontent).substring(0, 30);
@@ -211,8 +212,8 @@
 					itemTbodyHtml.push('<td><i class="yellow circle icon" alt="승인전"></i></td>');
 				} 
 					itemTbodyHtml.push('</tr>');
-				
 			}	
+				
 				if(data.itemDonateList.length == 0){
 					itemTbodyHtml.push('<tr>');
 					itemTbodyHtml.push('<td colspan="6"> 물품후원 신청 내역이 없습니다.</td>');
@@ -317,7 +318,7 @@
 				} 
 					moneyTbodyHtml.push('</tr>');
 				
-			}	
+			}
 				if(data.moneyDonateList.length == 0){
 					moneyTbodyHtml.push('<tr>');
 					moneyTbodyHtml.push('<td colspan="6"> 금액후원 신청 내역이 없습니다.</td>');
@@ -332,11 +333,11 @@
 				var moneyTbodyPageHtml = [];	
 				var currentPage = data.pi.currentPage;
 				//<<, <버튼 만들기
-				moneyTbodyPageHtml.push('<span><a class="num" onclick="itemTable(1);">&lt;&lt;</a></span>');
+				moneyTbodyPageHtml.push('<span><a class="num" onclick="moneyTable(1);">&lt;&lt;</a></span>');
 			if(currentPage <= 1){
 				moneyTbodyPageHtml.push('<span><a class="num" disabled>&lt;</a></span>');
 			}else{//1보다 큰 수의 페이지면
-				moneyTbodyPageHtml.push('<span><a class="num" onclick="itemTable('+(currentPage-1)+')">&lt;</a></span>');
+				moneyTbodyPageHtml.push('<span><a class="num" onclick="moneyTable('+(currentPage-1)+')">&lt;</a></span>');
 			}
 			
 				//숫자 버튼 만들기
@@ -344,16 +345,16 @@
 				if(i == currentPage){
 					moneyTbodyPageHtml.push('<span><a class="num on" disabled>'+i+'</a></span>');
 				}else{
-					moneyTbodyPageHtml.push('<span><a class="num" onclick="itemTable('+i+')">'+i+'</a></span>');
+					moneyTbodyPageHtml.push('<span><a class="num" onclick="moneyTable('+i+')">'+i+'</a></span>');
 				}
 			}
 				//>>, >버튼 만들기
 				if(currentPage >= data.pi.maxPage){
 					moneyTbodyPageHtml.push('<span><a class="num" disabled>&gt;</a></span>');
 				}else{
-					moneyTbodyPageHtml.push('<span><a class="num" onclick="itemTable('+(currentPage+1)+')">&gt;</a></span>');
+					moneyTbodyPageHtml.push('<span><a class="num" onclick="moneyTable('+(currentPage+1)+')">&gt;</a></span>');
 				}
-				moneyTbodyPageHtml.push('<span><a class="num" onclick="itemTable('+data.pi.maxPage+');">&gt;&gt;</a></span>');
+				moneyTbodyPageHtml.push('<span><a class="num" onclick="moneyTable('+data.pi.maxPage+');">&gt;&gt;</a></span>');
 				
 				
 				$("#moneyPageArea").html("");

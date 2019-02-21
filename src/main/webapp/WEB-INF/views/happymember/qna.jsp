@@ -2,6 +2,8 @@
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
+
 <% 
 	String bigtabon="6";
 %>
@@ -18,7 +20,7 @@
 	.textOrange {color: orange; font-weight: 600;} */
 </style>
 
-<title>마이페이지>나의 문의내역</title>
+<title>마이페이지>Q&A</title>
 <!-- Q&A -->
 </head>
 <body>
@@ -47,7 +49,7 @@
 					답변 중&nbsp;<i class="yellow circle icon" alt="답변 중"></i>
 				</h4>
 			</div>
-			<span>마이페이지 &gt; 나의 문의 내역</span>
+			<span>마이페이지 &gt; Q&A</span>
 		</div>
 		<br>
 		
@@ -64,28 +66,79 @@
 				<th scope="col">No</th>
 				<th scope="col">제목</th>
 				<th scope="col">내용</th>
+				<th scope="col">작성일시</th>
 				<th scope="col">답변상태</th>
 			</tr>
 			</thead>
 			<tbody>
-			<tr>
-				<td>1</td>
-				<td>증빙서류를 기간 내에 내지 못했어요</td>
-				<td class="tleft"><a href="qnaDetail.happy">안녕하세요! 증빙서류를 제 기간 내에 내지 못했습니다</a></td>
-				<td><i class="green circle icon" alt="답변완료"></i></td>
-			</tr>
+			<c:if test="${ !empty qnaList }">
+			<c:forEach items="${qnaList }" var="qnaList">
+				<tr>
+					<td><c:out value="${qnaList.rnum }"></c:out></td>
+					<td><c:out value="${qnaList.qtitle }"></c:out></td>
+					<td><c:out value="${qnaList.qcontent }"></c:out></td>
+					<td><c:out value="${qnaList.qdate }"></c:out></td>
+					<c:if test="${ empty qnaList.qanswer }">
+						<td><i class="yellow circle icon" alt="답변중"></i></td>
+					</c:if>
+					<c:if test="${ !empty qnaList.qanswer }">
+						<td><i class="green circle icon" alt="답변완료"></i></td>
+					</c:if>
+				</tr>
+			</c:forEach>
+			</c:if>
+			
+			<c:if test="${ empty qnaList }">
+				<tr>
+					<td colspan = "5"> Q&A 작성 내역이 없습니다.  </td>
+				<tr>
+			</c:if>
 			</tbody>
 		</table>
 
 		<div class="numbox pt40 pb50"> 
+			<c:url var="firstList" value="qna.happy">
+				<c:param name="currentPage" value="${pi.startPage }"></c:param>
+			</c:url>
+			<span><a class="num" href="${firstList }">&lt;&lt;</a></span>
+			<c:if test="${pi.currentPage <= 1 }">
 			<span><a class="num" href="#">&lt;</a></span>
-			<span><a class="num on" href="#">1</a></span>
-			<span><a class="num" href="#">2</a></span>
-			<span><a class="num" href="#">3</a></span>
-			<span><a class="num" href="#">4</a></span>
-			<span><a class="num" href="#">5</a></span>
-			<span><a class="num" href="#">&gt;</a></span>
+			</c:if>
+			<c:if test="${pi.currentPage > 1 }">
+				<c:url var="listBack" value="qna.happy">
+					<c:param name="currentPage" value="${pi.currentPage - 1 }"></c:param>
+				</c:url>
+				<span><a class="num" href="${listBack }">&lt;</a></span>
+			</c:if>
+			<!-- var : 현재 반복 횟수에 해당하는 변수의 이름 -->
+			<c:forEach var="page" begin="${pi.startPage }" end="${pi.endPage }">
+				<c:if test="${page eq pi.currentPage }">
+					<span><a class="num on" href="${listCheck }">${page }</a></span>
+				</c:if>
+				<c:if test="${page ne pi.currentPage }">
+					<c:url var="listCheck" value="qna.happy">
+						<c:param name="currentPage" value="${page }"></c:param>
+					</c:url>
+					<span><a class="num" href="${ listCheck}">${page }</a></span>
+				</c:if>
+			</c:forEach>
+			
+			<c:if test="${pi.currentPage >= pi.maxPage }">
+				<span><a class="num" href="#">&gt;</a></span>
+			</c:if>
+			<c:if test="${pi.currentPage < pi.maxPage}">
+				<c:url var="listEnd" value="qna.happy">
+					<c:param name="currentPage" value="${ pi.currentPage + 1}"></c:param>
+				</c:url>
+				<span><a class="num" href="${ listEnd}">&gt;</a></span>
+			</c:if>
+			<c:url var="endList" value="qna.happy">
+				<c:param name="currentPage" value="${pi.endPage }"></c:param>
+			</c:url>
+			<span><a class="num" href="${firstList }">&gt;&gt;</a></span>
 		</div>
+		
+		
 		
 		<div style="height: 100px;"></div>
 		
@@ -104,10 +157,10 @@
 
 <%-- <%@ include file="/hyun/myPost/include/footer.jsp" %>
  --%>
-
-</div><!--// Wrap E-->
 </c:if>
-
+<script>
+	
+</script>
 
 </body>
 </html>

@@ -14,6 +14,7 @@ import com.kh.duri.happymember.model.vo.DeliveryDetail;
 import com.kh.duri.happymember.model.vo.FundItemList;
 import com.kh.duri.happymember.model.vo.Funding;
 import com.kh.duri.happymember.model.vo.MyDonateItems;
+import com.kh.duri.happymember.model.vo.Qna;
 import com.kh.duri.member.model.vo.Member;
 import com.kh.duri.payment.model.vo.PageInfo;
 
@@ -264,12 +265,50 @@ public class HappymemberDaoImpl implements HappymemberDao{
 	public int selectQnaListCount(SqlSessionTemplate sqlSession, Member m) throws MypageException {
 		int listCount = sqlSession.selectOne("HappyMember.selectQnaListCount", m);
 		
-		System.out.println("Q&A 개수 조회 : " + listCount);
+		/*System.out.println("Q&A 개수 조회 : " + listCount);*/
 		
 		if(listCount < 0) {
 			throw new MypageException("Q&A 목록 개수 조회 실패");
 		}
 		return listCount;
 	}
+
+	//Q&A 목록 조회 
+	@Override
+	public List<Qna> selectQnaList(SqlSessionTemplate sqlSession, Member m, PageInfo pi) throws MypageException {
+		int offset = (pi.getCurrentPage()-1)*pi.getLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getLimit());
+		
+		List<Qna> qnaList = sqlSession.selectList("HappyMember.selectQnaList", m, rowBounds);
+		
+		if(qnaList == null) {
+			throw new MypageException("Q&A 목록 조회 실패");
+		}
+		
+		return qnaList;
+	}
+
+	//Q&A 작성
+	@Override
+	public int insertQna(SqlSessionTemplate sqlSession, Qna q) throws MypageException {
+		int result = sqlSession.insert("HappyMember.insertQna", q);
+		
+		if(result < 0) {
+			throw new MypageException("Q&A 작성 실패");
+		}
+		
+		return result;
+	}
+
+	//Q&A 상세보기
+	
+	
+	/*//감사편지 보낼 정기후원자 닉네임 뽑기
+	@Override
+	public List<Member> selectNanumNick(SqlSessionTemplate sqlSession, Member m) throws MypageException {
+		List<Member> nanumNicks = sqlSession.selectList("HappyMember.selectNanumNick", m);
+		
+		return nanumNicks;
+	}*/
 
 }

@@ -74,7 +74,7 @@
 		<result property="dh_mno_take" column="DH_MNO_TAKE"/>
 		<result property="dh_mno_give" column="DH_MNO_GIVE"/>
 		<result property="rnum" column="RNUM"/>
-		<result property="dh_name_give" column="DH_NAME_GIVE"/>
+		<result property="dh_nick_give" column="DH_NICK_GIVE"/>
 		<result property="sum" column="SUM"/>
 		<result property="cnt" column="CNT"/>
 	</resultMap>
@@ -145,14 +145,14 @@
 	</select>
 	<!-- 정기 후원 리스트 조회 -->
 	<select id="selectDirectFundList" resultMap="happyDirectFundHistoryResultSet" parameterType="DirectFundHistory">
-		SELECT ROWNUM RNUM, DH_NAME_GIVE, DHVALUE, SUM, CNT, DHSTARTDATE 
-		FROM (SELECT M.MNAME AS DH_NAME_GIVE, DH.DHVALUE, SUM(DH.DHVALUE) AS SUM, MAX(DHD.DHDCOUNT) AS CNT, DH.DHSTARTDATE 
-		FROM DIRECTFUNDHISTORY DH, DIRECTFUNDHISTORYDETAIL DHD, MEMBER M 
-		WHERE DH.DH_MNO_GIVE = M.MNO 
-		AND DH.DHNO = DHD.DHD_DHNO 
-		AND DH.DH_MNO_TAKE = #{mno}
-		AND DHSTATUS = 'Y' 
-		GROUP BY M.MNAME, DHD.DHD_DHNO, DH.DHSTARTDATE, DH.DHVALUE)
+		SELECT ROWNUM RNUM, DH_NICK_GIVE, DHVALUE, SUM, CNT, DHSTARTDATE 
+		FROM (SELECT M.MNICK AS DH_NICK_GIVE, DH.DHVALUE, SUM(DH.DHVALUE) AS SUM, MAX(DHD.DHDCOUNT) AS CNT, DH.DHSTARTDATE 
+				FROM DIRECTFUNDHISTORY DH, DIRECTFUNDHISTORYDETAIL DHD, MEMBER M 
+				WHERE DH.DH_MNO_GIVE = M.MNO 
+				AND DH.DHNO = DHD.DHD_DHNO 
+				AND DH.DH_MNO_TAKE = #{mno} 
+				AND DHSTATUS = 'Y' 
+				GROUP BY M.MNICK, DHD.DHD_DHNO, DH.DHSTARTDATE, DH.DHVALUE)
 	</select>
 	<!-- 배송 현황 목록 조회 -->
 	<select id="selectDeliveryList" resultMap="deliveryDetailResultSet" parameterType="DeliveryDetail">
@@ -177,7 +177,7 @@
 		AND FTYPE = 'ITEM'
 	</select>
 	<!-- 물품후원 목록 조회 -->
-	<select id="selectItemDonateList" resultMap="happyFundingResultSet" parameterType="Funding">
+	<select id="selectItemDonateList" resultMap="happyFundingResultSet" parameterType="_int">
 		SELECT DISTINCT ROWNUM RNUM, FNO, FTITLE, FCONTENT, FITEMNAME, FSTARTDATE, FENDDATE, FSTATUS 
 		FROM (SELECT DISTINCT F.FNO, F.FTITLE, F.FCONTENT, 
 			(SELECT LISTAGG(CAST(FI2.INAME as varchar2(50)),',') WITHIN GROUP (ORDER BY FD2.FD_FNO) 
@@ -214,6 +214,23 @@
 		WHERE QWRITER = 'H' 
 		AND Q_MNO = #{mno}
 	</select>
+	<!-- Q&A 목록 조회 -->
+	<select id="selectQnaList" resultMap="happyQnaResultSet" parameterType="HappyQna">
+		SELECT DISTINCT ROWNUM RNUM, QNO, QTITLE, QCONTENT, QDATE, QANSWER 
+		FROM (SELECT QNO, QTITLE, QCONTENT, QDATE, QANSWER 
+				FROM QNA 
+				WHERE QWRITER = 'H' 
+				AND Q_MNO = #{mno}
+				ORDER BY QDATE DESC )
+	</select>
+	<!-- Q&A 작성 -->
+	<insert id="insertQna">
+		INSERT INTO QNA VALUES(SEQ_Q_NO.NEXTVAL, SYSDATE, #{qtitle}, #{qcontent}, NULL, 'H', #{q_mno})
+	</insert>
+	<!-- 감사편지 보낼 정기후원자 닉네임 뽑기 -->
+	<!-- <select id="selectNanumNick" resultMap="memberResultSet" parameterType="Member">
+	
+	</select> -->
 </mapper>
 
 

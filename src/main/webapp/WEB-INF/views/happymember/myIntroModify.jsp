@@ -161,9 +161,6 @@ input, select{
 		<c:if test="${ empty loginUser.mprNew }">
 		 <button onclick="updatePr();" class="ui primary button">수정하기</button>
 		</c:if>
-		<%-- <c:if test="${ !empty loginUser.mprNew }">
-		 <button onclick="return failUpdatePr();" class="ui primary button">수정하기</button>
-		</c:if> --%>
 		<button onclick="return back();" class="ui button">취소하기</button>
 	</div>
 </form>
@@ -179,9 +176,10 @@ input, select{
 	}
 	
 	function updatePr(){
+		alert("자기소개 수정이 신청되었습니다. 승인을 기다려 주세요!");
 		$("#updatePrForm").submit();
 		console.log("성공");
-		alert("자기소개 수정이 신청되었습니다. 승인을 기다려 주세요!");
+		
 	}
 </script>
 </body>
