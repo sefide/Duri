@@ -64,5 +64,11 @@ public class adminAtcServiceImpl implements adminAtcService{
 		adminQnA adminQnADetail = aad.adminQnADetail(sqlsession,q);
 		return adminQnADetail;
 	}
+	//Q&A 답변하기 버튼
+	@Override
+	public int adminAnswer(adminQnA q) throws ListException {
+		int result = aad.adminAnswer(sqlsession,q);
+		return result;
+	}
 
 }

@@ -172,5 +172,30 @@ public class AdminAtcController {
 	
 	}
 	
+	//Q&A 답변하기 버튼 
+	@RequestMapping("adminAnswer.ad")
+	public String adminAnswer(HttpServletRequest request, HttpServletResponse response,adminQnA q) {
+		
+		String answer = request.getParameter("answer");
+		int num = Integer.parseInt(request.getParameter("num"));
+		
+		q.setqNo(num);
+		q.setqAnswer(answer);
+		
+		
+		
+		try {
+			int result = aas.adminAnswer(q);
+			return "redirect:adminQnA.ad";
+			
+			
+		} catch (ListException e) {
+			
+			return "redirect:adminQnA.ad";
+			
+		}
+		
+	}
+	
 	
 }

@@ -165,16 +165,18 @@
 	<select id="adminQnAList" resultType="adminQnA" parameterType="adminQnA" >
 		SELECT Q.Q_MNO,Q.QNO,Q.QDATE,Q.QTITLE,Q.QANSWER,M.MID,M.MNAME,M.MNO
 		FROM QNA Q JOIN MEMBER M ON(M.MNO=Q.Q_MNO)  
-		WHERE QWRITER='H' ORDER BY Q.QDATE DESC,Q.QANSWER NULLS FIRST 
+		WHERE QWRITER='H' ORDER BY Q.QANSWER NULLS FIRST,Q.QDATE DESC
 	</select>
 	<!-- 관리자 행복두리 Q&A 상세보기  -->
 	<select id="adminQnADetail" resultType="adminQnA" parameterType="adminQnA" >
-		SELECT Q.QNO,Q.Q_MNO,Q.QDATE,Q.QTITLE,Q.QCONTENT,M.MID,M.MNAME,Q.QWRITER
+		SELECT Q.QNO,Q.Q_MNO,Q.QDATE,Q.QTITLE,Q.QCONTENT,M.MID,M.MNAME,Q.QWRITER,Q.QANSWER
 		FROM QNA Q JOIN MEMBER M ON(M.MNO=Q.Q_MNO)  
 		WHERE Q.QWRITER='H' AND Q.Q_MNO=#{q_Mno} AND Q.QNO=#{qNo}
 	</select>
-	
-	
+	<!-- 관리자 Q&A 답변하기 -->
+	<select id="adminAnswer" resultType="adminQnA" parameterType="adminQnA" >
+		UPDATE QNA SET QANSWER=#{qAnswer} WHERE QNO=#{qNo}
+	</select>
 	
 	
 	
