@@ -86,7 +86,7 @@
 
 <header style=" height: 50px; text-align: right; ">		
 	<a class="mynav_2" href="updateInfo.nanum" >회원정보 수정</a>
-	<a class="mynav_2" href="total.nanum">로그아웃</a>
+	<a class="mynav_2" href="logout.me">로그아웃</a>
 	<div id="container">	
 		<div id='box-left'>
 			<i class="handshake outline icon"></i>

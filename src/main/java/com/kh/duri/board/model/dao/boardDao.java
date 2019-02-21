@@ -40,4 +40,5 @@ public interface boardDao {
 	int insertCloud(SqlSessionTemplate sqlSession, Board b) throws BoardException;
 
 
+
 }

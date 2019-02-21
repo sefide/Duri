@@ -135,6 +135,13 @@ public class MemberController {
 	}
 	
 	
+	/*@RequestMapping("logout.me")
+	public String logout(HttpServletRequest request) {
+		request.getSession().invalidate();
+		
+		return "redirect:goMain.me";
+	}*/
+	
 	@RequestMapping("logout.me")
 	public String logout(HttpServletRequest request) {
 		request.getSession().invalidate();

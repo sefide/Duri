@@ -20,29 +20,18 @@ public class Board {
 	private String mFundType;
 	private int fdValue;
 	private int fd_ino;
+	private int fdValue2;
+	private int fd_ino2;
+	private int fdValue3;
+	private int fd_ino3;
 
 	
 	public Board() {}
 
 
-	public Board(String ftype, String fTitle, String fContent, int fValue, String fValueType, int fWriter, String mNick, int fdValue, int fd_ino) {
-		super();
-		this.ftype = ftype;
-		this.fTitle = fTitle;
-		this.fContent = fContent;
-		this.fValue = fValue;
-		this.fValueType = fValueType;
-		this.fWriter = fWriter;
-		this.mNick = mNick;
-		this.fdValue = fdValue;
-		this.fd_ino = fd_ino;
-	}
-
-	
-	
 	public Board(int rnum, int fno, String ftype, String fTitle, String fContent, Date fWriterDate, Date fStartDate,
 			Date fEndDate, String fStatus, int fValue, String fValueType, int fWriter, String mNick, String mAddress,
-			String mFundType, int fdValue, int fd_ino) {
+			String mFundType, int fdValue, int fd_ino, int fdValue2, int fd_ino2, int fdValue3, int fd_ino3) {
 		super();
 		this.rnum = rnum;
 		this.fno = fno;
@@ -61,6 +50,10 @@ public class Board {
 		this.mFundType = mFundType;
 		this.fdValue = fdValue;
 		this.fd_ino = fd_ino;
+		this.fdValue2 = fdValue2;
+		this.fd_ino2 = fd_ino2;
+		this.fdValue3 = fdValue3;
+		this.fd_ino3 = fd_ino3;
 	}
 
 
@@ -234,17 +227,58 @@ public class Board {
 	}
 
 
+	public int getFdValue2() {
+		return fdValue2;
+	}
+
+
+	public void setFdValue2(int fdValue2) {
+		this.fdValue2 = fdValue2;
+	}
+
+
+	public int getFd_ino2() {
+		return fd_ino2;
+	}
+
+
+	public void setFd_ino2(int fd_ino2) {
+		this.fd_ino2 = fd_ino2;
+	}
+
+
+	public int getFdValue3() {
+		return fdValue3;
+	}
+
+
+	public void setFdValue3(int fdValue3) {
+		this.fdValue3 = fdValue3;
+	}
+
+
+	public int getFd_ino3() {
+		return fd_ino3;
+	}
+
+
+	public void setFd_ino3(int fd_ino3) {
+		this.fd_ino3 = fd_ino3;
+	}
+
+
 	@Override
 	public String toString() {
 		return "Board [rnum=" + rnum + ", fno=" + fno + ", ftype=" + ftype + ", fTitle=" + fTitle + ", fContent="
 				+ fContent + ", fWriterDate=" + fWriterDate + ", fStartDate=" + fStartDate + ", fEndDate=" + fEndDate
 				+ ", fStatus=" + fStatus + ", fValue=" + fValue + ", fValueType=" + fValueType + ", fWriter=" + fWriter
 				+ ", mNick=" + mNick + ", mAddress=" + mAddress + ", mFundType=" + mFundType + ", fdValue=" + fdValue
-				+ ", fd_ino=" + fd_ino + "]";
+				+ ", fd_ino=" + fd_ino + ", fdValue2=" + fdValue2 + ", fd_ino2=" + fd_ino2 + ", fdValue3=" + fdValue3
+				+ ", fd_ino3=" + fd_ino3 + "]";
 	}
 
 
-
+	
 	
 	
 	

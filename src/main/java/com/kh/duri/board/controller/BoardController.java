@@ -232,8 +232,72 @@ public class BoardController {
 	 
 	//펀딩글 작성(행복두리)
 	@RequestMapping("writeCloud.bo")
-	public ModelAndView writeCloud(@RequestParam(required=false)Board b, ModelAndView mv,HttpSession session){ 
+	public ModelAndView writeCloud(Board b, ModelAndView mv,HttpSession session) throws BoardException{ 
+
+
 		try {
+		System.out.println("Board : " + b);
+
+		int writeCloud = 0;
+		int writeCloud2 = 0;
+		
+		
+		if(b.getFtype()=="MONEY") {
+			writeCloud = bs.insertCloud(b); // 받아온 아이디와 비밀번호로 로그인 정보 조회
+			
+		}else {
+			writeCloud = bs.insertCloud(b); // 받아온 아이디와 비밀번호로 로그인 정보 조회
+			writeCloud2 = bs.insertItem(b); // 받아온 아이디와 비밀번호로 로그인 정보 조회
+		}
+
+		
+
+		if (writeCloud > 0) {
+			System.out.println("내사연페이지ㅣ로 이동");
+			mv.setViewName("redirect:mypage.happy"); // 위처럼 redirect로 뷰페이지이름연결할거랑 똑같음
+
+		}
+	} catch (BoardException e) {
+		mv.setViewName("redirect:writeCloud2.bo"); // 위처럼 redirect로 뷰페이지이름연결할거랑 똑같음
+
+	}
+
+	return mv;
+		
+		
+
+
+	}
+	
+	//펀딩글 작성(행복두리)
+	/*@RequestMapping("writeCloud2.bo")
+	public ModelAndView writeCloud2(Board b, ModelAndView mv,HttpSession session){ 
+
+
+int fWriter = Integer.parseInt(request.getParameter("fWriter"));
+		String fTitle = request.getParameter("fTitle");
+		String mNick = request.getParameter("mNick");
+		String ftype = request.getParameter("ftype");
+		String fValueType = request.getParameter("fValueType");
+		int fValue = Integer.parseInt(request.getParameter("fValue"));
+		String fContent = request.getParameter("fContent");
+		
+		
+		
+		
+
+String fWriter = request.getParameter("fWriter");
+		String fTitle = request.getParameter("fTitle");
+		String mNick = request.getParameter("mNick");
+		String ftype = request.getParameter("ftype");
+		String fValueType = request.getParameter("fValueType");
+		String fValue = request.getParameter("fValue");
+		String fd_ino = request.getParameter("fd_ino");
+		String fdValue = request.getParameter("fdValue");
+		String fContent = request.getParameter("fContent");
+		
+		
+			try {
 			System.out.println("Board : " + b);
 
 			int writeCloud = 0;
@@ -252,20 +316,6 @@ public class BoardController {
 
 		return mv;
 
-	}
-	
-	
-	//펀딩글 작성(행복두리)
-	/*@RequestMapping("writeCloud2.bo")
-	public ModelAndView writeCloud2(Board b, ModelAndView mv,HttpSession session){ 
-
-			System.out.println("Board : "+b);
-			
-			int writeCloud = 0; 		
-		
-			
-		
-			
 
 
 		return mv;

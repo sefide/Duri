@@ -118,6 +118,13 @@ public class boardServiceImpl implements boardService {
 		return result;	
 	}
 
+	@Override
+	public int insertItem(Board b) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+
 
 
 
