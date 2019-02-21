@@ -105,7 +105,7 @@ tr:hover{
 	
 	<div class="QnA-list">
 		 <c:if test="${ !empty sessionScope.loginUser2 }">
-		<button onclick="location.href='QnAInsert.nanum'" 
+		<button onclick="insertQnA();" 
 			class="ui orange basic button" style="float: right; margin-right: 50px;" >글 작성하기</button>		 
 		</c:if>
 		<br><br>
@@ -181,10 +181,11 @@ tr:hover{
 	//편지 상세 보기로 가기
 	function goQnADetail(qNo) {	
 		var qNo = qNo ;
-		console.log(qNo);
 		location.href="QnADetail.nanum?qNo="+qNo;
 	}
-	
+	function insertQnA() {
+		location.href="QnAInsertForm.nanum";
+	}
 	</script>
 	
 </body>

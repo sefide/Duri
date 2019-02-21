@@ -352,7 +352,6 @@
 		WHERE FI.FISTATUS = 'Y' AND FI.FI_MNO = #{mno}  AND FI.FITYPE = 3  AND F.FNO = FI.FI_FNO AND F.FWRITER = M.MNO
 		ORDER BY FI.FIDATE )
   	</select>
-  	
   	<!-- QnA 개수 조회 -->
   	<select id="QnAListCount" resultType="_int">
   		SELECT COUNT(*)
@@ -366,7 +365,7 @@
 		SELECT Q.QNO,Q.QDATE,Q.QTITLE,Q.QCONTENT,Q.QANSWER,Q.QWRITER, M.MNICK
 		FROM QNA Q JOIN MEMBER M ON(Q.Q_MNO = M.MNO)
 		WHERE QWRITER = 'N' 
-		ORDER BY QDATE DESC) 
+		ORDER BY QDATE DESC, QANSWER NULLS FIRST ) 
   	</select>
   	<!-- QnA 상세 조회  -->
   	<select id="QnADetail" resultMap="QnAResultSet" parameterType="NanumQnA" resultType="list">
@@ -374,8 +373,10 @@
 		FROM QNA Q JOIN MEMBER M ON(Q.Q_MNO = M.MNO)
 		WHERE QWRITER = 'N' AND Q.QNO = #{qNo}
   	</select>
-  	
-  	
+  	<!-- QnA 삽입 -->
+  	<insert id="insertQnA">
+  		INSERT INTO QNA VALUES(SEQ_Q_NO.NEXTVAL, SYSDATE,#{qTitle},#{qContent},DEFAULT,'N',#{q_mNo})
+  	</insert>
   	
   	
   	

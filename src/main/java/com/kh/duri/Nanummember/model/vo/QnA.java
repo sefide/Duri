@@ -13,11 +13,12 @@ public class QnA implements java.io.Serializable{
 	private int q_mNo;
 	private String mNick;
 	private int rnum;
+	private int mno;
 	
 	public QnA () {}
 
 	public QnA(int qNo, Date qDate, String qTitle, String qContent, String qAnswer, String qWriter, int q_mNo,
-			String mNick, int rnum) {
+			String mNick, int rnum, int mno) {
 		super();
 		this.qNo = qNo;
 		this.qDate = qDate;
@@ -28,12 +29,14 @@ public class QnA implements java.io.Serializable{
 		this.q_mNo = q_mNo;
 		this.mNick = mNick;
 		this.rnum = rnum;
+		this.mno = mno;
 	}
 
 	@Override
 	public String toString() {
 		return "QnA [qNo=" + qNo + ", qDate=" + qDate + ", qTitle=" + qTitle + ", qContent=" + qContent + ", qAnswer="
-				+ qAnswer + ", qWriter=" + qWriter + ", q_mNo=" + q_mNo + ", mNick=" + mNick + ", rnum=" + rnum + "]";
+				+ qAnswer + ", qWriter=" + qWriter + ", q_mNo=" + q_mNo + ", mNick=" + mNick + ", rnum=" + rnum
+				+ ", mno=" + mno + "]";
 	}
 
 	public int getqNo() {
@@ -106,6 +109,14 @@ public class QnA implements java.io.Serializable{
 
 	public void setRnum(int rnum) {
 		this.rnum = rnum;
+	}
+
+	public int getMno() {
+		return mno;
+	}
+
+	public void setMno(int mno) {
+		this.mno = mno;
 	}
 
 	

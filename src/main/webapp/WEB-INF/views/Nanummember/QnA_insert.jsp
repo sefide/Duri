@@ -100,7 +100,6 @@ td {
 	</div>
 	
 	<!-- QnA 내용 -->
-	
 	<div class="QnA-nocie">
 		<div id="myTitle"><i class="question icon"></i>QnA 등록하기</div>
 	</div>
@@ -121,14 +120,14 @@ td {
 				<td class="tableTitle">내용</td>
 			</tr>
 			<tr>
-				<td colspan="2"><textarea rows="8" cols="150" placeholder="내용을 입력하여 주세요"  onKeyup="len_chk()" name="qCont"></textarea> </td>
+				<td colspan="2"><textarea rows="8" cols="150" placeholder="내용을 입력하여 주세요"  onkeyup="fnChkByte(this);" name="qContent" id="qContent" ></textarea> </td>
 			</tr>			
 		</table>
 	</div>
 	
 	
 	<div align="center" style="margin-top: 80px;"> 
-	<button onclick="#"  
+	<button onclick="goBackQnAList();"  
 		class="ui orange basic button"  style="font-size: 20px; margin-right : 10px;">등록하기</button>
 	</div>
 	<script>
@@ -142,15 +141,45 @@ td {
 	    });
 	});
 	//내용 790자 미만
-	function len_chk(){  
-  		/* var frm = document.qCont; */   
-  		 var frm = $("textarea[name='qCont']");
+	function fnChkByte(obj) {
+    var maxByte = 1580; //최대 입력 바이트 수
+    var str = obj.value;
+    var str_len = str.length;
+ 
+    var rbyte = 0;
+    var rlen = 0;
+    var one_char = "";
+    var str2 = "";
+ 
+    for (var i = 0; i < str_len; i++) {
+        one_char = str.charAt(i);
+ 
+        if (escape(one_char).length > 4) {
+            rbyte += 2; //한글2Byte
+        } else {
+            rbyte++; //영문 등 나머지 1Byte
+        }
 
-  		if(frm.value.length > 1580){  
-       	alert("글자수는 한글790자로 제한됩니다.!");  
-       	frm.value = frm.value.substring(0,1580);  
-       	frm.focus();  } 
-  		} 
+        if (rbyte <= maxByte) {
+            rlen = i + 1; //return할 문자열 갯수
+        }
+    } 
+    if (rbyte > maxByte) {
+        alert("한글 " + (maxByte / 2) + "자를 초과 입력할 수 없습니다.");
+        str2 = str.substr(0, rlen); //문자열 자르기
+        obj.value = str2;
+        fnChkByte(obj, maxByte);
+    } else {
+        document.getElementById('byteInfo').innerText = rbyte;
+    }
+}
+	//글 INSERT 후 QnA상세로 되돌아가기
+	function goBackQnAList() {
+		var qTitle = $("#qTitle").val();
+		var qContent = $("#qContent").val();
+		location.href="QnAInsert.nanum?qTitle="+qTitle+"&qContent="+qContent;
+	}
+
 	
 </script>
 

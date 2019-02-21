@@ -98,14 +98,14 @@ public class NanumController {
 					ingItem.put(key, value)
 				}
 			}*/
-			if(endItemList.get(0) != null ) { //종료된 물품 크라우드 펀딩이 있을경우
+			/*if(endItemList.get(0) != null ) { //종료된 물품 크라우드 펀딩이 있을경우
 				for(int i = 0; i<endItemList.size(); i++) {
 					int fno = endItemList.get(0).getfNo();
 					ingItem = ns.selectEndItem(m,fno);
-					/*endItem.put(fno, ingItem);*/
+					endItem.put(fno, ingItem);
 			}
 			}
-			/*System.out.println("itemList : "+itemList);
+			System.out.println("itemList : "+itemList);
 			System.out.println("endItemList : "+endItemList);*/
 			
 			model.addAttribute("moneyList",moneyList);
@@ -121,7 +121,6 @@ public class NanumController {
 			model.addAttribute("msg", e.getMessage());
 			return "Nanummember/mypage/mypage";
 		}		
-		
 	}
 	//정기 후원 조회
 	@RequestMapping("mypageFund.nanum")
@@ -280,12 +279,10 @@ public class NanumController {
 		} catch (NanumException e) {
 			e.printStackTrace();
 			return "Nanummember/mypage/mypage_likefund";
-		}
-		
-		
-		
+		}		
 	}
 	
+	/* ----------------------나눔두리 QnA ----------------------*/
 	//QnA 목록 조회
 	@RequestMapping("QnAList.nanum")
 	public String selectQnaList(Model model, HttpServletRequest request, HttpServletResponse response) {
@@ -320,20 +317,46 @@ public class NanumController {
 			return "Nanummember/QnA_detail";
 		}
 	}
-	
-	@RequestMapping("QnAInsert.nanum")
-	public String Total9() {
-		return "Nanummember/QnA_insert";
+	//QnA 등록 폼으로 이동
+	@RequestMapping("QnAInsertForm.nanum")
+	public String goQnAInsert() {			
+			return "Nanummember/QnA_insert";
 	}
+	
+	//QnA 등록 후 리스트로 리다이렉트
+	@RequestMapping("QnAInsert.nanum")
+	public String insertQnA(Model model, HttpServletRequest request, HttpServletResponse response) {
+		Member m = (Member)request.getSession().getAttribute("loginUser2");
+		int mno = m.getMno();		
+		String qTitle = request.getParameter("qTitle");
+		String qContent = request.getParameter("qContent");
+		//QnA입력
+		QnA q = new QnA();
+		q.setQ_mNo(mno);
+		q.setqTitle(qTitle);
+		q.setqContent(qContent);
+		try {
+			int result = ns.insertQnA(q);
+			return "redirect:QnAList.nanum";
+		} catch (NanumException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return "redirect:QnAList.nanum";
+		}
+	}
+	//QnA 삭제
+	@RequestMapping("deleteQnA.nanum")
+	public String deleteQnA(Model model, HttpServletRequest request, HttpServletResponse response) {
+		int qNo = Integer.parseInt(request.getParameter("qNo"));
+		System.out.println("삭제 controller 들어왔당ㅎㅎ qNo :"+qNo);
+		int result = ns.deleteQnA(qNo);
+		return "redirect:QnAList.nanum";
+	}
+	
 	
 	@RequestMapping("updateInfo.nanum")
 	public String Total12() {
 		return "Nanummember/mypage/mypage_updateInfo";
 	}
-	
-/*	@RequestMapping("mypageReceipt.nanum")
-	public String Total6() {
-		return "Nanummember/mypage/mypage_receipt";
-	}*/
-	
+
 }

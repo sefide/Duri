@@ -44,6 +44,10 @@ public interface NanumMemberDao {
 	List<QnA> selectQnAList(SqlSessionTemplate sqlSession, PageInfo pi, Member m) throws NanumException;
 	//QnA 상세 가져오기
 	List<QnA> selectQnADetail(SqlSessionTemplate sqlSession, int qNo)throws NanumException;
+	//QnA 작성
+	int insertQnA(SqlSessionTemplate sqlSession, QnA q)throws NanumException;
+	//QnA 삭제
+	int deleteQnA(SqlSessionTemplate sqlSession, int qNo)throws NanumException;
 	
 	
 	
