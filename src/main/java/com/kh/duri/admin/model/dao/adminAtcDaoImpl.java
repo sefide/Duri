@@ -42,6 +42,11 @@ public class adminAtcDaoImpl implements adminAtcDao{
 	public List<adminQnA> adminQnAList(SqlSessionTemplate sqlsession) throws ListException {
 		return sqlsession.selectList("Admin.adminQnAList");
 	}
+	//관리자 행복두리 Q&A 상세보기
+	@Override
+	public adminQnA adminQnADetail(SqlSessionTemplate sqlsession, adminQnA q) throws ListException {
+		return sqlsession.selectOne("Admin.adminQnADetail",q);
+	}
 	
 	
 }

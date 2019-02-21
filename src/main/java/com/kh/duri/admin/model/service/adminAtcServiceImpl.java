@@ -58,5 +58,11 @@ public class adminAtcServiceImpl implements adminAtcService{
 		List<adminQnA>list = aad.adminQnAList(sqlsession);
 		return list;
 	}
+	//관리자 행복두리 Q&A 상세보기
+	@Override
+	public adminQnA adminQnADetail(adminQnA q) throws ListException {
+		adminQnA adminQnADetail = aad.adminQnADetail(sqlsession,q);
+		return adminQnADetail;
+	}
 
 }

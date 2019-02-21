@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<meta content="" name="description" />
     <meta content="webthemez" name="author" />
-    <title>Bootstrap HTML5 Admin Template : Master - WebThemez</title>
+    <title>행복두리 1:1답변 페이지</title>
 	 <jsp:include page="include/adminStyle.jsp"/>
 	 <style>
 .head {
@@ -86,7 +86,7 @@ td {
         <div id="page-wrapper">
 		  <div class="header"> 
                         <h1 class="page-header">
-                            행복두리 1:1 문의 게시판
+                            행복두리 1:1 문의 답변
                         </h1>
 						
 									
@@ -111,19 +111,23 @@ td {
 			
 			<tr>
 				<td class="tableTitle">제목</td>
-				<td>뭉뭉</td>
+				<td>${adminQnADetail.qTitle}</td>
 				<td class="tableTitle">작성자</td>
-				<td>뭉뭉</td>
+				<td>${adminQnADetail.mName}(${adminQnADetail.mid})</td>
 				<td class="tableTitle">작성일</td>
-				<td>2019-02-05</td>
+				<td>${adminQnADetail.qDate}</td>
 			</tr>
+			</table>	
+			<table class="listTable">
 			<tr>
-				<td class="tableTitle">내용</td>
+				<td class="tableTitle"></td>
 			</tr>
+			<tr></tr>
 			<tr>
-				<td colspan="4">내용내용앵아ㅣ러ㅏㄴㅇ머닠ㅇㄹ</td>
+				<td colspan="4">${adminQnADetail.qContent}</td>
 			</tr>			
-		</table>
+	</table>
+
 		<br><br><br><br>
 	</div>
 	<!-- 댓글 내용 -->
@@ -136,7 +140,7 @@ td {
 				<td class="tableTitle"></td>
 			</tr>
 			<tr>
-				<td><textarea style="width: 100%; height: 150px;">답변이다아ㅏ아</textarea> </td>
+				<td><textarea style="width: 100%; height: 150px;"></textarea> </td>
 			</tr>
 		</table>
 	</div>
