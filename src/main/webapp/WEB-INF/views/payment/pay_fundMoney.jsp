@@ -233,7 +233,17 @@
     		<input type = "hidden" name = "fWriter" value ="${ f.fWriter }">
     		<input type = "hidden" name = "checkDonate" value ="0" id = "checkDonate">
     			<div class ="row d-flex"> 
+    			<input type = "hidden" name = "leftPoint" id = "leftPoint" value = "${ f.fValue - f.fdValue }">
+	    		
 	    			<table>
+	    				<tr>
+	    					<th>목표 후원금 (현재 후원누적액)</th>
+	    					<td colspan = "2" ><span id = "goalPoint">${ f.fValue } (${ f.fdValue })원</span></td>
+	    				</tr>
+	    				<tr>
+	    					<th>더 필요한 후원금액</th>
+	    					<td colspan = "2" ><span id = "leftPoint">${ f.fValue - f.fdValue }원</span></td>
+	    				</tr>
 	    				<tr>
 	    					<th>현재보유 포인트</th>
 	    					<td colspan = "2" ><span id = "myPoint">${ giveM.mPoint }원</span></td>

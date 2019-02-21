@@ -66,13 +66,13 @@ public interface PaymentService {
 	Board selectFundMoney(Board b) throws FundingException;
 	
 	// 금액 후원 진행 - 펀딩내역 insert
-	Member insertFundMoneyHistory(FundHistory fh, String check, String fWriter) throws FundingException;
+	Member insertFundMoneyHistory(FundHistory fh, String check, String fWriter, int isGoal) throws FundingException;
 	
 	// 물품 후원 결제페이지 - 펀딩정보 select
 	HashMap<String, Object> selectFundItem(BoardItem bi) throws FundingException;
 	
 	// 물품 후원 진행 - 펀딩내역 insert
-	Member insertFundItemHistory(FundHistory fh, ArrayList<FundItemDetail> fhdList, String check, String fWriter, int isGoal);
+	Member insertFundItemHistory(FundHistory fh, ArrayList<FundItemDetail> fhdList, String check, String fWriter, int isGoal) throws FundingException;
 
 	
 		

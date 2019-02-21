@@ -6,16 +6,18 @@ public class FundItemDetail {
 	private int fhd_fhNo;
 	private int fhd_iNo;
 	private int fno;
+	private int fhd_mNo_take;
 	
 	public FundItemDetail() {}
 
-	public FundItemDetail(int fhdNo, String fhdItemValue, int fhd_fhNo, int fhd_iNo, int fno) {
+	public FundItemDetail(int fhdNo, String fhdItemValue, int fhd_fhNo, int fhd_iNo, int fno, int fhd_mNo_take) {
 		super();
 		this.fhdNo = fhdNo;
 		this.fhdItemValue = fhdItemValue;
 		this.fhd_fhNo = fhd_fhNo;
 		this.fhd_iNo = fhd_iNo;
 		this.fno = fno;
+		this.fhd_mNo_take = fhd_mNo_take;
 	}
 
 	public int getFhdNo() {
@@ -58,11 +60,20 @@ public class FundItemDetail {
 		this.fno = fno;
 	}
 
+	public int getFhd_mNo_take() {
+		return fhd_mNo_take;
+	}
+
+	public void setFhd_mNo_take(int fhd_mNo_take) {
+		this.fhd_mNo_take = fhd_mNo_take;
+	}
+
 	@Override
 	public String toString() {
 		return "FundItemDetail [fhdNo=" + fhdNo + ", fhdItemValue=" + fhdItemValue + ", fhd_fhNo=" + fhd_fhNo
-				+ ", fhd_iNo=" + fhd_iNo + ", fno=" + fno + "]";
+				+ ", fhd_iNo=" + fhd_iNo + ", fno=" + fno + ", fhd_mNo_take=" + fhd_mNo_take + "]";
 	}
+	
 	
 	
 }

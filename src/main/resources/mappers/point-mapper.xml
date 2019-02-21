@@ -346,6 +346,15 @@
 		WHERE FNO = #{fno}
 	</select>
 	
+	<select id = "selectFundMoneyCulValue" resultType="_int">
+		SELECT SUM(FH.FHVALUE) FROM 
+		FUNDHISTORY FH
+		JOIN FUNDING F ON(F.FNO = FH.FH_FNO)
+		WHERE F.FNO = #{fno}
+		AND F.FTYPE = 'MONEY'
+		GROUP BY F.FNO
+	</select>
+	
 	<!-- 금액후원 내역 insert -->
 	<insert id = "insertFundMoneyHistory">
 		INSERT INTO FUNDHISTORY VALUES(SEQ_FH_NO.NEXTVAL, SYSDATE, #{fhValue}, #{fhFno}, #{fhMnoGive})
@@ -367,12 +376,12 @@
 	</update>
 	
 	<!-- 포인트 이력 -나눔두리 insert -->
-	<insert id = "insertFundMoneynPoint">
+	<insert id = "insertFundnPoint">
 		INSERT INTO POINT VALUES (SEQ_P_NO.NEXTVAL, 'U', #{fhValue}, SYSDATE, '펀딩', #{fhMnoGive}, null, null, null, #{fhNo})
 	</insert>
 	
 	<!-- 포인트 이력 -행복두리 insert -->
-	<insert id = "insertFundMoneyhPoint">
+	<insert id = "insertFundhPoint">
 		INSERT INTO POINT VALUES (SEQ_P_NO.NEXTVAL, 'A', #{fhValue}, SYSDATE, '펀딩', #{fhMnoGive}, null, null, null, #{fhNo})
 	</insert>
 	
@@ -399,6 +408,41 @@
 		WHERE FNO = #{fno}
 		GROUP BY FNO, FDNO, FDVALUE, INO, INAME, IPRICE, FNO
 	</select>
-
 	
+	<!-- 펀딩 100% 시 펀딩글 정보 update -->
+	<update id = "updateFundingGoal">
+		UPDATE FUNDING SET FSTATUS = 'GOAL' , FENDDATE = SYSDATE
+		WHERE FNO = #{fhFno}
+	</update>
+
+	<!-- 펀딩 100% 시 나눔두리 정보 update -->
+	<update id = "updateMemberGoalNum">
+		UPDATE MEMBER SET MGOALNUM = MGOALNUM+1 WHERE MNO IN (
+		SELECT FH.FH_MNO_GIVE
+		FROM FUNDHISTORY FH
+		WHERE FH.FH_FNO = #{fhFno})
+	</update>
+	
+	<!-- 물품후원 내역 insert -->
+	<insert id = "insertFundItemHistory">
+		INSERT INTO FUNDHISTORY VALUES(SEQ_FH_NO.NEXTVAL, SYSDATE, #{fhValue}, #{fhFno}, #{fhMnoGive})
+	</insert>
+	
+	<!-- 물품후원 상세 내역 insert -->
+	<insert id = "insertFundItemHistoryDetail">
+		INSERT INTO FUNDHISTORYDETAIL VALUES(SEQ_FHD_NO.NEXTVAL, #{fhdItemValue}, #{fhd_fhNo}, #{fhd_iNo})
+	</insert>
+	
+	<!-- 행복두리 소유물품 update -->
+	<update id = "updateHappyOwnItem">
+		UPDATE OWNITEM SET OVALUE = OVALUE + #{fhdItemValue}
+		WHERE ONO = (SELECT ONO
+            FROM OWNITEM
+            WHERE O_MNO = #{fhd_mNo_take} AND O_INO = #{fhd_iNo})
+	</update>
+	
+	<!-- 행복두리 새로운 소유물품 insert -->
+	<insert id = "insertHappyOwnItem">
+		INSERT INTO OWNITEM VALUES(SEQ_I_NO.NEXTVAL, #{fhd_mNo_take}, #{fhd_iNo}, #{fhdItemValue})
+	</insert>
 </mapper>

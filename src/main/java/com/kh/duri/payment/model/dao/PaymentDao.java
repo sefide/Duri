@@ -17,6 +17,7 @@ import com.kh.duri.payment.model.exception.RefundException;
 import com.kh.duri.payment.model.vo.BoardItemValue;
 import com.kh.duri.payment.model.vo.DirectFundHist;
 import com.kh.duri.payment.model.vo.DonateReceipt;
+import com.kh.duri.payment.model.vo.FundItemDetail;
 import com.kh.duri.payment.model.vo.PageInfo;
 import com.kh.duri.payment.model.vo.Payment;
 import com.kh.duri.payment.model.vo.Point;
@@ -80,6 +81,8 @@ public interface PaymentDao {
 	
 	// 금액 후원 결제페이지 - 펀딩정보 select
 	Board selectFundMoney(SqlSessionTemplate sqlSession, Board b) throws FundingException;
+	// 해당 금액후원글 펀딩 후원 누적액 select
+	int selectFundMoneyCulValue(SqlSessionTemplate sqlSession, Board b);
 	
 	// 금액 후원 진행 - 펀딩내역 insert
 	// 펀딩내역 insert
@@ -88,14 +91,27 @@ public interface PaymentDao {
 	int updateMoneyhPoint(SqlSessionTemplate sqlSession, Member m) throws FundingException;
 	int updateMoneynPoint(SqlSessionTemplate sqlSession, Member m) throws FundingException;
 	Member selectLoginnMember(SqlSessionTemplate sqlSession, Member m) throws FundingException;
-	int insertFundMoneynPoint(SqlSessionTemplate sqlSession, FundHistory fh) throws FundingException;
-	int insertFundMoneyhPoint(SqlSessionTemplate sqlSession, FundHistory fh) throws FundingException;
+	int insertFundnPoint(SqlSessionTemplate sqlSession, FundHistory fh) throws FundingException;
+	int insertFundhPoint(SqlSessionTemplate sqlSession, FundHistory fh) throws FundingException;
 	int selectFundHistCurVal(SqlSessionTemplate sqlSession) throws FundingException;
 
 	// 물품 후원 결제페이지 - 후원글 정보 select
 	BoardItem selectFundItemBoard(SqlSessionTemplate sqlSession, BoardItem bi) throws FundingException;
 	// 물품 후원 결제페이지 - 후원물품정보 select
 	List<BoardItemValue> selectFundItem(SqlSessionTemplate sqlSession, BoardItem bi) throws FundingException;
+	
+	// 물품 후원 진행 - 펀딩내역 insert
+	// 펀딩 100% 시 펀딩정보 업데이트
+	int updateFundingGoal(SqlSessionTemplate sqlSession, FundHistory fh)  throws FundingException;
+	// 펀딩 100% 시 나눔두리 정보 업데이트
+	int updateMemberGoalNum(SqlSessionTemplate sqlSession, FundHistory fh)  throws FundingException;
+	// 펀딩내역 insert
+	int insertFundItemHistory(SqlSessionTemplate sqlSession, FundHistory fh) throws FundingException;
+	int insertFundItemHistoryDetail(SqlSessionTemplate sqlSession, FundItemDetail fundItemDetail) throws FundingException;
+	// 행복두리 소유물품 업데이트 (갯수)
+	int updateHappyOwnItem(SqlSessionTemplate sqlSession, FundItemDetail fundItemDetail) throws FundingException;
+	// 행복두리 소유물품 추가 (새로운 소유물품)
+	void insertHappyOwnItem(SqlSessionTemplate sqlSession, FundItemDetail fundItemDetail) throws FundingException;
 
 		
 	

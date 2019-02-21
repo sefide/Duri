@@ -120,7 +120,7 @@
     	</div>
     	<div id='box-right'>
     		<a href = "pointCharge.pm" class="headerpoint"> 포인트 충전</a><br>
-    		<a href="pointReturnList.pm" class="headerpoint" >포인트 환급</a><br>
+    		<a href="pointReturnList.pm" class="headerpoint" >포인트 환불</a><br>
     		<a href="pointHistory.pm" class="headerpoint"> 포인트 내역</a><br>
     	</div>
 	</div>

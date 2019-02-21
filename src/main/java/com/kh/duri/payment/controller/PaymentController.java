@@ -620,13 +620,20 @@ public class PaymentController {
 		String check = request.getParameter("checkDonate");
 		String fValue = request.getParameter("point");
 		String fWriter = request.getParameter("fWriter");
+		String leftPoint = request.getParameter("leftPoint");
 		String ipin1;
 		String ipin2;
+		int isGoal = 0;
 		
 		System.out.println("fno : " + fno);
 		System.out.println("m : " + m);
 		System.out.println("fValue : " + fValue);
 		System.out.println("fWriter : " + fWriter);
+		System.out.println("leftPoint : " + leftPoint);
+		
+		if(leftPoint.equals(fValue)) {
+			isGoal = 1;
+		}
 		if(check.equals("1")) {
 			ipin1 = request.getParameter("ipin1");
 			ipin2 = request.getParameter("ipin2");
@@ -641,7 +648,7 @@ public class PaymentController {
 		fh.setFhMnoGive(m.getMno());
 
 		try {
-			Member resultM = ps.insertFundMoneyHistory(fh, check, fWriter);
+			Member resultM = ps.insertFundMoneyHistory(fh, check, fWriter, isGoal);
 			
 			session.setAttribute("loginUser2", resultM);
 			model.addAttribute("msg", "펀딩이 완료되었습니다.");
@@ -731,7 +738,7 @@ public class PaymentController {
 		int j = 0;
 		int count = 0;
 		for(int i = 0; i < itemNum.length; i++) {
-			if(itemNum[i].equals(leftValue[i])) {
+			if(itemNum[i].equals(leftValue[i]) && !itemNum[i].equals("0")) {
 				count++;
 			}
 			if(itemNum[i].equals("0")) {
@@ -754,8 +761,20 @@ public class PaymentController {
 		if(count == itemNo.length) {
 			isGoal = 1; // 후원 달성 
 		}
-		Member resultM = ps.insertFundItemHistory(fh, fhdList, check, fWriter, isGoal);
+		try {
+			Member resultM = ps.insertFundItemHistory(fh, fhdList, check, fWriter, isGoal);
+			
+			session.setAttribute("loginUser2", resultM);
+			
+			model.addAttribute("msg", "펀딩이 완료되었습니다.");
+		    return "payment/pay_success";
+			
+		} catch (FundingException e) {
+			e.getStackTrace();
+			System.out.println(e.getMessage());
+			model.addAttribute(e.getMessage());
+		    return "payment/pay_success";
+		}
 		
-	    return "payment/pay_success";
 	}
 }
