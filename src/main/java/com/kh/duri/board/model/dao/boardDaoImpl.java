@@ -192,7 +192,7 @@ public class boardDaoImpl implements boardDao {
 		System.out.println("크라우드펀딩 작성 성공여부 : " + result);
 		
 		
-		 if(result > 0) { 
+		 if(result == 0) { 
 			 throw new BoardException("작성실패!"); //예외처리
 		 
 		 }
@@ -200,5 +200,6 @@ public class boardDaoImpl implements boardDao {
 
 		return result;
 	}
+
 
 }

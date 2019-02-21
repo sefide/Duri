@@ -42,7 +42,7 @@
           </c:if>
 		  <!-- 로그인  시-->
           <c:if test="${ !empty sessionScope.loginUser2 }">
-          <li class="nav-item"><a href="Eunji_nanumLogin.me" class="nav-link" style="color: rgb(50, 147, 63);" >로그아웃</a></li>
+          <li class="nav-item"><a href="logout.me" class="nav-link" style="color: rgb(50, 147, 63);" >로그아웃</a></li>
           <li class="nav-item"><a href="mypage.nanum" class="nav-link" style="color: rgb(50, 147, 63);" >마이페이지</a></li>
           </c:if>
           

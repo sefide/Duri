@@ -85,13 +85,13 @@
    <table align="center">
      <tr>
       <td>&nbsp;
-      	<input type="hidden" name ="fWriter" value="${sessionScope.loginUser.mno}">
-      	<input type="hidden" name ="mNick" value="${sessionScope.loginUser.mNickName}">
+      	<input type="hidden" id ="fWriter" value="${sessionScope.loginUser.mno}">
+      	<input type="hidden" id ="mNick" value="${sessionScope.loginUser.mNickName}">
       </td>
       <td align="center" style="height:50px;"><b>제목</b></td>
       <td>
       	<div class="ui input">
- 			<input type="text" name="fTitle">
+ 			<input type="text" id="fTitle">
 		</div>
 	</td>
       <td>&nbsp;</td>
@@ -101,9 +101,9 @@
     <tr>
       <td>&nbsp;</td>
       <td align="center" width="180px"><b>후원유형</b></td>
-      <td><input type="radio" id="MONEY" value="MONEY" name="ftype" size="100px">금액후원
+      <td><input type="radio" id="ftype" value="MONEY" name="ftype" size="100px">금액후원
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <input type="radio" id="ITEM" value="ITEM" name="ftype">물품후원</td>
+      <input type="radio" id="ftype" value="ITEM" name="ftype">물품후원</td>
       <td>&nbsp;<br>
       <div id="button" class="textSilver">
 		* 물품으로 받을 수 있는 후원은 물품후원을 선택해주세요!<br><br>
@@ -143,7 +143,7 @@
       <td align="center" style="height:50px;"><b>목표물품설정</b></td>
       <td style="width:800px;">
      	<div class="ui input ">
- 			<select align="center" name="fd_ino" style="width:160px; height:30px;">
+ 			<select align="center" id="fd_ino" style="width:160px; height:30px;">
  				<option disabled selected>선택</option>
  				<option value="1">생리대</option>
  				<option value="2">스킨로션세트</option>
@@ -166,9 +166,9 @@
  				<option value="19">클렌징폼&바디로션</option>
  			</select>
  			&nbsp;&nbsp;
- 			<input type="text" id="thing1" name="fdValue" maxlength="2" style=" width:65px"><b>개</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ 			<input type="text" id="fdValue" name="fdValue" maxlength="2" style=" width:65px"><b>개</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
  			
- 				<select align="center" name="" style="width:160px; height:30px;">
+ 				<select align="center" id="fd_ino2" style="width:160px; height:30px;">
  				<option disabled selected>선택</option>
  				<option value="1">생리대</option>
  				<option value="2">스킨로션세트</option>
@@ -191,9 +191,9 @@
  				<option value="19">클렌징폼&바디로션</option>
  			</select>
  			&nbsp;&nbsp;
- 			<input type="text" id="thing1" name="" maxlength="2" style=" width:65px"><b>개</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ 			<input type="text" id="fdValue2" name="fdValue" maxlength="2" style=" width:65px"><b>개</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
  				
- 				<select align="center" name="" style="width:160px; height:30px;">
+ 				<select align="center" id="fd_ino3" style="width:160px; height:30px;">
  				<option disabled selected>선택</option>
  				<option value="1">생리대</option>
  				<option value="2">스킨로션세트</option>
@@ -216,7 +216,7 @@
  				<option value="19">클렌징폼&바디로션</option>
  			</select>
  			&nbsp;&nbsp;
- 			<input type="text" id="thing1" name="" maxlength="2" style=" width:65px"><b>개</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ 			<input type="text" id="fdValue3" name="fdValue" maxlength="2" style=" width:65px"><b>개</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 		</div>
 	 </td>
      </tr>
@@ -250,7 +250,7 @@
      <tr>
       <td>&nbsp;</td>
       <td align="center" style="height:300px;"><b>후원 게시글 내용</b></td>
-      <td><textarea name="fContent" cols="110" rows="18" style="resize:none"></textarea></td>
+      <td><textarea id="fContent" cols="110" rows="18" style="resize:none"></textarea></td>
       <td>&nbsp;</td>
      </tr>
      <tr height="1" bgcolor="#dddddd"><td colspan="4"></td></tr>
@@ -265,9 +265,9 @@
   </tr>
  </table>
 	<div align="center">
-		 <button type="submit" class="ui primary button">
+		 <div onclick="writeCloud();" class="ui primary button">
 		   	사연등록
-		</button>
+		</div>
 		<button class="ui button">
 		  	취소하기
 		</button>
@@ -314,20 +314,51 @@
 
 
  
-/* 	function writeCloud(){
-		/* swal({
+	function writeCloud(){
+		var fWriter = $("#fWriter").val();
+		var mNick = $("#mNick").val();
+		var fTitle = $("#fTitle").val();
+		var ftype =  $("#ftype").val();
+		var fValueType =  $("#fValueType").val();
+		var fValue =  $("#fValue").val();
+		var fContent =  $("#fContent").val();
+		
+		var fd_ino = $("#fd_ino").val();
+		var fd_ino2 = $("#fd_ino2").val();
+		var fd_ino3 = $("#fd_ino3").val();
+		var fdValue =  $("#fdValue").val();
+		var fdValue2 =  $("#fdValue2").val();
+		var fdValue3 =  $("#fdValue3").val();
+		
+		
+		console.log("/" + fWriter + "/" + mNick+ "/" + fTitle+ "/" + ftype+ "/" + fValueType+ "/" + fValue+ "/"+ fContent+ "/");
+		console.log(fTitle + ftype);
+		
+		console.log("/" + fWriter + "/" + mNick+ "/" + fTitle+ "/" + ftype+ "/" + fd_ino+ "/" + fd_ino2+ "/"+ fd_ino3
+				+ "/"+ fdValue + "/"+ fdValue2 + "/"+ fdValue3 + "/" + fContent);
+		console.log(fTitle + ftype);
+		 swal({
 			  title: "작성완료!",
 			  text: "관리자 승인을 기다려주세요!",
 			  icon: "success"
-			  }).then(function(){ */
-			/* 	$("#goCloud").submit(); */
-			/* 	console.log("yes");
+			  }).then(function(){ 
+			 	$("#goCloud").submit(); 
+			 	if(ftype="MONEY"){
+			 		location.href="writeCloud.bo?fWriter="+fWriter+"&mNick="+mNick+"&fTitle="+fTitle + "&ftype="+ ftype
+			 			+"&fValueType=" + fValueType + "&fValue=" + fValue  + "&fContent=" + fContent;
+			 		
+			 	}else{
+			 		location.href="writeCloud.bo?fWriter="+fWriter+"&mNick="+mNick+"&fTitle="+fTitle + "&ftype="+ ftype
+		 			+"&fd_ino=" + fd_ino +"&fd_ino2=" + fd_ino2 + "&fd_ino3=" + fd_ino3 + "&fdValue=" + fdValue
+		 			+ "&fdValue2=" + fdValue2 + "&fdValue3=" + fdValue3 + "&fContent=" + fContent;
+			 		
+			 	}
+			 	 
 		
 		
-	}
+	});
 
-				});
-				 */
+	}
 
 </script>
 </body>
