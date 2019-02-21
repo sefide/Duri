@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -74,7 +75,11 @@ td {
 
 </head>
 <body>
+
 	<jsp:include page="include/adminNavi.jsp" />
+
+
+
 	<div id="page-wrapper">
 		<div class="header">
 			<h1 class="page-header">나눔두리 문의 답변</h1>
@@ -84,8 +89,10 @@ td {
 				<div class="col-md-12">
 					<!-- Advanced Tables -->
 					<div class="panel panel-default">
+
 						<div class="panel-body">
 							<div class="head"></div>
+
 							<!-- QnA 내용 -->
 							<div class="QnA-nocie">
 								<div id="myTitle">문의 사항</div>
@@ -93,6 +100,7 @@ td {
 							<div class="QnA-list">
 								<table class="listTable">
 									<tr>
+										<td id="Num" style="display: none;">${adminNanumQnADetail.qNo}</td>
 										<td class="tableTitle">제목</td>
 										<td>${adminNanumQnADetail.qTitle}</td>
 										<td class="tableTitle">작성자</td>
@@ -110,32 +118,78 @@ td {
 										<td colspan="4">${adminNanumQnADetail.qContent}</td>
 									</tr>
 								</table>
-
-								<br> <br> <br> <br>
+								<br><br><br><br>
 							</div>
 							<!-- 댓글 내용 -->
 							<div class="QnA-nocie">
 								<div id="myTitle" style="margin-bottom: 0px;">두리두리 답변</div>
 							</div>
-							<div class="QnA-list">
-								<table class="answerTable">
-									<tr>
-										<td class="tableTitle"></td>
-									</tr>
-									<tr>
-										<td>
-											<textarea style="width: 100%; height: 150px;" id="qAnswer"></textarea>
-										</td>
-									</tr>
-								</table>
-							</div>
+							<c:choose>
+								<c:when test="${empty adminNanumQnADetail.qAnswer}">
+									<div class="QnA-list">
+									<table class="answerTable">
+										<tr>
+											<td class="tableTitle"></td>
+										</tr>
+										<tr>
+											<td><textarea style="width: 100%; height: 150px;" id="qAnswer""></textarea></td>
+										</tr>
+									</table>
+								</div>
+								</c:when>
+								<c:when test="${not empty adminNanumQnADetail.qAnswer}">
+									<div class="QnA-list">
+									<table class="answerTable">
+										<tr>
+											<td class="tableTitle"></td>
+										</tr>
+										<tr>
+											<td>${adminNanumQnADetail.qAnswer}</td>
+										</tr>
+									</table>
+								</div>
+								</c:when>
+							</c:choose>
+							
+							
+							
+							
+							<%-- <c:if test="${empty adminNanumQnADetail.qAnswer}">
+								<div class="QnA-list">
+									<table class="answerTable">
+										<tr>
+											<td class="tableTitle"></td>
+										</tr>
+										<tr>
+											<td><textarea style="width: 100%; height: 150px;" id="qAnswer""></textarea></td>
+										</tr>
+									</table>
+								</div>
+							</c:if>
+							<c:if test="${not empty adminNanumQnADetail.qAnswer}">
+								<div class="QnA-list">
+									<table class="answerTable">
+										<tr>
+											<td class="tableTitle"></td>
+										</tr>
+										<tr>
+											<td>${adminNanumQnADetail.qAnswer}</td>
+										</tr>
+									</table>
+								</div>
+							</c:if>  --%>
 
 							<div align="center" style="margin-top: 80px;">
-								<button id="replyBtn" type="button" class="btn btn-primary btn-lg" onclick="goReply(${adminNanumQnADetail.qNo});">답변등록</button>
-								<button type="button" class="btn btn-secondary btn-lg" onclick="location.href='adminNanumQnA.ad'">목록으로
-									돌아가기</button>
+								<c:if test="${empty adminNanumQnADetail.qAnswer }">
+									<button type="button"
+										class="btn btn-primary btn-lg AnswerEnroll" onclick="goReply(${adminNanumQnADetail.qNo});">답변등록</button>
+								</c:if>
+								<button type="button" class="btn btn-secondary btn-lg"
+									onclick="location.href='adminNanumQnA.ad'">목록으로 돌아가기</button>
 							</div>
-							<br> <br> <br>
+							<br>
+							<br>
+							<br>
 
 						</div>
 					</div>
@@ -147,8 +201,14 @@ td {
 	</div>
 
 	<jsp:include page="include/admintableFooter.jsp" />
-	<script >
-		function goReply(qNo) {
+	<script type="text/javascript">
+      /*$(".AnswerEnroll").click(function () {
+      var answer = $("#Answer").val();
+      var num = $("#Num").text();
+      location.href="adminAnswer.ad?answer="+answer+"&num="+num;
+   });*/
+      
+      function goReply(qNo) {
 			var qNo = qNo;
 			var qAnswer = $("#qAnswer").val();
 			
@@ -164,7 +224,10 @@ td {
 				}			
 			});
 			}
-	</script>
+
+      
+      
+      </script>
 
 </body>
 </html>

@@ -181,7 +181,7 @@
 	</select>
 	<!-- 관리자 나눔두리 Q&A 상세보기 -->
 	<select id="adminNanumQnADetail" resultType="adminQnA" parameterType="adminQnA">
-		SELECT Q.QNO,Q.Q_MNO,Q.QDATE,Q.QTITLE,Q.QCONTENT,M.MID,M.MNAME,Q.QWRITER
+		SELECT Q.QNO,Q.Q_MNO,Q.QDATE,Q.QTITLE,Q.QCONTENT,M.MID,M.MNAME,Q.QWRITER, Q.QANSWER
 		FROM QNA Q JOIN MEMBER M ON(M.MNO=Q.Q_MNO)  
 		WHERE Q.QWRITER='N' AND Q.Q_MNO=#{q_Mno} AND Q.QNO= #{qNo}	
 	</select>

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -25,8 +25,10 @@
 						<div class="panel-heading">나눔두리 Q&A 목록</div>
 						<div class="panel-body">
 							<div>
-								<table class="table table-striped table-bordered table-hover dataTables-example">
+								<table
+									class="table table-striped table-bordered table-hover dataTables-example">
 									<thead>
+
 										<tr>
 											<th>No</th>
 											<th style="display: none;">회원번호</th>
@@ -58,7 +60,8 @@
 														class="btn btn-default btn-sm QnAanswer">답변하러하기</a></td>
 												</c:if>
 												<c:if test="${row.qAnswer!=null}">
-													<td class="center"></td>
+													<td class="center"><a
+														class="btn btn-default btn-sm QnAanswer">상세보기</a></td>
 												</c:if>
 											</tr>
 										</c:forEach>
@@ -76,15 +79,12 @@
 
 	<jsp:include page="include/admintableFooter.jsp" />
 	<script type="text/javascript">
-		$(".QnAanswer").click(
-				function() {
-					var Mnonum = $(this).parent().parent().children().eq(1)
-							.text();
-					var Qnanum = $(this).parent().parent().children().eq(2)
-							.text();
-					location.href = "adminNanumQnADetail.ad?Mnonum=" + Mnonum
-							+ "&Qnanum=" + Qnanum;
-				});
-	</script>
+   $(".QnAanswer").click(function () {
+      var Mnonum = $(this).parent().parent().children().eq(1).text();
+      var Qnanum = $(this).parent().parent().children().eq(2).text();
+      location.href= "adminNanumQnADetail.ad?Mnonum="+Mnonum+"&Qnanum="+Qnanum; 
+   });
+   
+   </script>
 </body>
 </html>
