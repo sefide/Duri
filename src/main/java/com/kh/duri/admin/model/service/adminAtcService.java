@@ -24,6 +24,10 @@ public interface adminAtcService {
 	//관리자 행복두리 Q&A 상세보기
 	adminQnA adminQnADetail(adminQnA q)throws ListException;
 	//Q&A 답변하기 버튼
-	int adminAnswer(adminQnA q)throws ListException;
+	int adminAnswer(adminQnA q);
+	//크라우드 펀딩 반려 버튼
+	int adminCrowdDeny(adminFundingList af);
+	//크라우드 펀딩 승인 버튼
+	int adminCrowdApprove(adminFundingList af);
 
 }

@@ -66,8 +66,20 @@ public class adminAtcServiceImpl implements adminAtcService{
 	}
 	//Q&A 답변하기 버튼
 	@Override
-	public int adminAnswer(adminQnA q) throws ListException {
+	public int adminAnswer(adminQnA q) {
 		int result = aad.adminAnswer(sqlsession,q);
+		return result;
+	}
+	//크라우드 펀딩 반려 버튼
+	@Override
+	public int adminCrowdDeny(adminFundingList af) {
+		int result = aad.adminCrowdDeny(sqlsession,af);
+		return result;
+	}
+	//크라우드 펀딩 승인 버튼
+	@Override
+	public int adminCrowdApprove(adminFundingList af) {
+		int result = aad.adminCrowdApprove(sqlsession,af);
 		return result;
 	}
 

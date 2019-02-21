@@ -138,8 +138,8 @@
 							<div class="table-responsive">
 								<table class="table table-bordered">
 									<tbody>
-									
 										<tr>
+											<td id="Funum" style="display: none;">${CrowdFundGoodsInfo[0].fNo}</td>
 											<td class="total">펀딩 제목</td>
 											<td>${CrowdFundGoodsInfo[0].fTitle}</td>
 										</tr>
@@ -157,8 +157,8 @@
 											<td>${CrowdFundGoodsInfo[0].fWriteDate}</td>
 										</tr>
 										<tr>
-											<td class="total">펀딩 설정 기간</td>
-											<td>${CrowdFundGoodsInfo[0].fLeftDay}일</td>
+											<td class="total" >펀딩 설정 기간(일)</td>
+											<td id="Term">${CrowdFundGoodsInfo[0].fLeftDay}</td>
 										</tr>
 										
 										<tr>
@@ -189,8 +189,8 @@
            
              <br>
                 <br>
-                 <button type="button" class="btn btn-light btn-lg btn-block">반려하기</button>
-		  		 <button type="button" class="btn btn-warning btn-lg btn-block">승인하기</button>
+                 <button type="button" class="btn btn-light btn-lg btn-block crowdRefuse">반려하기</button>
+		  		 <button type="button" class="btn btn-warning btn-lg btn-block crowdApply">승인하기</button>
             	<br><br>	  
             	<br><br>	
         </div>
@@ -199,5 +199,26 @@
             </div>
     
     <jsp:include page="include/admintableFooter.jsp" />
+    
+    <script type="text/javascript">
+    $(".crowdRefuse").click(function () {
+		var funum =$("#Funum").text();
+		var term =$("#Term").text();
+		
+		console.log("funum"+funum);
+		console.log("term"+term);
+		location.href="adminCrowdDeny.ad?funum="+funum+"&term="+term;
+	});
+    $(".crowdApply").click(function () {
+		var funum =$("#Funum").text();
+		var term =$("#Term").text();
+		
+		location.href="adminCrowdApprove.ad?funum="+funum+"&term="+term;
+	});
+    
+    
+    
+    
+    </script>
 </body>
 </html>
