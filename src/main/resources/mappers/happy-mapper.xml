@@ -107,6 +107,18 @@
 		<result property="rnum" column="RNUM"/>
 	</resultMap>
 	
+	<resultMap type="com.kh.duri.Nanummember.model.vo.Letter" id="letterResultSet">
+		<id property="leNo" column="LENO"/>
+		<result property="leMnoTake" column="LE_MNO_TAKE"/>
+		<result property="leMnoGive" column="LE_MNO_GIVE"/>
+		<result property="leTitle" column="LETITLE"/>
+		<result property="leContent" column="LECONTENT"/>
+		<result property="leWriteDate" column="LEWRITEDATE"/>
+		<result property="leType" column="LETYPE"/>
+		<result property="leStatus" column="LESTATUS"/>
+		<result property="mNick" column="MNICK"/>
+	</resultMap>
+	
 	<!-- 보유물품 리스트 조회-->
 	<select id="selectDonateItemList" resultMap="donateItemsResultSet" parameterType="_int">
 		SELECT * 
@@ -227,13 +239,20 @@
 	<insert id="insertQna">
 		INSERT INTO QNA VALUES(SEQ_Q_NO.NEXTVAL, SYSDATE, #{qtitle}, #{qcontent}, NULL, 'H', #{q_mno})
 	</insert>
-	<!-- 감사편지 보낼 정기후원자 닉네임 뽑기 -->
-	<!-- <select id="selectNanumNick" resultMap="memberResultSet" parameterType="Member">
-	
-	</select> -->
+	<!-- 감사편지 보낼 정기후원자 닉네임, 회원번호 뽑기 -->
+	<select id="selectNanumNick" resultMap="memberResultSet" parameterType="Member">
+		SELECT DISTINCT MNICK, MNO
+		FROM DIRECTFUNDHISTORY DH, MEMBER M 
+		WHERE DH.DH_MNO_GIVE = M.MNO 
+		AND DH.DH_MNO_TAKE = #{mno}
+		AND DH.DHSTATUS = 'Y' 
+		GROUP BY M.MNICK, M.MNO
+	</select>
+	<!-- 감사편지 보내기 -->
+	<insert id="insertThankyouLetter">
+		INSERT INTO LETTER VALUES (SEQ_LE_NO.NEXTVAL, #{leMnoTake}, #{leMnoGive}, #{leTitle}, #{leContent}, SYSDATE, 1, DEFAULT)
+	</insert>
 </mapper>
-
-
 
 
 

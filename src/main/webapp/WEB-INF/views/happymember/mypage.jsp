@@ -49,9 +49,10 @@
 			<div style="float: left;">
 				<h4 style="font-weight: 600">
 					진행중&nbsp;<i class="green circle icon" alt="진행중"></i>&nbsp;&nbsp;
-					종료&nbsp;<i class="red circle icon" alt="기간만료종료"></i>&nbsp;&nbsp;
+					기간만료종료&nbsp;<i class="red circle icon" alt="기간만료종료"></i>&nbsp;&nbsp;
+					목표달성종료&nbsp;<i class="blue circle icon" alt="목표달성종료"></i>&nbsp;&nbsp;
 					승인대기중&nbsp;<i class="yellow circle icon" alt="승인대기중"></i>&nbsp;&nbsp;
-					목표달성종료&nbsp;<i class="blue circle icon" alt="목표달성종료"></i>
+					승인반려&nbsp;<i class="red times icon" alt="승인반려"></i>
 				</h4>
 			</div>
 			<span>마이페이지 &gt; 내 사연 &gt; 물품 후원 현황</span>
@@ -93,10 +94,11 @@
 			<div style="float: left;"><h1><i class="chevron right icon"></i>금액 후원 현황</h1></div>
 			<div style="float: left;">
 				<h4 style="font-weight: 600">
-					진행중&nbsp;<i class="green circle icon"></i>&nbsp;&nbsp;
-					종료&nbsp;<i class="red circle icon"></i>&nbsp;&nbsp;
-					승인대기중&nbsp;<i class="yellow circle icon"></i>&nbsp;&nbsp;
-					목표달성종료&nbsp;<i class="blue circle icon"></i>
+					진행중&nbsp;<i class="green circle icon" alt="진행중"></i>&nbsp;&nbsp;
+					기간만료종료&nbsp;<i class="red circle icon" alt="기간만료종료"></i>&nbsp;&nbsp;
+					목표달성종료&nbsp;<i class="blue circle icon" alt="목표달성종료"></i>&nbsp;&nbsp;
+					승인대기중&nbsp;<i class="yellow circle icon" alt="승인대기중"></i>&nbsp;&nbsp;
+					승인반려&nbsp;<i class="red times icon" alt="승인반려"></i>
 				</h4>
 			</div>
 			<span>마이페이지 &gt; 내 사연 &gt; 금액 후원 현황</span>
@@ -208,8 +210,8 @@
 					itemTbodyHtml.push('<td><i class="red circle icon" alt="기간종료"></i></td>');
 				}else if(data.itemDonateList[i].fstatus == 'GOAL'){
 					itemTbodyHtml.push('<td><i class="blue circle icon" alt="달성되어종료"></i></td>');
-				}else{
-					itemTbodyHtml.push('<td><i class="yellow circle icon" alt="승인전"></i></td>');
+				}else if(data.itemDonateList[i].fstatus == 'DENY'){
+					itemTbodyHtml.push('<td><i class="red times icon" alt="승인반려"></i></td>');
 				} 
 					itemTbodyHtml.push('</tr>');
 			}	

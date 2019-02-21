@@ -10,6 +10,7 @@
 <!-- semantic ui -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
 <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 <title>마이페이지>정기후원>자기소개수정</title>
 <!-- 정기후원 -->
@@ -159,7 +160,7 @@ input, select{
 	
 	<div align="center">
 		<c:if test="${ empty loginUser.mprNew }">
-		 <button onclick="updatePr();" class="ui primary button">수정하기</button>
+		 <div onclick="updatePr();" class="ui primary button">수정하기</div>
 		</c:if>
 		<button onclick="return back();" class="ui button">취소하기</button>
 	</div>
@@ -176,11 +177,34 @@ input, select{
 	}
 	
 	function updatePr(){
+		swal({
+			  title: "",
+			  text: "자기소개 수정을 신청 하시겠습니까?",
+			  icon: "warning",
+			  buttons: true,
+			  dangerMode: true,
+			})
+			.then((willDelete) => {
+			  if (willDelete) {
+			    swal("수정 신청되었습니다. 관리자의 승인을 기다려주세요!", {
+			      icon: "success",
+			    }).then(function(){
+			    	$("#updatePrForm").submit();
+			    });
+			    
+			  } else {
+			    swal("자기소개 수정신청을 취소합니다.");
+			  }
+			});
+	}
+	
+	
+	/*function updatePr(){
 		alert("자기소개 수정이 신청되었습니다. 승인을 기다려 주세요!");
 		$("#updatePrForm").submit();
 		console.log("성공");
 		
-	}
+	} */
 </script>
 </body>
 </html>
