@@ -18,12 +18,18 @@ public class Board {
 	private String mNick;
 	private String mAddress;
 	private String mFundType;
+	
 	private int fdValue;
 	private int fd_ino;
+	
 	private int fdValue2;
 	private int fd_ino2;
+	
 	private int fdValue3;
 	private int fd_ino3;
+	
+	
+	private int fd_fno;
 
 	
 	public Board() {}
@@ -31,7 +37,8 @@ public class Board {
 
 	public Board(int rnum, int fno, String ftype, String fTitle, String fContent, Date fWriterDate, Date fStartDate,
 			Date fEndDate, String fStatus, int fValue, String fValueType, int fWriter, String mNick, String mAddress,
-			String mFundType, int fdValue, int fd_ino, int fdValue2, int fd_ino2, int fdValue3, int fd_ino3) {
+			String mFundType, int fdValue, int fd_ino, int fdValue2, int fd_ino2, int fdValue3, int fd_ino3,
+			int fd_fno) {
 		super();
 		this.rnum = rnum;
 		this.fno = fno;
@@ -54,6 +61,7 @@ public class Board {
 		this.fd_ino2 = fd_ino2;
 		this.fdValue3 = fdValue3;
 		this.fd_ino3 = fd_ino3;
+		this.fd_fno = fd_fno;
 	}
 
 
@@ -267,6 +275,16 @@ public class Board {
 	}
 
 
+	public int getFd_fno() {
+		return fd_fno;
+	}
+
+
+	public void setFd_fno(int fd_fno) {
+		this.fd_fno = fd_fno;
+	}
+
+
 	@Override
 	public String toString() {
 		return "Board [rnum=" + rnum + ", fno=" + fno + ", ftype=" + ftype + ", fTitle=" + fTitle + ", fContent="
@@ -274,12 +292,10 @@ public class Board {
 				+ ", fStatus=" + fStatus + ", fValue=" + fValue + ", fValueType=" + fValueType + ", fWriter=" + fWriter
 				+ ", mNick=" + mNick + ", mAddress=" + mAddress + ", mFundType=" + mFundType + ", fdValue=" + fdValue
 				+ ", fd_ino=" + fd_ino + ", fdValue2=" + fdValue2 + ", fd_ino2=" + fd_ino2 + ", fdValue3=" + fdValue3
-				+ ", fd_ino3=" + fd_ino3 + "]";
+				+ ", fd_ino3=" + fd_ino3 + ", fd_fno=" + fd_fno + "]";
 	}
 
 
-	
-	
 	
 	
 }

@@ -380,7 +380,7 @@ input{
 <!-- Form-->
 <div class="form">
   <div class="form-toggle"></div>
-  <div class="form-panel one">
+  <div class="form-panel one" style="height:500px">
     <div class="form-header">
       <h1>나눔두리 Login</h1>
     </div>
@@ -429,7 +429,7 @@ input{
 				
 				<td>
 					<span>
-						&nbsp;&nbsp;<a id="idCheckBtn3" onclick="return duplicationCheck();" class="btn btn-primary" > 중복확인</a>
+						&nbsp;&nbsp;<button id="idCheckBtn3"  class="btn btn-primary" > 중복확인</button>
 						<span id="idCheckMsg"></span>
 					</span>
 				</td>
@@ -594,7 +594,7 @@ $(document).ready(function() {
 	    $('.form-panel.one').removeClass('hidden');
 	    $('.form-panel.two').removeClass('active');
 	    $('.form').animate({
-	      'height': panelTwo
+	      'height': '500'
 	    }, 200);
 	  });
 	});
@@ -625,26 +625,48 @@ $(document).ready(function() {
 		   
   }
 	
-	
-	function duplicationCheck(){
-		var mid2 = $("#mid2").val();
-		console.log(mid2);
-		
-		$.ajax({
-			url:"duplicationCheck.me",
-			type:"post",
-			data:{mid2:mid2},
-			success:function(data){
-				/* alert.log(data); */
-				console.log(data.userId);
-			},
-			error:function(status){
-				console.log(status);
-			}
+
+		var idck = 0;
+		$(function() {
+		    //idck 버튼을 클릭했을 때 
+		    $("#idCheckBtn3").click(function() {
+		        
+		        //userid 를 param.
+		        var mid2 =  $("#mid2").val(); 
+		        console.log(mid2);
+		        
+		        $.ajax({
+		            async: true,
+		            type : 'POST',
+		            data : mid2,
+		            url : "idcheck.me",
+		            dataType : "json",
+		            contentType: "application/json; charset=UTF-8",
+		            success : function(data) {
+		                if (data.cnt > 0) {
+		                    
+		                    alert("아이디가 존재합니다. 다른 아이디를 입력해주세요.");
+		    
+		                
+		                } else {
+		                    alert("사용가능한 아이디입니다.");
+		                    //아이디가 존제할 경우 빨깡으로 , 아니면 파랑으로 처리하는 디자인
+		                    $("#divInputId").addClass("has-success")
+		                    $("#divInputId").removeClass("has-error")
+		                    $("#userpwd").focus();
+		                    //아이디가 중복하지 않으면  idck = 1 
+		                    idck = 1;
+		                    
+		                }
+		            },
+		            error : function(error) {
+		                
+		                alert("error : " + error);
+		            }
+		        });
+		    });
 		});
-		
-		return false;
-	}
+	
 
 
 

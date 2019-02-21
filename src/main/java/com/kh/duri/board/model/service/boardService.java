@@ -36,7 +36,9 @@ public interface boardService {
 
 	int insertCloud(Board b) throws BoardException;
 
-	int insertItem(Board b);
+	int insertItem(Board b) throws BoardException;
+
+
 
 
 

@@ -174,10 +174,33 @@
 	<!-- 크라우드 펀딩 글 작성 -->
 	<insert id="insertCloud">
 		INSERT INTO FUNDING 
-		VALUES(SEQ_FH_NO.NEXTVAL,#{ftype},#{fTitle},#{fContent}, SYSDATE, null, SYSDATE,'YET', #{fValue}, #{fValueType}, 1)
+		VALUES(SEQ_FH_NO.NEXTVAL,#{ftype},#{fTitle},#{fContent}, SYSDATE, null, SYSDATE,'YET', #{fValue}, #{fValueType}, #{fWriter})
 	</insert>
 	
+	<insert id="insertCloud2">
+		INSERT INTO FUNDING 
+		VALUES(SEQ_FH_NO.NEXTVAL,#{ftype},#{fTitle},#{fContent}, SYSDATE, null, SYSDATE,'YET', null, null, #{fWriter})
+	</insert>
 	
+	<select id="selectFnoCurrval" resultType="_int">
+		SELECT SEQ_FH_NO.CURRVAL FROM DUAL
+	</select>
+	
+	<!-- 크라우드 펀딩 글 작성 -->
+	<insert id="insertItem1">
+		INSERT INTO FUNDINGDETAIL 
+		VALUES(SEQ_FHD_NO.NEXTVAL,#{fdValue},#{fd_fno},#{fd_ino})
+	</insert>
+	
+	<insert id="insertItem2">
+		INSERT INTO FUNDINGDETAIL 
+		VALUES(SEQ_FHD_NO.NEXTVAL,#{fdValue2},#{fd_fno},#{fd_ino2})
+	</insert>
+	
+	<insert id="insertItem3">
+		INSERT INTO FUNDINGDETAIL 
+		VALUES(SEQ_FHD_NO.NEXTVAL,#{fdValue},#{fd_fno},#{fd_ino3})
+	</insert>
 	
 </mapper>
 

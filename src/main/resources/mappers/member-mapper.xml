@@ -75,6 +75,11 @@
 		FROM MEMBER
 		WHERE MNO = ${mno}
 	</select>
+	
+	<select id="userIdCheck" resultMap="memberResultSet" resultType="_int">
+		SELECT COUNT(*) FROM MEMBER
+      	WHERE MID = #{mid2}
+	</select>
 
 
 	

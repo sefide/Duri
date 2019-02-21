@@ -42,4 +42,19 @@ public class MemberDaoImpl implements MemberDao {
 		return loginUser2;
 	}
 
+
+	@Override
+	public int userIdCheck(SqlSessionTemplate sqlSession, String mid2) throws LoginException {
+		System.out.println(mid2);
+		int count= sqlSession.selectOne("Member.userIdCheck",mid2);
+		
+		System.out.println("Dao 아이디 중복확인 count : "+count);
+		
+		if(count < 0) {
+			throw new LoginException("로그인정보가 존재하지 않습니다.");
+		}
+		
+		return count;
+	}
+
 }

@@ -71,7 +71,7 @@
 			<span>마이페이지 &gt; 사연신청하기</span>
 		</div>
 		<br>
- <form action="writeCloud.bo" id="goCloud" method="get">	
+	
 <table>
   <tr>
    <td>
@@ -272,7 +272,7 @@
 		  	취소하기
 		</button>
 	</div>
-    </form>
+
 		
 		<div style="height: 100px;"></div>
 		
@@ -288,9 +288,10 @@
 </c:if>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
-
+var ftype = null;
  $("input[type=radio]").click(function () {
-	    if($(this).prop("checked")) {   
+	    if($(this).prop("checked")) {  
+	    	ftype=$(this).val();
 	    	if($(this).val()=="MONEY"){
 	    		$("#goalMoney").show();
 	    		$("#goalMoney2").show();
@@ -300,6 +301,8 @@
 		    	$("#goalThing2").hide();
 	    		
 	    	}else{
+	    		ftype=$(this).val();
+	    		console.log(ftype);
 	    		$("#goalThing").show();
 		    	$("#goalThing2").show();
 		    	$("#goalMoney").hide();
@@ -318,7 +321,6 @@
 		var fWriter = $("#fWriter").val();
 		var mNick = $("#mNick").val();
 		var fTitle = $("#fTitle").val();
-		var ftype =  $("#ftype").val();
 		var fValueType =  $("#fValueType").val();
 		var fValue =  $("#fValue").val();
 		var fContent =  $("#fContent").val();
@@ -329,37 +331,50 @@
 		var fdValue =  $("#fdValue").val();
 		var fdValue2 =  $("#fdValue2").val();
 		var fdValue3 =  $("#fdValue3").val();
+
 		
-		
-		console.log("/" + fWriter + "/" + mNick+ "/" + fTitle+ "/" + ftype+ "/" + fValueType+ "/" + fValue+ "/"+ fContent+ "/");
-		console.log(fTitle + ftype);
-		
-		console.log("/" + fWriter + "/" + mNick+ "/" + fTitle+ "/" + ftype+ "/" + fd_ino+ "/" + fd_ino2+ "/"+ fd_ino3
-				+ "/"+ fdValue + "/"+ fdValue2 + "/"+ fdValue3 + "/" + fContent);
-		console.log(fTitle + ftype);
 		 swal({
 			  title: "작성완료!",
 			  text: "관리자 승인을 기다려주세요!",
 			  icon: "success"
 			  }).then(function(){ 
-			 	$("#goCloud").submit(); 
-			 	if(ftype="MONEY"){
-			 		location.href="writeCloud.bo?fWriter="+fWriter+"&mNick="+mNick+"&fTitle="+fTitle + "&ftype="+ ftype
-			 			+"&fValueType=" + fValueType + "&fValue=" + fValue  + "&fContent=" + fContent;
-			 		
-			 	}else{
-			 		location.href="writeCloud.bo?fWriter="+fWriter+"&mNick="+mNick+"&fTitle="+fTitle + "&ftype="+ ftype
-		 			+"&fd_ino=" + fd_ino +"&fd_ino2=" + fd_ino2 + "&fd_ino3=" + fd_ino3 + "&fdValue=" + fdValue
-		 			+ "&fdValue2=" + fdValue2 + "&fdValue3=" + fdValue3 + "&fContent=" + fContent;
-			 		
-			 	}
-			 	 
-		
-		
-	});
+ 		
+	switch (ftype) {
+
+					case "MONEY":
+						console.log("/" + fWriter + "/" + mNick + "/" + fTitle
+								+ "/" + ftype + "/" + fValueType + "/" + fValue
+								+ "/" + fContent + "/");
+						console.log(fTitle + ftype);
+
+						location.href = "writeCloud.bo?fWriter=" + fWriter
+								+ "&mNick=" + mNick + "&fTitle=" + fTitle
+								+ "&ftype=" + ftype + "&fValueType="
+								+ fValueType + "&fValue=" + fValue
+								+ "&fContent=" + fContent;
+						break;
+
+					case "ITEM":
+						console.log("/" + fWriter + "/" + mNick + "/" + fTitle
+								+ "/" + ftype + "/" + fd_ino + "/" + fd_ino2
+								+ "/" + fd_ino3 + "/" + fdValue + "/"
+								+ fdValue2 + "/" + fdValue3 + "/" + fContent);
+						console.log(fTitle + ftype);
+
+						location.href = "writeCloud2.bo?fWriter=" + fWriter
+								+ "&mNick=" + mNick + "&fTitle=" + fTitle
+								+ "&ftype=" + ftype + "&fd_ino=" + fd_ino
+								+ "&fd_ino2=" + fd_ino2 + "&fd_ino3=" + fd_ino3
+								+ "&fdValue=" + fdValue + "&fdValue2="
+								+ fdValue2 + "&fdValue3=" + fdValue3
+								+ "&fContent=" + fContent;
+						break;
+
+					}
+					
+				});
 
 	}
-
 </script>
 </body>
 </html>
