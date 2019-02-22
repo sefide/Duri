@@ -81,7 +81,8 @@ public class adminAtcServiceImpl implements adminAtcService{
 	@Override
 	public int insertReply(adminQnA q) throws ListException {
 		int result = aad.insertReply(sqlsession,q);
-
+		return result;
+	}
 	//Q&A 답변하기 버튼
 	@Override
 	public int adminAnswer(adminQnA q) {
