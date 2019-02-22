@@ -1,9 +1,7 @@
 package com.kh.duri.Nanummember.controller;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -12,13 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-
 
 import com.kh.duri.Nanummember.model.exception.NanumException;
 import com.kh.duri.Nanummember.model.service.NanumMemberService;
-import com.kh.duri.Nanummember.model.vo.DirectFundHistory;
 import com.kh.duri.Nanummember.model.vo.FundInterest;
 import com.kh.duri.Nanummember.model.vo.FundItem;
 import com.kh.duri.Nanummember.model.vo.Funding;
@@ -45,6 +39,18 @@ public class NanumController {
 		return "Nanummember/nanumMain";
 	}
 	
+	/* ----------------------나눔두리 회원정보 수정 ----------------------*/
+	//비밀번호 확인
+	@RequestMapping("updateInfo.nanum")
+	public String Total12() {
+		return "Nanummember/mypage/mypage_updateInfo";
+	}
+	//회원정보 수정
+	@RequestMapping("updateDetail.nanum")
+	public String Total13() {
+		return "Nanummember/mypage/mypage_updateDetail";
+	}
+		
 	/* ----------------------나눔두리 마이페이지 ----------------------*/
 	// 크라우드 펀딩 조회
 	@RequestMapping("mypage.nanum")
@@ -357,23 +363,5 @@ public class NanumController {
 		}
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	/* ----------------------나눔두리 회원정보 수정 ----------------------*/
-	@RequestMapping("updateInfo.nanum")
-	public String Total12() {
-		return "Nanummember/mypage/mypage_updateInfo";
-	}
 
 }

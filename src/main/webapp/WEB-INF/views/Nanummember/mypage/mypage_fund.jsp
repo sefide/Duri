@@ -211,12 +211,11 @@
 				</div>
 			</div>
 		</div>								
-	
-			
-			
-	
-
 	<%@ include file="../include/myNav.jsp" %>
-
+	<script>
+		function goMoneyCloud() {
+			location.href = "";
+		}
+	</script>
 </body>
 </html>

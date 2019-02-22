@@ -178,11 +178,6 @@ body {
 	</div>
 	</section>
 	<br>
-	<br>
-
-	
-	
-	<br><br>
 	<!-- footer  -->
    <jsp:include page="../common/footer.jsp"></jsp:include>
   

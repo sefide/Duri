@@ -8278,14 +8278,14 @@ textarea.form-control {
 
 .ftco-footer {
   font-size: 16px;
-  padding: 7em 0;
-  background: #252525; }
+  padding: 1em 0;
+  background: #fafafa; }
   .ftco-footer .ftco-footer-logo {
     text-transform: uppercase;
     letter-spacing: .1em; }
   .ftco-footer .ftco-footer-widget h2 {
     font-weight: normal;
-    color: #fff;
+    color: #4c381a;
     margin-bottom: 40px;
     font-size: 18px;
     font-weight: 400;
@@ -8299,9 +8299,9 @@ textarea.form-control {
       content: '';
       width: 70px;
       height: 1px;
-      background: #fff; }
+      background: #4c381a; }
   .ftco-footer .ftco-footer-widget ul li a span {
-    color: #fff; }
+    color: #4c381a; }
   .ftco-footer .ftco-footer-widget .btn-primary {
     background: #fff !important;
     border: 2px solid #fff !important; }

@@ -114,21 +114,15 @@ public class BoardController {
 	      
 	      if(request.getParameter("currentPage") != null) {
 	         currentPage = Integer.parseInt(request.getParameter("currentPage"));
-	      }
-
-	      
-	         int listCount = bs.getMoneyListCount();
-			
-			PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
-			
+	      }      
+	         int listCount = bs.getMoneyListCount();			
+			PageInfo pi = Pagination.getPageInfo(currentPage, listCount);			
 			System.out.println("크라우드펀딩 금액후원 명수 :  " + listCount);
 			
 
 			List<Board> moList;
 			
-			moList = bs.selectMoneyList(pi);
-			
-
+			moList = bs.selectMoneyList(pi);			
 			model.addAttribute("moList", moList);
 			model.addAttribute("pi", pi);
 			return "board/causes";
@@ -137,31 +131,16 @@ public class BoardController {
 	      
 	      
 	   }
-
-	
-
-	
-	
-	@RequestMapping("cloud_money_datail.bo")
-	public ModelAndView moneyDetail(Board b, ModelAndView mv,HttpSession session){ 
-		
-		
-		System.out.println("Board : "+b);
-		
-		Board moneyDetail = null; 
-		
-		
-		moneyDetail = bs.moneyDetailOne(b); //받아온 아이디와 비밀번호로 로그인 정보 조회
-			
-		session.setAttribute("moneyDetail", moneyDetail);	//세션에 뿌려주기
-			
-		mv.setViewName("redirect:moneyDetail.bo"); //위처럼 redirect로 뷰페이지이름연결할거랑 똑같음
-
-		
-
-	
-	return mv;
-	
+	 //금액후원 상세조회
+	   @RequestMapping("cloud_money_datail.bo")
+	   public ModelAndView moneyDetail(Board b, ModelAndView mv,HttpSession session){ 
+				
+		System.out.println("Board : "+b);		
+		Board moneyDetail = null; 	
+		moneyDetail = bs.moneyDetailOne(b); //받아온 아이디와 비밀번호로 로그인 정보 조회			
+		session.setAttribute("moneyDetail", moneyDetail);	//세션에 뿌려주기			
+		mv.setViewName("redirect:moneyDetail.bo"); //위처럼 redirect로 뷰페이지이름연결할거랑 똑같음			
+		return mv;
 
 	}
 	

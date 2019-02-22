@@ -73,6 +73,9 @@
 	font-size: 20px;
 	cursor: pointer;
 }
+input{
+	 width: 400px;
+}
 </style>
 </head>
 <body>
@@ -88,25 +91,40 @@
 		</div>
 		<section class="ftco-section" style="padding: 0em 0;">
 			<div class="container">
-				<div align="center">
-					<!-- <img src="resources/common/images/nanum_logo.png" width="300px;"
-						alt="duri_logo"> -->
-					<div id="msgHappy">회원정보 수정을 위해 <b style="color: #fa8f3d">비밀번호</b>를 다시 한번 입력해주세요.</div>
-					<div id="msgBox">						
-						<div class="ui action input">
-						  <input type="password" placeholder="비밀번호를 입력하여 주세요" style="width:300px;" id="passCheck">
-						  <button class="ui orange button" style="color: white !important ;" onclick="goDetail();">확인하기</button>
-						</div>
-					</div>
+				<div align="center">				
+					<div id="msgHappy"></div>					
+						<table class="ui orange table" style="width: 90%;">
+						<tr>
+							<th scope="row">*닉네임</th>
+							<td><div class="ui input"><input id="mNickName" name="mNickName" type="text" required="required"></div></td>
+						</tr>
+						<tr>
+							<th scope="row">*비밀번호</th>
+							<td><div class="ui input"><input id="mpwd2" name="mpwd" type="password" required="required"> <span id="pwdCheckMsg" ></span></div></td>
+
+						</tr>
+						<tr>
+							<th scope="row">*비밀번호 확인</th>
+							<td><div class="ui input"><input id="mpwd22" type="password" required="required" ></div>
+							</td>
+
+						</tr>
+						<tr>
+							<th scope="row">휴대폰번호</th>
+							<td><div class="ui input"> <input id="mPhone" name="mPhone" type="text" placeholder="-없이 입력"></div></td>
+						</tr>
+					</table>
+
+					
 				</div>
 			</div>
 		</section>
+		<br><br><br><br>
+		<center><button class="ui orange button" style="color: white !important ;" onclick="goupdate();" >수정하기</button></center>
 	</div>	
 	<%@ include file="../include/myNav.jsp"%>
 	<script>
-		function goDetail() {
-			var mno = ${sessionScope.loginUser2.mno};		
-			/* console.log(mno); */
+		function goupdate() {
 			location.href="updateDetail.nanum";
 		}
 	</script>
