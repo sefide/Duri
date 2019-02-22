@@ -519,10 +519,13 @@
 	$("#btnSpon").click(function(){
 		var leftValue = $("#leftValue").text();
 		var randomUid = generateUUID();
-		
+		var selectDate = $("#selectDate").val();
 		leftValue = leftValue.substring(0, leftValue.length-1);
+
 		if(leftValue < 0){
 			alert("포인트가 부족합니다. 충전해주세요. ");
+		}else if(selectDate == null){
+			alert("다음 결제일을 선택해주세요. ");
 		}else if(!$("#chkinfo1").is(":checked")){
 			alert("정기결제 약관에 동의해주세요.");
 		}else if(!$("#chkinfo2").is(":checked")){
@@ -547,10 +550,10 @@
 			IMP.request_pay({ // param
 			    pg: "html5_inicis",
 			    pay_method: "card", // "card"만 지원됩니다 
-			    merchant_uid: 'merchant_' + new Date().getTime(), // 빌링키 발급용 주문번호
+			    merchant_uid: 'merchant_' + new Date().getTime() + '_b', // 빌링키 발급용 주문번호
 			    customer_uid: mno + randomUid, // 카드(빌링키)와 1:1로 대응하는 값
 			    name: "최초인증결제",
-			    amount: price, // 0 으로 설정하여 빌링키 발급만 진행합니다.
+			    amount: 0, // 0 으로 설정하여 빌링키 발급만 진행합니다.
 			    buyer_email: email,
 			    buyer_name: name,
 			    buyer_tel: "010-7630-9011"
@@ -562,7 +565,6 @@
 			        console.log(rsp);
 			        console.log("고유ID : "+ rsp.imp_uid);
 			        console.log("상점 거래ID : "+ rsp.merchant_uid);
-			        console.log("상점 거래ID : "+ rsp.customer_uid);
 			        
 			        $.ajax({
 			            url: "directFundGetToken.pm", // 최초 결제 및 토큰 가져오기
@@ -572,27 +574,38 @@
 			            data: {
 			                customer_uid: mno + randomUid, // 카드(빌링키)와 1:1로 대응하는 값
 			                imp_uid : rsp.imp_uid,
-			                merchant_uid : 'merchant_' + new Date().getTime(),
-			                amount : 100
+			                merchant_uid : 'merchant_' + new Date().getTime() + '_n',
+			                amount : 100  //price
+			            },
+			            success:function(data){
+							console.log(data.status);
+							console.log(data.msg);
+							
+							if(data.status == '1'){
+								console.log("결제 예약 서버 부르자  ");
+								
+								$.ajax({
+						            url: "subscribeDirectFund.pm", // 정기결제 예약 서버
+						            type: "post",
+						            data: {
+						                customer_uid: mno + randomUid, // 카드(빌링키)와 1:1로 대응하는 값
+						                imp_uid : rsp.imp_uid,
+						                merchant_uid : 'merchant_' + new Date().getTime()+'_s',
+						                amount : 100,//price
+						                giveMember : mno,
+						                takeMember : tmno,
+						                type : type,
+						                price : price,  //price
+						                selectDate : selectDate
+						            }
+						        });
+							}else {
+								console.log("실패");
+							}
 			            }
 			        });  
 			        
-			        $.ajax({
-			            url: "subscribeDirectFund.pm", // 정기결제 예약 서버
-			            type: "post",
-			            data: {
-			                customer_uid: mno + randomUid, // 카드(빌링키)와 1:1로 대응하는 값
-			                imp_uid : rsp.imp_uid,
-			                merchant_uid : 'merchant_' + new Date().getTime()+'_sub',
-			                amount : 100,
-			                giveMember : mno,
-			                takeMember : tmno,
-			                type : type,
-			                price : price
-			            }
-			        });
-			        
-			        location.href = "goSuccessPage.pm";
+			        //location.href = "goSuccessPage.pm";
 			      /*   location.href = "directFundGetToken.pm?customer_uid="+ mno + randomUid + "&imp_uid=" + rsp.imp_uid + "&merchant_uid="+ 'merchant_' + new Date().getTime()
 			        		+ "&amount=" + 100;
 			        
