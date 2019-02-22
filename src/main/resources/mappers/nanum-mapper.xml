@@ -304,7 +304,6 @@
 		WHERE LENO = #{leNo} AND LESTATUS = 'Y' AND L.LE_MNO_TAKE = M.MNO 
   	</select>
   	
- 
   	 <!-- 찜한 정기 후원 개수 조회 -->
   	<select id="selectLikeDirectCount" resultType="_int">
   		SELECT COUNT(*) 
@@ -377,10 +376,10 @@
   	<insert id="insertQnA">
   		INSERT INTO QNA VALUES(SEQ_Q_NO.NEXTVAL, SYSDATE,#{qTitle},#{qContent},DEFAULT,'N',#{q_mNo})
   	</insert>
-  	
-  	
-  	
-  	
-  	
+  	<!-- QnA 삭제 -->
+  	<delete id="deletetQnA">
+  		DELETE FROM QNA WHERE QNO = #{qNo}
+  	</delete>
+
  </mapper>
   

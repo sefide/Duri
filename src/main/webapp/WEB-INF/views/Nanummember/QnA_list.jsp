@@ -134,7 +134,7 @@ tr:hover{
 								<c:otherwise>
 									<td>O</td>
 								</c:otherwise>
-							</c:choose>						
+							</c:choose>			
 						</tr>
 						</c:forEach> 
 					</tbody>	
