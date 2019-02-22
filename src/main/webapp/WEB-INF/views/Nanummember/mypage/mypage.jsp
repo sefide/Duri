@@ -184,7 +184,7 @@
 							<tr>
 							<td><c:out value="${itemList.fTitle}"/></td>
 							<td></td>
-							<td><c:out value="${itemList.fhValue}"/></td>
+							<td><c:out value="${itemList.iName}"/></td>
 							
 							<td><c:out value="${itemList.fhDate}"></c:out></td>
 							<c:choose>
@@ -338,8 +338,7 @@
 							<tr>
 							<td><c:out value="${endItemList.fTitle}"/></td>
 							<td></td>
-							<td><c:out value="${endItemList.fhValue}"/></td>
-							
+							<td><c:out value="${endItemList.iName}"/></td>						
 							<td><c:out value="${endItemList.fhDate}"></c:out></td>
 							<c:choose>
 								<c:when test="${endItemList.fStatus eq 'GOAL'}">

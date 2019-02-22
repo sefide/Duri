@@ -71,11 +71,8 @@
         	<option>소년소녀가장</option>
         	<option>한부모가정</option>
         </select>
-</div>
-
-      </div>
-
-		
+		</div>
+      </div>		
       	<div class="row">
       	   <c:forEach var="mo" items="${moList}">
       		<div class="col-md-4 ftco-animate" >

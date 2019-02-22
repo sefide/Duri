@@ -40,6 +40,7 @@
 		<result property="fStatus" column="FSTATUS"/>
 		<result property="fValue" column="FVALUE"/>
 		<result property="fWriter" column="FWRITER"/>
+		<result property="iName" column="INAME"/>
 	</resultMap>
 	
 	<resultMap type="com.kh.duri.Nanummember.model.vo.FundHistory" id="fundHistoryResultSet">
@@ -157,26 +158,16 @@
 	</select>
 	<!-- 물품 크라우드 펀딩  조회 (진행) -->
 	<select id="selectItemCloud" resultMap="fundingResultSet" parameterType="Funding" resultType="list">
-		SELECT ROWNUM RNUM, FNO, FTITLE , FHVALUE ,FSTATUS, FSTARTDATE , FENDDATE , FHDATE
-		FROM(SELECT f.fno, f.FTITLE , fh.FHVALUE , f.FSTATUS,  f.FSTARTDATE ,f.FENDDATE , fh.FHDATE
-		FROM FUNDING f, FUNDHISTORY fh	
-		<![CDATA[	
-		WHERE f.FNO = fh.FH_FNO and fh.FH_MNO_GIVE = #{mno}  and f.FTYPE= 'ITEM' and f.fstartdate <= SYSDATE and f.fenddate >= SYSDATE ]]>
-		ORDER BY fh.FHDATE DESC)
-	</select>
-	<!-- 진행하는 물품크라우드 펀딩 - 물품 뽑기 -->
-	<select id="selectIngItem" resultType="list" parameterType="NanumFundItem">
-		SELECT F.FNO,  FI.INAME , FH.FH_MNO_GIVE
-		FROM FUNDING F, FUNDITEM FI, FUNDHISTORY FH, FUNDHISTORYDETAIL FHD
-		WHERE F.FNO = FH.FH_FNO AND FH.FHNO = FHD.FHD_FHNO AND FHD.FHD_INO = FI.INO
-		AND F.FNO= #{fno} AND FH.FH_MNO_GIVE = #{mno}
-		GROUP BY F.FNO,FI.INAME,FH.FH_MNO_GIVE
-		ORDER BY FNO  	
-	</select>
-	
-	
-	
-	
+		SELECT ROWNUM RNUM, FNO, FTITLE , FHVALUE ,FSTATUS, FSTARTDATE , FENDDATE , FHDATE, INAME
+		FROM(SELECT f.fno, f.FTITLE , fh.FHVALUE , f.FSTATUS,  f.FSTARTDATE ,f.FENDDATE , fh.FHDATE, FI.INAME
+		FROM 
+		FUNDING f JOIN FUNDHISTORY FH ON(F.FNO=FH.FH_FNO)
+		JOIN FUNDHISTORYDETAIL FHD ON(FHD.FHD_FHNO=FH.FHNO)
+		JOIN FUNDITEM FI ON (FI.INO=FHD.FHD_INO)
+		<![CDATA[
+		WHERE  fh.FH_MNO_GIVE = #{mno}  and f.FTYPE= 'ITEM' and f.fstartdate <= SYSDATE and f.fenddate >= SYSDATE ]]>
+		ORDER BY FH.FHDATE DESC)
+	</select>	
 	<!-- 물품 크라우드 펀딩 개수 조회 (종료)  -->
 	<select id="selectEndItemCloundListCount" resultType="_int">
 		SELECT COUNT(*)
@@ -187,12 +178,15 @@
 	</select>
 	<!-- 물품 크라우드 펀딩  조회 (종료) -->
 	<select id="selectEndItemCloud" resultMap="fundingResultSet" parameterType="Funding" resultType="list">
-		SELECT ROWNUM RNUM, FNO, FTITLE , FHVALUE ,FSTATUS, FSTARTDATE , FENDDATE , FHDATE
-		FROM(SELECT f.fno, f.FTITLE , fh.FHVALUE , f.FSTATUS,  f.FSTARTDATE ,f.FENDDATE , fh.FHDATE
-		FROM FUNDING f, FUNDHISTORY fh	
-		<![CDATA[	
-		WHERE f.FNO = fh.FH_FNO and fh.FH_MNO_GIVE = #{mno}  and f.FTYPE= 'ITEM' AND f.fenddate < SYSDATE ]]>
-		ORDER BY fh.FHDATE DESC)
+		SELECT ROWNUM RNUM, FNO, FTITLE , FHVALUE ,FSTATUS, FSTARTDATE , FENDDATE , FHDATE, INAME
+		FROM(SELECT f.fno, f.FTITLE , fh.FHVALUE , f.FSTATUS,  f.FSTARTDATE ,f.FENDDATE , fh.FHDATE, FI.INAME
+		FROM 
+		FUNDING f JOIN FUNDHISTORY FH ON(F.FNO=FH.FH_FNO)
+		JOIN FUNDHISTORYDETAIL FHD ON(FHD.FHD_FHNO=FH.FHNO)
+		JOIN FUNDITEM FI ON (FI.INO=FHD.FHD_INO)
+		<![CDATA[
+		WHERE  fh.FH_MNO_GIVE = 19  and f.FTYPE= 'ITEM' and f.fenddate < SYSDATE ]]>
+		ORDER BY FH.FHDATE DESC)
 	</select>
 	<!-- 정기후원 개수 조회 (진행) -->
 	<select id="selectDirectFundCount" resultType="_int">
