@@ -1,16 +1,14 @@
 
 package com.kh.duri.member.controller;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -124,23 +122,24 @@ public class MemberController {
 		}
 
 		
-	@RequestMapping("/idcheck.me")
-	@ResponseBody
-	public Map<Object, Object> idcheck(@RequestBody String mid2) {
+	@RequestMapping("duplicationCheck.me")		
+	public @ResponseBody String idcheck(@RequestParam String mid2, HttpServletResponse response) {
 
 		int count = 0;
-		Map<Object, Object> map = new HashMap<Object, Object>();
 
 		try {
 			count = ms.idcheck(mid2);
-			map.put("cnt", count);
+			System.out.println("count : " + count);
+			
 			
 		} catch (LoginException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
 
-		return map;
+
+		return count+"";
 	}
 		
 	
