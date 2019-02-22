@@ -62,6 +62,7 @@ public class adminAtcDaoImpl implements adminAtcDao{
 	@Override
 	public int insertReply(SqlSessionTemplate sqlsession, adminQnA q) throws ListException {
 		return sqlsession.insert("Admin.adminNanumReply", q);
+	}
 
 	//Q&A 답변하기 버튼
 	@Override
