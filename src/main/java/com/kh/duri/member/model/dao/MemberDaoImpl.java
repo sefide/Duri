@@ -15,7 +15,7 @@ public class MemberDaoImpl implements MemberDao {
 	public Member loginCheck(SqlSessionTemplate sqlSession, Member m) throws LoginException {
 		Member loginUser = sqlSession.selectOne("Member.loginCheck",m);	//받아온 m을 이용해 mapper에서 sql문 실행해서 받아온 값 저장 
 		
-		System.out.println("Dao Member : "+loginUser);
+		/*System.out.println("Dao Member : "+loginUser);*/
 		
 		if(loginUser ==null) {
 			throw new LoginException("로그인정보가 존재하지 않습니다.");	//예외처리

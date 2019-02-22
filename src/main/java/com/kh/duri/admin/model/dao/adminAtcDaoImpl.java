@@ -47,6 +47,7 @@ public class adminAtcDaoImpl implements adminAtcDao{
 	public adminQnA adminQnADetail(SqlSessionTemplate sqlsession, adminQnA q) throws ListException {
 		return sqlsession.selectOne("Admin.adminQnADetail",q);
 	}
+
 	//관리자 나눔두리 Q&A 목록
 	@Override
 	public List<adminQnA> adminNanumQnAList(SqlSessionTemplate sqlsession) throws ListException {
@@ -61,6 +62,26 @@ public class adminAtcDaoImpl implements adminAtcDao{
 	@Override
 	public int insertReply(SqlSessionTemplate sqlsession, adminQnA q) throws ListException {
 		return sqlsession.insert("Admin.adminNanumReply", q);
+
+	//Q&A 답변하기 버튼
+	@Override
+	public int adminAnswer(SqlSessionTemplate sqlsession, adminQnA q)  {
+		int result = sqlsession.update("Admin.adminAnswer",q);
+		return result;
+	}
+	//크라우드 펀딩 반려 버튼
+	@Override
+	public int adminCrowdDeny(SqlSessionTemplate sqlsession, adminFundingList af) {
+		int result = sqlsession.update("Admin.adminCrowdDeny",af);
+		return result;
+		
+	}
+	//크라우드 펀딩 승인 버튼
+	@Override
+	public int adminCrowdApprove(SqlSessionTemplate sqlsession, adminFundingList af) {
+		int result = sqlsession.update("Admin.adminCrowdApprove",af);
+		return result;
+
 	}
 	
 	

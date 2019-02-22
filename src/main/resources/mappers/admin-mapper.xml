@@ -146,7 +146,7 @@
 	</select>
 	<!-- 크라우드 펀딩 상세페이지 -펀딩정보(금액)-->
 	<select id="CrowdFundInfoDetail" resultType="adminFundingList" parameterType="adminFundingList" >
-		SELECT FTITLE,FVALUETYPE,FVALUE,FWRITEDATE,FLEFTDAY,FCONTENT 
+		SELECT FNO,FTITLE,FVALUETYPE,FVALUE,FWRITEDATE,FLEFTDAY,FCONTENT 
 		FROM FUNDING 
 		WHERE FSTATUS='YET' AND FTYPE='MONEY' AND FNO=#{fNo} 
 	</select>
@@ -157,7 +157,16 @@
 		JOIN FUNDITEM FI ON(FI.INO=FD.FD_INO)
 		WHERE F.FSTATUS='YET' AND F.FTYPE='ITEM' AND FNO=#{fNo}
 	</select>
-	
+	<!-- 크라우드 펀딩 반려 버튼 -->
+	<update id="adminCrowdDeny" parameterType="adminFundingList" >
+		UPDATE FUNDING 
+		SET FSTATUS='DENY' 
+		WHERE FNO=#{fNo}
+	</update>
+	<!-- 크라우드 펀딩 승인 버튼 -->
+	<update id="adminCrowdApprove"  parameterType="adminFundingList" >
+		UPDATE FUNDING SET FSTATUS='ING',FSTARTDATE=SYSDATE,FENDDATE=SYSDATE + #{fLeftDay}  WHERE FNO=#{fNo}
+	</update>
 	
 	<!-- *****************Q&A관련쿼리********************* -->
 	
@@ -165,11 +174,11 @@
 	<select id="adminQnAList" resultType="adminQnA" parameterType="adminQnA" >
 		SELECT Q.Q_MNO,Q.QNO,Q.QDATE,Q.QTITLE,Q.QANSWER,M.MID,M.MNAME,M.MNO
 		FROM QNA Q JOIN MEMBER M ON(M.MNO=Q.Q_MNO)  
-		WHERE QWRITER='H' ORDER BY Q.QDATE DESC,Q.QANSWER NULLS FIRST 
+		WHERE QWRITER='H' ORDER BY Q.QANSWER NULLS FIRST,Q.QDATE DESC
 	</select>
 	<!-- 관리자 행복두리 Q&A 상세보기  -->
 	<select id="adminQnADetail" resultType="adminQnA" parameterType="adminQnA" >
-		SELECT Q.QNO,Q.Q_MNO,Q.QDATE,Q.QTITLE,Q.QCONTENT,M.MID,M.MNAME,Q.QWRITER
+		SELECT Q.QNO,Q.Q_MNO,Q.QDATE,Q.QTITLE,Q.QCONTENT,M.MID,M.MNAME,Q.QWRITER,Q.QANSWER
 		FROM QNA Q JOIN MEMBER M ON(M.MNO=Q.Q_MNO)  
 		WHERE Q.QWRITER='H' AND Q.Q_MNO=#{q_Mno} AND Q.QNO=#{qNo}
 	</select>	
@@ -179,6 +188,7 @@
 		FROM QNA Q JOIN MEMBER M ON(M.MNO=Q.Q_MNO)  
 		WHERE QWRITER='N' ORDER BY Q.QDATE DESC,Q.QANSWER NULLS FIRST
 	</select>
+
 	<!-- 관리자 나눔두리 Q&A 상세보기 -->
 	<select id="adminNanumQnADetail" resultType="adminQnA" parameterType="adminQnA">
 		SELECT Q.QNO,Q.Q_MNO,Q.QDATE,Q.QTITLE,Q.QCONTENT,M.MID,M.MNAME,Q.QWRITER, Q.QANSWER
@@ -189,6 +199,14 @@
 	<update id="adminNanumReply">
 		UPDATE QNA SET QANSWER = #{qAnswer} WHERE QNO = #{qNo}
 	</update>
+
+	<!-- 관리자 Q&A 답변하기 -->
+	<update id="adminAnswer" parameterType="adminQnA" >
+		UPDATE QNA SET QANSWER=#{qAnswer} WHERE QNO=#{qNo}
+	</update>
+	
+	
+	
 	
 	<!-- 환급 신청 목록 조회 -->
 	<!-- <select id="adminRefundList" resultType="RefundList" parameterType="RefundList">
