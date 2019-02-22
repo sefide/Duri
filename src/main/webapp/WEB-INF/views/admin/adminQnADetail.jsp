@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -110,6 +111,8 @@ td {
 		<table class="listTable">
 			
 			<tr>
+				
+				<td id="Num" style="display: none;">${adminQnADetail.qNo}</td>
 				<td class="tableTitle">제목</td>
 				<td>${adminQnADetail.qTitle}</td>
 				<td class="tableTitle">작성자</td>
@@ -134,20 +137,37 @@ td {
 	<div class="QnA-nocie">
 		<div id="myTitle" style="margin-bottom: 0px;">두리두리 답변</div>
 	</div>
-	<div class="QnA-list">
-		<table class="answerTable">
-			<tr>
-				<td class="tableTitle"></td>
-			</tr>
-			<tr>
-				<td><textarea style="width: 100%; height: 150px;"></textarea> </td>
-			</tr>
-		</table>
-	</div>
+	
+		<c:if test="${adminQnADetail.qAnswer ==null}">
+			<div class="QnA-list">
+				<table class="answerTable">
+					<tr>
+						<td class="tableTitle"></td>
+					</tr>
+					<tr>
+						<td><textarea style="width: 100%; height: 150px;" id="Answer"></textarea> </td>
+					</tr>
+				</table>
+			</div>
+		</c:if>
+		<c:if test="${adminQnADetail.qAnswer !=null}">
+			<div class="QnA-list">
+				<table class="answerTable">
+					<tr>
+						<td class="tableTitle"></td>
+					</tr>
+					<tr>
+						<td>${adminQnADetail.qAnswer}</td>
+					</tr>
+				</table>
+			</div>
+		</c:if>
 	
 	<div align="center" style="margin-top: 80px;"> 
-	<button type="button" class="btn btn-primary btn-lg">답변등록</button>
-	<button type="button" class="btn btn-secondary btn-lg">목록으로 돌아가기</button>
+	<c:if test="${adminQnADetail.qAnswer ==null}">
+	<button type="button" class="btn btn-primary btn-lg AnswerEnroll">답변등록</button>
+	</c:if>
+	<button type="button" class="btn btn-secondary btn-lg" onclick="location.href='adminQnA.ad'">목록으로 돌아가기</button>
 	</div>
 	<br><br><br>
 
@@ -161,6 +181,15 @@ td {
 		</div>
 		
            		<jsp:include page="include/admintableFooter.jsp"/>
+      <script type="text/javascript">
+      $(".AnswerEnroll").click(function () {
+		var answer = $("#Answer").val();
+		var num = $("#Num").text();
+		location.href="adminAnswer.ad?answer="+answer+"&num="+num;
+	});
+      
+      
+      </script>
    
 </body>
 </html>

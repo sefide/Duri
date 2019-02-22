@@ -180,7 +180,7 @@
                                             <td class="center">${row.fStartDate }</td>
                                             <td class="center">${row.fEndDate }</td>
                                             <td class="center">${row.fhDate }</td>
-                                            <td class="center">${row.fhValue }</td>
+                                            <td class="center">${row.fhValue }원</td>
                                             <c:choose>
                                             	<c:when test="${row.fStatus=='ING' }">
                                             	 <td class="center">펀딩 진행중</td>

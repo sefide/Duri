@@ -99,7 +99,7 @@ public class AdminAtcController {
 		try {
 			CrowdMemGoodsInfo = aas.CrowdMemInfoDetail(m);
 			CrowdFundGoodsInfo = aas.CrowdFundGoodsInfo(f);
-			System.out.println("CrowdFundGoodsInfo:"+CrowdFundGoodsInfo);
+			
 			model1.addAttribute("CrowdMemGoodsInfo", CrowdMemGoodsInfo);
 			model2.addAttribute("CrowdFundGoodsInfo", CrowdFundGoodsInfo);
 			
@@ -116,6 +116,40 @@ public class AdminAtcController {
 		
 	}
 	
+	
+	//크라우드 펀딩 반려 버튼
+	@RequestMapping("adminCrowdDeny.ad")
+	public String adminCrowdDeny(HttpServletRequest request, HttpServletResponse response,adminFundingList af) {
+		
+		int funum = Integer.parseInt(request.getParameter("funum"));
+		String term = request.getParameter("term");
+		af.setfNo(funum);
+		af.setfLeftDay(term);
+		
+			int result = aas.adminCrowdDeny(af);
+			return "redirect:adminCrowd.ad";
+			
+		
+			
+		
+		
+	}
+	//크라우드 펀딩 승인 버튼
+	@RequestMapping("adminCrowdApprove.ad")
+	public String adminCrowdApprove(HttpServletRequest request, HttpServletResponse response,adminFundingList af) {
+		int funum = Integer.parseInt(request.getParameter("funum"));
+		String term = request.getParameter("term");
+		
+		af.setfNo(funum);
+		af.setfLeftDay(term);
+		
+		
+			int result = aas.adminCrowdApprove(af);
+			return "redirect:adminCrowd.ad";
+			
+			
+		
+	}
 	
 	//관리자 메인페이지
 	@RequestMapping("adminMain.ad")
@@ -170,6 +204,25 @@ public class AdminAtcController {
 		}
 		
 	
+	}
+	
+	//Q&A 답변하기 버튼 
+	@RequestMapping("adminAnswer.ad")
+	public String adminAnswer(HttpServletRequest request, HttpServletResponse response,adminQnA q) {
+		
+		String answer = request.getParameter("answer");
+		int num = Integer.parseInt(request.getParameter("num"));
+		
+		q.setqNo(num);
+		q.setqAnswer(answer);
+		
+		
+		
+			int result = aas.adminAnswer(q);
+			return "redirect:adminQnA.ad";
+			
+			
+		
 	}
 	
 	

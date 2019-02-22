@@ -65,7 +65,7 @@
                                             <td class="center"> <a class="btn btn-default btn-sm QnAanswer">답변하러하기</a></td>
                                             </c:if>
                                             <c:if test="${row.qAnswer!=null}">
-                                            <td class="center"></td>
+                                            <td class="center"><a class="btn btn-default btn-sm QnAanswer">상세보기</a></td>
                                             </c:if>
                                         </tr>
                                      </c:forEach>
