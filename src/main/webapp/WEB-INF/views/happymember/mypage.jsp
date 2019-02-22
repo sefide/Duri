@@ -182,8 +182,9 @@
 					var title = (data.itemDonateList[i].ftitle).substring(0, 10);
 					var content = (data.itemDonateList[i].fcontent).substring(0, 30);
 					var item = (data.itemDonateList[i].fitemname).substring(0, 8);
-					
-			
+					var titleDatail = data.itemDonateList[i].fno;
+				
+					console.log("번호 : "+titleDatail);
 					itemTbodyHtml.push('<tr>');
 					itemTbodyHtml.push('<td>'+data.itemDonateList[i].rnum+'</td>');
 				if(data.itemDonateList[i].ftitle.length > 10){
@@ -193,26 +194,47 @@
 				}
 				
 				if(data.itemDonateList[i].fcontent.length > 30){
-					itemTbodyHtml.push('<td><a href="cloudThingDetail.happy">'+content+'...</a></td>');
+					itemTbodyHtml.push('<td><a href="cloud_thing_datail.bo?titleDatail='+titleDatail+'">'+content+'...</a></td>');
 				}else{
+					itemTbodyHtml.push('<td><a href="cloud_thing_datail.bo?titleDatail='+titleDatail+'">'+data.itemDonateList[i].fcontent+'</a></td>');
+				}
+				/* if(data.itemDonateList[i].fcontent.length > 30){
+					itemTbodyHtml.push('<form id="boardDetail" action="cloud_thing_datail.bo">');
+					itemTbodyHtml.push('<input type="hidden" name="fno" value="'+data.itemDonateList[i].fno+'"/>');
+					itemTbodyHtml.push('<td><a onclick="boardDetail();">'+content+'...</a></td>');
+					itemTbodyHtml.push('</form>');
+				}else{
+					itemTbodyHtml.push('<form id="boardDetail" action="cloud_thing_datail.bo">');
+					itemTbodyHtml.push('<input type="hidden" name="fno" value="'+data.itemDonateList[i].fno+'"/>');
 					itemTbodyHtml.push('<td><a href="cloudThingDetail.happy">'+data.itemDonateList[i].fcontent+'</a></td>');
-				}	
+					itemTbodyHtml.push('</form>');
+				} */	
+				
 				if(data.itemDonateList[i].fitemname.length > 8){
 					itemTbodyHtml.push('<td>'+item+'...</td>');
 				}else{
 					itemTbodyHtml.push('<td>'+data.itemDonateList[i].fitemname+'</td>');
 				}
 				
+				if(data.itemDonateList[i].fstartdate == null){
+					itemTbodyHtml.push('<td>승인대기중</td>');
+				}else if(data.itemDonateList[i].fstartdate != null && data.itemDonateList[i].fenddate == null){
+					itemTbodyHtml.push('<td>'+startDate+'~</td>');
+				}else {
 					itemTbodyHtml.push('<td>'+startDate+'~'+endDate+'</td>');
+				}
+					
 				if(data.itemDonateList[i].fstatus == 'ING'){
 					itemTbodyHtml.push('<td><i class="green circle icon" alt="진행중"></i></td>');
 				}else if(data.itemDonateList[i].fstatus == 'END'){
 					itemTbodyHtml.push('<td><i class="red circle icon" alt="기간종료"></i></td>');
 				}else if(data.itemDonateList[i].fstatus == 'GOAL'){
 					itemTbodyHtml.push('<td><i class="blue circle icon" alt="달성되어종료"></i></td>');
-				}else if(data.itemDonateList[i].fstatus == 'DENY'){
+				}else if(data.itemDonateList[i].fstatus == 'YET'){
+					itemTbodyHtml.push('<td><i class="yellow circle icon" alt="승인대기"></i></td>');
+				}else{
 					itemTbodyHtml.push('<td><i class="red times icon" alt="승인반려"></i></td>');
-				} 
+				}
 					itemTbodyHtml.push('</tr>');
 			}	
 				
@@ -308,16 +330,27 @@
 					moneyTbodyHtml.push('<td><a href="cloudThingDetail.happy">'+data.moneyDonateList[i].fcontent+'</a></td>');
 				}	
 					moneyTbodyHtml.push('<td>'+data.moneyDonateList[i].fvalue+'</td>');
+					
+				if(data.moneyDonateList[i].fstartdate == null){
+					moneyTbodyHtml.push('<td>승인대기중</td>');
+				}else if(data.moneyDonateList[i].fstartdate != null && data.moneyDonateList[i].fenddate == null){
+					moneyTbodyHtml.push('<td>'+startDate+'~</td>');
+				}else {
 					moneyTbodyHtml.push('<td>'+startDate+'~'+endDate+'</td>');
+				}
+				
 				if(data.moneyDonateList[i].fstatus == 'ING'){
 					moneyTbodyHtml.push('<td><i class="green circle icon" alt="진행중"></i></td>');
 				}else if(data.moneyDonateList[i].fstatus == 'END'){
 					moneyTbodyHtml.push('<td><i class="red circle icon" alt="기간종료"></i></td>');
 				}else if(data.moneyDonateList[i].fstatus == 'GOAL'){
-					moneyTbodyHtml.push('<td><i class="blue circle icon" alt="달성되어종료"></i></td>');
+					itemTbmoneyTbodyHtmlodyHtml.push('<td><i class="blue circle icon" alt="달성되어종료"></i></td>');
+				}else if(data.moneyDonateList[i].fstatus == 'YET'){
+					moneyTbodyHtml.push('<td><i class="yellow circle icon" alt="승인대기"></i></td>');
 				}else{
-					moneyTbodyHtml.push('<td><i class="yellow circle icon" alt="승인전"></i></td>');
-				} 
+					moneyTbodyHtml.push('<td><i class="red times icon" alt="승인반려"></i></td>');
+				}
+				
 					moneyTbodyHtml.push('</tr>');
 				
 			}
@@ -374,6 +407,10 @@
 		itemTable(1);
 		moneyTable(1);
 	});
+	
+	function boardDetail(){
+		$("#boardDetail").submit();
+	}
 
 </script>
 	

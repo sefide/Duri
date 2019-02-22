@@ -7,8 +7,8 @@ public class DirectFundHistory implements java.io.Serializable {
 	private int dhvalue; //후원금액
 	private Date dhstartdate; //시작날짜
 	private String dhstatus;	//후원 상태
-	private String dhbillingkey;
-	private String dhvaluetype;
+	private String dhbillingkey;	//정기결제번호
+	private String dhvaluetype;	//후원유형
 	private String dh_mno_take;//후원대상자 번호
 	private int dh_mno_give;//후원자번호
 	private int rnum;

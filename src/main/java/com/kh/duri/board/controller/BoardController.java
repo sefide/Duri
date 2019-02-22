@@ -184,10 +184,19 @@ public class BoardController {
 	
 	//물품후원 상세조회
 	@RequestMapping("cloud_thing_datail.bo")
-	public ModelAndView thingDetail(BoardItem bi, ModelAndView mv,HttpSession session){ 
+	public ModelAndView thingDetail(BoardItem bi, ModelAndView mv,HttpSession session, HttpServletRequest request, HttpServletResponse response){ 
 		
+		String titleDatail = request.getParameter("titleDatail");
+		System.out.println("titleDatail : " + titleDatail);
 		
-		System.out.println("BoardItem : "+bi);
+		if(titleDatail!= null) {
+			int happyFno = Integer.parseInt(request.getParameter("titleDatail"));
+			
+			bi.setFno(happyFno);
+			System.out.println("happyFno : " + happyFno);
+			
+		}
+		
 		
 		BoardItem thingDetail = null; 
 		List<BoardItem> thingDetail2 = null; 
@@ -201,7 +210,6 @@ public class BoardController {
 			
 		mv.setViewName("redirect:thingDetail.bo"); //위처럼 redirect로 뷰페이지이름연결할거랑 똑같음
 
-		
 
 	
 		return mv;

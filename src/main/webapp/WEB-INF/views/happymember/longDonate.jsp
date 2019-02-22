@@ -65,9 +65,10 @@
 			<caption>문의내역 리스트입니다.</caption>
 			<colgroup>
 				<col style="width:6%;"><!-- No -->
+				<col style="width:17%;"><!--  -->
 				<col style="width:15%;"><!--  -->
-				<col style="width:15%;"><!--  -->
-				<col style="width:15%;"><!--  -->
+				<col style="width:17%;"><!--  -->
+				<col style="width:17%;"><!--  -->
 				<col style="width:15%;"><!--  -->
 				<col style="width:15%;"><!--  -->
 			</colgroup>
@@ -75,6 +76,7 @@
 			<tr>
 				<th scope="col">No</th>
 				<th scope="col">나눔두리</th>
+				<th scope="col">후원유형</th>
 				<th scope="col">후원금액</th>
 				<th scope="col">후원누적금액</th>
 				<th scope="col">후원회차</th>
@@ -87,6 +89,7 @@
 					<tr>
 						<td><c:out value="${directList.rnum}"/></td>
 						<td><c:out value="${directList.dh_nick_give}&nbsp;님" escapeXml="false"/></td>
+						<td><c:out value="${directList.dhvaluetype}"/></td>
 						<td><c:out value="${directList.dhvalue}원" escapeXml="false"/></td>
 						<td><c:out value="${directList.sum}원" escapeXml="false"/></td>
 						<td><c:out value="${directList.cnt}회" escapeXml="false"/></td>
