@@ -119,10 +119,13 @@ public class boardServiceImpl implements boardService {
 	}
 
 	@Override
-	public int insertItem(Board b) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int insertItem(Board b) throws BoardException {
+		int result = bd.insertCloud2(sqlSession,b);
+		
+		return result;	
 	}
+
+
 
 
 

@@ -9,4 +9,6 @@ public interface MemberService {
 
 	Member loginNaMember(Member m) throws LoginException;	//나눔두리 로그인 정보조회 메소드
 
+	int idcheck(String mid2) throws LoginException;
+
 }

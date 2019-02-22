@@ -406,126 +406,144 @@ input {
 </style>
 </head>
 <body>
-	<a id="two2" style="color: orange">둘이</a>
-	<a id="add" style="color: yellowgreen">두리</a>
-	<img src="/duri/resources/board/images/main.png" id="img1">
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
 
-	<!-- Form-->
-	<div class="form">
-		<div class="form-toggle"></div>
-		<div class="form-panel one">
-			<div class="form-header">
-				<h1>나눔두리 Login</h1>
-			</div>
-			<div class="form-content">
-				<form action="loginNa.me" method="POST">
-					<div class="form-group">
-						<label for="userId">userId</label> <input type="text" id="mid"
-							name="mid" required="required" />
-					</div>
-					<div class="form-group">
-						<label for="userPwd">Password</label> <input type="password"
-							id="mpwd" name="mpwd" required="required" />
-					</div>
-					<div class="form-group">
-						<label class="form-remember"> </label><a href="#"
-							class="form-recovery">Forgot Password?</a>
-					</div>
-					<div class="form-group">
-						<button id="loginBtn">LogIn</button>
-					</div>
-				</form>
-			</div>
-		</div>
+<a id="two2" style="color:orange">둘이</a><a id="add" style="color:yellowgreen">두리</a>
+<img src = "/duri/resources/board/images/main.png" id="img1">
+<br><br><br><br><br>
 
+<!-- Form-->
+<div class="form">
+  <div class="form-toggle"></div>
+  <div class="form-panel one" style="height:500px">
+    <div class="form-header">
+      <h1>나눔두리 Login</h1>
+    </div>
+    <div class="form-content">
+      <form action="loginNa.me" method="POST">
+        <div class="form-group">
+          <label for="userId">userId</label>
+          <input type="text" id="mid" name="mid" required="required"/>
+        </div>
+        <div class="form-group">
+          <label for="userPwd">Password</label>
+          <input type="password" id="mpwd" name="mpwd" required="required"/>
+        </div>
+        <div class="form-group">
+          <label class="form-remember">
+          </label><a href="#" class="form-recovery">Forgot Password?</a>
+        </div>
+        <div class="form-group">
+          <button id="loginBtn">LogIn</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  
+  
+  <!-- 회원가입 뷰 -->
+  
+  <div class="form-panel two">
+    <div class="form-header">
+      <h1>Join Member</h1>
+    </div>
+    <div class="form-content">
+      <form id="joinForm" name="sub1" action="joinNanum.me" method="post">
+		<table class="boardWrite wth700 mr_auto mt30"><!-- boardWrite S-->
+			<colgroup>
+				<col style="width:20%;">
+				<col style="width:%;">
+			</colgroup>
+			<tbody>
+			<tr>
+				<th scope="row">*아이디</th>
+				<td>
+					
+					<input id="mid2" name="mid" type="text"  required>
+				</td>
+				
+				<td>
+					<span>
+						&nbsp;&nbsp;<button id="idCheckBtn3"  class="btn btn-primary" > 중복확인</button>
+						<span id="idCheckMsg"></span>
+					</span>
+				</td>
 
-		<!-- 회원가입 뷰 -->
-		<div class="form-panel two">
-			<div class="form-header">
-				<h1>Join Member</h1>
-			</div>
-			<div class="form-content">
-				<form id="joinForm" name="sub1" action="joinNanum.me" method="post">
-					<table class="boardWrite wth700 mr_auto mt30">
-						<!-- boardWrite S-->
-						<colgroup>
-							<col style="width: 20%;">
-							<col style="width: %;">
-						</colgroup>
-						<tbody>
-							<tr>
-								<th scope="row">*아이디</th>
-								<td><input id="mid2" name="mid" type="text" required>
-								</td>
+			</tr>
 
-								<td><span> &nbsp;&nbsp;<a id="idCheckBtn3"
-										onclick="return duplicationCheck();" class="btn btn-primary">
-											중복확인</a> <span id="idCheckMsg"></span>
-								</span></td>
+			<tr>
+				<th scope="row">*비밀번호</th>
+				<td>
+					<input id="mpwd2" name="mpwd" type="password" required="required"> 
+					<span id="pwdCheckMsg"></span>
+				</td>
 
-							</tr>
+			</tr>
+			<tr>
+				<th scope="row">*비밀번호 확인</th>
+				<td>
+					<input id="mpwd22" type="password" required="required"> 
+				</td>
+		
+			</tr>
+			<tr>
+				<th scope="row">*이름</th>
+				<td>
+					<label for=""></label>
+					<input id="mName" name=mName type="text" required="required"> 
+				</td>
+			</tr>
+			<tr>
+	
+				<th scope="row">*닉네임</th>
 
-							<tr>
-								<th scope="row">*비밀번호</th>
-								<td><input id="mpwd2" name="mpwd" type="password"
-									required="required"> <span id="pwdCheckMsg"></span></td>
+				<td>
+					<label for=""></label>
+					<input id="mNickName" name="mNickName" type="text" required="required"> 
+				</td>
+			</tr>
 
-							</tr>
-							<tr>
-								<th scope="row">*비밀번호 확인</th>
-								<td><input id="mpwd22" type="password" required="required">
-								</td>
+			<tr>
+				<th scope="row">휴대폰번호</th>
+				<td>
+					<span>
+						<input id="mPhone" name="mPhone" type="text" placeholder="-없이 입력">
+					</span>
+				 </td>
+			</tr>
+			<tr>
+				<th scope="row">*이메일</th>
+				<td>
+					<input id="mEmail" name="email1" class="wth100" type="text" required="required">
+				</td>
 
-							</tr>
-							<tr>
-								<th scope="row">*이름</th>
-								<td><label for=""></label> <input id="mName" name=mName
-									type="text" required="required"></td>
-							</tr>
-							<tr>
-
-								<th scope="row">*닉네임</th>
-
-								<td><label for=""></label> <input id="mNickName"
-									name="mNickName" type="text" required="required"></td>
-							</tr>
-
-							<tr>
-								<th scope="row">휴대폰번호</th>
-								<td><span> <input id="mPhone" name="mPhone"
-										type="text" placeholder="-없이 입력">
-								</span></td>
-							</tr>
-							<tr>
-								<th scope="row">*이메일</th>
-								<td><input id="mEmail" name="email1" class="wth100"
-									type="text" required="required"></td>
-
-								<td><input id="mEmail2" name="email2" class="wth100"
-									type="text" required="required"></td>
-								<td>
-							</tr>
-
-
-							<tr>
-								<td></td>
-								<td><select id="email">
-										<option value="self" selected>직접입력</option>
-										<option value="naver">naver.com</option>
-										<option value="daum">daum.net</option>
-										<option value="google">google.com</option>
-								</select></td>
-								<td><span> &nbsp;&nbsp;<a id="sendEmail"
-										class="btn btn-primary">인증번호발송</a> <span id="idCheckMsg"></span>
-								</span></td>
-							</tr>
-							<tr>
+				<td>
+					<input id="mEmail2" name="email2" class="wth100" type="text" required="required">
+				</td>
+				<td>
+			</tr>
+			
+			
+			<tr>
+			<td></td>
+				<td>
+					<select id="email">
+							<option value="self" selected>직접입력</option>
+							<option value="naver">naver.com</option>
+							<option value="daum">daum.net</option>
+							<option value="google">google.com</option>
+					</select>
+				</td>
+				<td>
+					<span>
+						&nbsp;&nbsp;<a id="sendEmail" class="btn btn-primary" >인증번호발송</a>
+					<span id="idCheckMsg"></span>
+					</span>
+				</td>
+			</tr>
+			<tr>
+					
 								<%!
+
 						public int getRandom(){
 							int randomCode=0;
 							randomCode = (int)Math.floor((Math.random()*99999-10000+1))+10000;
@@ -597,7 +615,7 @@ $(document).ready(function() {
 	    $('.form-panel.one').removeClass('hidden');
 	    $('.form-panel.two').removeClass('active');
 	    $('.form').animate({
-	      'height': panelTwo
+	      'height': '500'
 	    }, 200);
 	  });
 	});
@@ -628,26 +646,48 @@ $(document).ready(function() {
 		   
   }
 	
-	
-	function duplicationCheck(){
-		var mid2 = $("#mid2").val();
-		console.log(mid2);
-		
-		$.ajax({
-			url:"duplicationCheck.me",
-			type:"post",
-			data:{mid2:mid2},
-			success:function(data){
-				/* alert.log(data); */
-				console.log(data.userId);
-			},
-			error:function(status){
-				console.log(status);
-			}
+
+		var idck = 0;
+		$(function() {
+		    //idck 버튼을 클릭했을 때 
+		    $("#idCheckBtn3").click(function() {
+		        
+		        //userid 를 param.
+		        var mid2 =  $("#mid2").val(); 
+		        console.log(mid2);
+		        
+		        $.ajax({
+		            async: true,
+		            type : 'POST',
+		            data : mid2,
+		            url : "idcheck.me",
+		            dataType : "json",
+		            contentType: "application/json; charset=UTF-8",
+		            success : function(data) {
+		                if (data.cnt > 0) {
+		                    
+		                    alert("아이디가 존재합니다. 다른 아이디를 입력해주세요.");
+		    
+		                
+		                } else {
+		                    alert("사용가능한 아이디입니다.");
+		                    //아이디가 존제할 경우 빨깡으로 , 아니면 파랑으로 처리하는 디자인
+		                    $("#divInputId").addClass("has-success")
+		                    $("#divInputId").removeClass("has-error")
+		                    $("#userpwd").focus();
+		                    //아이디가 중복하지 않으면  idck = 1 
+		                    idck = 1;
+		                    
+		                }
+		            },
+		            error : function(error) {
+		                
+		                alert("error : " + error);
+		            }
+		        });
+		    });
 		});
-		
-		return false;
-	}
+	
 
 
 

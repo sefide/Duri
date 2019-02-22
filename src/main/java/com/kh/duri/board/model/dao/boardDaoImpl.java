@@ -201,5 +201,27 @@ public class boardDaoImpl implements boardDao {
 		return result;
 	}
 
+	@Override
+	public int insertCloud2(SqlSessionTemplate sqlSession, Board b) throws BoardException {
+		int result = 0;	//전체 삽입 결과 확인
+		int insertCloud = sqlSession.insert("Boards.insertCloud2", b);
+		int fd_fno = sqlSession.selectOne("Boards.selectFnoCurrval");
+		System.out.println(fd_fno);
+		b.setFd_fno(fd_fno);
+		int insertItem1 = sqlSession.insert("Boards.insertItem1", b);	//첫번째 물품 목록 삽입
+		int insertItem2 = sqlSession.insert("Boards.insertItem2", b);	//두번째 물품 목록 삽입
+		int insertItem3 = sqlSession.insert("Boards.insertItem3", b);	//세번째 물품 목록 삽입
+
+		if(insertItem1>0 && insertItem2 >0 && insertItem3 >0 && insertCloud > 0) {
+			System.out.println("크라우드펀딩 작성 성공여부 : " + result);
+			result = 1;
+		}else {
+			
+			throw new BoardException("작성실패!"); //예외처리
+		}
+		
+		return result;
+	}
+
 
 }

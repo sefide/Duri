@@ -232,7 +232,7 @@ public class BoardController {
 	 
 	//펀딩글 작성(행복두리)
 	@RequestMapping("writeCloud.bo")
-	public ModelAndView writeCloud(Board b, ModelAndView mv,HttpSession session) throws BoardException{ 
+	public ModelAndView writeCloud(Board b, ModelAndView mv,HttpSession session){ 
 
 
 		try {
@@ -240,25 +240,33 @@ public class BoardController {
 
 		int writeCloud = 0;
 		int writeCloud2 = 0;
+		System.out.println(b.getFtype());
 		
-		
-		if(b.getFtype()=="MONEY") {
-			writeCloud = bs.insertCloud(b); // 받아온 아이디와 비밀번호로 로그인 정보 조회
+
+				writeCloud = bs.insertCloud(b); // 받아온 아이디와 비밀번호로 로그인 정보 조회
+				
+				if (writeCloud > 0) {
+					System.out.println("내사연페이지로 이동");
+					mv.setViewName("redirect:mypage.happy"); // 위처럼 redirect로 뷰페이지이름연결할거랑 똑같음
+	
 			
-		}else {
-			writeCloud = bs.insertCloud(b); // 받아온 아이디와 비밀번호로 로그인 정보 조회
-			writeCloud2 = bs.insertItem(b); // 받아온 아이디와 비밀번호로 로그인 정보 조회
-		}
-
+				
+			}/*else if(b.getFtype()=="ITEM"){
+				writeCloud = bs.insertCloud(b); // 게시글 insert
+				writeCloud2 = bs.insertItem(b); // 물품 종류, 개수 insert
+				
+				if (writeCloud > 0 && writeCloud2 > 0) {
+					System.out.println("내사연페이지로 이동");
+					mv.setViewName("redirect:mypage.happy"); // 위처럼 redirect로 뷰페이지이름연결할거랑 똑같음
+	
+				}
+			}
+*/
 		
 
-		if (writeCloud > 0) {
-			System.out.println("내사연페이지ㅣ로 이동");
-			mv.setViewName("redirect:mypage.happy"); // 위처럼 redirect로 뷰페이지이름연결할거랑 똑같음
-
-		}
+		
 	} catch (BoardException e) {
-		mv.setViewName("redirect:writeCloud2.bo"); // 위처럼 redirect로 뷰페이지이름연결할거랑 똑같음
+		System.out.println("실패!");
 
 	}
 
@@ -269,68 +277,34 @@ public class BoardController {
 
 	}
 	
-	//펀딩글 작성(행복두리)
-	/*@RequestMapping("writeCloud2.bo")
-	public ModelAndView writeCloud2(Board b, ModelAndView mv,HttpSession session){ 
 
 
-int fWriter = Integer.parseInt(request.getParameter("fWriter"));
-		String fTitle = request.getParameter("fTitle");
-		String mNick = request.getParameter("mNick");
-		String ftype = request.getParameter("ftype");
-		String fValueType = request.getParameter("fValueType");
-		int fValue = Integer.parseInt(request.getParameter("fValue"));
-		String fContent = request.getParameter("fContent");
-		
-		
-		
-		
+	// 펀딩글 작성2(행복두리)
+	@RequestMapping("writeCloud2.bo")
+	public ModelAndView writeCloud2(Board b, ModelAndView mv, HttpSession session) {
 
-String fWriter = request.getParameter("fWriter");
-		String fTitle = request.getParameter("fTitle");
-		String mNick = request.getParameter("mNick");
-		String ftype = request.getParameter("ftype");
-		String fValueType = request.getParameter("fValueType");
-		String fValue = request.getParameter("fValue");
-		String fd_ino = request.getParameter("fd_ino");
-		String fdValue = request.getParameter("fdValue");
-		String fContent = request.getParameter("fContent");
-		
-		
-			try {
+		try {
 			System.out.println("Board : " + b);
 
-			int writeCloud = 0;
+			int writeCloud2 = 0;
 
-			writeCloud = bs.insertCloud(b); // 받아온 아이디와 비밀번호로 로그인 정보 조회
+			writeCloud2 = bs.insertItem(b); // 물품 종류, 개수 insert
 
-			if (writeCloud > 0) {
-				System.out.println("내사연페이지ㅣ로 이동");
+			if ( writeCloud2 > 0) {
+				System.out.println("내사연페이지로 이동");
 				mv.setViewName("redirect:mypage.happy"); // 위처럼 redirect로 뷰페이지이름연결할거랑 똑같음
 
 			}
+
 		} catch (BoardException e) {
-			mv.setViewName("redirect:writeCloud2.bo"); // 위처럼 redirect로 뷰페이지이름연결할거랑 똑같음
+			System.out.println("실패!");
 
 		}
 
 		return mv;
 
-
-
-		return mv;
-
 	}
-	*/
-	
-	 
-	
-	@RequestMapping("writeCloud2.bo")
-	public String eunji11() {
-		return "common/cloudWrite";
-	}
-	
-	
+
 	@RequestMapping("writeCloud_page.bo")
 	public String eunji10() {
 		return "happymember/cloudWrite";

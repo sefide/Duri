@@ -11,4 +11,6 @@ public interface MemberDao {
 
 	Member loginNaCheck(SqlSessionTemplate sqlSession, Member m) throws LoginException;
 
+	int userIdCheck(SqlSessionTemplate sqlSession, String mid2) throws LoginException;
+
 }

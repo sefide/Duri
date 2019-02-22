@@ -19,12 +19,11 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public Member loginMember(Member m) throws LoginException {
-		//System.out.println(sqlSession.hashCode());
-		
-				Member loginUser = md.loginCheck(sqlSession, m);	//DAO로 Member 정보와 sqlSession 전송
-				
-				return loginUser;
+		// System.out.println(sqlSession.hashCode());
 
+		Member loginUser = md.loginCheck(sqlSession, m); // DAO로 Member 정보와 sqlSession 전송
+
+		return loginUser;
 
 	}
 
@@ -33,6 +32,13 @@ public class MemberServiceImpl implements MemberService {
 		Member loginUser2 = md.loginNaCheck(sqlSession, m);
 		
 		return loginUser2;
+	}
+
+	@Override
+	public int idcheck(String mid2) throws LoginException {
+		int count = md.userIdCheck(sqlSession, mid2);
+		
+		return count;
 	}
 
 
