@@ -73,10 +73,10 @@
 	<select id="selectLongList" resultMap="memberResultSet" resultType="Member">
 		SELECT *
 		FROM MEMBER
-		WHERE MNO = ${mno}
+		WHERE MNO = #{mno}
 	</select>
 	
-	<select id="userIdCheck" resultMap="memberResultSet" resultType="_int">
+	<select id="userIdCheck" parameterType="java.lang.String" resultType="_int">
 		SELECT COUNT(*) FROM MEMBER
       	WHERE MID = #{mid2}
 	</select>

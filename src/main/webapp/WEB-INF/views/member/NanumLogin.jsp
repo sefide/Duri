@@ -463,7 +463,7 @@ input {
 				
 				<td>
 					<span>
-						&nbsp;&nbsp;<button id="idCheckBtn3"  class="btn btn-primary" > 중복확인</button>
+						&nbsp;&nbsp;<button id="idCheckBtn3" onclick="duplicationCheck();" class="btn btn-primary" > 중복확인</button>
 						<span id="idCheckMsg"></span>
 					</span>
 				</td>
@@ -647,7 +647,44 @@ $(document).ready(function() {
   }
 	
 
-		var idck = 0;
+	function duplicationCheck(){
+		var mid2=$("#mid2").val();
+		console.log(mid2);
+		if(mid2 == ""){
+			
+			swal("아이디를 입력해주세요!");
+		}else{
+		$.ajax({
+			url:"duplicationCheck.me",
+			type:"post",
+			data:{mid2:mid2},
+			success:function(data){
+				console.log(data);
+				  if (data > 0) {
+	                   console.log(data);
+	                   swal("존재하는 아이디 입니다!");
+	                    
+	    
+	                } else{
+	                    swal("사용가능한 아이디입니다.");
+	                    
+	                }
+			},
+			error:function(status){
+				console.log(status);
+			}
+			
+		});
+		
+		
+		return false;
+	}	
+	}
+
+
+
+
+	/* 	var idck = 0;
 		$(function() {
 		    //idck 버튼을 클릭했을 때 
 		    $("#idCheckBtn3").click(function() {
@@ -664,17 +701,14 @@ $(document).ready(function() {
 		            dataType : "json",
 		            contentType: "application/json; charset=UTF-8",
 		            success : function(data) {
-		                if (data.cnt > 0) {
-		                    
+		                if (data > 0) {
+		                   console.log(data.cnt);
 		                    alert("아이디가 존재합니다. 다른 아이디를 입력해주세요.");
+		                    
 		    
-		                
-		                } else {
+		                } else{
 		                    alert("사용가능한 아이디입니다.");
-		                    //아이디가 존제할 경우 빨깡으로 , 아니면 파랑으로 처리하는 디자인
-		                    $("#divInputId").addClass("has-success")
-		                    $("#divInputId").removeClass("has-error")
-		                    $("#userpwd").focus();
+		      
 		                    //아이디가 중복하지 않으면  idck = 1 
 		                    idck = 1;
 		                    
@@ -686,7 +720,7 @@ $(document).ready(function() {
 		            }
 		        });
 		    });
-		});
+		}); */
 	
 
 

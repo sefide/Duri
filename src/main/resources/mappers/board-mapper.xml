@@ -42,7 +42,7 @@
 
 	</resultMap>
 	
-	<resultMap type="com.kh.duri.board.model.vo.BoardItem" id="thingBoardlistSet">
+	<resultMap type="com.kh.duri.board.model.vo.Board" id="thingBoard">
 	<!-- property=컬럼명, column=필드명    반드시 일치! -->
 		<id property="fno" column="FNO"></id>
 		<result property="rnum" column="RNUM"/>
@@ -63,6 +63,31 @@
 		<result property="fd_ino2" column="FD_INO"/>
 		<result property="fdValue3" column="FDVALUE"/>
 		<result property="fd_ino3" column="FD_INO"/>
+
+
+	</resultMap>
+		<resultMap type="com.kh.duri.board.model.vo.BoardItem" id="thingBoardlistSet">
+	<!-- property=컬럼명, column=필드명    반드시 일치! -->
+		<id property="fno" column="FNO"></id>
+		<result property="rnum" column="RNUM"/>
+		<result property="fTitle" column="FTITLE"/>
+		<result property="fContent" column="FCONTENT"/>
+		<result property="fWriterDate" column="FWRITERDATE"/>
+		<result property="fStartDate" column="FSTARTDATE"/>
+		<result property="fEndDate" column="FENDDATE"/>
+		<result property="fStatus" column="FSTATUS"/>
+		<result property="fWriter" column="FWRITER"/>
+		<result property="iName" column="INAME"/>
+		<result property="mNick" column="MNICK"/>
+		<result property="mAddress" column="MADDRESS"/>
+		<result property="mFundType" column="MFUNDTYPE"/>
+		<result property="fdValue" column="FDVALUE"/>
+		<result property="fd_ino" column="FD_INO"/>
+		<result property="fdValue2" column="FDVALUE"/>
+		<result property="fd_ino2" column="FD_INO"/>
+		<result property="fdValue3" column="FDVALUE"/>
+		<result property="fd_ino3" column="FD_INO"/>
+		<result property="iName" column="INAME"/>
 
 
 	</resultMap>
