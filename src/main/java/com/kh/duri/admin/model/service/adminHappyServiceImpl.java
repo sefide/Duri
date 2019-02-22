@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import com.kh.duri.admin.model.dao.adminHappyDao;
 import com.kh.duri.admin.model.exception.ListException;
 import com.kh.duri.admin.model.vo.RefundList;
+import com.kh.duri.admin.model.vo.adminDirectList;
+import com.kh.duri.admin.model.vo.adminFundingHistoryList;
 import com.kh.duri.admin.model.vo.adminMember;
 
 @Service
@@ -43,6 +45,30 @@ public class adminHappyServiceImpl implements adminHappyService{
 		List<adminMember> list = ahd.adminHappyNewList(sqlsession);
 		
 		return list;
+	}
+	//행복두리 상세보기 - 정기후원 내역
+	@Override
+	public List<adminDirectList> HappydirectList(adminDirectList ad) throws ListException {
+		
+		List<adminDirectList> directList =ahd.HappydirectList(sqlsession,ad);
+		
+		return directList;
+	}
+	//행복두리 상세보기 - 크라우드 금액 펀딩 내역
+	@Override
+	public List<adminFundingHistoryList> HappyfundingMoneyList(adminFundingHistoryList ahf) throws ListException {
+		
+		List<adminFundingHistoryList> fundingMoneyList =ahd.HappyfundingMoneyList(sqlsession,ahf);
+		
+		return fundingMoneyList;
+	}
+	//행복두리 상세보기 - 크라우드 물품 펀딩 내역	
+	@Override
+	public List<adminFundingHistoryList> HappyfundingGoodsList(adminFundingHistoryList ahf) throws ListException {
+		
+		List<adminFundingHistoryList> fundingGoodsList =ahd.HappyfundingGoodsList(sqlsession,ahf);
+		
+		return fundingGoodsList;
 	}
 
 	//행복두리 환급목록 조회

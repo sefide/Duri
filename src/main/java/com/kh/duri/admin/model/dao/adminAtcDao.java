@@ -5,6 +5,7 @@ import java.util.List;
 import org.mybatis.spring.SqlSessionTemplate;
 
 import com.kh.duri.admin.model.exception.ListException;
+import com.kh.duri.admin.model.vo.RefundList;
 import com.kh.duri.admin.model.vo.adminFundingList;
 import com.kh.duri.admin.model.vo.adminMember;
 import com.kh.duri.admin.model.vo.adminQnA;
@@ -39,6 +40,8 @@ public interface adminAtcDao {
 	int adminCrowdDeny(SqlSessionTemplate sqlsession, adminFundingList af);
 	//크라우드 펀딩 승인 버튼
 	int adminCrowdApprove(SqlSessionTemplate sqlsession, adminFundingList af);
+	/*//관리자 환급하기 목록
+	List<RefundList> adminRefundList(SqlSessionTemplate sqlsession)throws ListException;*/
 
 	
 }

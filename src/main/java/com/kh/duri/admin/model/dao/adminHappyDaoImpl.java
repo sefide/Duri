@@ -7,6 +7,8 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.duri.admin.model.exception.ListException;
 import com.kh.duri.admin.model.vo.RefundList;
+import com.kh.duri.admin.model.vo.adminDirectList;
+import com.kh.duri.admin.model.vo.adminFundingHistoryList;
 import com.kh.duri.admin.model.vo.adminMember;
 
 @Repository
@@ -31,7 +33,24 @@ public class adminHappyDaoImpl implements adminHappyDao{
 		
 		return sqlsession.selectList("Admin.adminHappyNewList");
 	}
-	//행복두리 환급목록
+	//행복두리 상세보기 - 정기후원 내역
+	@Override
+	public List<adminDirectList> HappydirectList(SqlSessionTemplate sqlsession, adminDirectList ad)throws ListException {
+		
+		return sqlsession.selectList("Admin.adminHappydirectList",ad);
+	}
+	//행복두리 상세보기 - 크라우드 금액 펀딩 내역
+	@Override
+	public List<adminFundingHistoryList> HappyfundingMoneyList(SqlSessionTemplate sqlsession,adminFundingHistoryList ahf) throws ListException {
+		
+		return sqlsession.selectList("Admin.adminHappyfundingMoneyList",ahf);
+	}
+	//행복두리 상세보기 - 크라우드 물품 펀딩 내역
+	@Override
+	public List<adminFundingHistoryList> HappyfundingGoodsList(SqlSessionTemplate sqlsession,adminFundingHistoryList ahf) throws ListException {
+		
+		return sqlsession.selectList("Admin.adminHappyfundingGoodsList",ahf);
+	}
 	
 
 }

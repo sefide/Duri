@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.duri.admin.model.dao.adminAtcDao;
 import com.kh.duri.admin.model.exception.ListException;
+import com.kh.duri.admin.model.vo.RefundList;
 import com.kh.duri.admin.model.vo.adminFundingList;
 import com.kh.duri.admin.model.vo.adminMember;
 import com.kh.duri.admin.model.vo.adminQnA;
@@ -102,5 +103,11 @@ public class adminAtcServiceImpl implements adminAtcService{
 
 		return result;
 	}
-
+	/*//관리자 환급하기 목록
+	@Override
+	public List<RefundList> adminRefundList() throws ListException {
+		List<RefundList>list = aad.adminRefundList(sqlsession);
+		return list;
+	}
+*/
 }
