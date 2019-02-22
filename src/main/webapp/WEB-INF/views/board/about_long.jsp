@@ -72,54 +72,54 @@ b{
     		</div>
     	</div>
     </section>
-
+	
     <section class="ftco-counter ftco-intro ftco-intro-2" id="section-counter">
     	<div class="container">
+    	<form action="directFund.pm" method="POST" id = "formStyle">
     		<div class="row no-gutters">
     			<div class="col-md-5 d-flex justify-content-center counter-wrap ftco-animate">
-            <div class="block-18 color-1 align-items-stretch">
-              <div class="text">
-              	<span>총 나눔두리 후원액</span>
-               	<strong class="number" data-number="1432805">0</strong>
-                <span>2명의 나눔두리가 정기후원중입니다.</span>
-              </div>
-            </div>
-          </div>
+		            <div class="block-18 color-1 align-items-stretch">
+		              <div class="text">
+		              	<span>총 나눔두리 후원액</span>
+		               	<strong class="number" data-number="1432805">0</strong>
+		                <span>2명의 나눔두리가 정기후원중입니다.</span>
+		              </div>
+		            </div>
+		        </div>
           
-          <form action="directFund.pm" method="POST">
-          <div class="col-md d-flex justify-content-center counter-wrap ftco-animate">
-            <div class="block-18 color-2 align-items-stretch">
-                    <div class="text">
-              	<h3 class="mb-4">후원유형선택</h3>
-              	<p>다양한 형태로 후원받을수 있습니다.<br>후원유형을 선택해주세요!</p>
-              	<select class="btn btn-white px-3 py-2 mt-2"  id="goHo" name = "valueType">
-              		<option>선택</option>
-              		<option value ="교육비">교육비</option>
-              		<option value ="의료비">의료비</option>
-              		<option value ="생활비">생활비</option>
-              	</select>
-              </div>
-            </div>
-          </div>
-          <div class="col-md d-flex justify-content-center counter-wrap ftco-animate">
-            <div class="block-18 color-3 align-items-stretch">
-              <div class="text">
-              	<h3 class="mb-4">후원하기</h3>
-              	<p>행복두리에게 올 한해 따뜻하게 </br>지낼 수 있는 행복을 선물하세요.</p>
-              	
-              	<input type="hidden"  name="mno_take" value="${longDetail.mno}">
-              	<input type="hidden"  name="mnickname_take" value="${longDetail.mNickName}">
-              	<input type="hidden"  name="maddress_take" value="${longDetail.mAddress}">
-              	<p>
-              	<!-- <input type="submit" style="width:200px" value="후원하기" class="btn btn-white px-3 py-2 mt-2"> -->
-              	<button onclick = "return direct();" style = "width:200px" class="btn btn-white px-3 py-2 mt-2">후원하기</button></p>
-              	
-              </div>
-            </div>
-          </div>
-          </form>
+		          <div class="col-md d-flex justify-content-center counter-wrap ftco-animate" style = "width: 30%;">
+		            <div class="block-18 color-2 align-items-stretch">
+		                    <div class="text">
+		              	<h3 class="mb-4">후원유형선택</h3>
+		              	<p>다양한 형태로 후원받을수 있습니다.<br>후원유형을 선택해주세요!</p>
+		              	<select class="btn btn-white px-3 py-2 mt-2"  id="goHo" name = "valueType">
+		              		<option>선택</option>
+		              		<option value ="교육비">교육비</option>
+		              		<option value ="의료비">의료비</option>
+		              		<option value ="생활비">생활비</option>
+		              	</select>
+		              </div>
+		            </div>
+		          </div>
+		          <div class="col-md d-flex justify-content-center counter-wrap ftco-animate">
+		            <div class="block-18 color-3 align-items-stretch">
+		              <div class="text">
+		              	<h3 class="mb-4">후원하기</h3>
+		              	<p>행복두리에게 올 한해 따뜻하게 </br>지낼 수 있는 행복을 선물하세요.</p>
+		              	
+		              	<input type="hidden"  name="mno_take" value="${longDetail.mno}">
+		              	<input type="hidden"  name="mnickname_take" value="${longDetail.mNickName}">
+		              	<input type="hidden"  name="maddress_take" value="${longDetail.mAddress}">
+		              	<p>
+		              	<!-- <input type="submit" style="width:200px" value="후원하기" class="btn btn-white px-3 py-2 mt-2"> -->
+		              	<button onclick = "return direct();" style = "width:200px" class="btn btn-white px-3 py-2 mt-2">후원하기</button></p>
+		              	
+		              </div>
+		            </div>
+		          </div>
           
     		</div>
+    		</form>
     	</div>
     </section>
 
@@ -198,6 +198,9 @@ b{
     			return false;
     		<% } %>
     	}
+    	$(document).ready(function() {
+	    	$("#formStyle").removeAttr("style"); 
+    	});
     </script>
   </body>
 

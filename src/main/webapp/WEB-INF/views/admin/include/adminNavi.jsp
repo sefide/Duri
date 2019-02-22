@@ -48,7 +48,7 @@
                         <a href="#" ><i class="fa fa-edit"></i>Q&A 관리<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="QnAList.nanum">나눔두리 Q&A</a>
+                                <a href="adminNanumQnA.ad">나눔두리 Q&A</a>
                             </li>
                             <li>
                                 <a href="adminQnA.ad">행복두리 Q&A</a>

@@ -2,15 +2,17 @@ package com.kh.duri.happymember.model.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.kh.duri.happymember.model.vo.DirectFundHistory;
+import com.kh.duri.Nanummember.model.vo.Letter;
 import com.kh.duri.happymember.model.dao.HappymemberDao;
 import com.kh.duri.happymember.model.exception.MypageException;
 import com.kh.duri.happymember.model.vo.DeliveryDetail;
+import com.kh.duri.happymember.model.vo.DirectFundHistory;
 import com.kh.duri.happymember.model.vo.FundItemList;
 import com.kh.duri.happymember.model.vo.Funding;
 import com.kh.duri.happymember.model.vo.MyDonateItems;
@@ -164,13 +166,21 @@ public class HappymemberServiceImpl implements HappymemberService {
 		return result;
 	}
 
-	/*//감사편지 보낼 정기후원자 닉네임 뽑기
+	//감사편지 보낼 정기후원자 닉네임 뽑기
 	@Override
 	public List<Member> selectNanumNick(Member m) throws MypageException {
 		List<Member> nanumNicks = hd.selectNanumNick(sqlSession, m);
 		
 		return nanumNicks;
-	}*/
+	}
+
+	//감사편지 보내기
+	@Override
+	public int insertThankyouLetter(Letter l) throws MypageException {
+		int result = hd.insertThankyouLetter(sqlSession, l);
+		
+		return result;
+	}
 
 
 	

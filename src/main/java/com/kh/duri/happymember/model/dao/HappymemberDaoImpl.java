@@ -2,12 +2,14 @@ package com.kh.duri.happymember.model.dao;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.duri.happymember.model.vo.DirectFundHistory;
+import com.kh.duri.Nanummember.model.vo.Letter;
 import com.kh.duri.happymember.model.exception.MypageException;
 import com.kh.duri.happymember.model.vo.Delivery;
 import com.kh.duri.happymember.model.vo.DeliveryDetail;
@@ -303,12 +305,24 @@ public class HappymemberDaoImpl implements HappymemberDao{
 	//Q&A 상세보기
 	
 	
-	/*//감사편지 보낼 정기후원자 닉네임 뽑기
+	//감사편지 보낼 정기후원자 닉네임 뽑기
 	@Override
 	public List<Member> selectNanumNick(SqlSessionTemplate sqlSession, Member m) throws MypageException {
 		List<Member> nanumNicks = sqlSession.selectList("HappyMember.selectNanumNick", m);
 		
+		/*for(Member i : nanumNicks) {
+			System.out.println("정기후원 닉네임,이름 : " + i);
+		}*/
+		
 		return nanumNicks;
-	}*/
+	}
+
+	//감사편지 보내기
+	@Override
+	public int insertThankyouLetter(SqlSessionTemplate sqlSession, Letter l) throws MypageException {
+		int result = sqlSession.insert("HappyMember.insertThankyouLetter", l);
+		
+		return result;
+	}
 
 }

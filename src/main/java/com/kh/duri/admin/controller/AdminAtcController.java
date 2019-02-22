@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.duri.admin.model.exception.ListException;
 import com.kh.duri.admin.model.service.adminAtcService;
@@ -99,7 +101,7 @@ public class AdminAtcController {
 		try {
 			CrowdMemGoodsInfo = aas.CrowdMemInfoDetail(m);
 			CrowdFundGoodsInfo = aas.CrowdFundGoodsInfo(f);
-			System.out.println("CrowdFundGoodsInfo:"+CrowdFundGoodsInfo);
+			
 			model1.addAttribute("CrowdMemGoodsInfo", CrowdMemGoodsInfo);
 			model2.addAttribute("CrowdFundGoodsInfo", CrowdFundGoodsInfo);
 			
@@ -117,6 +119,40 @@ public class AdminAtcController {
 	}
 	
 	
+	//크라우드 펀딩 반려 버튼
+	@RequestMapping("adminCrowdDeny.ad")
+	public String adminCrowdDeny(HttpServletRequest request, HttpServletResponse response,adminFundingList af) {
+		
+		int funum = Integer.parseInt(request.getParameter("funum"));
+		String term = request.getParameter("term");
+		af.setfNo(funum);
+		af.setfLeftDay(term);
+		
+			int result = aas.adminCrowdDeny(af);
+			return "redirect:adminCrowd.ad";
+			
+		
+			
+		
+		
+	}
+	//크라우드 펀딩 승인 버튼
+	@RequestMapping("adminCrowdApprove.ad")
+	public String adminCrowdApprove(HttpServletRequest request, HttpServletResponse response,adminFundingList af) {
+		int funum = Integer.parseInt(request.getParameter("funum"));
+		String term = request.getParameter("term");
+		
+		af.setfNo(funum);
+		af.setfLeftDay(term);
+		
+		
+			int result = aas.adminCrowdApprove(af);
+			return "redirect:adminCrowd.ad";
+			
+			
+		
+	}
+	
 	//관리자 메인페이지
 	@RequestMapping("adminMain.ad")
 	public String adminMain() {
@@ -128,49 +164,98 @@ public class AdminAtcController {
 	public String adminQnAList(Model model) {  
 		
 		try {
-			List<adminQnA>adminQnAList = aas.adminQnAList();
-			
-			model.addAttribute("adminQnAList", adminQnAList);
-			
-			return "admin/adminQnA";
-			
+			List<adminQnA>adminQnAList = aas.adminQnAList();			
+			model.addAttribute("adminQnAList", adminQnAList);		
+			return "admin/adminQnA";			
 			}catch(ListException e) {
-				model.addAttribute("msg", e.getMessage());
-				
+				model.addAttribute("msg", e.getMessage());				
 				return "admin/adminQnA";
-			}
-		
-		
+			}		
 	}
 	//관리자 행복두리 Q&A상세보기
 	@RequestMapping("adminQnADetail.ad")
-	public String adminQnADetail(HttpServletRequest request, HttpServletResponse response,Model model,adminQnA q) {
-		
+	public String adminQnADetail(HttpServletRequest request, HttpServletResponse response,Model model,adminQnA q) {		
 		int Mnonum = Integer.parseInt(request.getParameter("Mnonum"));
 		int Qnanum = Integer.parseInt(request.getParameter("Qnanum"));
-		
-	
-		
 		q.setQ_Mno(Mnonum);
-		q.setqNo(Qnanum);
-		
-		adminQnA adminQnADetail;
-		
+		q.setqNo(Qnanum);		
+		adminQnA adminQnADetail;		
 		try {
-			adminQnADetail = aas.adminQnADetail(q);
-			
+			adminQnADetail = aas.adminQnADetail(q);			
 			model.addAttribute("adminQnADetail", adminQnADetail);
-			return "admin/adminQnADetail";
-			
-		} catch (ListException e) {
-			
+			return "admin/adminQnADetail";			
+		} catch (ListException e) {			
 			model.addAttribute("msg", e.getMessage());
-			
 			return "admin/adminQnADetail";
 		}
-		
-	
+	}	
+	//관리자 나눔두리 Q&A 목록
+		@RequestMapping("adminNanumQnA.ad")
+		public String adminNanumQnAList(Model model) {  			
+			try {
+				List<adminQnA>adminNanumQnAList = aas.adminNanumQnAList();			
+				model.addAttribute("adminNanumQnAList", adminNanumQnAList);		
+				return "admin/adminNanumQnA";			
+				}catch(ListException e) {
+					model.addAttribute("msg", e.getMessage());				
+					return "admin/adminNanumQnA";
+				}		
+		}	
+	//관리자 나눔두리 Q&A상세보기
+	@RequestMapping("adminNanumQnADetail.ad")
+	public String adminNanumQnADetail(HttpServletRequest request, HttpServletResponse response,Model model,adminQnA q) {		
+		int Mnonum = Integer.parseInt(request.getParameter("Mnonum"));
+		int Qnanum = Integer.parseInt(request.getParameter("Qnanum"));
+		q.setQ_Mno(Mnonum);
+		q.setqNo(Qnanum);		
+		adminQnA adminNanumQnADetail;		
+		try {
+			adminNanumQnADetail = aas.adminNanumQnADetail(q);			
+			model.addAttribute("adminNanumQnADetail", adminNanumQnADetail);
+			return "admin/adminNanumQnADetail";			
+		} catch (ListException e) {			
+			model.addAttribute("msg", e.getMessage());
+		return "admin/adminNanumQnADetail";
+		}
 	}
 	
+	//관리자 QnA 답변 달기 -> ajax를 이용하자! 
+ 	@RequestMapping("adminNanumReply.ad")
+ 	public @ResponseBody String adminNanumReply(@RequestParam int qNo, @RequestParam String qAnswer, HttpServletRequest request, HttpServletResponse response,Model model) {		
+		/*System.out.println("admin qNo"+qNo);
+		System.out.println("admin qAnswer"+qAnswer);	*/
+		adminQnA q = new adminQnA();
+		q.setqAnswer(qAnswer);
+		q.setqNo(qNo);		
+		/*System.out.println("admin q"+q);*/
+		try {
+			int result = aas.insertReply(q);
+			return qAnswer;
+		} catch (ListException e) {
+			return "";
+		}		
+ 	}
+ 	
+
+
+	//Q&A 답변하기 버튼 
+	@RequestMapping("adminAnswer.ad")
+	public String adminAnswer(HttpServletRequest request, HttpServletResponse response,adminQnA q) {
+		
+		String answer = request.getParameter("answer");
+		int num = Integer.parseInt(request.getParameter("num"));
+		
+		q.setqNo(num);
+		q.setqAnswer(answer);
+		
+		
+		
+			int result = aas.adminAnswer(q);
+			return "redirect:adminQnA.ad";
+			
+			
+		
+	}
+
 	
 }

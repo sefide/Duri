@@ -29,7 +29,7 @@ public class MemberController {
 	public ModelAndView loginCheck(Member m, ModelAndView mv, HttpSession session) {
 			
 		try {
-			System.out.println("member : "+m);
+			/*System.out.println("member : "+m);*/
 			
 			Member loginUser = null; 
 			

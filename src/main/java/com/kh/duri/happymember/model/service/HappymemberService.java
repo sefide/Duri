@@ -2,8 +2,10 @@ package com.kh.duri.happymember.model.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import com.kh.duri.happymember.model.vo.DirectFundHistory;
+import com.kh.duri.Nanummember.model.vo.Letter;
 import com.kh.duri.happymember.model.exception.MypageException;
 import com.kh.duri.happymember.model.vo.Delivery;
 import com.kh.duri.happymember.model.vo.DeliveryDetail;
@@ -64,8 +66,11 @@ public interface HappymemberService {
 	
 	//Q&A 상세보기
 
-	/*//감사편지 보낼 정기후원자 닉네임 뽑기
-	List<Member> selectNanumNick(Member m) throws MypageException;*/
+	///감사편지 보낼 정기후원자 닉네임 뽑기
+	List<Member> selectNanumNick(Member m) throws MypageException;
+
+	//감사편지 보내기
+	int insertThankyouLetter(Letter l) throws MypageException;
 
 
 	

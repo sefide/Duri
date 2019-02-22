@@ -65,4 +65,41 @@ public class adminAtcServiceImpl implements adminAtcService{
 		return adminQnADetail;
 	}
 
+	//관리자 나눔두리 Q&A 목록
+	@Override
+	public List<adminQnA> adminNanumQnAList() throws ListException {
+		List<adminQnA>list = aad.adminNanumQnAList(sqlsession);
+		return list;
+	}
+	//관리자 나눔두리 Q&A 상세보기
+	@Override
+	public adminQnA adminNanumQnADetail(adminQnA q) throws ListException {
+		adminQnA adminNanumQnADetail = aad.adminNanumQnADetail(sqlsession,q);
+		return adminNanumQnADetail;
+	}
+	//관리자 나눔두리 Q&A 댓글달기
+	@Override
+	public int insertReply(adminQnA q) throws ListException {
+		int result = aad.insertReply(sqlsession,q);
+
+	//Q&A 답변하기 버튼
+	@Override
+	public int adminAnswer(adminQnA q) {
+		int result = aad.adminAnswer(sqlsession,q);
+		return result;
+	}
+	//크라우드 펀딩 반려 버튼
+	@Override
+	public int adminCrowdDeny(adminFundingList af) {
+		int result = aad.adminCrowdDeny(sqlsession,af);
+		return result;
+	}
+	//크라우드 펀딩 승인 버튼
+	@Override
+	public int adminCrowdApprove(adminFundingList af) {
+		int result = aad.adminCrowdApprove(sqlsession,af);
+
+		return result;
+	}
+
 }
