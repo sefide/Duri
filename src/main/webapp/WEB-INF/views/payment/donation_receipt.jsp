@@ -9,9 +9,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<!DOCTYPE html>
-<html>
-<head>
+
 <meta charset="UTF-8">
 <!-- semantic ui -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
@@ -21,9 +19,9 @@
 <title>둘이두리</title>
 <jsp:include page="../common/css.jsp"/>
 <style>
-	 .ftco-section {
-    	padding: 1em 0;
-    }
+	.mb50 {
+     margin-bottom: 0px !important; 
+	}	
 	#myTitle{
 		margin-bottom: 20px;
 		font-size:25px;
@@ -193,12 +191,6 @@
 </style>
 </head>
 <body>
-<%-- 	<c:if test="${ !empty sessionScope.loginUser }">
-	</c:if>
-	<c:if test="${ empty sessionScope.loginUser }">
-		<c:set var="message" value="로그인이 필요한 서비스입니다." scope="request"/>
-		<jsp:forward page="../common/errorPage.jsp"/>
-	</c:if> --%>
 	 <!-- 네비바 -->
 	<jsp:include page="../common/navi.jsp"/>
 	
@@ -210,8 +202,8 @@
 	
  	<br><br><br><br>	
 	<div class="contBox inner">
-		<jsp:include page="include/tabMypage_receipt.jsp"/>	
-
+ 		<jsp:include page="include/tabMypage_receipt.jsp"/>	
+		
 	    <section class="ftco-section">
 	    	<div class="container">
 	    		<div class="row d-flex">
