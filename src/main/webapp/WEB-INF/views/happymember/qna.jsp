@@ -135,9 +135,8 @@
 			<c:url var="endList" value="qna.happy">
 				<c:param name="currentPage" value="${pi.endPage }"></c:param>
 			</c:url>
-			<span><a class="num" href="${firstList }">&gt;&gt;</a></span>
+			<span><a class="num" href="${endList }">&gt;&gt;</a></span>
 		</div>
-		
 		
 		
 		<div style="height: 100px;"></div>

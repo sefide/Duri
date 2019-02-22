@@ -3,6 +3,7 @@ package com.kh.duri.happymember.controller;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.duri.happymember.model.vo.DirectFundHistory;
+import com.kh.duri.Nanummember.model.vo.Letter;
 import com.kh.duri.happymember.model.exception.MypageException;
 import com.kh.duri.happymember.model.service.HappymemberService;
 import com.kh.duri.happymember.model.vo.DeliveryDetail;
@@ -266,10 +268,11 @@ public class HappymemberController {
 		
 		int currentPage = 1;
 		
-		if(request.getAttribute("currentPage") != null) {
+		if(request.getParameter("currentPage") != null) {
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		}
-			try {
+
+		try {
 				int listCount = hs.selectQnaListCount(m);
 				
 				PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
@@ -325,7 +328,7 @@ public class HappymemberController {
 	
 	//Q&A 상세보기 
 	
-	/*//감사편지 보낼 정기후원자 닉네임 뽑기
+	//감사편지 보낼 정기후원자 닉네임 뽑기
 	@RequestMapping("thankyouLetter.happy")
 	public String selectNanumNick(Model model, HttpServletRequest request, HttpServletResponse response) {
 		Member m = (Member)request.getSession().getAttribute("loginUser");
@@ -333,7 +336,7 @@ public class HappymemberController {
 		try {
 			List<Member> nanumNicks = hs.selectNanumNick(m);
 			
-			
+			model.addAttribute("nanumNicks", nanumNicks);
 			
 			
 		} catch (MypageException e) {
@@ -344,7 +347,42 @@ public class HappymemberController {
 		
 		return "happymember/thankyouLetter";
 	}
-	*/
+	
+	//감사편지 보내기
+	@RequestMapping("thankyouLetterInsert.happy")
+	public String insertThankyouLetter(Model model, HttpServletRequest request, HttpServletResponse response) {
+		Member m = (Member)request.getSession().getAttribute("loginUser");
+		String nanumMnoString = request.getParameter("nick");
+		String letterTitle = request.getParameter("letterTitle");
+		String letterContent = request.getParameter("letterContent");
+		
+		int happyMno = m.getMno();//세션에서 행복두리 번호 뽑고
+		int nanumMno = Integer.parseInt(nanumMnoString);//넘겨받은 나눔두리 번호 뽑고
+		/*System.out.println("나눔두리 번호 : " + nanumMno);
+		System.out.println("편지 제목 : " + letterTitle);
+		System.out.println("편지 내용 : " + letterContent);*/
+		
+		Letter l = new Letter();
+		l.setLeMnoTake(happyMno);
+		l.setLeMnoGive(nanumMno);
+		l.setLeTitle(letterTitle);
+		l.setLeContent(letterContent);
+		
+		
+		try {
+			int result = hs.insertThankyouLetter(l);
+			
+			if(result > 0) {
+				return "redirect:logngDonateRefresh.happy";
+			}
+			
+		} catch (MypageException e) {
+			model.addAttribute("msg", e.getMessage());
+			return "common/errorPage";
+		}
+		
+		return "hapymember/thankyouLetter";
+	}
 	
 	//물품 배송 목록 새로고침했을 때 insert다시 안되게 !
 	@RequestMapping("deliveryOriginal.happy")
@@ -355,13 +393,13 @@ public class HappymemberController {
 	//새로고침 - 자기소개 수정
 	@RequestMapping("logngDonateRefresh.happy")
 	public String logngDonateRefresh() {
-		return "happymember/longDonate";
+		return "redirect:longDonate.happy";
 	}
 	
 	//새로고침 - Q&A 작성
 	@RequestMapping("qnaInsertOriginal.happy")
 	public String qnaInsertOriginal() {
-		return "happymember/qna";
+		return "redirect:qna.happy";
 	}
 		
 	@RequestMapping("qnaInsert.happy")
@@ -380,10 +418,6 @@ public class HappymemberController {
 		return "happymember/deliveryStatus";
 	}
 	
-	@RequestMapping("thankyouLetter.happy")
-	public String happy4() {
-		return "happymember/thankyouLetter";
-	}
 	
 	@RequestMapping("qnaDetail.happy")
 	public String happy6() {
