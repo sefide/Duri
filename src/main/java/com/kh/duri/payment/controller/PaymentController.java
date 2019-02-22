@@ -408,44 +408,47 @@ public class PaymentController {
 	
 	// 정기결제 토큰값 가져오기
 	@RequestMapping("directFundGetToken.pm")
-	public @ResponseBody String directFundGetToken(@RequestParam String customer_uid, @RequestParam String imp_uid, 
+	public @ResponseBody HashMap<String, Object> directFundGetToken(@RequestParam String customer_uid, @RequestParam String imp_uid, 
 			@RequestParam String merchant_uid, @RequestParam BigDecimal amount, HttpServletRequest request, HttpServletResponse response) {
-		//System.out.println("customer_uid : "+ customer_uid);
-		//System.out.println("imp_uid : "+ imp_uid);
-		
+		HashMap<String, Object> resultMap = new HashMap<String, Object>();
+		resultMap.put("status", 0);
 		IamportClient iam = new IamportClient("2128480452188810", "auDtdoRqy5eWYjryBzpvoByL60yEzqGJUjc8I3yg9Nd76EFIe5dCGMoNNXsmn85hsipamYqvLDDSijAw");
 		try {
 			AccessToken at = iam.getAuth().getResponse();
-			System.out.println("token? : " + at.getToken());
 			System.out.println("================= 정기 후원 결제 ==================");
 			// 결제 요청하기 
 			AgainPaymentData again_data = new AgainPaymentData(customer_uid, merchant_uid, amount);
 			again_data.setName("정기후원 정기결제");
 
 			IamportResponse<com.siot.IamportRestClient.response.Payment> payment_response = iam.againPayment(again_data);
-			System.out.println("payment_response message: " + payment_response.getMessage());
 			System.out.println("payment_response code: " + payment_response.getCode());
-			
 			
 			if(payment_response.getCode() == 0) {
 				if(payment_response.getResponse().getStatus().equals("paid")) {
 					System.out.println("최초결제 완료");
-					return "최초결제 완료되었습니다.";
+					resultMap.put("status", 1);
+					resultMap.put("msg", "최초결제 완료");
+					return resultMap;
 				}else {
-					return payment_response.getResponse().getFailReason();
+					System.out.println(payment_response.getResponse().getFailReason());
+					resultMap.put("msg", payment_response.getResponse().getFailReason());
+					return resultMap;
 				}
-				//payment_response.getResponse().getFailReason()
 			}else {
-				return "카드사 요청에 실패하였습니다.";
+				System.out.println("카드사 요청에 실패하였습니다.");
+				resultMap.put("msg", "카드사 요청에 실패하였습니다.");
+				return resultMap;
 			}
 			
 		} catch (IamportResponseException e) {
 			e.printStackTrace();
+			resultMap.put("msg", e.getMessage());
+			return resultMap;
 		} catch (IOException e) {
 			e.printStackTrace();
+			resultMap.put("msg", e.getMessage());
+			return resultMap;
 		} 
-		return null;
-		
 		
 	}
 	
@@ -453,7 +456,7 @@ public class PaymentController {
 	@RequestMapping("subscribeDirectFund.pm")
 	public @ResponseBody String subscribeDirectFund(@RequestParam String customer_uid, @RequestParam String imp_uid, 
 			@RequestParam String merchant_uid, @RequestParam BigDecimal amount, @RequestParam String price, @RequestParam String giveMember, @RequestParam String takeMember, 
-			@RequestParam String type, HttpServletRequest request, HttpServletResponse response) {
+			@RequestParam String type, @RequestParam int selectDate, HttpServletRequest request, HttpServletResponse response) {
 			
 		System.out.println("merchant_uid : "+ merchant_uid);
 		IamportClient iam = new IamportClient("2128480452188810", "auDtdoRqy5eWYjryBzpvoByL60yEzqGJUjc8I3yg9Nd76EFIe5dCGMoNNXsmn85hsipamYqvLDDSijAw");
@@ -467,15 +470,29 @@ public class PaymentController {
 			ScheduleData schedule_data = new ScheduleData(customer_uid);
 			
 			Date today = new Date();
-			Date schedule_at = CommonUtils.getNextMonth(today);
+			/* 웹훅 방식 
+			 * Date schedule_at = CommonUtils.getNextMonth(today);
 			System.out.println("today : " + today);
 			System.out.println("schedule_at : " + schedule_at);
 			
 			ScheduleEntry entry = new ScheduleEntry(merchant_uid, schedule_at, amount);
-			schedule_data.addSchedule(entry);
+			schedule_data.addSchedule(entry);*/
 			
+			/* Scheduler 방식 */
+			ArrayList<Date> schedule = CommonUtils.getNextMonthList(today, selectDate);
+			System.out.println("today : " + today);
+			//System.out.println("schedule_at : " + schedule_at);
+			
+			for(Date schedule_at : schedule) {
+				ScheduleEntry entry = new ScheduleEntry(merchant_uid, schedule_at, amount);
+				schedule_data.addSchedule(entry);
+			}
+			
+			for(ScheduleEntry entry : schedule_data.getSchedules()) {
+				System.out.println(entry.getScheduleAt().getTime());
+			}
+
 			IamportResponse<List<Schedule>> list = iam.subscribeSchedule(schedule_data);
-			//System.out.println("list message : " + list.getMessage());
 			System.out.println("예약 list code : " + list.getCode());
 			
 			// DirectFundHist 객체 생성
@@ -604,7 +621,7 @@ public class PaymentController {
 			resultBoard = ps.selectFundMoney(f);
 			
 			model.addAttribute("f" ,resultBoard);
-			System.out.println("controlle page뿌리기 f : "+ f);
+			/*System.out.println("controlle page뿌리기 f : "+ f);*/
 			return "payment/pay_fundMoney";
 			
 		} catch (FundingException e) {
@@ -625,11 +642,11 @@ public class PaymentController {
 		String ipin2;
 		int isGoal = 0;
 		
-		System.out.println("fno : " + fno);
+		/*System.out.println("fno : " + fno);
 		System.out.println("m : " + m);
 		System.out.println("fValue : " + fValue);
 		System.out.println("fWriter : " + fWriter);
-		System.out.println("leftPoint : " + leftPoint);
+		System.out.println("leftPoint : " + leftPoint);*/
 		
 		if(leftPoint.equals(fValue)) {
 			isGoal = 1;
@@ -637,8 +654,8 @@ public class PaymentController {
 		if(check.equals("1")) {
 			ipin1 = request.getParameter("ipin1");
 			ipin2 = request.getParameter("ipin2");
-			System.out.println("ipin1 : " + ipin1);
-			System.out.println("ipin2 : " + ipin2);
+			/*System.out.println("ipin1 : " + ipin1);
+			System.out.println("ipin2 : " + ipin2);*/
 			
 		}
 
@@ -698,7 +715,7 @@ public class PaymentController {
 		String ipin1;
 		String ipin2;
 		
-		System.out.println("fno : " + fno);
+		/*System.out.println("fno : " + fno);
 		System.out.println("m : " + m);
 		System.out.println("totalValue : " + totalValue);
 		System.out.println("fWriter : " + fWriter);
@@ -717,7 +734,7 @@ public class PaymentController {
 		System.out.println("itemSumPrice : ");
 		for (String i : itemSumPrice) {
 			System.out.println(i);
-		}
+		}*/
 		if(check.equals("1")) {
 			ipin1 = request.getParameter("ipin1");
 			ipin2 = request.getParameter("ipin2");
@@ -748,15 +765,15 @@ public class PaymentController {
 				fhd.setFhd_iNo(Integer.parseInt(itemNo[j]));
 				fhd.setFhdItemValue(itemNum[i]);
 				fhdList.add(fhd);
-				System.out.println("i : " + i + "/ j : "+ j);
+				/*System.out.println("i : " + i + "/ j : "+ j);*/
 				j++;
 			}
 			
 		}
 		
-		System.out.println(fhdList);
+		/*System.out.println(fhdList);
 		System.out.println("count : " + count);
-		System.out.println("itemNo : " + itemNo.length);
+		System.out.println("itemNo : " + itemNo.length);*/
 		int isGoal = 0; // 후원 달성여부 체크 변수
 		if(count == itemNo.length) {
 			isGoal = 1; // 후원 달성 
