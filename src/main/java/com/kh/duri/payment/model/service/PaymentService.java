@@ -73,6 +73,9 @@ public interface PaymentService {
 	
 	// 물품 후원 진행 - 펀딩내역 insert
 	Member insertFundItemHistory(FundHistory fh, ArrayList<FundItemDetail> fhdList, String check, String fWriter, int isGoal) throws FundingException;
+	
+	// 스케줄러 사용하여 정기후원 내역 insert
+	int insertDirectFundDetailSchedule(String day) throws DirectFundException;
 
 	
 		

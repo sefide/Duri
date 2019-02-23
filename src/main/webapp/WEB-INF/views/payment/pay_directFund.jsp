@@ -389,8 +389,8 @@
     					<th>후원 출금일 </th>
     					<td>
     						<select name = "selectDate" id = "selectDate" class = "form-control">
-    							<option value = "1" >1일 </option>
-    							<option value = "5" >5일 </option>
+    							<option value = "01" >1일 </option>
+    							<option value = "05" >5일 </option>
     							<option value = "15" >15일 </option>
     							<option value = "25" >25일 </option>
     						</select>

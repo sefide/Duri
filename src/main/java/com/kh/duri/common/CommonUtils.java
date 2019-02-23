@@ -31,20 +31,19 @@ public class CommonUtils {
 	
 	public static ArrayList<Date> getNextMonthList(Date date, int subDay) {
 		ArrayList<Date> list = new ArrayList<Date>();
-		
-		//Calendar cal = Calendar.getInstance();
-		//cal.setTime(date);
 
-	    //cal.set(Calendar.MONTH , Calendar.JUNE);
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(date);
+
 		// 3분 뒤 (test용)
-		/*for (int i = 0; i < 3; i++) {  // 3개월 예약
+		for (int i = 0; i < 3; i++) {  // 3개월 예약
 			cal.add(Calendar.MONTH, 1);
 		    cal.set(Calendar.DAY_OF_MONTH , subDay);
 		    System.out.println("지정 시간" + i+ " : " + cal.getTime());
 		    list.add(cal.getTime());
-		}*/
+		}
 		
-		Calendar cal = Calendar.getInstance();
+		/*Calendar cal = Calendar.getInstance();
 		cal.set(Calendar.YEAR, 2019);
 		cal.set(Calendar.MONTH, Calendar.FEBRUARY);
 		cal.set(Calendar.DAY_OF_MONTH, 23);
@@ -62,7 +61,7 @@ public class CommonUtils {
 		
 		list.add(d1);
 		list.add(d2);
-		list.add(d3);
+		list.add(d3);*/
 		
 		return list;
 	}

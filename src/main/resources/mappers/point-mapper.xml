@@ -84,6 +84,7 @@
 		<result property="dhBilling" column="DHBILLINGKEY"/>
 		<result property="dhImpUid" column="DHIMPUID"/>
 		<result property="dhStartDate" column="DHSTARTDATE"/>
+		<result property="dhDay" column="DHDAY"/>
 	</resultMap>
 	
 	<resultMap type="com.kh.duri.board.model.vo.Board" id="boardResultSet">
@@ -304,7 +305,7 @@
 	
 	<!-- 나눔두리 - 정기후원 정보 insert -->
 	<insert id = "insertDirectFundHist">
-		INSERT INTO DIRECTFUNDHISTORY VALUES (SEQ_DH_NO.NEXTVAL, #{dhValue}, SYSDATE, DEFAULT, #{dhBilling}, #{dhImpUid}, #{dhType}, #{dh_mNo_take}, #{dh_mNo_give})
+		INSERT INTO DIRECTFUNDHISTORY VALUES (SEQ_DH_NO.NEXTVAL, #{dhValue}, SYSDATE, #{dhDay}, DEFAULT, #{dhBilling}, #{dhImpUid}, #{dhType}, #{dh_mNo_take}, #{dh_mNo_give})
 	</insert>
 	
 	<!-- 정기후원 테이블 현재 SEQ_DH_NO 값 구하기 -->
@@ -325,6 +326,11 @@
 	<!-- 나눔두리 - Point이력에 정기후원 정보 입력하기 -->	
 	<insert id = "insertPointDirect">
 		INSERT INTO POINT VALUES (SEQ_P_NO.NEXTVAL, 'U', #{dhValue}, SYSDATE, '정기후원', #{dh_mNo_give}, null, #{dhNo}, null, null)
+	</insert>
+	
+	<!-- 행복두리 - Point이력에 정기후원 정보 입력하기 -->
+	<insert id = "insertPointDirectHappy">
+		INSERT INTO POINT VALUES (SEQ_P_NO.NEXTVAL, 'A', #{dhValue}, SYSDATE, '정기후원', #{dh_mNo_take}, null, #{dhNo}, null, null)
 	</insert>
 	
 	<!-- 행복두리 - Point 업뎃하기 -->
@@ -445,4 +451,26 @@
 	<insert id = "insertHappyOwnItem">
 		INSERT INTO OWNITEM VALUES(SEQ_I_NO.NEXTVAL, #{fhd_mNo_take}, #{fhd_iNo}, #{fhdItemValue})
 	</insert>
+	
+	<!-- 정기후원 스케줄, 오늘 후원 insert -->
+	<select id="selectDirectFundHistToday" resultMap="directFundHistResultSet" parameterType="String">
+		SELECT *
+		FROM DIRECTFUNDHISTORY 
+		WHERE DHSTATUS = 'Y' AND DHDAY = #{day}
+	</select>
+	
+	<!-- 정기후원 스케줄, 후원 회차 select -->
+	<select id="selectFundCurCount" parameterType="int" resultType="_int">
+		SELECT MAX(DHDCOUNT)
+		FROM DIRECTFUNDHISTORYDETAIL
+		WHERE DHD_DHNO = #{dhNo}
+	</select>
+	
+	<!-- 정기후원 스케줄, 새 회차 내역 insert -->
+	<insert id = "insertDirectFundDetailNext">
+		INSERT INTO DIRECTFUNDHISTORYDETAIL VALUES (SEQ_DHD_NO.NEXTVAL, SYSDATE, #{dhdValue}, #{dhdCount}, #{dhdDhno})
+	</insert>
+	
+
+	
 </mapper>
