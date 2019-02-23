@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
+import com.kh.duri.Nanummember.model.vo.DirectFundHistoryDetail;
 import com.kh.duri.Nanummember.model.vo.FundHistory;
 import com.kh.duri.board.model.vo.Board;
 import com.kh.duri.board.model.vo.BoardItem;
@@ -333,6 +334,41 @@ public class PaymentServiceImpl implements PaymentService {
 		Member resultM = pd.selectLoginnMember(sqlSession, m);
 
 		return resultM;
+	}
+	
+	// 스케줄러 사용하여 정기후원 내역 insert
+	@Override
+	public int insertDirectFundDetailSchedule(String day) throws DirectFundException {
+		// 오늘 날짜 기준과 같은 날을 가진 애들중 진행중인 정기후원 목록 뽑아와서 
+		List<DirectFundHist> dhList = pd.selectDirectFundHistToday(sqlSession, day);
+		int result = 0;
+		System.out.println("스케줄 서비스 진입 ");
+		for(int i = 0; i < dhList.size(); i++) {
+			System.out.println(dhList.get(i));
+			
+			// 몇회차 후원인지 확인
+			int curCount = pd.selectFundCurCount(sqlSession, dhList.get(i).getDhNo());
+			System.out.println("curCount : "+ curCount);
+			DirectFundHistoryDetail dhd = new DirectFundHistoryDetail();
+			dhd.setDhdCount(curCount+1);
+			dhd.setDhdDhno(dhList.get(i).getDhNo());
+			dhd.setDhdValue(Integer.parseInt(dhList.get(i).getDhValue()));
+			System.out.println("dhd : "+ dhd);
+			// 그 정보를 DirectFundDetail 테이블에 추가한다. 
+			result = pd.insertDirectFundDetailNext(sqlSession, dhd);
+			
+			// 행복두리 해당하는 회원의 포인트 업데이트
+			pd.updateDirecthPoint(sqlSession, dhList.get(i));
+			
+			Member m = new Member();
+			m.setMno(dhList.get(i).getDh_mNo_take());
+			// 포인트 이력 insert (행복/나눔)
+			pd.insertPointDirect(sqlSession, dhList.get(i)); // 나눔두리
+			pd.insertPointDirectHappy(sqlSession, dhList.get(i)); // 행복두리 
+			
+		}
+		
+		return result;
 	}
 	
 

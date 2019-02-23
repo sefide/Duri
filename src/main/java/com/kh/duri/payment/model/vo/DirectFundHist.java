@@ -11,12 +11,13 @@ public class DirectFundHist {
 	private String dhBilling;
 	private String dhImpUid;
 	private Date dhStartDate;
+	private String dhDay;
 	
 	public DirectFundHist() {}
 
 
 	public DirectFundHist(int dhNo, int dh_mNo_take, int dh_mNo_give, String dhValue, String dhType, String dhBilling,
-			String dhImpUid, Date dhStartDate) {
+			String dhImpUid, Date dhStartDate, String dhDay) {
 		super();
 		this.dhNo = dhNo;
 		this.dh_mNo_take = dh_mNo_take;
@@ -26,8 +27,8 @@ public class DirectFundHist {
 		this.dhBilling = dhBilling;
 		this.dhImpUid = dhImpUid;
 		this.dhStartDate = dhStartDate;
+		this.dhDay = dhDay;
 	}
-
 
 
 	public int getDhNo() {
@@ -103,12 +104,22 @@ public class DirectFundHist {
 	}
 
 
+	public String getDhDay() {
+		return dhDay;
+	}
+
+
+	public void setDhDay(String dhDay) {
+		this.dhDay = dhDay;
+	}
+
+
 	@Override
 	public String toString() {
 		return "DirectFundHist [dhNo=" + dhNo + ", dh_mNo_take=" + dh_mNo_take + ", dh_mNo_give=" + dh_mNo_give
-				+ ", dhValue=" + dhValue + ", dhType=" + dhType + ", dhBilling=" + dhBilling + ", dhImpUid="
-				+ dhImpUid + ", dhStartDate=" + dhStartDate + "]";
+				+ ", dhValue=" + dhValue + ", dhType=" + dhType + ", dhBilling=" + dhBilling + ", dhImpUid=" + dhImpUid
+				+ ", dhStartDate=" + dhStartDate + ", dhDay=" + dhDay + "]";
 	}
 
-	
+
 }

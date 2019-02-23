@@ -1,9 +1,11 @@
 package com.kh.duri.payment.model.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
 
+import com.kh.duri.Nanummember.model.vo.DirectFundHistoryDetail;
 import com.kh.duri.Nanummember.model.vo.FundHistory;
 import com.kh.duri.board.model.vo.Board;
 import com.kh.duri.board.model.vo.BoardItem;
@@ -112,6 +114,17 @@ public interface PaymentDao {
 	int updateHappyOwnItem(SqlSessionTemplate sqlSession, FundItemDetail fundItemDetail) throws FundingException;
 	// 행복두리 소유물품 추가 (새로운 소유물품)
 	void insertHappyOwnItem(SqlSessionTemplate sqlSession, FundItemDetail fundItemDetail) throws FundingException;
+	
+	// 정기후원 스케줄 insert
+	// 정기후원 스케줄, 오늘 결제해야 하는 정기후원 내역list select
+	List<DirectFundHist> selectDirectFundHistToday(SqlSessionTemplate sqlSession, String day) throws DirectFundException;
+	// 정기후원 스케줄, 현재까지 후원 회차 select 
+	int selectFundCurCount(SqlSessionTemplate sqlSession, int dhNo) throws DirectFundException;
+	// 정기후원 스케줄, 날짜 비교후 다음 회차 후원 상세 내역 insert
+	int insertDirectFundDetailNext(SqlSessionTemplate sqlSession, DirectFundHistoryDetail dhd) throws DirectFundException;
+	
+	// 정기후원 포인트 이력 insert (행복두리)
+	void insertPointDirectHappy(SqlSessionTemplate sqlSession, DirectFundHist directFundHist) throws DirectFundException;
 
 		
 	

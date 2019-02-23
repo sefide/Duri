@@ -2,6 +2,7 @@ package com.kh.duri.payment.controller;
 
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -30,7 +31,6 @@ import com.kh.duri.payment.model.exception.PointHistoryException;
 import com.kh.duri.payment.model.exception.ReceiptException;
 import com.kh.duri.payment.model.exception.RefundException;
 import com.kh.duri.payment.model.service.PaymentService;
-import com.kh.duri.payment.model.vo.BoardItemValue;
 import com.kh.duri.payment.model.vo.DirectFundHist;
 import com.kh.duri.payment.model.vo.DonateReceipt;
 import com.kh.duri.payment.model.vo.FundItemDetail;
@@ -243,6 +243,9 @@ public class PaymentController {
 	// 행복두리 포인트 환급페이지
 	@RequestMapping("pointReturnHappy.pm")
 	public String pointReturnHappy() {
+		
+		//String day = DirectFundScheduler.postSend();
+		
 	    return "payment/point_return_happy";
 	}
 	
@@ -334,6 +337,7 @@ public class PaymentController {
 	// 나눔두리 포인트 환급페이지
 	@RequestMapping("pointReturn.pm")
 	public String pointReturn() {
+		
 	    return "payment/point_return";
 	}
 	
@@ -483,17 +487,20 @@ public class PaymentController {
 			System.out.println("today : " + today);
 			//System.out.println("schedule_at : " + schedule_at);
 			
-			for(Date schedule_at : schedule) {
-				ScheduleEntry entry = new ScheduleEntry(merchant_uid, schedule_at, amount);
+			for(int i = 0; i < schedule.size(); i++) {
+				ScheduleEntry entry = new ScheduleEntry(merchant_uid+i, schedule.get(i), amount);
 				schedule_data.addSchedule(entry);
 			}
 			
 			for(ScheduleEntry entry : schedule_data.getSchedules()) {
 				System.out.println(entry.getScheduleAt().getTime());
+				System.out.println(entry.getMerchantUid());
 			}
 
 			IamportResponse<List<Schedule>> list = iam.subscribeSchedule(schedule_data);
 			System.out.println("예약 list code : " + list.getCode());
+			System.out.println("결과 표시 : "+ list.getMessage());
+			System.out.println("response : "+ list.getResponse());
 			
 			// DirectFundHist 객체 생성
 			DirectFundHist dh = new DirectFundHist();
@@ -503,6 +510,7 @@ public class PaymentController {
 			dh.setDhImpUid(imp_uid);
 			dh.setDhValue(price);
 			dh.setDhType(type);
+			dh.setDhDay(String.valueOf(selectDate));
 			
 			if(list.getCode() == 0) {
 				//DB에 저장 
@@ -793,5 +801,28 @@ public class PaymentController {
 		    return "payment/pay_success";
 		}
 		
+	}
+	
+	
+	@RequestMapping("directFundSchedule.pm")
+	public void directFundSchedule() {
+		System.out.println("스케줄러 날짜 함수 작동");
+		Date today = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("dd");
+        System.out.println("현재날짜 : "+ sdf.format(today));
+        String day = sdf.format(today);
+        
+		int result = 0;
+        try {
+        	result = ps.insertDirectFundDetailSchedule(day);
+        	System.out.println("스케줄러 결과 조회 : " + result);
+        	
+			
+		} catch (DirectFundException e) {
+			System.out.println("스케줄러 결과 실패 : "+ e.getMessage());
+			e.printStackTrace();
+		}
+	
+	
 	}
 }

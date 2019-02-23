@@ -3,12 +3,15 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:tx="http://www.springframework.org/schema/tx"
 	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:task="http://www.springframework.org/schema/task"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans 
 	http://www.springframework.org/schema/beans/spring-beans.xsd 
 	http://www.springframework.org/schema/tx 
 	http://www.springframework.org/schema/tx/spring-tx-4.3.xsd 
 	http://www.springframework.org/schema/aop 
-	http://www.springframework.org/schema/aop/spring-aop-4.3.xsd">
+	http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+    http://www.springframework.org/schema/task 
+    http://www.springframework.org/schema/task/spring-task-3.2.xsd">
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	<!-- 데이터베이스 접속에 관련된 클래스들을 bean으로 등록할 수 있다. -->
@@ -89,6 +92,8 @@
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="serviceMethod" id="transactionAdvisor"/>
 	</aop:config>
 	
-	
+	<bean id="cronTask" class="com.kh.duri.payment.controller.DirectFundScheduler" />
+    <task:scheduler id="cronScheduler" pool-size="10" />
+    <task:annotation-driven scheduler="cronScheduler" />
 
 </beans>

@@ -1,11 +1,13 @@
 package com.kh.duri.payment.model.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.kh.duri.Nanummember.model.vo.DirectFundHistoryDetail;
 import com.kh.duri.Nanummember.model.vo.FundHistory;
 import com.kh.duri.board.model.vo.Board;
 import com.kh.duri.board.model.vo.BoardItem;
@@ -542,6 +544,46 @@ public class PaymentDaoImpl implements PaymentDao {
 			throw new FundingException("후원 물품을 행복두리에게 보내는데 실패했습니다. (추가)");
 		}
 		
+	}
+	
+	// 정기후원 스케줄, 오늘 결제해야 하는 정기후원 내역list select
+	@Override
+	public List<DirectFundHist> selectDirectFundHistToday(SqlSessionTemplate sqlSession, String day) throws DirectFundException{
+		List<DirectFundHist> dhList = sqlSession.selectList("Point.selectDirectFundHistToday", day);
+		
+		return dhList;
+	}
+	
+	// 정기후원 스케줄, 몇회차 후원인지 확인 select
+	@Override
+	public int selectFundCurCount(SqlSessionTemplate sqlSession, int dhNo) throws DirectFundException {
+		int curCount = sqlSession.selectOne("Point.selectFundCurCount", dhNo);
+		
+		if(curCount == 0) {
+			throw new DirectFundException("스케쥴, 정기후원 결제내역 입력 실패 (회차조회)");
+		}
+		return curCount;
+	}
+	
+	// 정기후원 스케줄, 새로운 회차 정기후원 insert
+	@Override
+	public int insertDirectFundDetailNext(SqlSessionTemplate sqlSession, DirectFundHistoryDetail dhd) throws DirectFundException {
+		int result = sqlSession.insert("Point.insertDirectFundDetailNext", dhd);
+		
+		if(result == 0) {
+			throw new DirectFundException("스케쥴, 정기후원 결제내역 입력 실패 (상세정보입력)");
+		}
+		return result;
+	}
+	
+	// 정기후원 포인트 이력 insert (행복두리)
+	@Override
+	public void insertPointDirectHappy(SqlSessionTemplate sqlSession, DirectFundHist directFundHist) throws DirectFundException {
+		int result = sqlSession.insert("Point.insertPointDirectHappy", directFundHist);
+		
+		if(result == 0) {
+			throw new DirectFundException("스케쥴, 정기후원 포인트 이력(행복두리) 입력 실패");
+		}
 	}
 	
 
