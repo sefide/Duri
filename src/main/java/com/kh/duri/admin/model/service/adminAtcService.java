@@ -3,6 +3,7 @@ package com.kh.duri.admin.model.service;
 import java.util.List;
 
 import com.kh.duri.admin.model.exception.ListException;
+import com.kh.duri.admin.model.vo.RefundList;
 import com.kh.duri.admin.model.vo.adminFundingList;
 import com.kh.duri.admin.model.vo.adminMember;
 import com.kh.duri.admin.model.vo.adminQnA;
@@ -38,6 +39,9 @@ public interface adminAtcService {
 	int adminCrowdDeny(adminFundingList af);
 	//크라우드 펀딩 승인 버튼
 	int adminCrowdApprove(adminFundingList af);
+	
+	/*//관리자 환급하기 목록
+	List<RefundList> adminRefundList()throws ListException;*/
 
 
 }

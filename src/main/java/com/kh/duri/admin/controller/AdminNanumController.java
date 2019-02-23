@@ -67,6 +67,7 @@ public class AdminNanumController {
 			directList = ans.directList(ad);
 			fundingMoneyList = ans.fundingMoneyList(ahf);
 			fundingGoodsList = ans.fundingGoodsList(ahf);
+			
 			model.addAttribute("NanumDetail", NanumDetail);
 			model1.addAttribute("directList", directList);
 			model2.addAttribute("fundingMoneyList", fundingMoneyList);

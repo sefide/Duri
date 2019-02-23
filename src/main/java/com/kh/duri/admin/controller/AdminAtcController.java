@@ -1,5 +1,6 @@
 package com.kh.duri.admin.controller;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.duri.admin.model.exception.ListException;
 import com.kh.duri.admin.model.service.adminAtcService;
+import com.kh.duri.admin.model.vo.RefundList;
 import com.kh.duri.admin.model.vo.adminFundingList;
 import com.kh.duri.admin.model.vo.adminMember;
 import com.kh.duri.admin.model.vo.adminQnA;
@@ -256,6 +258,38 @@ public class AdminAtcController {
 			
 		
 	}
+	
+	
+	/*//관리자 환급페이지
+	@RequestMapping("adminRefund.ad")
+	public @ResponseBody HashMap<String, Object> adminRefundList(@RequestParam int currentPage,Model model, HttpServletRequest request, HttpServletResponse response) {
+		
+
+		if(request.getParameter("currentPage") != null) {
+			currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		}
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		try {
+			List<RefundList>adminRefundList = aas.adminRefundList();
+			
+			
+			map.put("adminRefundList", adminRefundList);
+			
+			return map;
+			
+			}catch(ListException e) {
+				map.put("msg", e.getMessage());
+				
+				return map;
+			}
+		
+		
+		
+	}
+	*/
+	
 
 	
 }

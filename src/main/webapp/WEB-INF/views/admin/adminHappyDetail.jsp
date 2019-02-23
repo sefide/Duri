@@ -156,8 +156,182 @@
            
            <br><br><br> 
           </c:if> 
+          
+          <!-- 기존회원만 보여지기 -->
+          <c:if test="${HappyDetail.mTakeStatus == 1 }">
+            <h1 class="page-header">
+                            	<strong style="color: #c16624;">${HappyDetail.mName}</strong>님의 후원내역
+                        </h1>
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- Advanced Tables -->
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                             	 정기 후원 내역
+                        </div>
+                        <div class="panel-body">
+                            <div >
+                                <table class="table table-striped table-bordered table-hover dataTables-example">
+                                    <thead>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>나눔두리ID</th>
+                                            <th>후원 시작 날짜</th>
+                                            <th>매달 후원 금액</th>
+                                            <th>누적 후원 횟수</th>
+                                            <th>누적 후원 금액</th>
+                                            <th>현재 후원 상태</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    
+                                    <c:forEach var="row" items="${directList}" varStatus="status">
+                                       <tr class="odd gradeX">
+                                            <td class="center">${status.count}</td>
+                                            <td class="center">${row.mid }</td>
+                                            <td class="center">${row.dhStartDate }</td>
+                                            <td class="center">${row.dhValue}원</td>
+                                            <td class="center">${row.cnt}회</td>
+                                            <td class="center">${row.sum}원</td>
+                                            <c:if test="${row.dhStatus=='Y'}">
+                                            <td class="center">후원중</td>
+                                            </c:if>
+                                            <c:if test="${row.dhStatus=='N'}">
+                                            <td class="center">후원정지</td>
+                                            </c:if>
+                                            
+                                        </tr>
+                                    </c:forEach>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <!--End Advanced Tables -->
+                </div>
+            </div>
+                <!-- /. ROW  -->
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- Advanced Tables -->
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                             	크라우드 펀딩 금액 후원 내역
+                        </div>
+                        <div class="panel-body">
+                            <div >
+                                <table class="table table-striped table-bordered table-hover dataTables-example">
+                                    <thead>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>나눔두리ID</th>
+                                            <th>펀딩제목</th>
+                                            <th>펀딩목적</th>
+                                            <th>펀딩 시작 날짜</th>
+                                            <th>펀딩 마감 날짜</th>
+                                            <th>펀딩 후원 날짜</th>
+                                            <th>후원금액</th>
+                                            <th>상태</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    <c:forEach var="row" items="${fundingMoneyList}" varStatus="status">
+                                       <tr class="odd gradeX">
+                                            <td class="center">${status.count}</td>
+                                            <td class="center">${row.mid }</td>
+                                            <td class="center">${row.fValueType }</td>
+                                            <td class="center">${row.fTitle }</td>
+                                            <td class="center">${row.fStartDate }</td>
+                                            <td class="center">${row.fEndDate }</td>
+                                            <td class="center">${row.fhDate }</td>
+                                            <td class="center">${row.fhValue }원</td>
+                                            <c:choose>
+                                            	<c:when test="${row.fStatus=='ING' }">
+                                            	 <td class="center">펀딩 진행중</td>
+                                            	</c:when>
+                                            	<c:when test="${row.fStatus=='GOAL' }">
+                                            	 <td class="center">펀딩 목표달성 종료</td>
+                                            	</c:when>
+                                            	<c:otherwise>
+                                            	 <td class="center">펀딩 기간만료 종료</td>
+                                            	</c:otherwise>
+                                            </c:choose>
+                                           
+                                        </tr>
+                                    </c:forEach>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <!--End Advanced Tables -->
+                </div>
+            </div>
+                <!-- /. ROW  -->
+            
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- Advanced Tables -->
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                             	크라우드 펀딩 물품 후원 내역
+                        </div>
+                        <div class="panel-body">
+                            <div >
+                                <table class="table table-striped table-bordered table-hover dataTables-example">
+                                    <thead>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>나눔두리ID</th>
+                                            <th>펀딩제목</th>
+                                            <th>펀딩 시작 날짜</th>
+                                            <th>펀딩 마감 날짜</th>
+                                            <th>펀딩 후원 날짜</th>
+                                            <th>후원물품</th>
+                                            <th>후원물품갯수</th>
+                                            <th>상태</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    <c:forEach var="row" items="${fundingGoodsList}" varStatus="status">
+                                       <tr class="odd gradeX">
+                                            <td class="center">${status.count}</td>
+                                            <td class="center">${row.mid }</td>
+                                            <td class="center">${row.fTitle }</td>
+                                            <td class="center">${row.fStartDate }</td>
+                                            <td class="center">${row.fEndDate }</td>
+                                            <td class="center">${row.fhDate }</td>
+                                            <td class="center">${row.iName }</td>
+                                            <td class="center">${row.fhdItemValue }개</td>
+                                           <c:choose>
+                                            	<c:when test="${row.fStatus=='ING' }">
+                                            	 <td class="center">펀딩 진행중</td>
+                                            	</c:when>
+                                            	<c:when test="${row.fStatus=='GOAL' }">
+                                            	 <td class="center">펀딩 목표달성 종료</td>
+                                            	</c:when>
+                                            	<c:otherwise>
+                                            	 <td class="center">펀딩 기간만료 종료</td>
+                                            	</c:otherwise>
+                                            </c:choose>
+                                        </tr>
+                                     </c:forEach>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <!--End Advanced Tables -->
+                </div>
+            </div>
+            </c:if>
+    <!-- /후원내역 -->
         </div>
     </div>
+    
+    
+    
+    
              <!-- /. PAGE INNER  -->
             </div>
     

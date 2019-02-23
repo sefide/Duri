@@ -5,6 +5,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.duri.admin.model.exception.ListException;
+import com.kh.duri.admin.model.vo.RefundList;
 import com.kh.duri.admin.model.vo.adminFundingList;
 import com.kh.duri.admin.model.vo.adminMember;
 import com.kh.duri.admin.model.vo.adminQnA;
@@ -84,6 +85,12 @@ public class adminAtcDaoImpl implements adminAtcDao{
 		return result;
 
 	}
-	
+	/*//관리자 환급하기 목록
+	@Override
+	public List<RefundList> adminRefundList(SqlSessionTemplate sqlsession) throws ListException {
+		
+		return sqlsession.selectList("Admin.adminRefundList");
+	}
+	*/
 	
 }

@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.kh.duri.admin.model.exception.ListException;
 import com.kh.duri.admin.model.service.adminHappyService;
 import com.kh.duri.admin.model.vo.RefundList;
+import com.kh.duri.admin.model.vo.adminDirectList;
+import com.kh.duri.admin.model.vo.adminFundingHistoryList;
 import com.kh.duri.admin.model.vo.adminMember;
 
 
@@ -26,13 +28,8 @@ public class AdminHappyController {
 
 
 	
-	//행복두리 환급 목록
-	@RequestMapping("adminRefund.ad")
-	public String adminRefundList() {
 		
-		return "admin/adminRefund";
-		
-	}
+	
 	//행복두리 승인목록 조회
 	@RequestMapping("adminHappyAcc.ad")
 	public String adminHappyAccList(Model model) {
@@ -72,22 +69,39 @@ public class AdminHappyController {
 	}
 	//행복두리 [기존회원(1)/신규회원(3)] 상세페이지 (공통페이지)  
 	@RequestMapping("adminHappyDetail.ad")
-	public String adminHappyDetailList(HttpServletRequest request, HttpServletResponse response,Model model,adminMember m) {
+	public String adminHappyDetailList(HttpServletRequest request, HttpServletResponse response,Model model,Model model1,Model model2,Model model3,
+			adminMember m,adminDirectList ad, adminFundingHistoryList ahf) {
 		
 		int Mnonum = Integer.parseInt(request.getParameter("Mnonum"));
 		String Statusnum = request.getParameter("Statusnum");
+		List<adminDirectList> directList;
+		List<adminFundingHistoryList> fundingMoneyList;
+		List<adminFundingHistoryList> fundingGoodsList;
 		m.setMno(Mnonum);
 		m.setmTakeStatus(Statusnum);
+		ad.setDh_Mno_take(Mnonum);
+		ahf.setfWriter(Mnonum);
 		
 		adminMember HappyDetail;
 		try {
 			HappyDetail = ahs.HappyDetail(m);
+			directList = ahs.HappydirectList(ad);
+			fundingMoneyList = ahs.HappyfundingMoneyList(ahf);
+			fundingGoodsList = ahs.HappyfundingGoodsList(ahf);
+			
 			model.addAttribute("HappyDetail", HappyDetail);
+			model1.addAttribute("directList", directList);
+			model2.addAttribute("fundingMoneyList", fundingMoneyList);
+			model3.addAttribute("fundingGoodsList", fundingGoodsList);
+			
 			
 			return "admin/adminHappyDetail";
 			
 		} catch (ListException e) {
 			model.addAttribute("msg", e.getMessage());
+			model1.addAttribute("msg", e.getMessage());
+			model2.addAttribute("msg", e.getMessage());
+			model3.addAttribute("msg", e.getMessage());
 			return "admin/adminHappyDetail";
 		}
 		
