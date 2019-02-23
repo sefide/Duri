@@ -72,12 +72,17 @@ public interface HappymemberDao {
 	int insertQna(SqlSessionTemplate sqlSession, Qna q) throws MypageException;
 	
 	//Q&A 상세보기
-
+	List<Qna> selectQnaDetail(SqlSessionTemplate sqlSession, Qna q) throws MypageException;
+	
 	//감사편지 보낼 정기후원자 닉네임 뽑기
 	List<Member> selectNanumNick(SqlSessionTemplate sqlSession, Member m) throws MypageException;
 
 	//감사편지 보내기
 	int insertThankyouLetter(SqlSessionTemplate sqlSession, Letter l) throws MypageException;
+
+	
+
+	
 
 	
 

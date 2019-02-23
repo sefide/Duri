@@ -303,7 +303,16 @@ public class HappymemberDaoImpl implements HappymemberDao{
 	}
 
 	//Q&A 상세보기
-	
+	@Override
+	public List<Qna> selectQnaDetail(SqlSessionTemplate sqlSession, Qna q) throws MypageException {
+		List<Qna> qnaDetail = sqlSession.selectList("HappyMember.selectQnaDetail", q);
+		
+		if(qnaDetail == null) {
+			throw new MypageException("Q&A 내역이 없음");
+		}
+		
+		return qnaDetail;
+	}
 	
 	//감사편지 보낼 정기후원자 닉네임 뽑기
 	@Override
@@ -314,6 +323,10 @@ public class HappymemberDaoImpl implements HappymemberDao{
 			System.out.println("정기후원 닉네임,이름 : " + i);
 		}*/
 		
+		if(nanumNicks == null) {
+			throw new MypageException("감사편지 보낼 대상 없음");
+		}
+		
 		return nanumNicks;
 	}
 
@@ -322,7 +335,15 @@ public class HappymemberDaoImpl implements HappymemberDao{
 	public int insertThankyouLetter(SqlSessionTemplate sqlSession, Letter l) throws MypageException {
 		int result = sqlSession.insert("HappyMember.insertThankyouLetter", l);
 		
+		if(result < 0) {
+			throw new MypageException("감사편지 보내기 실패");
+		}
+		
 		return result;
 	}
+
+	
+
+	
 
 }
