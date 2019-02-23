@@ -182,9 +182,9 @@
 					var title = (data.itemDonateList[i].ftitle).substring(0, 10);
 					var content = (data.itemDonateList[i].fcontent).substring(0, 30);
 					var item = (data.itemDonateList[i].fitemname).substring(0, 8);
-					var titleDatail = data.itemDonateList[i].fno;
-				
-					console.log("번호 : "+titleDatail);
+					var itemDatail = data.itemDonateList[i].fno;
+					console.log("물품후원 글상세 : " + itemDatail);
+					
 					itemTbodyHtml.push('<tr>');
 					itemTbodyHtml.push('<td>'+data.itemDonateList[i].rnum+'</td>');
 				if(data.itemDonateList[i].ftitle.length > 10){
@@ -194,21 +194,10 @@
 				}
 				
 				if(data.itemDonateList[i].fcontent.length > 30){
-					itemTbodyHtml.push('<td><a href="cloud_thing_datail.bo?titleDatail='+titleDatail+'">'+content+'...</a></td>');
+					itemTbodyHtml.push('<td><a href="cloud_thing_datail.bo?itemDatail='+itemDatail+'">'+content+'...</a></td>');
 				}else{
-					itemTbodyHtml.push('<td><a href="cloud_thing_datail.bo?titleDatail='+titleDatail+'">'+data.itemDonateList[i].fcontent+'</a></td>');
-				}
-				/* if(data.itemDonateList[i].fcontent.length > 30){
-					itemTbodyHtml.push('<form id="boardDetail" action="cloud_thing_datail.bo">');
-					itemTbodyHtml.push('<input type="hidden" name="fno" value="'+data.itemDonateList[i].fno+'"/>');
-					itemTbodyHtml.push('<td><a onclick="boardDetail();">'+content+'...</a></td>');
-					itemTbodyHtml.push('</form>');
-				}else{
-					itemTbodyHtml.push('<form id="boardDetail" action="cloud_thing_datail.bo">');
-					itemTbodyHtml.push('<input type="hidden" name="fno" value="'+data.itemDonateList[i].fno+'"/>');
-					itemTbodyHtml.push('<td><a href="cloudThingDetail.happy">'+data.itemDonateList[i].fcontent+'</a></td>');
-					itemTbodyHtml.push('</form>');
-				} */	
+					itemTbodyHtml.push('<td><a href="cloud_thing_datail.bo?itemDatail='+itemDatail+'">'+data.itemDonateList[i].fcontent+'</a></td>');
+				}	
 				
 				if(data.itemDonateList[i].fitemname.length > 8){
 					itemTbodyHtml.push('<td>'+item+'...</td>');
@@ -316,6 +305,8 @@
 			        //제목,내용 길이 제한
 					var title = (data.moneyDonateList[i].ftitle).substring(0, 10);
 					var content = (data.moneyDonateList[i].fcontent).substring(0, 30);
+					var moneyDatail = data.moneyDonateList[i].fno;
+					console.log("금액후원글 번호 : " + moneyDatail);
 					
 					moneyTbodyHtml.push('<tr>');
 					moneyTbodyHtml.push('<td>'+data.moneyDonateList[i].rnum+'</td>');
@@ -324,11 +315,14 @@
 				}else{
 					moneyTbodyHtml.push('<td>'+data.moneyDonateList[i].ftitle+'</td>');
 				}
+				
+				
 				if(data.moneyDonateList[i].fcontent.length > 30){
-					moneyTbodyHtml.push('<td><a href="cloudThingDetail.happy">'+content+'...</a></td>');
+					moneyTbodyHtml.push('<td><a href="cloud_money_datail.bo?moneyDatail='+moneyDatail+'">'+content+'...</a></td>');
 				}else{
-					moneyTbodyHtml.push('<td><a href="cloudThingDetail.happy">'+data.moneyDonateList[i].fcontent+'</a></td>');
-				}	
+					moneyTbodyHtml.push('<td><a href="cloud_money_datail.bo?moneyDatail='+moneyDatail+'">'+data.moneyDonateList[i].fcontent+'</a></td>');
+				}
+					
 					moneyTbodyHtml.push('<td>'+data.moneyDonateList[i].fvalue+'</td>');
 					
 				if(data.moneyDonateList[i].fstartdate == null){

@@ -165,6 +165,14 @@ public class HappymemberServiceImpl implements HappymemberService {
 		
 		return result;
 	}
+	
+	//Q&A 상세보기
+	@Override
+	public List<Qna> selectQnaDetail(Qna q) throws MypageException {
+		List<Qna> qnaDetail = hd.selectQnaDetail(sqlSession, q);
+		
+		return qnaDetail;
+	}
 
 	//감사편지 보낼 정기후원자 닉네임 뽑기
 	@Override
@@ -181,6 +189,10 @@ public class HappymemberServiceImpl implements HappymemberService {
 		
 		return result;
 	}
+
+	
+
+	
 
 
 	

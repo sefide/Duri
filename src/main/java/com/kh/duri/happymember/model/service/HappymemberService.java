@@ -65,12 +65,17 @@ public interface HappymemberService {
 	int insertQna(Qna q) throws MypageException;
 	
 	//Q&A 상세보기
-
+	List<Qna> selectQnaDetail(Qna q) throws MypageException;
+	
 	///감사편지 보낼 정기후원자 닉네임 뽑기
 	List<Member> selectNanumNick(Member m) throws MypageException;
 
 	//감사편지 보내기
 	int insertThankyouLetter(Letter l) throws MypageException;
+
+	
+
+	
 
 
 	

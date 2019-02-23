@@ -327,6 +327,35 @@ public class HappymemberController {
 	
 	
 	//Q&A 상세보기 
+	@RequestMapping("qnaDetail.happy")
+	public String qnaDetail(Model model, HttpServletRequest request, HttpServletResponse response) {
+		Member m = (Member)request.getSession().getAttribute("loginUser");
+		int mno = m.getMno();
+		
+		String qnoString = request.getParameter("qno");
+		System.out.println("qno잘뽑힘? : " + qnoString);
+		
+		Qna q = new Qna();
+		if(qnoString != null) {
+			int qno = Integer.parseInt(qnoString);
+			System.out.println("qno 인트형 : " + qno);
+			q.setQno(qno);
+			q.setQ_mno(mno);
+		}
+	
+		
+		try {
+			List<Qna> qnaDetail = hs.selectQnaDetail(q);
+			
+			model.addAttribute("qnaDetail", qnaDetail);
+			
+		} catch (MypageException e) {
+			model.addAttribute("msg", e.getMessage());
+		} 
+		
+		return "happymember/qnaDetail";
+	}
+	
 	
 	//감사편지 보낼 정기후원자 닉네임 뽑기
 	@RequestMapping("thankyouLetter.happy")
@@ -418,11 +447,6 @@ public class HappymemberController {
 		return "happymember/deliveryStatus";
 	}
 	
-	
-	@RequestMapping("qnaDetail.happy")
-	public String happy6() {
-		return "happymember/qnaDetail";
-	}
 	
 	@RequestMapping("proofDocument.happy")
 	public String happy8() {

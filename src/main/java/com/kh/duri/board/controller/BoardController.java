@@ -133,8 +133,18 @@ public class BoardController {
 	   }
 	 //금액후원 상세조회
 	   @RequestMapping("cloud_money_datail.bo")
-	   public ModelAndView moneyDetail(Board b, ModelAndView mv,HttpSession session){ 
+	   public ModelAndView moneyDetail(Board b, ModelAndView mv,HttpSession session, HttpServletRequest request, HttpServletResponse response){ 
 				
+		   String moneyDatail = request.getParameter("moneyDatail");
+		   System.out.println("moneyDatail : " + moneyDatail);
+		   
+		   if(moneyDatail != null) {
+			   int happyMoneyFno = Integer.parseInt(moneyDatail);
+			   
+			   b.setFno(happyMoneyFno);
+			   System.out.println("happyMoneyFno : " + happyMoneyFno);
+		   }
+		   
 		System.out.println("Board : "+b);		
 		Board moneyDetail = null; 	
 		moneyDetail = bs.moneyDetailOne(b); //받아온 아이디와 비밀번호로 로그인 정보 조회			
@@ -186,14 +196,14 @@ public class BoardController {
 	@RequestMapping("cloud_thing_datail.bo")
 	public ModelAndView thingDetail(BoardItem bi, ModelAndView mv,HttpSession session, HttpServletRequest request, HttpServletResponse response){ 
 		
-		String titleDatail = request.getParameter("titleDatail");
-		System.out.println("titleDatail : " + titleDatail);
+		String itemDatail = request.getParameter("itemDatail");
+		/*System.out.println("itemDatail : " + itemDatail);*/
 		
-		if(titleDatail!= null) {
-			int happyFno = Integer.parseInt(request.getParameter("titleDatail"));
+		if(itemDatail!= null) {
+			int happyItemFno = Integer.parseInt(itemDatail);
 			
-			bi.setFno(happyFno);
-			System.out.println("happyFno : " + happyFno);
+			bi.setFno(happyItemFno);
+		/*	System.out.println("happyItemFno : " + happyItemFno);*/
 			
 		}
 		
@@ -223,11 +233,11 @@ public class BoardController {
 
 
 		try {
-		System.out.println("Board : " + b);
+		/*System.out.println("Board : " + b);*/
 
 		int writeCloud = 0;
 		int writeCloud2 = 0;
-		System.out.println(b.getFtype());
+		/*System.out.println(b.getFtype());*/
 		
 
 				writeCloud = bs.insertCloud(b); // 받아온 아이디와 비밀번호로 로그인 정보 조회

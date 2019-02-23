@@ -2,6 +2,7 @@
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
+
 <% 
 	String bigtabon="6";
 %>
@@ -13,7 +14,11 @@
 
 <style>
 	.to {font-size: 30px; font-weight: 600;}
-	a {color: #333;}
+	 a:hover {
+	    color: #4183c4;
+	    text-decoration: none;
+	    cursor: pointer;
+	}
 	#button{text-align: center;}
 	/* .textSilver {color: silver; font-weight: 600;}
 	.textOrange {color: orange; font-weight: 600;} */
@@ -40,12 +45,12 @@
 	<div class="contBox inner"><!-- inner S -->
 	 
 		<%@ include file="include/tabMypage.jsp" %>
-
+		<c:if test="${ !empty qnaDetail}">
 		<div style="float: left; margin-left: 35px;">
-			<h1><i class="chevron right icon"></i>제목 : 동생도 같이 후원 받을 수 있나요?</h1>
+			<h1><i class="chevron right icon"></i>제목 : ${qnaDetail.qtitle}</h1>
 		</div>
 		<div align="right" style="margin-right: 47px;">
-			<h1>작성일 : 2019.01.11</h1>
+			<h1>작성일 : ${qnaDetail.qdate}</h1>
 		</div>
 		<br>
 		<br>
@@ -54,11 +59,16 @@
 			<!-- Q&A : 내용 -->
 			<div>
 				<div class="field">
-				    <textarea style="width: 92%; height: 600px;">동생이 올해 11살이 되었습니다. 저랑 동생 둘다 후원 받을 수 있는건가요? 혹시 같은 가족이라면 후원 받을 수 있는 사람의 수가 제한되나요??
-				    </textarea>
-				 </div>
+				    <textarea style="width: 92%; height: 600px;">${qnaDetail.qcontent}</textarea>
+				</div>
 			</div>
 			<br>
+			<br>
+		</c:if>
+			<!-- 둘이두리 답변란 -->
+			<div align="left" style="margin-left: 47px;">
+				<button class="ui button">둘이두리님의 답변</button>
+			</div>
 			<br>
 			<!-- 둘이두리 답변란 -->
 			<div align="left" style="margin-left: 47px;">
@@ -70,20 +80,19 @@
 				    <textarea style="width: 92%; height: 200px;"></textarea>
 				 </div>
 			</div>
+			<c:if test="${ !empty qnaDetail.qanswer}">
 			<div align="right" style="margin-right: 48px;">
 				<a class="sbtn gy" href="#">답변등록</a>
 			</div>
-		</div>
+			</c:if>
 		
 		<div style="height: 100px;"></div>
 		
 		<div id="button">
 			<button class="massive ui instagram button">목록으로 돌아가기</button>&nbsp;&nbsp;&nbsp;&nbsp;
 		</div>
-
 	</div><!--// inner E-->
 </div>
-
 <%-- <%@ include file="/hyun/myPost/include/footer.jsp" %> --%>
 
 

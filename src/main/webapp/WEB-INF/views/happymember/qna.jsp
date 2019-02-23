@@ -14,7 +14,11 @@
 <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
 
 <style>
-	a {color: #333;}
+	 #contentA:hover {
+	    color: #4183c4;
+	    text-decoration: none;
+	    cursor: pointer;
+	}
 	#button{text-align: center;}
 	/* .textSilver {color: silver; font-weight: 600;}
 	.textOrange {color: orange; font-weight: 600;} */
@@ -52,7 +56,7 @@
 			<span>마이페이지 &gt; Q&A</span>
 		</div>
 		<br>
-		
+	<form id="qnaDetailForm" action="qnaDetail.happy">
 		<table class="boardList mt30">
 			<colgroup>
 				<col style="width:6%;"><!-- No -->
@@ -73,10 +77,11 @@
 			<tbody>
 			<c:if test="${ !empty qnaList }">
 			<c:forEach items="${qnaList }" var="qnaList">
+			<input type="hidden" name="qno" id="qno" value="${qnaList.qno}"/>
 				<tr>
 					<td><c:out value="${qnaList.rnum }"></c:out></td>
 					<td><c:out value="${qnaList.qtitle }"></c:out></td>
-					<td><c:out value="${qnaList.qcontent }"></c:out></td>
+					<td id="contentA" onclick="requestQno();"><c:out value="${qnaList.qcontent }"></c:out></td>
 					<td><c:out value="${qnaList.qdate }"></c:out></td>
 					<c:if test="${ empty qnaList.qanswer }">
 						<td><i class="yellow circle icon" alt="답변중"></i></td>
@@ -84,7 +89,7 @@
 					<c:if test="${ !empty qnaList.qanswer }">
 						<td><i class="green circle icon" alt="답변완료"></i></td>
 					</c:if>
-				</tr>
+				</tr>	
 			</c:forEach>
 			</c:if>
 			
@@ -95,6 +100,7 @@
 			</c:if>
 			</tbody>
 		</table>
+	</form>	
 
 		<div class="numbox pt40 pb50"> 
 			<c:url var="firstList" value="qna.happy">
@@ -158,7 +164,10 @@
  --%>
 </c:if>
 <script>
-	
+	function requestQno(){
+		$("#qnaDetailForm").submit();
+	}
+
 </script>
 
 </body>
