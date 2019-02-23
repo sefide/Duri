@@ -1,18 +1,18 @@
-/*package com.kh.duri.member.controller;
+package com.kh.duri.member.controller;
 
 import java.util.Random;
-//인증키 생성
+ 
 public class Tempkey {
-
+    
     private boolean lowerCheck;
     private int size;
-
+    
     public String getKey(int size, boolean lowerCheck) {
         this.size = size;
         this.lowerCheck = lowerCheck;
         return init();
     }
-
+    
     private String init() {
         Random ran = new Random();
         StringBuffer sb = new StringBuffer();
@@ -30,5 +30,5 @@ public class Tempkey {
         }
         return sb.toString();
     }
-
-}*/
+    
+}

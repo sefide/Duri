@@ -81,8 +81,18 @@
       	WHERE MID = #{mid2}
 	</select>
 
-
+	<!-- 나눔두리 회원가입 -->
+	<insert id="insertNanum">
+	INSERT INTO MEMBER
+	VALUES (SEQ_M_NO.NEXTVAL, #{mName}, #{mNickName},#{mGender}, #{mPhone}, #{mid}, #{mpwd}, #{email}, SYSDATE, 0, 'N', null, null, null, null, null, null, null, 0, 'Y', null)
+	</insert>
 	
+	<select id="selectPwd" parameterType="java.lang.String" resultType="java.lang.String" >
+		SELECT MPWD
+		FROM MEMBER
+		WHERE MID = #{mid}
+		AND MTYPE='N'
+	</select> 
 	
 	
 	

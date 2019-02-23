@@ -11,4 +11,8 @@ public interface MemberService {
 
 	int idcheck(String mid2) throws LoginException;
 
+	int insertMember(Member m) throws LoginException;
+
+
+
 }
