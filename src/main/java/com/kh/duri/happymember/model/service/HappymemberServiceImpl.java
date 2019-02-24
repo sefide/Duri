@@ -11,12 +11,14 @@ import org.springframework.stereotype.Service;
 import com.kh.duri.Nanummember.model.vo.Letter;
 import com.kh.duri.happymember.model.dao.HappymemberDao;
 import com.kh.duri.happymember.model.exception.MypageException;
+import com.kh.duri.happymember.model.vo.Attachment;
 import com.kh.duri.happymember.model.vo.DeliveryDetail;
 import com.kh.duri.happymember.model.vo.DirectFundHistory;
 import com.kh.duri.happymember.model.vo.FundItemList;
 import com.kh.duri.happymember.model.vo.Funding;
 import com.kh.duri.happymember.model.vo.MyDonateItems;
 import com.kh.duri.happymember.model.vo.Qna;
+import com.kh.duri.member.model.exception.LoginException;
 import com.kh.duri.member.model.vo.Member;
 import com.kh.duri.payment.model.vo.PageInfo;
 
@@ -188,6 +190,14 @@ public class HappymemberServiceImpl implements HappymemberService {
 		int result = hd.insertThankyouLetter(sqlSession, l);
 		
 		return result;
+	}
+
+	//증빙서류 승인일 조회
+	@Override
+	public Attachment selectAdate(Member member) throws LoginException {
+		Attachment aDate = hd.selectAdate(sqlSession, member);
+		
+		return aDate;
 	}
 
 	

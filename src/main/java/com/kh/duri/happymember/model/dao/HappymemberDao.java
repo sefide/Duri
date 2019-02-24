@@ -8,12 +8,14 @@ import org.mybatis.spring.SqlSessionTemplate;
 
 import com.kh.duri.Nanummember.model.vo.Letter;
 import com.kh.duri.happymember.model.exception.MypageException;
+import com.kh.duri.happymember.model.vo.Attachment;
 import com.kh.duri.happymember.model.vo.DeliveryDetail;
 import com.kh.duri.happymember.model.vo.DirectFundHistory;
 import com.kh.duri.happymember.model.vo.FundItemList;
 import com.kh.duri.happymember.model.vo.Funding;
 import com.kh.duri.happymember.model.vo.MyDonateItems;
 import com.kh.duri.happymember.model.vo.Qna;
+import com.kh.duri.member.model.exception.LoginException;
 import com.kh.duri.member.model.vo.Member;
 import com.kh.duri.payment.model.vo.PageInfo;
 
@@ -79,6 +81,9 @@ public interface HappymemberDao {
 
 	//감사편지 보내기
 	int insertThankyouLetter(SqlSessionTemplate sqlSession, Letter l) throws MypageException;
+
+	//증빙서류 승인일 조회
+	Attachment selectAdate(SqlSessionTemplate sqlSession, Member member) throws LoginException;
 
 	
 
