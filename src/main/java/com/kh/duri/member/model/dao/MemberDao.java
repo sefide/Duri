@@ -17,4 +17,6 @@ public interface MemberDao {
 
 	String selectEncPassword(SqlSessionTemplate sqlSession, Member m);
 
+	int NickCheck(SqlSessionTemplate sqlSession, String mNick);
+
 }
