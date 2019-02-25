@@ -125,6 +125,9 @@ public interface PaymentDao {
 	
 	// 정기후원 포인트 이력 insert (행복두리)
 	void insertPointDirectHappy(SqlSessionTemplate sqlSession, DirectFundHist directFundHist) throws DirectFundException;
+	
+	// 정기후원 새로운 회차 결제 완료 후 merchant_id update  
+	int updateDirectFundImpUid(SqlSessionTemplate sqlSession, DirectFundHist rdh) throws DirectFundException;
 
 		
 	
