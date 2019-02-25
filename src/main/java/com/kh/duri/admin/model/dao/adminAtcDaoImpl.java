@@ -1,14 +1,19 @@
 package com.kh.duri.admin.model.dao;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
+import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.kh.duri.Nanummember.model.vo.PageInfo;
 import com.kh.duri.admin.model.exception.ListException;
 import com.kh.duri.admin.model.vo.RefundList;
 import com.kh.duri.admin.model.vo.adminFundingList;
 import com.kh.duri.admin.model.vo.adminMember;
 import com.kh.duri.admin.model.vo.adminQnA;
+import com.kh.duri.happymember.model.exception.MypageException;
 
 @Repository
 public class adminAtcDaoImpl implements adminAtcDao{
@@ -85,12 +90,27 @@ public class adminAtcDaoImpl implements adminAtcDao{
 		return result;
 
 	}
-	/*//관리자 환급하기 목록
+	//관리자 환급하기 목록
 	@Override
-	public List<RefundList> adminRefundList(SqlSessionTemplate sqlsession) throws ListException {
-		
-		return sqlsession.selectList("Admin.adminRefundList");
+	public List<RefundList> adminRefundList(SqlSessionTemplate sqlsession,RefundList r, PageInfo pi) throws ListException {
+		int offset = (pi.getCurrentPage() - 1) * pi.getLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getLimit());
+		return sqlsession.selectList("Admin.adminRefundList",r,rowBounds);
 	}
-	*/
+	
+	//환급하기 갯수 조회
+	@Override
+	public int selectItemDonateCount(SqlSessionTemplate sqlsession, RefundList r) {
+		
+		int listCount = sqlsession.selectOne("Admin.adminRefundListCount", r);
+		
+		return listCount;
+	}
+	
+	//통계 페이지 - bar chart 데이터
+	@Override
+	public List<HashMap<String, String>> getBarChartList(SqlSessionTemplate sqlsession) {
+		return sqlsession.selectList("Admin.getBarChartList");
+	}
 	
 }

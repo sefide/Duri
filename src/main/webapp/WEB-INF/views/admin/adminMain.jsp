@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 
@@ -20,6 +21,7 @@
 <jsp:include page="include/adminStyle.jsp" />
 
 </head>
+
 
 <body>
 
@@ -96,7 +98,7 @@
 							<div class="number">
 								<h3>
 									<h3>23건</h3><br>
-									<big>진행 펀딩글</big>
+									<big>신규 펀딩 승인 펀딩글</big>
 								</h3>
 							</div>
 							<div class="icon">
@@ -236,35 +238,23 @@
 				</div>
 				<div class="col-md-6 col-sm-12 col-xs-12">
 					<div class="panel panel-default">
-						<div class="panel-heading">Area Chart</div>
+						<div class="panel-heading">Donut Chart</div>
 						<div class="panel-body">
-							<div id="morris-area-chart"></div>
+							<div id="morris-donut-chart">
+							</div>
 						</div>
 					</div>
 				</div>
 
 			</div>
 			<!-- /. ROW  -->
-			<div class="row">
 
-				<div class="col-md-6 col-sm-12 col-xs-12">
-					<div class="panel panel-default">
-						<div class="panel-heading">Line Chart</div>
-						<div class="panel-body">
-							<div id="morris-line-chart"></div>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-6 col-sm-12 col-xs-12">
-					<div class="panel panel-default">
-						<div class="panel-heading">Donut Chart</div>
-						<div class="panel-body">
-							<div id="morris-donut-chart"></div>
-						</div>
-					</div>
-				</div>
-
-			</div>
+		<div id="barChartValue" style="display: none;">
+			<c:forEach items="${barChartList}" var="vo" varStatus="index">
+				<span id="${vo.MONTH}">${vo.MONTHCNT}</span>
+			</c:forEach>
+		</div>
+			
 
 <footer><p>All right reserved. Template by: <a href="http://webthemez.com">WebThemez.com</a></p></footer>
 		</div>
@@ -274,5 +264,51 @@
 	</div>
 	<jsp:include page="include/adminFooter.jsp" />
 </body>
+
+<script type="text/javascript">
+(function ($) {
+	Morris.Bar({
+	    element: 'morris-bar-chart',
+	    data: [{
+	        y: $("#barChartValue").children("span").eq(0).attr("id"),
+	        a: $("#barChartValue").children("span").eq(0).text(),
+	        b: 90
+	    }, {
+	        y: '2',
+	        a: 75,
+	        b: 65
+	    }, {
+	        y: '3',
+	        a: 50,
+	        b: 40
+	    }, {
+	        y: '4',
+	        a: 75,
+	        b: 65
+	    }, {
+	        y: '5',
+	        a: 50,
+	        b: 40
+	    }, {
+	        y: '2011',
+	        a: 75,
+	        b: 65
+	    }, {
+	        y: '2012',
+	        a: 100,
+	        b: 90
+	    }],
+	    xkey: 'y',
+	    ykeys: ['a', 'b'],
+	    labels: ['Series A', 'Series B'],
+		 barColors: [
+	'#FABE28','#30A5FF',
+	'#A8E9DC' 
+	],
+	    hideHover: 'auto',
+	    resize: true
+	});
+}(jQuery));
+</script>
 
 </html>

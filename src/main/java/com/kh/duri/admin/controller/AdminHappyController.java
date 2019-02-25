@@ -32,17 +32,29 @@ public class AdminHappyController {
 	
 	//행복두리 승인목록 조회
 	@RequestMapping("adminHappyAcc.ad")
-	public String adminHappyAccList(Model model) {
+	public String adminHappyAccList(Model model,Model model1,Model model2,Model model3) {
 		List<adminMember>HappyNewList ; //신규목록
+		List<adminMember>HappyMprList ; //자기소개 갱신 목록
+		List<adminMember>HappyAttachList ; //증빙서류 갱신 목록
+		List<adminMember>HappyNotAttachList ; //증빙서류 비갱신 목록
 		try {
 			HappyNewList = ahs.adminHappyNewList();
+			HappyMprList = ahs.adminHappyMprList();
+			HappyAttachList = ahs.adminHappyAttachList();
+			HappyNotAttachList = ahs.adminHappyNotAttachList();
 			
 			model.addAttribute("HappyNewList", HappyNewList);
+			model1.addAttribute("HappyMprList", HappyMprList);
+			model2.addAttribute("HappyAttachList", HappyAttachList);
+			model3.addAttribute("HappyNotAttachList", HappyNotAttachList);
 			
 			return "admin/adminHappyAcc";
 			
 			}catch(ListException e) {
 				model.addAttribute("msg", e.getMessage());
+				model1.addAttribute("msg", e.getMessage());
+				model2.addAttribute("msg", e.getMessage());
+				model3.addAttribute("msg", e.getMessage());
 				
 				return "admin/adminHappyAcc";
 			}

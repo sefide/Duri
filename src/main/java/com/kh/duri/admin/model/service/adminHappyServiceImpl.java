@@ -38,14 +38,6 @@ public class adminHappyServiceImpl implements adminHappyService{
 		
 		return HappyDetail;
 	}
-	//행복두리 승인목록 -신규리스트
-	@Override
-	public List<adminMember> adminHappyNewList() throws ListException {
-		
-		List<adminMember> list = ahd.adminHappyNewList(sqlsession);
-		
-		return list;
-	}
 	//행복두리 상세보기 - 정기후원 내역
 	@Override
 	public List<adminDirectList> HappydirectList(adminDirectList ad) throws ListException {
@@ -70,7 +62,38 @@ public class adminHappyServiceImpl implements adminHappyService{
 		
 		return fundingGoodsList;
 	}
+	//행복두리 승인목록 -신규리스트
+	@Override
+	public List<adminMember> adminHappyNewList() throws ListException {
+		
+		List<adminMember> list = ahd.adminHappyNewList(sqlsession);
+		
+		return list;
+	}
+	//행복두리 승인목록 -자기소개 갱신 목록
+	@Override
+	public List<adminMember> adminHappyMprList() throws ListException {
 
-	//행복두리 환급목록 조회
+		List<adminMember> list = ahd.adminHappyMprList(sqlsession);
+		
+		return list;
+	}
+	//행복두리 승인목록 -증빙서류 갱신 목록
+	@Override
+	public List<adminMember> adminHappyAttachList() throws ListException {
+
+		List<adminMember> list = ahd.adminHappyAttachList(sqlsession);
+		
+		return list;
+	}
+	//행복두리 승인목록 -증빙서류 비갱신 목록
+	@Override
+	public List<adminMember> adminHappyNotAttachList() throws ListException {
+
+		List<adminMember> list = ahd.adminHappyNotAttachList(sqlsession);
+		
+		return list;
+	}
+
 	
 }

@@ -5,6 +5,7 @@
 	xmlns:aop="http://www.springframework.org/schema/aop" 
 	xmlns:task="http://www.springframework.org/schema/task"
 	xmlns:context="http://www.springframework.org/schema/context" 
+	xmlns:websocket="http://www.springframework.org/schema/websocket"
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc 
 	http://www.springframework.org/schema/mvc/spring-mvc.xsd 
 	http://www.springframework.org/schema/beans 
@@ -13,8 +14,21 @@
 	http://www.springframework.org/schema/context/spring-context.xsd 
 	http://www.springframework.org/schema/aop 
 	http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+	http://www.springframework.org/schema/websocket
+	http://www.springframework.org/schema/websocket/spring-websocket.xsd">
+
+
+<!-- 웹소켓 사용 -->
+
+    <websocket:handlers>
+        <websocket:mapping path="/count" handler="myHandler"/>
+    </websocket:handlers>
+
+ 	<!-- 웹 소켓 핸들러  -->
+    <beans:bean id="myHandler" class="com.kh.duri.common.handler.WebSocketHandler"/>
     http://www.springframework.org/schema/task 
     http://www.springframework.org/schema/task/spring-task-3.2.xsd">
+
 
 
 	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
@@ -35,7 +49,6 @@
 	<aop:aspectj-autoproxy proxy-target-class="true"></aop:aspectj-autoproxy>
 	
 	<context:component-scan base-package="com.kh.duri" />
-	
 	
 	
 	
