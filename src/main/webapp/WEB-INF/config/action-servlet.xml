@@ -26,9 +26,6 @@
 
  	<!-- 웹 소켓 핸들러  -->
     <beans:bean id="myHandler" class="com.kh.duri.common.handler.WebSocketHandler"/>
-    http://www.springframework.org/schema/task 
-    http://www.springframework.org/schema/task/spring-task-3.2.xsd">
-
 
 
 	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
