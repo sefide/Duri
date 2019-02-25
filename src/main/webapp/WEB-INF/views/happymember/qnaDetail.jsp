@@ -20,8 +20,7 @@
 	    cursor: pointer;
 	}
 	#button{text-align: center;}
-	/* .textSilver {color: silver; font-weight: 600;}
-	.textOrange {color: orange; font-weight: 600;} */
+	
 </style>
 
 <title>마이페이지>Q&A>Q&A상세</title>
@@ -47,19 +46,18 @@
 		<%@ include file="include/tabMypage.jsp" %>
 		<c:if test="${ !empty qnaDetail}">
 		<div style="float: left; margin-left: 35px;">
-			<h1><i class="chevron right icon"></i>제목 : ${qnaDetail.qtitle}</h1>
+			<h1><i class="chevron right icon"></i>제목 : ${qnaTitle }</h1>
 		</div>
 		<div align="right" style="margin-right: 47px;">
-			<h1>작성일 : ${qnaDetail.qdate}</h1>
+			<h1>작성일 : ${qnaDate}</h1>
 		</div>
 		<br>
 		<br>
-		
 		<div align="center">
 			<!-- Q&A : 내용 -->
 			<div>
 				<div class="field">
-				    <textarea style="width: 92%; height: 600px;">${qnaDetail.qcontent}</textarea>
+				    <textarea style="width: 92%; height: 600px; font-size: 18px;" readonly>${qnaContent}</textarea>
 				</div>
 			</div>
 			<br>
@@ -70,22 +68,35 @@
 				<button class="ui button">둘이두리님의 답변</button>
 			</div>
 			<br>
-			<!-- 둘이두리 답변란 -->
-			<div align="left" style="margin-left: 47px;">
-				<button class="ui button">둘이두리님의 답변</button>
-			</div>
-			<br>
+		<c:choose>
+			<c:when test="${ empty qnaAnswer}">
 			<div>
 				<div class="field">
-				    <textarea style="width: 92%; height: 200px;"></textarea>
+				    <textarea id="qnaAnswerContent" style="width: 92%; height: 200px; font-size: 18px;" readonly>답변을 기다려 주세요.</textarea>
 				 </div>
 			</div>
-			<c:if test="${ !empty qnaDetail.qanswer}">
-			<div align="right" style="margin-right: 48px;">
-				<a class="sbtn gy" href="#">답변등록</a>
+			<!-- <div align="right" style="margin-right: 48px;">
+				<a class="sbtn gy" id="qnaAnswerUpdate">답변등록</a>
+			</div> -->
+			</c:when>
+			<c:otherwise>
+			<div>
+				<div class="field">
+				    <textarea style="width: 92%; height: 200px; font-size: 18px;" readonly>${qnaAnswer }</textarea>
+				 </div>
 			</div>
-			</c:if>
-		
+			</c:otherwise>
+		</c:choose>
+			<%-- <c:if test="${loginUser.mtype == 'M' || loginUser2.mtype == 'M'} ">
+			<div>
+				<div class="field">
+				    <textarea id="qnaAnswerContent" style="width: 92%; height: 200px;">답변을 기다려 주세요.</textarea>
+				 </div>
+			</div>
+			<div align="right" style="margin-right: 48px;">
+				<a class="sbtn gy" id="qnaAnswerUpdate">답변등록</a>
+			</div>
+			</c:if> --%>
 		<div style="height: 100px;"></div>
 		
 		<div id="button">
@@ -98,7 +109,17 @@
 
 </div><!--// Wrap E-->
 </c:if>
+<script>
+	$("#qnaAnswerUpdate").click(function(){
+		var qnaAnswerContent = $("#qnaAnswerContent").val();
+		console.log("답변등록 내용 : " + qnaAnswerContent);
+		
+		location.href="qnaAnswerUpdate.happy?qnaAnswerContent="+qnaAnswerContent;
+	});
 
+
+
+</script>
 
 </body>
 </html>

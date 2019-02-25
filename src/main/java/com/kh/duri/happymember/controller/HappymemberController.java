@@ -1,6 +1,9 @@
 package com.kh.duri.happymember.controller;
 
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,6 +22,7 @@ import com.kh.duri.happymember.model.vo.DirectFundHistory;
 import com.kh.duri.Nanummember.model.vo.Letter;
 import com.kh.duri.happymember.model.exception.MypageException;
 import com.kh.duri.happymember.model.service.HappymemberService;
+import com.kh.duri.happymember.model.vo.Attachment;
 import com.kh.duri.happymember.model.vo.DeliveryDetail;
 import com.kh.duri.happymember.model.vo.FundItemList;
 import com.kh.duri.happymember.model.vo.Funding;
@@ -332,30 +336,33 @@ public class HappymemberController {
 		Member m = (Member)request.getSession().getAttribute("loginUser");
 		int mno = m.getMno();
 		
-		String qnoString = request.getParameter("qno");
-		System.out.println("qno잘뽑힘? : " + qnoString);
+		String requestQno = request.getParameter("requestQno");
+		int qno = Integer.parseInt(requestQno);
+		/*System.out.println("qno잘뽑힘? : " + requestQno);
+		System.out.println("qno 인트형 : " + qno);*/
 		
 		Qna q = new Qna();
-		if(qnoString != null) {
-			int qno = Integer.parseInt(qnoString);
-			System.out.println("qno 인트형 : " + qno);
-			q.setQno(qno);
-			q.setQ_mno(mno);
-		}
-	
-		
+		q.setQno(qno);
+		q.setQ_mno(mno);
+
 		try {
 			List<Qna> qnaDetail = hs.selectQnaDetail(q);
 			
+			/*System.out.println("다 담겻나? : " + qnaDetail);*/
+			
 			model.addAttribute("qnaDetail", qnaDetail);
+			model.addAttribute("qnaTitle", qnaDetail.get(0).getQtitle());
+			model.addAttribute("qnaDate", qnaDetail.get(0).getQdate());
+			model.addAttribute("qnaContent", qnaDetail.get(0).getQcontent());
+			model.addAttribute("qnaAnswer", qnaDetail.get(0).getQanswer());
 			
 		} catch (MypageException e) {
 			model.addAttribute("msg", e.getMessage());
 		} 
 		
+		
 		return "happymember/qnaDetail";
 	}
-	
 	
 	//감사편지 보낼 정기후원자 닉네임 뽑기
 	@RequestMapping("thankyouLetter.happy")
@@ -412,6 +419,30 @@ public class HappymemberController {
 		
 		return "hapymember/thankyouLetter";
 	}
+	
+	
+	/*//증빙서류 승인일 조회
+		@RequestMapping("adate.happy")
+		public String adate(Model model, HttpServletRequest request, HttpServletResponse response) {
+			Member m = (Member)request.getSession().getAttribute("loginUser");
+			
+			try {
+				Attachment aDate = hs.selectAdate(m);
+				
+				System.out.println("갱신 가능 시작 d-day : " + aDate.getChangestart());
+				System.out.println("갱신가능~마감까지 d-day : " + aDate.getFinishdate());
+				model.addAttribute("changestart", aDate.getChangestart());
+				model.addAttribute("finishdate", aDate.getFinishdate());
+				
+				
+			} catch (MypageException e) {
+				model.addAttribute("msg", e.getMessage());
+				return "common/errorPage";
+			}
+			
+			
+			return "happymember/include/header";
+		}*/
 	
 	//물품 배송 목록 새로고침했을 때 insert다시 안되게 !
 	@RequestMapping("deliveryOriginal.happy")

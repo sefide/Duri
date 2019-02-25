@@ -1,6 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
+
+
 <header>
+
+<style>
+	.ddayPtag {font-size: 20px; font-weight: 600; color:darkorange !important; margin-top: 5%;}
+	.ddayPtag2 {font-size: 20px; font-weight: 600; color:red !important; margin-top: 5%;}
+	.d-day-count {font-size: 20px; font-weight: 600; color: gray !important; margin-top: 5%}
+	
+</style>
 
 <!-- semantic ui -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
@@ -12,11 +24,18 @@
 		<div class="myNavBox">
 			<span class="mumyNavBox-logout"><i class="large lock open icon"></i><a href="logout.me">로그아웃</a></span>
 		</div>
-		
-		<div class="d-day">
-			<span class="d-day-count"><i class="bullhorn icon"></i>증빙서류 재 제출 D-day : 15일</span>
-		</div>
-		
+		<c:choose>
+		<c:when test="${changestart le (-1) }">
+			<div class="d-day">
+				<span class="d-day-count"><i class="bullhorn icon"></i>증빙서류  <span class="ddayPtag">재 제출 시작일까지 D${changestart }</span>일 남았습니다.</span>
+			</div>
+		</c:when>
+		<c:when test="${changestart ge 0 }">
+			<div class="d-day">
+				<span class="d-day-count"><i class="bullhorn icon"></i>증빙서류 <span class="ddayPtag2">재 제출기간 마감까지 D${finishdate - changestart }</span>일 남았습니다.</span>
+			</div>
+		</c:when>
+		</c:choose>
 
 
 		<!-- <span class="menuAll" onclick="openNav()"><img src="../happymember/images/gnb/ico_menu.png" alt="menu"></span>gnbmenu S

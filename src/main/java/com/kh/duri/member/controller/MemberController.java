@@ -22,6 +22,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kh.duri.happymember.model.exception.MypageException;
+import com.kh.duri.happymember.model.service.HappymemberService;
+import com.kh.duri.happymember.model.vo.Attachment;
 import com.kh.duri.member.model.exception.LoginException;
 import com.kh.duri.member.model.service.MemberService;
 import com.kh.duri.member.model.vo.Member;
@@ -33,12 +36,13 @@ public class MemberController {
 	private MemberService ms;
 
 	@Autowired
+	private HappymemberService hs;
+
 	private BCryptPasswordEncoder passwordEncoder;
-	
 	
 	//로그인 회원 조회용 메소드(행복두리)
 	@RequestMapping	("login.me")
-	public ModelAndView loginCheck(Member m, ModelAndView mv, HttpSession session) {
+	public ModelAndView loginCheck(Member m, ModelAndView mv, HttpSession session, Model model, HttpServletRequest request) {
 			
 		try {
 			/*System.out.println("member : "+m);*/
@@ -46,17 +50,34 @@ public class MemberController {
 			Member loginUser = null; 
 			
 			if(!(m.getMid().equals("mng01")||m.getMid().equals("mng02")||m.getMid().equals("mng03")||m.getMid().equals("mng04"))) {
-				loginUser = ms.loginMember(m); //받아온 아이디와 비밀번호로 로그인 정보 조회
+
 				
+				loginUser = ms.loginMember(m); //받아온 아이디와 비밀번호로 로그인 정보 조회
+				System.out.println("loginUser : "+loginUser);
 				session.setAttribute("loginUser", loginUser);	//세션에 뿌려주기
+				
+				Member member = (Member)request.getSession().getAttribute("loginUser");
+				System.out.println("세션 : " + member);
+				
+				
+				//애린이가 수정
+				//로그인 하자마자 증빙 서류 재 제출 D-day 띄우기	
+				Attachment aDate;
+				aDate = hs.selectAdate(member);
+				
+				System.out.println("갱신 가능 시작 d-day : " + aDate.getChangestart());
+				System.out.println("갱신가능~마감까지 d-day : " + aDate.getFinishdate());
+				/*model.addAttribute("changestart", aDate.getChangestart());
+				model.addAttribute("finishdate", aDate.getFinishdate());*/
+				session.setAttribute("changestart", aDate.getChangestart());
+				session.setAttribute("finishdate", aDate.getFinishdate());
+			
 				
 				mv.setViewName("redirect:goHappyMain.me"); //위처럼 redirect로 뷰페이지이름연결할거랑 똑같음
 			}else {
 				
 				mv.setViewName("redirect:goAdmin.me"); //위처럼 redirect로 뷰페이지이름연결할거랑 똑같음
 			}
-			
-
 			
 		} catch (LoginException e) {
 			

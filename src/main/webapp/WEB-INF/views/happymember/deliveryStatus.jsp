@@ -75,7 +75,7 @@
 					<th scope="col">물품명</th>
 					<th scope="col">개수</th>
 					<th scope="col">배송신청일</th>
-					<th scope="col">배송현황</th>
+					<th scope="col">배송상태</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -87,7 +87,7 @@
 						<td><c:out value="${deliveryList.ddvalue }"/></td>
 						<td><c:out value="${deliveryList.dd_date }"/></td>
 						<td>
-							<a id="deliveryBtn" class="sbtn gy" href="#"/>배송상태 보기</a>
+							<a id="deliveryBtn" class="sbtn gy" href="#">배송상태 보기</a>
 						</td>	
 					</tr>
 				</c:forEach>
