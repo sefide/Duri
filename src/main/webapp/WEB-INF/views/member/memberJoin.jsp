@@ -380,7 +380,7 @@ input, select{
 
   
 
-<form class="ui form" name = "join2" style="background: none;">
+<form class="ui form" action="insert2.me" method="POST" name = "sub1" id="sub1" style="background: none;" encType="multipart/form-data">
 	<div class="field" style="margin:10px;">
     <label>ID</label>
     <div class="two fields">
@@ -401,7 +401,7 @@ input, select{
       </div>
       
       <div class="field" align="right" style="width:300px">
-        <input type="text" name="mNick" id="mNick" placeholder="닉네임을 입력하세요." style="width:300px">
+        <input type="text" name="mNickName" id="mNick" placeholder="닉네임을 입력하세요." style="width:300px">
       </div>
        <div class="ui button" onclick="duplicationCheckNick();" style="width:110px; margin-left:15px" tabindex="0">중복확인</div>
     </div>
@@ -480,7 +480,7 @@ input, select{
         <input type="text"  name="check1" id="check1" placeholder="인증번호를 입력하세요.">
       </div>
         <div class="ui button" id="check2" tabindex="0">인증하기</div>
-
+		<input type="hidden" name="email" id="email">
     </div>
   </div>
 
@@ -488,19 +488,10 @@ input, select{
   
   <div class="fields" style="margin:10px;">
      <div class="five wide field">
-       <label>주민등록번호</label>
-      <input type="text" name="mBirthDay" id="mBirthDay" maxlength="6" placeholder="">
+       <label>생년월일</label>
+      <input type="Date" name="mBirthDay" id="mBirthDay" maxlength="6" placeholder="">
     </div>
 
-    <div class="three wide field">
-      <label></label><br>
-      <input type="text" name="card[cvc]" maxlength="1" placeholder="">
-    </div>
-    
-      <div class="three wide field">
-      <label></label><label></label><br>
-      ******
-    </div>
     
     </div>
 
@@ -515,10 +506,11 @@ input, select{
       
        <div class="two fields">
           <div class="field">
-           <input type="text" name="mAddress2" placeholder="주소를 입력해주세요." style="width:200px;"> 
+           <input type="text" name="mAddress2" id="mAddress2" placeholder="주소를 입력해주세요." style="width:300px;"> 
    		</div> 
 		<div class="field">
-           <input type="text" name="mAddress3" placeholder="상세주소를 입력해주세요." style="width:400px;">  	
+           <input type="text" name="mAddress3" id="mAddress3" placeholder="상세주소를 입력해주세요." style="width:400px;margin-left:100px;">  	
+			<input type="hidden" name="mAddress" id="mAddress">
 		</div>
 	</div>
     </div>
@@ -532,17 +524,17 @@ input, select{
 
       <div class="two field" style="width:300px;">
           <label>증빙서류 유형:</label>
-          <select class="ui fluid search dropdown" name="card[expire-month]">
+          <select class="ui fluid search dropdown" name="mFundtype" id="mFundtype">
             <option value="" selected disabled>선택</option>
-            <option value="1">기초생활수급자</option>
-            <option value="2">소년소녀가장</option>
-            <option value="3">한부모가정</option>
+            <option value="기초생활수급자">기초생활수급자</option>
+            <option value="소년소녀가장">소년소녀가장</option>
+            <option value="한부모가정">한부모가정</option>
           </select>
           	
         </div>
         <div class="field" style="width:300px;">
         <label></label><br>
-   			<input type="file" >
+   			<input type="file" id="photo" name="photo">
         </div>
         <div class="field" style="width:300px;">
         <br><label>증빙서류는 최대 6개월까지 보관 됩니다.<br></label>
@@ -554,7 +546,7 @@ input, select{
    	<div class="field" style="margin:10px">
         <div class="field" >
         <label></label><br>
-   			<textarea name="memo" id="mpr" cols="230" rows="10" style="resize:none" placeholder="입력하신 자기소개는 정기후원 게시판에서 보여집니다."></textarea>
+   			<textarea id="mpr" name="mpr" cols="230" rows="10" style="resize:none" placeholder="입력하신 자기소개는 정기후원 게시판에서 보여집니다."></textarea>
         </div>
     </div>
 
@@ -563,7 +555,7 @@ input, select{
 </form>
 		    
   	<div align="center">
-		 <button class="ui primary button">
+		 <button onclick="erchk();" class="ui primary button">
 		   	회원가입
 		</button>
 		<button class="ui button" onclick="location.href='Eunji_happyLogin.me'">
@@ -656,7 +648,7 @@ input, select{
 	}
 	
 	
-	
+	var email = null;
 	var m = null;
 	//이메일 인증 버튼 클릭시 랜덤 번호 전송
 	$("#sendEmail").click(function(){
@@ -664,7 +656,7 @@ input, select{
 			swal("이메일을 입력해주세요!");
 		}else{
 			
-			var email = null;
+
 		email = $("#email1").val() + "@" + $("#email2").val();
 		console.log(email);
 		$.ajax({
@@ -715,13 +707,14 @@ input, select{
 	
 	
 	//주소 검색
+	var mAdd = null;
 	$("#mAdd").click(function(){
 		 new daum.Postcode({
 		        oncomplete: function(data) {
 
 	                // 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
 	                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
-	                var roadAddr = data.roadAddress; // 도로명 주소 변수
+	                var fullRoadAddr = data.roadAddress; // 도로명 주소 변수
 	                var extraRoadAddr = ''; // 참고 항목 변수
 
 	                // 법정동명이 있을 경우 추가한다. (법정리는 제외)
@@ -737,27 +730,20 @@ input, select{
 	                if(extraRoadAddr !== ''){
 	                    extraRoadAddr = ' (' + extraRoadAddr + ')';
 	                }
-
-	                // 우편번호와 주소 정보를 해당 필드에 넣는다.
-	                document.getElementById('mAddress1').value = data.zonecode;
-	                document.getElementById('mAddress2').value = roadAddr + data.jibunAddress + extraRoadAddr;
-	
-
-	                var guideTextBox = document.getElementById("guide");
-	                // 사용자가 '선택 안함'을 클릭한 경우, 예상 주소라는 표시를 해준다.
-	                if(data.autoRoadAddress) {
-	                    var expRoadAddr = data.autoRoadAddress + extraRoadAddr;
-	                    guideTextBox.innerHTML = '(예상 도로명 주소 : ' + expRoadAddr + ')';
-	                    guideTextBox.style.display = 'block';
-
-	                } else if(data.autoJibunAddress) {
-	                    var expJibunAddr = data.autoJibunAddress;
-	                    guideTextBox.innerHTML = '(예상 지번 주소 : ' + expJibunAddr + ')';
-	                    guideTextBox.style.display = 'block';
-	                } else {
-	                    guideTextBox.innerHTML = '';
-	                    guideTextBox.style.display = 'none';
+	                
+	                //도로명, 지번 주소의 유무에 따라 해당 주소 풀로 입력
+	                if(fullRoadAddr !== ''){
+	                	fullRoadAddr += extraRoadAddr;
 	                }
+	                
+					console.log(fullRoadAddr);
+	                // 우편번호와 주소 정보를 해당 필드에 넣는다.
+					
+	                $('#mAddress1').val(data.zonecode) ;
+	                $('#mAddress2').val(fullRoadAddr);
+	                // 커서를 상세주소 필드로 이동한다.
+	                $("#mAddress3").focus();
+
 	            }
 		        
 		    }).open();
@@ -768,35 +754,42 @@ input, select{
 	
 	//필수입력사항 입력 검사
 	function erchk() {
+			mGender = $("#mGender").val();
+			console.log($("#photo").val());
 			//필수입력값 입력유무 조사
 			if($("#mid").val()!="" 
 				&& $("#mpwd").val()!="" && $("#mpwd22").val()!="" && $("#mName").val()!="" 
 				&& $("#mNick").val()!="" && $("#email1").val()!="" && $("#email2").val()!=""
-				&& $("#mBirthDay").val()!="" && $("#mPhone").val()!=""  && $("#mGender").val()!=""
-				&& $("#mAddress1").val()!="" && $("#mAddress2").val()!=""&& $("#mAddress3").val()!=""&& $("#mpr").val()!=""){
+				&& $("#mBirthDay").val()!=""  && $("#mGender").val()!=""
+				&& $("#mAddress1").val()!="" && $("#mAddress2").val()!=""&& $("#mAddress3").val()!=""&& $("#mpr").val()!="" && $("#mFundType").val()!=""){
 				//중복확인 유무 조사
 				if(i == 1){
 					//비밀번호 일치 여부 조사
 					if($("#mpwd").val()==$("#mpwd22").val()){
 						if(okEmail == 1){
-							$("#email").val($("#mEmail").val() + "@" + $("#mEmail2").val());
+							$("#email").val($("#email1").val() + "@" + $("#email2").val());
 							$("#mGender").val(mGender);
-							
+							$("#mAddress").val($("#mAddress2").val() + " " + $("#mAddress3").val());
 					        var queryString = $("form[name=sub1]").serialize() ;
-					        
-					        $.ajax({
+					        $("#sub1").submit();
+					   /*      $.ajax({
 					            type : 'post',
-					            url : 'insert.me',
-					            data : queryString,
+					            url : 'insert2.me',
+					            data : formData,
+					            
 					            error: function(xhr, status, error){
 					                alert(error);
 					            },
 					            success : function(data){
-					                swal("둘이두리 회원가입을 축하합니다! 당신의 행복나눔을 응원합니다!").then(function(){
+					            	swal({
+					      			  title: "회원가입료!",
+					      			  text: "행복두리는 관리자 승인을 받아야 사이트 이용이 가능합니다!(최대7일)",
+					      			  icon: "success"
+					      			  }).then(function(){
 					                	location.href="nanumLogin.me";
 					                });
 					            },
-					        });
+					        }); */
 
 						}else{
 							swal("이메일을 인증해 주세요!");

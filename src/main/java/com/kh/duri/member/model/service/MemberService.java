@@ -15,6 +15,8 @@ public interface MemberService {
 
 	int NickCheck(String mNick);
 
+	int insertHappyMember(Member m);
+
 
 
 }
