@@ -34,10 +34,7 @@ public class NanumController {
 	public String Total1() {
 		return "Nanummember/totalMain";
 	}
-	@RequestMapping("main.nanum")
-	public String Total2() {
-		return "Nanummember/nanumMain";
-	}
+	
 	
 	/* ----------------------나눔두리 회원정보 수정 ----------------------*/
 	//비밀번호 확인

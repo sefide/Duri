@@ -1,5 +1,6 @@
 package com.kh.duri.admin.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -164,19 +165,89 @@ public class AdminAtcController {
 	//관리자 메인페이지
 	@SuppressWarnings("rawtypes")
 	@RequestMapping("adminMain.ad")
-	public String adminMain(Model model) {
+	public String adminMain(Model model, Model model1, Model model2) {
+		
+		//Today
+		List<Integer> Todaylist = new ArrayList<Integer>();
+		
+		int TodayNewNanum = aas.TodayNewNanum();
+		int TodayNewHappy = aas.TodayNewHappy();
+		int TodayNewDirect = aas.TodayNewDirect();
+		int TodayNewFund = aas.TodayNewFund();
+		int TodayNewDirectMoney = aas.TodayNewDirectMoney();
+		int TodayNewItem = aas.TodayNewItem();
+		int TodayNewFundMoney = aas.TodayNewFundMoney();
+		int TodayNewPoint = aas.TodayNewPoint();
+		
+		Todaylist.add(0,TodayNewNanum);
+		Todaylist.add(1,TodayNewHappy);
+		Todaylist.add(2,TodayNewDirect);
+		Todaylist.add(3,TodayNewFund);
+		Todaylist.add(4,TodayNewDirectMoney);
+		Todaylist.add(5,TodayNewItem);
+		Todaylist.add(6,TodayNewFundMoney);
+		Todaylist.add(7,TodayNewPoint);
+		
+		//Total
+		List<Integer> Totallist = new ArrayList<Integer>();
+		
+		int TotalNanum = aas.TotalNanum();
+		int TotalHappy = aas.TotalHappy();
+		int TotalDirect = aas.TotalDirect();
+		int Totalfund = aas.Totalfund();
+		int Totalitem = aas.Totalitem();
+		int TotalitemMoney = aas.TotalitemMoney();
+		int TotalDirectConn = aas.TotalDirectConn();
+		int TotalFundUpload = aas.TotalFundUpload();
+		int TotalMoneyTotal =TotalDirect+Totalfund+TotalitemMoney;
+		
+		Totallist.add(0,TotalNanum);
+		Totallist.add(1,TotalHappy);
+		Totallist.add(2,TotalDirect);
+		Totallist.add(3,Totalfund);
+		Totallist.add(4,Totalitem);
+		Totallist.add(5,TotalMoneyTotal);
+		Totallist.add(6,TotalDirectConn);
+		Totallist.add(7,TotalFundUpload);
+		
+		
+		
+		
 		
 		List<HashMap<String,String>> barChartList;
 		barChartList = aas.getBarChartList();
 		
+		
+		
 		model.addAttribute("barChartList", barChartList);
+		model1.addAttribute("Todaylist", Todaylist);
+		model2.addAttribute("Totallist", Totallist);
 		
 		
 		
 		
-		List<adminFundingList> CrowdFundGoodsInfo;
 		return "admin/adminMain";
 	}
+	//나눔두리 메인페이지 통계
+	@RequestMapping("main.nanum")
+	public String nanumMain(Model model,Model model1) {
+		
+		int TotalDirect = aas.TotalDirect();
+		int Totalfund = aas.Totalfund();
+		int TotalitemMoney = aas.TotalitemMoney();
+		int TotalNanum = aas.TotalNanum();
+		
+		int mainTotal =TotalDirect+Totalfund+TotalitemMoney;
+		
+		model.addAttribute("mainTotal", mainTotal);
+		model1.addAttribute("TotalNanum", TotalNanum);
+		
+		return "Nanummember/nanumMain";
+	}
+	
+	
+	
+	
 	
 	//관리자 행복두리 Q&A 목록
 	@RequestMapping("adminQnA.ad")
@@ -313,6 +384,12 @@ public class AdminAtcController {
 			PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
 			
 			List<RefundList> adminRefundList = aas.adminRefundList(r,pi);
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			for(int i = 0; i < adminRefundList.size(); i++) {
+				String rrDate = sdf.format(adminRefundList.get(i).getrDate());
+				
+				adminRefundList.get(i).setRrDate(rrDate);
+			}
 			map.put("adminRefundList", adminRefundList);
 			map.put("pi", pi);
 		
@@ -324,10 +401,37 @@ public class AdminAtcController {
 			
 		
 	}
+	//환불 버튼 ajax
+	@RequestMapping("adminRefund_ajax_button.ad")
+	public String adminRefundButton(HttpServletRequest request, HttpServletResponse response,RefundList RfL) {
+		
+		
+		int num = Integer.parseInt(request.getParameter("num"));
+		
+		RfL.setrNo(num);
+		try {
+			int result = aas.adminRefundButton(RfL);
+			return "admin/adminRefund";
+			
+			}catch(Exception e) {
+				
+				return "admin/adminRefund";				
+			}
+		
+		
+		}
 		
 	
+		
+		
 	
+
+		
+	
+		
+	
+}
 	
 
 	
-}
+
