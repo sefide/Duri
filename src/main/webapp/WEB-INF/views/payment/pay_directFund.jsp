@@ -89,7 +89,7 @@
    		}
    		
    		#totalBox{
-   			width : 99%; 
+   			width : 100%; 
    			background: rgba(220,220,220,0.3); 
    			margin : 2% auto; 
    			padding: 4% 2%;
@@ -195,7 +195,7 @@
    			width : 670px;
    			z-index : 200;
    			/* text-align : center; */
-   			top : 50%;
+   			top : 70%;
    			left : 30%;
    			visibility : hidden;
    			border : 1px solid lightgray;
@@ -227,6 +227,28 @@
    			width : 75px;
    			cursor : pointer;
    		}	
+   		
+   		#chkExplain + label{
+   			font-size : 18px;
+		    color: #000;
+		    font-family: "Dosis", Arial, sans-serif;
+		    font-weight: 400;
+   		}
+   		
+		.checks {position: relative;} 
+		.checks input[type="checkbox"] { 
+		/* 실제 체크박스는 화면에서 숨김 */ position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip:rect(0,0,0,0); border: 0 } .checks input[type="checkbox"] + label { display: inline-block; position: relative; cursor: pointer; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; } 
+		.checks input[type="checkbox"] + label:before { /* 가짜 체크박스 */ content: ' '; display: inline-block; width: 21px; /* 체크박스의 너비를 지정 */ height: 21px; /* 체크박스의 높이를 지정 */ line-height: 21px; /* 세로정렬을 위해 높이값과 일치 */ margin: -2px 8px 0 0; text-align: center; vertical-align: middle; background: #fafafa; border: 1px solid #cacece; border-radius : 3px; box-shadow: 0px 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05); } 
+		.checks input[type="checkbox"] + label:active:before, .checks input[type="checkbox"]:checked + label:active:before { box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px 1px 3px rgba(0,0,0,0.1); } 
+		.checks input[type="checkbox"]:checked + label:before { /* 체크박스를 체크했을때 */ content: '\2714'; /* 체크표시 유니코드 사용 */ color: #FE9D35; text-shadow: 1px 1px #fff; background: #e9ecee; border-color: #adb8c0; box-shadow: 0px 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05), inset 15px 10px -12px rgba(255,255,255,0.1); }
+		
+		#explainBox{
+			width : 96%;
+			padding : 1.2% 3%;
+			border : 1px solid lightgray;
+			margin : 10px 0;
+		}
+		
     </style>
 </head>
 <body>
@@ -341,12 +363,33 @@
     		<div class="row d-flex">
     			<div class = "ftco-animate" id = "sType">정기후원</div>  
     			<h3 class = "ftco-animate" id = "sTitle">1대 1 결연 맺기</h3><br>
-    			<p>
-    			정기후원의 방식은 다음과 같습니다. <br>
-    			후원시작일(정기후원 신청일)을 기준으로 다음달 선택한 출금일이 2차 후원일입니다. <br>
-    			매월 출금일마다 지정한 후원금액으로 신용카드 자동결제가 이루어지며 후원된 금액은 후원대상자 행복두리의 후원포인트로 바로 송금됩니다.  <br>
-    			정기후원 취소를 원할 시에는 고객센터로 문의해주시길 바랍니다. </p>
     		</div>
+    		<div id = "bar1"></div>
+    		<div class ="row d-flex"> 
+	    		<h4 class ="ftco-animate">정기후원의 방식은 다음과 같습니다. </h4>
+	    		<div id ="explainBox">
+	    			<p style ="line-height : 1.2em; margin-top : 10px;">
+		    			- 정기후원은 지속적인 지원과 돌봄이 필요한 만7세에서 18세 사이의 아동을 대상으로 매월 지정 금액으로 <br>
+		    			&nbsp;&nbsp; 1대1 또는 1대 다수의 형태로 결연을 맺어 건강한 사회의 구성원으로 성장할 수 있도록 지원합니다.<br><br>
+		    			- 후원시작일(정기후원 신청일)을 기준으로 다음달 선택한 결제일이 2차 후원일입니다. <br> <br>
+		    			- 후원금 결제일은 1일, 5일, 15일, 25일 중 하나를 선택해주시면 됩니다.  <br> <br>
+		    			- 매월 결제일마다 지정한 후원금액으로 신용카드 자동결제가 이루어지며 후원된 금액은 후원대상자 행복두리의 후원포인트로 바로 송금됩니다.  <br> <br>
+		    			- 둘이두리에서는 후원대상자인 행복두리의 후원 대상 자격여부를 6개월마다 엄격히 확인합니다.  <br> <br>
+		    			- 행복두리의 후원대상 자격이 박탈된 행복두리는 후원을 받을 수 없으며 진행중이던 정기후원 또한 자동 취소됩니다. <br>
+		    			&nbsp;&nbsp; 따라서 정기후원이 갑자기 중단될 경우 결제 카드의 문제인지 먼저 확인해주시고 이상이 없을 시에는 <br> 
+		    			&nbsp;&nbsp; 후원중이던 행복두리의 후원대상자격박탈이 그 이유임을 명시해주시면 됩니다. <br> <br>
+		    			- 나눔두리님의 개인적인 사유로 정기후원을 중단하기를 원할 시에는 고객센터로 문의해주시길 바랍니다.
+		    		</p>
+	    		
+	    		</div>
+	    		
+	    		<div class="checks etrans">
+				  <input type="checkbox" id="chkExplain"> 
+				  <label for="chkExplain" >정기후원 방식을 이해했습니다. </label> 
+				</div>
+	    		
+    		</div>
+    		
     		<div id = "bar1"></div>
     		<div class ="row d-flex"> 
     			<h4 class ="ftco-animate">> 후원 정보</h4>
@@ -386,7 +429,7 @@
     					</td>
     				</tr>
     				<tr>
-    					<th>후원 출금일 </th>
+    					<th>후원금 결제일 </th>
     					<td>
     						<select name = "selectDate" id = "selectDate" class = "form-control">
     							<option value = "01" >1일 </option>
@@ -413,7 +456,7 @@
     		<div id = "bar1"></div>
     		
     		<div id = "totaldiv">
-    			<div> 
+    			<div class="checks etrans"> 
     				<input type ="checkbox" id= "chkinfo1"><label for = "chkinfo1">신용카드 약관동의 (필수) </label> 
 	    			<a id = "seeTerms01" class = "seeTerm">전문보기 </a> <br>
 	    			<input type ="checkbox" id= "chkinfo2"><label for = "chkinfo2">개인정보수집 약관동의  (필수) </label> 
@@ -597,6 +640,12 @@
 						                type : type,
 						                price : price,  //price
 						                selectDate : selectDate
+						            },success:function(data){
+						            	console.log(data);
+						            	location.href = "directFundResult.pm?status="+data.status + "&msg="+data.msg;
+						            },error:function(data){
+						            	console.log(data);
+						            	location.href = "directFundResult.pm?status="+data.status + "&msg="+data.msg;
 						            }
 						        });
 							}else {

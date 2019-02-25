@@ -75,8 +75,8 @@ body {
 				<div class="block-18 color-1 align-items-stretch">
 					<div class="text">
 						<span style="font-family:Nanum Pen Script; font-size: 40px;">총
-							나눔두리 후원 액</span> <strong class="number" data-number="1432805">0</strong>
-						<span style="">268명의 나눔두리들이 후원했어요</span>
+							나눔두리 후원 액</span> <strong class="number" data-number="${mainTotal}">0</strong>
+						<span style="">${TotalNanum }명의 나눔두리들이 후원했어요</span>
 					</div>
 				</div>
 			</div>

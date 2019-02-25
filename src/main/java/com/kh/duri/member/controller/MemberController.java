@@ -76,7 +76,7 @@ public class MemberController {
 				mv.setViewName("redirect:goHappyMain.me"); //위처럼 redirect로 뷰페이지이름연결할거랑 똑같음
 			}else {
 				
-				mv.setViewName("redirect:goAdmin.me"); //위처럼 redirect로 뷰페이지이름연결할거랑 똑같음
+				mv.setViewName("redirect:adminMain.ad"); //위처럼 redirect로 뷰페이지이름연결할거랑 똑같음
 			}
 			
 		} catch (LoginException e) {
@@ -329,10 +329,7 @@ public class MemberController {
 	}
 
 	
-	@RequestMapping("goAdmin.me")
-	public String goAdmin() {
-		return "admin/adminMain";
-	}
+	
 
 
 
