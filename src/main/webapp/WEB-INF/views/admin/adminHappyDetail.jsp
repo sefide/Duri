@@ -239,8 +239,8 @@
                                        <tr class="odd gradeX">
                                             <td class="center">${status.count}</td>
                                             <td class="center">${row.mid }</td>
-                                            <td class="center">${row.fValueType }</td>
                                             <td class="center">${row.fTitle }</td>
+                                            <td class="center">${row.fValueType }</td>
                                             <td class="center">${row.fStartDate }</td>
                                             <td class="center">${row.fEndDate }</td>
                                             <td class="center">${row.fhDate }</td>

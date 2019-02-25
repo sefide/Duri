@@ -26,7 +26,6 @@
 
  	<!-- 웹 소켓 핸들러  -->
     <beans:bean id="myHandler" class="com.kh.duri.common.handler.WebSocketHandler"/>
-    
 
 
 	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->

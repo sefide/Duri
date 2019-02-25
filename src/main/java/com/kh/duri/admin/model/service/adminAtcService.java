@@ -50,6 +50,34 @@ public interface adminAtcService {
 	List<RefundList> adminRefundList(RefundList r,PageInfo pi)throws ListException;
 	//관리자 환급목록 갯수
 	int selectRefundPageCount(RefundList r);
+	//환불하기 버튼 ajax
+	int adminRefundButton(RefundList rfL);
+	
+	
+	
+	
+	//Today
+	int TodayNewNanum();
+	int TodayNewHappy();
+	int TodayNewDirect();
+	int TodayNewFund();
+	int TodayNewDirectMoney();
+	int TodayNewItem();
+	int TodayNewFundMoney();
+	int TodayNewPoint();
+	
+	
+	
+	//Total
+	int TotalNanum();
+	int TotalHappy();
+	int TotalDirect();
+	int Totalfund();
+	int Totalitem();
+	int TotalitemMoney();
+	int TotalDirectConn();
+	int TotalFundUpload();
+	
 
 
 }
