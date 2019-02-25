@@ -81,14 +81,19 @@ public class MemberController {
 				
 			
 				loginUser2 = ms.loginNaMember(m); //받아온 아이디와 비밀번호로 로그인 정보 조회
-				session.setAttribute("loginUser2", loginUser2);	//세션에 뿌려주기
-				
-				if(loginUser2.getMtype()!="M") {
-					mv.setViewName("redirect:goNanumMain.me"); //위처럼 redirect로 뷰페이지이름연결할거랑 똑같음
-				}else {
-					
-					mv.setViewName("redirect:goAdmin.me"); //위처럼 redirect로 뷰페이지이름연결할거랑 똑같음
+				System.out.println(loginUser2.getMtype());
+				if(loginUser2 != null) {
+					if(loginUser2.getMtype().equals("M")) {
+
+						mv.setViewName("redirect:goAdmin.me"); //위처럼 redirect로 뷰페이지이름연결할거랑 똑같음
+						
+						
+					}else{
+						session.setAttribute("loginUser2", loginUser2);	//세션에 뿌려주기
+						mv.setViewName("redirect:goNanumMain.me"); //위처럼 redirect로 뷰페이지이름연결할거랑 똑같음
+					}
 				}
+				
 				
 
 				
@@ -106,7 +111,7 @@ public class MemberController {
 		
 		
 
-		
+	//아이디 중복확인
 	@RequestMapping("duplicationCheck.me")		
 	public @ResponseBody String idcheck(@RequestParam String mid2, HttpServletResponse response) {
 
@@ -126,6 +131,22 @@ public class MemberController {
 
 		return count+"";
 	}
+	
+	//닉네임 중복확인
+	@RequestMapping("duplicationCheckNick.me")		
+	public @ResponseBody String NickCheck(@RequestParam String mNick, HttpServletResponse response) throws LoginException {
+
+		int count = 0;
+
+		count = ms.NickCheck(mNick);
+		System.out.println("count : " + count);
+		
+
+
+		return count+"";
+	}
+	
+	
 		
 	
 	@RequestMapping("insert.me")

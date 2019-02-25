@@ -13,6 +13,8 @@ public interface MemberService {
 
 	int insertMember(Member m) throws LoginException;
 
+	int NickCheck(String mNick);
+
 
 
 }

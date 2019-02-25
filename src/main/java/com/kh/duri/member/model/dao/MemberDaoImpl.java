@@ -43,7 +43,7 @@ public class MemberDaoImpl implements MemberDao {
 		return loginUser2;
 	}
 
-
+	//아이디 중복확인
 	@Override
 	public int userIdCheck(SqlSessionTemplate sqlSession, String mid2) throws LoginException {
 		System.out.println(mid2);
@@ -58,7 +58,7 @@ public class MemberDaoImpl implements MemberDao {
 		return count;
 	}
 
-
+	//나눔두리 회원가입
 	@Override
 	public int insertNanum(SqlSessionTemplate sqlSession, Member m) throws LoginException {
 		int result = sqlSession.insert("Member.insertNanum", m);
@@ -75,11 +75,30 @@ public class MemberDaoImpl implements MemberDao {
 		return result;
 	}
 
-
+	
+	//로그인시 암호화된 비밀번호 가져오기
 	@Override
 	public String selectEncPassword(SqlSessionTemplate sqlSession, Member m) {
-		return sqlSession.selectOne("Member.selectPwd",m.getMid());
+		String m2 = sqlSession.selectOne("Member.selectPwd",m); 
+		System.out.println(m2);
+		return m2;
 
+	}
+
+	
+	//닉네임 중복확인
+	@Override
+	public int NickCheck(SqlSessionTemplate sqlSession, String mNick) {
+		System.out.println(mNick);
+		int count= sqlSession.selectOne("Member.NickCheck",mNick);
+		
+		System.out.println("Dao 닉네임 중복확인 count : "+count);
+		
+	/*	if(count < 0) {
+			throw new LoginException("로그인정보가 존재하지 않습니다.");
+		}*/
+		
+		return count;
 	}
 
 }
