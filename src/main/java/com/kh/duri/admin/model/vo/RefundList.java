@@ -11,6 +11,7 @@ public class RefundList {
 	private int r_mNo;  // 회원번호
 	private String rValue;   // 요청금액
 	private Date rDate;   // 요청 일시
+	private String rrDate;   // 요청 일시
 	private String rStatus;   // 요청 상태
 	private int mno;
 	private String mname;
@@ -21,7 +22,7 @@ public class RefundList {
 	}
 
 	public RefundList(int rNo, String rBank, String rName, String rAccount, int r_mNo, String rValue, Date rDate,
-			String rStatus, int mno, String mname, String mid) {
+			String rrDate, String rStatus, int mno, String mname, String mid) {
 		super();
 		this.rNo = rNo;
 		this.rBank = rBank;
@@ -30,6 +31,7 @@ public class RefundList {
 		this.r_mNo = r_mNo;
 		this.rValue = rValue;
 		this.rDate = rDate;
+		this.rrDate = rrDate;
 		this.rStatus = rStatus;
 		this.mno = mno;
 		this.mname = mname;
@@ -39,8 +41,8 @@ public class RefundList {
 	@Override
 	public String toString() {
 		return "RefundList [rNo=" + rNo + ", rBank=" + rBank + ", rName=" + rName + ", rAccount=" + rAccount
-				+ ", r_mNo=" + r_mNo + ", rValue=" + rValue + ", rDate=" + rDate + ", rStatus=" + rStatus + ", mno="
-				+ mno + ", mname=" + mname + ", mid=" + mid + "]";
+				+ ", r_mNo=" + r_mNo + ", rValue=" + rValue + ", rDate=" + rDate + ", rrDate=" + rrDate + ", rStatus="
+				+ rStatus + ", mno=" + mno + ", mname=" + mname + ", mid=" + mid + "]";
 	}
 
 	public int getrNo() {
@@ -99,6 +101,14 @@ public class RefundList {
 		this.rDate = rDate;
 	}
 
+	public String getRrDate() {
+		return rrDate;
+	}
+
+	public void setRrDate(String rrDate) {
+		this.rrDate = rrDate;
+	}
+
 	public String getrStatus() {
 		return rStatus;
 	}
@@ -130,7 +140,7 @@ public class RefundList {
 	public void setMid(String mid) {
 		this.mid = mid;
 	}
-	
+ 
 	
 	
 }

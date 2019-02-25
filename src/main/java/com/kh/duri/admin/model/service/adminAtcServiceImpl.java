@@ -113,17 +113,116 @@ public class adminAtcServiceImpl implements adminAtcService{
 		return list;
 	}
 
+	//관리자 환급하기 목록 갯수 조회
+	@Override
+	public int selectRefundPageCount(RefundList r) {
+		
+		int listCount = aad.selectRefundPageCount(sqlsession, r);
+		
+		return listCount;
+	}
+	//환불하기 버튼 ajax
+	@Override
+	public int adminRefundButton(RefundList rfL) {
+		
+		int result = aad.adminRefundButton(sqlsession,rfL);
+		
+		return result;
+	}
+	
 	//통계 페이지 - bar chart 데이터
 	@Override
 	public List<HashMap<String, String>> getBarChartList() {
 		return aad.getBarChartList(sqlsession);
 	}
-	//관리자 환급하기 목록 갯수 조회
+	
+	
+	
+	//today
 	@Override
-	public int selectRefundPageCount(RefundList r) {
-		
-		int listCount = aad.selectItemDonateCount(sqlsession, r);
-		
-		return listCount;
+	public int TodayNewNanum() {
+		int result =aad.TodayNewNanum(sqlsession);
+		return result;
 	}
+	@Override
+	public int TodayNewHappy() {
+		int result =aad.TodayNewHappy(sqlsession);
+		return result;
+	}
+	@Override
+	public int TodayNewDirect() {
+		int result =aad.TodayNewDirect(sqlsession);
+		return result;
+	}
+	@Override
+	public int TodayNewFund() {
+		int result =aad.TodayNewFund(sqlsession);
+		return result;
+	}
+	@Override
+	public int TodayNewDirectMoney() {
+		int result =aad.TodayNewDirectMoney(sqlsession);
+		return result;
+	}
+	@Override
+	public int TodayNewItem() {
+		int result =aad.TodayNewItem(sqlsession);
+		return result;
+	}
+	@Override
+	public int TodayNewFundMoney() {
+		int result =aad.TodayNewFundMoney(sqlsession);
+		return result;
+	}
+	@Override
+	public int TodayNewPoint() {
+		int result =aad.TodayNewPoint(sqlsession);
+		return result;
+	}
+	
+	
+	
+	
+	//Total
+	@Override
+	public int TotalNanum() {
+		int result =aad.TotalNanum(sqlsession);
+		return result;
+	}
+	@Override
+	public int TotalHappy() {
+		int result =aad.TotalHappy(sqlsession);
+		return result;
+	}
+	@Override
+	public int TotalDirect() {
+		int result =aad.TotalDirect(sqlsession);
+		return result;
+	}
+	@Override
+	public int Totalfund() {
+		int result =aad.Totalfund(sqlsession);
+		return result;
+	}
+	@Override
+	public int Totalitem() {
+		int result =aad.Totalitem(sqlsession);
+		return result;
+	}
+	@Override
+	public int TotalitemMoney() {
+		int result =aad.TotalitemMoney(sqlsession);
+		return result;
+	}
+	@Override
+	public int TotalDirectConn() {
+		int result =aad.TotalDirectConn(sqlsession);
+		return result;
+	}
+	@Override
+	public int TotalFundUpload() {
+		int result =aad.TotalFundUpload(sqlsession);
+		return result;
+	}
+	
 }
