@@ -2,21 +2,22 @@ package com.kh.duri.happymember.model.dao;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.kh.duri.happymember.model.vo.DirectFundHistory;
 import com.kh.duri.Nanummember.model.vo.Letter;
 import com.kh.duri.happymember.model.exception.MypageException;
+import com.kh.duri.happymember.model.vo.Attachment;
 import com.kh.duri.happymember.model.vo.Delivery;
 import com.kh.duri.happymember.model.vo.DeliveryDetail;
+import com.kh.duri.happymember.model.vo.DirectFundHistory;
 import com.kh.duri.happymember.model.vo.FundItemList;
 import com.kh.duri.happymember.model.vo.Funding;
 import com.kh.duri.happymember.model.vo.MyDonateItems;
 import com.kh.duri.happymember.model.vo.Qna;
+import com.kh.duri.member.model.exception.LoginException;
 import com.kh.duri.member.model.vo.Member;
 import com.kh.duri.payment.model.vo.PageInfo;
 
@@ -340,6 +341,18 @@ public class HappymemberDaoImpl implements HappymemberDao{
 		}
 		
 		return result;
+	}
+
+	//증빙서류 승인일 조회
+	@Override
+	public Attachment selectAdate(SqlSessionTemplate sqlSession, Member member) throws LoginException {
+		Attachment aDate = sqlSession.selectOne("HappyMember.selectAdate", member);
+		
+		if(aDate == null) {
+			throw new LoginException("증빙서류 승인일 조회 실패");
+		}
+		
+		return aDate;
 	}
 
 	

@@ -119,6 +119,20 @@
 		<result property="mNick" column="MNICK"/>
 	</resultMap>
 	
+	<resultMap type="com.kh.duri.happymember.model.vo.Attachment" id="attachmentResultSet">
+		<id property="ano" column="ANO"/>
+		<result property="originname" column="AORIGINNAME"/>
+		<result property="achangename" column="ACHANGENAME"/>
+		<result property="adate" column="ADATE"/>
+		<result property="afilepath" column="AFILEPATH"/>
+		<result property="a_mno" column="A_MNO"/>
+		<result property="adoctype" column="ADOCTYPE"/>
+		<result property="astatus" column="ASTATUS"/>
+		<result property="changestart" column="CHANGESTART"/>
+		<result property="finishdate" column="FINISHDATE"/>
+	</resultMap>
+
+
 	<!-- 보유물품 리스트 조회-->
 	<select id="selectDonateItemList" resultMap="donateItemsResultSet" parameterType="_int">
 		SELECT * 
@@ -126,7 +140,7 @@
 		WHERE O_MNO=#{mno}
 	</select>
 	<!-- 후원 가능한 물품 리스트 조회-->
-	<select id="selectFundItemList" resultMap="fundItemListResultSet" parameterType="_int">
+	<select id="selectFundItemList" resultMap="fundItemListResultSet">
 		SELECT * 
 		FROM FUNDITEM
 	</select>
@@ -156,7 +170,7 @@
 		AND DHSTATUS = 'Y'
 	</select>
 	<!-- 정기 후원 리스트 조회 -->
-	<select id="selectDirectFundList" resultMap="happyDirectFundHistoryResultSet" parameterType="HappyDirectFundHistory">
+	<select id="selectDirectFundList" resultMap="happyDirectFundHistoryResultSet" parameterType="Member">
 		SELECT ROWNUM RNUM, DH_NICK_GIVE, DHVALUETYPE, DHVALUE, SUM, CNT, DHSTARTDATE 
 		FROM (SELECT M.MNICK AS DH_NICK_GIVE, DH.DHVALUETYPE, DH.DHVALUE, SUM(DH.DHVALUE) AS SUM, MAX(DHD.DHDCOUNT) AS CNT, DH.DHSTARTDATE 
 				FROM DIRECTFUNDHISTORY DH, DIRECTFUNDHISTORYDETAIL DHD, MEMBER M 
@@ -167,7 +181,7 @@
 				GROUP BY M.MNICK, DH.DHVALUETYPE, DHD.DHD_DHNO, DH.DHSTARTDATE, DH.DHVALUE)
 	</select>
 	<!-- 배송 현황 목록 조회 -->
-	<select id="selectDeliveryList" resultMap="deliveryDetailResultSet" parameterType="DeliveryDetail">
+	<select id="selectDeliveryList" resultMap="deliveryDetailResultSet" parameterType="Member">
 		SELECT ROWNUM RNUM, DD_NAME, DDVALUE, DDATE, DLINK 
 		FROM (SELECT F.INAME AS DD_NAME, DD.DDVALUE, D.DDATE, D.DLINK 
 		FROM DELIVERYDETAIL DD, FUNDITEM F, DELIVERY D 
@@ -211,7 +225,7 @@
 		AND FTYPE = 'MONEY'
 	</select>
 	<!-- 금액후원 목록 조회 -->
-	<select id="selectMoneyDonateList" resultMap="happyFundingResultSet" parameterType="HappyFunding">
+	<select id="selectMoneyDonateList" resultMap="happyFundingResultSet" parameterType="Member">
 		SELECT DISTINCT ROWNUM RNUM, FNO, FTITLE, FCONTENT, FVALUE, FSTARTDATE, FENDDATE, FSTATUS 
 		FROM (SELECT FNO, FTITLE, FCONTENT, FVALUE, FSTARTDATE, FENDDATE, FSTATUS 
 			FROM FUNDING 
@@ -227,7 +241,7 @@
 		AND Q_MNO = #{mno}
 	</select>
 	<!-- Q&A 목록 조회 -->
-	<select id="selectQnaList" resultMap="happyQnaResultSet" parameterType="HappyQna">
+	<select id="selectQnaList" resultMap="happyQnaResultSet" parameterType="Member">
 		SELECT DISTINCT ROWNUM RNUM, QNO, QTITLE, QCONTENT, QDATE, QANSWER 
 		FROM (SELECT QNO, QTITLE, QCONTENT, QDATE, QANSWER 
 				FROM QNA 
@@ -261,6 +275,15 @@
 	<insert id="insertThankyouLetter">
 		INSERT INTO LETTER VALUES (SEQ_LE_NO.NEXTVAL, #{leMnoTake}, #{leMnoGive}, #{leTitle}, #{leContent}, SYSDATE, 1, DEFAULT)
 	</insert>
+	<!-- 증빙서류 승인일 조회 -->
+	<select id="selectAdate" resultMap="attachmentResultSet" parameterType="Member">
+		SELECT (TO_DATE(TO_CHAR(SYSDATE, 'YYYYMMDD')) - TO_DATE(ADATE+170))AS CHANGESTART, 
+		(TO_DATE(TO_CHAR(SYSDATE, 'YYYYMMDD')) - TO_DATE(ADATE+184))AS FINISHDATE 
+		FROM ATTACHMENT 
+		WHERE A_MNO = #{mno}
+		AND ADOCTYPE = 1 
+		AND ASTATUS = 'Y'
+	</select>
 </mapper>
 
 

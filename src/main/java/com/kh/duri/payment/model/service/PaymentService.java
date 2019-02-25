@@ -76,6 +76,9 @@ public interface PaymentService {
 	
 	// 스케줄러 사용하여 정기후원 내역 insert
 	int insertDirectFundDetailSchedule(String day) throws DirectFundException;
+	
+	// webhook 사용하여 정기후원 내역 insert
+	int insertDirectFundDetail(DirectFundHist resultDirectFund) throws DirectFundException;
 
 	
 		

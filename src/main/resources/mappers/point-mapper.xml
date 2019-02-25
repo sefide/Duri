@@ -340,7 +340,7 @@
 	
 	<!-- 나눔두리 - 다음 정기결제를 위한 merchant_id 값 가져오기 -->
 	<select id = "selectDirectFundId" resultMap="directFundHistResultSet" parameterType="DirectFundHist">
-		SELECT * FROM DIRECTFUNDHISTORY WHERE DHIMPUID = #{ dhImpUid }
+		SELECT * FROM DIRECTFUNDHISTORY WHERE DHIMPUID = #{ dhImpUid } WHERE DHSTATUS = 'Y'
 	</select>
 	
 	
@@ -471,6 +471,11 @@
 		INSERT INTO DIRECTFUNDHISTORYDETAIL VALUES (SEQ_DHD_NO.NEXTVAL, SYSDATE, #{dhdValue}, #{dhdCount}, #{dhdDhno})
 	</insert>
 	
-
+	<!--  -->
+	<update id = "updateDirectFundImpUid">
+		UPDATE DIRECTFUNDHISTORY SET DHIMPUID = #{dhImpUid}
+		WHERE DHNO = #{dhNo}
+	</update>
+	
 	
 </mapper>

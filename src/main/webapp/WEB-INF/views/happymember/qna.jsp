@@ -56,7 +56,6 @@
 			<span>마이페이지 &gt; Q&A</span>
 		</div>
 		<br>
-	<form id="qnaDetailForm" action="qnaDetail.happy">
 		<table class="boardList mt30">
 			<colgroup>
 				<col style="width:6%;"><!-- No -->
@@ -77,11 +76,11 @@
 			<tbody>
 			<c:if test="${ !empty qnaList }">
 			<c:forEach items="${qnaList }" var="qnaList">
-			<input type="hidden" name="qno" id="qno" value="${qnaList.qno}"/>
 				<tr>
+					<td style="display: none;">${qnaList.qno}</td>
 					<td><c:out value="${qnaList.rnum }"></c:out></td>
 					<td><c:out value="${qnaList.qtitle }"></c:out></td>
-					<td id="contentA" onclick="requestQno();"><c:out value="${qnaList.qcontent }"></c:out></td>
+					<td id="contentA" class="requestQno"><c:out value="${qnaList.qcontent }"></c:out></td>
 					<td><c:out value="${qnaList.qdate }"></c:out></td>
 					<c:if test="${ empty qnaList.qanswer }">
 						<td><i class="yellow circle icon" alt="답변중"></i></td>
@@ -99,8 +98,7 @@
 				<tr>
 			</c:if>
 			</tbody>
-		</table>
-	</form>	
+		</table>	
 
 		<div class="numbox pt40 pb50"> 
 			<c:url var="firstList" value="qna.happy">
@@ -164,9 +162,12 @@
  --%>
 </c:if>
 <script>
-	function requestQno(){
-		$("#qnaDetailForm").submit();
-	}
+	$(".requestQno").click(function (){
+		var requestQno = $(this).parent().children().eq(0).text();
+		
+		location.href="qnaDetail.happy?requestQno="+requestQno;
+		console.log("잘 찍었나? : " + requestQno);
+	});
 
 </script>
 
