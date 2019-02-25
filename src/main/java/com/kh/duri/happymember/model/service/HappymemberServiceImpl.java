@@ -107,8 +107,17 @@ public class HappymemberServiceImpl implements HappymemberService {
 	//자기소개 수정
 	@Override
 	public int updateIntroduce(Member oldLoginUser) throws MypageException {
-		int result = hd.updateIntroduce(sqlSession, oldLoginUser);
+		int result1 = hd.updateIntroduce1(sqlSession, oldLoginUser);
+		int result2 = hd.updateIntroduce2(sqlSession, oldLoginUser);
 		
+		int result = 0;
+		
+		if(result1 > 0 && result2 < 0) {
+			result = 1;
+		}else if(result2 > 0 && result1 < 0) {
+			result = 2;
+		}
+				
 		return result;
 	}
 

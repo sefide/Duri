@@ -191,11 +191,20 @@
 		AND D.D_MNO = #{mno}
 		ORDER BY D.DDATE DESC)
 	</select>
-	<!-- 자기소개 수정 -->
-	<update id="updateIntroduce">
+	<!-- 자기소개 수정1  : 회원상태 1,2 -->
+	<update id="updateIntroduce1">
 		UPDATE MEMBER SET MPRNEW = #{mprNew}
 		WHERE MNO = #{mno}
+		AND MTAKESTATUS IN (1,2)
 	</update>
+	<!-- 자기소개 수정2 : 회원상태 3 -->
+	<update id="updateIntroduce2">
+		UPDATE MEMBER SET MPR = #{mpr}
+		WHERE MNO = #{mno}
+		AND MTAKESTATUS = 3
+	</update>
+	
+	
 	<!-- 물품후원 목록 개수 조회 -->
 	<select id="selectItemDonateCount" resultType="_int">
 		SELECT COUNT(*) 

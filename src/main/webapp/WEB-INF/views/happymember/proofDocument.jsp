@@ -11,76 +11,46 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
 <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
 
+
 <style>
+	.h1 {color: darkorange; text-align: center;}
 	a {color: #333;}
-	#button {text-align: center;}
+	#button {margin-left: 310px; width: 49.7%; height: 40px; font-size: 18px;}
 	#proofDocument {margin:auto; width: 60%; height: 750px; background: lightgray; text-align: center;}
 	.d-day-plus {color: red;}
-
-
-
-.where {
-  display: block;
-  margin: 25px 15px;
-  font-size: 11px;
-  color: #000;
-  text-decoration: none;
-  font-family: verdana;
-  font-style: italic;
-} 
-
-.filebox input[type="file"] {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip:rect(0,0,0,0);
-    border: 0;
-}
-
-.filebox span {
-    display: inline-block;
-    padding: .5em .75em;
-    color: #999;
-    font-size: inherit;
-    line-height: normal;
-    vertical-align: middle;
-    background-color: #fdfdfd;
-    cursor: pointer;
-    border: 1px solid #ebebeb;
-    border-bottom-color: #e2e2e2;
-    border-radius: .25em;
-}
-
-/* named upload */
-.filebox .upload-name {
-    display: inline-block;
-    padding: .5em .75em;
-    font-size: inherit;
-    font-family: inherit;
-    line-height: normal;
-    vertical-align: middle;
-    background-color: #f5f5f5;
-  border: 1px solid #ebebeb;
-  border-bottom-color: #e2e2e2;
-  border-radius: .25em;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-}
-
-.filebox.bs3-primary sapn {
-  color: #fff;
-    background-color: #337ab7;
-    border-color: #2e6da4;
-}
-
-
-
-
+	.textSilver {margin-top: 60px;}
 	
+	#file_name_textbox {float: left; height: 37px;}
+	
+	#fileName {width: 300px; font-size: 15px;}
+	
+	#file_input_box {
+		margin-left:6px; 
+		float: left; 
+		position: relative; 
+		width: 90px; 
+		height: 37px; 
+		overflow: hidden;
+		}
+	
+	.file_input_button {
+		top: 0px;
+		background: #4169E1;
+		color: white;
+		border-style: solid;
+		font-size: 15px;
+		font-weight: 600;
+	 	background: #1478CD ;
+	}
+	.file_input_hidden {
+		font-size: 40px;
+		position: absolute;
+		right: 0px;
+		top: 0px;
+		opacity: 0;
+	}
+	
+
 </style>
 
 <title>마이페이지>증빙서류 관리</title>
@@ -145,35 +115,40 @@
 			</tr>
 			</tbody>
 		</table>
-		<br><br><br><br>
-		
-		<div class="titNavi">
-			<div style="float: left;" class="ptag"><h1><i class="chevron right icon"></i>증빙서류 제 제출</h1></div>
+		<br><br><br><br><br><br><br><br>
+		<div>
+			<h1 class="h1">※ 증빙서류를 재 제출해주세요</h1><br>
 		</div>
-		<br><br>
-		
-		<div>	
-			<div class="fields" style="margin:10px">
-				<div class="two field" style="width: 300px; float: left;">
-				<label>증빙서류 유형:</label>
-				<select class="ui search dropdown">
-					<option value="" selected disabled>증빙서류 유형선택</option>
-					<option value="1">기초생활수급자</option>
-					<option value="2">소년소녀가장</option>
-					<option value="3">한부모가정</option>
-				</select>
+		<div style="margin-left: 300px;">
+			<div>	
+				<div class="fields" style="margin:10px">
+					<div class="two field" style="width: 200px; float: left;">
+					<label>증빙서류 유형:</label>
+					<select class="ui search dropdown">
+						<option value="" selected disabled>증빙서류 유형선택</option>
+						<option value="1">기초생활수급자</option>
+						<option value="2">소년소녀가장</option>
+						<option value="3">한부모가정</option>
+					</select>
+					</div>
+				</div>
+			</div>
+			<div>
+				<div class="ui input" id="file_name_textbox">
+	  				<input type="text" id="fileName" readonly>
+				</div>
+				
+				<div class="ui input" id="file_input_box">
+					<input type="button" value="파일첨부" class="file_input_button"/>
+	  				<input type="file" class="file_input_hidden" 
+	  				onchange="javascript:document.getElementById('fileName').value = this.value"/>
 				</div>
 			</div>
 		</div>
-		<div class="filebox bs3-primary">
-                            <input class="upload-name" value="파일선택" disabled="disabled">
-
-                            <span for="ex_filename">업로드</span> 
-                          <input type="file" id="ex_filename" class="upload-hidden"> 
-                        </div>
-
-
-
+		
+		<div class="textSilver">
+			<button onclick="#" id="button" class="massive ui instagram button">증빙서류 재 제출</button>
+		</div>
 		<br><br><br><br>
 		
 		<div id="proofDocument"><h1>증빙서류 예시</h1></div>
@@ -190,20 +165,8 @@
 </c:if>
 <script>
 
- $(document).ready(function(){
-  var fileTarget = $('.filebox .upload-hidden');
+$('input[type=file]').val().replace(/.*(\/|\\)/, '');
 
-    fileTarget.on('change', function(){
-        if(window.FileReader){
-            var filename = $(this)[0].files[0].name;
-        } else {
-            var filename = $(this).val().split('/').pop().split('\\').pop();
-        }
-
-        $(this).siblings('.upload-name').val(filename);
-    });
-}); 
-	
 
 </script>
 
