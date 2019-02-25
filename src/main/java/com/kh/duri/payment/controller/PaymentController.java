@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -54,6 +55,8 @@ public class PaymentController {
 	@Autowired
 	private PaymentService ps;
 
+	@Autowired
+	private BCryptPasswordEncoder passwordEncoder;
 	// 나눔두리 포인트 히스토리 페이지
 	@RequestMapping("pointHistory.pm")
 	public String pointHistory(Model model, HttpServletRequest request, HttpServletResponse response) {
@@ -70,6 +73,7 @@ public class PaymentController {
 			PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
 			
 			List<Point> phList = ps.selectPointHistory(m, pi);
+			
 			
 			/*for(Point i : phList) {
 				System.out.println("내역 : "+ i);
@@ -134,7 +138,7 @@ public class PaymentController {
 	@RequestMapping("donateReceipt.pm")
 	public String donateReceipt(HttpServletRequest request, HttpServletResponse response, Model model) {
 		Member m = (Member) request.getSession().getAttribute("loginUser2");
-		//System.out.println("세션에 저장된 회원번호 : " + m.getMno());
+		System.out.println("세션에 저장된 회원번호 : " + m.getMno());
 		int currentPage = 1;
 		
 		if(request.getParameter("currentPage") != null) {
@@ -458,13 +462,14 @@ public class PaymentController {
 	}
 	
 	// 정기결제 예약하기
-	@RequestMapping("subscribeDirectFund.pm")
-	public @ResponseBody String subscribeDirectFund(@RequestParam String customer_uid, @RequestParam String imp_uid, 
+	/*@RequestMapping("subscribeDirectFund.pm")
+	public @ResponseBody HashMap<String, String> subscribeDirectFund(@RequestParam String customer_uid, @RequestParam String imp_uid, 
 			@RequestParam String merchant_uid, @RequestParam BigDecimal amount, @RequestParam String price, @RequestParam String giveMember, @RequestParam String takeMember, 
 			@RequestParam String type, @RequestParam int selectDate, HttpServletRequest request, HttpServletResponse response) {
 			
 		System.out.println("merchant_uid : "+ merchant_uid);
 		IamportClient iam = new IamportClient("2128480452188810", "auDtdoRqy5eWYjryBzpvoByL60yEzqGJUjc8I3yg9Nd76EFIe5dCGMoNNXsmn85hsipamYqvLDDSijAw");
+		HashMap<String, String> hmap = new HashMap<String, String>();
 		
 		try {
 			AccessToken at = iam.getAuth().getResponse();
@@ -475,29 +480,14 @@ public class PaymentController {
 			ScheduleData schedule_data = new ScheduleData(customer_uid);
 			
 			Date today = new Date();
-			/* 웹훅 방식 
-			 */
+			 웹훅 방식 
+			 
 			Date schedule_at = CommonUtils.getNextMonth(today);
 			System.out.println("today : " + today);
 			System.out.println("schedule_at : " + schedule_at);
 			
 			ScheduleEntry entry = new ScheduleEntry(merchant_uid, schedule_at, amount);
 			schedule_data.addSchedule(entry);
-			
-			/* Scheduler 방식 */
-			/*ArrayList<Date> schedule = CommonUtils.getNextMonthList(today, selectDate);
-			System.out.println("today : " + today);
-			//System.out.println("schedule_at : " + schedule_at);
-			
-			for(int i = 0; i < schedule.size(); i++) {
-				ScheduleEntry entry = new ScheduleEntry(merchant_uid+i, schedule.get(i), amount);
-				schedule_data.addSchedule(entry);
-			}
-			
-			for(ScheduleEntry entry : schedule_data.getSchedules()) {
-				System.out.println(entry.getScheduleAt().getTime());
-				System.out.println(entry.getMerchantUid());
-			}*/
 
 			IamportResponse<List<Schedule>> list = iam.subscribeSchedule(schedule_data);
 			System.out.println("예약 list code : " + list.getCode());
@@ -519,40 +509,119 @@ public class PaymentController {
 				int result = ps.insertDirectFundHist(dh);
 				
 				if(result > 0) {
-					request.setAttribute("msg", "정기후원이 완료되었습니다.");
-				    return "redirect:goSuccessPage.pm"; 
+					hmap.put("status", "success");
+					hmap.put("msg", "정기후원이 완료되었습니다.");
+				    return hmap; 
 				}else {
-					request.setAttribute("msg", "정기후원 정보 DB저장 실패 ");
-				    return "redirect:goSuccessPage.pm"; 
+					hmap.put("status", "fail");
+					hmap.put("msg", "정기후원 정보 DB저장 실패 ");
+					return hmap; 
 				}
 				
 			}else {
-				request.setAttribute("msg", "카드사 요청에 실패하였습니다.");
-			    return "redirect:goSuccessPage.pm"; 
+				hmap.put("status", "fail");
+				hmap.put("msg", "카드사 요청에 실패하였습니다. ");
+			    return hmap; 
 			}
 			
 		} catch (IamportResponseException e) {
 			e.printStackTrace();
-			request.setAttribute("msg","정기결제 예약 실패");
-		    return "redirect:goSuccessPage.pm";
+			hmap.put("status", "fail");
+			hmap.put("msg", "정기결제 예약 실패");
+		    return hmap;
 		} catch (IOException e) {
-			request.setAttribute("msg", "정기결제 예약 실패");
-		    return "redirect:goSuccessPage.pm";
+			hmap.put("status", "fail");
+			hmap.put("msg", "정기결제 예약 실패");
+		    return hmap;
 		}catch (DirectFundException e) {
-			request.setAttribute("msg", "정기결제 실패");
-		    return "redirect:goSuccessPage.pm";
+			hmap.put("status", "fail");
+			hmap.put("msg", "정기결제 예약 실패");
+		    return hmap;
 		}
 		
-	}
+	}*/
 	
-	@RequestMapping("goSuccessPage.pm")
-	public String goSuccessPage(HttpServletRequest request, HttpServletResponse response, Model model, HttpSession session) {
-		System.out.println("정기후원에 참여해주셔서 감사합니다.");
-		request.setAttribute("msg", request.getParameter("msg"));
-		return "payment/pay_success";
-		
-	}
-	
+	// 정기결제 예약하기 -- 스케줄러 
+		@RequestMapping("subscribeDirectFund.pm")
+		public @ResponseBody HashMap<String, String> subscribeDirectFund(@RequestParam String customer_uid, @RequestParam String imp_uid, 
+				@RequestParam String merchant_uid, @RequestParam BigDecimal amount, @RequestParam String price, @RequestParam String giveMember, @RequestParam String takeMember, 
+				@RequestParam String type, @RequestParam int selectDate, HttpServletRequest request, HttpServletResponse response) {
+				
+			System.out.println("merchant_uid : "+ merchant_uid);
+			IamportClient iam = new IamportClient("2128480452188810", "auDtdoRqy5eWYjryBzpvoByL60yEzqGJUjc8I3yg9Nd76EFIe5dCGMoNNXsmn85hsipamYqvLDDSijAw");
+			HashMap<String, String> hmap = new HashMap<String, String>();
+			
+			try {
+				AccessToken at = iam.getAuth().getResponse();
+				System.out.println("token? : " + at.getToken());
+				
+				// 결제 예약하기
+				System.out.println("================= 정기 결제 예약 ==================");
+				ScheduleData schedule_data = new ScheduleData(customer_uid);
+				
+				Date today = new Date();
+				
+				/* Scheduler 방식 */
+				ArrayList<Date> schedule = CommonUtils.getNextMonthList(today, selectDate);
+				System.out.println("today : " + today);
+				//System.out.println("schedule_at : " + schedule_at);
+				
+				for(int i = 0; i < schedule.size(); i++) {
+					ScheduleEntry entry = new ScheduleEntry(merchant_uid+i, schedule.get(i), amount);
+					schedule_data.addSchedule(entry);
+				}
+				
+				IamportResponse<List<Schedule>> list = iam.subscribeSchedule(schedule_data);
+				System.out.println("예약 list code : " + list.getCode());
+				System.out.println("결과 표시 : "+ list.getMessage());
+				System.out.println("response : "+ list.getResponse());
+				
+				// DirectFundHist 객체 생성
+				DirectFundHist dh = new DirectFundHist();
+				dh.setDh_mNo_give(Integer.parseInt(giveMember));
+				dh.setDh_mNo_take(Integer.parseInt(takeMember));
+				dh.setDhBilling(customer_uid);
+				dh.setDhImpUid(merchant_uid);
+				dh.setDhValue(price);
+				dh.setDhType(type);
+				dh.setDhDay(String.valueOf(selectDate));
+				
+				if(list.getCode() == 0) {
+					//DB에 저장 
+					int result = ps.insertDirectFundHist(dh);
+					
+					if(result > 0) {
+						hmap.put("status", "success");
+						hmap.put("msg", "정기후원이 완료되었습니다.");
+					    return hmap; 
+					}else {
+						hmap.put("status", "fail");
+						hmap.put("msg", "정기후원 정보 DB저장 실패 ");
+						return hmap; 
+					}
+					
+				}else {
+					hmap.put("status", "fail");
+					hmap.put("msg", "카드사 요청에 실패하였습니다. ");
+				    return hmap; 
+				}
+				
+			} catch (IamportResponseException e) {
+				e.printStackTrace();
+				hmap.put("status", "fail");
+				hmap.put("msg", "정기결제 예약 실패");
+			    return hmap;
+			} catch (IOException e) {
+				hmap.put("status", "fail");
+				hmap.put("msg", "정기결제 예약 실패");
+			    return hmap;
+			}catch (DirectFundException e) {
+				hmap.put("status", "fail");
+				hmap.put("msg", "정기결제 예약 실패");
+			    return hmap;
+			}
+			
+		}
 	// webHook - 예약된 결제가 완료되었을 때 요청되는 서버 (다음 결제 예약을 처리한다)
 	@RequestMapping("directFundCallback.pm")
 	public String directFundCallback(HttpServletRequest request, HttpServletResponse response, Model model, HttpSession session) {
@@ -620,6 +689,13 @@ public class PaymentController {
 		}
 		
 		return null;
+	}
+	
+	@RequestMapping("directFundResult.pm")
+	public String directFundResult(HttpServletRequest request, HttpServletResponse response, Model model) {
+		System.out.println("정기후원에 참여해주셔서 감사합니다.");
+		request.setAttribute("msg", request.getParameter("msg"));
+		return "payment/pay_success";
 	}
 	
 
