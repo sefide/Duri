@@ -245,7 +245,7 @@
 	    				<fmt:formatDate var="newDate" type = "date" value="${dr.drApplyDate}" pattern="yyyy-MM"/>
 	    				<c:set var ="Applydate" value = "${newDate}"/>
 	    				<% newDate = format.parse((String)pageContext.getAttribute("newDate")); 
-	    				System.out.println("허 : " +newDate.compareTo(beforeDate));%>
+	    				%>
 	    				<c:if test = "${ status.index eq 0}">
 		    				<div id = "month01">
 							<div class = "month-view">

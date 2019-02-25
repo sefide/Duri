@@ -100,11 +100,17 @@ public class adminAtcDaoImpl implements adminAtcDao{
 	
 	//환급하기 갯수 조회
 	@Override
-	public int selectItemDonateCount(SqlSessionTemplate sqlsession, RefundList r) {
+	public int selectRefundPageCount(SqlSessionTemplate sqlsession, RefundList r) {
 		
 		int listCount = sqlsession.selectOne("Admin.adminRefundListCount", r);
 		
 		return listCount;
+	}
+	//환불하기 버튼 ajax
+	@Override
+	public int adminRefundButton(SqlSessionTemplate sqlsession, RefundList rfL) {
+		int result = sqlsession.update("Admin.adminRefundButton",rfL);
+		return result;
 	}
 	
 	//통계 페이지 - bar chart 데이터
@@ -112,5 +118,104 @@ public class adminAtcDaoImpl implements adminAtcDao{
 	public List<HashMap<String, String>> getBarChartList(SqlSessionTemplate sqlsession) {
 		return sqlsession.selectList("Admin.getBarChartList");
 	}
+	
+	
+	
+	
+	//Today
+	@Override
+	public int TodayNewNanum(SqlSessionTemplate sqlsession) {
+		int result = sqlsession.selectOne("Admin.adminTodayNewNanum");
+		return result;
+	}
+	@Override
+	public int TodayNewHappy(SqlSessionTemplate sqlsession) {
+		int result = sqlsession.selectOne("Admin.adminTodayNewHappy");
+		return result;
+	}
+	@Override
+	public int TodayNewDirect(SqlSessionTemplate sqlsession) {
+		int result = sqlsession.selectOne("Admin.adminTodayNewDirect");
+		return 0;
+	}
+	@Override
+	public int TodayNewFund(SqlSessionTemplate sqlsession) {
+		int result = sqlsession.selectOne("Admin.adminTodayNewFund");
+		return result;
+	}
+	@Override
+	public int TodayNewDirectMoney(SqlSessionTemplate sqlsession) {
+		int result = sqlsession.selectOne("Admin.adminTodayNewDirectMoney");
+		return result;
+	}
+	@Override
+	public int TodayNewItem(SqlSessionTemplate sqlsession) {
+		int result = sqlsession.selectOne("Admin.adminTodayNewItem");
+		return result;
+	}
+	@Override
+	public int TodayNewFundMoney(SqlSessionTemplate sqlsession) {
+		int result = sqlsession.selectOne("Admin.adminTodayNewFundMoney");
+		return result;
+	}
+	@Override
+	public int TodayNewPoint(SqlSessionTemplate sqlsession) {
+		int result = sqlsession.selectOne("Admin.adminTodayNewPoint");
+		return result;
+	}
+	
+	
+	
+	
+	
+	
+	//Total
+	@Override
+	public int TotalNanum(SqlSessionTemplate sqlsession) {
+		int result = sqlsession.selectOne("Admin.adminTotalNanum");
+		return result;
+	}
+	@Override
+	public int TotalHappy(SqlSessionTemplate sqlsession) {
+		int result = sqlsession.selectOne("Admin.adminTotalHappy");
+		return result;
+	}
+	@Override
+	public int TotalDirect(SqlSessionTemplate sqlsession) {
+		int result = sqlsession.selectOne("Admin.adminTotalDirect");
+		return result;
+	}
+	@Override
+	public int Totalitem(SqlSessionTemplate sqlsession) {
+		int result = sqlsession.selectOne("Admin.adminTotalitem");
+		return result;
+	}
+	@Override
+	public int Totalfund(SqlSessionTemplate sqlsession) {
+		int result = sqlsession.selectOne("Admin.adminTotalfund");
+		return result;
+	}
+	@Override
+	public int TotalitemMoney(SqlSessionTemplate sqlsession) {
+		int result = sqlsession.selectOne("Admin.adminTotalitemMoney");
+		return result;
+	}
+	@Override
+	public int TotalDirectConn(SqlSessionTemplate sqlsession) {
+		int result = sqlsession.selectOne("Admin.adminTotalDirectConn");
+		return result;
+	}
+	@Override
+	public int TotalFundUpload(SqlSessionTemplate sqlsession) {
+		int result = sqlsession.selectOne("Admin.adminTotalFundUpload");
+		return result;
+	}
+	
+	
+	
+	
+	
+	
+	
 	
 }

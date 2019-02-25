@@ -1,6 +1,8 @@
 
 package com.kh.duri.member.controller;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Properties;
 
 import javax.mail.Message;
@@ -20,9 +22,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.kh.duri.happymember.model.exception.MypageException;
+import com.kh.duri.common.CommonUtils;
 import com.kh.duri.happymember.model.service.HappymemberService;
 import com.kh.duri.happymember.model.vo.Attachment;
 import com.kh.duri.member.model.exception.LoginException;
@@ -38,6 +41,7 @@ public class MemberController {
 	@Autowired
 	private HappymemberService hs;
 
+	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
 	
 	//로그인 회원 조회용 메소드(행복두리)
@@ -74,7 +78,7 @@ public class MemberController {
 				mv.setViewName("redirect:goHappyMain.me"); //위처럼 redirect로 뷰페이지이름연결할거랑 똑같음
 			}else {
 				
-				mv.setViewName("redirect:goAdmin.me"); //위처럼 redirect로 뷰페이지이름연결할거랑 똑같음
+				mv.setViewName("redirect:adminMain.ad"); //위처럼 redirect로 뷰페이지이름연결할거랑 똑같음
 			}
 			
 		} catch (LoginException e) {
@@ -176,7 +180,7 @@ public class MemberController {
 		try {
 
 			System.out.println("member : "+m);
-			
+			System.out.println(m.getMpwd());
 			
 			/* 암호화처리 */
 			String encPassword = passwordEncoder.encode(m.getMpwd()); 
@@ -208,6 +212,59 @@ public class MemberController {
 
 	}
 
+	
+	//행복두리 회원가입
+	@RequestMapping("insert2.me")
+	public String insertHappyMember(Model model, Member m, HttpServletRequest request,
+			@RequestParam (value="photo", required=false) MultipartFile photo) {
+
+		System.out.println("Member : " + m);
+		System.out.println("photo : " + photo);
+		int result= 0 ;
+		// 실제경로 가져오기
+		String root = request.getSession().getServletContext().getRealPath("resources");
+		/* System.out.println(root); */
+
+		String filePath = root + "\\formFiles";
+
+		// 파일명 변경
+		String originFileName = photo.getOriginalFilename();
+		String ext = originFileName.substring(originFileName.lastIndexOf("."));
+		String changeName = CommonUtils.getRandomString();
+
+		try {
+
+			// 사진명 변경해서 업로드
+			photo.transferTo(new File(filePath + "\\" + changeName + ext));
+
+			m.setMpwd(passwordEncoder.encode(m.getMpwd()));
+
+			/* 암호화처리 */
+			String encPassword = passwordEncoder.encode(m.getMpwd()); 
+			
+			System.out.println("암호화 후 : "+encPassword);
+			
+			m.setMpwd(encPassword);//암호화된 비밀번호 저장
+			m.setOrigin(originFileName);
+			m.setChange(changeName);
+			
+			System.out.println("member : "+m);
+
+			result = ms.insertHappyMember(m);
+
+			return "redirect:goMain.me";
+
+		} catch (IOException e) {
+
+			new File(filePath = "\\" + changeName + ext).delete();
+
+			model.addAttribute("msg", "회원가입 실패!");
+			return "common/errorPage";
+		}
+
+	}
+
+	
 	
 	 
 	// 인증번호 이메일 보내기
@@ -327,10 +384,7 @@ public class MemberController {
 	}
 
 	
-	@RequestMapping("goAdmin.me")
-	public String goAdmin() {
-		return "admin/adminMain";
-	}
+	
 
 
 

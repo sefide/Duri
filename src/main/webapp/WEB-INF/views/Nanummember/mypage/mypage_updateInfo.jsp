@@ -104,10 +104,9 @@
 	</div>	
 	<%@ include file="../include/myNav.jsp"%>
 	<script>
-		function goDetail() {
-			var mno = ${sessionScope.loginUser2.mno};		
-			/* console.log(mno); */
-			location.href="updateDetail.nanum";
+		function goDetail() {		
+			var pwd = $("#passCheck").val();
+			location.href="checkPwd.nanum?pwd="+pwd;
 		}
 	</script>
 </body>

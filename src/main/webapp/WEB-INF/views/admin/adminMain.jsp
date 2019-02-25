@@ -50,7 +50,7 @@
 						<div class="panel panel-primary">
 							<div class="number">
 								<h3>
-									<h3>18명</h3><br>
+									<h3>${Todaylist[0]}명</h3><br>
 									<big>신규 나눔두리</big>
 								</h3>
 							</div>
@@ -65,7 +65,7 @@
 						<div class="panel panel-primary">
 							<div class="number">
 								<h3>
-									<h3>4명</h3><br>
+									<h3>${Todaylist[1]}명</h3><br>
 									<big>신규 행복두리</big>
 								</h3>
 							</div>
@@ -81,7 +81,7 @@
 						<div class="panel panel-primary">
 							<div class="number">
 								<h3>
-									<h3>4건</h3><br>
+									<h3>${Todaylist[2]}건</h3><br>
 									<big>정기후원 연결</big>
 								</h3>
 							</div>
@@ -97,8 +97,8 @@
 						<div class="panel panel-primary">
 							<div class="number">
 								<h3>
-									<h3>23건</h3><br>
-									<big>신규 펀딩 승인 펀딩글</big>
+									<h3>${Todaylist[3]}건</h3><br>
+									<big>신규 승인 펀딩글</big>
 								</h3>
 							</div>
 							<div class="icon">
@@ -119,7 +119,7 @@
 							<h4>정기후원 금액</h4>
 							<div class="easypiechart" id="easypiechart-blue"
 								data-percent="82">
-								<span class="percent">100,000</span>
+								<span class="percent">${Todaylist[4]}</span>
 							</div>
 						</div>
 					</div>
@@ -130,7 +130,7 @@
 							<h4>후원물품 갯수</h4>
 							<div class="easypiechart" id="easypiechart-orange"
 								data-percent="55">
-								<span class="percent">34개</span>
+								<span class="percent">${Todaylist[5]}개</span>
 							</div>
 						</div>
 					</div>
@@ -141,7 +141,7 @@
 							<h4>펀딩후원 금액</h4>
 							<div class="easypiechart" id="easypiechart-teal"
 								data-percent="84">
-								<span class="percent">430,500</span>
+								<span class="percent">${Todaylist[6]}</span>
 							</div>
 						</div>
 					</div>
@@ -151,7 +151,7 @@
 						<div class="panel-body easypiechart-panel">
 							<h4>포인트 충전금액</h4>
 							<div class="easypiechart" id="easypiechart-red" data-percent="46">
-								<span class="percent">470,000</span>
+								<span class="percent">${Todaylist[7]}</span>
 							</div>
 						</div>
 					</div>
@@ -177,35 +177,35 @@
 									<tbody>
 										<tr>
 											<td class="total">누적 나눔두리</td>
-											<td>129명</td>
+											<td>${Totallist[0]}명</td>
 										</tr>
 										<tr>
 											<td class="total">누적 행복두리</td>
-											<td>584명</td>
+											<td>${Totallist[1]}명</td>
 										</tr>
 										<tr>
 											<td class="total">총 누적 후원 금액 </td>
-											<td>34,434,500원</td>
+											<td>${Totallist[5]}원</td>
 										</tr>
 										<tr>
 											<td class="total">누적 정기후원 금액</td>
-											<td>345,000원</td>
+											<td>${Totallist[2]}원</td>
 										</tr>
 										<tr>
 											<td class="total">누적 펀딩후원 금액</td>
-											<td>34,089,500원</td>
+											<td>${Totallist[3]}원</td>
 										</tr>
 										<tr>
 											<td class="total">누적 후원물품 갯수</td>
-											<td>43,043개</td>
+											<td>${Totallist[4]}개</td>
 										</tr>
 										<tr>
 											<td class="total">누적 정기후원 연결 건수</td>
-											<td>345건</td>
+											<td>${Totallist[6]}건</td>
 										</tr>
 										<tr>
 											<td class="total">누적 펀딩후원 게시 건수</td>
-											<td>12,340건</td>
+											<td>${Totallist[7]}건</td>
 										</tr>
 									</tbody>
 								</table>

@@ -8,12 +8,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<meta content="" name="description" />
     <meta content="webthemez" name="author" />
-    <title>행복두리 승인페이지</title>
+    <title>환급/환불페이지</title>
 	 <jsp:include page="include/adminStyle.jsp"/>
 	 
 	 
 <script type="text/javascript">
+//버튼
+ function addBtnEvent() {
 
+	  $(".RefundComplete").click(function () {
+		var num = $(this).parent().parent().children().eq(1).text();
+		$.ajax({
+			url:"adminRefund_ajax_button.ad",
+			type : "get",
+			data : {num:num},
+			success : function (data) {
+				refundbefore(1);
+				refundafter(1); 
+				
+			}
+		});
+	}); 
+}
 
 //환불전ajax
 var bfPage = 1;
@@ -21,7 +37,7 @@ function refundbefore(bfPage) {
 		$.ajax({
 			url : "adminRefund_ajax.ad",
 			type :"get",
-			data :{rstatus:'Y',currentPage:bfPage},
+			data :{rstatus:'N',currentPage:bfPage},
 			success : function (data) {
 				
 				var beforeListHtml = [];
@@ -34,16 +50,18 @@ function refundbefore(bfPage) {
 					beforeListHtml.push('	<td class="center">' +data.adminRefundList[i].mid + '</td>');
 					beforeListHtml.push('	<td class="center">' +data.adminRefundList[i].mname + '</td>');
 					beforeListHtml.push('	<td class="center">' +data.adminRefundList[i].rName+ '</td>');
-					beforeListHtml.push('	<td class="center">' +data.adminRefundList[i].rDate+ '</td>');
+					beforeListHtml.push('	<td class="center">' +data.adminRefundList[i].rrDate+ '</td>');
 					beforeListHtml.push('	<td class="center">' +data.adminRefundList[i].rAccount+ '</td>');
 					beforeListHtml.push('	<td class="center">' +data.adminRefundList[i].rBank+"은행"+ '</td>');
 					beforeListHtml.push('	<td class="center">' +data.adminRefundList[i].rValue+"원"+'</td>');
-					beforeListHtml.push('	<td class="center"><a href="complete()" class="btn btn-warning btn-sm">환급진행하기</a></td>');
+					beforeListHtml.push('	<td class="center"><a class="btn btn-warning btn-sm RefundComplete">환급진행하기</a></td>');
 					beforeListHtml.push('</tr>');
 					}
 
 				$("#beforeList").html("");//이전틀 지우고
 				$("#beforeList").append(beforeListHtml.join(''));//""를 기준으로 배열에 담긴 데이터 꺼내오기
+				
+				 addBtnEvent();
 				
 				//페이징 처리
 				var bfPageListHtml = [];	
@@ -73,6 +91,8 @@ function refundbefore(bfPage) {
 				
 				$("#BeforePagingArea").children("ul").html("");
 				$("#BeforePagingArea").children("ul").append(bfPageListHtml.join(''));
+				
+				
 			}
 		});
 	}
@@ -84,7 +104,7 @@ function refundafter(afPage) {
 		$.ajax({
 			url : "adminRefund_ajax.ad",
 			type :"get",
-			data :{rstatus:'N',currentPage:afPage},
+			data :{rstatus:'Y',currentPage:afPage},
 			success : function (data) {
 				
 				var afterListHtml = [];
@@ -96,7 +116,7 @@ function refundafter(afPage) {
 					afterListHtml.push('	<td class="center">' +data.adminRefundList[i].mid + '</td>');
 					afterListHtml.push('	<td class="center">' +data.adminRefundList[i].mname + '</td>');
 					afterListHtml.push('	<td class="center">' +data.adminRefundList[i].rName+ '</td>');
-					afterListHtml.push('	<td class="center">' +data.adminRefundList[i].rDate+ '</td>');
+					afterListHtml.push('	<td class="center">' +data.adminRefundList[i].rrDate+ '</td>');
 					afterListHtml.push('	<td class="center">' +data.adminRefundList[i].rAccount+ '</td>');
 					afterListHtml.push('	<td class="center">' +data.adminRefundList[i].rBank+"은행"+ '</td>');
 					afterListHtml.push('	<td class="center" >' +data.adminRefundList[i].rValue+"원"+'</td>');
@@ -160,7 +180,7 @@ $(function () {
         <div id="page-wrapper" >
 		  <div class="header"> 
                         <h1 class="page-header">
-                            	행복두리 환불 관리
+                            	환불/환급 관리
                         </h1>
 		</div>
             <div id="page-inner"> 
@@ -171,7 +191,7 @@ $(function () {
                 <div class="col-md-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                             	환급 신청 행복두리 목록	
+                             	환급 신청 둘이두리 목록	
                         </div>
                         <div class="panel-body">
                             <div >
@@ -213,7 +233,7 @@ $(function () {
                 <div class="col-md-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                             	환급 완료 행복두리 목록	
+                             	환급 완료 둘이두리 목록	
                         </div>
                         <div class="panel-body">
                             <div >

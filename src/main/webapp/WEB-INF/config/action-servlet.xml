@@ -25,8 +25,6 @@
 
  	<!-- 웹 소켓 핸들러  -->
     <beans:bean id="myHandler" class="com.kh.duri.common.handler.WebSocketHandler"/>
-  
-
 
 
 	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
@@ -42,6 +40,14 @@
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
+	
+	<!-- 파일 업로드를 하기위해 bean 등록 -->
+	<beans:bean class="org.springframework.web.multipart.commons.CommonsMultipartResolver"
+				id="multipartResolver">
+		<beans:property name="maxUploadSize" value="10000000" /> <!-- 1000메가정도 -->
+		
+	</beans:bean>
+
 	
 	<!-- 프록시 설정 추가 -->	
 	<aop:aspectj-autoproxy proxy-target-class="true"></aop:aspectj-autoproxy>

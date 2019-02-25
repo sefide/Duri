@@ -3,6 +3,7 @@ package com.kh.duri.common;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.UUID;
 
 public class CommonUtils {
 	
@@ -43,6 +44,8 @@ public class CommonUtils {
 		    list.add(cal.getTime());
 		}
 		
+	
+
 		/*Calendar cal = Calendar.getInstance();
 		cal.set(Calendar.YEAR, 2019);
 		cal.set(Calendar.MONTH, Calendar.FEBRUARY);
@@ -64,6 +67,12 @@ public class CommonUtils {
 		list.add(d3);*/
 		
 		return list;
+	}
+	
+	public static String getRandomString() {
+		
+		//32비티의 랜덤문자를 생성해주는 메서드
+		return UUID.randomUUID().toString().replaceAll("-", ""); //- 를 빈칸으로 대체
 	}
 	
 }

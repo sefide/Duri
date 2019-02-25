@@ -46,9 +46,58 @@ public interface adminAtcDao {
 	//관리자 환급하기 목록
 	List<RefundList> adminRefundList(SqlSessionTemplate sqlsession,RefundList r,PageInfo pi)throws ListException;
 	//환급하기 갯수 조회
-	int selectItemDonateCount(SqlSessionTemplate sqlsession, RefundList r);
+	int selectRefundPageCount(SqlSessionTemplate sqlsession, RefundList r);
+	//환불하기 버튼 ajax
+	int adminRefundButton(SqlSessionTemplate sqlsession, RefundList rfL);
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	//통계 페이지 - bar chart 데이터
 	List<HashMap<String, String>> getBarChartList(SqlSessionTemplate sqlsession);
+	
+	
+	//Today
+	int TodayNewNanum(SqlSessionTemplate sqlsession);
+	int TodayNewHappy(SqlSessionTemplate sqlsession);
+	int TodayNewDirect(SqlSessionTemplate sqlsession);
+	int TodayNewFund(SqlSessionTemplate sqlsession);
+	int TodayNewDirectMoney(SqlSessionTemplate sqlsession);
+	int TodayNewItem(SqlSessionTemplate sqlsession);
+	int TodayNewFundMoney(SqlSessionTemplate sqlsession);
+	int TodayNewPoint(SqlSessionTemplate sqlsession);
+	
+	
+	//Total
+	int TotalNanum(SqlSessionTemplate sqlsession);
+	int TotalHappy(SqlSessionTemplate sqlsession);
+	int TotalDirect(SqlSessionTemplate sqlsession);
+	int Totalitem(SqlSessionTemplate sqlsession);
+	int Totalfund(SqlSessionTemplate sqlsession);
+	int TotalitemMoney(SqlSessionTemplate sqlsession);
+	int TotalDirectConn(SqlSessionTemplate sqlsession);
+	int TotalFundUpload(SqlSessionTemplate sqlsession);
+	
 	
 
 	

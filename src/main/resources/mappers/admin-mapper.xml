@@ -103,8 +103,8 @@
 	<select id="adminHappyDetail" resultType="adminMember" parameterType="adminMember" >
 		SELECT M.MNO,M.MTAKESTATUS,M.MNICK,M.MPR,M.MBIRTHDAY,M.MNAME,M.MID,M.MGENDER,M.MPHONE,M.MEMAIL,
 		M.MADDRESS,M.MFUNDTYPE,M.MACCEPTDATE,A.ADATE,A.ASTATUS,M.MPRACCEPTDATE,A.ACHANGENAME,A.AFILEPATH
-		FROM MEMBER M JOIN ATTACHMENT A ON (A.A_MNO=M.MNO) AND A.ATYPE='R' 
-		WHERE M.MNO=#{mno} AND M.MTAKESTATUS =#{mTakeStatus}
+		FROM MEMBER M JOIN ATTACHMENT A ON (A.A_MNO=M.MNO)  
+		WHERE M.MNO=#{mno} AND M.MTAKESTATUS =#{mTakeStatus} 
 	 <if test="mTakeStatus==1">
 			AND A.ADATE IS NOT NULL
 	 </if>
@@ -272,10 +272,17 @@
 			FROM MEMBER M JOIN REFUND R ON (M.MNO=R.R_MNO) 
 			WHERE R.RSTATUS = #{rStatus} 
 		)
-
 	</select> 
+	<!-- 환불하기 버튼 ajax -->
+	<update id="adminRefundButton"  parameterType="RefundList" >
+		UPDATE REFUND SET RSTATUS='Y' WHERE RNO=#{rNo}
+	</update>
 	
 	
+	
+	
+	
+	<!-- 통계 -->
 	<select id="getBarChartList" resultType="java.util.HashMap">
 		SELECT TO_CHAR(MENROLLDATE,'YYYYMM') AS month
 				, COUNT(1) AS monthCnt 
@@ -285,6 +292,80 @@
 		ORDER BY TO_CHAR(MENROLLDATE,'YYYYMM') DESC
 	</select>
 	
+	
+	
+	<!-- Today -->
+	<select id="adminTodayNewNanum" resultType="_int" >
+		SELECT COUNT(*) FROM MEMBER 
+		WHERE MTYPE='N' AND MSTATUS='Y' 
+		AND TO_CHAR(MENROLLDATE,'YYYYMMDD') =  TO_CHAR(SYSDATE,'YYYYMMDD')
+	</select> 
+	<select id="adminTodayNewHappy" resultType="_int" >
+		SELECT COUNT(*) FROM MEMBER 
+		WHERE MTYPE='H' AND MSTATUS='Y' 
+		AND TO_CHAR(MACCEPTDATE,'YYYYMMDD') =  TO_CHAR(SYSDATE,'YYYYMMDD')
+	</select> 
+	<select id="adminTodayNewDirect" resultType="_int" >
+		SELECT COUNT(*) FROM DIRECTFUNDHISTORY 
+		WHERE TO_CHAR(DHSTARTDATE,'YYYYMMDD') =  TO_CHAR(SYSDATE,'YYYYMMDD')
+	</select> 
+	<select id="adminTodayNewFund" resultType="_int" >
+		SELECT COUNT(*) FROM FUNDING 
+		WHERE TO_CHAR(FSTARTDATE,'YYYYMMDD') =  TO_CHAR(SYSDATE,'YYYYMMDD')
+	</select> 
+	<select id="adminTodayNewDirectMoney" resultType="_int" >
+		SELECT NVL(SUM(DHDVALUE),0) FROM DIRECTFUNDHISTORYDETAIL 
+		WHERE TO_CHAR(DHDDATE,'YYYYMMDD') =  TO_CHAR(SYSDATE,'YYYYMMDD')
+	</select> 
+	<select id="adminTodayNewItem" resultType="_int" >
+		SELECT NVL(SUM(FD.FDVALUE),0) FROM FUNDHISTORY FH JOIN FUNDINGDETAIL FD ON (FH.FH_FNO=FD.FD_FNO) 
+		WHERE TO_CHAR(FH.FHDATE,'YYYYMMDD') =  TO_CHAR(SYSDATE,'YYYYMMDD')
+	</select> 
+	<select id="adminTodayNewFundMoney" resultType="_int" >
+		SELECT NVL(SUM(FHVALUE),0) FROM FUNDHISTORY 
+		WHERE TO_CHAR(FHDATE,'YYYYMMDD') =  TO_CHAR(SYSDATE,'YYYYMMDD')
+	</select> 
+	<select id="adminTodayNewPoint" resultType="_int" >
+		SELECT NVL(SUM(PYPRICE),0) FROM PAYMENT 
+		WHERE TO_CHAR(PYDATE,'YYYYMMDD') =  TO_CHAR(SYSDATE,'YYYYMMDD')
+	</select> 
+	
+	
+	
+	
+	
+	
+	<!-- Total -->
+	<select id="adminTotalNanum" resultType="_int" >
+		SELECT COUNT(*) FROM MEMBER 
+		WHERE MTYPE='N' 
+	</select> 
+	<select id="adminTotalHappy" resultType="_int" >
+		SELECT COUNT(*) FROM MEMBER 
+		WHERE MTYPE='H' 
+	</select> 
+	<select id="adminTotalDirect" resultType="_int" >
+		SELECT NVL(SUM(DHDVALUE),0) FROM DIRECTFUNDHISTORYDETAIL 
+	</select> 
+	<select id="adminTotalitem" resultType="_int" >
+		SELECT NVL(SUM(FHDITEMVALUE),0) FROM FUNDHISTORYDETAIL 
+	</select> 
+	<select id="adminTotalfund" resultType="_int" >
+		SELECT NVL(SUM(FHVALUE),0) FROM FUNDHISTORY FH 
+		JOIN FUNDING F ON (F.FNO=FH.FH_FNO) 
+		WHERE F.FTYPE ='MONEY'
+	</select> 
+	<select id="adminTotalitemMoney" resultType="_int" >
+		SELECT NVL(SUM(FHVALUE),0) FROM FUNDHISTORY FH 
+		JOIN FUNDING F ON (F.FNO=FH.FH_FNO) 
+		WHERE F.FTYPE ='ITEM'
+	</select> 
+	<select id="adminTotalDirectConn" resultType="_int" >
+		SELECT COUNT(DHNO) FROM DIRECTFUNDHISTORY
+	</select> 
+	<select id="adminTotalFundUpload" resultType="_int" >
+		SELECT COUNT(FNO) FROM FUNDING
+	</select> 
 </mapper>
 
 

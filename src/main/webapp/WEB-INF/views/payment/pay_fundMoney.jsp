@@ -175,6 +175,16 @@
    			width : 75px;
    			cursor : pointer;
    		}
+   		
+   		#barBox{
+   			background-color : white;
+   			border : 1px solid lightgray;
+   			width : 93%;
+   			height : 2.5em;
+   		 }
+   		 #bar2{
+   		 	background-color : #FE9D35;
+   		 }
     </style>
 </head>
 <body>
@@ -224,26 +234,66 @@
     			<div class = "ftco-animate" id = "sType">금액후원</div>  
     			<h3 class = "ftco-animate" id = "sTitle">${ f.fTitle }</h3>
     		</div>
-    		<div id = "bar1"></div>
-    		<div class ="row d-flex"> 
-    			<h4 class ="ftco-animate">> 후원 금액</h4>
-    		</div>
+    		
     		<form action = "execfundMoney.pm" method = "post" id = "fundMoneyForm">
     		<input type = "hidden" name = "fno" value ="${ f.fno }">
     		<input type = "hidden" name = "fWriter" value ="${ f.fWriter }">
     		<input type = "hidden" name = "checkDonate" value ="0" id = "checkDonate">
-    			<div class ="row d-flex"> 
-    			<input type = "hidden" name = "leftPoint" id = "leftPoint" value = "${ f.fValue - f.fdValue }">
+    			
+	    		<div id = "bar1"></div>
 	    		
+	    		<div class ="row d-flex"> 
+	    			<h4 class ="ftco-animate" id = "">> 후원 정보</h4>
+	    			<p style = "margin-left : 1%;"> * 후원자 정보 수정을 원한다면 회원정보 수정을 해주세요. </p>
+	    		</div>
+	    		<div class ="row d-flex"> 
 	    			<table>
 	    				<tr>
+	    					<th>후원 펀딩</th>
+	    					<td colspan = "2" > ${ f.fTitle }</td>
+	    				</tr>
+	    				
+	    				<tr>
+	    					<th>행복두리</th>
+	    					<td colspan = "2" >${ f.mNick }</td>
+	    				</tr>
+	    				<tr>
+	    					<th>나눔두리</th>
+	    					<td colspan = "2" > ${ giveM.mNickName } (${ giveM.mName }님) </td>
+	    				</tr>
+	    				<tr>
+	    					<th>후원 유형</th>
+	    					<td colspan = "2" > ${ f.fValueType }</td>
+	    				</tr>
+    		
+	    			</table>
+	    		</div>
+	    	
+	    		<div id = "bar1"></div>
+	    		
+	    		<div class ="row d-flex"> 
+	    			<h4 class ="ftco-animate">> 후원 금액</h4>
+	    		</div>
+	    		<div style = "margin-left : 9%;">
+	    		현재 후원금액 : ${f.fdValue}  목표 후원금액 : ${ f.fValue }
+	    			<div class="progress custom-progress-success" id = "barBox" >
+		    			<div id="bar2" class="progress-bar" role="progressbar" aria-valuenow="28" aria-valuemin="0" aria-valuemax="100"></div>
+		   			</div>
+		   		필요한 후원금액 : ${ f.fValue - f.fdValue }원
+	    		</div>
+	    		
+	   			
+    			<div class ="row d-flex"> 
+    			<input type = "hidden" name = "leftPoint" id = "leftPoint" value = "${ f.fValue - f.fdValue }">
+	    			<table>
+	    				<%-- <tr>
 	    					<th>목표 후원금 (현재 후원누적액)</th>
 	    					<td colspan = "2" ><span id = "goalPoint">${ f.fValue } (${ f.fdValue })원</span></td>
 	    				</tr>
 	    				<tr>
 	    					<th>더 필요한 후원금액</th>
 	    					<td colspan = "2" ><span id = "leftPoint">${ f.fValue - f.fdValue }원</span></td>
-	    				</tr>
+	    				</tr> --%>
 	    				<tr>
 	    					<th>현재보유 포인트</th>
 	    					<td colspan = "2" ><span id = "myPoint">${ giveM.mPoint }원</span></td>
@@ -254,39 +304,13 @@
 	    					<td>
 	    						<div class="form-check">
 							  <input class="form-check-input" type="checkbox" value="" id="allPoint">
-							  <label class="form-check-label" for="allPoint">
+							  <label class="form-check-label" for="allPoint" style = "font-size : 15px;">
 							 	  모든 포인트 사용하기
 							  </label>
 							</div>
 	    					</td>
 	    				</tr>
-	    			</table>
-	    		</div>
-	    		
-	    		<div id = "bar1"></div>
-	    		
-	    		<div class ="row d-flex"> 
-	    			<h4 class ="ftco-animate" id = "">> 후원 정보</h4>
-	    			<p style = "margin-left : 1%;"> * 후원자 정보 수정을 원한다면 회원정보 수정을 해주세요. </p>
-	    		</div>
-	    		<div class ="row d-flex"> 
-	    			<table>
-	    				<tr>
-	    					<th>행복두리</th>
-	    					<td colspan = "2" >${ f.mNick }</td>
-	    				</tr>
-	    				<tr>
-	    					<th>후원 펀딩</th>
-	    					<td colspan = "2" > ${ f.fTitle }</td>
-	    				</tr>
-	    				<tr>
-	    					<th>후원 유형</th>
-	    					<td colspan = "2" > ${ f.fValueType }</td>
-	    				</tr>
-	    				<tr>
-	    					<th>나눔두리</th>
-	    					<td colspan = "2" > ${ giveM.mNickName } (${ giveM.mName }님) </td>
-	    				</tr>
+	    				
 	    				<tr>
 	    					<th>기부금영수증</th>
 	    					<td colspan = "2" >
@@ -311,6 +335,7 @@
 	    				</tr>
 	    			</table>
 	    		</div>
+	    		
     		
     		</form>
     		
@@ -350,7 +375,9 @@
 		$(document).ready(function() {
 			/* 주민등록번호 입력창 숨겨두기 */
 			$(".ipin").css("display","none");
-			
+			var percents = ${ f.fValue / f.fdValue * 100};
+			console.log(percents);
+			$("#bar2").css("width", percents);
 			/* 모든 포인트 쓰기 선택 할 시  */
 			$("#allPoint").change(function(){
 				var mypoint = $("#myPoint").text();
