@@ -15,8 +15,72 @@
 	a {color: #333;}
 	#button {text-align: center;}
 	#proofDocument {margin:auto; width: 60%; height: 750px; background: lightgray; text-align: center;}
-	/* .textSilver {color: silver; font-weight: 600;}
-	.textOrange {color: orange; font-weight: 600;} */
+	.d-day-plus {color: red;}
+
+
+
+.where {
+  display: block;
+  margin: 25px 15px;
+  font-size: 11px;
+  color: #000;
+  text-decoration: none;
+  font-family: verdana;
+  font-style: italic;
+} 
+
+.filebox input[type="file"] {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip:rect(0,0,0,0);
+    border: 0;
+}
+
+.filebox span {
+    display: inline-block;
+    padding: .5em .75em;
+    color: #999;
+    font-size: inherit;
+    line-height: normal;
+    vertical-align: middle;
+    background-color: #fdfdfd;
+    cursor: pointer;
+    border: 1px solid #ebebeb;
+    border-bottom-color: #e2e2e2;
+    border-radius: .25em;
+}
+
+/* named upload */
+.filebox .upload-name {
+    display: inline-block;
+    padding: .5em .75em;
+    font-size: inherit;
+    font-family: inherit;
+    line-height: normal;
+    vertical-align: middle;
+    background-color: #f5f5f5;
+  border: 1px solid #ebebeb;
+  border-bottom-color: #e2e2e2;
+  border-radius: .25em;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+.filebox.bs3-primary sapn {
+  color: #fff;
+    background-color: #337ab7;
+    border-color: #2e6da4;
+}
+
+
+
+
+	
 </style>
 
 <title>마이페이지>증빙서류 관리</title>
@@ -42,18 +106,11 @@
 
 		<div class="titNavi">
 			<div style="float: left;" class="ptag"><h1><i class="chevron right icon"></i>내가 올린 증빙서류</h1></div>
-			<div style="float: left;">
-				<h4 style="font-weight: 600">
-					승인완료&nbsp;<i class="green circle icon" alt="승인완료"></i>&nbsp;&nbsp;
-					반려&nbsp;<i class="red circle icon" alt="반려"></i>
-				</h4>
-			</div>
 			<span>마이페이지 &gt; 증빙 서류 현황</span>
 		</div>
 		<br>
 		
 		<table class="boardList mt30">
-			<caption>문의내역 리스트입니다.</caption>
 			<colgroup>
 				<col style="width:6%;"><!-- No -->
 				<col style="width:17%;"><!--  -->
@@ -64,46 +121,59 @@
 			<thead>
 			<tr>
 				<th scope="col">No</th>
-				<th scope="col">증빙서류 제출일</th>
+				<th scope="col">증빙서류 승인일</th>
 				<th scope="col">증빙서류 제출 마감일</th>
-				<th scope="col">승인상태</th>
-				<th scope="col">승인 or 반려된 날짜</th>
+				<th scope="col">D-day(남은기간)</th>
 			</tr>
 			</thead>
 			<tbody>
 			<tr>
 				<td>1</td>
-				<td>2018.04.22</td>
-				<td>2018.10.22</td>
-				<td><i class="green circle icon" alt="승인완료"></i></td> 	
-				<td>2018.10.11</td>
-			</tr>
-			<tr>
-				<td>2</td>
-				<td>2018.07.12</td>
-				<td>2019.01.12</td>
-				<td><i class="red circle icon" alt="반려"></i></td> 	
-				<td>2019.01.02</td>
-			</tr>
-			<tr>
-				<td>3</td>
-				<td>2018.10.11</td>
-				<td>2019.04.11</td>
-				<td><i class="green circle icon" alt="승인완료"></i></td> 	
-				<td>2018.04.11</td>
+				<td>${proofDocument.adate }</td>
+				<td>${proofDocument.dday }</td>
+				<c:choose>
+				<c:when test="${proofDocument.finishdate lt (0)}">
+				<td>D${proofDocument.finishdate}</td>
+				</c:when>
+				<c:when test="${proofDocument.finishdate eq (0)}">
+				<td>D-day</td>
+				</c:when>
+				<c:otherwise>
+				<td class="d-day-plus">재 제출 기간을 넘었습니다.</td>
+				</c:otherwise>
+				</c:choose>	
 			</tr>
 			</tbody>
 		</table>
-
-		<div class="numbox pt40 pb50"> 
-			<span><a class="num" href="#">&lt;</a></span>
-			<span><a class="num on" href="#">1</a></span>
-			<span><a class="num" href="#">2</a></span>
-			<span><a class="num" href="#">3</a></span>
-			<span><a class="num" href="#">4</a></span>
-			<span><a class="num" href="#">5</a></span>
-			<span><a class="num" href="#">&gt;</a></span>
+		<br><br><br><br>
+		
+		<div class="titNavi">
+			<div style="float: left;" class="ptag"><h1><i class="chevron right icon"></i>증빙서류 제 제출</h1></div>
 		</div>
+		<br><br>
+		
+		<div>	
+			<div class="fields" style="margin:10px">
+				<div class="two field" style="width: 300px; float: left;">
+				<label>증빙서류 유형:</label>
+				<select class="ui search dropdown">
+					<option value="" selected disabled>증빙서류 유형선택</option>
+					<option value="1">기초생활수급자</option>
+					<option value="2">소년소녀가장</option>
+					<option value="3">한부모가정</option>
+				</select>
+				</div>
+			</div>
+		</div>
+		<div class="filebox bs3-primary">
+                            <input class="upload-name" value="파일선택" disabled="disabled">
+
+                            <span for="ex_filename">업로드</span> 
+                          <input type="file" id="ex_filename" class="upload-hidden"> 
+                        </div>
+
+
+
 		<br><br><br><br>
 		
 		<div id="proofDocument"><h1>증빙서류 예시</h1></div>
@@ -118,7 +188,24 @@
 
 </div><!--// Wrap E-->
 </c:if>
+<script>
 
+ $(document).ready(function(){
+  var fileTarget = $('.filebox .upload-hidden');
+
+    fileTarget.on('change', function(){
+        if(window.FileReader){
+            var filename = $(this)[0].files[0].name;
+        } else {
+            var filename = $(this).val().split('/').pop().split('\\').pop();
+        }
+
+        $(this).siblings('.upload-name').val(filename);
+    });
+}); 
+	
+
+</script>
 
 </body>
 </html>

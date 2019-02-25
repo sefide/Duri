@@ -57,11 +57,11 @@ public class MemberController {
 
 				
 				loginUser = ms.loginMember(m); //받아온 아이디와 비밀번호로 로그인 정보 조회
-				System.out.println("loginUser : "+loginUser);
+				/*System.out.println("loginUser : "+loginUser);*/
 				session.setAttribute("loginUser", loginUser);	//세션에 뿌려주기
 				
 				Member member = (Member)request.getSession().getAttribute("loginUser");
-				System.out.println("세션 : " + member);
+				/*System.out.println("세션 : " + member);*/
 				
 				
 				//애린이가 수정
@@ -69,10 +69,8 @@ public class MemberController {
 				Attachment aDate;
 				aDate = hs.selectAdate(member);
 				
-				System.out.println("갱신 가능 시작 d-day : " + aDate.getChangestart());
-				System.out.println("갱신가능~마감까지 d-day : " + aDate.getFinishdate());
-				/*model.addAttribute("changestart", aDate.getChangestart());
-				model.addAttribute("finishdate", aDate.getFinishdate());*/
+				/*System.out.println("갱신 가능 시작 d-day : " + aDate.getChangestart());
+				System.out.println("갱신가능~마감까지 d-day : " + aDate.getFinishdate());*/
 				session.setAttribute("changestart", aDate.getChangestart());
 				session.setAttribute("finishdate", aDate.getFinishdate());
 			

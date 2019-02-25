@@ -200,6 +200,14 @@ public class HappymemberServiceImpl implements HappymemberService {
 		return aDate;
 	}
 
+	//증빙서류 현황 조회
+	@Override
+	public Attachment selectProofDocument(Member m) throws MypageException {
+		Attachment proofDocument = hd.selectProofDocument(sqlSession, m);
+		
+		return proofDocument;
+	}
+
 	
 
 	

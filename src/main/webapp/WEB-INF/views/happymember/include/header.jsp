@@ -11,6 +11,7 @@
 	.ddayPtag {font-size: 20px; font-weight: 600; color:darkorange !important; margin-top: 5%;}
 	.ddayPtag2 {font-size: 20px; font-weight: 600; color:red !important; margin-top: 5%;}
 	.d-day-count {font-size: 20px; font-weight: 600; color: gray !important; margin-top: 5%}
+	.d-day-count2 {font-size: 20px; font-weight: 600; color: red !important; margin-top: 5%}
 	
 </style>
 
@@ -30,9 +31,14 @@
 				<span class="d-day-count"><i class="bullhorn icon"></i>증빙서류  <span class="ddayPtag">재 제출 시작일까지 D${changestart }</span>일 남았습니다.</span>
 			</div>
 		</c:when>
-		<c:when test="${changestart ge 0 }">
+		<c:when test="${changestart ge (0) && finishdate le (-1)}">
 			<div class="d-day">
-				<span class="d-day-count"><i class="bullhorn icon"></i>증빙서류 <span class="ddayPtag2">재 제출기간 마감까지 D${finishdate - changestart }</span>일 남았습니다.</span>
+				<span class="d-day-count"><i class="bullhorn icon"></i>증빙서류 <span class="ddayPtag2">재 제출기간 마감까지 D${finishdate}</span>일 남았습니다.</span>
+			</div>
+		</c:when>
+		<c:when test="${finishdate gt (0) }">
+			<div class="d-day2">
+				<span class="d-day-count2"><i class="bomb icon"></i>증빙서류 유효기간이 지났습니다. 반드시 재 제출해주세요.</span>
 			</div>
 		</c:when>
 		</c:choose>
