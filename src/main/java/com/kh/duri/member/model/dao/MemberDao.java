@@ -19,4 +19,6 @@ public interface MemberDao {
 
 	int NickCheck(SqlSessionTemplate sqlSession, String mNick);
 
+	int insertHappy(SqlSessionTemplate sqlSession, Member m);
+
 }

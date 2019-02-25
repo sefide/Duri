@@ -101,4 +101,24 @@ public class MemberDaoImpl implements MemberDao {
 		return count;
 	}
 
+
+	@Override
+	public int insertHappy(SqlSessionTemplate sqlSession, Member m) {
+		int result = sqlSession.insert("Member.insertHappy",m);
+		int mno = sqlSession.selectOne("Boards.selectMnoCurrval");
+		m.setMno(mno);
+		int result2 = sqlSession.insert("Member.insertHappyPhoto",m);
+		
+		System.out.println("나눔두리 회원가입 성공여부 : " + result);
+		
+		
+		/* if(result == 0) { 
+			 throw new LoginException("작성실패!"); //예외처리
+		 
+		 }*/
+		 
+
+		return result;
+	}
+
 }

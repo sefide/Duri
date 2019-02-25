@@ -82,6 +82,13 @@ public class MemberServiceImpl implements MemberService {
 		return result;	
 	}
 
+	@Override
+	public int insertHappyMember(Member m) {
+		int result = md.insertHappy(sqlSession,m);
+		
+		return result;	
+	}
+
 
 
 	

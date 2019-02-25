@@ -29,6 +29,8 @@
 		<result property="mTakeStatus" column="MTAKESTATUS"/>
 		<result property="dMoney" column="DHVALUE"/>
       	<result property="cfMoney" column="FHVALUE"/>
+      	<result property="origin" column="AORIGINNAME"/>
+      	<result property="change" column="ACHANGENAME"/>
 	</resultMap>
 	
 	<select id="loginCheck" resultMap="memberResultSet" parameterType="Member">
@@ -101,6 +103,20 @@
 		WHERE MID = #{mid}
 		AND MTYPE='N'
 	</select> 
+	
+	<insert id="insertHappy">
+	INSERT INTO MEMBER
+	VALUES (SEQ_M_NO.NEXTVAL, #{mName}, #{mNickName},#{mGender}, #{mPhone}, #{mid}, #{mpwd}, #{email}, SYSDATE, 0, 'H', #{mFundtype}, #{mpr}, null, null, null, null, null, 0, 'Y', 3)
+	</insert>
+	
+	<select id="selectMnoCurrval" resultType="_int">
+		SELECT SEQ_M_NO.CURRVAL FROM DUAL
+	</select>
+	
+	<insert id="insertHappyPhoto">
+	INSERT INTO MEMBER
+	VALUES (SEQ_M_NO.NEXTVAL, #{mName}, #{mNickName},#{mGender}, #{mPhone}, #{mid}, #{mpwd}, #{email}, SYSDATE, 0, 'H', #{mFundtype}, #{mpr}, null, null, null, null, null, 0, 'Y', 3)
+	</insert>
 	
 	
 	

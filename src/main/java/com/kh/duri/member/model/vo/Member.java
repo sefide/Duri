@@ -25,13 +25,15 @@ public class Member implements java.io.Serializable{
 	private String mTakeStatus;
 	private int dMoney;
 	private int cfMoney;
+	private String origin;
+	private String change;
 	
 	public Member() {}
 
 	public Member(int mno, String mName, String mNickName, String mGender, String mPhone, String mid, String mpwd,
 			String email, Date mEnrollDate, int mPoint, String mtype, String mFundtype, String mpr, String mprNew,
 			String mBirthDay, String mAddress, Date mAcceptDate, int mGoalNum, String mStatus, String mTakeStatus,
-			int dMoney, int cfMoney) {
+			int dMoney, int cfMoney, String origin, String change) {
 		super();
 		this.mno = mno;
 		this.mName = mName;
@@ -55,6 +57,8 @@ public class Member implements java.io.Serializable{
 		this.mTakeStatus = mTakeStatus;
 		this.dMoney = dMoney;
 		this.cfMoney = cfMoney;
+		this.origin = origin;
+		this.change = change;
 	}
 
 	public int getMno() {
@@ -233,6 +237,22 @@ public class Member implements java.io.Serializable{
 		this.cfMoney = cfMoney;
 	}
 
+	public String getOrigin() {
+		return origin;
+	}
+
+	public void setOrigin(String origin) {
+		this.origin = origin;
+	}
+
+	public String getChange() {
+		return change;
+	}
+
+	public void setChange(String change) {
+		this.change = change;
+	}
+
 	@Override
 	public String toString() {
 		return "Member [mno=" + mno + ", mName=" + mName + ", mNickName=" + mNickName + ", mGender=" + mGender
@@ -240,8 +260,10 @@ public class Member implements java.io.Serializable{
 				+ mEnrollDate + ", mPoint=" + mPoint + ", mtype=" + mtype + ", mFundtype=" + mFundtype + ", mpr=" + mpr
 				+ ", mprNew=" + mprNew + ", mBirthDay=" + mBirthDay + ", mAddress=" + mAddress + ", mAcceptDate="
 				+ mAcceptDate + ", mGoalNum=" + mGoalNum + ", mStatus=" + mStatus + ", mTakeStatus=" + mTakeStatus
-				+ ", dMoney=" + dMoney + ", cfMoney=" + cfMoney + "]";
+				+ ", dMoney=" + dMoney + ", cfMoney=" + cfMoney + ", origin=" + origin + ", change=" + change + "]";
 	}
+
+	
 
 }
 	
