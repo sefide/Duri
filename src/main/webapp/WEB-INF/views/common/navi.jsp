@@ -38,7 +38,7 @@
           <li class="nav-item"><a href="QnAList.nanum" class="nav-link" style="color: rgb(50, 147, 63);" >QnA</a></li>
           <!-- 비 로그인 시-->
           <c:if test="${ empty sessionScope.loginUser2 }">
-          <li class="nav-item"><a href="Eunji_nanumLogin.me" class="nav-link" style="color: rgb(50, 147, 63);" >로그인</a></li>
+          <li class="nav-item"><a href="nanumLogin.me" class="nav-link" style="color: rgb(50, 147, 63);" >로그인</a></li>
           </c:if>
 		  <!-- 로그인  시-->
           <c:if test="${ !empty sessionScope.loginUser2 }">

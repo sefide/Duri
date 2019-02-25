@@ -2,7 +2,7 @@ package com.kh.duri.member.model.service;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.kh.duri.member.model.dao.MemberDao;
@@ -16,6 +16,12 @@ public class MemberServiceImpl implements MemberService {
 	
 	@Autowired
 	private MemberDao md;
+	
+	@Autowired
+	private BCryptPasswordEncoder passwordEncoder;
+
+
+
 
 	@Override
 	public Member loginMember(Member m) throws LoginException {
@@ -27,9 +33,23 @@ public class MemberServiceImpl implements MemberService {
 
 	}
 
+	//로그인 나눔두리
 	@Override
 	public Member loginNaMember(Member m) throws LoginException {
-		Member loginUser2 = md.loginNaCheck(sqlSession, m);
+		Member loginUser2 = null;
+		
+		/*String encPassword =md.selectEncPassword(sqlSession,m);*/
+
+		
+		// matches를 equals라 생각, 평문=암호화된문장  인지 확인
+		/*if(!passwordEncoder.matches(m.getMpwd(),encPassword)) {
+			throw new LoginException("로그인 실패!");
+		}else {*/
+			loginUser2 = md.loginNaCheck(sqlSession, m);
+	/*	}*/
+
+		
+				
 		
 		return loginUser2;
 	}
@@ -41,6 +61,14 @@ public class MemberServiceImpl implements MemberService {
 		return count;
 	}
 
+	@Override
+	public int insertMember(Member m) throws LoginException {
+		int result = md.insertNanum(sqlSession,m);
+		
+		return result;	
+	}
+
+	
 
 
 }

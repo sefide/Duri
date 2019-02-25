@@ -3,6 +3,7 @@ package com.kh.duri.member.model.dao;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.kh.duri.board.model.exception.BoardException;
 import com.kh.duri.member.model.exception.LoginException;
 import com.kh.duri.member.model.vo.Member;
 
@@ -55,6 +56,30 @@ public class MemberDaoImpl implements MemberDao {
 		}
 		
 		return count;
+	}
+
+
+	@Override
+	public int insertNanum(SqlSessionTemplate sqlSession, Member m) throws LoginException {
+		int result = sqlSession.insert("Member.insertNanum", m);
+
+		System.out.println("나눔두리 회원가입 성공여부 : " + result);
+		
+		
+		 if(result == 0) { 
+			 throw new LoginException("작성실패!"); //예외처리
+		 
+		 }
+		 
+
+		return result;
+	}
+
+
+	@Override
+	public String selectEncPassword(SqlSessionTemplate sqlSession, Member m) {
+		return sqlSession.selectOne("Member.selectPwd",m.getMid());
+
 	}
 
 }

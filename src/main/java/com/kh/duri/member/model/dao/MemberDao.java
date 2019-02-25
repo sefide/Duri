@@ -13,4 +13,8 @@ public interface MemberDao {
 
 	int userIdCheck(SqlSessionTemplate sqlSession, String mid2) throws LoginException;
 
+	int insertNanum(SqlSessionTemplate sqlSession, Member m) throws LoginException;
+
+	String selectEncPassword(SqlSessionTemplate sqlSession, Member m);
+
 }
