@@ -1,5 +1,7 @@
 package com.kh.duri.Nanummember.controller;
 
+import static org.hamcrest.CoreMatchers.is;
+
 import java.util.HashMap;
 import java.util.List;
 
@@ -7,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,7 +33,9 @@ public class NanumController {
 	@Autowired
 	private NanumMemberService ns;
 	
-	
+		@Autowired
+	 private PasswordEncoder passwordEncoder;
+	 
 	@RequestMapping("total.nanum")
 	public String Total1() {
 		return "Nanummember/totalMain";
@@ -37,17 +43,37 @@ public class NanumController {
 	
 	
 	/* ----------------------나눔두리 회원정보 수정 ----------------------*/
-	//비밀번호 확인
+	//회원정보 수정 들어오기
 	@RequestMapping("updateInfo.nanum")
-	public String Total12() {
+	public String Total12(Model model, HttpServletRequest request, HttpServletResponse response) {			
 		return "Nanummember/mypage/mypage_updateInfo";
 	}
-	//회원정보 수정
-	@RequestMapping("updateDetail.nanum")
-	public String Total13() {
-		return "Nanummember/mypage/mypage_updateDetail";
+	
+	//비밀번호 확인
+	@RequestMapping("checkPwd.nanum")
+	public String Total13(Model model, HttpServletRequest request, HttpServletResponse response) {
+		Member m = (Member)request.getSession().getAttribute("loginUser2");
+		String mpwd = m.getMpwd(); //비교할 DB의 인코딩 된 암호
+		String pwd = request.getParameter("pwd"); //인코딩하고 일치시킬 원시 비번
+		if( passwordEncoder.matches(pwd, mpwd) == true  ) { // 비밀번호 일치시 
+			return "Nanummember/mypage/mypage_updateDetail";
+		 }else { // 비밀번호 불일치
+			 return "Nanummember/mypage/mypage_updateInfo";
+		  } 
 	}
-		
+	//회원정보 수정 완료!
+		@RequestMapping("updateComplete.nanum")
+		public String updateInfo(Model model, HttpServletRequest request, HttpServletResponse response) {	
+			Member m = (Member)request.getSession().getAttribute("loginUser2");
+			String mNick = request.getParameter("mNick");			
+			String mPwd = request.getParameter("mPwd"); 
+			String mPhone = request.getParameter("mPhone"); 
+			System.out.println("mNick"+mNick);
+			System.out.println("mPwd"+mPwd);
+			System.out.println("mPhone"+mPhone);
+			return "Nanummember/mypage/mypage_updateInfo";
+		}
+	
 	/* ----------------------나눔두리 마이페이지 ----------------------*/
 	// 크라우드 펀딩 조회
 	@RequestMapping("mypage.nanum")
@@ -95,22 +121,6 @@ public class NanumController {
 			//물품을 가져와 보자!
 			HashMap<String,FundItem> ingItem = new HashMap<String,FundItem>(); //진행중인 물품 크라우드 펀딩 - 물품 리스트
 			HashMap<String,FundItem> endItem = new HashMap<String,FundItem>(); //종료된 물품 크라우드 펀딩 - 물품 리스트			
-		/*	if(itemList.get(0) != null ) { //진행중인 물품 크라우드 펀딩이 있을경우
-				for(int i = 0; i<itemList.size(); i++) {
-					ingItem = ns.selectIngItem(m,itemList.get(0));
-					ingItem.put(key, value)
-				}
-			}*/
-			/*if(endItemList.get(0) != null ) { //종료된 물품 크라우드 펀딩이 있을경우
-				for(int i = 0; i<endItemList.size(); i++) {
-					int fno = endItemList.get(0).getfNo();
-					ingItem = ns.selectEndItem(m,fno);
-					endItem.put(fno, ingItem);
-			}
-			}
-			System.out.println("itemList : "+itemList);
-			System.out.println("endItemList : "+endItemList);*/
-			
 			model.addAttribute("moneyList",moneyList);
 			model.addAttribute("pi",pi);
 			model.addAttribute("endMoneyList",endMoneyList);

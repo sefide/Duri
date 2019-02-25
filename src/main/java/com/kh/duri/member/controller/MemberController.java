@@ -37,7 +37,7 @@ public class MemberController {
 
 	@Autowired
 	private HappymemberService hs;
-
+	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
 	
 	//로그인 회원 조회용 메소드(행복두리)

@@ -95,23 +95,28 @@ input{
 					<div id="msgHappy"></div>					
 						<table class="ui orange table" style="width: 90%;">
 						<tr>
-							<th scope="row">*닉네임</th>
-							<td><div class="ui input"><input id="mNickName" name="mNickName" type="text" required="required"></div></td>
+							<th scope="row">아이디</th>
+							<td><div class="ui input">${sessionScope.loginUser2.mid }</div></td>						
+						</tr>
+						
+						<tr>
+							<th scope="row">닉네임</th>
+							<td><div class="ui input"><input id="mNickName" name="mNickName" type="text" required="required" placeholder="${sessionScope.loginUser2.mNickName }"></div></td>
 						</tr>
 						<tr>
-							<th scope="row">*비밀번호</th>
-							<td><div class="ui input"><input id="mpwd2" name="mpwd" type="password" required="required"> <span id="pwdCheckMsg" ></span></div></td>
+							<th scope="row">비밀번호</th>
+							<td><div class="ui input"><input id="mpwd" name="mpwd" type="password" required="required"> <span id="pwdCheckMsg" ></span></div></td>
 
 						</tr>
 						<tr>
-							<th scope="row">*비밀번호 확인</th>
-							<td><div class="ui input"><input id="mpwd22" type="password" required="required" ></div>
+							<th scope="row">비밀번호 확인</th>
+							<td><div class="ui input"><input id="mpwd2" type="password" required="required" ></div>
 							</td>
 
 						</tr>
 						<tr>
 							<th scope="row">휴대폰번호</th>
-							<td><div class="ui input"> <input id="mPhone" name="mPhone" type="text" placeholder="-없이 입력"></div></td>
+							<td><div class="ui input"> <input id="mPhone" name="mPhone" type="text" placeholder="${sessionScope.loginUser2.mPhone }  - 없이 입력"></div></td>
 						</tr>
 					</table>
 
@@ -125,7 +130,33 @@ input{
 	<%@ include file="../include/myNav.jsp"%>
 	<script>
 		function goupdate() {
-			location.href="updateDetail.nanum";
+/* 			var mNick;
+			var mPwd;
+			var mPwd2;
+			var mPhone;		
+			if(  ($("#mpwd").val()).equals($("#mpwd2").val())){				
+				if($("#mNickName").val()!=""){
+					mNcik = mNick;			
+				}else{
+					mNcik = $("#mNickName").val();	
+				}			
+				
+				if($("#mpwd").val()!="" ){
+					mPwd = mpwd;			
+				}else{
+					mPwd = $("#mpwd").val();	
+				}
+				
+				if($("#mPhone").val()!="" ){
+					mPhone = mPhone;			
+				}else{
+					mPhone = $("#mPhone").val();	
+				}				
+				alert(mNcik+mPwd+mPhone);
+				location.href="updateInfo.nanum?mNick="+mNick+"&mPwd="+mPwd+"&mPhone="+mPhone;				
+			}		 */		
+			
+
 		}
 	</script>
 </body>

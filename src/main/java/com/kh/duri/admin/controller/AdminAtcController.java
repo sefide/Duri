@@ -312,12 +312,9 @@ public class AdminAtcController {
 	//관리자 QnA 답변 달기 -> ajax를 이용하자! 
  	@RequestMapping("adminNanumReply.ad")
  	public @ResponseBody String adminNanumReply(@RequestParam int qNo, @RequestParam String qAnswer, HttpServletRequest request, HttpServletResponse response,Model model) {		
-		/*System.out.println("admin qNo"+qNo);
-		System.out.println("admin qAnswer"+qAnswer);	*/
 		adminQnA q = new adminQnA();
 		q.setqAnswer(qAnswer);
 		q.setqNo(qNo);		
-		/*System.out.println("admin q"+q);*/
 		try {
 			int result = aas.insertReply(q);
 			return qAnswer;
