@@ -318,6 +318,7 @@ var ftype = null;
 
  
 	function writeCloud(){
+		
 		var fWriter = $("#fWriter").val();
 		var mNick = $("#mNick").val();
 		var fTitle = $("#fTitle").val();

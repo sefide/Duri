@@ -16,7 +16,7 @@ public class MemberDaoImpl implements MemberDao {
 	public Member loginCheck(SqlSessionTemplate sqlSession, Member m) throws LoginException {
 		Member loginUser = sqlSession.selectOne("Member.loginCheck",m);	//받아온 m을 이용해 mapper에서 sql문 실행해서 받아온 값 저장 
 		
-		/*System.out.println("Dao Member : "+loginUser);*/
+		System.out.println("Dao Member : "+loginUser);
 		
 		if(loginUser ==null) {
 			throw new LoginException("로그인정보가 존재하지 않습니다.");	//예외처리
@@ -76,7 +76,7 @@ public class MemberDaoImpl implements MemberDao {
 	}
 
 	
-	//로그인시 암호화된 비밀번호 가져오기
+	//로그인시 암호화된 비밀번호 가져오기 - 나눔두리
 	@Override
 	public String selectEncPassword(SqlSessionTemplate sqlSession, Member m) {
 		String m2 = sqlSession.selectOne("Member.selectPwd",m); 
@@ -84,6 +84,16 @@ public class MemberDaoImpl implements MemberDao {
 		return m2;
 
 	}
+	
+	
+	//로그인시 암호화된 비밀번호 가져오기 - 행복두리
+	@Override
+	public String selectEncPassword2(SqlSessionTemplate sqlSession, Member m) {
+		String m2 = sqlSession.selectOne("Member.selectPwd2",m); 
+		System.out.println(m2);
+		return m2;
+	}
+	
 
 	
 	//닉네임 중복확인
@@ -105,12 +115,12 @@ public class MemberDaoImpl implements MemberDao {
 	@Override
 	public int insertHappy(SqlSessionTemplate sqlSession, Member m) {
 		int result = sqlSession.insert("Member.insertHappy",m);
-		int mno = sqlSession.selectOne("Boards.selectMnoCurrval");
+		int mno = sqlSession.selectOne("Member.selectMnoCurrval");
 		m.setMno(mno);
 		int result2 = sqlSession.insert("Member.insertHappyPhoto",m);
 		
 		System.out.println("나눔두리 회원가입 성공여부 : " + result);
-		
+		System.out.println("나눔두리 회원가입 성공여부 : " + result2);
 		
 		/* if(result == 0) { 
 			 throw new LoginException("작성실패!"); //예외처리
@@ -120,5 +130,8 @@ public class MemberDaoImpl implements MemberDao {
 
 		return result;
 	}
+
+
+	
 
 }

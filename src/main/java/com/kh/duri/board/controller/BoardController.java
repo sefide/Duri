@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.duri.board.model.exception.BoardException;
@@ -18,9 +17,10 @@ import com.kh.duri.board.model.exception.DonateListException;
 import com.kh.duri.board.model.service.boardService;
 import com.kh.duri.board.model.vo.Board;
 import com.kh.duri.board.model.vo.BoardItem;
+import com.kh.duri.board.model.vo.PageInfo;
+import com.kh.duri.board.model.vo.Pagination;
 import com.kh.duri.member.model.vo.Member;
-import com.kh.duri.payment.model.vo.PageInfo;
-import com.kh.duri.payment.model.vo.Pagination;
+
 
 @Controller
 public class BoardController {
@@ -122,7 +122,8 @@ public class BoardController {
 
 			List<Board> moList;
 			
-			moList = bs.selectMoneyList(pi);			
+			moList = bs.selectMoneyList(pi);
+			
 			model.addAttribute("moList", moList);
 			model.addAttribute("pi", pi);
 			return "board/causes";

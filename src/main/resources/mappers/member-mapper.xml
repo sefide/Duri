@@ -70,6 +70,7 @@
 		OR MTAKESTATUS = '2'
 	</select>
 	
+	<!-- 정기후원 리스트 조회 -->
 	<select id="selectLongList" resultMap="memberResultSet" resultType="Member">
 		SELECT *
 		FROM MEMBER
@@ -97,26 +98,37 @@
 	VALUES (SEQ_M_NO.NEXTVAL, #{mName}, #{mNickName},#{mGender}, #{mPhone}, #{mid}, #{mpwd}, #{email}, SYSDATE, 0, 'N', null, null, null, null, null, null, null, 0, 'Y', null)
 	</insert>
 	
+	<!-- 로그인시 암호화된 비밀번호 가져오기 - 나눔두리 -->
 	<select id="selectPwd" parameterType="java.lang.String"  resultType="String" >
 		SELECT MPWD
 		FROM MEMBER
 		WHERE MID = #{mid}
-		AND MTYPE='N'
 	</select> 
 	
+	<!-- 로그인시 암호화된 비밀번호 가져오기 - 행복두리 -->
+	<select id="selectPwd2" parameterType="java.lang.String"  resultType="String" >
+		SELECT MPWD
+		FROM MEMBER
+		WHERE MID = #{mid}
+	</select> 
+	
+	<!-- 행복두리 회원가입 -->
 	<insert id="insertHappy">
 	INSERT INTO MEMBER
-	VALUES (SEQ_M_NO.NEXTVAL, #{mName}, #{mNickName},#{mGender}, #{mPhone}, #{mid}, #{mpwd}, #{email}, SYSDATE, 0, 'H', #{mFundtype}, #{mpr}, null, null, null, null, null, 0, 'Y', 3)
+	VALUES (SEQ_M_NO.NEXTVAL, #{mName}, #{mNickName},#{mGender}, #{mPhone}, #{mid}, #{mpwd}, #{email}, SYSDATE, 0, 'H', #{mFundtype}, #{mpr}, null, null, #{mAddress}, null, null, 0, 'Y', 3)
 	</insert>
 	
+	<!-- 행복두리 회원번호 받아오기 -->
 	<select id="selectMnoCurrval" resultType="_int">
 		SELECT SEQ_M_NO.CURRVAL FROM DUAL
 	</select>
 	
+	<!-- 행복두리 증빙서류 삽입 -->
 	<insert id="insertHappyPhoto">
-	INSERT INTO MEMBER
-	VALUES (SEQ_M_NO.NEXTVAL, #{mName}, #{mNickName},#{mGender}, #{mPhone}, #{mid}, #{mpwd}, #{email}, SYSDATE, 0, 'H', #{mFundtype}, #{mpr}, null, null, null, null, null, 0, 'Y', 3)
+	INSERT INTO ATTACHMENT
+	VALUES (SEQ_A_NO.NEXTVAL,#{origin},#{change},null,'formFiles','R',null,#{mno},'1','F')
 	</insert>
+	
 	
 	
 	

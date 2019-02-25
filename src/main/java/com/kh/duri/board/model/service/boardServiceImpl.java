@@ -14,7 +14,7 @@ import com.kh.duri.board.model.exception.DonateListException;
 import com.kh.duri.board.model.vo.Board;
 import com.kh.duri.board.model.vo.BoardItem;
 import com.kh.duri.member.model.vo.Member;
-import com.kh.duri.payment.model.vo.PageInfo;
+import com.kh.duri.board.model.vo.PageInfo;
 
 @Service
 public class boardServiceImpl implements boardService {
