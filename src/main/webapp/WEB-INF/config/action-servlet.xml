@@ -3,7 +3,6 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 	xmlns:beans="http://www.springframework.org/schema/beans" 
 	xmlns:aop="http://www.springframework.org/schema/aop" 
-	xmlns:task="http://www.springframework.org/schema/task"
 	xmlns:context="http://www.springframework.org/schema/context" 
 	xmlns:websocket="http://www.springframework.org/schema/websocket"
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc 
@@ -26,8 +25,7 @@
 
  	<!-- 웹 소켓 핸들러  -->
     <beans:bean id="myHandler" class="com.kh.duri.common.handler.WebSocketHandler"/>
-    http://www.springframework.org/schema/task 
-    http://www.springframework.org/schema/task/spring-task-3.2.xsd">
+  
 
 
 

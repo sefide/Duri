@@ -85,6 +85,9 @@ public interface HappymemberDao {
 	//증빙서류 승인일 조회
 	Attachment selectAdate(SqlSessionTemplate sqlSession, Member member) throws LoginException;
 
+	//증빙서류 현황 조회
+	Attachment selectProofDocument(SqlSessionTemplate sqlSession, Member m) throws MypageException;
+
 	
 
 	

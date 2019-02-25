@@ -20,8 +20,10 @@ header .myNavBox span.mu11 {background:url(../images/gnb/mult04.png) no-repeat 0
 header .multBoxL2 {position:absolute; top:0; left:120px;}
 
 header .d-day {text-align: right; margin-right: 20%; padding-top: 22px;}
+header .d-day2 {text-align: right; margin-right: 20%; padding-top: 22px;}
 /* header .d-day span.d-day-count {font-size: 20px; font-weight: 600; color: #2e3a4a; margin-top: 5%;} */
 header .d-day span i {color: #737373;}
+header .d-day2 span i {color: red;}
 /* header .d-day span.d-day-count-pTag {font-size: 20px; font-weight: 600; color:darkorange; margin-top: 5%;} */
 
 

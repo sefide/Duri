@@ -355,6 +355,18 @@ public class HappymemberDaoImpl implements HappymemberDao{
 		return aDate;
 	}
 
+	//증빙서류 현황 조회
+	@Override
+	public Attachment selectProofDocument(SqlSessionTemplate sqlSession, Member m) throws MypageException {
+		Attachment proofDocument = sqlSession.selectOne("HappyMember.selectProofDocument", m);
+		
+		if(proofDocument == null) {
+			throw new MypageException("증빙서류 현황 조회 실패");
+		}
+		
+		return proofDocument;
+	}
+
 	
 
 	

@@ -130,6 +130,7 @@
 		<result property="astatus" column="ASTATUS"/>
 		<result property="changestart" column="CHANGESTART"/>
 		<result property="finishdate" column="FINISHDATE"/>
+		<result property="dday" column="DDAY"/>
 	</resultMap>
 
 
@@ -281,6 +282,14 @@
 		(TO_DATE(TO_CHAR(SYSDATE, 'YYYYMMDD')) - TO_DATE(ADATE+184))AS FINISHDATE 
 		FROM ATTACHMENT 
 		WHERE A_MNO = #{mno}
+		AND ADOCTYPE = 1 
+		AND ASTATUS = 'Y'
+	</select>
+	<!-- 증빙서류 현황 조회 -->
+	<select id="selectProofDocument" resultMap="attachmentResultSet" parameterType="Member">
+		SELECT ADATE, TO_DATE(ADATE+184) AS DDAY,(TO_DATE(TO_CHAR(SYSDATE, 'YYYYMMDD')) - TO_DATE(ADATE+184))AS FINISHDATE 
+		FROM ATTACHMENT 
+		WHERE A_MNO = #{mno} 
 		AND ADOCTYPE = 1 
 		AND ASTATUS = 'Y'
 	</select>

@@ -13,11 +13,12 @@ public class Attachment implements java.io.Serializable{
 	String astatus;
 	String changestart;
 	String finishdate;
+	Date dday;
 	
 	public Attachment() {}
 
 	public Attachment(int ano, String originname, String achangename, Date adate, String afilepath, int a_mno,
-			String adoctype, String astatus, String changestart, String finishdate) {
+			String adoctype, String astatus, String changestart, String finishdate, Date dday) {
 		super();
 		this.ano = ano;
 		this.originname = originname;
@@ -29,6 +30,7 @@ public class Attachment implements java.io.Serializable{
 		this.astatus = astatus;
 		this.changestart = changestart;
 		this.finishdate = finishdate;
+		this.dday = dday;
 	}
 
 	public int getAno() {
@@ -111,13 +113,22 @@ public class Attachment implements java.io.Serializable{
 		this.finishdate = finishdate;
 	}
 
+	public Date getDday() {
+		return dday;
+	}
+
+	public void setDday(Date dday) {
+		this.dday = dday;
+	}
+
 	@Override
 	public String toString() {
 		return "Attachment [ano=" + ano + ", originname=" + originname + ", achangename=" + achangename + ", adate="
 				+ adate + ", afilepath=" + afilepath + ", a_mno=" + a_mno + ", adoctype=" + adoctype + ", astatus="
-				+ astatus + ", changestart=" + changestart + ", finishdate=" + finishdate + "]";
+				+ astatus + ", changestart=" + changestart + ", finishdate=" + finishdate + ", dday=" + dday + "]";
 	}
 
+	
 	
 	
 }

@@ -421,28 +421,26 @@ public class HappymemberController {
 	}
 	
 	
-	/*//증빙서류 승인일 조회
-		@RequestMapping("adate.happy")
-		public String adate(Model model, HttpServletRequest request, HttpServletResponse response) {
-			Member m = (Member)request.getSession().getAttribute("loginUser");
+	//증빙서류 현황 조회
+	@RequestMapping("proofDocument.happy")
+	public String adate(Model model, HttpServletRequest request, HttpServletResponse response) {
+		Member m = (Member)request.getSession().getAttribute("loginUser");
 			
-			try {
-				Attachment aDate = hs.selectAdate(m);
-				
-				System.out.println("갱신 가능 시작 d-day : " + aDate.getChangestart());
-				System.out.println("갱신가능~마감까지 d-day : " + aDate.getFinishdate());
-				model.addAttribute("changestart", aDate.getChangestart());
-				model.addAttribute("finishdate", aDate.getFinishdate());
-				
-				
-			} catch (MypageException e) {
-				model.addAttribute("msg", e.getMessage());
-				return "common/errorPage";
-			}
+		try {
+			Attachment proofDocument = hs.selectProofDocument(m);
+					
+			/*System.out.println("증빙서류 객체 : " + proofDocument);*/
 			
-			
-			return "happymember/include/header";
-		}*/
+			model.addAttribute("proofDocument", proofDocument);
+					
+					
+		} catch (MypageException e) {
+			model.addAttribute("msg", e.getMessage());
+			return "common/errorPage";
+		}
+		
+		return "happymember/proofDocument";
+	}
 	
 	//물품 배송 목록 새로고침했을 때 insert다시 안되게 !
 	@RequestMapping("deliveryOriginal.happy")
@@ -478,11 +476,6 @@ public class HappymemberController {
 		return "happymember/deliveryStatus";
 	}
 	
-	
-	@RequestMapping("proofDocument.happy")
-	public String happy8() {
-		return "happymember/proofDocument";
-	}
 	
 	@RequestMapping("cloudWrite.happy")
 	public String happt10() {
