@@ -35,7 +35,7 @@ public class PaymentDaoImpl implements PaymentDao {
 	public int selectPointListCount(SqlSessionTemplate sqlSession, Member m) throws PointHistoryException {
 		int listCount = sqlSession.selectOne("Point.selectPointListCount", m);
 		
-		System.out.println("포인트 히스토리 수 : "+ listCount);
+		//System.out.println("포인트 히스토리 수 : "+ listCount);
 		if(listCount < 0) {
 			throw new PointHistoryException("포인트 히스토리 수 조회 실패");
 		}
@@ -47,7 +47,7 @@ public class PaymentDaoImpl implements PaymentDao {
 	public int selectSearchPointListCount(SqlSessionTemplate sqlSession, Member m) throws PointHistoryException {
 		int listCount = sqlSession.selectOne("Point.selectSearchPointListCount", m);
 		
-		System.out.println("포인트 히스토리 수 : "+ listCount);
+		//System.out.println("포인트 히스토리 수 : "+ listCount);
 		if(listCount < 0) {
 			throw new PointHistoryException("포인트 히스토리 수 조회 실패");
 		}
@@ -67,7 +67,7 @@ public class PaymentDaoImpl implements PaymentDao {
 			throw new PointHistoryException("포인트 발급내역 정보가 존재하지 않습니다.");
 		}
 		
-		System.out.println("Dao Point 객체 : "+ ph.size());
+		//System.out.println("Dao Point 객체 : "+ ph.size());
 		return ph;
 	}
 
@@ -83,7 +83,7 @@ public class PaymentDaoImpl implements PaymentDao {
 			throw new PointHistoryException("포인트 발급내역 정보가 존재하지 않습니다.");
 		}
 		
-		System.out.println("Dao Point 객체 : "+ ph.size());
+		//System.out.println("Dao Point 객체 : "+ ph.size());
 		return ph;
 	}
 	
@@ -92,7 +92,7 @@ public class PaymentDaoImpl implements PaymentDao {
 	public int selectReceiptListCount(SqlSessionTemplate sqlSession, Member m) throws ReceiptException {
 		int listCount = sqlSession.selectOne("Point.selectReceiptListCount", m);
 		
-		System.out.println("기부금 영수증 수 : "+ listCount);
+		//System.out.println("기부금 영수증 수 : "+ listCount);
 		if(listCount < 0) {
 			throw new ReceiptException("기부금 영수증 수 조회 실패");
 		}
@@ -104,7 +104,7 @@ public class PaymentDaoImpl implements PaymentDao {
 	public int selectSearchReceiptListCount(SqlSessionTemplate sqlSession, Member m) throws ReceiptException {
 		int listCount = sqlSession.selectOne("Point.selectSearchReceiptListCount", m);
 		
-		System.out.println("기부금 영수증 수 : "+ listCount);
+		//System.out.println("기부금 영수증 수 : "+ listCount);
 		if(listCount < 0) {
 			throw new ReceiptException("기부금 영수증 수 조회 실패");
 		}
@@ -124,7 +124,7 @@ public class PaymentDaoImpl implements PaymentDao {
 			throw new ReceiptException("기부금 발급내역 정보가 존재하지 않습니다.");
 		}
 		
-		System.out.println("Dao Donate 객체 size : "+ drList.size());
+		//System.out.println("Dao Donate 객체 size : "+ drList.size());
 		return drList;
 	}
 	
@@ -140,7 +140,7 @@ public class PaymentDaoImpl implements PaymentDao {
 			throw new ReceiptException("기부금 발급내역 정보가 존재하지 않습니다.");
 		}
 		
-		System.out.println("Dao Donate 객체 size : "+ drList.size());
+		//System.out.println("Dao Donate 객체 size : "+ drList.size());
 		return drList;
 	}
 
@@ -203,7 +203,7 @@ public class PaymentDaoImpl implements PaymentDao {
 				resultInsertPoint = sqlSession.insert("Point.insertPointHistoryRefund", r);
 			}
 		}
-		System.out.println("Dao result : "+ result);
+		//System.out.println("Dao result : "+ result);
 		//System.out.println("환급 후 포인트이력에 추가가 되었는가? "+ resultInsertPoint);
 		
 		return loginUser;
@@ -326,10 +326,10 @@ public class PaymentDaoImpl implements PaymentDao {
 	public DirectFundHist selectDirectFundId(SqlSessionTemplate sqlSession, DirectFundHist dh) throws DirectFundException {
 		DirectFundHist result = sqlSession.selectOne("Point.selectDirectFundId", dh);
 		
-		if(result == null) {
+		/*if(result == null) {
 			throw new DirectFundException("정기후원 내역을 조회할 수 없습니다.");
-		}
-		System.out.println("result : " + result);
+		}*/
+		//System.out.println("result : " + result);
 	
 		return result;
 	}
@@ -351,7 +351,7 @@ public class PaymentDaoImpl implements PaymentDao {
 	@Override
 	public int selectFundMoneyCulValue(SqlSessionTemplate sqlSession, Board b) {
 		int result = sqlSession.selectOne("Point.selectFundMoneyCulValue", b);
-		System.out.println("dao 현재 누적 후원금 :" + result);
+		//System.out.println("dao 현재 누적 후원금 :" + result);
 		return result;
 	}
 	
@@ -394,7 +394,7 @@ public class PaymentDaoImpl implements PaymentDao {
 	// 포인트 update (나눔두리)
 	@Override
 	public int updateMoneynPoint(SqlSessionTemplate sqlSession, Member m) throws FundingException {
-		System.out.println("업데이트할 나눔두리 회원번호 : "+ m.getMno());
+		//System.out.println("업데이트할 나눔두리 회원번호 : "+ m.getMno());
 		int result = sqlSession.update("Point.updateMoneynPoint", m);
 		
 		if(result == 0) {
@@ -407,7 +407,7 @@ public class PaymentDaoImpl implements PaymentDao {
 	// 로그인 유저 select (나눔두리)
 	@Override
 	public Member selectLoginnMember(SqlSessionTemplate sqlSession, Member m) throws FundingException {
-		System.out.println("m : " + m.getMno());
+		//System.out.println("m : " + m.getMno());
 		Member resultM = sqlSession.selectOne("Point.loginNaCheck", m);
 
 		if(resultM == null) {
@@ -584,6 +584,17 @@ public class PaymentDaoImpl implements PaymentDao {
 		if(result == 0) {
 			throw new DirectFundException("스케쥴, 정기후원 포인트 이력(행복두리) 입력 실패");
 		}
+	}
+	
+	// 정기후원 새로운 회차 결제 완료 후 merchant_id update  
+	@Override
+	public int updateDirectFundImpUid(SqlSessionTemplate sqlSession, DirectFundHist rdh) throws DirectFundException {
+		int result = sqlSession.update("Point.updateDirectFundImpUid", rdh);
+		
+		if(result == 0) {
+			throw new DirectFundException("정기후원 , 다음 회차 정보 업데이트 실패");
+		}
+		return result;
 	}
 	
 

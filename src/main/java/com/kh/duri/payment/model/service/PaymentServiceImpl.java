@@ -205,7 +205,7 @@ public class PaymentServiceImpl implements PaymentService {
 		// 후원 내역 입력하고
 		int result1 = pd.insertFundMoneyHistory(sqlSession, fh);
 		int result2 = 1;
-		System.out.println("service check : "+ check);
+		//System.out.println("service check : "+ check);
 		if(check.equals("1")) {
 			// 기부금 영수증 발급내역 넣고
 			result2 = pd.insertDonateReceipt(sqlSession, fh);
@@ -215,7 +215,7 @@ public class PaymentServiceImpl implements PaymentService {
 		m.setMno(Integer.parseInt(fWriter));
 		m.setmPoint(fh.getFhValue());
 
-		System.out.println("service m : " + m);
+		//System.out.println("service m : " + m);
 		// 포인트 업데이트 (행복두리)
 		int result3 = pd.updateMoneyhPoint(sqlSession, m);
 
@@ -270,8 +270,8 @@ public class PaymentServiceImpl implements PaymentService {
 			String fWriter, int isGoal) throws FundingException {
 		// 100% 달성 시 GOAL로 바꾸고, 마감일 변경 - 금액물품둘다
 	    // 후원자 GoalNum +1 하기
-		System.out.println("check : "+ check); // 0이면 미발급 , 1이면 발급
-		System.out.println("isGoal : "+ isGoal);  // 0이면 미달성, 1이면 달성
+		//System.out.println("check : "+ check); // 0이면 미발급 , 1이면 발급
+		//System.out.println("isGoal : "+ isGoal);  // 0이면 미달성, 1이면 달성
 		
 		Member m = new Member();
 		m.setMno(fh.getFhMnoGive());
@@ -317,7 +317,7 @@ public class PaymentServiceImpl implements PaymentService {
 			fhdList.get(i).setFhd_mNo_take(Integer.parseInt(fWriter));
 			result5 = pd.updateHappyOwnItem(sqlSession, fhdList.get(i));
 			
-			System.out.println("result5 : "+ result5);
+			//System.out.println("result5 : "+ result5);
 			// 행복두리 소유 물품 추가하기
 			if(result5 == 0) {
 				pd.insertHappyOwnItem(sqlSession, fhdList.get(i));
@@ -344,16 +344,16 @@ public class PaymentServiceImpl implements PaymentService {
 		int result = 0;
 		System.out.println("스케줄 서비스 진입 ");
 		for(int i = 0; i < dhList.size(); i++) {
-			System.out.println(dhList.get(i));
+			//System.out.println(dhList.get(i));
 			
 			// 몇회차 후원인지 확인
 			int curCount = pd.selectFundCurCount(sqlSession, dhList.get(i).getDhNo());
-			System.out.println("curCount : "+ curCount);
+			//System.out.println("curCount : "+ curCount);
 			DirectFundHistoryDetail dhd = new DirectFundHistoryDetail();
 			dhd.setDhdCount(curCount+1);
 			dhd.setDhdDhno(dhList.get(i).getDhNo());
 			dhd.setDhdValue(Integer.parseInt(dhList.get(i).getDhValue()));
-			System.out.println("dhd : "+ dhd);
+			//System.out.println("dhd : "+ dhd);
 			// 그 정보를 DirectFundDetail 테이블에 추가한다. 
 			result = pd.insertDirectFundDetailNext(sqlSession, dhd);
 			
@@ -369,6 +369,37 @@ public class PaymentServiceImpl implements PaymentService {
 		}
 		
 		return result;
+	}
+	
+	// webhook 사용하여 정기후원 내역 insert
+	@Override
+	public int insertDirectFundDetail(DirectFundHist rdh) throws DirectFundException {
+		// 회차 정보 가져오고
+		int curCount = pd.selectFundCurCount(sqlSession, rdh.getDhNo());
+		
+		// 일단 새로운 회차 DirectFundHistoryDetail에 insert
+		//System.out.println("curCount : "+ curCount);
+		DirectFundHistoryDetail dhd = new DirectFundHistoryDetail();
+		dhd.setDhdCount(curCount+1);
+		dhd.setDhdDhno(rdh.getDhNo());
+		dhd.setDhdValue(Integer.parseInt(rdh.getDhValue()));
+		//System.out.println("dhd : "+ dhd);
+		// 그 정보를 DirectFundDetail 테이블에 추가한다. 
+		int result1 = pd.insertDirectFundDetailNext(sqlSession, dhd);
+		
+		// DirectFundHistory 업데이트 
+		int result2 = pd.updateDirectFundImpUid(sqlSession, rdh);
+		
+		// 행복두리 해당하는 회원의 포인트 업데이트
+		pd.updateDirecthPoint(sqlSession,rdh);
+		
+		Member m = new Member();
+		m.setMno(rdh.getDh_mNo_take());
+		// 포인트 이력 insert (행복/나눔)
+		pd.insertPointDirect(sqlSession, rdh); // 나눔두리
+		pd.insertPointDirectHappy(sqlSession, rdh); // 행복두리 
+		
+		return result2;
 	}
 	
 

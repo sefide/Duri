@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -475,15 +476,16 @@ public class PaymentController {
 			
 			Date today = new Date();
 			/* 웹훅 방식 
-			 * Date schedule_at = CommonUtils.getNextMonth(today);
+			 */
+			Date schedule_at = CommonUtils.getNextMonth(today);
 			System.out.println("today : " + today);
 			System.out.println("schedule_at : " + schedule_at);
 			
 			ScheduleEntry entry = new ScheduleEntry(merchant_uid, schedule_at, amount);
-			schedule_data.addSchedule(entry);*/
+			schedule_data.addSchedule(entry);
 			
 			/* Scheduler 방식 */
-			ArrayList<Date> schedule = CommonUtils.getNextMonthList(today, selectDate);
+			/*ArrayList<Date> schedule = CommonUtils.getNextMonthList(today, selectDate);
 			System.out.println("today : " + today);
 			//System.out.println("schedule_at : " + schedule_at);
 			
@@ -495,7 +497,7 @@ public class PaymentController {
 			for(ScheduleEntry entry : schedule_data.getSchedules()) {
 				System.out.println(entry.getScheduleAt().getTime());
 				System.out.println(entry.getMerchantUid());
-			}
+			}*/
 
 			IamportResponse<List<Schedule>> list = iam.subscribeSchedule(schedule_data);
 			System.out.println("예약 list code : " + list.getCode());
@@ -507,7 +509,7 @@ public class PaymentController {
 			dh.setDh_mNo_give(Integer.parseInt(giveMember));
 			dh.setDh_mNo_take(Integer.parseInt(takeMember));
 			dh.setDhBilling(customer_uid);
-			dh.setDhImpUid(imp_uid);
+			dh.setDhImpUid(merchant_uid);
 			dh.setDhValue(price);
 			dh.setDhType(type);
 			dh.setDhDay(String.valueOf(selectDate));
@@ -554,7 +556,7 @@ public class PaymentController {
 	// webHook - 예약된 결제가 완료되었을 때 요청되는 서버 (다음 결제 예약을 처리한다)
 	@RequestMapping("directFundCallback.pm")
 	public String directFundCallback(HttpServletRequest request, HttpServletResponse response, Model model, HttpSession session) {
-		System.out.println("webhook 이얏호 ");
+		System.out.println("webhook 통신");
 		String imp_uid = request.getParameter("imp_uid");
 		String merchant_uid = request.getParameter("merchant_uid");
 		String status = request.getParameter("status");
@@ -563,47 +565,52 @@ public class PaymentController {
 		System.out.println("merchant_uid : "+ merchant_uid);
 		System.out.println("status : "+ status);
 		
+		int result = 0;
 		
 		DirectFundHist dh = new DirectFundHist();
-		dh.setDhImpUid(imp_uid);
-		
+		dh.setDhImpUid(merchant_uid);
 		try {
-			DirectFundHist resultDirectFund = new DirectFundHist();
-			resultDirectFund = ps.selectDirectFundId(dh);
-			
-			if(resultDirectFund != null) {
-				// 다음 결제 예약하기
-				IamportClient iam = new IamportClient("2128480452188810", "auDtdoRqy5eWYjryBzpvoByL60yEzqGJUjc8I3yg9Nd76EFIe5dCGMoNNXsmn85hsipamYqvLDDSijAw");
+			if(imp_uid != null && merchant_uid != null) {
+				DirectFundHist resultDirectFund = new DirectFundHist();
+				resultDirectFund = ps.selectDirectFundId(dh);
 				
-				System.out.println("================= 정기 결제 예약 ==================");
+				if(resultDirectFund != null) {
+					// 다음 결제 예약하기
+					IamportClient iam = new IamportClient("2128480452188810", "auDtdoRqy5eWYjryBzpvoByL60yEzqGJUjc8I3yg9Nd76EFIe5dCGMoNNXsmn85hsipamYqvLDDSijAw");
+					
+					System.out.println("================= 정기 결제 예약 ==================");
 
-				String customer_uid = resultDirectFund.getDhBilling();
-				ScheduleData schedule_data = new ScheduleData(customer_uid);
-				
-				Date today = new Date();
-				Date schedule_at = CommonUtils.getNextMonth(today);
-				System.out.println("today : " + today);
-				System.out.println("schedule_at : " + schedule_at);
-				
-				BigDecimal amount = new BigDecimal("100");
-				String merchant_uid_new = "merchant_" + new Date().getTime()+"_sub";
-				
-				ScheduleEntry entry = new ScheduleEntry(merchant_uid_new, schedule_at, amount);
-				schedule_data.addSchedule(entry);
-				
-				IamportResponse<List<Schedule>> list = iam.subscribeSchedule(schedule_data);
-				System.out.println("list message : " + list.getMessage());
-				System.out.println("list code : " + list.getCode());				
-				
-				resultDirectFund.setDhImpUid(imp_uid);
-				
-				if(list.getCode() == 0) {
-					// 다음 회차 정기후원 내역 DB 저장하기 
+					String customer_uid = resultDirectFund.getDhBilling();
+					ScheduleData schedule_data = new ScheduleData(customer_uid);
 					
+					Date today = new Date();
+					Date schedule_at = CommonUtils.getNextMonth(today);
+					System.out.println("today : " + today);
+					System.out.println("schedule_at : " + schedule_at);
 					
+					BigDecimal amount = new BigDecimal("100");
+					String merchant_uid_new = "merchant_" + new Date().getTime()+"_sub";
+					
+					ScheduleEntry entry = new ScheduleEntry(merchant_uid_new, schedule_at, amount);
+					schedule_data.addSchedule(entry);
+					
+					IamportResponse<List<Schedule>> list = iam.subscribeSchedule(schedule_data);
+					System.out.println("list message : " + list.getMessage());
+					System.out.println("list code : " + list.getCode());				
+					
+					resultDirectFund.setDhImpUid(merchant_uid_new);
+					
+					if(list.getCode() == 0 && status.equals("paid")) {
+						// 다음 회차 정기후원 내역 DB 저장하기 
+						result = ps.insertDirectFundDetail(resultDirectFund);
+					}
+					
+				}else {
+					System.out.println("다음 정기후원 내역이 없습니다. (정기후원 중단)");
 				}
-				
+	
 			}
+			System.out.println("webhook Final result : "+ result);
 		} catch (DirectFundException e) {
 			e.printStackTrace();
 		} catch (IamportResponseException e) {
@@ -803,26 +810,4 @@ public class PaymentController {
 		
 	}
 	
-	
-	@RequestMapping("directFundSchedule.pm")
-	public void directFundSchedule() {
-		System.out.println("스케줄러 날짜 함수 작동");
-		Date today = new Date();
-		SimpleDateFormat sdf = new SimpleDateFormat("dd");
-        System.out.println("현재날짜 : "+ sdf.format(today));
-        String day = sdf.format(today);
-        
-		int result = 0;
-        try {
-        	result = ps.insertDirectFundDetailSchedule(day);
-        	System.out.println("스케줄러 결과 조회 : " + result);
-        	
-			
-		} catch (DirectFundException e) {
-			System.out.println("스케줄러 결과 실패 : "+ e.getMessage());
-			e.printStackTrace();
-		}
-	
-	
-	}
 }
