@@ -65,13 +65,46 @@ public class NanumController {
 		@RequestMapping("updateComplete.nanum")
 		public String updateInfo(Model model, HttpServletRequest request, HttpServletResponse response) {	
 			Member m = (Member)request.getSession().getAttribute("loginUser2");
+			Member m2 = new Member();
 			String mNick = request.getParameter("mNick");			
 			String mPwd = request.getParameter("mPwd"); 
+			String mPwd2 = request.getParameter("mPwd2"); 
 			String mPhone = request.getParameter("mPhone"); 
 			System.out.println("mNick"+mNick);
 			System.out.println("mPwd"+mPwd);
+			System.out.println("mPwd2"+mPwd2);
 			System.out.println("mPhone"+mPhone);
-			return "Nanummember/mypage/mypage_updateInfo";
+			if(mPwd.equals(mPwd2)) {
+				if(mNick == null) {
+					mNick = m.getmNickName();
+				}
+				if(mPwd == null) {
+					mPwd = m.getMpwd();
+				}
+				if(mPhone == null) {
+					mPhone = m.getmPhone();
+				}
+				String encPassword = passwordEncoder.encode(mPwd); 
+								
+				m2.setMno(m.getMno());
+				m2.setmNickName(mNick);
+				m2.setMpwd(encPassword);//암호화된 비밀번호 저장
+				m2.setmPhone(mPhone);
+				try {
+					int result = ns.updateMember(m2);
+					if(result>0) {
+						return "Nanummember/mypage/mypage_updateSuccess";
+					}else {
+						return "Nanummember/mypage/mypage_updateError";
+					}
+				} catch (NanumException e) {
+					e.printStackTrace();
+					return "Nanummember/mypage/mypage_updateError";
+				}				
+			}else {
+				return "Nanummember/mypage/mypage_updateError";
+			}
+			
 		}
 	
 	/* ----------------------나눔두리 마이페이지 ----------------------*/

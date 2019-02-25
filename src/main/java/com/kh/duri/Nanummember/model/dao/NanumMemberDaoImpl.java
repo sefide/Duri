@@ -218,6 +218,12 @@ public class NanumMemberDaoImpl implements NanumMemberDao {
 		int result = sqlSession.insert("Nanum.deletetQnA",qNo);
 		return result;
 	}
+	//회원정보 수정
+	@Override
+	public int updateMember(SqlSessionTemplate sqlSession, Member m2) throws NanumException {
+		int result = sqlSession.update("Nanum.updateMember", m2);
+		return result;
+	}
 		
 		
 

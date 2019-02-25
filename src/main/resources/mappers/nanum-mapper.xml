@@ -374,6 +374,11 @@
   	<delete id="deletetQnA">
   		DELETE FROM QNA WHERE QNO = #{qNo}
   	</delete>
-
+	<!-- 회원정보 수정 -->
+	<update id="Nanum.updateMember">
+		UPDATE Member 
+		SET MNICK = #{mNickName} , MPHONE = #{mPhone} , MPWD = #{mpwd} 
+		WHERE MNO = #{mno} 
+	</update>
  </mapper>
   

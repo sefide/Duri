@@ -46,6 +46,8 @@ public interface NanumMemberService {
 	int insertQnA(QnA q)throws NanumException;
 	//QnA 삭제
 	int deleteQnA(int qNo)throws NanumException;
+	//회원정보 수정
+	int updateMember(Member m2) throws NanumException;
 	
 	
 	
