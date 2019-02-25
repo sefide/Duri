@@ -11,7 +11,9 @@
 	<!-- semantic ui -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
 <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
-	<title>http://www.blueb.co.kr</title>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+	<title>행복두리 회원가입</title>
 
 <style rel="stylesheet">
 html {
@@ -378,14 +380,14 @@ input, select{
 
   
 
-<form class="ui form" style="background: none;">
+<form class="ui form" name = "join2" style="background: none;">
 	<div class="field" style="margin:10px;">
     <label>ID</label>
     <div class="two fields">
       <div class="field">
-        <input type="text" name="shipping[first-name]" placeholder="아이디를 입력하세요.">
+        <input type="text" name="mid" id="mid" placeholder="아이디를 입력하세요.">
       </div>
-        <div class="ui button" tabindex="0">중복확인</div>
+        <div class="ui button" onclick="duplicationCheck();" tabindex="0">중복확인</div>
 
     </div>
   </div>
@@ -395,12 +397,13 @@ input, select{
     <label>Name</label>
     <div class="two fields">
       <div class="field">
-        <input type="text" name="shipping[first-name]" placeholder="이름을 입력하세요." required>
+        <input type="text" name="mName" id="mName" placeholder="이름을 입력하세요."  style="width:100%">
       </div>
       
-      <div class="field">
-        <input type="text" name="shipping[last-name]" placeholder="닉네임을 입력하세요.(실명가능)" required>
+      <div class="field" align="right" style="width:300px">
+        <input type="text" name="mNick" id="mNick" placeholder="닉네임을 입력하세요." style="width:300px">
       </div>
+       <div class="ui button" onclick="duplicationCheckNick();" style="width:110px; margin-left:15px" tabindex="0">중복확인</div>
     </div>
   </div>
   
@@ -408,11 +411,11 @@ input, select{
     <label>Password</label>
     <div class="two fields">
       <div class="field">
-        <input type="password" name="shipping[first-name]" placeholder="비밀번호를 입력하세요." required>
+        <input type="password" name="mpwd" id="mpwd" placeholder="비밀번호를 입력하세요." required>
       </div>
 
       <div class="field">
-        <input type="password" name="shipping[last-name]"  placeholder="비밀번호를 확인하세요." required>
+        <input type="password" name="mpwd2" id="mpwd22" placeholder="비밀번호를 확인하세요." required>
       </div>
     </div>
     </div>
@@ -421,10 +424,10 @@ input, select{
   <div class="two fields"  style="margin:10px;">
     <div class="field">
       <label>Gender</label>
-      <select class="ui fluid dropdown">
+      <select name="mGender" id="mGender" class="ui fluid dropdown">
         <option value="" selected disabled>선택</option>
-    	<option value="AL">남</option>
-        <option value="AL">여</option>
+    	<option value="M">남</option>
+        <option value="F">여</option>
 
 
       </select>
@@ -435,7 +438,7 @@ input, select{
         <input type="hidden" name="country">
       
        
-			 <input type="text" name="shipping[first-name]" placeholder="(-)를 제외하고 입력하세요.">
+			 <input type="text" name="mPhone" id="mPhone" placeholder="(-)를 제외하고 입력하세요.">
        </div>
     </div>
   </div>
@@ -445,7 +448,7 @@ input, select{
   <div class="fields"  style="margin:10px;">
     <div class="five wide field">
       <label>이메일주소</label>
-      <input type="text" name="email" maxlength="10" placeholder="이메일 주소를 입력해주세요.">
+      <input type="text" name="email1" id="email1" maxlength="10" placeholder="이메일 주소를 입력해주세요.">
     </div>
      <div class="field">
      <label></label><label></label><br>
@@ -453,7 +456,7 @@ input, select{
     </div>
     <div class="three wide field">
       <label></label><br>
-      <input type="text" name="card[cvc]" maxlength="3" placeholder="직접입력">
+      <input type="text" name="email2" id="email2"  placeholder="직접입력">
     </div>
     <div class="seven wide field">
       <label></label><br>
@@ -467,24 +470,26 @@ input, select{
             <option value="4">naver.com</option>
           </select>
         </div>
-         <div class="ui button" style="width:120px; height:35px;" id="email">이메일 인증</div>
+         <div class="ui button" style="width:120px; height:35px;" id="sendEmail">이메일 인증</div>
       </div>
     </div>
   </div>
 	<div class="field" style="margin:10px;" id="check">
     <div class="fields">
       <div class="field">
-        <input type="text" name="shipping[first-name]" placeholder="인증번호를 입력하세요.">
+        <input type="text"  name="check1" id="check1" placeholder="인증번호를 입력하세요.">
       </div>
-        <div class="ui button" tabindex="0">인증하기</div>
+        <div class="ui button" id="check2" tabindex="0">인증하기</div>
 
     </div>
   </div>
+
+  
   
   <div class="fields" style="margin:10px;">
      <div class="five wide field">
        <label>주민등록번호</label>
-      <input type="text" name="email" maxlength="6" placeholder="">
+      <input type="text" name="mBirthDay" id="mBirthDay" maxlength="6" placeholder="">
     </div>
 
     <div class="three wide field">
@@ -503,24 +508,22 @@ input, select{
       <label>주소</label>
       <div class="two fields">
          <div class="field">
-        <input type="text" name="shipping[first-name]" placeholder="">
+        <input type="text" name="mAddress1" id="mAddress1" placeholder="">
       </div>
-         <div class="ui button" style="width:120px; height:35px;" id="email">주소검색</div>
+         <div class="ui button" style="width:120px; height:35px;" id="mAdd">주소검색</div>
       </div>
-       <div class="field">
-           <input type="text" name="shipping[first-name]" placeholder="상세주소를 입력해주세요.">  	
-       </div>
+      
+       <div class="two fields">
+          <div class="field">
+           <input type="text" name="mAddress2" placeholder="주소를 입력해주세요." style="width:200px;"> 
+   		</div> 
+		<div class="field">
+           <input type="text" name="mAddress3" placeholder="상세주소를 입력해주세요." style="width:400px;">  	
+		</div>
+	</div>
     </div>
 
-	<div class="field" style="margin:10px;" id="check">
-    <div class="fields">
-      <div class="field">
-        <input type="text" name="shipping[first-name]" placeholder="인증번호를 입력하세요.">
-      </div>
-        <div class="ui button" tabindex="0">인증하기</div>
-
-    </div>
-  </div>
+	
   
     
     
@@ -541,13 +544,17 @@ input, select{
         <label></label><br>
    			<input type="file" >
         </div>
+        <div class="field" style="width:300px;">
+        <br><label>증빙서류는 최대 6개월까지 보관 됩니다.<br></label>
+   	
+        </div>
     </div>
     
      <h4 class="ui dividing header" style="margin:10px; font-size:10px">자기소개</h4>
    	<div class="field" style="margin:10px">
         <div class="field" >
         <label></label><br>
-   			<textarea name="memo" cols="230" rows="10" style="resize:none" placeholder="입력하신 자기소개는 정기후원 게시판에서 보여집니다."></textarea>
+   			<textarea name="memo" id="mpr" cols="230" rows="10" style="resize:none" placeholder="입력하신 자기소개는 정기후원 게시판에서 보여집니다."></textarea>
         </div>
     </div>
 
@@ -576,6 +583,244 @@ input, select{
 
 	});
 
+	//아이디 중복체크
+	var i = 0;
+	function duplicationCheck(){
+		var mid2=$("#mid").val();
+		console.log(mid2);
+		if(mid2 == ""){
+			
+			swal("아이디를 입력해주세요!");
+		}else{
+		$.ajax({
+			url:"duplicationCheck.me",
+			type:"post",
+			data:{mid2:mid2},
+			success:function(data){
+				console.log(data);
+				  if (data > 0) {
+	                   console.log(data);
+	                   swal("존재하는 아이디 입니다!");
+	                   $("#mid").val(""); 
+	    
+	                } else{
+	                    swal("사용가능한 아이디입니다.");
+	                    i = 1;
+	                }
+			},
+			error:function(status){
+				console.log(status);
+			}
+			
+		});
+		
+		
+		return false;
+	}	
+	}
+
+	//아이디 중복체크
+	var j = 0;
+	function duplicationCheckNick(){
+		var mNick=$("#mNick").val();
+		console.log(mNick);
+		if(mNick == ""){
+			
+			swal("닉네임을 입력해주세요!");
+		}else{
+		$.ajax({
+			url:"duplicationCheckNick.me",
+			type:"post",
+			data:{mNick:mNick},
+			success:function(data){
+				console.log(data);
+				  if (data > 0) {
+	                   console.log(data);
+	                   swal("존재하는 닉네임 입니다!");
+	                   $("#mNick").val(""); 
+	    
+	                } else{
+	                    swal("사용가능한 닉네임입니다.");
+	                    j = 1;
+	                }
+			},
+			error:function(status){
+				console.log(status);
+			}
+			
+		});
+		
+		
+		return false;
+	}	
+	}
+	
+	
+	
+	var m = null;
+	//이메일 인증 버튼 클릭시 랜덤 번호 전송
+	$("#sendEmail").click(function(){
+		if($("#email1").val()=="" || $("#email2").val()==""){
+			swal("이메일을 입력해주세요!");
+		}else{
+			
+			var email = null;
+		email = $("#email1").val() + "@" + $("#email2").val();
+		console.log(email);
+		$.ajax({
+			url:"emailCheckNumSend.do",
+			type:"post",
+			data:{email:email},
+			success:function(data){
+				console.log(data);
+	                   console.log(data);
+	                   swal("메일이 발송되었습니다.")
+	               		m = data;
+						console.log(m);
+	   	
+			},
+			
+			error:function(status){
+				console.log(status);
+			}
+		
+			
+		});
+		/* location.href="emailCheckNumSend.do?email=" + email; */
+		$("#check").show();
+		$("#check2").show();
+		
+		}
+	});
+	
+	
+	
+	//이메일 인증번호 일치 여부
+	var okEmail = 0;
+	$("#check2").click(function(){
+		console.log(m);
+	            if($("#check1").val() == m){
+	            	swal("인증이 완료되었습니다.");
+	            	
+	            	okEmail = 1;
+	            }else if($("#check1").val() == ""){
+	            	swal("인증번호를 입력해주세요!");
+	            }else{
+	            	swal("인증번호가 틀렵습니다!")
+	            	okEmail = 2;
+	            	$("#mpwd").val("");
+	            }
+	});
+	
+	
+	
+	//주소 검색
+	$("#mAdd").click(function(){
+		 new daum.Postcode({
+		        oncomplete: function(data) {
+
+	                // 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
+	                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+	                var roadAddr = data.roadAddress; // 도로명 주소 변수
+	                var extraRoadAddr = ''; // 참고 항목 변수
+
+	                // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+	                // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+	                if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+	                    extraRoadAddr += data.bname;
+	                }
+	                // 건물명이 있고, 공동주택일 경우 추가한다.
+	                if(data.buildingName !== '' && data.apartment === 'Y'){
+	                   extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+	                }
+	                // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+	                if(extraRoadAddr !== ''){
+	                    extraRoadAddr = ' (' + extraRoadAddr + ')';
+	                }
+
+	                // 우편번호와 주소 정보를 해당 필드에 넣는다.
+	                document.getElementById('mAddress1').value = data.zonecode;
+	                document.getElementById('mAddress2').value = roadAddr + data.jibunAddress + extraRoadAddr;
+	
+
+	                var guideTextBox = document.getElementById("guide");
+	                // 사용자가 '선택 안함'을 클릭한 경우, 예상 주소라는 표시를 해준다.
+	                if(data.autoRoadAddress) {
+	                    var expRoadAddr = data.autoRoadAddress + extraRoadAddr;
+	                    guideTextBox.innerHTML = '(예상 도로명 주소 : ' + expRoadAddr + ')';
+	                    guideTextBox.style.display = 'block';
+
+	                } else if(data.autoJibunAddress) {
+	                    var expJibunAddr = data.autoJibunAddress;
+	                    guideTextBox.innerHTML = '(예상 지번 주소 : ' + expJibunAddr + ')';
+	                    guideTextBox.style.display = 'block';
+	                } else {
+	                    guideTextBox.innerHTML = '';
+	                    guideTextBox.style.display = 'none';
+	                }
+	            }
+		        
+		    }).open();
+		
+	})
+	
+	
+	
+	//필수입력사항 입력 검사
+	function erchk() {
+			//필수입력값 입력유무 조사
+			if($("#mid").val()!="" 
+				&& $("#mpwd").val()!="" && $("#mpwd22").val()!="" && $("#mName").val()!="" 
+				&& $("#mNick").val()!="" && $("#email1").val()!="" && $("#email2").val()!=""
+				&& $("#mBirthDay").val()!="" && $("#mPhone").val()!=""  && $("#mGender").val()!=""
+				&& $("#mAddress1").val()!="" && $("#mAddress2").val()!=""&& $("#mAddress3").val()!=""&& $("#mpr").val()!=""){
+				//중복확인 유무 조사
+				if(i == 1){
+					//비밀번호 일치 여부 조사
+					if($("#mpwd").val()==$("#mpwd22").val()){
+						if(okEmail == 1){
+							$("#email").val($("#mEmail").val() + "@" + $("#mEmail2").val());
+							$("#mGender").val(mGender);
+							
+					        var queryString = $("form[name=sub1]").serialize() ;
+					        
+					        $.ajax({
+					            type : 'post',
+					            url : 'insert.me',
+					            data : queryString,
+					            error: function(xhr, status, error){
+					                alert(error);
+					            },
+					            success : function(data){
+					                swal("둘이두리 회원가입을 축하합니다! 당신의 행복나눔을 응원합니다!").then(function(){
+					                	location.href="nanumLogin.me";
+					                });
+					            },
+					        });
+
+						}else{
+							swal("이메일을 인증해 주세요!");
+						}
+
+					}else{
+						swal("비밀번호가 일치하지 않습니다!");
+						$("#mpwd2").val("");
+						$("#mpwd22").val("");
+					}
+				
+				
+					
+				}else{
+					
+					swal("중복확인을 해주세요!");
+				}
+					
+				
+			}else{
+				swal("필수 입력 사항을 입력해 주세요!");
+			}
+		   
+  }
 
 
 </script>

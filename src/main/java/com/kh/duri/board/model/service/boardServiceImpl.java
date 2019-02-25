@@ -113,6 +113,7 @@ public class boardServiceImpl implements boardService {
 
 	@Override
 	public int insertCloud(Board b) throws BoardException {
+		
 		int result = bd.insertCloud(sqlSession,b);
 		
 		return result;	

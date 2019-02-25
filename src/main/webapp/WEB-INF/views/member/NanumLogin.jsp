@@ -403,6 +403,21 @@ input {
 	border: 1px solid white;
 	cursor: pointer;
 }
+
+	
+	#gender1:hover{
+		cursor:pointer;
+		background:lightblue;
+		color:white;
+		border:1px solid white;
+	}
+	#gender2:hover{
+		cursor:pointer;
+		background:lightpink;
+		color:white;
+		border:1px solid white;
+	}
+	
 </style>
 </head>
 <body>
@@ -447,7 +462,7 @@ input {
       <h1>Join Member</h1>
     </div>
     <div class="form-content">
-      <form id="joinForm" name="sub1" action="joinNanum.me" method="post">
+      <form id="joinForm" name="sub1" action="insert.me" method="post">
 		<table class="boardWrite wth700 mr_auto mt30"><!-- boardWrite S-->
 			<colgroup>
 				<col style="width:20%;">
@@ -503,7 +518,7 @@ input {
 			</tr>
 
 			<tr>
-				<th scope="row">휴대폰번호</th>
+				<th scope="row">*휴대폰번호</th>
 				<td>
 					<span>
 						<input id="mPhone" name="mPhone" type="text" placeholder="-없이 입력">
@@ -519,7 +534,7 @@ input {
 				<td>
 					<input id="mEmail2" name="email2" class="wth100" type="text" required="required">
 				</td>
-				<td>
+				<td><input type="hidden" id="email" name="email"></td>
 			</tr>
 			
 			
@@ -541,31 +556,20 @@ input {
 				</td>
 			</tr>
 			<tr>
-					
-								<%!
-
-						public int getRandom(){
-							int randomCode=0;
-							randomCode = (int)Math.floor((Math.random()*99999-10000+1))+10000;
-							return randomCode;
-						}
-					%>
-								<td><input type="hidden" value="<%=getRandom()%>"
-									id="randomCode"></td>
+					<td></td>
 								<td><input id="check" type="text" placeholder="인증번호를 입력하세요">
 								</td>
 								<td><span id="check2"> &nbsp;&nbsp;<a
 										id="idCheckBtn" class="btn btn-primary">인증하기</a> <span
 										id="idCheckMsg"></span>
 								</span></td>
+
 							</tr>
 							<tr>
-								<th scope="row">*주민등록번호</th>
-								<td><input type="text" size="25" name="mBirthDay"
-									id="mBirthDay" maxlength="6" required="required"></td>
-								<td><input type="text" size="25" name="mGender"
-									id="mGender" maxlength="1" required="required"></td>
-								<td>******</td>
+								<th scope="row">*성별</th>
+								<td><input type="button" name="mGender1" id="gender1" value="남" ></td>
+								<td><input type="button" name="mGender2" id="gender2" value="여"></td>
+								<td><input type="hidden" id="mGender" name="mGender"></td>
 							</tr>
 
 
@@ -626,27 +630,8 @@ $(document).ready(function() {
 	});
 	
 	
-	//필수입력사항 입력 검사
-	function erchk() {
-			if($("#mid2").val()!="" 
-				&& $("#mpwd2").val()!="" && $("#mpwd22").val()!="" && $("#mName").val()!="" 
-				&& $("#mNickName").val()!="" && $("#mEmail").val()!="" && $("#mEmail2").val()!=""
-				&& $("#mBirthDay").val()!="" && $("#mGender").val()!="" ){
-				if($("#mGender").val()=="1" || $("#mGender").val()=="3"){
-					$("#mGender").val("M");
-					document.sub1.submit();	
-				}else if($("#mGender").val()=="2" || $("#mGender").val()=="4"){
-					$("#mGender").val("F");
-					document.sub1.submit();	
-				}
-				
-			}else{
-				swal("필수 입력 사항을 입력해 주세요!");
-			}
-		   
-  }
-	
-
+	//아이디 중복체크
+	var i = 0;
 	function duplicationCheck(){
 		var mid2=$("#mid2").val();
 		console.log(mid2);
@@ -667,7 +652,7 @@ $(document).ready(function() {
 	    
 	                } else{
 	                    swal("사용가능한 아이디입니다.");
-	                    
+	                    i = 1;
 	                }
 			},
 			error:function(status){
@@ -680,48 +665,141 @@ $(document).ready(function() {
 		return false;
 	}	
 	}
-
-
-
-
-	/* 	var idck = 0;
-		$(function() {
-		    //idck 버튼을 클릭했을 때 
-		    $("#idCheckBtn3").click(function() {
-		        
-		        //userid 를 param.
-		        var mid2 =  $("#mid2").val(); 
-		        console.log(mid2);
-		        
-		        $.ajax({
-		            async: true,
-		            type : 'POST',
-		            data : mid2,
-		            url : "idcheck.me",
-		            dataType : "json",
-		            contentType: "application/json; charset=UTF-8",
-		            success : function(data) {
-		                if (data > 0) {
-		                   console.log(data.cnt);
-		                    alert("아이디가 존재합니다. 다른 아이디를 입력해주세요.");
-		                    
-		    
-		                } else{
-		                    alert("사용가능한 아이디입니다.");
-		      
-		                    //아이디가 중복하지 않으면  idck = 1 
-		                    idck = 1;
-		                    
-		                }
-		            },
-		            error : function(error) {
-		                
-		                alert("error : " + error);
-		            }
-		        });
-		    });
-		}); */
 	
+	var mGender = null;
+	//성별 체크
+	
+	$("#gender1").click(function(){
+		$("#gender1").css("background","lightblue").css("color","white").css("border","white");
+		mGender = "M";
+		console.log(mGender);
+	});
+	
+	$("#gender2").click(function(){
+		$("#gender2").css("background","lightpink").css("color","white").css("border","white");
+		mGender = "F";
+		console.log(mGender);
+	});
+	
+	
+	
+	var m = null;
+
+
+	//이메일 인증 버튼 클릭시 랜덤 번호 전송
+	$("#sendEmail").click(function(){
+		if($("#mEmail").val()=="" || $("#mEmail2").val()==""){
+			swal("이메일을 입력해주세요!");
+		}else{
+			
+			var email = null;
+		email = $("#mEmail").val() + "@" + $("#mEmail2").val();
+		console.log(email);
+		$.ajax({
+			url:"emailCheckNumSend.do",
+			type:"post",
+			data:{email:email},
+			success:function(data){
+				console.log(data);
+	                   console.log(data);
+	                   swal("메일이 발송되었습니다.")
+	               		m = data;
+
+	   
+			},
+			error:function(status){
+				console.log(status);
+			}
+		
+			
+		});
+		/* location.href="emailCheckNumSend.do?email=" + email; */
+		$("#check").show();
+		$("#check2").show();
+		
+		}
+	});
+	
+	
+	//이메일 인증번호 일치 여부
+	var okEmail = 0;
+	$("#check2").click(function(){
+	            if($("#check").val() == m){
+	            	swal("인증이 완료되었습니다.");
+	            	$("#sendEmail").unbind("click"); //a태그 비활성화
+	            	$("#sendEmail").css("background","gray").css("color","white").css("cursor","default").css("border","solid 1px gray");
+	            	$("#idCheckBtn").css("background","gray").css("color","white").css("cursor","default").css("border","solid 1px gray");
+	            	okEmail = 1;
+	            }else if($("#check").val() == ""){
+	            	swal("인증번호를 입력해주세요!");
+	            }else{
+	            	swal("인증번호가 틀렵습니다!")
+	            	okEmail = 2;
+	            	$("#mpwd2").val("");
+	            }
+	});
+	
+	
+	
+	//필수입력사항 입력 검사
+	function erchk() {
+			//필수입력값 입력유무 조사
+			if($("#mid2").val()!="" 
+				&& $("#mpwd2").val()!="" && $("#mpwd22").val()!="" && $("#mName").val()!="" 
+				&& $("#mNickName").val()!="" && $("#mEmail").val()!="" && $("#mEmail2").val()!=""
+				&& $("#mBirthDay").val()!="" && $("#mPhone")!="" && mGender!="" ){
+				//중복확인 유무 조사
+				if(i == 1){
+					//비밀번호 일치 여부 조사
+					if($("#mpwd2").val()==$("#mpwd22").val()){
+						if(okEmail == 1){
+							$("#email").val($("#mEmail").val() + "@" + $("#mEmail2").val());
+							$("#mGender").val(mGender);
+							
+					        var queryString = $("form[name=sub1]").serialize() ;
+					        
+					        $.ajax({
+					            type : 'post',
+					            url : 'insert.me',
+					            data : queryString,
+					            error: function(xhr, status, error){
+					                alert(error);
+					            },
+					            success : function(data){
+					                swal("둘이두리 회원가입을 축하합니다! 당신의 행복나눔을 응원합니다!").then(function(){
+					                	location.href="nanumLogin.me";
+					                });
+					            },
+					        });
+
+						}else{
+							swal("이메일을 인증해 주세요!");
+						}
+
+					}else{
+						swal("비밀번호가 일치하지 않습니다!");
+						$("#mpwd2").val("");
+						$("#mpwd22").val("");
+					}
+				
+				
+					
+				}else{
+					
+					swal("중복확인을 해주세요!");
+				}
+					
+				
+			}else{
+				swal("필수 입력 사항을 입력해 주세요!");
+			}
+		   
+  }
+		
+
+
+
+
 
 
 
