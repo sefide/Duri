@@ -117,7 +117,7 @@
                 <div class="col-md-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                             	증빙서류 기간 내 미갱신 행복두리 목록	
+                             	증빙서류 갱신 행복두리 목록	
                         </div>
                         <div class="panel-body">
                             <div >
@@ -130,7 +130,6 @@
                                             <th>이름</th>
                                             <th>성별</th>
                                             <th>정상갱신 날짜</th>
-                                            <th>갱신 여부</th>
                                             <th>상세보기</th>
                                         </tr>
                                     </thead>
@@ -142,7 +141,6 @@
                                             <td class="center">한의희</td>
                                             <td class="center">W</td>
                                             <td class="center">2018/10/11</td>
-                                            <td class="center">제출</td>
                                             <td class="center"><a href="adminHappyAccDetail.ad" class="btn btn-default btn-sm">상세보기</a></td>
                                         </tr>
                                         
@@ -159,7 +157,7 @@
                 <div class="col-md-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                             	증빙서류 기간 만료 자격정지 행복두리 목록	
+                             	증빙서류 비갱신 행복두리 목록	
                         </div>
                         <div class="panel-body">
                             <div >
@@ -172,7 +170,7 @@
                                             <th>이름</th>
                                             <th>성별</th>
                                             <th>정상갱신 날짜</th>
-                                            <th>갱신 여부</th>
+                                            <th>회원 상태</th>
                                             <th>상세보기</th>
                                         </tr>
                                     </thead>

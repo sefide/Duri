@@ -1,9 +1,12 @@
 package com.kh.duri.admin.model.dao;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
 
+import com.kh.duri.Nanummember.model.vo.PageInfo;
 import com.kh.duri.admin.model.exception.ListException;
 import com.kh.duri.admin.model.vo.RefundList;
 import com.kh.duri.admin.model.vo.adminFundingList;
@@ -40,8 +43,13 @@ public interface adminAtcDao {
 	int adminCrowdDeny(SqlSessionTemplate sqlsession, adminFundingList af);
 	//크라우드 펀딩 승인 버튼
 	int adminCrowdApprove(SqlSessionTemplate sqlsession, adminFundingList af);
-	/*//관리자 환급하기 목록
-	List<RefundList> adminRefundList(SqlSessionTemplate sqlsession)throws ListException;*/
+	//관리자 환급하기 목록
+	List<RefundList> adminRefundList(SqlSessionTemplate sqlsession,RefundList r,PageInfo pi)throws ListException;
+	//환급하기 갯수 조회
+	int selectItemDonateCount(SqlSessionTemplate sqlsession, RefundList r);
+	//통계 페이지 - bar chart 데이터
+	List<HashMap<String, String>> getBarChartList(SqlSessionTemplate sqlsession);
+	
 
 	
 }

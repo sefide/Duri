@@ -23,7 +23,7 @@
 
             /* MORRIS BAR CHART
 			-----------------------------------------*/
-            Morris.Bar({
+/*            Morris.Bar({
                 element: 'morris-bar-chart',
                 data: [{
                     y: '2006',
@@ -65,7 +65,7 @@
                 resize: true
             });
 	 
-
+*/
 
             /* MORRIS DONUT CHART
 			----------------------------------------*/

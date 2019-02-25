@@ -1,11 +1,14 @@
 package com.kh.duri.admin.model.service;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kh.duri.Nanummember.model.vo.PageInfo;
 import com.kh.duri.admin.model.dao.adminAtcDao;
 import com.kh.duri.admin.model.exception.ListException;
 import com.kh.duri.admin.model.vo.RefundList;
@@ -103,11 +106,24 @@ public class adminAtcServiceImpl implements adminAtcService{
 
 		return result;
 	}
-	/*//관리자 환급하기 목록
+	//관리자 환급하기 목록
 	@Override
-	public List<RefundList> adminRefundList() throws ListException {
-		List<RefundList>list = aad.adminRefundList(sqlsession);
+	public List<RefundList> adminRefundList(RefundList r,PageInfo pi) throws ListException {
+		List<RefundList>list = aad.adminRefundList(sqlsession,r,pi);
 		return list;
 	}
-*/
+
+	//통계 페이지 - bar chart 데이터
+	@Override
+	public List<HashMap<String, String>> getBarChartList() {
+		return aad.getBarChartList(sqlsession);
+	}
+	//관리자 환급하기 목록 갯수 조회
+	@Override
+	public int selectRefundPageCount(RefundList r) {
+		
+		int listCount = aad.selectItemDonateCount(sqlsession, r);
+		
+		return listCount;
+	}
 }

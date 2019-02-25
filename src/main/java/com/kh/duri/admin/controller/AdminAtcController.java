@@ -1,5 +1,6 @@
 package com.kh.duri.admin.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -13,12 +14,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.kh.duri.Nanummember.model.vo.PageInfo;
 import com.kh.duri.admin.model.exception.ListException;
 import com.kh.duri.admin.model.service.adminAtcService;
+import com.kh.duri.admin.model.vo.Pagination;
 import com.kh.duri.admin.model.vo.RefundList;
 import com.kh.duri.admin.model.vo.adminFundingList;
 import com.kh.duri.admin.model.vo.adminMember;
 import com.kh.duri.admin.model.vo.adminQnA;
+import com.kh.duri.happymember.model.exception.MypageException;
+import com.kh.duri.happymember.model.vo.Funding;
+import com.kh.duri.member.model.vo.Member;
 
 
 
@@ -156,8 +162,19 @@ public class AdminAtcController {
 	}
 	
 	//관리자 메인페이지
+	@SuppressWarnings("rawtypes")
 	@RequestMapping("adminMain.ad")
-	public String adminMain() {
+	public String adminMain(Model model) {
+		
+		List<HashMap<String,String>> barChartList;
+		barChartList = aas.getBarChartList();
+		
+		model.addAttribute("barChartList", barChartList);
+		
+		
+		
+		
+		List<adminFundingList> CrowdFundGoodsInfo;
 		return "admin/adminMain";
 	}
 	
@@ -260,35 +277,56 @@ public class AdminAtcController {
 	}
 	
 	
-	/*//관리자 환급페이지
+	//관리자 환급페이지
 	@RequestMapping("adminRefund.ad")
-	public @ResponseBody HashMap<String, Object> adminRefundList(@RequestParam int currentPage,Model model, HttpServletRequest request, HttpServletResponse response) {
+	public String adminRefundList(Model model) {
 		
-
+		try {
+			
+			return "admin/adminRefund";
+			
+			}catch(Exception e) {
+				model.addAttribute("msg", e.getMessage());
+				return "admin/adminRefund";
+				
+			}
+		
+	}
+	//환불 목록 ajax
+	@RequestMapping("adminRefund_ajax.ad")
+	public @ResponseBody HashMap<String, Object> adminRefundList(@RequestParam int currentPage, RefundList r, Model model, HttpServletRequest request, HttpServletResponse response){
+		
+		String rstatus = request.getParameter("rstatus");
+		r.setrStatus(rstatus);
+		
 		if(request.getParameter("currentPage") != null) {
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		}
 		
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		
+		
 		try {
-			List<RefundList>adminRefundList = aas.adminRefundList();
 			
+			int listCount = aas.selectRefundPageCount(r);
 			
+			PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
+			
+			List<RefundList> adminRefundList = aas.adminRefundList(r,pi);
 			map.put("adminRefundList", adminRefundList);
-			
+			map.put("pi", pi);
+		
 			return map;
+		} catch (Exception e){
+			map.put("msg", e.getMessage());
+			return map;
+		}
 			
-			}catch(ListException e) {
-				map.put("msg", e.getMessage());
-				
-				return map;
-			}
-		
-		
 		
 	}
-	*/
+		
+	
+	
 	
 
 	

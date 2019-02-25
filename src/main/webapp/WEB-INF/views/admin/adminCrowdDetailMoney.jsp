@@ -158,7 +158,7 @@
 										</tr>
 										<tr>
 											<td class="total" >펀딩 설정기간</td>
-											<td id="Term">${CrowdFundInfo.fLeftDay}일</td>
+											<td id="Term">${CrowdFundInfo.fLeftDay}</td>
 										</tr>
 										
 										<tr>

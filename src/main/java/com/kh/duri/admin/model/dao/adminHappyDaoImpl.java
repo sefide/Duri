@@ -27,12 +27,6 @@ public class adminHappyDaoImpl implements adminHappyDao{
 		
 		return sqlsession.selectOne("Admin.adminHappyDetail",m);
 	}
-	//행복두리 승인목록 -신규리스트
-	@Override
-	public List<adminMember> adminHappyNewList(SqlSessionTemplate sqlsession) throws ListException {
-		
-		return sqlsession.selectList("Admin.adminHappyNewList");
-	}
 	//행복두리 상세보기 - 정기후원 내역
 	@Override
 	public List<adminDirectList> HappydirectList(SqlSessionTemplate sqlsession, adminDirectList ad)throws ListException {
@@ -50,6 +44,30 @@ public class adminHappyDaoImpl implements adminHappyDao{
 	public List<adminFundingHistoryList> HappyfundingGoodsList(SqlSessionTemplate sqlsession,adminFundingHistoryList ahf) throws ListException {
 		
 		return sqlsession.selectList("Admin.adminHappyfundingGoodsList",ahf);
+	}
+	//행복두리 승인목록 -신규리스트
+	@Override
+	public List<adminMember> adminHappyNewList(SqlSessionTemplate sqlsession) throws ListException {
+		
+		return sqlsession.selectList("Admin.adminHappyNewList");
+	}
+	//행복두리 승인목록 -자기소개 갱신 목록
+	@Override
+	public List<adminMember> adminHappyMprList(SqlSessionTemplate sqlsession) throws ListException {
+
+		return sqlsession.selectList("Admin.adminHappyMprList");
+	}
+	//행복두리 승인목록 -증빙서류 갱신 목록
+	@Override
+	public List<adminMember> adminHappyAttachList(SqlSessionTemplate sqlsession) throws ListException {
+
+		return sqlsession.selectList("Admin.adminHappyAttachList");
+	}
+	//행복두리 승인목록 -증빙서류 비갱신 목록
+	@Override
+	public List<adminMember> adminHappyNotAttachList(SqlSessionTemplate sqlsession) throws ListException {
+
+		return sqlsession.selectList("Admin.adminHappyNotAttachList");
 	}
 	
 

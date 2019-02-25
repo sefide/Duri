@@ -16,19 +16,20 @@
 
 
 //환불전ajax
-function refundbefore(currentPage) {
-	var currentPage = 1;
+var bfPage = 1;
+function refundbefore(bfPage) {
 		$.ajax({
-			url : "adminRefund.ad",
+			url : "adminRefund_ajax.ad",
 			type :"get",
-			data: {currentPage:currentPage}
+			data :{rstatus:'Y',currentPage:bfPage},
 			success : function (data) {
 				
 				var beforeListHtml = [];
 				var no =0;
+				var rownum = 1;
 				for(var i=0; i<data.adminRefundList.length; i++){
 					beforeListHtml.push('<tr>');
-					beforeListHtml.push('	<th scope="row">' + (i+1) + '</th>');
+					beforeListHtml.push('	<th scope="row">' + (rownum++) + '</th>');
 					beforeListHtml.push('	<td class="center" style="display: none;">' +data.adminRefundList[i].rNo + '</td>');
 					beforeListHtml.push('	<td class="center">' +data.adminRefundList[i].mid + '</td>');
 					beforeListHtml.push('	<td class="center">' +data.adminRefundList[i].mname + '</td>');
@@ -39,75 +40,68 @@ function refundbefore(currentPage) {
 					beforeListHtml.push('	<td class="center">' +data.adminRefundList[i].rValue+"원"+'</td>');
 					beforeListHtml.push('	<td class="center"><a href="complete()" class="btn btn-warning btn-sm">환급진행하기</a></td>');
 					beforeListHtml.push('</tr>');
-					
+					}
 
-				}
 				$("#beforeList").html("");//이전틀 지우고
 				$("#beforeList").append(beforeListHtml.join(''));//""를 기준으로 배열에 담긴 데이터 꺼내오기
 				
 				//페이징 처리
-				var beforeListPageHtml = [];	
-				var currentPage = data.pi.currentPage;
+				var bfPageListHtml = [];	
+				bfPage = data.pi.currentPage;
 				//<<, <버튼 만들기
-				beforeListPageHtml.push('<span><a class="num" onclick="itemTable(1);">&lt;&lt;</a></span>');
-					if(currentPage <= 1){
-						beforeListPageHtml.push('<span><a class="num" disabled>&lt;</a></span>');
-					}else{//1보다 큰 수의 페이지면
-						beforeListPageHtml.push('<span><a class="num" onclick="itemTable('+(currentPage-1)+')">&lt;</a></span>');
-					}
-			
-				//숫자 버튼 만들기
+				if(bfPage <= 1){
+					bfPageListHtml.push('<li class="paginate_button previous disabled" id="DataTables_Table_0_previous"><a href="#">Previous</a></li>');
+				}else{//1보다 큰 수의 페이지면
+					bfPageListHtml.push('<li class="paginate_button previous" id="DataTables_Table_0_previous"><a href="javascript:;" onclick="javascript:refundbefore(' + (bfPage-1) + ')">Previous</a></li>');
+				}
+				
+					//숫자 버튼 만들기
 				for(var i = data.pi.startPage; i <= data.pi.endPage; i++ ){
-					if(i == currentPage){
-						beforeListPageHtml.push('<span><a class="num on" disabled>'+i+'</a></span>');
+					if(i == bfPage){
+						
+						bfPageListHtml.push('<li class="paginate_button active"><a href="#">' + i + '</a></li>');
 					}else{
-						beforeListPageHtml.push('<span><a class="num" onclick="itemTable('+i+')">'+i+'</a></span>');
+						bfPageListHtml.push('<li class="paginate_button"><a href="javascript:;" onclick="refundbefore(' + i + ')">' + i + '</a></li>');
 					}
 				}
 				//>>, >버튼 만들기
-				if(currentPage >= data.pi.maxPage){
-					beforeListPageHtml.push('<span><a class="num" disabled>&gt;</a></span>');
+				if(bfPage >= data.pi.maxPage){
+					bfPageListHtml.push('<li class="paginate_button next disabled" id="DataTables_Table_0_next"><a href="#">Next</a></li>');
 				}else{
-					beforeListPageHtml.push('<span><a class="num" onclick="itemTable('+(currentPage+1)+')">&gt;</a></span>');
+					bfPageListHtml.push('<li class="paginate_button next" id="DataTables_Table_0_next"><a href="javascript:;" onclick="javascript:refundbefore(' + (bfPage+1) + ')">Next</a></li>');
 				}
-				beforeListPageHtml.push('<span><a class="num" onclick="itemTable('+data.pi.maxPage+');">&gt;&gt;</a></span>');
 				
-				
-				$("#BeforePagingArea").html("");
-				$("#BeforePagingArea").append(beforeListPageHtml.join(''));
-					
-				
-				 addBtnEvent();//버튼 함수 불러오기
-				 
-				 
-				 
+				$("#BeforePagingArea").children("ul").html("");
+				$("#BeforePagingArea").children("ul").append(bfPageListHtml.join(''));
 			}
 		});
 	}
 	
-/* //환불후 ajax
-function refundafter() {
-		
+ //환불후 ajax
+ var afPage = 1;
+function refundafter(afPage) {
+	 
 		$.ajax({
-			url : "${pageContext.request.contextPath}/adminRefund.ad",
+			url : "adminRefund_ajax.ad",
 			type :"get",
+			data :{rstatus:'N',currentPage:afPage},
 			success : function (data) {
 				
 				var afterListHtml = [];
 				var no =0;
-				for(var i=0; i<10; i++){
+				var rownum = 1;
+				for(var i=0; i<data.adminRefundList.length; i++){
 					afterListHtml.push('<tr>');
-					afterListHtml.push('	<th scope="row">' + (i+1) + '</th>');
-					afterListHtml.push('	<td class="center">' +data[i].mid + '</td>');
-					afterListHtml.push('	<td class="center">' +data[i].mname + '</td>');
-					afterListHtml.push('	<td class="center">' +data[i].rName+ '</td>');
-					afterListHtml.push('	<td class="center">' +data[i].rDate+ '</td>');
-					afterListHtml.push('	<td class="center">' +data[i].rAccount+ '</td>');
-					afterListHtml.push('	<td class="center">' +data[i].rBank+"은행"+ '</td>');
-					afterListHtml.push('	<td class="center" >' +data[i].rValue+"원"+'</td>');
-					afterListHtml.push('	<td class="center" style="width: 50px;">환급완료</td>');
+					afterListHtml.push('	<th scope="row">' + (rownum++) + '</th>');
+					afterListHtml.push('	<td class="center">' +data.adminRefundList[i].mid + '</td>');
+					afterListHtml.push('	<td class="center">' +data.adminRefundList[i].mname + '</td>');
+					afterListHtml.push('	<td class="center">' +data.adminRefundList[i].rName+ '</td>');
+					afterListHtml.push('	<td class="center">' +data.adminRefundList[i].rDate+ '</td>');
+					afterListHtml.push('	<td class="center">' +data.adminRefundList[i].rAccount+ '</td>');
+					afterListHtml.push('	<td class="center">' +data.adminRefundList[i].rBank+"은행"+ '</td>');
+					afterListHtml.push('	<td class="center" >' +data.adminRefundList[i].rValue+"원"+'</td>');
+					afterListHtml.push('	<td class="center" style="width: 100px;">환급완료</td>');
 					afterListHtml.push('</tr>');
-					
 
 				    
                  
@@ -116,17 +110,44 @@ function refundafter() {
 				$("#afterList").append(afterListHtml.join(""));//""를 기준으로 배열에 담긴 데이터 꺼내오기
 				
 		
-				 
+				//페이징 처리
+				var afPageListHtml = [];	
+				afPage = data.pi.currentPage;
+				//<<, <버튼 만들기
+				if(afPage <= 1){
+					afPageListHtml.push('<li class="paginate_button previous disabled" id="DataTables_Table_0_previous"><a href="#">Previous</a></li>');
+				}else{//1보다 큰 수의 페이지면
+					afPageListHtml.push('<li class="paginate_button previous" id="DataTables_Table_0_previous"><a href="javascript:;" onclick="javascript:refundafter(' + (bfPage-1) + ')">Previous</a></li>');
+				}
+				
+					//숫자 버튼 만들기
+				for(var i = data.pi.startPage; i <= data.pi.endPage; i++ ){
+					if(i == afPage){
+						
+						afPageListHtml.push('<li class="paginate_button active"><a href="#">' + i + '</a></li>');
+					}else{
+						afPageListHtml.push('<li class="paginate_button"><a href="javascript:;" onclick="refundafter(' + i + ')">' + i + '</a></li>');
+					}
+				}
+				//>>, >버튼 만들기
+				if(afPage >= data.pi.maxPage){
+					afPageListHtml.push('<li class="paginate_button next disabled" id="DataTables_Table_0_next"><a href="#">Next</a></li>');
+				}else{
+					afPageListHtml.push('<li class="paginate_button next" id="DataTables_Table_0_next"><a href="javascript:;" onclick="javascript:refundafter(' + (bfPage+1) + ')">Next</a></li>');
+				}
+				
+				$("#AfterPagingArea").children("ul").html("");
+				$("#AfterPagingArea").children("ul").append(afPageListHtml.join(''));
 				 
 				 
 			}
 		});
 	}
- */
+ 
 
 $(function () {
 	refundbefore(1);
-/* 	refundafter(1); */
+ 	refundafter(1); 
 }); 
 
 </script>
@@ -154,7 +175,7 @@ $(function () {
                         </div>
                         <div class="panel-body">
                             <div >
-                                <table class="table table-striped table-bordered table-hover dataTables-example">
+                                <table class="table table-striped table-bordered table-hover ">
                                     <thead>
                                         <tr>
                                             <th>No</th>
@@ -176,6 +197,9 @@ $(function () {
                                 </table>
                             </div>
                             <div class="pagingArea" align="center" id="BeforePagingArea">
+                            	<ul class="pagination">
+                            	
+                            	</ul>
 							<!-- ajax에서 도는부분 -->
 							</div>
 				
@@ -193,7 +217,7 @@ $(function () {
                         </div>
                         <div class="panel-body">
                             <div >
-                                <table class="table table-striped table-bordered table-hover dataTables-example">
+                                <table class="table table-striped table-bordered table-hover ">
                                     <thead>
                                         <tr>
                                             <th>No</th>
@@ -212,6 +236,13 @@ $(function () {
                                     </tbody>
                                 </table>
                             </div>
+                            <div class="pagingArea" align="center" id="AfterPagingArea">
+                            	<ul class="pagination">
+                            	
+                            	</ul>
+							<!-- ajax에서 도는부분 -->
+							</div>
+				
                         </div>
                     </div>
                     <!--End Advanced Tables -->
