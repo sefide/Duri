@@ -420,8 +420,8 @@
 			//cache: false,
 			contenType : "application/json",
 			data : {
-				"client_id" : "l7xx5a2b2c2836b54004ba419824d3a84b3f",
-				"client_secret" : "39ed8dfb10d145a189376c95addd2986",
+				"client_id" : "MY_KEY",
+				"client_secret" : "MY_SECRET",
 				"grant_type" : grant_type,
 				"scope" : scope
 			},

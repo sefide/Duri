@@ -469,7 +469,7 @@
 	    			</div>
 	    			<div id = "bar1"></div>
 	    			<div align = "right">
-	    				<div id = "txtLeftValue">다음 후원금액 </div> <div id = "nextValue">10000원 </div>
+	    				<div id = "txtLeftValue">다음 후원금액 </div> <div id = "nextValue">0원 </div>
 	    			</div>
     			</div>
     		</div>
@@ -493,6 +493,11 @@
    <jsp:include page="../common/loader.jsp"></jsp:include>
   <script>
   var alertRed = 0;
+  
+  function numberWithCommas(x) {
+	    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+	}
+
   $(document).ready(function() {
 		/* 후원포인트 금액 변경 시 */
 		$("#sponPoint").change(function(){
@@ -519,8 +524,8 @@
 	/* 후원포인트, 잔여포인트 계산 및 표시 */
 	function calValue(){
 		var sPoint = $("#sponPoint").val();
-		$("#sponValue").text(sPoint);
-		$("#leftValue").text(sPoint + "원");
+		$("#sponValue").text(numberWithCommas(sPoint));
+		$("#nextValue").text(numberWithCommas(sPoint) + "원");
 	}
 	
 	/* 후원 출금일 선택 시  */
@@ -560,19 +565,17 @@
 	
 	/* 후원하기 버튼 클릭 시  */
 	$("#btnSpon").click(function(){
-		var leftValue = $("#leftValue").text();
 		var randomUid = generateUUID();
 		var selectDate = $("#selectDate").val();
-		leftValue = leftValue.substring(0, leftValue.length-1);
-
-		if(leftValue < 0){
-			alert("포인트가 부족합니다. 충전해주세요. ");
-		}else if(selectDate == null){
+		
+		if(selectDate == null){
 			alert("다음 결제일을 선택해주세요. ");
 		}else if(!$("#chkinfo1").is(":checked")){
 			alert("정기결제 약관에 동의해주세요.");
 		}else if(!$("#chkinfo2").is(":checked")){
 			alert("수수료 약관에 동의해주세요.");
+		}else if(!$("#chkExplain").is(":checked")){
+			alert("정기후원 방식 고지를 다시 한번 확인해주세요.");
 		}else if(alertRed == 1){
 			//alert("10000원 이상부터 정기후원이 가능합니다.");
 			$('#sponPoint').css('border', '1px solid red').focus()

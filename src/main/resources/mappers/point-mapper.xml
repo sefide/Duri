@@ -398,7 +398,7 @@
 	
 	<!-- 후원글 정보 가져오기 - 물품후원 -->
 	<select id="selectFundItemBoard" resultMap="boardItemResultSet" parameterType="BoardItem">
-		SELECT FNO, FTITLE, FWRITER, MNICK
+		SELECT FNO, FTITLE, FWRITER, MNICK, FSTARTDATE, FENDDATE
 		FROM FUNDING F
 		JOIN MEMBER M ON (M.MNO = F.FWRITER)
 		WHERE FNO = #{fno}
