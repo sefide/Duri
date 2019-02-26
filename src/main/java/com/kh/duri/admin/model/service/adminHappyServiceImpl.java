@@ -38,6 +38,15 @@ public class adminHappyServiceImpl implements adminHappyService{
 		
 		return HappyDetail;
 	}
+	
+	//행복두리 승인 상세 페이지[자개소개 갱신/증빙성 갱신/증빙서 비갱신]
+		@Override
+		public List<adminMember> HappyAccDetail(adminMember m) throws ListException {
+			
+			List<adminMember> HappyAccDetail = ahd.HappyAccDetail(sqlsession, m);
+			
+			return HappyAccDetail;
+		}
 	//행복두리 상세보기 - 정기후원 내역
 	@Override
 	public List<adminDirectList> HappydirectList(adminDirectList ad) throws ListException {
@@ -94,6 +103,7 @@ public class adminHappyServiceImpl implements adminHappyService{
 		
 		return list;
 	}
+	
 
 	
 }

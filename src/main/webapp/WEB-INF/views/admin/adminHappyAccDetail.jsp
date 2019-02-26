@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<meta content="" name="description" />
     <meta content="webthemez" name="author" />
-    <title>행복두리 관리 상세 페이지</title>
+    <title>행복두리 관리 승인 상세 페이지</title>
     <style type="text/css">
 .total{
 	background-color: #f7faff;

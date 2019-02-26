@@ -60,7 +60,54 @@ public class AdminHappyController {
 			}
 		
 	}
-	//행복두리 전체 목록 조회
+	//행복두리 승인 상세페이지[자기소개 갱신/증빙서류갱신/증빙서류비갱신]
+	@RequestMapping("adminHappyAccDetail.ad")
+	public String adminHappyAccDetailList(HttpServletRequest request, HttpServletResponse response,Model model,Model model1,Model model2,Model model3,
+			adminMember m,adminDirectList ad, adminFundingHistoryList ahf) {
+		
+		int Mnonum = Integer.parseInt(request.getParameter("Mnonum"));
+		String Statusnum = request.getParameter("Statusnum");
+		String num = request.getParameter("num");
+		
+		List<adminDirectList> directList;
+		List<adminFundingHistoryList> fundingMoneyList;
+		List<adminFundingHistoryList> fundingGoodsList;
+		m.setMno(Mnonum);
+		m.setmTakeStatus(Statusnum);
+		m.setNumStatus(num);
+		ad.setDh_Mno_take(Mnonum);
+		ahf.setfWriter(Mnonum);
+		
+		List<adminMember> HappyAccDetail;
+		
+		try {
+			HappyAccDetail = ahs.HappyAccDetail(m);
+			directList = ahs.HappydirectList(ad);
+			fundingMoneyList = ahs.HappyfundingMoneyList(ahf);
+			fundingGoodsList = ahs.HappyfundingGoodsList(ahf);
+			
+			model.addAttribute("HappyAccDetail", HappyAccDetail);
+			model1.addAttribute("directList", directList);
+			model2.addAttribute("fundingMoneyList", fundingMoneyList);
+			model3.addAttribute("fundingGoodsList", fundingGoodsList);
+			
+			
+			return "admin/adminHappyAccDetail";
+			
+		} catch (ListException e) {
+			model.addAttribute("msg", e.getMessage());
+			model1.addAttribute("msg", e.getMessage());
+			model2.addAttribute("msg", e.getMessage());
+			model3.addAttribute("msg", e.getMessage());
+			
+			return "admin/adminHappyAccDetail";
+		}
+		
+		
+	}
+	
+	
+	//행복두리 정상회원 목록 조회
 	@RequestMapping("adminHappyAll.ad")
 	public String adminHappyAllList(Model model) {
 		
@@ -122,14 +169,8 @@ public class AdminHappyController {
 		
 		
 	}
-	@RequestMapping("adminHappyAccDetail.ad")
-	public String admin17() {
-		return "admin/adminHappyAccDetail";
-	}
-	@RequestMapping("adminNewHappyDetail.ad")
-	public String admin15() {
-		return "admin/adminNewHappyDetail";
-	}
+	
+	
 	
 	
 	
