@@ -105,21 +105,20 @@
 					</thead>
 					<tbody>
 						<c:forEach items="${moneyList}" var = "moneyList" varStatus="">
-							<tr>
-							<td><c:out value="${moneyList.fTitle}"/></td>
-							<td></td>
-							<td><c:out value="${moneyList.fhValue}"/></td>
-							
-							<td><c:out value="${moneyList.fhDate}"></c:out></td>
-							<c:choose>
-								<c:when test="${moneyList.fStatus eq 'GOAL'}">
-									<td>O</td>
-								</c:when>
-								<c:otherwise>
-									<td>X</td>
-								</c:otherwise>
-							</c:choose>						
-						</tr>
+							<tr onclick="goFund(${moneyList.fNo});">
+								<td><c:out value="${moneyList.fTitle}"/></td>
+								<td></td>
+								<td><c:out value="${moneyList.fhValue}"/></td>							
+								<td><c:out value="${moneyList.fhDate}"></c:out></td>
+								<c:choose>
+									<c:when test="${moneyList.fStatus eq 'GOAL'}">
+										<td>O</td>
+									</c:when>
+									<c:otherwise>
+										<td>X</td>
+									</c:otherwise>
+								</c:choose>						
+							</tr>
 						</c:forEach>
 					</tbody>
 				</table>				
@@ -181,21 +180,21 @@
 					</thead>
 					<tbody>
 						<c:forEach items="${itemList}" var = "itemList" varStatus="">
-							<tr>
-							<td><c:out value="${itemList.fTitle}"/></td>
-							<td></td>
-							<td><c:out value="${itemList.iName}"/></td>
-							
-							<td><c:out value="${itemList.fhDate}"></c:out></td>
-							<c:choose>
-								<c:when test="${itemList.fStatus eq 'GOAL'}">
-									<td>O</td>
-								</c:when>
-								<c:otherwise>
-									<td>X</td>
-								</c:otherwise>
-							</c:choose>						
-						</tr>
+							<tr onclick="goItemFund(${itemList.fNo});">							
+								<td><c:out value="${itemList.fTitle}"/></td>
+								<td></td>
+								<td><c:out value="${itemList.iName}"/></td>
+								
+								<td><c:out value="${itemList.fhDate}"></c:out></td>
+								<c:choose>
+									<c:when test="${itemList.fStatus eq 'GOAL'}">
+										<td>O</td>
+									</c:when>
+									<c:otherwise>
+										<td>X</td>
+									</c:otherwise>
+								</c:choose>						
+							</tr>
 						</c:forEach>
 					</tbody>
 				</table>				
@@ -258,20 +257,20 @@
 					</thead>
 					<tbody>
 						<c:forEach items="${endMoneyList}" var = "endMoneyList" varStatus="">
-							<tr>
-							<td><c:out value="${endMoneyList.fTitle}"/></td>
-							<td></td>
-							<td><c:out value="${endMoneyList.fhValue}"/></td>
-							
-							<td><c:out value="${endMoneyList.fhDate}"></c:out></td>
-							<c:choose>
-								<c:when test="${endMoneyList.fStatus eq 'GOAL'}">
-									<td>O</td>
-								</c:when>
-								<c:otherwise>
-									<td>X</td>
-								</c:otherwise>
-							</c:choose>						
+							<tr onclick="goFund(${endMoneyList.fNo});">
+								<td><c:out value="${endMoneyList.fTitle}"/></td>
+								<td></td>
+								<td><c:out value="${endMoneyList.fhValue}"/></td>
+								
+								<td><c:out value="${endMoneyList.fhDate}"></c:out></td>
+								<c:choose>
+									<c:when test="${endMoneyList.fStatus eq 'GOAL'}">
+										<td>O</td>
+									</c:when>
+									<c:otherwise>
+										<td>X</td>
+									</c:otherwise>
+								</c:choose>						
 						</tr>
 						</c:forEach>
 						
@@ -334,21 +333,21 @@
 						</tr>					
 					</thead>
 					<tbody>
-						<c:forEach items="${endItemList}" var = "endItemList" varStatus="">
-							<tr>
-							<td><c:out value="${endItemList.fTitle}"/></td>
-							<td></td>
-							<td><c:out value="${endItemList.iName}"/></td>						
-							<td><c:out value="${endItemList.fhDate}"></c:out></td>
-							<c:choose>
-								<c:when test="${endItemList.fStatus eq 'GOAL'}">
-									<td>O</td>
-								</c:when>
-								<c:otherwise>
-									<td>X</td>
-								</c:otherwise>
-							</c:choose>						
-						</tr>
+						<c:forEach items="${endItemList}" var ="endItemList" varStatus="">
+							<tr onclick="goItemFund(${endItemList.fNo});">	
+								<td><c:out value="${endItemList.fTitle}"/></td>
+								<td></td>
+								<td><c:out value="${endItemList.iName}"/></td>						
+								<td><c:out value="${endItemList.fhDate}"></c:out></td>
+								<c:choose>
+									<c:when test="${endItemList.fStatus eq 'GOAL'}">
+										<td>O</td>
+									</c:when>
+									<c:otherwise>
+										<td>X</td>
+									</c:otherwise>
+								</c:choose>						
+							</tr>
 						</c:forEach>
 						
 					</tbody>
@@ -467,6 +466,17 @@
 					}				
 				});
 			} 
+			
+			//금액 후원 상세로 가기
+			function goFund(fno) {	
+				var fno = fno ;
+				location.href="cloud_money_datail.bo?moneyDatail="+fno;
+			}
+			//물품 후원 상세로 가기
+			function goItemFund(fno) {	
+				var fno = fno ;
+				location.href="cloud_thing_datail.bo?itemDatail="+fno;
+			}
 			
 		</script>	
 </body>

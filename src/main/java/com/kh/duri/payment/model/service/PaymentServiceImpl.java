@@ -177,7 +177,9 @@ public class PaymentServiceImpl implements PaymentService {
 	public Board selectFundMoney(Board b) throws FundingException {
 		// 해당 금액후원글 정보  select
 		Board resultBoard = pd.selectFundMoney(sqlSession, b);
-		
+		if(resultBoard == null) {
+			resultBoard = new Board();
+		}
 		// 해당 금액후원글 펀딩 후원 누적액 select
 		int curValue = pd.selectFundMoneyCulValue(sqlSession, b);
 		

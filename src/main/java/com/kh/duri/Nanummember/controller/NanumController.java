@@ -62,8 +62,8 @@ public class NanumController {
 		  } 
 	}
 	//회원정보 수정 완료!
-		@RequestMapping("updateComplete.nanum")
-		public String updateInfo(Model model, HttpServletRequest request, HttpServletResponse response) {	
+	@RequestMapping("updateComplete.nanum")
+	public String updateInfo(Model model, HttpServletRequest request, HttpServletResponse response) {	
 			Member m = (Member)request.getSession().getAttribute("loginUser2");
 			Member m2 = new Member();
 			String mNick = request.getParameter("mNick");			
@@ -75,21 +75,21 @@ public class NanumController {
 			System.out.println("mPwd2"+mPwd2);
 			System.out.println("mPhone"+mPhone);
 			if(mPwd.equals(mPwd2)) {
-				if(mNick == null) {
+				if(mNick == null || mNick.length() == 0) {
 					mNick = m.getmNickName();
 				}
 				if(mPwd == null) {
 					mPwd = m.getMpwd();
 				}
-				if(mPhone == null) {
+				if( mPhone == null || mPhone.length() == 0)  {
 					mPhone = m.getmPhone();
 				}
-				String encPassword = passwordEncoder.encode(mPwd); 
-								
+				String encPassword = passwordEncoder.encode(mPwd); 								
 				m2.setMno(m.getMno());
 				m2.setmNickName(mNick);
 				m2.setMpwd(encPassword);//암호화된 비밀번호 저장
 				m2.setmPhone(mPhone);
+				System.out.println("m2"+m2);
 				try {
 					int result = ns.updateMember(m2);
 					if(result>0) {
@@ -402,6 +402,7 @@ public class NanumController {
 			return "redirect:QnAList.nanum";
 		}
 	}
+	
 	
 
 }

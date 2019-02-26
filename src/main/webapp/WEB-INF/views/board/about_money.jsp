@@ -100,7 +100,7 @@
               	<% if(((Member)request.getSession().getAttribute("loginUser2")) != null){%>
               	<p><a href="fundMoney.pm?fno=${moneyDetail.fno}" class="btn btn-white px-3 py-2 mt-2" style="font-weight:bold;">후원하러가기</a></p>
               	<%}else{ %>
-              	
+              	<p><a href = "nanumLogin.me" class="btn btn-white px-3 py-2 mt-2" style="font-weight:bold;">로그인 후 후원이 가능합니다.</a></p>
               	<%} %>
               </div>
             </div>

@@ -15,7 +15,7 @@
             <div class="ftco-footer-widget mb-4">
               <h2 class="ftco-heading-2">About Duri Web Developer</h2>
               <p style="color: #4c381a;">             	
-              	의희 :  <br>AeRin : <br> DaHee : <br>  EunJi : <br>  AJin : <br></p>
+              	EuiHee  <br>AeRin <br> DaHee <br>  EunJi <br>  AJin <br></p>
             <!--   <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
                 <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
                 <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>

@@ -68,11 +68,10 @@ public class MemberController {
 					Member member = (Member)request.getSession().getAttribute("loginUser");
 					/*System.out.println("세션 : " + member);*/
 					
-					
-					/*if(Integer.parseInt(member.getmTakeStatus()) == 3) {
+					if(Integer.parseInt(member.getmTakeStatus()) == 3) {
 						mv.setViewName("redirect:goHappyMain.me");
-					}*/
-					
+					}else {
+
 					//애린이가 수정
 					//로그인 하자마자 증빙 서류 재 제출 D-day 띄우기	
 					Attachment aDate;
@@ -82,10 +81,9 @@ public class MemberController {
 					System.out.println("갱신가능~마감까지 d-day : " + aDate.getFinishdate());
 					session.setAttribute("changestart", aDate.getChangestart());
 					session.setAttribute("finishdate", aDate.getFinishdate());
-					
-					//위처럼 redirect로 뷰페이지이름연결할거랑 똑같음
-					mv.setViewName("redirect:goHappyMain.me");
-			
+
+					mv.setViewName("redirect:goHappyMain.me"); //위처럼 redirect로 뷰페이지이름연결할거랑 똑같음
+					}
 				}
 			}
 			
@@ -243,7 +241,6 @@ public class MemberController {
 
 			// 사진명 변경해서 업로드
 			photo.transferTo(new File(filePath + "\\" + changeName + ext));
-
 
 			/* 암호화처리 */
 			String encPassword = passwordEncoder.encode(m.getMpwd()); 

@@ -93,10 +93,11 @@ b{
 		              	<h3 class="mb-4">후원유형선택</h3>
 		              	<p>다양한 형태로 후원받을수 있습니다.<br>후원유형을 선택해주세요!</p>
 		              	<select class="btn btn-white px-3 py-2 mt-2"  id="goHo" name = "valueType">
-		              		<option>선택</option>
+		              		<option value = "">선택</option>
 		              		<option value ="교육비">교육비</option>
 		              		<option value ="의료비">의료비</option>
 		              		<option value ="생활비">생활비</option>
+		              		<option value ="기타">기타</option>
 		              	</select>
 		              </div>
 		            </div>
@@ -192,7 +193,14 @@ b{
     <script>
     	function direct(){
     		<% if(((Member)request.getSession().getAttribute("loginUser2")) != null){%>
+    		var isCheck = $("select option:selected").val();
+    		if(isCheck == "" || isCheck == null){
+    			alert("후원금 유형을 선택해주세요.");
+    			return false;
+    		}else {
     			document.sub1.submit();	
+    		}
+    			
     		<% } else {%>
     			alert("회원만 후원이 가능합니다. 로그인해주세요 :)");
     			return false;
