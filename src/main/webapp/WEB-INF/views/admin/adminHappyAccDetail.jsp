@@ -28,56 +28,63 @@
         <div id="page-wrapper" >
 		  <div class="header"> 
                         <h1 class="page-header">
-                            	EH님의 상세정보
+                            	<strong style="color: #c16624;">${HappyAccDetail[0].mName}</strong>님의 승인정보
                         </h1>
 		</div>
             <div id="page-inner"> 
             	<div class="row">
 				<div class="col-md-12">
 					<div class="panel panel-default">
-						<div class="panel-heading">EH님의 기본정보</div>
+						<div class="panel-heading">${HappyAccDetail[0].mName}님의 기본정보</div>
 						<div class="panel-body">
 							<div class="table-responsive">
 								<table class="table table-bordered">
 									<tbody>
 										<tr>
 											<td class="total">아이디</td>
-											<td>han419120</td>
+											<td>${HappyAccDetail[0].mid}</td>
 											<td class="total">생년월일</td>
-											<td>930504</td>
+											<td>20${HappyAccDetail[0].mBirthDay}</td>
 										</tr>
 										<tr>
 											<td class="total">이름</td>
-											<td>한의희</td>
+											<td>${HappyAccDetail[0].mName}</td>
 											<td class="total">주소</td>
-											<td>서울시 송파구 백제고분로11길 15</td>
+											<td>${HappyAccDetail[0].mAddress}</td>
 										</tr>
 										<tr>
 											<td class="total">닉네임</td>
-											<td>EH</td>
+											<td>${HappyAccDetail[0].mNick}</td>
 											<td class="total">가입유형</td>
-											<td>한부모가정</td>
+											<td>${HappyAccDetail[0].mFundtype}</td>
 										</tr>
 										<tr>
 											<td class="total">성별</td>
-											<td>W</td>
+											<c:if test="${HappyAccDetail[0].mGender == 'F'}"><td>여성</td></c:if>
+											<c:if test="${HappyAccDetail[0].mGender == 'M'}"><td>남성</td></c:if>
 											<td class="total">이메일</td>
-											<td>han419120@naver.com</td>
+											<td>${HappyAccDetail[0].memail}</td>
 										</tr>
 										<tr>
 											<td class="total">휴대전화</td>
-											<td>01055432010</td>
-											<td class="total">가입날짜</td>
-											<td>2019/01/12</td>
+											<c:if test="${HappyAccDetail[0].mPhone == null}"><td>없음</td></c:if>
+											<c:if test="${HappyAccDetail[0].mPhone != null}"><td>${HappyAccDetail[0].mPhone}</td></c:if>
+											
+											<td class="total">가입승인날짜</td>
+											<c:if test="${HappyAccDetail[0].mAcceptDate ==null}"><td>승인 전 신규회원</td></c:if>
+											<c:if test="${HappyAccDetail[0].mAcceptDate !=null}"><td>${HappyAccDetail[0].mAcceptDate}</td></c:if>
 										</tr>
 										<tr>
 											<td class="total">증빙서류 갱신일</td>
-											<td>2019/01/11</td>
+											<c:if test="${HappyAccDetail[0].adate ==null}"><td>승인 전 신규회원</td></c:if>
+											<c:if test="${HappyAccDetail[0].adate !=null}"><td>${HappyAccDetail[0].adate}</td></c:if>
 											<td class="total">자기소개 갱신일</td>
-											<td>2019/03/14</td>
+											<c:if test="${HappyAccDetail[0].mprAcceptDate ==null && HappyAccDetail[0].mTakeStatus == 3}"><td>승인 전 신규회원</td></c:if>
+											<c:if test="${HappyAccDetail[0].mprAcceptDate ==null && HappyAccDetail[0].mTakeStatus == 1}"><td>가입시 등록 후 변경없음</td></c:if>
+											<c:if test="${HappyAccDetail[0].mprAcceptDate !=null}"><td>${HappyAccDetail[0].mprAcceptDate}</td></c:if>
+											
+											
 										</tr>
-										
-										
 									</tbody>
 								</table>
 							</div>
@@ -91,7 +98,7 @@
             	
             	
 			<h1 class="page-header">
-                            	EH님의 후원 필수서류
+                         <strong style="color: #c16624;">${HappyAccDetail[0].mName}</strong>님의 후원 필수서류
                         </h1>
              
 		
@@ -105,23 +112,8 @@
                         <div class="panel-body">
 		                  <div class="well">
 		                        <h4>저는 집이 없어요...</h4>
-		                        <p style="height: 550px;">
-		                        Lorem ipsum dolor sit amet, 
-		                        consectetur adipiscing elit. Vestibulum tincidunt 
-		                        est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, 
-		                        posuere lectus et, fringilla augue.
-		                        Lorem ipsum dolor sit amet, 
-		                        consectetur adipiscing elit. Vestibulum tincidunt 
-		                        est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, 
-		                        posuere lectus et, fringilla augue.
-		                        Lorem ipsum dolor sit amet, 
-		                        consectetur adipiscing elit. Vestibulum tincidunt 
-		                        est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, 
-		                        posuere lectus et, fringilla augue.
-		                        Lorem ipsum dolor sit amet, 
-		                        consectetur adipiscing elit. Vestibulum tincidunt 
-		                        est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, 
-		                        posuere lectus et, fringilla augue.
+		                        <p style="height: 600px;">
+		                        <big>${HappyAccDetail[0].mpr}</big>
 		                        </p>
 		                    </div>
                 
@@ -137,23 +129,8 @@
                         <div class="panel-body">
 		                  <div class="well">
 		                        <h4>저는 집이 없어요...</h4>
-		                        <p style="height: 550px;">
-		                        Lorem ipsum dolor sit amet, 
-		                        consectetur adipiscing elit. Vestibulum tincidunt 
-		                        est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, 
-		                        posuere lectus et, fringilla augue.
-		                        Lorem ipsum dolor sit amet, 
-		                        consectetur adipiscing elit. Vestibulum tincidunt 
-		                        est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, 
-		                        posuere lectus et, fringilla augue.
-		                        Lorem ipsum dolor sit amet, 
-		                        consectetur adipiscing elit. Vestibulum tincidunt 
-		                        est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, 
-		                        posuere lectus et, fringilla augue.
-		                        Lorem ipsum dolor sit amet, 
-		                        consectetur adipiscing elit. Vestibulum tincidunt 
-		                        est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, 
-		                        posuere lectus et, fringilla augue.
+		                       <p style="height: 600px;">
+		                        <big>${HappyAccDetail[0].mpr}</big>
 		                        </p>
 		                    </div>
                 
@@ -177,9 +154,9 @@
                             	증빙 서류(원본)
                         </div>
                        
-                        <div class="panel-body" style="height: 700px;">
+                        <div class="panel-body" style="height: 700px; text-align: center;"" >
                        	
-		                 <img src="/duri/resources/admin/img/happy.PNG" style="width: 100%; height: 100%;">
+		                <img style="height: 650px; width: 600px;" src="resources/${HappyAccDetail[0].aFilePath}/${HappyAccDetail[0].achangeName}.jpg" onclick="OnloadImg(this.src)">
 		               
                             </div>
                             </div>
@@ -191,9 +168,9 @@
                             	증빙 서류(갱신서류)
                         </div>
                        
-                        <div class="panel-body" style="height: 700px;">
+                        <div class="panel-body" style="height: 700px; text-align: center;"">
                        	
-		                 <img src="/duri/resources/admin/img/happy.PNG" style="width: 100%; height: 100%;">
+		                <img style="height: 650px; width: 600px;" src="resources/${HappyAccDetail[0].aFilePath}/${HappyAccDetail[0].achangeName}.jpg" onclick="OnloadImg(this.src)">
 		               
                             </div>
                             </div>
@@ -208,13 +185,14 @@
            <br><br><br> 
             
              <h1 class="page-header">
-                            	EH님의 후원내역
+                            	<strong style="color: #c16624;">${HappyAccDetail[0].mName}</strong>님의 후원내역
                         </h1>
             <div class="row">
                 <div class="col-md-12">
+                    <!-- Advanced Tables -->
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                             	정기 후원 내역 
+                             	 정기 후원 내역
                         </div>
                         <div class="panel-body">
                             <div >
@@ -225,52 +203,45 @@
                                             <th>나눔두리ID</th>
                                             <th>후원 시작 날짜</th>
                                             <th>매달 후원 금액</th>
-                                            <th>매달 후원 날짜</th>
+                                            <th>누적 후원 횟수</th>
                                             <th>누적 후원 금액</th>
                                             <th>현재 후원 상태</th>
                                         </tr>
                                     </thead>
                                     <tbody>
+                                    
+                                    <c:forEach var="row" items="${directList}" varStatus="status">
                                        <tr class="odd gradeX">
-                                            <td class="center">1</td>
-                                            <td class="center">han419120</td>
-                                            <td class="center">2018/03/11</td>
-                                            <td class="center">50,000</td>
-                                            <td class="center">11일</td>
-                                            <td class="center">300,000</td>
-                                            <td class="center">Y</td>
+                                            <td class="center">${status.count}</td>
+                                            <td class="center">${row.mid }</td>
+                                            <td class="center">${row.dhStartDate }</td>
+                                            <td class="center">${row.dhValue}원</td>
+                                            <td class="center">${row.cnt}회</td>
+                                            <td class="center">${row.sum}원</td>
+                                            <c:if test="${row.dhStatus=='Y'}">
+                                            <td class="center">후원중</td>
+                                            </c:if>
+                                            <c:if test="${row.dhStatus=='N'}">
+                                            <td class="center">후원정지</td>
+                                            </c:if>
+                                            
                                         </tr>
-                                       <tr class="odd gradeX">
-                                            <td class="center">1</td>
-                                            <td class="center">han419120</td>
-                                            <td class="center">2018/03/11</td>
-                                            <td class="center">50,000</td>
-                                            <td class="center">11일</td>
-                                            <td class="center">300,000</td>
-                                            <td class="center">Y</td>
-                                        </tr>
-                                       <tr class="odd gradeX">
-                                            <td class="center">1</td>
-                                            <td class="center">han419120</td>
-                                            <td class="center">2018/03/11</td>
-                                            <td class="center">50,000</td>
-                                            <td class="center">11일</td>
-                                            <td class="center">300,000</td>
-                                            <td class="center">Y</td>
-                                        </tr>
-                                       
+                                    </c:forEach>
                                     </tbody>
                                 </table>
                             </div>
                         </div>
                     </div>
+                    <!--End Advanced Tables -->
                 </div>
             </div>
+                <!-- /. ROW  -->
             <div class="row">
                 <div class="col-md-12">
+                    <!-- Advanced Tables -->
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                             	크라우드 펀딩 후원 내역 
+                             	크라우드 펀딩 금액 후원 내역
                         </div>
                         <div class="panel-body">
                             <div >
@@ -278,53 +249,104 @@
                                     <thead>
                                         <tr>
                                             <th>No</th>
+                                            <th>나눔두리ID</th>
                                             <th>펀딩제목</th>
-                                            <th>카테고리</th>
+                                            <th>펀딩목적</th>
                                             <th>펀딩 시작 날짜</th>
                                             <th>펀딩 마감 날짜</th>
-                                            <th>진행 상태(%)</th>
-                                            <th>목표금액or수량</th>
+                                            <th>펀딩 후원 날짜</th>
+                                            <th>후원금액</th>
                                             <th>상태</th>
                                         </tr>
                                     </thead>
                                     <tbody>
+                                    <c:forEach var="row" items="${fundingMoneyList}" varStatus="status">
                                        <tr class="odd gradeX">
-                                            <td class="center">1</td>
-                                            <td class="center">돈이 없어요</td>
-                                            <td class="center">금액후원</td>
-                                            <td class="center">2018/04/15</td>
-                                            <td class="center">2018/10/15</td>
-                                            <td class="center">35</td>
-                                            <td class="center">300,000</td>
-                                            <td class="center">진행중</td>
+                                            <td class="center">${status.count}</td>
+                                            <td class="center">${row.mid }</td>
+                                            <td class="center">${row.fTitle }</td>
+                                            <td class="center">${row.fValueType }</td>
+                                            <td class="center">${row.fStartDate }</td>
+                                            <td class="center">${row.fEndDate }</td>
+                                            <td class="center">${row.fhDate }</td>
+                                            <td class="center">${row.fhValue }원</td>
+                                            <c:choose>
+                                            	<c:when test="${row.fStatus=='ING' }">
+                                            	 <td class="center">펀딩 진행중</td>
+                                            	</c:when>
+                                            	<c:when test="${row.fStatus=='GOAL' }">
+                                            	 <td class="center">펀딩 목표달성 종료</td>
+                                            	</c:when>
+                                            	<c:otherwise>
+                                            	 <td class="center">펀딩 기간만료 종료</td>
+                                            	</c:otherwise>
+                                            </c:choose>
+                                           
                                         </tr>
-                                       <tr class="odd gradeX">
-                                            <td class="center">1</td>
-                                            <td class="center">생리대 없어요</td>
-                                            <td class="center">물품후원</td>
-                                            <td class="center">2018/04/15</td>
-                                            <td class="center">2018/10/15</td>
-                                            <td class="center">35</td>
-                                            <td class="center">300</td>
-                                            <td class="center">진행중</td>
-                                        </tr>
-                                       <tr class="odd gradeX">
-                                            <td class="center">1</td>
-                                            <td class="center">돈이 없어요</td>
-                                            <td class="center">금액후원</td>
-                                            <td class="center">2018/04/15</td>
-                                            <td class="center">2018/10/15</td>
-                                            <td class="center">35</td>
-                                            <td class="center">300,000</td>
-                                            <td class="center">진행중</td>
-                                        </tr>
-                                       
-                                       
+                                    </c:forEach>
                                     </tbody>
                                 </table>
                             </div>
                         </div>
                     </div>
+                    <!--End Advanced Tables -->
+                </div>
+            </div>
+                <!-- /. ROW  -->
+            
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- Advanced Tables -->
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                             	크라우드 펀딩 물품 후원 내역
+                        </div>
+                        <div class="panel-body">
+                            <div >
+                                <table class="table table-striped table-bordered table-hover dataTables-example">
+                                    <thead>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>나눔두리ID</th>
+                                            <th>펀딩제목</th>
+                                            <th>펀딩 시작 날짜</th>
+                                            <th>펀딩 마감 날짜</th>
+                                            <th>펀딩 후원 날짜</th>
+                                            <th>후원물품</th>
+                                            <th>후원물품갯수</th>
+                                            <th>상태</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    <c:forEach var="row" items="${fundingGoodsList}" varStatus="status">
+                                       <tr class="odd gradeX">
+                                            <td class="center">${status.count}</td>
+                                            <td class="center">${row.mid }</td>
+                                            <td class="center">${row.fTitle }</td>
+                                            <td class="center">${row.fStartDate }</td>
+                                            <td class="center">${row.fEndDate }</td>
+                                            <td class="center">${row.fhDate }</td>
+                                            <td class="center">${row.iName }</td>
+                                            <td class="center">${row.fhdItemValue }개</td>
+                                           <c:choose>
+                                            	<c:when test="${row.fStatus=='ING' }">
+                                            	 <td class="center">펀딩 진행중</td>
+                                            	</c:when>
+                                            	<c:when test="${row.fStatus=='GOAL' }">
+                                            	 <td class="center">펀딩 목표달성 종료</td>
+                                            	</c:when>
+                                            	<c:otherwise>
+                                            	 <td class="center">펀딩 기간만료 종료</td>
+                                            	</c:otherwise>
+                                            </c:choose>
+                                        </tr>
+                                     </c:forEach>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <!--End Advanced Tables -->
                 </div>
             </div>
             <br><br>
@@ -336,5 +358,27 @@
             </div>
     
     <jsp:include page="include/admintableFooter.jsp" />
+      <script>
+
+ function OnloadImg(url){
+
+  var img=new Image();
+
+  img.src=url;
+
+  var img_width=img.width;
+
+  var win_width=img.width+25;
+
+  var height=img.height+30;
+
+  var OpenWindow=window.open('','_blank', 'width='+img_width+', height='+height+', menubars=no, scrollbars=auto');
+
+  OpenWindow.document.write("<style>body{margin:0px;}</style><img src='"+url+"' width='"+win_width+"'>");
+
+ }
+
+</script>
+
 </body>
 </html>
