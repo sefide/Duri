@@ -1,3 +1,5 @@
+
+
 package com.kh.duri.board.controller;
 
 import java.util.List;
@@ -58,7 +60,7 @@ public class BoardController {
 			try {
 				int listCount = bs.getDonateListCount();
 				
-				PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
+				PageInfo pi = Pagination.getPageInfo2(currentPage, listCount);
 				
 				System.out.println("정기후원자 명수 :  " + listCount);
 				

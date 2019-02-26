@@ -68,30 +68,31 @@ public class MemberController {
 					Member member = (Member)request.getSession().getAttribute("loginUser");
 					/*System.out.println("세션 : " + member);*/
 					
+					
+					/*if(Integer.parseInt(member.getmTakeStatus()) == 3) {
+						mv.setViewName("redirect:goHappyMain.me");
+					}*/
+					
 					//애린이가 수정
 					//로그인 하자마자 증빙 서류 재 제출 D-day 띄우기	
 					Attachment aDate;
 					aDate = hs.selectAdate(member);
 					
-					/*System.out.println("갱신 가능 시작 d-day : " + aDate.getChangestart());
-					System.out.println("갱신가능~마감까지 d-day : " + aDate.getFinishdate());*/
+					System.out.println("갱신 가능 시작 d-day : " + aDate.getChangestart());
+					System.out.println("갱신가능~마감까지 d-day : " + aDate.getFinishdate());
 					session.setAttribute("changestart", aDate.getChangestart());
 					session.setAttribute("finishdate", aDate.getFinishdate());
-				
 					
-					mv.setViewName("redirect:goHappyMain.me"); //위처럼 redirect로 뷰페이지이름연결할거랑 똑같음
+					//위처럼 redirect로 뷰페이지이름연결할거랑 똑같음
+					mv.setViewName("redirect:goHappyMain.me");
+			
 				}
 			}
 			
-
-			
 		} catch (LoginException e) {
-			
 			mv.addObject("msg",e.getMessage());
 			mv.setViewName("common/errorPage");
 		}
-		
-		
 		return mv;
 	}
 
@@ -243,7 +244,6 @@ public class MemberController {
 			// 사진명 변경해서 업로드
 			photo.transferTo(new File(filePath + "\\" + changeName + ext));
 
-			m.setMpwd(passwordEncoder.encode(m.getMpwd()));
 
 			/* 암호화처리 */
 			String encPassword = passwordEncoder.encode(m.getMpwd()); 
@@ -396,7 +396,7 @@ public class MemberController {
 
 	
 	
-	@RequestMapping("Eunji_happyLogin.me")
+	@RequestMapping("happyLogin.me")
 	public String cloudList() {
 		return "member/HappyLogin";
 	}
