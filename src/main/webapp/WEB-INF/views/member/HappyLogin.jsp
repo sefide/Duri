@@ -391,7 +391,7 @@ input, select{
       <h1>행복두리 Login</h1>
     </div>
     <div class="form-content">
-      <form action="login.me" method="POST">
+      <form action="login.me"  method="POST">
         <div class="form-group">
           <label for="userId">userId</label>
           <input type="text" id="mid" name="mid" required="required"/>
@@ -413,7 +413,11 @@ input, select{
   </div>
  </div> 
   <!-- 계정찾기 -->
-  <div id="intro">
+
+
+
+
+  <!--  <div id="intro">
   	<div class="form-group">
           <label for="userId">userId</label>
           <input type="text" id="mid" name="mid" required="required"/>
@@ -426,7 +430,7 @@ input, select{
           <button id="loginBtn">LogIn</button>
         </div>
 
- </div>
+ </div>-->
 
    
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> 

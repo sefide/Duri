@@ -444,8 +444,9 @@ input {
           <input type="password" id="mpwd" name="mpwd" required="required"/>
         </div>
         <div class="form-group">
-          <label class="form-remember">
-          </label><a href="#" class="form-recovery">Forgot Password?</a>
+          
+          <a href="#" id="memJoin" class="form-recovery">회원가입</a>
+          <a href="#" class="form-recovery">Forgot Password?</a>
         </div>
         <div class="form-group">
           <button id="loginBtn">LogIn</button>
@@ -592,12 +593,12 @@ input {
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<script type="text/javascript">
-$(document).ready(function() {
+  
 	  var panelOne = $('.form-panel.two').height(),
 	    panelTwo = $('.form-panel.two')[0].scrollHeight;
 
-	  $('.form-panel.two').not('.form-panel.two.active').on('click', function(e) {
-	    e.preventDefault();
+	  $("#memJoin").click(function(){
+	    
 
 	    $('.form-toggle').addClass('visible');
 	    $('.form-panel.one').addClass('hidden');
@@ -605,8 +606,9 @@ $(document).ready(function() {
 	    $('.form').animate({
 	      'height': panelTwo
 	    }, 200);
+	    
 	  });
-
+	 
 	  
 	  //회원가입 폼 x눌렀을때 반응
 	  $('.form-toggle').on('click', function(e) {
@@ -622,7 +624,7 @@ $(document).ready(function() {
 	      'height': '500'
 	    }, 200);
 	  });
-	});
+
 
 	$("#idCheckBtn").click(function(){
 		$("#check").show();

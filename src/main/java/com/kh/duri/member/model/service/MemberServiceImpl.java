@@ -22,12 +22,26 @@ public class MemberServiceImpl implements MemberService {
 
 
 
-
+	//로그인 행복두리
 	@Override
 	public Member loginMember(Member m) throws LoginException {
 		// System.out.println(sqlSession.hashCode());
+		Member loginUser = null;
+		
+		String encPassword = md.selectEncPassword2(sqlSession,m);
 
-		Member loginUser = md.loginCheck(sqlSession, m); // DAO로 Member 정보와 sqlSession 전송
+		
+		// matches를 equals라 생각, 평문=암호화된문장  인지 확인
+		if(!passwordEncoder.matches(m.getMpwd(),encPassword)) {
+			throw new LoginException("로그인 실패!");
+			
+		}else {
+			m.setMpwd(encPassword);
+			System.out.println(m.getMpwd() + "악");
+			loginUser = md.loginCheck(sqlSession, m);
+		}
+
+		
 
 		return loginUser;
 

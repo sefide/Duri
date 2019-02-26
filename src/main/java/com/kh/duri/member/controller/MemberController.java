@@ -49,37 +49,41 @@ public class MemberController {
 	public ModelAndView loginCheck(Member m, ModelAndView mv, HttpSession session, Model model, HttpServletRequest request) {
 			
 		try {
-			/*System.out.println("member : "+m);*/
+			System.out.println("member : "+m);
 			
 			Member loginUser = null; 
+			loginUser = ms.loginMember(m); //받아온 아이디와 비밀번호로 로그인 정보 조회
 			
-			if(!(m.getMid().equals("mng01")||m.getMid().equals("mng02")||m.getMid().equals("mng03")||m.getMid().equals("mng04"))) {
-
+			if(loginUser != null) {
+				if(loginUser.getMtype().equals("M")) {
+					
+					mv.setViewName("redirect:adminMain.ad"); //위처럼 redirect로 뷰페이지이름연결할거랑 똑같음
+					
+					
+				}else{
+					
+					/*System.out.println("loginUser : "+loginUser);*/
+					session.setAttribute("loginUser", loginUser);	//세션에 뿌려주기
+					
+					Member member = (Member)request.getSession().getAttribute("loginUser");
+					/*System.out.println("세션 : " + member);*/
+					
+					//애린이가 수정
+					//로그인 하자마자 증빙 서류 재 제출 D-day 띄우기	
+					Attachment aDate;
+					aDate = hs.selectAdate(member);
+					
+					/*System.out.println("갱신 가능 시작 d-day : " + aDate.getChangestart());
+					System.out.println("갱신가능~마감까지 d-day : " + aDate.getFinishdate());*/
+					session.setAttribute("changestart", aDate.getChangestart());
+					session.setAttribute("finishdate", aDate.getFinishdate());
 				
-				loginUser = ms.loginMember(m); //받아온 아이디와 비밀번호로 로그인 정보 조회
-				/*System.out.println("loginUser : "+loginUser);*/
-				session.setAttribute("loginUser", loginUser);	//세션에 뿌려주기
-				
-				Member member = (Member)request.getSession().getAttribute("loginUser");
-				/*System.out.println("세션 : " + member);*/
-				
-				
-				//애린이가 수정
-				//로그인 하자마자 증빙 서류 재 제출 D-day 띄우기	
-				Attachment aDate;
-				aDate = hs.selectAdate(member);
-				
-				/*System.out.println("갱신 가능 시작 d-day : " + aDate.getChangestart());
-				System.out.println("갱신가능~마감까지 d-day : " + aDate.getFinishdate());*/
-				session.setAttribute("changestart", aDate.getChangestart());
-				session.setAttribute("finishdate", aDate.getFinishdate());
-			
-				
-				mv.setViewName("redirect:goHappyMain.me"); //위처럼 redirect로 뷰페이지이름연결할거랑 똑같음
-			}else {
-				
-				mv.setViewName("redirect:adminMain.ad"); //위처럼 redirect로 뷰페이지이름연결할거랑 똑같음
+					
+					mv.setViewName("redirect:goHappyMain.me"); //위처럼 redirect로 뷰페이지이름연결할거랑 똑같음
+				}
 			}
+			
+
 			
 		} catch (LoginException e) {
 			
@@ -104,11 +108,12 @@ public class MemberController {
 				
 			
 				loginUser2 = ms.loginNaMember(m); //받아온 아이디와 비밀번호로 로그인 정보 조회
+				
 				System.out.println(loginUser2.getMtype());
 				if(loginUser2 != null) {
 					if(loginUser2.getMtype().equals("M")) {
 
-						mv.setViewName("redirect:goAdmin.me"); //위처럼 redirect로 뷰페이지이름연결할거랑 똑같음
+						mv.setViewName("redirect:adminMain.ad"); //위처럼 redirect로 뷰페이지이름연결할거랑 똑같음
 						
 						
 					}else{
@@ -116,7 +121,6 @@ public class MemberController {
 						mv.setViewName("redirect:goNanumMain.me"); //위처럼 redirect로 뷰페이지이름연결할거랑 똑같음
 					}
 				}
-				
 				
 
 				
@@ -220,6 +224,8 @@ public class MemberController {
 
 		System.out.println("Member : " + m);
 		System.out.println("photo : " + photo);
+		
+		
 		int result= 0 ;
 		// 실제경로 가져오기
 		String root = request.getSession().getServletContext().getRealPath("resources");
@@ -252,7 +258,7 @@ public class MemberController {
 
 			result = ms.insertHappyMember(m);
 
-			return "redirect:goMain.me";
+			return "redirect:goHappyLogin.me";
 
 		} catch (IOException e) {
 
@@ -404,6 +410,11 @@ public class MemberController {
 	@RequestMapping("join.me") 
 	public String cloudList3() {
 		return "member/memberJoin";
+	}
+	
+	@RequestMapping("goHappyLogin.me") 
+	public String happyLogin() {
+		return "member/HappyLogin";
 	}
 	
 	

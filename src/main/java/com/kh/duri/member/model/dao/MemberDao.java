@@ -21,4 +21,6 @@ public interface MemberDao {
 
 	int insertHappy(SqlSessionTemplate sqlSession, Member m);
 
+	String selectEncPassword2(SqlSessionTemplate sqlSession, Member m);
+
 }

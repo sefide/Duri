@@ -771,26 +771,26 @@ input, select{
 							$("#mGender").val(mGender);
 							$("#mAddress").val($("#mAddress2").val() + " " + $("#mAddress3").val());
 					        var queryString = $("form[name=sub1]").serialize() ;
-					        $("#sub1").submit();
-					   /*      $.ajax({
-					            type : 'post',
-					            url : 'insert2.me',
-					            data : formData,
-					            
-					            error: function(xhr, status, error){
-					                alert(error);
-					            },
-					            success : function(data){
-					            	swal({
-					      			  title: "회원가입료!",
-					      			  text: "행복두리는 관리자 승인을 받아야 사이트 이용이 가능합니다!(최대7일)",
-					      			  icon: "success"
-					      			  }).then(function(){
-					                	location.href="nanumLogin.me";
-					                });
-					            },
-					        }); */
-
+					        swal({
+					        	  title: "가입하시겠습니까?",
+					        	  text: "증빙서류는 만료기간 최대 6개월",
+					        	  icon: "warning",
+					        	  buttons: true,
+					        	  dangerMode: true,
+					        	})
+					        	.then((willDelete) => {
+					        	  if (willDelete) {
+					        	    swal("가입완료! 관리자 승인을 기다리세요(최대7일)!", {
+					        	      icon: "success",
+					        	    });
+					        	  } else {
+					        	    swal("회원가입 실패!");
+					        	  }
+					        	}).then(function(){
+					        		$("#sub1").submit();
+					        	});
+					        
+					
 						}else{
 							swal("이메일을 인증해 주세요!");
 						}
