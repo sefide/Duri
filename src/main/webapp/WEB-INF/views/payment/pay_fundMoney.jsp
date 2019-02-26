@@ -289,18 +289,21 @@
 	    		</div>
 	    		
 	    		<div style = "margin-left : 9%;">
-	    		<div class = "barTxt" >현재 후원금액 : ${f.fdValue}원 </div> <div class = "barTxt" align = "right"> 목표 후원금액 : ${ f.fValue }원 </div> <div stype = "width : 7%;"> </div>
+	    		<div class = "barTxt" >현재 후원금액 : <fmt:formatNumber value = "${ f.fdValue }" type="currency" currencySymbol=" "/>원 </div> 
+	    		<div class = "barTxt" align = "right"> 목표 후원금액 : <fmt:formatNumber value = "${ f.fValue }" type="currency" currencySymbol=" "/>원 </div> <div stype = "width : 7%;"> </div>
 	    			<div class="progress custom-progress-success" id = "barBox" >
 		    			<div id="bar2" class="progress-bar" role="progressbar" aria-valuenow="28" aria-valuemin="0" aria-valuemax="100">
 		    				<fmt:formatNumber value = "${ f.fdValue / f.fValue *100 }" pattern = ".0"/>%
 		    			</div>
 		   			</div>
-		   		${ f.fValue - f.fdValue }원이 더 필요해요 :)
+		   			<fmt:formatNumber value = "${ f.fValue - f.fdValue }" type="currency" currencySymbol=" "/>원이 더 필요해요 :)
 	    		</div>
 	    		
 	   			
     			<div class ="row d-flex"> 
     			<input type = "hidden" name = "leftPoint" id = "leftPoint" value = "${ f.fValue - f.fdValue }">
+    			<input type = "hidden" id = "giveMPoint" value = "${ giveM.mPoint }">
+    			<input type = "hidden" id = "leftValueInput" value = "0">
 	    			<table>
 	    				<%-- <tr>
 	    					<th>목표 후원금 (현재 후원누적액)</th>
@@ -308,11 +311,11 @@
 	    				</tr>--%>
 	    				<tr>
 	    					<th>필요한 후원금액</th>
-	    					<td colspan = "2" ><span id = "leftPoint">${ f.fValue - f.fdValue }원</span></td>
+	    					<td colspan = "2" ><span id = "leftPoint"><fmt:formatNumber value = "${ f.fValue - f.fdValue }" type="currency" currencySymbol=" "/>원</span></td>
 	    				</tr> 
 	    				<tr>
 	    					<th>현재보유 포인트</th>
-	    					<td colspan = "2" ><span id = "myPoint">${ giveM.mPoint }원</span></td>
+	    					<td colspan = "2" ><span id = "myPoint"><fmt:formatNumber value = "${ giveM.mPoint }" type="currency" currencySymbol=" "/>원</span></td>
 	    				</tr>
 	    				<tr>
 	    					<th>후원포인트</th>
@@ -387,7 +390,7 @@
   <script>
   var checkUsing = 1; /* 기부금영수증 발급 약관 확인 변수 */
   var checkIpin = 0; /* 기부금영수증 발급인지 아닌지 확인 변수 */
-  
+ 
 		$(document).ready(function() {
 			/* 주민등록번호 입력창 숨겨두기 */
 			$(".ipin").css("display","none");
@@ -401,16 +404,13 @@
 			
 			/* 모든 포인트 쓰기 선택 할 시  */
 			$("#allPoint").change(function(){
-				var mypoint = $("#myPoint").text();
+				var mypoint = $("#giveMPoint").val();
 				var pointlength = mypoint.length-1;
-				mypoint = mypoint.substring(0,pointlength);
-				mypoint = mypoint.split(",");
-				console.log(mypoint);
-			    var mypointt = mypoint.join();
-				console.log(mypointt);
+
 				if($("#allPoint").is(":checked")){
-					$("#sponPoint").val(mypointt);
-					$("#sponValue").text(mypointt);
+					$("#sponPoint").val(mypoint);
+					console.log(numberWithCommas(mypoint));
+					$("#sponValue").text(numberWithCommas(mypoint));
 					calValue();
 				}
 				
@@ -444,14 +444,14 @@
 		/* 후원포인트, 잔여포인트 계산 및 표시 */
 		function calValue(){
 			var sPoint = $("#sponPoint").val();
-			var mPoint = $("#myPoint").text();
-			mPoint = mPoint.substring(0,mPoint.length-1);
-			$("#sponValue").text(sPoint);
+			var mPoint = $("#giveMPoint").val();
+			$("#sponValue").text(numberWithCommas(sPoint));
 			
 			if(isNaN(mPoint-sPoint)){
 				$("#leftValue").text("- 원");
 			}else{
-				$("#leftValue").text(mPoint-sPoint + "원");
+				$("#leftValue").text(numberWithCommas(mPoint-sPoint) + "원");
+				$("#leftValueInput").val(mPoint-sPoint);
 			}
 		}
 		
@@ -481,21 +481,28 @@
 			$("#pop_div").css("visibility", "hidden");
 			$("input:checkbox").prop("checked", false);
 		}
-		
+		 function numberWithCommas(x) {
+			    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+			  }
 		/* 후원하기 버튼 클릭 시  */
 		$("#btnSpon").click(function(){
 			var numberTest = /[^0-9]/g; /* 숫자로만 이뤄지기 */
 			var resultValue = $("#sponPoint").val();
+			var leftPoint = $("#leftPoint").val();
 			
 			var ipinTest01 = /\d{6}/; /* 숫자로만 6글자 이뤄지기 */
 			var ipinTest02 = /\d{7}/; /* 숫자로만 7글자 이뤄지기 */
 			var ipinFirst = $("#ipinFirst").val();
 			var ipinSecond = $("#ipinSecond").val();
 			
-			var leftValue = $("#leftValue").text();
-			leftValue = leftValue.substring(0, leftValue.length-1);
+			var leftValue = Number($("#leftValueInput").val());
 
-			if(resultValue == "" || numberTest.test(resultValue)){
+			if(resultValue > leftPoint){
+				alert("후원금액이 후원할 수 있는 금액을 넘었습니다.");
+			}else if(leftPoint < 0){
+				alert("종료된 펀딩입니다. ");
+				return false;
+			}else if(resultValue == "" || numberTest.test(resultValue)){
 				alert("후원포인트를 정확히 입력해주세요. (숫자 이외의 글자 입력 불가)");
 			}else if(checkUsing == 1 && checkIpin == 1 && !ipinTest01.test(ipinFirst)) {
 				alert("주민번호 앞자리를 제대로 입력해주세요.");

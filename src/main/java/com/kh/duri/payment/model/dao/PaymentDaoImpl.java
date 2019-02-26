@@ -351,7 +351,7 @@ public class PaymentDaoImpl implements PaymentDao {
 	@Override
 	public int selectFundMoneyCulValue(SqlSessionTemplate sqlSession, Board b) {
 		int result = sqlSession.selectOne("Point.selectFundMoneyCulValue", b);
-		//System.out.println("dao 현재 누적 후원금 :" + result);
+		System.out.println("dao 현재 누적 후원금 :" + result);
 		return result;
 	}
 	
