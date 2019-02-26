@@ -17,7 +17,8 @@ public interface adminHappyDao {
 
 	//행복두리 [기존회원(1)/신규회원(3)] 상세페이지 (공통페이지)
 	adminMember HappyDetail(SqlSessionTemplate sqlsession, adminMember m)throws ListException;
-
+	//행복두리 승인 상세 페이지[자개소개 갱신/증빙성 갱신/증빙서 비갱신]
+	List<adminMember> HappyAccDetail(SqlSessionTemplate sqlsession, adminMember m)throws ListException;
 	//행복두리 상세보기 - 정기후원 내역
 	List<adminDirectList> HappydirectList(SqlSessionTemplate sqlsession, adminDirectList ad)throws ListException;
 	//행복두리 상세보기 - 크라우드 금액 펀딩 내역
@@ -32,6 +33,7 @@ public interface adminHappyDao {
 	List<adminMember> adminHappyAttachList(SqlSessionTemplate sqlsession)throws ListException;
 	//행복두리 승인목록 -증빙서류 비갱신 목록
 	List<adminMember> adminHappyNotAttachList(SqlSessionTemplate sqlsession)throws ListException;
+	
 
 
 

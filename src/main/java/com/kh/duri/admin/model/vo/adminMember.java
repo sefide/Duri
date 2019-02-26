@@ -31,6 +31,7 @@ public class adminMember implements Serializable{
 	//가상컬럼
 	private long pValue;
 	private String p_mNo;
+	private String NumStatus;
 	
 	//ATTACHMENT
 	private int ano;//첨부파일번호
@@ -51,26 +52,12 @@ public class adminMember implements Serializable{
 
 
 
-	@Override
-	public String toString() {
-		return "adminMember [mno=" + mno + ", mName=" + mName + ", mNick=" + mNick + ", mGender=" + mGender
-				+ ", mPhone=" + mPhone + ", mid=" + mid + ", mpwd=" + mpwd + ", memail=" + memail + ", mEnrollDate="
-				+ mEnrollDate + ", mPoint=" + mPoint + ", mtype=" + mtype + ", mFundtype=" + mFundtype + ", mpr=" + mpr
-				+ ", mprNew=" + mprNew + ", mBirthDay=" + mBirthDay + ", mAddress=" + mAddress + ", mAcceptDate="
-				+ mAcceptDate + ", mprAcceptDate=" + mprAcceptDate + ", mGoalNum=" + mGoalNum + ", mStatus=" + mStatus
-				+ ", mTakeStatus=" + mTakeStatus + ", pValue=" + pValue + ", p_mNo=" + p_mNo + ", ano=" + ano
-				+ ", aoriginName=" + aoriginName + ", achangeName=" + achangeName + ", adate=" + adate + ", aFilePath="
-				+ aFilePath + ", atype=" + atype + ", a_Fno=" + a_Fno + ", a_mno=" + a_mno + ", aDocType=" + aDocType
-				+ ", aStatus=" + aStatus + "]";
-	}
-
-
-
 	public adminMember(int mno, String mName, String mNick, String mGender, String mPhone, String mid, String mpwd,
 			String memail, Date mEnrollDate, int mPoint, String mtype, String mFundtype, String mpr, String mprNew,
 			String mBirthDay, String mAddress, Date mAcceptDate, Date mprAcceptDate, int mGoalNum, String mStatus,
-			String mTakeStatus, long pValue, String p_mNo, int ano, String aoriginName, String achangeName, Date adate,
-			String aFilePath, String atype, int a_Fno, int a_mno, String aDocType, String aStatus) {
+			String mTakeStatus, long pValue, String p_mNo, String numStatus, int ano, String aoriginName,
+			String achangeName, Date adate, String aFilePath, String atype, int a_Fno, int a_mno, String aDocType,
+			String aStatus) {
 		super();
 		this.mno = mno;
 		this.mName = mName;
@@ -95,6 +82,7 @@ public class adminMember implements Serializable{
 		this.mTakeStatus = mTakeStatus;
 		this.pValue = pValue;
 		this.p_mNo = p_mNo;
+		NumStatus = numStatus;
 		this.ano = ano;
 		this.aoriginName = aoriginName;
 		this.achangeName = achangeName;
@@ -105,6 +93,21 @@ public class adminMember implements Serializable{
 		this.a_mno = a_mno;
 		this.aDocType = aDocType;
 		this.aStatus = aStatus;
+	}
+
+
+
+	@Override
+	public String toString() {
+		return "adminMember [mno=" + mno + ", mName=" + mName + ", mNick=" + mNick + ", mGender=" + mGender
+				+ ", mPhone=" + mPhone + ", mid=" + mid + ", mpwd=" + mpwd + ", memail=" + memail + ", mEnrollDate="
+				+ mEnrollDate + ", mPoint=" + mPoint + ", mtype=" + mtype + ", mFundtype=" + mFundtype + ", mpr=" + mpr
+				+ ", mprNew=" + mprNew + ", mBirthDay=" + mBirthDay + ", mAddress=" + mAddress + ", mAcceptDate="
+				+ mAcceptDate + ", mprAcceptDate=" + mprAcceptDate + ", mGoalNum=" + mGoalNum + ", mStatus=" + mStatus
+				+ ", mTakeStatus=" + mTakeStatus + ", pValue=" + pValue + ", p_mNo=" + p_mNo + ", NumStatus="
+				+ NumStatus + ", ano=" + ano + ", aoriginName=" + aoriginName + ", achangeName=" + achangeName
+				+ ", adate=" + adate + ", aFilePath=" + aFilePath + ", atype=" + atype + ", a_Fno=" + a_Fno + ", a_mno="
+				+ a_mno + ", aDocType=" + aDocType + ", aStatus=" + aStatus + "]";
 	}
 
 
@@ -385,6 +388,18 @@ public class adminMember implements Serializable{
 
 
 
+	public String getNumStatus() {
+		return NumStatus;
+	}
+
+
+
+	public void setNumStatus(String numStatus) {
+		NumStatus = numStatus;
+	}
+
+
+
 	public int getAno() {
 		return ano;
 	}
@@ -504,9 +519,6 @@ public class adminMember implements Serializable{
 	}
 
 
-
-	
-	
 
 	
 	
