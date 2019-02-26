@@ -48,6 +48,8 @@ public interface NanumMemberDao {
 	int insertQnA(SqlSessionTemplate sqlSession, QnA q)throws NanumException;
 	//QnA 삭제
 	int deleteQnA(SqlSessionTemplate sqlSession, int qNo)throws NanumException;
+	//회원정보 수정
+	int updateMember(SqlSessionTemplate sqlSession, Member m2) throws NanumException;
 	
 	
 	

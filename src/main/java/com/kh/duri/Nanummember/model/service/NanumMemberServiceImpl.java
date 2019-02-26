@@ -117,6 +117,12 @@ public class NanumMemberServiceImpl implements NanumMemberService {
 		int result = nd.deleteQnA(sqlSession,qNo);
 		return result;
 	}
+	//회원정보 수정
+	@Override
+	public int updateMember(Member m2) throws NanumException {
+		int result = nd.updateMember(sqlSession, m2);
+		return result;
+	}
 	
 	
 	
