@@ -68,6 +68,10 @@ public class MemberController {
 					Member member = (Member)request.getSession().getAttribute("loginUser");
 					/*System.out.println("세션 : " + member);*/
 					
+					if(Integer.parseInt(member.getmTakeStatus()) == 3) {
+						mv.setViewName("redirect:goHappyMain.me");
+					}else {
+						
 					//애린이가 수정
 					//로그인 하자마자 증빙 서류 재 제출 D-day 띄우기	
 					Attachment aDate;
@@ -80,6 +84,7 @@ public class MemberController {
 				
 					
 					mv.setViewName("redirect:goHappyMain.me"); //위처럼 redirect로 뷰페이지이름연결할거랑 똑같음
+					}
 				}
 			}
 			
@@ -242,8 +247,6 @@ public class MemberController {
 
 			// 사진명 변경해서 업로드
 			photo.transferTo(new File(filePath + "\\" + changeName + ext));
-
-			m.setMpwd(passwordEncoder.encode(m.getMpwd()));
 
 			/* 암호화처리 */
 			String encPassword = passwordEncoder.encode(m.getMpwd()); 

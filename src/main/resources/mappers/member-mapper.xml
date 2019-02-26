@@ -126,7 +126,7 @@
 	<!-- 행복두리 증빙서류 삽입 -->
 	<insert id="insertHappyPhoto">
 	INSERT INTO ATTACHMENT
-	VALUES (SEQ_A_NO.NEXTVAL,#{origin},#{change},null,'formFiles','R',null,#{mno},'1','F')
+	VALUES (SEQ_A_NO.NEXTVAL,#{origin},#{change},null,'formFiles',#{mno},'1','F')
 	</insert>
 	
 	
