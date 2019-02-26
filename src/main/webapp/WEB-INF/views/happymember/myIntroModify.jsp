@@ -159,7 +159,7 @@ input, select{
     </div>
 	
 	<div align="center">
-		<c:if test="${ empty loginUser.mprNew }">
+		<c:if test="${ loginUser.mTakeStatus ne 4 }">
 		 <div onclick="updatePr();" class="ui primary button">수정하기</div>
 		</c:if>
 		<button onclick="return back();" class="ui button">취소하기</button>

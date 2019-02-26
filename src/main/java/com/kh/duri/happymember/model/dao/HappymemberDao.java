@@ -50,8 +50,10 @@ public interface HappymemberDao {
 	List<DeliveryDetail> selectDeliveryList(SqlSessionTemplate sqlSession, Member m, PageInfo pi) throws MypageException;
 
 	//자기소개 수정
-	int updateIntroduce(SqlSessionTemplate sqlSession, Member oldLoginUser) throws MypageException;
-
+	int updateIntroduce1(SqlSessionTemplate sqlSession, Member oldLoginUser)throws MypageException;
+	int updateIntroduce2(SqlSessionTemplate sqlSession, Member oldLoginUser)throws MypageException;
+	
+	
 	//물품후원 목록 개수 조회
 	int selectItemDonateCount(SqlSessionTemplate sqlSession, Member m) throws MypageException;
 
@@ -87,6 +89,10 @@ public interface HappymemberDao {
 
 	//증빙서류 현황 조회
 	Attachment selectProofDocument(SqlSessionTemplate sqlSession, Member m) throws MypageException;
+
+
+
+	
 
 	
 

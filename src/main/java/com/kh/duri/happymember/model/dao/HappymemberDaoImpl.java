@@ -186,18 +186,29 @@ public class HappymemberDaoImpl implements HappymemberDao{
 		return deliveryList;
 	}
 
-	//자기소개 수정
+	//자기소개 수정1 - 회원상태 1,2
 	@Override
-	public int updateIntroduce(SqlSessionTemplate sqlSession, Member oldLoginUser) throws MypageException {
-		int result = sqlSession.update("HappyMember.updateIntroduce", oldLoginUser);
+	public int updateIntroduce1(SqlSessionTemplate sqlSession, Member oldLoginUser) throws MypageException {
+		int result1 = sqlSession.update("HappyMember.updateIntroduce1", oldLoginUser);
 		/*System.out.println("회원번너너너너너너넌호 : " + oldLoginUser.getMno());
 		System.out.println("자기소개 : " + oldLoginUser.getMprNew());
 		System.out.println("정보 : " + result);*/
 		
-		if(result < 0) {
+		if(result1 < 0) {
 			throw new MypageException("자기소개 수정 실패");
 		}
-		return result;
+		return result1;
+	}
+	
+	//자기소개 수정2 - 회원상태3
+	@Override
+	public int updateIntroduce2(SqlSessionTemplate sqlSession, Member oldLoginUser) throws MypageException {
+		int result2 = sqlSession.update("HappyMember.updateIntroduce2", oldLoginUser);
+		
+		if(result2 < 0) {
+			throw new MypageException("자기소개 수정 실패");
+		}
+		return result2;
 	}
 
 	//물품후원 목록 개수 조회
@@ -366,6 +377,9 @@ public class HappymemberDaoImpl implements HappymemberDao{
 		
 		return proofDocument;
 	}
+
+
+	
 
 	
 

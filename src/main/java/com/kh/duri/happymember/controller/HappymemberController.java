@@ -187,6 +187,7 @@ public class HappymemberController {
 		/*System.out.println("userNewPr : " + userNewPr);*/
 		
 		oldLoginUser.setMprNew(userNewPr);
+		oldLoginUser.setMpr(userNewPr);
 				
 		try {
 			int result = hs.updateIntroduce(oldLoginUser);
@@ -197,6 +198,7 @@ public class HappymemberController {
 			
 		} catch (MypageException e) {
 			model.addAttribute("msg", e.getMessage());
+			return "common/errorPage";
 		}
 	
 		

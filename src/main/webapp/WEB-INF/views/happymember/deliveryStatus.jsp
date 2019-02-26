@@ -161,9 +161,9 @@
 
 <script>
 	$("#deliveryBtn").hover(function(){
-		$("#deliveryBtn").text("택배접수 완료");
+		$(this).text("택배접수 완료");
 	},function(){
-		$("#deliveryBtn").text("배송상태 보기")
+		$(this).text("배송상태 보기")
 	});
 	
 	
