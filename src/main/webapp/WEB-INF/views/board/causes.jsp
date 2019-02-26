@@ -133,7 +133,7 @@
 								<li><a href="#">&gt;</a></li>
 							</c:if>
 							<c:if test="${ pi.currentPage < pi.maxPage }">
-								<c:url var="blistEnd" value="mypageFund.nanum">
+								<c:url var="blistEnd" value="money_donate.bo">
 									<c:param name="currentPage" value="${ pi.currentPage + 1}"/>
 								</c:url>
 								<li><a href="${ blistEnd }">&gt;</a></li>

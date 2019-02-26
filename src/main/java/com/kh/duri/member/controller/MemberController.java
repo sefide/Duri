@@ -71,32 +71,26 @@ public class MemberController {
 					if(Integer.parseInt(member.getmTakeStatus()) == 3) {
 						mv.setViewName("redirect:goHappyMain.me");
 					}else {
-						
+
 					//애린이가 수정
 					//로그인 하자마자 증빙 서류 재 제출 D-day 띄우기	
 					Attachment aDate;
 					aDate = hs.selectAdate(member);
 					
-					/*System.out.println("갱신 가능 시작 d-day : " + aDate.getChangestart());
-					System.out.println("갱신가능~마감까지 d-day : " + aDate.getFinishdate());*/
+					System.out.println("갱신 가능 시작 d-day : " + aDate.getChangestart());
+					System.out.println("갱신가능~마감까지 d-day : " + aDate.getFinishdate());
 					session.setAttribute("changestart", aDate.getChangestart());
 					session.setAttribute("finishdate", aDate.getFinishdate());
-				
-					
+
 					mv.setViewName("redirect:goHappyMain.me"); //위처럼 redirect로 뷰페이지이름연결할거랑 똑같음
 					}
 				}
 			}
 			
-
-			
 		} catch (LoginException e) {
-			
 			mv.addObject("msg",e.getMessage());
 			mv.setViewName("common/errorPage");
 		}
-		
-		
 		return mv;
 	}
 
@@ -399,7 +393,7 @@ public class MemberController {
 
 	
 	
-	@RequestMapping("Eunji_happyLogin.me")
+	@RequestMapping("happyLogin.me")
 	public String cloudList() {
 		return "member/HappyLogin";
 	}

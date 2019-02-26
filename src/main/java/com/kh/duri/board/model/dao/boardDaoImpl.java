@@ -36,7 +36,7 @@ public class boardDaoImpl implements boardDao {
 		int offset = (pi.getCurrentPage() - 1) * pi.getLimit();
 		RowBounds rowBounds = new RowBounds(offset, pi.getLimit());
 
-		List<Member> bh = sqlSession.selectList("Member.selectDonateList", rowBounds);
+		List<Member> bh = sqlSession.selectList("Member.selectDonateList", null,rowBounds);
 
 		if (bh == null) {
 			throw new DonateListException("정기후원 명단을 불러올수 없습니다.");
@@ -81,7 +81,7 @@ public class boardDaoImpl implements boardDao {
 		int offset = (pi.getCurrentPage() - 1) * pi.getLimit();
 		RowBounds rowBounds = new RowBounds(offset, pi.getLimit());
 
-		List<Board> bh = sqlSession.selectList("Boards.selectMoneyList", rowBounds);
+		List<Board> bh = sqlSession.selectList("Boards.selectMoneyList", null,rowBounds);
 
 		if (bh == null) {
 			throw new DonateListException("금액후원 명단을 불러올수 없습니다.");
@@ -127,7 +127,7 @@ public class boardDaoImpl implements boardDao {
 		int offset = (pi.getCurrentPage() - 1) * pi.getLimit();
 		RowBounds rowBounds = new RowBounds(offset, pi.getLimit());
 
-		List<BoardItem> th = sqlSession.selectList("Boards.selectThingList", rowBounds);
+		List<BoardItem> th = sqlSession.selectList("Boards.selectThingList", null,rowBounds);
 
 		/*
 		 * if(th == null){ throw new DonateListException("금액후원 명단을 불러올수 없습니다."); }
@@ -143,7 +143,7 @@ public class boardDaoImpl implements boardDao {
 		int offset = (pi.getCurrentPage() - 1) * pi.getLimit();
 		RowBounds rowBounds = new RowBounds(offset, pi.getLimit());
 
-		List<BoardItem> th2 = sqlSession.selectList("Boards.selectThingList2", rowBounds);
+		List<BoardItem> th2 = sqlSession.selectList("Boards.selectThingList2", null,rowBounds);
 
 		/*
 		 * if(th == null){ throw new DonateListException("금액후원 명단을 불러올수 없습니다."); }
