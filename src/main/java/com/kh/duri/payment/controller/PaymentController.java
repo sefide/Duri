@@ -55,8 +55,6 @@ public class PaymentController {
 	@Autowired
 	private PaymentService ps;
 
-	@Autowired
-	private BCryptPasswordEncoder passwordEncoder;
 	// 나눔두리 포인트 히스토리 페이지
 	@RequestMapping("pointHistory.pm")
 	public String pointHistory(Model model, HttpServletRequest request, HttpServletResponse response) {

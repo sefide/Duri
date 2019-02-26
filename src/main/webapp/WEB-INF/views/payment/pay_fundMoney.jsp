@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -177,14 +177,27 @@
    		}
    		
    		#barBox{
-   			background-color : white;
-   			border : 1px solid lightgray;
+   			background-color : rgb(240,240,240);
+   			/* border : 1px solid lightgray; */
    			width : 93%;
-   			height : 2.5em;
+   			height : 3em;
    		 }
    		 #bar2{
    		 	background-color : #FE9D35;
+   		 	font-size : 17px;
    		 }
+   		 
+   		 .checks {position: relative;} 
+   		 .checks input[type="radio"] { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip:rect(0,0,0,0); border: 0; } .checks input[type="radio"] + label { display: inline-block; position: relative; padding-left: 30px; cursor: pointer; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; } 
+   		 .checks input[type="radio"] + label:before { content: ''; position: absolute; left: 0; top: -4px; width: 21px; height: 21px; text-align: center; background: #fafafa; border: 1px solid #cacece; border-radius: 100%; box-shadow: 0px 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05); } 
+   		 .checks input[type="radio"] + label:active:before, .checks input[type="radio"]:checked + label:active:before { box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px 1px 3px rgba(0,0,0,0.1); } 
+   		 .checks input[type="radio"]:checked + label:before { background: #E9ECEE; border-color: #adb8c0; } 
+   		 .checks input[type="radio"]:checked + label:after { content: ''; position: absolute; top: 1px; left: 5px; width: 13px; height: 13px; background: #FE9D35; border-radius: 100%; box-shadow: inset 0px 0px 10px rgba(0,0,0,0.3); }
+		
+		.barTxt{
+			display : inline-block;
+			width : 46%;		
+		}
     </style>
 </head>
 <body>
@@ -274,12 +287,15 @@
 	    		<div class ="row d-flex"> 
 	    			<h4 class ="ftco-animate">> 후원 금액</h4>
 	    		</div>
+	    		
 	    		<div style = "margin-left : 9%;">
-	    		현재 후원금액 : ${f.fdValue}  목표 후원금액 : ${ f.fValue }
+	    		<div class = "barTxt" >현재 후원금액 : ${f.fdValue}원 </div> <div class = "barTxt" align = "right"> 목표 후원금액 : ${ f.fValue }원 </div> <div stype = "width : 7%;"> </div>
 	    			<div class="progress custom-progress-success" id = "barBox" >
-		    			<div id="bar2" class="progress-bar" role="progressbar" aria-valuenow="28" aria-valuemin="0" aria-valuemax="100"></div>
+		    			<div id="bar2" class="progress-bar" role="progressbar" aria-valuenow="28" aria-valuemin="0" aria-valuemax="100">
+		    				<fmt:formatNumber value = "${ f.fdValue / f.fValue *100 }" pattern = ".0"/>%
+		    			</div>
 		   			</div>
-		   		필요한 후원금액 : ${ f.fValue - f.fdValue }원
+		   		${ f.fValue - f.fdValue }원이 더 필요해요 :)
 	    		</div>
 	    		
 	   			
@@ -289,11 +305,11 @@
 	    				<%-- <tr>
 	    					<th>목표 후원금 (현재 후원누적액)</th>
 	    					<td colspan = "2" ><span id = "goalPoint">${ f.fValue } (${ f.fdValue })원</span></td>
-	    				</tr>
+	    				</tr>--%>
 	    				<tr>
-	    					<th>더 필요한 후원금액</th>
+	    					<th>필요한 후원금액</th>
 	    					<td colspan = "2" ><span id = "leftPoint">${ f.fValue - f.fdValue }원</span></td>
-	    				</tr> --%>
+	    				</tr> 
 	    				<tr>
 	    					<th>현재보유 포인트</th>
 	    					<td colspan = "2" ><span id = "myPoint">${ giveM.mPoint }원</span></td>
@@ -314,11 +330,11 @@
 	    				<tr>
 	    					<th>기부금영수증</th>
 	    					<td colspan = "2" >
-	    						<div class="form-check form-check-inline">
+	    						<div class="form-check form-check-inline checks small">
 		    						<input class="form-check-input" type="radio" name="sponReceip" id="yesReceip" value="Y">
 		 		 					<label class="form-check-label" for="yesReceip">발급</label>
 	 		 					</div>
-	 		 					<div class="form-check form-check-inline">
+	 		 					<div class="form-check form-check-inline checks small">
 	 		 						<input class="form-check-input" type="radio" name="sponReceip" id="noReceip" value="N" checked>
 	 		 						<label class="form-check-label" for="noReceip">미발급</label>
 	    						</div>
@@ -375,9 +391,14 @@
 		$(document).ready(function() {
 			/* 주민등록번호 입력창 숨겨두기 */
 			$(".ipin").css("display","none");
-			var percents = ${ f.fValue / f.fdValue * 100};
+			var fValue = ${ f.fValue }
+			var fdValue = ${ f.fdValue };
+			var percents = Number(fdValue)/Number(fValue)*100;
+			console.log(fValue);
+			console.log(fdValue);
 			console.log(percents);
-			$("#bar2").css("width", percents);
+			$("#bar2").css("width", percents+"%");
+			
 			/* 모든 포인트 쓰기 선택 할 시  */
 			$("#allPoint").change(function(){
 				var mypoint = $("#myPoint").text();
