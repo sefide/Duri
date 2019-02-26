@@ -70,6 +70,8 @@
 		<result property="value" column="value"/>
 		<result property="cnt" column="cnt"/>
 		<result property="sum" column="sum"/>
+		<result property="dhdDate" column="DHDDATE"/>
+		<result property="mNo" column="MNO"/>
 	</resultMap>
 	<resultMap type="com.kh.duri.Nanummember.model.vo.Letter" id="letterResultSet">
 		<id property="leNo" column="LENO"/>
@@ -93,6 +95,8 @@
 		<result property="mNick" column="MNICK"/>
 		<result property="mpr" column="MPR"/>
 		<result property="fTitle" column="FTITLE"/>
+		<result property="fNo" column="FNO" />
+		<result property="mNo" column="MNO"/>
 	</resultMap>
 	<resultMap type="com.kh.duri.Nanummember.model.vo.FundItem" id="fundItemResultSet">
 		<id property="iNo" column="INO"/>
@@ -122,8 +126,8 @@
 	
 	<!-- 금액 크라우드 펀딩 조회 (진행) -->
 	<select id="selectMoneyCloud" resultMap="fundingResultSet" parameterType="Funding" resultType="list">
-		SELECT ROWNUM RNUM, FTITLE , FHVALUE ,FSTATUS, FSTARTDATE , FENDDATE , FHDATE
-		FROM(SELECT f.FTITLE , fh.FHVALUE , f.FSTATUS,  f.FSTARTDATE ,f.FENDDATE , fh.FHDATE
+		SELECT ROWNUM RNUM, FTITLE , FHVALUE ,FSTATUS, FSTARTDATE , FENDDATE , FHDATE, FNO
+		FROM(SELECT f.FTITLE , fh.FHVALUE , f.FSTATUS,  f.FSTARTDATE ,f.FENDDATE , fh.FHDATE , f.FNO
 		FROM FUNDING f, FUNDHISTORY fh		
 		<![CDATA[
 		WHERE f.FNO = fh.FH_FNO and fh.FH_MNO_GIVE = #{mno}  and f.FTYPE= 'MONEY' 
@@ -141,8 +145,8 @@
 	</select>
 	<!-- 금액 크라우드 펀딩 조회 (종료) -->
 	<select id="selectEndMoneyClound" resultMap="fundingResultSet" parameterType="Funding" resultType="list">
-		SELECT ROWNUM RNUM, FTITLE , FHVALUE ,FSTATUS, FSTARTDATE , FENDDATE , FHDATE
-		FROM(SELECT f.FTITLE , fh.FHVALUE , f.FSTATUS,  f.FSTARTDATE ,f.FENDDATE , fh.FHDATE
+		SELECT ROWNUM RNUM, FTITLE , FHVALUE ,FSTATUS, FSTARTDATE , FENDDATE , FHDATE, FNO
+		FROM(SELECT f.FTITLE , fh.FHVALUE , f.FSTATUS,  f.FSTARTDATE ,f.FENDDATE , fh.FHDATE, f.FNO
 		FROM FUNDING f, FUNDHISTORY fh		
 		<![CDATA[
 		WHERE f.FNO = fh.FH_FNO and fh.FH_MNO_GIVE = #{mno}  and f.FTYPE= 'MONEY' and f.fenddate < SYSDATE ]]>
@@ -173,7 +177,7 @@
 		SELECT COUNT(*)
 		FROM FUNDING f, FUNDHISTORY fh
 		<![CDATA[
-		WHERE f.FNO = fh.FH_FNO and fh.FH_MNO_GIVE =  #{mno}  AND f.fenddate < SYSDATE ]]>
+		WHERE f.FNO = fh.FH_FNO and fh.FH_MNO_GIVE = #{mno}  AND f.fenddate < SYSDATE ]]>
 		and f.FTYPE= 'ITEM'
 	</select>
 	<!-- 물품 크라우드 펀딩  조회 (종료) -->
@@ -185,7 +189,7 @@
 		JOIN FUNDHISTORYDETAIL FHD ON(FHD.FHD_FHNO=FH.FHNO)
 		JOIN FUNDITEM FI ON (FI.INO=FHD.FHD_INO)
 		<![CDATA[
-		WHERE  fh.FH_MNO_GIVE = 19  and f.FTYPE= 'ITEM' and f.fenddate < SYSDATE ]]>
+		WHERE  fh.FH_MNO_GIVE = #{mno} and f.FTYPE= 'ITEM' and f.fenddate < SYSDATE ]]>
 		ORDER BY FH.FHDATE DESC)
 	</select>
 	<!-- 정기후원 개수 조회 (진행) -->
@@ -199,12 +203,12 @@
 	</select>	
 	<!-- 정기후원  조회 (진행)-->
 	<select id="selectDirectFund" resultMap="directFundResultSet" parameterType="SelectDirectFund" resultType="list">
-		SELECT ROWNUM RNUM, nick, value, cnt, sum
+		SELECT ROWNUM RNUM, nick, value, cnt, sum ,DHDDATE, MNO
 		FROM( 
-		SELECT  M.MNICK as nick, MAX(DH.DHVALUE) as value, MAX(DHD.DHDCOUNT) as cnt, SUM(DH.DHVALUE) as sum 
+		SELECT  M.MNICK as nick, MAX(DH.DHVALUE) as value, MAX(DHD.DHDCOUNT) as cnt, SUM(DH.DHVALUE) as sum , DHD.DHDDATE, M.MNO
 		FROM Member M, DIRECTFUNDHISTORY DH, DIRECTFUNDHISTORYDETAIL DHD
 		WHERE DH.DHSTATUS = 'Y'  AND DH.DHNO = DHD.DHD_DHNO AND DH.DH_MNO_GIVE = #{mno} AND DH.DH_MNO_TAKE = M.MNO
-		GROUP BY M.MNICK, DH.DHVALUE )
+		GROUP BY M.MNICK, DH.DHVALUE, DHD.DHDDATE, M.MNO )
 	</select>
 	<!-- 정기후원 개수 조회 (종료) -->
 	<select id="selectDirectFundCount2" resultType="_int">
@@ -218,12 +222,12 @@
 	</select>
 	<!-- 정기후원  조회 (종료)-->
 	<select id="selectDirectFund2" resultMap="directFundResultSet" parameterType="SelectDirectFund" resultType="list">
-		SELECT ROWNUM RNUM, nick, value, cnt, sum
+		SELECT ROWNUM RNUM, nick, value, cnt, sum, MNO
 		FROM( 
-		SELECT  M.MNICK as nick, MAX(DH.DHVALUE) as value, MAX(DHD.DHDCOUNT) as cnt, SUM(DH.DHVALUE) as sum 
+		SELECT  M.MNICK as nick, MAX(DH.DHVALUE) as value, MAX(DHD.DHDCOUNT) as cnt, SUM(DH.DHVALUE) as sum , M.MNO
 		FROM Member M, DIRECTFUNDHISTORY DH, DIRECTFUNDHISTORYDETAIL DHD
 		WHERE DH.DHSTATUS = 'N'  AND DH.DHNO = DHD.DHD_DHNO AND DH.DH_MNO_GIVE = #{mno} AND DH.DH_MNO_TAKE = M.MNO
-		GROUP BY M.MNICK, DH.DHVALUE)
+		GROUP BY M.MNICK, DH.DHVALUE, M.MNO)
 	</select>
 	<!-- 정기 감사편지 개수 조회 (진행)-->
   	<select id="selectDirectLetterCount" resultType="_int">
@@ -306,9 +310,9 @@
   	</select>
   	<!-- 찜한 정기 후원  조회 -->
   	<select id="selectLikeDirect" resultMap="fundInterestResultSet" parameterType="FundInterest" resultType="list">
-  		SELECT ROWNUM RNUM ,MNICK, MPR ,FIDATE, FI_MNO_TAKE
+  		SELECT ROWNUM RNUM ,MNICK, MPR ,FIDATE, FI_MNO_TAKE, MNO
 		FROM(
-		SELECT M.MNICK, M.MPR ,FI.FIDATE, FI.FI_MNO_TAKE
+		SELECT M.MNICK, M.MPR ,FI.FIDATE, FI.FI_MNO_TAKE , M.MNO
 		FROM FUNDINTEREST FI, MEMBER M 
 		WHERE FI.FISTATUS = 'Y' AND FI.FI_MNO = #{mno}  AND FI.FI_MNO_TAKE = M.MNO AND FI.FITYPE = 1 
 		ORDER BY FI.FIDATE)
@@ -322,9 +326,9 @@
   	</select>
   	<!-- 찜한 금액 크라우드 펀딩  조회 -->
   	<select id="selectLikeMoneyCloud" resultMap="fundInterestResultSet" parameterType="FundInterest" resultType="list">
-  		SELECT ROWNUM RNUM, MNICK , FTITLE, FIDATE, FI_FNO
+  		SELECT ROWNUM RNUM, MNICK , FTITLE, FIDATE, FI_FNO, FNO
 		FROM(
-		SELECT  M.MNICK ,F.FTITLE, FI.FIDATE , FI.FI_FNO
+		SELECT  M.MNICK ,F.FTITLE, FI.FIDATE , FI.FI_FNO, F.FNO
 		FROM FUNDINTEREST FI, MEMBER M , FUNDING F
 		WHERE FI.FISTATUS = 'Y' AND FI.FI_MNO = #{mno}  AND FI.FITYPE = 2  AND F.FNO = FI.FI_FNO AND F.FWRITER = M.MNO
 		ORDER BY FI.FIDATE )
@@ -338,9 +342,9 @@
   	</select>
   	<!-- 찜한 물품 크라우딩 조회 -->
   	<select id="selectLikeItemCloud" resultMap="fundInterestResultSet" parameterType="FundInterest" resultType="list">
-  		SELECT ROWNUM RNUM, MNICK , FTITLE, FIDATE, FI_FNO
+  		SELECT ROWNUM RNUM, MNICK , FTITLE, FIDATE, FI_FNO, FNO
 		FROM(
-		SELECT  M.MNICK ,F.FTITLE, FI.FIDATE , FI.FI_FNO
+		SELECT  M.MNICK ,F.FTITLE, FI.FIDATE , FI.FI_FNO, F.FNO
 		FROM FUNDINTEREST FI, MEMBER M , FUNDING F
 		WHERE FI.FISTATUS = 'Y' AND FI.FI_MNO = #{mno}  AND FI.FITYPE = 3  AND F.FNO = FI.FI_FNO AND F.FWRITER = M.MNO
 		ORDER BY FI.FIDATE )
@@ -375,10 +379,11 @@
   		DELETE FROM QNA WHERE QNO = #{qNo}
   	</delete>
 	<!-- 회원정보 수정 -->
-	<update id="Nanum.updateMember">
+	<update id="updateMember">
 		UPDATE Member 
 		SET MNICK = #{mNickName} , MPHONE = #{mPhone} , MPWD = #{mpwd} 
 		WHERE MNO = #{mno} 
 	</update>
+	
  </mapper>
   

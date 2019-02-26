@@ -89,7 +89,7 @@ body {
 						<p style="">한명의 행복두리에게 매월 행복들 선물해주세요</p>
 						<p>
 							<a href="long_donate.bo" class="btn btn-white px-3 py-2 mt-2" id="gofund"
-								style="font-family: Nanum Pen Script;  ">행복 선물하기</a>
+								style="font-family: Nanum Pen Script;">행복 선물하기</a>
 						</p>
 					</div>
 				</div>
