@@ -99,10 +99,10 @@
 					</thead>
 					<tbody>
 						<c:forEach items="${likeDirectList}" var = "likeDirectList" varStatus="">
-							<tr>
-							<td><c:out value="${likeDirectList.mNick}"/></td>
-							<td title="${likeDirectList.mpr}"><c:out value="${likeDirectList.mpr}"/></td>						
-							<td><c:out value="${likeDirectList.flDate}"></c:out></td>											
+							<tr onclick="goDirect(${likeDirectList.mNo});">
+								<td><c:out value="${likeDirectList.mNick}"/></td>
+								<td title="${likeDirectList.mpr}"><c:out value="${likeDirectList.mpr}"/></td>						
+								<td><c:out value="${likeDirectList.flDate}"></c:out></td>											
 						</tr>
 						</c:forEach>
 					</tbody>
@@ -163,7 +163,7 @@
 					</thead>
 					<tbody>
 						<c:forEach items="${likeMoneyList}" var = "likeMoneyList" varStatus="">
-							<tr>
+							<tr onclick="goFund(${likeMoneyList.fNo});">
 							<td><c:out value="${likeMoneyList.mNick}"/></td>
 							<td ><c:out value="${likeMoneyList.fTitle}"/></td>						
 							<td><c:out value="${likeMoneyList.flDate}"></c:out></td>											
@@ -227,10 +227,10 @@
 					</thead>
 					<tbody>
 						<c:forEach items="${likeItemList}" var = "likeItemList" varStatus="">
-							<tr>
-							<td><c:out value="${likeItemList.mNick}"/></td>
-							<td ><c:out value="${likeItemList.fTitle}"/></td>						
-							<td><c:out value="${likeItemList.flDate}"></c:out></td>											
+							<tr onclick="goItemFund(${likeItemList.fNo});">
+								<td><c:out value="${likeItemList.mNick}"/></td>
+								<td ><c:out value="${likeItemList.fTitle}"/></td>						
+								<td><c:out value="${likeItemList.flDate}"></c:out></td>											
 						</tr>
 						</c:forEach>
 					</tbody>
@@ -312,7 +312,21 @@
 			}				
 		});
 	}	
-	
+	// 정기상세로 가기
+	function goDirect(mNo) {	
+		var mNo = mNo ;
+		location.href="long_donate_detail.bo?longDetail="+mNo;
+	}
+	//금액 후원 상세로 가기
+	function goFund(fno) {	
+		var fno = fno ;
+		location.href="cloud_money_datail.bo?moneyDatail="+fno;
+	}
+	//물품 후원 상세로 가기
+	function goItemFund(fno) {	
+		var fno = fno ;
+		location.href="cloud_thing_datail.bo?itemDatail="+fno;
+	}
 	</script>
 
 </body>

@@ -88,23 +88,25 @@
 				<%@ include file="../include/tabMypage.jsp"%>
 
 			<div class="tableArea">
-				<div id="myTitle"><i class="child icon"></i> 진행중인 정기후훤현황</div>
+				<div id="myTitle"><i class="child icon"></i> 진행중인 정기후원현황</div>
 				<table>
 					<thead>
 						<tr>
-							<th style="width: 25%;">행복두리</th>
-							<th style="width: 25%;">후원금액</th>
-							<th style="width: 25%;">누적 후원기간</th>
-							<th style="width: 25%;">누적 후원금액</th>
+							<th style="width: 20%;">행복두리</th>
+							<th style="width: 20%;">후원금액</th>
+							<th style="width: 20%;">누적 후원기간</th>
+							<th style="width: 20%;">누적 후원금액</th>
+							<th style="width: 20%;">후원 일시</th>
 						</tr>
 					</thead>
 					<tbody>
 						<c:forEach items="${fundIngList}" var = "fundIngList">
-							<tr>
+							<tr onclick="goFund(${fundIngList.mNo});">
 								<td><c:out value="${fundIngList.mNickName}"/></td>
 								<td><c:out value="${fundIngList.value}"/> 원 </td>
 								<td><c:out value="${fundIngList.cnt}"/> 달 째</td>
 								<td><c:out value="${fundIngList.sum}"/> 원</td>
+								<td><c:out value="${fundIngList.dhdDate}"/> </td>
 							</tr>
 						</c:forEach>
 					</tbody>
@@ -150,7 +152,7 @@
 
 			<!-- 종료된 정기 후원 -->
 						<div class="tableArea">
-				<div id="myTitle"><i class="child icon"></i>종료된 정기후훤현황</div>
+				<div id="myTitle"><i class="child icon"></i>종료된 정기후원</div>
 				<table>
 					<thead>
 						<tr>
@@ -162,11 +164,11 @@
 					</thead>
 					<tbody>
 						<c:forEach items="${fundEndList}" var = "fundEndList" varStatus="">
-							<tr>
-								<td><c:out value="${fundEndList.mNickName}"/></td>
-								<td><c:out value="${fundEndList.value}"/> 원 </td>
-								<td><c:out value="${fundEndList.cnt}"/> 달 </td>
-								<td><c:out value="${fundEndList.sum}"/> 원</td>
+								<tr onclick="goFund(${fundEndList.mNo});">
+									<td><c:out value="${fundEndList.mNickName}"/></td>
+									<td><c:out value="${fundEndList.value}"/> 원 </td>
+									<td><c:out value="${fundEndList.cnt}"/> 달 </td>
+									<td><c:out value="${fundEndList.sum}"/> 원</td>
 							</tr>
 						</c:forEach>
 					</tbody>
@@ -213,8 +215,10 @@
 		</div>								
 	<%@ include file="../include/myNav.jsp" %>
 	<script>
-		function goMoneyCloud() {
-			location.href = "";
+		// 상세로 가기
+		function goFund(mNo) {	
+			var mNo = mNo ;
+			location.href="long_donate_detail.bo?longDetail="+mNo;
 		}
 	</script>
 </body>

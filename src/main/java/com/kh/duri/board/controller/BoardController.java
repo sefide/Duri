@@ -84,27 +84,19 @@ public class BoardController {
 
 	//정기후원 상세페이지
 	@RequestMapping("long_donate_detail.bo")
-	public ModelAndView longDonate(Member m, ModelAndView mv,HttpSession session){ 
-	
-	
-			System.out.println("member : "+m);
-			
+	public ModelAndView longDonate(Member m, ModelAndView mv,HttpSession session,HttpServletRequest request, HttpServletResponse response){ 	
+			String longDetail2 = request.getParameter("longDetail");
+			if(longDetail2 != null) {
+				int mNo = Integer.parseInt(longDetail2);
+				m.setMno(mNo);
+			}
+			System.out.println("member : "+m);			
 			Member longDetail = null; 
-			
-			
-			longDetail = bs.longDanateDetail(m); //받아온 아이디와 비밀번호로 로그인 정보 조회
-				
-			session.setAttribute("longDetail", longDetail);	//세션에 뿌려주기
-				
-				mv.setViewName("redirect:longDonate.bo"); //위처럼 redirect로 뷰페이지이름연결할거랑 똑같음
-	
-			
-
-		
+			longDetail = bs.longDanateDetail(m); //받아온 아이디와 비밀번호로 로그인 정보 조회				
+			session.setAttribute("longDetail", longDetail);	//세션에 뿌려주기				
+			mv.setViewName("redirect:longDonate.bo"); //위처럼 redirect로 뷰페이지이름연결할거랑 똑같음
 		return mv;
-		
-
-		}
+	}
 
 
 	//금액후원 조회
@@ -115,7 +107,7 @@ public class BoardController {
 	      if(request.getParameter("currentPage") != null) {
 	         currentPage = Integer.parseInt(request.getParameter("currentPage"));
 	      }      
-	         int listCount = bs.getMoneyListCount();			
+	        int listCount = bs.getMoneyListCount();			
 			PageInfo pi = Pagination.getPageInfo(currentPage, listCount);			
 			System.out.println("크라우드펀딩 금액후원 명수 :  " + listCount);
 			
@@ -134,18 +126,14 @@ public class BoardController {
 	   }
 	 //금액후원 상세조회
 	   @RequestMapping("cloud_money_datail.bo")
-	   public ModelAndView moneyDetail(Board b, ModelAndView mv,HttpSession session, HttpServletRequest request, HttpServletResponse response){ 
-				
+	   public ModelAndView moneyDetail(Board b, ModelAndView mv,HttpSession session, HttpServletRequest request, HttpServletResponse response){ 	   
 		   String moneyDatail = request.getParameter("moneyDatail");
-		   System.out.println("moneyDatail : " + moneyDatail);
-		   
+		   System.out.println("moneyDatail : " + moneyDatail);	   
 		   if(moneyDatail != null) {
-			   int happyMoneyFno = Integer.parseInt(moneyDatail);
-			   
+			   int happyMoneyFno = Integer.parseInt(moneyDatail);			   
 			   b.setFno(happyMoneyFno);
 			   System.out.println("happyMoneyFno : " + happyMoneyFno);
-		   }
-		   
+		   }   
 		System.out.println("Board : "+b);		
 		Board moneyDetail = null; 	
 		moneyDetail = bs.moneyDetailOne(b); //받아온 아이디와 비밀번호로 로그인 정보 조회			

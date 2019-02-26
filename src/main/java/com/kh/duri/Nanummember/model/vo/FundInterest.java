@@ -13,13 +13,17 @@ public class FundInterest implements java.io.Serializable{
 	private String mNick; //후원대상자 닉네임
 	private String mpr; // 후원 대상자 자기소개
 	private String fTitle; //후원 제목
+	private int fNo;
+	private int mNo;
+	
 	
 	
 	public FundInterest(){}
 
 
+
 	public FundInterest(int flNo, Date flDate, String flStatus, String flType, int flMno, int flFno, int flMnoTake,
-			String mNick, String mpr, String fTitle) {
+			String mNick, String mpr, String fTitle, int fNo, int mNo) {
 		super();
 		this.flNo = flNo;
 		this.flDate = flDate;
@@ -31,15 +35,19 @@ public class FundInterest implements java.io.Serializable{
 		this.mNick = mNick;
 		this.mpr = mpr;
 		this.fTitle = fTitle;
+		this.fNo = fNo;
+		this.mNo = mNo;
 	}
+
 
 
 	@Override
 	public String toString() {
 		return "FundInterest [flNo=" + flNo + ", flDate=" + flDate + ", flStatus=" + flStatus + ", flType=" + flType
-				+ ", flMno=" + flMno + ", flFno=" + flFno + ", flMnoTake=" + flMnoTake + ", mpr=" + mpr + ", fTitle="
-				+ fTitle + "]";
+				+ ", flMno=" + flMno + ", flFno=" + flFno + ", flMnoTake=" + flMnoTake + ", mNick=" + mNick + ", mpr="
+				+ mpr + ", fTitle=" + fTitle + ", fNo=" + fNo + ", mNo=" + mNo + "]";
 	}
+
 
 
 	public int getFlNo() {
@@ -47,9 +55,11 @@ public class FundInterest implements java.io.Serializable{
 	}
 
 
+
 	public void setFlNo(int flNo) {
 		this.flNo = flNo;
 	}
+
 
 
 	public Date getFlDate() {
@@ -57,9 +67,11 @@ public class FundInterest implements java.io.Serializable{
 	}
 
 
+
 	public void setFlDate(Date flDate) {
 		this.flDate = flDate;
 	}
+
 
 
 	public String getFlStatus() {
@@ -67,9 +79,11 @@ public class FundInterest implements java.io.Serializable{
 	}
 
 
+
 	public void setFlStatus(String flStatus) {
 		this.flStatus = flStatus;
 	}
+
 
 
 	public String getFlType() {
@@ -77,9 +91,11 @@ public class FundInterest implements java.io.Serializable{
 	}
 
 
+
 	public void setFlType(String flType) {
 		this.flType = flType;
 	}
+
 
 
 	public int getFlMno() {
@@ -87,9 +103,11 @@ public class FundInterest implements java.io.Serializable{
 	}
 
 
+
 	public void setFlMno(int flMno) {
 		this.flMno = flMno;
 	}
+
 
 
 	public int getFlFno() {
@@ -97,9 +115,11 @@ public class FundInterest implements java.io.Serializable{
 	}
 
 
+
 	public void setFlFno(int flFno) {
 		this.flFno = flFno;
 	}
+
 
 
 	public int getFlMnoTake() {
@@ -107,9 +127,11 @@ public class FundInterest implements java.io.Serializable{
 	}
 
 
+
 	public void setFlMnoTake(int flMnoTake) {
 		this.flMnoTake = flMnoTake;
 	}
+
 
 
 	public String getmNick() {
@@ -117,9 +139,11 @@ public class FundInterest implements java.io.Serializable{
 	}
 
 
+
 	public void setmNick(String mNick) {
 		this.mNick = mNick;
 	}
+
 
 
 	public String getMpr() {
@@ -127,9 +151,11 @@ public class FundInterest implements java.io.Serializable{
 	}
 
 
+
 	public void setMpr(String mpr) {
 		this.mpr = mpr;
 	}
+
 
 
 	public String getfTitle() {
@@ -137,10 +163,38 @@ public class FundInterest implements java.io.Serializable{
 	}
 
 
+
 	public void setfTitle(String fTitle) {
 		this.fTitle = fTitle;
 	}
 
+
+
+	public int getfNo() {
+		return fNo;
+	}
+
+
+
+	public void setfNo(int fNo) {
+		this.fNo = fNo;
+	}
+
+
+
+	public int getmNo() {
+		return mNo;
+	}
+
+
+
+	public void setmNo(int mNo) {
+		this.mNo = mNo;
+	}
+
+
+	
+	
 	
 	
 	
