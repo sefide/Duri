@@ -228,15 +228,15 @@
       <td>&nbsp;</td>
       <td align="center" style="height:50px;"><b>펀딩 종료 기간</b></td>
       <td>
-     	<select align="center" style="width:150px; height:30px;">
+     	<select align="center" name="mLeftDay" id="mLeftDay" style="width:150px; height:30px;">
      		<option disabled selected>기간선택</option>
-     		<option>15일</option>
-     		<option>30일</option>
-     		<option>60일</option>
-     		<option>90일</option>
-     		<option>120일</option>
-     		<option>150일</option>
-     		<option>170일</option>
+     		<option>15</option>
+     		<option>30</option>
+     		<option>60</option>
+     		<option>90</option>
+     		<option>120</option>
+     		<option>150</option>
+     		<option>170</option>
      	</select>
 	 </td>
 	 <td>&nbsp;<br>
@@ -332,7 +332,8 @@ var ftype = null;
 		var fdValue =  $("#fdValue").val();
 		var fdValue2 =  $("#fdValue2").val();
 		var fdValue3 =  $("#fdValue3").val();
-
+		var mLeftDay =  $("#mLeftDay").val();
+		
 		
 		 swal({
 			  title: "작성완료!",
@@ -345,14 +346,14 @@ var ftype = null;
 					case "MONEY":
 						console.log("/" + fWriter + "/" + mNick + "/" + fTitle
 								+ "/" + ftype + "/" + fValueType + "/" + fValue
-								+ "/" + fContent + "/");
+								+ "/" + fContent + "/" + mLeftDay);
 						console.log(fTitle + ftype);
 
 						location.href = "writeCloud.bo?fWriter=" + fWriter
 								+ "&mNick=" + mNick + "&fTitle=" + fTitle
 								+ "&ftype=" + ftype + "&fValueType="
 								+ fValueType + "&fValue=" + fValue
-								+ "&fContent=" + fContent;
+								+ "&fContent=" + fContent + "&mLeftDay=" + mLeftDay;
 						break;
 
 					case "ITEM":
@@ -368,7 +369,7 @@ var ftype = null;
 								+ "&fd_ino2=" + fd_ino2 + "&fd_ino3=" + fd_ino3
 								+ "&fdValue=" + fdValue + "&fdValue2="
 								+ fdValue2 + "&fdValue3=" + fdValue3
-								+ "&fContent=" + fContent;
+								+ "&fContent=" + fContent + "&mLeftDay=" + mLeftDay;
 						break;
 
 					}

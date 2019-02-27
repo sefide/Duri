@@ -152,7 +152,7 @@ body {
 							<h3 class="heading"
 								style="font-size: 40px; color: #FD771A; font-family: Nanum Pen Script;">행복두리가 되고 싶다면?</h3>
 							<c:if test="${empty sessionScope.loginUser}">
-								<div class="tm_btn" id="goLogin" onclick="location.href='Eunji_happyLogin.me'">행복두리로 가자!</div>
+								<div class="tm_btn" id="goLogin" onclick="location.href='happyLogin.me'">행복두리로 가자!</div>
 							</c:if>
 							<c:if test="${not empty sessionScope.loginUser}">
 								<div class="tm_btn" id="goLogin" onclick="location.href='mypage.happy'">행복두리로 가자!</div>
