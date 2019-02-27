@@ -62,11 +62,11 @@ public class MemberController {
 					
 				}else{
 					
-					/*System.out.println("loginUser : "+loginUser);*/
 					session.setAttribute("loginUser", loginUser);	//세션에 뿌려주기
 					
+					
 					Member member = (Member)request.getSession().getAttribute("loginUser");
-					/*System.out.println("세션 : " + member);*/
+					System.out.println("세션 : " + member);
 					
 					if(Integer.parseInt(member.getmTakeStatus()) == 3) {
 						mv.setViewName("redirect:goHappyMain.me");
@@ -81,8 +81,9 @@ public class MemberController {
 					System.out.println("갱신가능~마감까지 d-day : " + aDate.getFinishdate());
 					session.setAttribute("changestart", aDate.getChangestart());
 					session.setAttribute("finishdate", aDate.getFinishdate());
-
+					
 					mv.setViewName("redirect:goHappyMain.me"); //위처럼 redirect로 뷰페이지이름연결할거랑 똑같음
+					
 					}
 				}
 			}

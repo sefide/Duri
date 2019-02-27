@@ -42,7 +42,7 @@ public class HappymemberController {
 	@RequestMapping("donateItemList.happy")
 	public @ResponseBody HashMap<String, Object> items(@RequestParam String mno, HttpServletRequest request, HttpServletResponse response) {
 		
-		System.out.println("controller 회원번호 : " + mno);
+		/*System.out.println("controller 회원번호 : " + mno);*/
 
 		HashMap<String, Object> hmap = new HashMap<String, Object>();
 		
