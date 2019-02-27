@@ -163,7 +163,7 @@
 	$("#deliveryBtn").hover(function(){
 		$(this).text("택배접수 완료");
 	},function(){
-		$(this).text("배송상태 보기")
+		$(this).text("배송상태 보기")/*  */
 	});
 	
 	

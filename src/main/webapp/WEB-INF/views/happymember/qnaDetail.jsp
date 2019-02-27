@@ -117,7 +117,7 @@
 		location.href="qnaAnswerUpdate.happy?qnaAnswerContent="+qnaAnswerContent;
 	});
 
-
+/*  */
 
 </script>
 

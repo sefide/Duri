@@ -432,6 +432,7 @@ p {font-size: 20px; text-align: center;}
 		$("#myModal").css("display", "none");
 		//$itemsList.empty();
 		location.href="selectDeliveryList.happy";
+		/**/
 	}
 	
 </script>

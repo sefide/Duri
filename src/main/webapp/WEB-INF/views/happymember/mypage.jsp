@@ -403,7 +403,7 @@
 	});
 	
 	function boardDetail(){
-		$("#boardDetail").submit();
+		$("#boardDetail").submit(); /*  */
 	}
 
 </script>

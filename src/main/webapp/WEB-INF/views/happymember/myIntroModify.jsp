@@ -188,7 +188,7 @@ input, select{
 			  if (willDelete) {
 			    swal({
 			    	title: "수정 신청되었습니다.",
-					text: "관리자의 승인을 기다려주세요!(1~7일 소요됩니다.)",
+					text: "관리자의 승인을 기다려주세요!(1~7일 소요됩니다)",
 			     	icon: "success",
 			    }).then(function(){
 			    	$("#updatePrForm").submit();

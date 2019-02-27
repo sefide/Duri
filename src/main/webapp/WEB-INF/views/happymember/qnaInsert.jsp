@@ -101,7 +101,7 @@
 			  if (willDelete) {
 			    swal({
 			    	title: "Q&A가 등록되었습니다.",
-					text: "관리자의 답변을 기다려주세요!(1~7일 소요됩니다.)",
+					text: "관리자의 답변을 기다려주세요!(1~7일 소요됩니다)",
 			     	icon: "success",
 			    }).then(function(){
 			    	$("#qnaInsertForm").submit();

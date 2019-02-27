@@ -166,7 +166,7 @@
 		var requestQno = $(this).parent().children().eq(0).text();
 		
 		location.href="qnaDetail.happy?requestQno="+requestQno;
-		console.log("잘 찍었나? : " + requestQno);
+		/* console.log("잘 찍었나? : " + requestQno); */
 	});
 
 </script>

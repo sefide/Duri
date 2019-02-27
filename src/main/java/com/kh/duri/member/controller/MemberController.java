@@ -77,8 +77,8 @@ public class MemberController {
 					Attachment aDate;
 					aDate = hs.selectAdate(member);
 					
-					System.out.println("갱신 가능 시작 d-day : " + aDate.getChangestart());
-					System.out.println("갱신가능~마감까지 d-day : " + aDate.getFinishdate());
+					/*System.out.println("갱신 가능 시작 d-day : " + aDate.getChangestart());
+					System.out.println("갱신가능~마감까지 d-day : " + aDate.getFinishdate());*/
 					session.setAttribute("changestart", aDate.getChangestart());
 					session.setAttribute("finishdate", aDate.getFinishdate());
 					
