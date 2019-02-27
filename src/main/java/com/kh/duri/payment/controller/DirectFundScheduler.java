@@ -22,8 +22,6 @@ public class DirectFundScheduler {
 		System.out.println("스케줄러 작동");
       
         int result = 0;
-        // Controller에서 실행하면 되는데 
-        // 여기에서는 ps를 못찾는 문제가 발생함 
         String day = directFundProceed();
         try {
         	if(ps != null) {

@@ -460,7 +460,7 @@
 				console.log(data)
 				console.log($("#accountName").val());
 				if (data.account_holder_name == $("#accountName").val()) {
-					alert('인증 성공!!!');
+					alert('인증이 완료되었습니다.');
 					$("#checkAccount").hide();
 					$("#accountName").attr("readonly","readonly");
 					$("#returnAccount").attr("readonly","readonly");
