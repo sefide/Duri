@@ -178,16 +178,18 @@ input, select{
 	
 	function updatePr(){
 		swal({
-			  title: "",
-			  text: "자기소개 수정을 신청 하시겠습니까?",
+			  title: "자기소개 수정을 신청 하시겠습니까?",
+			  text: "",
 			  icon: "warning",
 			  buttons: true,
 			  dangerMode: true,
 			})
 			.then((willDelete) => {
 			  if (willDelete) {
-			    swal("수정 신청되었습니다. 관리자의 승인을 기다려주세요!", {
-			      icon: "success",
+			    swal({
+			    	title: "수정 신청되었습니다.",
+					text: "관리자의 승인을 기다려주세요!(1~7일 소요됩니다)",
+			     	icon: "success",
 			    }).then(function(){
 			    	$("#updatePrForm").submit();
 			    });

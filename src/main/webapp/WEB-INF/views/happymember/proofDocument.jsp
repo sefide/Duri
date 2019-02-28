@@ -165,7 +165,7 @@
 </c:if>
 <script>
 
-$('input[type=file]').val().replace(/.*(\/|\\)/, '');
+/* $('input[type=file]').val().replace(/.*(\/|\\)/, ''); */
 
 
 </script>

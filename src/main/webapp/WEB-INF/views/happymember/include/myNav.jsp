@@ -5,6 +5,7 @@
 <!-- semantic ui -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
 <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 <style>
 /* 모달 창 : modal-물품목록, modal2-알림창 */
@@ -277,8 +278,10 @@ p {font-size: 20px; text-align: center;}
 	$(function (){
 		$("#close").click(function(){
 			$("#myModal").css("display", "none");
+			location.href="selectDeliveryList.happy";
 		});
 	});
+	
 	$(function (){
 		$("#close2").click(function(){
 			$("#myModal2").css("display", "none");
@@ -385,20 +388,42 @@ p {font-size: 20px; text-align: center;}
 	//배송 현황 목록 추가
 	//배송 상세 현황 목록 추가
 	function getDelivery(){
-		var item = [];
-		var itemAmount = [];
-		var address = "${ loginUser.mAddress }";
-		
-		$("input[name='item']:checked").each(function(){//=for문
-			item.push($(this).val());	//물품번호 가져오기
-			itemAmount.push($(this).parent().next().next($("#amout option:selected")).val());//select값(물품수량)가져오기
+		//배송받기 버튼 클릭 시 팝업띄우기	
+		swal({
+			  title: "",
+			  text: "선택한 물품을 배송 받으시겠습니까?",
+			  icon: "warning",
+			  buttons: true,
+			  dangerMode: true,
+			})
+			.then((willDelete) => {
+			  if (willDelete) {
+			    swal("물품 배송 신청이 완료되었습니다!", {
+			      icon: "success",
+				   }).then(function(){				   	
+					var item = [];
+					var itemAmount = [];
+					var address = "${ loginUser.mAddress }";
+						
+					$("input[name='item']:checked").each(function(){//=for문
+						item.push($(this).val());	//물품번호 가져오기
+						itemAmount.push($(this).parent().next().next($("#amout option:selected")).val());//select값(물품수량)가져오기
 
-		});
-			console.log("체크박스 값 : " + item);
-			console.log("개수 : " + itemAmount);
-		
-			location.href="getDelivery.happy?item="+item+"&itemAmount="+itemAmount+"&mno="+${loginUser.mno} + "&address="+ address;
-			/* console.log("주소 : " + (${loginUser.mAddress})); */
+					});
+						console.log("체크박스 값 : " + item);
+						console.log("개수 : " + itemAmount);
+						
+						location.href="getDelivery.happy?item="+item+"&itemAmount="+itemAmount+"&mno="+${loginUser.mno} + "&address="+ address;
+						/* console.log("주소 : " + (${loginUser.mAddress})); */
+				   }); 
+				 } else {
+				   swal("물품 배송을 취소합니다.");
+				   $("#getDeliveryForm")[0].reset();
+					$("#myModal").css("display", "none");
+					//$itemsList.empty();
+					location.href="selectDeliveryList.happy";
+				 }
+			});	
 	}
 	
 	//보유물품 - 취소 버튼 클릭 함수
@@ -406,6 +431,8 @@ p {font-size: 20px; text-align: center;}
 		$("#getDeliveryForm")[0].reset();
 		$("#myModal").css("display", "none");
 		//$itemsList.empty();
+		location.href="selectDeliveryList.happy";
+		/**/
 	}
 	
 </script>

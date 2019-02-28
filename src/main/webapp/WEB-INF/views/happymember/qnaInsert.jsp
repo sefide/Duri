@@ -10,6 +10,7 @@
 <!-- semantic ui -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
 <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 <style>
 	.to {font-size: 30px; font-weight: 600;}
@@ -69,7 +70,7 @@
 		<div style="height: 100px;"></div>
 		
 		<div id="button">
-			<button onclick="qnaInsert();" class="massive ui instagram button">문의하기 완료</button>&nbsp;&nbsp;&nbsp;&nbsp;
+			<div onclick="qnaInsert();" class="massive ui instagram button">문의하기 완료</div>&nbsp;&nbsp;&nbsp;&nbsp;
 			<button onclick="return back();" style="width: 21%;" class="massive ui button">취소하기</button>
 		</div>
 </form>
@@ -89,11 +90,29 @@
 	}
 	
 	function qnaInsert(){
-		alert("자기소개 수정이 신청되었습니다. 승인을 기다려 주세요!");
-		 $("#qnaInsertForm").submit();
-		 console("성공"); 
+		swal({
+			  title: "Q&A를 남기겠습니까?",
+			  text: "",
+			  icon: "warning",
+			  buttons: true,
+			  dangerMode: true,
+			})
+			.then((willDelete) => {
+			  if (willDelete) {
+			    swal({
+			    	title: "Q&A가 등록되었습니다.",
+					text: "관리자의 답변을 기다려주세요!(1~7일 소요됩니다)",
+			     	icon: "success",
+			    }).then(function(){
+			    	$("#qnaInsertForm").submit();
+			    	console("성공"); 
+			    });
+			    
+			  } else {
+				swal("Q&A작성을 취소합니다.");
+			  }
+			});
 	}
-
 	
 	
 </script>

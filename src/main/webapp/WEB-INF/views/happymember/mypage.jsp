@@ -404,7 +404,7 @@
 	});
 	
 	function boardDetail(){
-		$("#boardDetail").submit();
+		$("#boardDetail").submit(); /*  */
 	}
 	
 	function writeCloud(){
