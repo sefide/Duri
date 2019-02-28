@@ -367,7 +367,7 @@
     			</div>
     			<div id = "bar1"></div>
     			<div align = "right">
-    				<div id = "txtLeftValue">후원 후 잔여포인트 </div> <div id = "leftValue">10000원 </div>
+    				<div id = "txtLeftValue">후원 후 잔여포인트 </div> <div id = "leftValue">${ giveM.mPoint }원 </div>
     			</div>
     		</div>
     		<div id = "btnBox">

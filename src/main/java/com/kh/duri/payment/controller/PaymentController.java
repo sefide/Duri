@@ -420,6 +420,7 @@ public class PaymentController {
 		HashMap<String, Object> resultMap = new HashMap<String, Object>();
 		resultMap.put("status", 0);
 		IamportClient iam = new IamportClient("2128480452188810", "auDtdoRqy5eWYjryBzpvoByL60yEzqGJUjc8I3yg9Nd76EFIe5dCGMoNNXsmn85hsipamYqvLDDSijAw");
+		
 		try {
 			AccessToken at = iam.getAuth().getResponse();
 			System.out.println("================= 정기 후원 결제 ==================");

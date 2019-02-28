@@ -400,7 +400,7 @@
     					<th class = "txtColor_o">행복두리</th>
     					<td class = "txtColor_o txtBold">
     					${takeM.mNickName }
-    					(${ takeM.mAddress })
+    				<%-- 	(${ takeM.mAddress }) --%>
     					</td>
     				</tr>
     				<tr>

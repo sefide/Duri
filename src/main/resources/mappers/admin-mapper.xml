@@ -213,7 +213,7 @@
 	<!-- 크라우드 펀딩 상세페이지 -회원정보 -->
 	<select id="CrowdMemInfoDetail" resultType="adminMember"  >
 		SELECT M.MNO,M.MNICK,M.MPR,M.MBIRTHDAY,M.MNAME,M.MID,M.MGENDER,M.MPHONE,M.MEMAIL,M.MADDRESS,M.MFUNDTYPE,M.MACCEPTDATE,A.ADATE,M.MPRACCEPTDATE 
-		FROM MEMBER M JOIN ATTACHMENT A ON (A.A_MNO=M.MNO) AND A.ATYPE='R' 
+		FROM MEMBER M JOIN ATTACHMENT A ON (A.A_MNO=M.MNO)
 		WHERE  A.ADATE IS NOT NULL AND M.MNO=#{mno}
 	</select>
 	<!-- 크라우드 펀딩 상세페이지 -펀딩정보(금액)-->
