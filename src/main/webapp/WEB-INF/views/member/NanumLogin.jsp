@@ -422,8 +422,11 @@ input {
 </head>
 <body>
 
-<a id="two2" style="color:orange">둘이</a><a id="add" style="color:yellowgreen">두리</a>
-<img src = "/duri/resources/board/images/main.png" id="img1">
+<div align="center" style="float:left; width:90%;height:80px;position:absolute;top:130px; font-size:60px; font-weight:bold;">
+<a style="color:orange;">둘이</a><a style="color:yellowgreen;">두리</a>
+<img src = "/duri/resources/board/images/main.png" style="width:120px;height:80px;position:absolute;top:-30px;">
+</div>
+
 <br><br><br><br><br>
 
 <!-- Form-->
