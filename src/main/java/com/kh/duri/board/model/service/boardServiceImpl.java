@@ -126,6 +126,12 @@ public class boardServiceImpl implements boardService {
 		return result;	
 	}
 
+	@Override
+	public Board moneyCountOne(Board moneyDetail) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 
 
