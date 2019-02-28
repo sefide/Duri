@@ -66,7 +66,7 @@ public class MemberController {
 					
 					
 					Member member = (Member)request.getSession().getAttribute("loginUser");
-					System.out.println("세션 : " + member);
+					/*System.out.println("세션 : " + member);*/
 					
 					if(Integer.parseInt(member.getmTakeStatus()) == 3) {
 						mv.setViewName("redirect:goHappyMain.me");
