@@ -246,9 +246,9 @@
 		    				
 		    				<div class= "flexBox valueBox">
 		    					<div class = "d-left">충전액 </div><div class = "d-right" id = "txtChargeValue">0원</div>
-		    					<div class = "d-left">후원 수수료 </div><div class = "d-right" id = "txtFees">3000원</div>
+		    					<div class = "d-left">후원 수수료 </div><div class = "d-right" id = "txtFees">0원</div>
 		    					<div id = "bar3"></div>
-		    					<div id = "txtTotalValue">총 결제금액</div><div class = "txtColor_o d-right" id = "totalValue">103,000</div>원
+		    					<div id = "txtTotalValue">총 결제금액</div><div class = "txtColor_o d-right" id = "totalValue">0</div>원
 		    					
 		    				</div>
 	    				</div>
@@ -282,14 +282,15 @@
 		$("#chargeValue").change(function(){
 			var value = Number($("#chargeValue").val());
 			var fees = 0;
-			if(${user.mGoalNum}  > 9 ){
+			var dsa = ${user.mGoalNum};
+			if(dsa  > 9 ){
 				fees = value * 0.03;
-			}else if( ${user.mGoalNum} <= 9 && 4 < ${user.mGoalNum} ){
+			}else if( dsa <= 9 && 4 < dsa){
 				fees = value * 0.04;
 			}else {
 				fees = value * 0.05;
 			}
-			$("#txtFees").text(fees);
+			$("#txtFees").text(fees+"원");
 			//fees = Number(fees.substring(0, fees.length-1));
 			$("#txtChargeValue").text(value+"원");
 			$("#totalValue").text(value+fees);
@@ -310,8 +311,8 @@
 			IMP.request_pay({
 				pg : 'inicis', // version 1.1.0부터 지원.
 				merchant_uid : 'merchant_' + new Date().getTime(),
-				name : '결제테스트',
-				amount : 100,
+				name : '둘이두리 포인트충전',
+				amount : 63000,
 				buyer_email : 'sefide@naver.com',
 				buyer_name : bName,
 			}, function(rsp) {

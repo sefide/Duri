@@ -63,6 +63,7 @@
 		<result property="fd_ino2" column="FD_INO"/>
 		<result property="fdValue3" column="FDVALUE"/>
 		<result property="fd_ino3" column="FD_INO"/>
+		<result property="mLeftDay" column="FLEFTDAY"/>
 
 
 	</resultMap>
@@ -199,12 +200,12 @@
 	<!-- 크라우드 펀딩 글 작성 -->
 	<insert id="insertCloud">
 		INSERT INTO FUNDING 
-		VALUES(SEQ_FH_NO.NEXTVAL,#{ftype},#{fTitle},#{fContent}, SYSDATE, null, SYSDATE,'YET', #{fValue}, #{fValueType}, #{fWriter})
+		VALUES(SEQ_FH_NO.NEXTVAL,#{ftype},#{fTitle},#{fContent}, SYSDATE, null, SYSDATE,#{mLeftDay},'YET', #{fValue}, #{fValueType}, #{fWriter})
 	</insert>
 	
 	<insert id="insertCloud2">
 		INSERT INTO FUNDING 
-		VALUES(SEQ_FH_NO.NEXTVAL,#{ftype},#{fTitle},#{fContent}, SYSDATE, null, SYSDATE,'YET', null, null, #{fWriter})
+		VALUES(SEQ_FH_NO.NEXTVAL,#{ftype},#{fTitle},#{fContent}, SYSDATE, null, SYSDATE,#{mLeftDay},'YET', null, null, #{fWriter})
 	</insert>
 	
 	<select id="selectFnoCurrval" resultType="_int">

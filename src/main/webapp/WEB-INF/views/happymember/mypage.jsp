@@ -10,7 +10,7 @@
 <!-- semantic ui -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
 <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
- 
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <title>마이페이지>내사연</title>
 
 <style>
@@ -22,6 +22,7 @@
 </style>
 </head>
 <body>
+<c:set var="message" value="해당 페이지는 로그인을 해야 이용하실 수 있습니다." scope="request"></c:set>
 <!-- 로그인 세션이 만료 되면 errorPage로 이동 -->
 <c:if test="${empty sessionScope.loginUser}">
 	<c:set var="message" value="해당 페이지는 로그인을 해야 이용하실 수 있습니다." scope="request"></c:set>
@@ -138,9 +139,9 @@
 		<div style="height: 100px;"></div>
 		
 		<div id="button">
-			<button onclick="location.href='cloudWrite.happy'" class="massive ui instagram button">사연 신청하러 가기</button>
+			<button onclick="writeCloud();" class="massive ui instagram button">사연 신청하러 가기</button>
 		</div>
-
+<!-- onclick="location.href='cloudWrite.happy'" -->
 </div><!--// inner E-->
 </div> 
 
@@ -150,7 +151,7 @@
 
 </div><!--// Wrap E-->
 </c:if>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> 
 <script>
 	
 	//물품후원 목록 조회
@@ -404,6 +405,15 @@
 	
 	function boardDetail(){
 		$("#boardDetail").submit(); /*  */
+	}
+	
+	function writeCloud(){
+		 if(${loginUser.mTakeStatus eq '3'}||${loginUser.mTakeStatus eq '4'}){																																																																																			
+			 swal("관리자 승인 기간에는 펀딩 글 작성이 불가합니다!");
+		 }else{
+			 location.href='cloudWrite.happy';
+		 }
+		
 	}
 
 </script>

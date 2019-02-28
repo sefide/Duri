@@ -558,7 +558,7 @@ input, select{
 		 <button onclick="erchk();" class="ui primary button">
 		   	회원가입
 		</button>
-		<button class="ui button" onclick="location.href='Eunji_happyLogin.me'">
+		<button class="ui button" onclick="location.href='happyLogin.me'">
 		  	취소하기
 		</button>
 	</div>

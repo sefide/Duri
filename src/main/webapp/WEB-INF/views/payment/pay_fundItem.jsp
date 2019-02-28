@@ -222,6 +222,11 @@
 		.checks input[type="checkbox"] + label:active:before, .checks input[type="checkbox"]:checked + label:active:before { box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px 1px 3px rgba(0,0,0,0.1); } 
 		.checks input[type="checkbox"]:checked + label:before { /* 체크박스를 체크했을때 */ content: '\2714'; /* 체크표시 유니코드 사용 */ color: #FE9D35; text-shadow: 1px 1px #fff; background: #e9ecee; border-color: #adb8c0; box-shadow: 0px 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05), inset 15px 10px -12px rgba(255,255,255,0.1); }
 		
+		.firstMyPoint{
+			font-size : 18px;
+			color : #434343;
+   			margin-left : 56%;
+		}
     </style>
 </head>
 <body>
@@ -273,6 +278,7 @@
     		<div id = "bar1"></div>
     		<div class ="row d-flex"> 
     			<h4 class ="ftco-animate">> 후원 물품</h4>
+    			<p class = "firstMyPoint">▶ 현재 보유 포인트 : ${giveM.mPoint}원</p>
     		</div>
     		<div class ="row d-flex"> 
     		<form id = "fundItemform" action = "execfundItem.pm" method = "post" style ="width: 100%;">
