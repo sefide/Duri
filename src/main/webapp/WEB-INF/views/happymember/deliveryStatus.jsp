@@ -87,7 +87,7 @@
 						<td><c:out value="${deliveryList.ddvalue }"/></td>
 						<td><c:out value="${deliveryList.dd_date }"/></td>
 						<td>
-							<a id="deliveryBtn" class="sbtn gy" href="#">배송상태 보기</a>
+							<a id="deliveryBtn" class="sbtn gy">배송상태 보기</a>
 						</td>	
 					</tr>
 				</c:forEach>
@@ -160,12 +160,13 @@
 </c:if>
 
 <script>
-	$("#deliveryBtn").hover(function(){
+	 
+	 $("#deliveryBtn").hover(function(){
 		$(this).text("택배접수 완료");
 	},function(){
-		$(this).text("배송상태 보기")/*  */
-	});
-	
+		$(this).text("배송상태 보기")
+	}); 
+
 	
 </script>
 </body>

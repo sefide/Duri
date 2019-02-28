@@ -119,6 +119,7 @@
 		<div>
 			<h1 class="h1">※ 증빙서류를 재 제출해주세요</h1><br>
 		</div>
+	<form id="UploadForm" action="proofDocumentUpload.happy" encType="multipart/form-data">	
 		<div style="margin-left: 300px;">
 			<div>	
 				<div class="fields" style="margin:10px">
@@ -140,7 +141,7 @@
 				
 				<div class="ui input" id="file_input_box">
 					<input type="button" value="파일첨부" class="file_input_button"/>
-	  				<input type="file" class="file_input_hidden" 
+	  				<input name="photo" type="file" class="file_input_hidden" 
 	  				onchange="javascript:document.getElementById('fileName').value = this.value"/>
 				</div>
 			</div>
@@ -149,6 +150,7 @@
 		<div class="textSilver">
 			<button onclick="#" id="button" class="massive ui instagram button">증빙서류 재 제출</button>
 		</div>
+	</form>	
 		<br><br><br><br>
 		
 		<div id="proofDocument"><h1>증빙서류 예시</h1></div>
