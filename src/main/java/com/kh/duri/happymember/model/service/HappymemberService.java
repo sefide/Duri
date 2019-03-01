@@ -81,6 +81,8 @@ public interface HappymemberService {
 	//증빙서류 현황 조회
 	Attachment selectProofDocument(Member m) throws MypageException;
 
+	//증빙서류 업로드(파일 이름 변경)
+	int updateProofDocumentUpload(Member m);
 	
 
 	

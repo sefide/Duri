@@ -90,6 +90,9 @@ public interface HappymemberDao {
 	//증빙서류 현황 조회
 	Attachment selectProofDocument(SqlSessionTemplate sqlSession, Member m) throws MypageException;
 
+	//증빙서류 업로드(파일 이름 변경)
+	int updateProofDocumentUpload(SqlSessionTemplate sqlSession, Member m);
+
 
 
 	

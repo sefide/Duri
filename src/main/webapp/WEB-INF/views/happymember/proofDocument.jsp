@@ -16,7 +16,7 @@
 	.h1 {color: darkorange; text-align: center;}
 	a {color: #333;}
 	#button {margin-left: 310px; width: 49.7%; height: 40px; font-size: 18px;}
-	#proofDocument {margin:auto; width: 60%; height: 750px; background: lightgray; text-align: center;}
+	/* #proofDocument {margin:auto; width: 60%; height: 750px; background: lightgray; text-align: center;} */
 	.d-day-plus {color: red;}
 	.textSilver {margin-top: 60px;}
 	
@@ -91,7 +91,7 @@
 			<thead>
 			<tr>
 				<th scope="col">No</th>
-				<th scope="col">증빙서류 승인일</th>
+				<th scope="col">증빙서류 최근 승인일</th>
 				<th scope="col">증빙서류 제출 마감일</th>
 				<th scope="col">D-day(남은기간)</th>
 			</tr>
@@ -115,26 +115,33 @@
 			</tr>
 			</tbody>
 		</table>
-		<br><br><br><br><br><br><br><br>
+		<br><br><br><br><br><br><br>
 		<div>
 			<h1 class="h1">※ 증빙서류를 재 제출해주세요</h1><br>
 		</div>
-	<form id="UploadForm" action="proofDocumentUpload.happy" encType="multipart/form-data">	
+	<form id="uploadForm" action="proofDocumentUpload.happy" method="post" encType="multipart/form-data">	
 		<div style="margin-left: 300px;">
-			<div>	
 				<div class="fields" style="margin:10px">
 					<div class="two field" style="width: 200px; float: left;">
-					<label>증빙서류 유형:</label>
-					<select class="ui search dropdown">
-						<option value="" selected disabled>증빙서류 유형선택</option>
-						<option value="1">기초생활수급자</option>
-						<option value="2">소년소녀가장</option>
-						<option value="3">한부모가정</option>
-					</select>
+						<select class="ui search dropdown" name="fundType">
+							<option value="" selected disabled>증빙서류 유형선택</option>
+							<option value="기초생활수급자">기초생활수급자</option>
+							<option value="소년소녀가장">소년소녀가장</option>
+							<option value="한부모가정">한부모가정</option>
+						</select>
+					</div>
+					<div style="float: left;">
+						<div class="ui input" id="file_name_textbox">
+			  				<input type="text" id="fileName" readonly>
+						</div>
+						<div class="ui input" id="file_input_box">
+							<input type="button" value="파일첨부" class="file_input_button"/>
+			  				<input name="photo" type="file" class="file_input_hidden" 
+			  				onchange="javascript:document.getElementById('fileName').value = this.value"/>
+						</div>
 					</div>
 				</div>
-			</div>
-			<div>
+			<!-- <div>
 				<div class="ui input" id="file_name_textbox">
 	  				<input type="text" id="fileName" readonly>
 				</div>
@@ -144,16 +151,17 @@
 	  				<input name="photo" type="file" class="file_input_hidden" 
 	  				onchange="javascript:document.getElementById('fileName').value = this.value"/>
 				</div>
-			</div>
+			</div> -->
 		</div>
-		
 		<div class="textSilver">
-			<button onclick="#" id="button" class="massive ui instagram button">증빙서류 재 제출</button>
+			<div onclick="upload();" id="button" class="massive ui instagram button" style="margin-top: 10px;">증빙서류 재 제출</div>
 		</div>
 	</form>	
 		<br><br><br><br>
 		
-		<div id="proofDocument"><h1>증빙서류 예시</h1></div>
+		<div id="proofDocument"><h1>증빙서류 예시</h1>
+			<img alt="" src="${contextPath}/resources/formFiles/${changeName}">
+		</div>
 		
 
 		
@@ -167,7 +175,31 @@
 </c:if>
 <script>
 
-/* $('input[type=file]').val().replace(/.*(\/|\\)/, ''); */
+function upload(){
+	swal({
+		  title: "증빙서류를 제출하시겠습니까?",
+		  text: "",
+		  icon: "warning",
+		  buttons: true,
+		  dangerMode: true,
+		})
+		.then((willDelete) => {
+		  if (willDelete) {
+		    swal({
+		    	title: "증빙서류가 제출되었습니다!",
+				text: "관리자의 승인을 기다려주세요!(1~7일 소요됩니다)",
+		     	icon: "success",
+		    }).then(function(){
+		    	$("#uploadForm").submit();
+		    	console("성공"); 
+		    });
+		    
+		  } else {
+			swal("증빌서류 제출을 취소합니다.");
+		  }
+		});
+	
+}
 
 
 </script>
