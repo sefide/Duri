@@ -217,6 +217,14 @@ public class HappymemberServiceImpl implements HappymemberService {
 		return proofDocument;
 	}
 
+	//증빙서류 업로드(파일 이름 변경)
+	@Override
+	public int updateProofDocumentUpload(Member m){
+		int result = hd.updateProofDocumentUpload(sqlSession, m);
+		
+		return result;
+	}
+
 	
 
 	

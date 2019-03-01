@@ -378,6 +378,20 @@ public class HappymemberDaoImpl implements HappymemberDao{
 		return proofDocument;
 	}
 
+	//증빙서류 업로드(파일 이름 변경)
+	@Override
+	public int updateProofDocumentUpload(SqlSessionTemplate sqlSession, Member m){
+		int result = 0;
+		int result1 = sqlSession.update("HappyMember.updateMfundType", m);
+		int result2 = sqlSession.update("HappyMember.updateProofDocumentUpload", m);
+				
+		if(result1 > 0 && result2 > 0) {
+			result = 1;
+		}
+		
+		return result;
+	}
+
 
 	
 

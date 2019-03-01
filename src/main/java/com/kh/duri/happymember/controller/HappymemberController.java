@@ -1,12 +1,10 @@
 package com.kh.duri.happymember.controller;
 
-import java.sql.Date;
-import java.text.SimpleDateFormat;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,20 +15,22 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
-import com.kh.duri.happymember.model.vo.DirectFundHistory;
 import com.kh.duri.Nanummember.model.vo.Letter;
+import com.kh.duri.common.CommonUtils;
 import com.kh.duri.happymember.model.exception.MypageException;
 import com.kh.duri.happymember.model.service.HappymemberService;
 import com.kh.duri.happymember.model.vo.Attachment;
 import com.kh.duri.happymember.model.vo.DeliveryDetail;
+import com.kh.duri.happymember.model.vo.DirectFundHistory;
 import com.kh.duri.happymember.model.vo.FundItemList;
 import com.kh.duri.happymember.model.vo.Funding;
 import com.kh.duri.happymember.model.vo.MyDonateItems;
-import com.kh.duri.payment.model.vo.PageInfo;
 import com.kh.duri.happymember.model.vo.Pagination;
 import com.kh.duri.happymember.model.vo.Qna;
 import com.kh.duri.member.model.vo.Member;
+import com.kh.duri.payment.model.vo.PageInfo;
 
 @Controller
 public class HappymemberController {
@@ -425,8 +425,11 @@ public class HappymemberController {
 	
 	//증빙서류 현황 조회
 	@RequestMapping("proofDocument.happy")
-	public String adate(Model model, HttpServletRequest request, HttpServletResponse response) {
+	public String adate(@RequestParam String changeName, Model model, HttpServletRequest request, HttpServletResponse response) {
 		Member m = (Member)request.getSession().getAttribute("loginUser");
+		
+	
+		System.out.println("제발... : " + changeName);
 			
 		try {
 			Attachment proofDocument = hs.selectProofDocument(m);
@@ -443,6 +446,57 @@ public class HappymemberController {
 		
 		return "happymember/proofDocument";
 	}
+	
+	//증빙서류 업로드(파일 이름 변경)
+	@RequestMapping("proofDocumentUpload.happy")
+	public String proofDocumentUpload(Model model, HttpServletRequest request,
+						@RequestParam(value="photo", required=false) MultipartFile photo){
+		Member m = (Member)request.getSession().getAttribute("loginUser");
+		
+		String fundType = request.getParameter("fundType");
+		System.out.println("후원타입 : " + fundType);
+		System.out.println("행복두리 증빙서류 : " + photo);
+		
+	
+		//실제경로 가져오기
+		String root = request.getSession().getServletContext().getRealPath("resources");
+		
+		String filePath = root + "\\formFiles";
+		System.out.println("저장될 주소 : " + filePath);
+		
+		//파일명 변경
+		String originFileName = photo.getOriginalFilename();
+		System.out.println("이름 : " + originFileName);
+		String ext = originFileName.substring(originFileName.lastIndexOf("."));
+		String changeName = CommonUtils.getRandomString();
+		
+		
+		try {
+			//사진명 변경해서 업로드
+			photo.transferTo(new File(filePath + "\\" + changeName + ext));
+			
+			m.setmFundtype(fundType);
+			m.setOrigin(originFileName);
+			m.setChange(changeName+ext);
+			
+			int result = hs.updateProofDocumentUpload(m);
+				
+			if(result > 0) {
+				System.out.println("성공!!");
+				model.addAttribute("changeName", m.getChange());
+				return "redirect:proofDocument.happy";
+			}
+			
+		} catch (IOException e) {
+			new File(filePath = "\\" + changeName + ext).delete();
+			model.addAttribute("msg", e.getMessage());
+			return "common/errorPage";
+			
+		}
+		
+		return "redirect:proofDocument.happy";
+	}
+	
 	
 	//물품 배송 목록 새로고침했을 때 insert다시 안되게 !
 	@RequestMapping("deliveryOriginal.happy")
