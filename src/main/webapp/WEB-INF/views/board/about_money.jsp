@@ -1,14 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import = "com.kh.duri.member.model.vo.Member"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
  <head>
     <title>둘이두리 - 금액후원 상세페이지</title>
     <meta charset="utf-8">
+    	<!-- semantic ui -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+<script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
       <!-- 공통 css 부분 -->
       <jsp:include page="../common/css.jsp"/>
+      
   </head>
+  
   <style>
   	#goHo{
   		width:250px;
@@ -25,7 +31,7 @@
   	.number{
   		font-size:10px;
   	}
-
+ 
   </style>
   <body>
     
@@ -71,14 +77,22 @@
     			<div class="col-md-5 d-flex justify-content-center counter-wrap ftco-animate">
             <div class="block-18 color-1 align-items-stretch">
               <div class="text">
-              	<span>총 나눔두리 후원액</span>
+              <c:set var="sum" value="${(b1/moneyDetail.fValue)*100}"/>
+              <script>
+             	// ${sum} = ${sum}.toFixed(1); // 99.98765 출력	
+              </script>
+              
+              	<span>현재 모금 금액 : <b><fmt:formatNumber value = "${b1}" type="currency" currencySymbol=" "/>원</b></span>
+				<span>총 목표금액 : <b><fmt:formatNumber value = "${moneyDetail.fValue}" type="currency" currencySymbol=" "/>원</b></span>
 
-
-                <br><br>
-              	<div class="progress custom-progress-success" style="background-color:white">
-  	      			<div id="bar2" class="progress-bar" role="progressbar" style="width:43%" aria-valuenow="28" aria-valuemin="0" aria-valuemax="100"></div>
-        		</div>
-               	<strong class="number" data-number="${moneyDetail.fValue }" style="font-size:20px">0</strong>
+              <br>
+              	<!-- <div class="progress custom-progress-success" style="background-color:white"> -->
+  	      			<!-- <div id="bar2" class="progress-bar" role="progressbar" style="width:43%" aria-valuenow="28" aria-valuemin="0" aria-valuemax="100"></div> -->
+  	      			<div class="progress" style="height:30px">
+ 		 				<div class="progress-bar" role="progressbar" style="width: 25%; font-size:15px; background-color:yellowgreen" aria-valuenow="${sum}" aria-valuemin="0" aria-valuemax="100">${sum}%</div>
+					</div>
+        		<!-- </div> -->
+               	<%-- <strong class="number" style="font-size:20px"><fmt:formatNumber value = "${b1}" type="currency" currencySymbol=" "/>원</strong> --%>
                 <span>190명의 나눔두리가 후원하였습니다.</span>
               </div>
             </div>
@@ -173,7 +187,9 @@
 
   <!-- loader -->
    <jsp:include page="../common/loader.jsp"></jsp:include>
- 
+	<script>
+
+	</script> 
  
   </body>
 
