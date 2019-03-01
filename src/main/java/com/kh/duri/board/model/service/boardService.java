@@ -38,7 +38,8 @@ public interface boardService {
 
 	int insertItem(Board b) throws BoardException;
 
-	Board moneyCountOne(Board moneyDetail);
+	int moneyCountOne(Board moneyDetail);
+
 
 
 

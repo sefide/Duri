@@ -224,4 +224,15 @@ public class boardDaoImpl implements boardDao {
 	}
 
 
+	@Override
+	public int moneyCountDetail(SqlSessionTemplate sqlSession, Board moneyDetail) {
+		int listCount = sqlSession.selectOne("Point.selectFundMoneyCulValue",moneyDetail);
+
+		System.out.println("모든 후원금액 개수 : " + listCount);
+		
+
+		return listCount;
+	}
+
+
 }

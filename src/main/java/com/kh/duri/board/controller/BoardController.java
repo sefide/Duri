@@ -1,5 +1,3 @@
-
-
 package com.kh.duri.board.controller;
 
 import java.util.List;
@@ -139,8 +137,9 @@ public class BoardController {
 		System.out.println("Board : "+b);		
 		Board moneyDetail = null; 	
 		moneyDetail = bs.moneyDetailOne(b); //받아온 아이디와 비밀번호로 로그인 정보 조회		
-		Board b1 =  bs.moneyCountOne(moneyDetail);
-		session.setAttribute("moneyDetail", moneyDetail);	//세션에 뿌려주기			
+		int b1 =  bs.moneyCountOne(moneyDetail);
+		session.setAttribute("moneyDetail", moneyDetail);	//세션에 뿌려주기	
+		session.setAttribute("b1", b1);	//세션에 뿌려주기	
 		mv.setViewName("redirect:moneyDetail.bo"); //위처럼 redirect로 뷰페이지이름연결할거랑 똑같음			
 		return mv;
 

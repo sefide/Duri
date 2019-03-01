@@ -127,10 +127,13 @@ public class boardServiceImpl implements boardService {
 	}
 
 	@Override
-	public Board moneyCountOne(Board moneyDetail) {
-		// TODO Auto-generated method stub
-		return null;
+	public int moneyCountOne(Board moneyDetail) {
+		int moneyDetail2 = bd.moneyCountDetail(sqlSession, moneyDetail);	//DAO로 Member 정보와 sqlSession 전송
+		
+		return moneyDetail2 ;
 	}
+
+
 
 
 

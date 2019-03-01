@@ -41,6 +41,8 @@ public interface boardDao {
 
 	int insertCloud2(SqlSessionTemplate sqlSession, Board b) throws BoardException;
 
+	int moneyCountDetail(SqlSessionTemplate sqlSession, Board moneyDetail);
+
 
 
 }
