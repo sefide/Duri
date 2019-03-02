@@ -134,6 +134,14 @@
 		<result property="finishdate" column="FINISHDATE"/>
 		<result property="dday" column="DDAY"/>
 	</resultMap>
+	
+	<resultMap type="com.kh.duri.Nanummember.model.vo.FundHistory" id="fundHistoryResultSet">
+		<id property="fhNo" column="FHNO"/>
+		<result property="fhDate" column="FHDATE"/>
+		<result property="fhValue" column="FHVALUE"/>
+		<result property="fhFno" column="FH_FNO"/>
+		<result property="fhMnoGive" column="FH_MNO_GIVE"/>
+	</resultMap>
 
 
 	<!-- 보유물품 리스트 조회-->
@@ -205,8 +213,6 @@
 		WHERE MNO = #{mno}
 		AND MTAKESTATUS = 3
 	</update>
-	
-	
 	<!-- 물품후원 목록 개수 조회 -->
 	<select id="selectItemDonateCount" resultType="_int">
 		SELECT COUNT(*) 
@@ -298,7 +304,7 @@
 	</select>
 	<!-- 증빙서류 현황 조회 -->
 	<select id="selectProofDocument" resultMap="attachmentResultSet" parameterType="Member">
-		SELECT ADATE, TO_DATE(ADATE+184) AS DDAY,(TO_DATE(TO_CHAR(SYSDATE, 'YYYYMMDD')) - TO_DATE(ADATE+184))AS FINISHDATE 
+		SELECT ADATE, TO_DATE(ADATE+184) AS DDAY,(TO_DATE(TO_CHAR(SYSDATE, 'YYYYMMDD')) - TO_DATE(ADATE+184))AS FINISHDATE, ACHANGENAME 
 		FROM ATTACHMENT 
 		WHERE A_MNO = #{mno} 
 		AND ADOCTYPE = 1 
@@ -315,6 +321,22 @@
 	WHERE A_MNO = #{mno} 
 	AND ADOCTYPE = 2
 	</update>
+	<!-- 물품 크라운드 참여한 나눔두리 조회하기 -->
+	<select id="selectNanumMno" resultMap="fundHistoryResultSet" parameterType="FundHistory">
+		SELECT FH_MNO_GIVE 
+		FROM FUNDHISTORY 
+		WHERE FH_FNO = #{fhFno}
+	</select>
+	<!-- 펀딩 구분 찾아오기(물품) -->
+	<select id="selectFtype" resultMap="happyFundingResultSet" parameterType="HappyFunding">
+		SELECT FTYPE 
+		FROM FUNDING 
+		WHERE FNO = #{fno}
+	</select>
+	<!-- 크라우드 펀딩 단체 감사편지 보내기  -->
+	<insert id="insertCrowdfundingLetter">
+		INSERT INTO LETTER VALUES(SEQ_LE_NO.NEXTVAL, #{leMnoTake}, #{leMnoGive}, #{leTitle}, #{leContent}, SYSDATE, #{leType}, DEFAULT)
+	</insert>
 </mapper>
 
 

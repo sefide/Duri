@@ -18,7 +18,7 @@
 	#button {margin-left: 310px; width: 49.7%; height: 40px; font-size: 18px;}
 	/* #proofDocument {margin:auto; width: 60%; height: 750px; background: lightgray; text-align: center;} */
 	.d-day-plus {color: red;}
-	.textSilver {margin-top: 60px;}
+	.textSilver {margin-left:-9px; margin-top: 60px; width: 101.5%;}
 	
 	#file_name_textbox {float: left; height: 37px;}
 	
@@ -120,9 +120,9 @@
 			<h1 class="h1">※ 증빙서류를 재 제출해주세요</h1><br>
 		</div>
 	<form id="uploadForm" action="proofDocumentUpload.happy" method="post" encType="multipart/form-data">	
-		<div style="margin-left: 300px;">
+		<div style="margin-left: 290px;">
 				<div class="fields" style="margin:10px">
-					<div class="two field" style="width: 200px; float: left;">
+					<div class="two field" style="width: 210px; float: left;">
 						<select class="ui search dropdown" name="fundType">
 							<option value="" selected disabled>증빙서류 유형선택</option>
 							<option value="기초생활수급자">기초생활수급자</option>
@@ -159,8 +159,8 @@
 	</form>	
 		<br><br><br><br>
 		
-		<div id="proofDocument"><h1>증빙서류 예시</h1>
-			<img alt="" src="${contextPath}/resources/formFiles/${changeName}">
+		<div id="proofDocument" align="center"><h1>증빙서류 예시</h1>
+			<img alt="최근증빙서류 이미지" src="resources/formFiles/${proofDocument.achangename}" style="width: 600px; height: 800px;">
 		</div>
 		
 

@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 
+import com.kh.duri.Nanummember.model.vo.FundHistory;
 import com.kh.duri.Nanummember.model.vo.Letter;
 import com.kh.duri.happymember.model.exception.MypageException;
 import com.kh.duri.happymember.model.vo.Attachment;
@@ -92,6 +93,15 @@ public interface HappymemberDao {
 
 	//증빙서류 업로드(파일 이름 변경)
 	int updateProofDocumentUpload(SqlSessionTemplate sqlSession, Member m);
+
+	//크라운드 참여한 나눔두리 찾아오기
+	List<FundHistory> selectNanumMno(SqlSessionTemplate sqlSession, FundHistory fs) throws MypageException;
+
+	//펀딩 구분 찾아오기
+	Funding selectFtype(SqlSessionTemplate sqlSession, Funding fs) throws MypageException;
+
+	//크라우드 펀딩 단체 감사편지 보내기
+	int insertCrowdfundingLetter(SqlSessionTemplate sqlSession, Letter l) throws MypageException;
 
 
 

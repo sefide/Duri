@@ -8,6 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kh.duri.Nanummember.model.vo.FundHistory;
 import com.kh.duri.Nanummember.model.vo.Letter;
 import com.kh.duri.happymember.model.dao.HappymemberDao;
 import com.kh.duri.happymember.model.exception.MypageException;
@@ -225,6 +226,31 @@ public class HappymemberServiceImpl implements HappymemberService {
 		return result;
 	}
 
+	//물품 크라운드 참여한 나눔두리 찾아오기
+	@Override
+	public List<FundHistory> selectNanumMno(FundHistory fs) throws MypageException {
+		List<FundHistory> nanumMnoList = hd.selectNanumMno(sqlSession, fs);
+		
+		return nanumMnoList;
+	}
+
+	//펀딩 구분 찾아오기
+	@Override
+	public Funding selectFtype(Funding f) throws MypageException {
+		Funding ftype = hd.selectFtype(sqlSession, f);
+		
+		return ftype;
+	}
+
+	//크라우드 펀딩 단체 감사편지 보내기
+	@Override
+	public int insertCrowdfundingLetter(Letter l) throws MypageException {
+		int result = hd.insertCrowdfundingLetter(sqlSession, l);
+		
+		return result;
+	}
+
+	
 	
 
 	
