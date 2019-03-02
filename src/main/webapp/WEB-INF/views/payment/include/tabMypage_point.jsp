@@ -20,6 +20,7 @@
 	}
 	
 	</style>
+	
 	<div style="margin: 0 auto;" >
 	<div class="tabBigBox btab_5ea mt50 mb50" id="mynav">
 		<ul>

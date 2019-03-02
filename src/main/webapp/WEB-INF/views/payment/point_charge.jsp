@@ -191,6 +191,7 @@
 	<jsp:include page="../Nanummember/include/header.jsp" />	
 	<c:set var = "user" value = "${ sessionScope.loginUser2 }"/>
 	<br><br><br><br>	
+	
 	<div class="contBox inner">
 		<jsp:include page="include/tabMypage_point.jsp"/>	
 		

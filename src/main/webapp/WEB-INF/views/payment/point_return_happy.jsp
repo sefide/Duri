@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"%>
     
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -231,7 +233,7 @@
 		    				<table>
 		    					<tr>
 		    						<th>보유포인트</th>
-		    						<td id = "myPoint"> ${ sessionScope.loginUser.mPoint }원</td>
+		    						<td id = "myPoint"><fmt:formatNumber value = "${ sessionScope.loginUser.mPoint }" type="currency" currencySymbol=" "/>원</td>
 		    					</tr>
 		    					<tr>
 		    						<th>환급 금액</th>
@@ -299,11 +301,12 @@
 								<p style = "margin-left : 1%; font-size: 14px; line-height : 2; text-align : left;"> *환급받을 계좌 정보를 정확히 입력해주세요. <br> 
 								계좌번호와 예금주명이 다를 경우 환급이 제대로 되지 않을 수 있습니다.  </p>
 			    				<div class= "flexBox valueBox">
-			    					<div class = "d-left">현재 보유포인트 </div><div class = "d-right" id = "txtChargeValue">${ sessionScope.loginUser.mPoint }원</div><br><br>
+			    					<div class = "d-left">현재 보유포인트 </div><div class = "d-right" id = "txtChargeValue"><fmt:formatNumber value = "${ sessionScope.loginUser.mPoint }" type="currency" currencySymbol=" "/>원</div><br><br>
 			    					<div id = "txtTotalValue">환급 금액</div><div class = "txtColor_o d-right" id = "totalValue">0</div>원
-			    					<div id = "bar3"></div>
-			    					<div class = "d-left">잔여포인트 </div><div class = "d-right" id = "txtFees">${ sessionScope.loginUser.mPoint }원</div>
 			    					
+			    					<div id = "bar3"></div>
+			    					<div class = "d-left">잔여포인트 </div><div class = "d-right" id = "txtFees"><fmt:formatNumber value = "${ sessionScope.loginUser.mPoint }" type="currency" currencySymbol=" "/>원</div>
+			    					<input type = "hidden" id = "txtFeesInput" value = "0">
 			    				</div>
 		    				</div>
 		    				<div id = "back-btn">
@@ -327,6 +330,10 @@
 	<jsp:include page="../common/loader.jsp"></jsp:include>
 	
 	<script>
+	function numberWithCommas(x) {
+	    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+	}
+
 	var reqDate = new Date();
 	var year = reqDate.getFullYear() +"";
 	var month = (reqDate.getMonth() + 1) > 10?reqDate.getMonth() + 1 + "":"0" + (reqDate.getMonth() + 1);
@@ -347,8 +354,9 @@
 		/* 후원 포인트 입력 시 */
 		$("#returnValue").change(function(){
 			var value = Number($("#returnValue").val());
-			$("#totalValue").text(value);
+			$("#totalValue").text(numberWithCommas(value));
 			changeFreePoint();
+			
 		}).on("keyup", function() {
 			$("#allPoint").prop("checked", false);
 		});
@@ -377,7 +385,8 @@
 			var mPoint = ${ sessionScope.loginUser.mPoint }; /* 현재 보유포인트 */
 			var returnValue = $("#returnValue").val(); /* 환급금액 */
 			
-			$("#txtFees").text(mPoint-returnValue);
+			$("#txtFees").text(numberWithCommas(mPoint-returnValue));
+			$("#txtFeesInput").val(mPoint-returnValue);
 		}
 		
 		$("input:text[numberOnly]").on("keyup", function() {
@@ -470,6 +479,7 @@
 
 				} else {
 					alert('인증 실패');
+					checkAcc = 0;
 				}
 			},
 			error : function(data, data2, data3) {
@@ -487,12 +497,18 @@
 		console.log(returnPoint);
 		console.log(accountNum);
 		console.log(numberTest.test(returnPoint)); //false
-		if( numberTest.test(returnPoint)){
+		if(checkAcc == 0){
+			alert("계좌 인증을 해주세요.");
+			return false;
+		}else if( numberTest.test(returnPoint)){
 			alert("환급금액을 숫자로만 입력해주세요.");
+			return false;
 		}else if( numberTest.test(accountNum)){
 			alert("계좌번호를 숫자로만 입력해주세요.");
+			return false;
 		}else if(Number($("#txtFees").text()) < 0){
 			alert("환급 금액이 부족합니다.");
+			return false;
 		}else {
 			$("#returnHappyForm").submit();
 		}
