@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.kh.duri.Nanummember.model.vo.FundHistory;
 import com.kh.duri.Nanummember.model.vo.Letter;
 import com.kh.duri.common.CommonUtils;
 import com.kh.duri.happymember.model.exception.MypageException;
@@ -425,17 +426,16 @@ public class HappymemberController {
 	
 	//증빙서류 현황 조회
 	@RequestMapping("proofDocument.happy")
-	public String adate(@RequestParam String changeName, Model model, HttpServletRequest request, HttpServletResponse response) {
+	public String adate(Model model, HttpServletRequest request, HttpServletResponse response) {
 		Member m = (Member)request.getSession().getAttribute("loginUser");
-		
-	
-		System.out.println("제발... : " + changeName);
+
 			
 		try {
+			//증빙서류 현황 테이블
 			Attachment proofDocument = hs.selectProofDocument(m);
-					
-			/*System.out.println("증빙서류 객체 : " + proofDocument);*/
 			
+			/*System.out.println("힝.. : " + proofDocument.getAchangename());*/
+
 			model.addAttribute("proofDocument", proofDocument);
 					
 					
@@ -454,19 +454,15 @@ public class HappymemberController {
 		Member m = (Member)request.getSession().getAttribute("loginUser");
 		
 		String fundType = request.getParameter("fundType");
-		System.out.println("후원타입 : " + fundType);
-		System.out.println("행복두리 증빙서류 : " + photo);
 		
 	
 		//실제경로 가져오기
-		String root = request.getSession().getServletContext().getRealPath("resources");
+		String root = request.getSession().getServletContext().getRealPath("resources");//webapp의 resources를 뜻
 		
 		String filePath = root + "\\formFiles";
-		System.out.println("저장될 주소 : " + filePath);
 		
 		//파일명 변경
 		String originFileName = photo.getOriginalFilename();
-		System.out.println("이름 : " + originFileName);
 		String ext = originFileName.substring(originFileName.lastIndexOf("."));
 		String changeName = CommonUtils.getRandomString();
 		
@@ -483,7 +479,6 @@ public class HappymemberController {
 				
 			if(result > 0) {
 				System.out.println("성공!!");
-				model.addAttribute("changeName", m.getChange());
 				return "redirect:proofDocument.happy";
 			}
 			
@@ -496,6 +491,69 @@ public class HappymemberController {
 		
 		return "redirect:proofDocument.happy";
 	}
+	
+	//크라운드 펀딩(물품/금액) 감사편지 보내기
+	@RequestMapping("crowdfundingLetter.happy")
+	public String crowdfundingLetter(Model model, HttpServletRequest request, HttpServletResponse response) {
+		Member m = (Member)request.getSession().getAttribute("loginUser");
+		int mno = m.getMno();
+		
+		//1.펀딩글 번호, 물품/금액 구분 받기
+		String ftitle = request.getParameter("ftitle");
+		int fno = Integer.parseInt(request.getParameter("fno"));
+		String fWriter = request.getParameter("fWriter");
+		
+		model.addAttribute("ftitle", ftitle);
+		
+		//크라운드 참여한 나눔두리 찾아오기
+		FundHistory fs = new FundHistory();
+		fs.setFhFno(fno);
+		
+		try {
+			List<FundHistory> nanumMnoList = hs.selectNanumMno(fs);
+			
+			//펀딩 구분 찾아오기
+			Funding f = new Funding();
+			f.setFno(fno);
+			
+			Funding ftype = hs.selectFtype(f);
+			String fundingType = ftype.getFtype();
+		
+			if(fundingType == "ITEM") {
+				fundingType = "3";
+			}else {
+				fundingType = "2";
+			}
+			System.out.println("fundingType : " + fundingType);
+			System.out.println("성공4");
+			//후원한 나눔두리들이 있을 경우 단체 감사편지 보내기
+			/*if(nanumMnoList != null) {
+				Letter l = new Letter();
+				System.out.println("letter만들어졌어?");
+				int nanumMno = 0;
+				for(int i = 0; i < nanumMnoList.size(); i++) {
+					System.out.println("for문 진입");
+					nanumMno = nanumMnoList.get(i).getFhMnoGive();
+					l.setLeMnoGive(nanumMno);
+					l.setLeMnoTake(m.getMno());
+					l.setLeType(fundingType);
+					l.setLeTitle(letterTitle);
+					l.setLeContent(letterContent);
+					System.out.println("이제 들어갈까???");
+					int result = hs.insertCrowdfundingLetter(l);
+					System.out.println("끝났따!!");
+				} 
+			}*/
+			
+		} catch (MypageException e) {
+			model.addAttribute("msg", e.getMessage());
+			return "common/errorPage";
+		}
+	
+		return "happymember/thankyouLetterCrowd";
+	}
+	
+	
 	
 	
 	//물품 배송 목록 새로고침했을 때 insert다시 안되게 !

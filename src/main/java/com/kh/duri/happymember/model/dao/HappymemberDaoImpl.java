@@ -7,6 +7,7 @@ import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.kh.duri.Nanummember.model.vo.FundHistory;
 import com.kh.duri.Nanummember.model.vo.Letter;
 import com.kh.duri.happymember.model.exception.MypageException;
 import com.kh.duri.happymember.model.vo.Attachment;
@@ -388,6 +389,31 @@ public class HappymemberDaoImpl implements HappymemberDao{
 		if(result1 > 0 && result2 > 0) {
 			result = 1;
 		}
+		
+		return result;
+	}
+
+	//크라운드 참여한 나눔두리 찾아오기
+	@Override
+	public List<FundHistory> selectNanumMno(SqlSessionTemplate sqlSession, FundHistory fs) throws MypageException {
+		 List<FundHistory> nanumMnoList = sqlSession.selectList("HappyMember.selectNanumMno", fs);
+		 
+		return nanumMnoList;
+	}
+
+	//펀딩 구분 찾아오기
+	@Override
+	public Funding selectFtype(SqlSessionTemplate sqlSession, Funding f) throws MypageException {
+		Funding ftype = sqlSession.selectOne("HappyMember.selectFtype", f);
+		System.out.println(ftype);
+		
+		return ftype;
+	}
+
+	//크라우드 펀딩 단체 감사편지 보내기
+	@Override
+	public int insertCrowdfundingLetter(SqlSessionTemplate sqlSession, Letter l) throws MypageException {
+		int result = sqlSession.insert("HappyMember.insertCrowdfundingLetter", l);
 		
 		return result;
 	}

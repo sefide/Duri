@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.kh.duri.happymember.model.vo.DirectFundHistory;
+import com.kh.duri.Nanummember.model.vo.FundHistory;
 import com.kh.duri.Nanummember.model.vo.Letter;
 import com.kh.duri.happymember.model.exception.MypageException;
 import com.kh.duri.happymember.model.vo.Attachment;
@@ -83,6 +84,15 @@ public interface HappymemberService {
 
 	//증빙서류 업로드(파일 이름 변경)
 	int updateProofDocumentUpload(Member m);
+
+	//크라운드 참여한 나눔두리 찾아오기
+	List<FundHistory> selectNanumMno(FundHistory fs) throws MypageException;
+
+	//펀딩 구분 찾아오기
+	Funding selectFtype(Funding f) throws MypageException;
+
+	//크라우드 펀딩 단체 감사편지 보내기
+	int insertCrowdfundingLetter(Letter l) throws MypageException;
 	
 
 	

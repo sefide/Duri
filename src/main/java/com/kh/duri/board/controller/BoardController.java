@@ -206,7 +206,7 @@ public class BoardController {
 		thingDetail = bs.thingDetailOne(bi); //물품펀딩글 받아오기(fundging)
 		thingDetail2 = bs.thingDetailOne2(bi);//물품만 받아오기(fundgindDetail & fundItem)
 			
-		session.setAttribute("thingDetail", thingDetail);	
+		session.setAttribute("thingDetail", thingDetail);
 		session.setAttribute("thingDetail2", thingDetail2);	
 			
 		mv.setViewName("redirect:thingDetail.bo"); //위처럼 redirect로 뷰페이지이름연결할거랑 똑같음

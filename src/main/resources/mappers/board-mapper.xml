@@ -173,9 +173,7 @@
 		            FROM FUNDING F , MEMBER M
 		            WHERE M.MNO = F.FWRITER
 		            AND F.FTYPE='ITEM'
-		            AND F.FSTATUS != 'END'
 		            AND F.FSTATUS != 'YET'
-		            AND F.FSTATUS != 'GOAL' 
 		            AND F.FNO = #{fno}))
 	</select>
 	
@@ -189,9 +187,7 @@
 		                    AND FD.FD_INO = FI.INO
 		                    AND F.FNO = FD.FD_FNO
 		                    AND F.FTYPE = 'ITEM'
-		                    AND F.FSTATUS != 'END'
 		                    AND F.FSTATUS != 'YET'
-		                    AND F.FSTATUS != 'GOAL' 
 		                    AND F.FNO = #{fno}
 		            		ORDER BY F.FNO))
 	</select>
