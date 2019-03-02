@@ -53,6 +53,10 @@ public class MemberController {
 			
 		try {
 			System.out.println("member : "+m);
+			/* 암호화처리 */
+			String encPassword = passwordEncoder.encode(m.getMpwd()); 
+			
+			System.out.println("암호화 후 : "+encPassword);
 			
 			Member loginUser = null; 
 			loginUser = ms.loginMember(m); //받아온 아이디와 비밀번호로 로그인 정보 조회
@@ -89,6 +93,8 @@ public class MemberController {
 					
 					}
 				}
+			}else {
+				System.out.println("안대~");
 			}
 			
 		} catch (LoginException e) {
@@ -96,6 +102,7 @@ public class MemberController {
 			mv.addObject("msg",e.getMessage());
 			mv.setViewName("common/errorPage_login");
 		}
+		
 		return mv;
 	}
 
