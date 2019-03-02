@@ -79,7 +79,7 @@
               <div class="text">
               <c:set var="sum" value="${(b1/moneyDetail.fValue)*100}"/>
               <script>
-             	// ${sum} = ${sum}.toFixed(1); // 99.98765 출력	
+              ${sum}=${sum}.toFixed(1); // 99.98765 출력	
               </script>
               
               	<span>현재 모금 금액 : <b><fmt:formatNumber value = "${b1}" type="currency" currencySymbol=" "/>원</b></span>
@@ -89,7 +89,7 @@
               	<!-- <div class="progress custom-progress-success" style="background-color:white"> -->
   	      			<!-- <div id="bar2" class="progress-bar" role="progressbar" style="width:43%" aria-valuenow="28" aria-valuemin="0" aria-valuemax="100"></div> -->
   	      			<div class="progress" style="height:30px">
- 		 				<div class="progress-bar" role="progressbar" style="width: 25%; font-size:15px; background-color:yellowgreen" aria-valuenow="${sum}" aria-valuemin="0" aria-valuemax="100">${sum}%</div>
+ 		 				<div class="progress-bar" role="progressbar" style="width: ${sum}%; font-size:15px; background-color:yellowgreen" aria-valuenow="${sum}" aria-valuemin="0" aria-valuemax="100">${sum}%</div>
 					</div>
         		<!-- </div> -->
                	<%-- <strong class="number" style="font-size:20px"><fmt:formatNumber value = "${b1}" type="currency" currencySymbol=" "/>원</strong> --%>

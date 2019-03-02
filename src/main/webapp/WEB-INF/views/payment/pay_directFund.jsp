@@ -254,7 +254,9 @@
 <body>
     <!-- 네비바 -->
 	<jsp:include page="../common/navi.jsp"/>
-   
+   	<c:if test = "${ empty sessionScope.loginUser2 }">
+ 		<jsp:forward page="long_donate.bo"/>
+ 	</c:if>
    	<!-- 신용카드 약관 팝업창 -->
     <div class = "pop" id = "pop_div01">
     	<div class = "pop_inner">

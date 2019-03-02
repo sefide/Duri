@@ -7,7 +7,6 @@
 <title>Error Page</title>
 </head>
 <body>
-
-      <h1>${requestScope.message }</h1>
+	  <h1>${requestScope.msg }</h1>
 </body>
 </html>

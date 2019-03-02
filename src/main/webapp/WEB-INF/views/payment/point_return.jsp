@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -229,6 +229,11 @@
 	<jsp:include page="../Nanummember/include/header.jsp" />	
 	
 	<br><br><br><br>
+	
+	<c:if test = "${ empty sessionScope.loginUser2 }">
+ 		<jsp:forward page="total.nanum"/>
+ 	</c:if>
+ 	
 	<div class="contBox inner">
 		<jsp:include page="include/tabMypage_point.jsp"/>	
 	</div>
@@ -248,7 +253,8 @@
     				<table>
     					<tr>
     						<th>보유포인트</th>
-    						<td id = "myPoint"> ${ sessionScope.loginUser2.mPoint }원</td>
+    						<td id = "myPoint"> <fmt:formatNumber value = "${ sessionScope.loginUser2.mPoint }" type="currency" currencySymbol=" "/>원</td>
+    						<input type = "hidden" id = "myPointInput" value = "${ sessionScope.loginUser2.mPoint }">
     					</tr>
     					<tr>
     						<th>환불 금액</th>
@@ -318,11 +324,11 @@
 						<p style = "margin-left : 1%;"> *환불받을 계좌 정보를 정확히 입력해주세요. <br> 
 						계좌번호와 예금주명이 다를 경우 환불이 제대로 되지 않을 수 있습니다.  </p>
 	    				<div class= "flexBox valueBox">
-	    					<div class = "d-left">현재 보유포인트 </div><div class = "d-right" id = "txtChargeValue">${ sessionScope.loginUser2.mPoint }원</div>
+	    					<div class = "d-left">현재 보유포인트 </div><div class = "d-right" id = "txtChargeValue"><fmt:formatNumber value = "${ sessionScope.loginUser2.mPoint }" type="currency" currencySymbol=" "/>원</div>
 	    					<div id = "txtTotalValue">환불 금액</div><div class = "txtColor_o d-right" id = "totalValue">0</div><p class = "txtright">원</p>
 	    					<div id = "bar3"></div>
-	    					<div class = "d-left">잔여포인트 </div><div class = "d-right" id = "txtFees">${ sessionScope.loginUser2.mPoint }원</div>
-	    					
+	    					<div class = "d-left">잔여포인트 </div><div class = "d-right" id = "txtFees"><fmt:formatNumber value = "${ sessionScope.loginUser2.mPoint }" type="currency" currencySymbol=" "/>원</div>
+	    					<input type = "hidden" id = "txtFreesInput" value = "0">
 	    				</div>
     				</div>
     				<div id = "back-btn">
@@ -343,6 +349,10 @@
 	<jsp:include page="../common/loader.jsp"></jsp:include>
 	
 	<script>
+	function numberWithCommas(x) {
+	    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+	}
+	
 	var reqDate = new Date();
 	var year = reqDate.getFullYear() +"";
 	var month = (reqDate.getMonth() + 1) > 10?reqDate.getMonth() + 1 + "":"0" + (reqDate.getMonth() + 1);
@@ -365,7 +375,7 @@
 		/* 후원 포인트 입력 시 */
 		$("#returnValue").change(function(){
 			var value = Number($("#returnValue").val());
-			$("#totalValue").text(value);
+			$("#totalValue").text(numberWithCommas(value));
 			changeFreePoint();
 		}).on("keyup", function() {
 			$("#allPoint").prop("checked", false);
@@ -374,14 +384,7 @@
 		
 		/* 모든 포인트 쓰기 선택 할 시  */
 		$("#allPoint").change(function(){
-			var mypoint = $("#myPoint").text();
-			var pointlength = mypoint.length-1;
-			mypoint = mypoint.substring(0,pointlength);
-			
-			/*mypoint = mypoint.split(",");
-			console.log(mypoint); 
-		    var mypointt = mypoint.join();
-			console.log(mypointt);*/
+			var mypoint = $("#myPointInput").val();
 			
 			if($("#allPoint").is(":checked")){
 				$("#returnValue").val(mypoint);
@@ -395,7 +398,8 @@
 			var mPoint = ${ sessionScope.loginUser2.mPoint }; /* 현재 보유포인트 */
 			var returnValue = $("#returnValue").val(); /* 환불금액 */
 			
-			$("#txtFees").text((mPoint-returnValue)+"원");
+			$("#txtFees").text(numberWithCommas(mPoint-returnValue)+"원");
+			$("#txtFreesInput").val(mPoint-returnValue);
 		}
 		
 		
@@ -410,8 +414,8 @@
 	function fnSearchAccessToken() {
 		//$("#bank_code_std").val($("#bankcode").val());
 		//$("#account_num").val($("#accnum").val());
-		var client_id = "client_id";
-		var client_secret = "client_secret";
+		var client_id = "l7xx5a2b2c2836b54004ba419824d3a84b3f";
+		var client_secret = "39ed8dfb10d145a189376c95addd2986";
 		var grant_type = "client_credentials";
 		var scope = "oob";
 		$.ajax({
@@ -420,8 +424,8 @@
 			//cache: false,
 			contenType : "application/json",
 			data : {
-				"client_id" : "MY_KEY",
-				"client_secret" : "MY_SECRET",
+				"client_id" : "l7xx5a2b2c2836b54004ba419824d3a84b3f",
+				"client_secret" : "39ed8dfb10d145a189376c95addd2986",
 				"grant_type" : grant_type,
 				"scope" : scope
 			},
@@ -489,6 +493,7 @@
 
 				} else {
 					alert('인증 실패');
+					checkAcc = 0;
 				}
 			},
 			error : function(data, data2, data3) {
@@ -514,12 +519,19 @@
 		console.log(returnPoint);
 		console.log(accountNum);
 		console.log(numberTest.test(returnPoint)); //false
-		if( numberTest.test(returnPoint)){
+		
+		if(checkAcc == 0){
+			alert("환급 계좌 정보를 정확히 입력해주세요.");
+			return false;
+		} else if( numberTest.test(returnPoint)){
 			alert("환불금액을 숫자로만 입력해주세요.");
+			return false;
 		}else if( numberTest.test(accountNum)){
 			alert("계좌번호를 숫자로만 입력해주세요.");
-		}else if(Number($("#txtFees").text()) < 0){
+			return false;
+		}else if(Number($("#txtFreesInput").val()) < 0){
 			alert("환불 금액이 부족합니다.");
+			return false;
 		}else {
 			$("#returnHappyForm").submit();
 		}

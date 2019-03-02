@@ -201,6 +201,7 @@
  	<fmt:formatDate value="${now}" pattern="yyyy-MM" var="now" />
 	
  	<br><br><br><br>	
+ 	
 	<div class="contBox inner">
  		<jsp:include page="include/tabMypage_receipt.jsp"/>	
 		
@@ -290,7 +291,7 @@
 	    						<tr class = "">
 	    							<td>${dr.rnum}</td>
 	    							<td>${dr.dr_mNo}</td>
-	    							<td>${dr.drValue}원</td>
+	    							<td><fmt:formatNumber value = "${dr.drValue}" type="currency" currencySymbol=" "/>원</td>
 	    							<td>${dr.drDonateDate}</td>
 	    							<td>${dr.drApplyDate}</td>
 	    						</tr>

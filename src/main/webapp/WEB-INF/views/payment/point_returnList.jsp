@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!-- semantic ui -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
 <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
@@ -88,7 +88,12 @@
 	<jsp:include page="../common/navi.jsp" />
 	<jsp:include page="../Nanummember/include/header.jsp" />
 	
-	<br><br><br><br>	
+	<br><br><br><br>
+	
+	<c:if test = "${ empty sessionScope.loginUser2 }">
+ 		<jsp:forward page="total.nanum"/>
+ 	</c:if>
+ 		
 	<div class="contBox inner">
 		<jsp:include page="include/tabMypage_point.jsp"/>
 
@@ -123,7 +128,8 @@
 	    			<c:forEach var="rf" items="${ rfList }">
 			    		<tr>	
 						<td>${ rf.rDate }</td>
-						<td>${ rf.rValue }</td>
+						<td><fmt:formatNumber value = "${ rf.rValue }" type="currency" currencySymbol=" "/>원
+						</td>
 						<td>${ rf.rName } </td>
 						<td>${ rf.rBank }</td>
 						<td>${ rf.rAccount }</td>

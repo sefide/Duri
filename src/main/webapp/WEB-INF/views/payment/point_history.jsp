@@ -218,6 +218,7 @@
  	<fmt:formatDate value="${now}" pattern="yyyy-MM" var="now" />
 
 	<br><br><br><br>	
+	
 	<div class="contBox inner">
 		<jsp:include page="include/tabMypage_point.jsp"/>
 		
@@ -303,10 +304,10 @@
 		    						</div>
 		    						<div class = "histRight">
 		    							<c:if test = "${ ph.pType == 'U'}">
-		    								<div class = "fValue">-${ ph.pValue }</div>
+		    								<div class = "fValue">-<fmt:formatNumber value = "${ ph.pValue }" type="currency" currencySymbol=" "/></div>
 		    							</c:if>
 		    							<c:if test = "${ ph.pType == 'A'}">
-		    								<div class = "fValue">+${ ph.pValue }</div>
+		    								<div class = "fValue">+<fmt:formatNumber value = "${ ph.pValue }" type="currency" currencySymbol=" "/></div>
 		    							</c:if>
 		    							<div class = "txtValue">원</div>
 		    							
