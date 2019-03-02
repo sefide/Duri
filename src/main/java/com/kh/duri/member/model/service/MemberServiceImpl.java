@@ -29,12 +29,7 @@ public class MemberServiceImpl implements MemberService {
 		Member loginUser = null;
 		
 		String encPassword = md.selectEncPassword2(sqlSession,m);
-		//String enc = passwordEncoder.encode(m.getMpwd()); 
-		
-		System.out.println("암호화 후 : "+encPassword);
-		System.out.println(m.getMpwd());
-		System.out.println(passwordEncoder.matches(m.getMpwd(),encPassword));
-		
+
 		
 		// matches를 equals라 생각, 평문=암호화된문장  인지 확인
 		if(!passwordEncoder.matches(m.getMpwd(),encPassword)) {
