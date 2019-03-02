@@ -203,7 +203,9 @@
 <body>
     <!-- 네비바 -->
 	<jsp:include page="../common/navi.jsp"/>
-    
+    <c:if test = "${ empty sessionScope.loginUser2 }">
+ 		<jsp:forward page="money_donate.bo"/>
+ 	</c:if>
     <!-- 약관 팝업창 -->
     <div class = "pop" id = "pop_div">
     	<div class = "pop_inner">
@@ -367,7 +369,7 @@
     			</div>
     			<div id = "bar1"></div>
     			<div align = "right">
-    				<div id = "txtLeftValue">후원 후 잔여포인트 </div> <div id = "leftValue">${ giveM.mPoint }원 </div>
+    				<div id = "txtLeftValue">후원 후 잔여포인트 </div> <div id = "leftValue"><fmt:formatNumber value = "${ giveM.mPoint }" type="currency" currencySymbol=" "/>원 </div>
     			</div>
     		</div>
     		<div id = "btnBox">

@@ -155,7 +155,7 @@
    		
    		#tdRight{
    			text-align : right;
-		    padding-left: 30%;
+		    /* padding-left: 30%; */
    			padding-right : 3%;
    		}
    		
@@ -235,6 +235,10 @@
    
    	<c:set var = "giveM" value = "${ sessionScope.loginUser2 }"/>
 	<c:set var = "leftV" value = "0"/>
+	
+	<c:if test = "${ empty sessionScope.loginUser2 }">
+ 		<jsp:forward page="thing_donate.bo"/>
+ 	</c:if>
     <!-- 약관 팝업창 -->
      <div class = "pop" id = "pop_div">
     	<div class = "pop_inner">
@@ -278,7 +282,7 @@
     		<div id = "bar1"></div>
     		<div class ="row d-flex"> 
     			<h4 class ="ftco-animate">> 후원 물품</h4>
-    			<p class = "firstMyPoint">▶ 현재 보유 포인트 : ${giveM.mPoint}원</p>
+    			<p class = "firstMyPoint">▶ 현재 보유 포인트 : <fmt:formatNumber value = "${ giveM.mPoint }" type="currency" currencySymbol=" "/>원</p>
     		</div>
     		<div class ="row d-flex"> 
     		<form id = "fundItemform" action = "execfundItem.pm" method = "post" style ="width: 100%;">
@@ -322,7 +326,7 @@
     				<input type = "hidden" name = "itemSumPrice" value = "0" id = "itemSumPrice${ status.index }"> <!-- 물품 총 후원값 -->
     				<tr>
     					<td  style = "padding-left: 20px;" colspan = "3"><p id = "leftItemValue${ status.index }">남은 수량 : ${leftV}개 </p></td>
-    					<td> <p  class = "itemPriceTxt" id = "itemPriceTxt${ status.index }">${ biList.iPrice } x 0 </p></td>
+    					<td> <p  class = "itemPriceTxt" id = "itemPriceTxt${ status.index }"><fmt:formatNumber value = "${ biList.iPrice }" type="currency" currencySymbol=" "/> x 0 </p></td>
     				</tr>
    					<input type = "hidden"  name = "leftValue" id = "leftValue${ status.index }" value ="${leftV}"> <!-- 물품별 남은 수량 -->
     				
@@ -405,10 +409,10 @@
     			</div>
     			<div id = "bar1"></div>
     			<div align = "right">
-    				<div id = "txtLeftValue">현재 보유포인트 </div> <div class ="txtValue" id = "myValue">${giveM.mPoint}원 </div>
+    				<div id = "txtLeftValue">현재 보유포인트 </div> <div class ="txtValue" id = "myValue"><fmt:formatNumber value = "${ giveM.mPoint }" type="currency" currencySymbol=" "/>원 </div>
     			</div>
     			<div align = "right">
-    				<div id = "txtLeftValue">후원 후 잔여포인트 </div> <div class ="txtValue" id = "leftValue">${giveM.mPoint}원 </div>
+    				<div id = "txtLeftValue">후원 후 잔여포인트 </div> <div class ="txtValue" id = "leftValue"><fmt:formatNumber value = "${ giveM.mPoint }" type="currency" currencySymbol=" "/>원 </div>
     				<input type = "hidden" id = "leftValueInput" value = "${giveM.mPoint}">
     			</div>
     		</div>
@@ -428,11 +432,15 @@
   
 
   <!-- loader -->
-   <jsp:include page="../common/loader.jsp"></jsp:include>
-  <script>
-  var checkUsing = 1;  /* 기부금영수증 발급 약관 확인 변수 */
-  var checkIpin = 0; /* 기부금영수증 발급인지 아닌지 확인 변수 */
-  
+   	<jsp:include page="../common/loader.jsp"></jsp:include>
+  	<script>
+		function numberWithCommas(x) {
+		    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+		}
+		
+		var checkUsing = 1;  /* 기부금영수증 발급 약관 확인 변수 */
+		var checkIpin = 0; /* 기부금영수증 발급인지 아닌지 확인 변수 */
+	  
 		$(document).ready(function() {
 			/* 주민등록번호 입력창 숨겨두기 */
 			$(".ipin").css("display","none");
@@ -469,8 +477,8 @@
   			if(Number(itemCount) > Number(leftCount)){
   				$(this).val("1");
   			}else {
-  				$("#itemPriceTxt"+ thisId).text(itemPrice +" x " + itemCount);
-  	  			$("#itemValue"+ thisId).text(itemPrice*itemCount);
+  				$("#itemPriceTxt"+ thisId).text(numberWithCommas(itemPrice) +" x " + itemCount);
+  	  			$("#itemValue"+ thisId).text(numberWithCommas(itemPrice*itemCount));
   	  			$("#itemSumPrice"+ thisId).val(itemPrice*itemCount);
   			}
   			
@@ -490,15 +498,22 @@
 	  			var Idlength = thisId.length;
 	  			thisId = thisId.substring(Idlength-1,Idlength);
 	  			
-	  			var value = Number($("#itemValue"+thisId).text());
-	  			total += value;
+	  			var value = Number($("#itemSumPrice"+thisId).val());
+	  			console.log($("#itemSumPrice"+thisId).val() + " 원 임당");
+	  			if(value == undefined){
+	  				
+	  			}else{
+	  				total += value;
+	  				console.log(total);
+	  			}
+	  			
 			});
 			
 			var mPoint = ${giveM.mPoint};
 			var leftValue = mPoint - total;
 			$("#totalValue").val(total);
-			$("#sponValue").text(total);
-			$("#leftValue").text(leftValue +"원");
+			$("#sponValue").text(numberWithCommas(total));
+			$("#leftValue").text(numberWithCommas(leftValue) +"원");
 			$("#leftValueInput").val(leftValue);
 			
 		}

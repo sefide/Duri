@@ -59,6 +59,10 @@ public class PaymentController {
 	@RequestMapping("pointHistory.pm")
 	public String pointHistory(Model model, HttpServletRequest request, HttpServletResponse response) {
 		Member m = (Member) request.getSession().getAttribute("loginUser2");
+		if(m == null) {
+			return "redirect:nanumLogin.me";
+		}
+		
 		int currentPage = 1;
 		
 		if(request.getParameter("currentPage") != null) {
@@ -89,6 +93,9 @@ public class PaymentController {
 	@RequestMapping("searchPointHistory.pm")
 	public String searchPointHistory(HttpServletRequest request, HttpServletResponse response, Model model) {
 		Member m = (Member) request.getSession().getAttribute("loginUser2");
+		if(m == null) {
+			return "redirect:nanumLogin.me";
+		}
 		String sm = request.getParameter("startMonth")+"-01";
 		String em = request.getParameter("endMonth");
 		//System.out.println("어허 " + em.substring(5, 7));
@@ -136,7 +143,9 @@ public class PaymentController {
 	@RequestMapping("donateReceipt.pm")
 	public String donateReceipt(HttpServletRequest request, HttpServletResponse response, Model model) {
 		Member m = (Member) request.getSession().getAttribute("loginUser2");
-		System.out.println("세션에 저장된 회원번호 : " + m.getMno());
+		if(m == null) {
+			return "redirect:nanumLogin.me";
+		}
 		int currentPage = 1;
 		
 		if(request.getParameter("currentPage") != null) {
@@ -169,6 +178,9 @@ public class PaymentController {
 	@RequestMapping("searchDonateReceipt.pm")
 	public String searchDonateReceipt(HttpServletRequest request, HttpServletResponse response, Model model) {
 		Member m = (Member) request.getSession().getAttribute("loginUser2");
+		if(m == null) {
+			return "redirect:nanumLogin.me";
+		}
 		String sm = request.getParameter("startMonth")+"-01";
 		String em = request.getParameter("endMonth");
 		System.out.println("어허 " + em.substring(5, 7));
@@ -216,6 +228,9 @@ public class PaymentController {
 	@RequestMapping("pointReturnListHappy.pm")
 	public String pointReturnHappyList(HttpServletRequest request, HttpServletResponse response, Model model) {
 		Member m = (Member) request.getSession().getAttribute("loginUser");
+		if(m == null) {
+			return "redirect:happyLogin.me";
+		}
 		int currentPage = 1;
 		
 		if(request.getParameter("currentPage") != null) {
@@ -310,6 +325,9 @@ public class PaymentController {
 	@RequestMapping("pointReturnList.pm")
 	public String pointReturnList(HttpServletRequest request, HttpServletResponse response, Model model) {
 		Member m = (Member) request.getSession().getAttribute("loginUser2");
+		if(m == null) {
+			return "redirect:nanumLogin.me";
+		}
 		int currentPage = 1;
 		
 		if(request.getParameter("currentPage") != null) {
@@ -394,6 +412,9 @@ public class PaymentController {
 	@RequestMapping("directFund.pm")
 	public String directFund(HttpServletRequest request, HttpServletResponse response, Model model, HttpSession session) {
 		Member loginUser = (Member)session.getAttribute("loginUser2");
+		if(loginUser == null) {
+			return "redirect:long_donate.bo";
+		}
 		Member takeMember = new Member();
 		String mno_take = request.getParameter("mno_take");
 		String mnickname_take = request.getParameter("mnickname_take");
@@ -724,6 +745,10 @@ public class PaymentController {
 	@RequestMapping("execfundMoney.pm")
 	public String execfundMoney(@RequestParam String fno , HttpServletRequest request, HttpServletResponse response, Model model, HttpSession session) {
 		Member m = (Member)session.getAttribute("loginUser2");
+		
+		if(m == null) {
+			return "redirect:money_donate.bo";
+		}
 		String check = request.getParameter("checkDonate");
 		String fValue = request.getParameter("point");
 		String fWriter = request.getParameter("fWriter");
@@ -794,6 +819,9 @@ public class PaymentController {
 	public String execfundItem(HttpServletRequest request, HttpServletResponse response, Model model, HttpSession session) {
 		System.out.println("Hello");
 		Member m = (Member)session.getAttribute("loginUser2");
+		if(m == null) {
+			return "redirect:thing_donate.bo";
+		}
 		String check = request.getParameter("checkDonate");
 		String totalValue = request.getParameter("totalValue");
 		String fno = request.getParameter("fno");

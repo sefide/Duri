@@ -3,6 +3,9 @@ package com.kh.duri.member.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Properties;
 
 import javax.mail.Message;
@@ -89,8 +92,9 @@ public class MemberController {
 			}
 			
 		} catch (LoginException e) {
+			mv.addObject("status", "happy");
 			mv.addObject("msg",e.getMessage());
-			mv.setViewName("common/errorPage");
+			mv.setViewName("common/errorPage_login");
 		}
 		return mv;
 	}
@@ -125,11 +129,10 @@ public class MemberController {
 
 				
 			} catch (LoginException e) {
-				
+				mv.addObject("status", "nanum");
 				mv.addObject("msg",e.getMessage());
-				mv.setViewName("common/errorPage");
+				mv.setViewName("common/errorPage_login");
 			}
-			
 			
 			return mv;
 		}
@@ -210,6 +213,7 @@ public class MemberController {
 		if(result>0) {
 			return result+"";
 		}else {
+			
 			model.addAttribute("msg","회원가입 실패");
 			return "common/errorPage";
 		}
