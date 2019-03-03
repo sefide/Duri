@@ -250,6 +250,24 @@
 		 WHERE DH_MNO_TAKE=#{mno}
 	</select>
 	
+	<select id="selectMoneyCount" resultType="_int">
+		SELECT count(*)
+		FROM FUNDHISTORY
+		WHERE FH_FNO = #{fno}
+	</select>
+	
+	<select id="selectMno" resultType="_int">
+		SELECT MNO
+		FROM MEMBER
+		WHERE MTYPE = 'H'
+		AND MNICK = #{mNick}
+	</select>
+	
+	
+	<insert id="insertWish">
+		INSERT INTO FUNDINTEREST 
+		VALUES(SEQ_FI_NO.NEXTVAL,SYSDATE,'Y','3',#{mno},#{fno},#{mno2})
+	</insert>
 	
 	
 </mapper>

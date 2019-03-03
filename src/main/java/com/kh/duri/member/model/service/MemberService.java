@@ -19,6 +19,10 @@ public interface MemberService {
 
 	int updateMember(Member m) throws LoginException;
 
+	String findCheck(Member m) throws LoginException;
+
+	int updatePassword(Member m) throws LoginException;
+
 
 
 }

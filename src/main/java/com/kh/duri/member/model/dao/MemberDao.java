@@ -25,4 +25,8 @@ public interface MemberDao {
 
 	int updateHappy(SqlSessionTemplate sqlSession, Member m) throws LoginException;
 
+	String findId(SqlSessionTemplate sqlSession, Member m) throws LoginException;
+
+	int updatePassword(SqlSessionTemplate sqlSession, Member m) throws LoginException;
+
 }

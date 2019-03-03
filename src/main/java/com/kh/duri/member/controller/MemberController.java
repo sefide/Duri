@@ -2,10 +2,8 @@ package com.kh.duri.member.controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Properties;
+import java.util.Random;
 
 import javax.mail.Message;
 import javax.mail.Session;
@@ -111,11 +109,26 @@ public class MemberController {
 		public ModelAndView loginNaCheck(Member m, ModelAndView mv, HttpSession session){
 				
 			try {
-				System.out.println("member : "+m);
-
+				/* 암호화처리 */
+				String encPassword = passwordEncoder.encode(m.getMpwd()); 
+				
+				System.out.println("암호화 후 : "+encPassword);
 				
 				Member loginUser2 = null; 
 				
+				System.out.println("member : "+m);
+
+
+
+
+
+
+
+
+
+
+
+
 			
 				loginUser2 = ms.loginNaMember(m); //받아온 아이디와 비밀번호로 로그인 정보 조회
 				
@@ -367,9 +380,9 @@ public class MemberController {
 	}
 
 
-
+	//회원정보 수정
 	@RequestMapping("updateMyInfo.me")
-	public @ResponseBody String updateMember(Member m, Model model) {
+	public @ResponseBody ModelAndView updateMember(Member m, Model model, ModelAndView mv) {
 		
 		int result = 0;
 		
@@ -390,18 +403,18 @@ public class MemberController {
 			
 			result = ms.updateMember(m);
 			
-			return "redirect:goHappyMain.me";
+			mv.setViewName("happymember/mypage");
 			
 			
 		} catch (LoginException e) {
 
 			model.addAttribute("msg","회원수정 실패");
-			return "common/errorPage";
+			mv.setViewName("common/errorPage");
 	
 		}
 		
 	
-		
+		return mv;
 
 	}
 	
@@ -449,9 +462,200 @@ public class MemberController {
 			 return "happymember/updateError";
 		  } 
 	}
+	
+	
+	
+	
+	//아이디 찾기
+	@RequestMapping	("findId.me")
+	public @ResponseBody String findId(Member m, HttpServletResponse response) {
+			
+		String count = null;
+		
+		try {
+			System.out.println("member : "+m);
+
+			
+			String loginUser2 = null; 
+			
+		
+			loginUser2 = ms.findCheck(m); //받아온 아이디와 비밀번호로 로그인 정보 조회
+			
+			System.out.println(loginUser2);
+			
+			count = loginUser2;
+
+			
+		} catch (LoginException e) {
+			
+		}
+		
+		return count;
+	}
+
 
 	
-	
+		//비밀번호 찾기
+		@RequestMapping("sendEmail.me")
+		public @ResponseBody String emailSend(HttpServletRequest req, HttpServletResponse res) throws Exception {
+
+			String email = req.getParameter("email");
+
+			String host = "smtp.gmail.com";
+
+			String to = email;
+
+			String from = "wqwq1563@gmail.com";
+
+			String password = "dmswl1596";
+
+			String from_name = "둘이두리관리자";
+
+			System.out.println(email);
+
+			Properties props = new Properties();
+
+			props.put("mail.smtps.auth", "true");
+
+			Session session = Session.getInstance(props);
+
+			String checkNum="";
+
+			try {
+
+				MimeMessage msg = new MimeMessage(session);
+
+				msg.setFrom(new InternetAddress(from, MimeUtility.encodeText(from_name, "UTF-8", "B")));
+
+				msg.setSubject("둘이두리 임시비밀번호");
+
+
+		
+			        String st[] = {"A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"};
+			        Random r = new Random();
+			        for(int i=1; i<=8; i++) {
+			             
+			            checkNum+=st[r.nextInt(26)];
+			             
+			        }
+			 
+					
+
+
+				
+
+				HttpSession session2=req.getSession();
+
+				session2.setAttribute("checkNum", checkNum);
+
+				msg.setContent("<h1>임시비밀번호 : "+checkNum+"</h1>", "text/html;charset=" + "EUC-KR");
+
+				InternetAddress address = new InternetAddress(to);
+
+				msg.setRecipient(Message.RecipientType.TO, address);
+
+				
+
+				Transport transport = session.getTransport("smtps");
+
+				transport.connect(host, from, password);
+
+				transport.sendMessage(msg, msg.getAllRecipients());
+
+				Transport.send(msg);
+
+				transport.close();
+
+				
+
+			} catch (Exception ex) {
+
+				System.out.println(ex.getMessage());
+
+			}
+
+			return checkNum;
+
+		}
+		
+		
+		//회원정보 수정
+		@RequestMapping("updateMyInfo2.me")
+		public @ResponseBody ModelAndView updateMember2(Member m, Model model, ModelAndView mv) {
+			
+			int result = 0;
+			
+			try {
+
+				System.out.println("member : "+m);
+				System.out.println(m.getMpwd());
+				
+				/* 암호화처리 */
+				String encPassword = passwordEncoder.encode(m.getMpwd()); 
+				
+				System.out.println("암호화 후 : "+encPassword);
+				
+				m.setMpwd(encPassword);//암호화된 비밀번호 저장
+				
+				System.out.println("member : "+m);
+		
+				
+				result = ms.updatePassword(m);
+				
+				mv.setViewName("redirect:goHappyLogin.me");
+				
+				
+			} catch (LoginException e) {
+
+				model.addAttribute("msg","회원수정 실패");
+				mv.setViewName("common/errorPage");
+		
+			}
+			
+		
+			return mv;
+
+		}
+		
+		
+		//회원정보 수정
+		@RequestMapping("updateMyInfo3.me")
+		public @ResponseBody ModelAndView updateMember3(Member m, Model model, ModelAndView mv) {
+			
+			int result = 0;
+			
+			try {
+
+				System.out.println("member : "+m);
+				System.out.println(m.getMpwd());
+				
+				/* 암호화처리 */
+				String encPassword = passwordEncoder.encode(m.getMpwd()); 
+				
+				System.out.println("암호화 후 : "+encPassword);
+				
+				m.setMpwd(encPassword);//암호화된 비밀번호 저장
+				
+				System.out.println("member : "+m);
+		
+				
+				result = ms.updatePassword(m);
+				
+				mv.setViewName("redirect:nanumLogin.me");
+				
+				
+			} catch (LoginException e) {
+
+				model.addAttribute("msg","회원수정 실패");
+				mv.setViewName("common/errorPage");
+		
+			}
+			
+		
+			return mv;
+
+		}
+		
 	@RequestMapping("happyLogin.me")
 	public String cloudList() {
 		return "member/HappyLogin";

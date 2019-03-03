@@ -135,7 +135,18 @@
 		WHERE MID = #{mid} 
 	</update>
 	
+	<select id="findId" parameterType="java.lang.String"  resultType="String" >
+		SELECT MID
+		FROM MEMBER
+		WHERE MNICK = #{mNickName}
+		AND MEMAIL = #{email}
+	</select> 
 	
+	<update id="updatePass">
+		UPDATE MEMBER
+		SET MPWD = #{mpwd}
+		WHERE MID = #{mid} 
+	</update>
 	
 </mapper>
 
