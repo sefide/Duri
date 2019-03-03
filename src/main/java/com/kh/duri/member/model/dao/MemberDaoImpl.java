@@ -132,6 +132,23 @@ public class MemberDaoImpl implements MemberDao {
 	}
 
 
+	@Override
+	public int updateHappy(SqlSessionTemplate sqlSession, Member m) throws LoginException {
+		int result = sqlSession.insert("Member.updateHappy",m);
+		
+		System.out.println("행복두리 회원수정 성공여부 : " + result);
+
+		
+		 if(result == 0) { 
+			 throw new LoginException("작성실패!"); //예외처리
+		 
+		 }
+		 
+
+		return result;
+	}
+
+
 	
 
 }

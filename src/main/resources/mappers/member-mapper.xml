@@ -129,6 +129,11 @@
 	VALUES (SEQ_A_NO.NEXTVAL,#{origin},#{change},null,'formFiles',#{mno},'1','F')
 	</insert>
 	
+	<update id="updateHappy">
+		UPDATE MEMBER
+		SET MPHONE = #{mPhone} , MPWD = #{mpwd} ,MGENDER = #{mGender}
+		WHERE MID = #{mid} 
+	</update>
 	
 	
 	

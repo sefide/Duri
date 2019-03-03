@@ -77,11 +77,8 @@
     			<div class="col-md-5 d-flex justify-content-center counter-wrap ftco-animate">
             <div class="block-18 color-1 align-items-stretch">
               <div class="text">
-              <c:set var="sum" value="${(b1/moneyDetail.fValue)*100}"/>
-              <script>
-              ${sum}=${sum}.toFixed(1); // 99.98765 출력	
-              </script>
-              
+              <c:set var="sum" value="${(b1*100)/moneyDetail.fValue}"/>
+        
               	<span>현재 모금 금액 : <b><fmt:formatNumber value = "${b1}" type="currency" currencySymbol=" "/>원</b></span>
 				<span>총 목표금액 : <b><fmt:formatNumber value = "${moneyDetail.fValue}" type="currency" currencySymbol=" "/>원</b></span>
 

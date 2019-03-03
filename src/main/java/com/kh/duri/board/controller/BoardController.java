@@ -1,5 +1,6 @@
 package com.kh.duri.board.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -86,15 +87,22 @@ public class BoardController {
 	@RequestMapping("long_donate_detail.bo")
 	public ModelAndView longDonate(Member m, ModelAndView mv,HttpSession session,HttpServletRequest request, HttpServletResponse response){ 	
 			String longDetail2 = request.getParameter("longDetail");
+			System.out.println(m.getMno());
 			if(longDetail2 != null) {
 				int mNo = Integer.parseInt(longDetail2);
 				m.setMno(mNo);
-			}
+			}else {
 			System.out.println("member : "+m);			
 			Member longDetail = null; 
-			longDetail = bs.longDanateDetail(m); //받아온 아이디와 비밀번호로 로그인 정보 조회				
-			session.setAttribute("longDetail", longDetail);	//세션에 뿌려주기				
+			int money = bs.selectTotalMoney(m);
+			int count = bs.selectTotalCount(m);
+			longDetail = bs.longDanateDetail(m);
+			
+			session.setAttribute("longDetail", longDetail);	//세션에 뿌려주기	
+			session.setAttribute("money", money);	//세션에 뿌려주기
+			session.setAttribute("count", count);	//세션에 뿌려주기
 			mv.setViewName("redirect:longDonate.bo"); //위처럼 redirect로 뷰페이지이름연결할거랑 똑같음
+			}
 		return mv;
 	}
 
@@ -114,9 +122,11 @@ public class BoardController {
 
 			List<Board> moList;
 			
-			moList = bs.selectMoneyList(pi);
+			
+			moList = bs.selectMoneyList(pi);			
 			
 			model.addAttribute("moList", moList);
+
 			model.addAttribute("pi", pi);
 			return "board/causes";
 

@@ -105,6 +105,13 @@ public class MemberServiceImpl implements MemberService {
 		return result;	
 	}
 
+	@Override
+	public int updateMember(Member m) throws LoginException {
+		int result = md.updateHappy(sqlSession,m);
+		
+		return result;	
+	}
+
 
 
 	

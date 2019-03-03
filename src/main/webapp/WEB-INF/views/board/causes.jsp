@@ -75,6 +75,7 @@
       </div>		
       	<div class="row">
       	   <c:forEach var="mo" items="${moList}">
+<%--       	    <c:set var="sum" value="${(moList2*100)/mo.fValue}"/> --%>
       		<div class="col-md-4 ftco-animate" >
       			<div class="cause-entry">
       			<!-- style="background-image: url(/duri/resources/common/images/cause-1.jpg);" -->
@@ -94,7 +95,7 @@
     					<p>' ${mo.mNick} ' 행복두리의 사연</p>
     					<span class="donation-time mb-3 d-block" style="color:black">${mo.mFundType}</span>
 	                	<div class="progress custom-progress-success">
-	                    <div class="progress-bar bg-primary" role="progressbar" style="width: 28%" aria-valuenow="28" aria-valuemin="0" aria-valuemax="100"></div>
+	                    <div class="progress-bar bg-primary" role="progressbar" style="width: 40%" aria-valuenow="28" aria-valuemin="0" aria-valuemax="100"></div>
 	                	</div>
 	               		<a>46%</a><a style="float:right">${mo.fValue}원</a>
 	    			</div>
