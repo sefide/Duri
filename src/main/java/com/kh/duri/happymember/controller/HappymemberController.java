@@ -492,7 +492,7 @@ public class HappymemberController {
 		return "redirect:proofDocument.happy";
 	}
 	
-	//크라운드 펀딩(물품/금액) 감사편지 보내기
+	//크라운드 펀딩(물품/금액) 감사편지 작성 페이지로
 	@RequestMapping("crowdfundingLetter.happy")
 	public String crowdfundingLetter(Model model, HttpServletRequest request, HttpServletResponse response) {
 		Member m = (Member)request.getSession().getAttribute("loginUser");
@@ -503,7 +503,45 @@ public class HappymemberController {
 		int fno = Integer.parseInt(request.getParameter("fno"));
 		String fWriter = request.getParameter("fWriter");
 		
-		model.addAttribute("ftitle", ftitle);
+		/*model.addAttribute("ftitle", ftitle);*/
+		
+		try {
+			
+			//펀딩 구분 찾아오기
+			Funding f = new Funding();
+			f.setFno(fno);
+			
+			Funding ftype = hs.selectFtype(f);
+			String fundingType = null;
+		
+			if(ftype.getFtype().equals("ITEM")) {
+				fundingType = "3";
+			}else {
+				fundingType = "2";
+			}
+			
+			f.setFtype(fundingType);
+			f.setFtitle(ftitle);
+			model.addAttribute("f", f);
+			
+			
+			
+		} catch (MypageException e) {
+			model.addAttribute("msg", e.getMessage());
+			return "common/errorPage";
+		}
+	
+		return "happymember/thankyouLetterCrowd";
+	}
+	
+	//크라운펀딩 (물품/금액) 단체 편지 보내기
+	@RequestMapping("insertCrowdfundingLetter.happy")
+	public String insertCrowdfundingLetter(Model model, HttpServletRequest request, HttpServletResponse response) {
+		Member m = (Member)request.getSession().getAttribute("loginUser");
+		int fno = Integer.parseInt(request.getParameter("fno"));
+		String ftype = request.getParameter("ftype");
+		String letterContent = request.getParameter("letterContent");
+		String letterTitle = request.getParameter("letterTitle");
 		
 		//크라운드 참여한 나눔두리 찾아오기
 		FundHistory fs = new FundHistory();
@@ -512,22 +550,8 @@ public class HappymemberController {
 		try {
 			List<FundHistory> nanumMnoList = hs.selectNanumMno(fs);
 			
-			//펀딩 구분 찾아오기
-			Funding f = new Funding();
-			f.setFno(fno);
-			
-			Funding ftype = hs.selectFtype(f);
-			String fundingType = ftype.getFtype();
-		
-			if(fundingType == "ITEM") {
-				fundingType = "3";
-			}else {
-				fundingType = "2";
-			}
-			System.out.println("fundingType : " + fundingType);
-			System.out.println("성공4");
 			//후원한 나눔두리들이 있을 경우 단체 감사편지 보내기
-			/*if(nanumMnoList != null) {
+			if(nanumMnoList != null) {
 				Letter l = new Letter();
 				System.out.println("letter만들어졌어?");
 				int nanumMno = 0;
@@ -536,21 +560,24 @@ public class HappymemberController {
 					nanumMno = nanumMnoList.get(i).getFhMnoGive();
 					l.setLeMnoGive(nanumMno);
 					l.setLeMnoTake(m.getMno());
-					l.setLeType(fundingType);
+					l.setLeType(ftype);
 					l.setLeTitle(letterTitle);
 					l.setLeContent(letterContent);
-					System.out.println("이제 들어갈까???");
 					int result = hs.insertCrowdfundingLetter(l);
-					System.out.println("끝났따!!");
 				} 
-			}*/
+				return "redirect:crowdfundingLetterRefresh.happy";
+			}
+			
+			
+			
 			
 		} catch (MypageException e) {
 			model.addAttribute("msg", e.getMessage());
 			return "common/errorPage";
 		}
-	
-		return "happymember/thankyouLetterCrowd";
+		
+		
+		return "happymember/mypage";
 	}
 	
 	
@@ -574,9 +601,10 @@ public class HappymemberController {
 		return "redirect:qna.happy";
 	}
 		
-	@RequestMapping("qnaInsert.happy")
+	//새로고침 - 단체 감사편지
+	@RequestMapping("crowdfundingLetterRefresh.happy")
 	public String qnaInsert() {
-		return "happymember/qnaInsert";
+		return "happymember/mypage";
 	}
 	
 	@RequestMapping("mypage.happy")

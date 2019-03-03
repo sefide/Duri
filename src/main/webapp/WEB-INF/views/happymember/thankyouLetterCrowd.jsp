@@ -42,7 +42,7 @@
 	<div class="contBox inner"><!-- inner S -->
 	 
 		<%@ include file="include/tabMypage.jsp" %>
-<form id="crowdfundingLetterForm" action="crowdfundingLetter.happy">
+<form id="crowdfundingLetterForm" action="insertCrowdfundingLetter.happy">
 		<div>
 			<h1>
 				<i class="chevron right icon"></i>TO. 나눔두리님들<i class="orange heart icon"></i>
@@ -54,7 +54,7 @@
 		<div align="center">
 			<!-- 감사편지 쓰기 : 펀딩글 제목 -->
 			<div style="float: left; margin-left: 45px; margin-top: 4px;">
-				&nbsp;<div class="ui grey basic button" id="ftitle">${ftitle}</div>&nbsp;&nbsp;
+				&nbsp;<div class="ui grey basic button" id="ftitle">${f.ftitle}</div>&nbsp;&nbsp;
 			</div>
 			
 			
@@ -76,7 +76,10 @@
 			</div>
 		</div>
 		
-		<div style="height: 100px;"></div>
+		<div style="height: 100px;">
+			<input type="hidden" name="fno" value="${f.fno}"/>
+			<input type="hidden" name="ftype" value="${f.ftype}"/>
+		</div>
 		
 		<div id="button">
 			<div onclick="insertThankyouLetter();" class="massive ui instagram button">감사편지 보내기</div>&nbsp;&nbsp;&nbsp;&nbsp;

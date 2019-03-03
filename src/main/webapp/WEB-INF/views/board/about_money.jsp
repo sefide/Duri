@@ -119,7 +119,7 @@
              	</c:when>
              </c:choose> 
              <!-- 행복두리가 상세페이지로 들어왔을 경우 -->
-             <c:if test="${not empty sessionScope.loginUser && empty sessionScope.loginUser2}">
+            <c:if test="${not empty sessionScope.loginUser && empty sessionScope.loginUser2}">
              	<c:choose>
              		<c:when test="${moneyDetail.fStatus eq 'END' or moneyDetail.fStatus eq 'GOAL'}">
              			<h3 class="mb-4">${moneyDetail.mNick}님!</h3>
@@ -133,10 +133,6 @@
              		</c:otherwise>
              	</c:choose>
              </c:if>
-             
-             
-             
-             
               </div>
             </div>
           </div>
