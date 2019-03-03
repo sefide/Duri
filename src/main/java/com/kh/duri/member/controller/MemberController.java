@@ -368,7 +368,44 @@ public class MemberController {
 
 
 
+	@RequestMapping("updateMyInfo.me")
+	public @ResponseBody String updateMember(Member m, Model model) {
+		
+		int result = 0;
+		
+		try {
 
+			System.out.println("member : "+m);
+			System.out.println(m.getMpwd());
+			
+			/* 암호화처리 */
+			String encPassword = passwordEncoder.encode(m.getMpwd()); 
+			
+			System.out.println("암호화 후 : "+encPassword);
+			
+			m.setMpwd(encPassword);//암호화된 비밀번호 저장
+			
+			System.out.println("member : "+m);
+	
+			
+			result = ms.updateMember(m);
+			
+			return "redirect:goHappyMain.me";
+			
+			
+		} catch (LoginException e) {
+
+			model.addAttribute("msg","회원수정 실패");
+			return "common/errorPage";
+	
+		}
+		
+	
+		
+
+	}
+	
+	
 
 	
 	//새로고침하면 로그인계속요청함 ! 방지하기 위해 아래 메서드 생성
@@ -400,7 +437,18 @@ public class MemberController {
 	
 	
 
-
+	//비밀번호 확인
+	@RequestMapping("checkPwd.me")
+	public String Total13(Model model, HttpServletRequest request, HttpServletResponse response) {
+		Member m = (Member)request.getSession().getAttribute("loginUser");
+		String mpwd = m.getMpwd(); //비교할 DB의 인코딩 된 암호
+		String pwd = request.getParameter("pwd"); //인코딩하고 일치시킬 원시 비번
+		if( passwordEncoder.matches(pwd, mpwd) == true  ) { // 비밀번호 일치시 
+			return "happymember/myInfoModify";
+		 }else { // 비밀번호 불일치
+			 return "happymember/updateError";
+		  } 
+	}
 
 	
 	
@@ -424,6 +472,13 @@ public class MemberController {
 	public String happyLogin() {
 		return "member/HappyLogin";
 	}
+	
+	
+	@RequestMapping("passCheck.me") 
+	public String passCheck() {
+		return "happymember/passCheck";
+	}
+	
 	
 	
 	

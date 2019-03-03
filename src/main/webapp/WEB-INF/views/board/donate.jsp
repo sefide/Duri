@@ -92,7 +92,7 @@ form{
 			    </div>
 			    <div class="extra content">
 			      <div class="ui two buttons">
-        				<div class="ui basic button" id="join" style="height:40px; font-size:15px; font-weight:bold; text-align:center; " onclick = "goDonate();">후원하러가기</div>  
+        				<button class="ui basic button" id="join" style="height:40px; font-size:15px; font-weight:bold; text-align:center; " type="submit">후원하러가기</button>  
 			      </div>
 			    </div>
 			  </div>
@@ -150,15 +150,7 @@ form{
   <!-- loader -->
    <jsp:include page="../common/loader.jsp"></jsp:include>
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> 
-    <script>
-    	function goDonate(){
 
-    		$("#directFundDetailFrom").submit();
-
-
-    		//document.sub1.submit();	
-    	}
-    </script>
 
   </body>
 </html>

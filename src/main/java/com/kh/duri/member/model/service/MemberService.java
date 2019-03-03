@@ -17,6 +17,8 @@ public interface MemberService {
 
 	int insertHappyMember(Member m);
 
+	int updateMember(Member m) throws LoginException;
+
 
 
 }

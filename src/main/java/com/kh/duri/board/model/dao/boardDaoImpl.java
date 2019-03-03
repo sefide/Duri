@@ -82,6 +82,7 @@ public class boardDaoImpl implements boardDao {
 		RowBounds rowBounds = new RowBounds(offset, pi.getLimit());
 
 		List<Board> bh = sqlSession.selectList("Boards.selectMoneyList", null,rowBounds);
+		List<Board> bc= sqlSession.selectList("Boards.selectFundMoneyCulValue2",null,rowBounds);
 
 		if (bh == null) {
 			throw new DonateListException("금액후원 명단을 불러올수 없습니다.");
@@ -89,6 +90,7 @@ public class boardDaoImpl implements boardDao {
 
 		System.out.println("Dao Point 객체 : " + bh.size());
 		System.out.println("Dao Point 총객체 : " + bh);
+		System.out.println("Dao Point 총객체 : " + bc);
 		return bh;
 	}
 
@@ -233,6 +235,30 @@ public class boardDaoImpl implements boardDao {
 
 		return listCount;
 	}
+
+	@Override
+	public int selectTotalMoney(SqlSessionTemplate sqlSession, Member m) {
+		System.out.println(m);
+		int listCount = sqlSession.selectOne("Boards.selectTotalMoney",m);
+
+		System.out.println("모든 후원금액 개수 : " + listCount);
+	
+
+		return listCount;
+	}
+
+	@Override
+	public int selectTotalCount(SqlSessionTemplate sqlSession, Member m) {
+		int listCount = sqlSession.selectOne("Boards.selectTotalCount",m);
+	
+
+		System.out.println("모든 후원금액 개수 : " + listCount);
+		
+
+		return listCount;
+	}
+
+
 
 
 }

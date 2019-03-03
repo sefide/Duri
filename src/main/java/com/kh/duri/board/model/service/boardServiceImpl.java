@@ -1,5 +1,6 @@
 package com.kh.duri.board.model.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -132,6 +133,21 @@ public class boardServiceImpl implements boardService {
 		
 		return moneyDetail2 ;
 	}
+
+	@Override
+	public int selectTotalMoney(Member m) {
+		int listCount = bd.selectTotalMoney(sqlSession,m);
+		
+		return listCount;
+	}
+
+	@Override
+	public int selectTotalCount(Member m) {
+		int listCount = bd.selectTotalCount(sqlSession,m);
+		
+		return listCount;
+	}
+
 
 
 

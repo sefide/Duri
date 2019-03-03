@@ -77,11 +77,8 @@
     			<div class="col-md-5 d-flex justify-content-center counter-wrap ftco-animate">
             <div class="block-18 color-1 align-items-stretch">
               <div class="text">
-              <c:set var="sum" value="${(b1/moneyDetail.fValue)*100}"/>
-              <script>
-              ${sum}=${sum}.toFixed(1); // 99.98765 출력	
-              </script>
-              
+              <c:set var="sum" value="${(b1*100)/moneyDetail.fValue}"/>
+        
               	<span>현재 모금 금액 : <b><fmt:formatNumber value = "${b1}" type="currency" currencySymbol=" "/>원</b></span>
 				<span>총 목표금액 : <b><fmt:formatNumber value = "${moneyDetail.fValue}" type="currency" currencySymbol=" "/>원</b></span>
 
@@ -139,13 +136,7 @@
              
              
              
-              	<h3 class="mb-4">후원하기</h3>
-              	<p style="font-weight:bold;">행복두리에게 올 한해 따뜻하게 </br>지낼 수 있는 행복을 선물하세요.</p>
-              	<% if(((Member)request.getSession().getAttribute("loginUser2")) != null){%>
-              	<p><a href="fundMoney.pm?fno=${moneyDetail.fno}" class="btn btn-white px-3 py-2 mt-2" style="font-weight:bold;">후원하러가기</a></p>
-              	<%}else{ %>
-              	<p><a href = "nanumLogin.me" class="btn btn-white px-3 py-2 mt-2" style="font-weight:bold;">로그인 후 후원이 가능합니다.</a></p>
-              	<%} %>
+             
               </div>
             </div>
           </div>

@@ -81,8 +81,8 @@ b{
 		            <div class="block-18 color-1 align-items-stretch">
 		              <div class="text">
 		              	<span>총 나눔두리 후원액</span>
-		               	<strong class="number" data-number="1432805">0</strong>
-		                <span>2명의 나눔두리가 정기후원중입니다.</span>
+		               	<strong class="number" data-number="${money}">0</strong>
+		                <span>${count}명의 나눔두리가 정기후원중입니다.</span>
 		              </div>
 		            </div>
 		        </div>
