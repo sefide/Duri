@@ -23,4 +23,6 @@ public interface MemberDao {
 
 	String selectEncPassword2(SqlSessionTemplate sqlSession, Member m);
 
+	int updateHappy(SqlSessionTemplate sqlSession, Member m) throws LoginException;
+
 }

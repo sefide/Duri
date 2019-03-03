@@ -89,8 +89,21 @@
 		<result property="fdValue3" column="FDVALUE"/>
 		<result property="fd_ino3" column="FD_INO"/>
 		<result property="iName" column="INAME"/>
+		<result property="goalMoney" column="FHVALUE"/>
 
 
+	</resultMap>
+	
+	<resultMap type="com.kh.duri.board.model.vo.DirectFundHistory" id="directFundHistResultSet">
+		<id property="dhNo" column="DHNO"></id>
+		<result property="dh_mNo_take" column="DH_MNO_TAKE"/>
+		<result property="dh_mNo_give" column="DH_MNO_GIVE"/>
+		<result property="dhValue" column="DHVALUE"/>
+		<result property="dhType" column="DHVALUETYPE"/>
+		<result property="dhBilling" column="DHBILLINGKEY"/>
+		<result property="dhImpUid" column="DHIMPUID"/>
+		<result property="dhStartDate" column="DHSTARTDATE"/>
+		<result property="dhDay" column="DHDAY"/>
 	</resultMap>
 	
 	<!-- 금액후원 리스트 갯수 조회 -->
@@ -223,6 +236,21 @@
 		INSERT INTO FUNDINGDETAIL 
 		VALUES(SEQ_FHD_NO.NEXTVAL,#{fdValue},#{fd_fno},#{fd_ino3})
 	</insert>
+
+		
+	<select id="selectTotalMoney" resultType="_int">
+		SELECT NVL(SUM(DHVALUE), 0)
+		FROM DIRECTFUNDHISTORY
+		WHERE DH_MNO_TAKE=#{mno}
+	</select>
+	
+	<select id="selectTotalCount" resultType="_int">
+		 SELECT COUNT(*)
+		 FROM DIRECTFUNDHISTORY
+		 WHERE DH_MNO_TAKE=#{mno}
+	</select>
+	
+	
 	
 </mapper>
 

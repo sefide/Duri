@@ -19,6 +19,7 @@ public class Board {
 	private String mAddress;
 	private String mFundType;
 	private String mLeftDay;
+	private int goalMoney;
 	
 	private int fdValue;
 	private int fd_ino;
@@ -38,8 +39,8 @@ public class Board {
 
 	public Board(int rnum, int fno, String ftype, String fTitle, String fContent, Date fWriterDate, Date fStartDate,
 			Date fEndDate, String fStatus, int fValue, String fValueType, int fWriter, String mNick, String mAddress,
-			String mFundType, String mLeftDay, int fdValue, int fd_ino, int fdValue2, int fd_ino2, int fdValue3,
-			int fd_ino3, int fd_fno) {
+			String mFundType, String mLeftDay, int goalMoney, int fdValue, int fd_ino, int fdValue2, int fd_ino2,
+			int fdValue3, int fd_ino3, int fd_fno) {
 		super();
 		this.rnum = rnum;
 		this.fno = fno;
@@ -57,6 +58,7 @@ public class Board {
 		this.mAddress = mAddress;
 		this.mFundType = mFundType;
 		this.mLeftDay = mLeftDay;
+		this.goalMoney = goalMoney;
 		this.fdValue = fdValue;
 		this.fd_ino = fd_ino;
 		this.fdValue2 = fdValue2;
@@ -227,6 +229,16 @@ public class Board {
 	}
 
 
+	public int getGoalMoney() {
+		return goalMoney;
+	}
+
+
+	public void setGoalMoney(int goalMoney) {
+		this.goalMoney = goalMoney;
+	}
+
+
 	public int getFdValue() {
 		return fdValue;
 	}
@@ -303,11 +315,13 @@ public class Board {
 				+ fContent + ", fWriterDate=" + fWriterDate + ", fStartDate=" + fStartDate + ", fEndDate=" + fEndDate
 				+ ", fStatus=" + fStatus + ", fValue=" + fValue + ", fValueType=" + fValueType + ", fWriter=" + fWriter
 				+ ", mNick=" + mNick + ", mAddress=" + mAddress + ", mFundType=" + mFundType + ", mLeftDay=" + mLeftDay
-				+ ", fdValue=" + fdValue + ", fd_ino=" + fd_ino + ", fdValue2=" + fdValue2 + ", fd_ino2=" + fd_ino2
-				+ ", fdValue3=" + fdValue3 + ", fd_ino3=" + fd_ino3 + ", fd_fno=" + fd_fno + "]";
+				+ ", goalMoney=" + goalMoney + ", fdValue=" + fdValue + ", fd_ino=" + fd_ino + ", fdValue2=" + fdValue2
+				+ ", fd_ino2=" + fd_ino2 + ", fdValue3=" + fdValue3 + ", fd_ino3=" + fd_ino3 + ", fd_fno=" + fd_fno
+				+ "]";
 	}
 
 
+	
 	
 	
 }

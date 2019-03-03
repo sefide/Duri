@@ -139,12 +139,12 @@ input, select{
 			<span>마이페이지 &gt; 내 정보 수정</span>
 		</div>
 		<br><br>
-<form class="ui form" id="updateForm" action="">
+<form class="ui form" id="updateForm" action="updateMyInfo.me" method="POST">
   <h4 class="ui dividing header"  style="margin:10px;">ID</h4>
 	<div class="field" style="margin:10px;">
     <div class="two fields">
       <div class="field">
-        <input type="text" name="shipping[first-name]" placeholder="아이디를 입력하세요." value="${loginUser.mid }" style="height:40px">
+        <input type="text" name="mid" placeholder="아이디를 입력하세요." value="${loginUser.mid }" style="height:40px" readonly>
       </div>
         <!-- <div class="ui button" tabindex="0">중복확인</div> -->
     </div>
@@ -154,11 +154,11 @@ input, select{
 	<div class="field" style="margin:10px;">
     <div class="two fields">
       <div class="field">
-        <input type="password" name="userPwd" id="userPwd" placeholder="비밀번호를 입력하세요.">
+        <input type="password" name="mpwd" id="userPwd" placeholder="비밀번호를 입력하세요.">
       </div>
 
       <div class="field">
-        <input type="password" id="userNewPwd" placeholder="비밀번호를 확인하세요.">
+        <input type="password" id="mpwd2" placeholder="비밀번호를 확인하세요.">
       </div>
     </div>
     </div>
@@ -169,11 +169,11 @@ input, select{
   <div class="field" style="margin:10px;">
     <div class="two fields">
       <div class="field">
-        <input type="text" name="userName" placeholder="이름을 입력하세요." value="${loginUser.mName }" style="height:40px">
+        <input type="text" name="mName" placeholder="이름을 입력하세요." value="${loginUser.mName }" style="height:40px" readonly>
       </div>
       
       <div class="field">
-        <input type="text" name="userNick" placeholder="닉네임을 입력하세요.(실명가능)"  value="${loginUser.mNickName }" style="height:40px">
+        <input type="text" name="mNickName" placeholder="닉네임을 입력하세요.(실명가능)"  value="${loginUser.mNickName }" style="height:40px" readonly>
       </div>
     </div>
   </div>
@@ -183,15 +183,15 @@ input, select{
   <div class="two fields"  style="margin:10px;">
     <div class="field">
       <label>Gender</label>
-      <select class="ui fluid dropdown">
+      <select class="ui fluid dropdown" name="mGender">
         <option value="" selected disabled>선택</option>
         <c:if test="${loginUser.mGender eq 'M' }">
-    	<option value="male" selected>남</option>
-    	<option value="female" >여</option>
+    	<option value="M" selected>남</option>
+    	<option value="F" >여</option>
     	</c:if>
     	<c:if test="${loginUser.mGender eq 'F' }">
-    	<option value="male">남</option>
-        <option value="female" selected>여</option>
+    	<option value="M">남</option>
+        <option value="F" selected>여</option>
 		</c:if>
 
       </select>
@@ -201,58 +201,20 @@ input, select{
       <div class="ui field">
         <input type="hidden" name="country">
         	<c:if test="${ empty loginUser.mPhone}">
-			 <input type="text" name="userPhone" placeholder="번호가 등록되어 있지 않습니다." style="height:40px">
+			 <input type="text" name="mPhone" placeholder="번호가 등록되어 있지 않습니다." style="height:40px">
 			</c:if>
 			<c:if test="${ !empty loginUser.mPhone}">
-			<input type="text" name="userPhone" placeholder="${loginUser.mPhone }" style="height:40px">
+			<input type="text" name="mPhone" placeholder="${loginUser.mPhone }" style="height:40px">
 			</c:if>
        </div>
     </div>
   </div>
-  <h4 class="ui dividing header"  style="margin:10px;">Email</h4>
 
-   
-  <div class="fields"  style="margin:10px;">
-    <div class="five wide field">
-      <label>이메일주소</label><br>
-      <input type="text" name="userEmail1" maxlength="10" placeholder="이메일 주소를 입력해주세요." value="${(loginUser.email).substring(0,(loginUser.email).indexOf('@'))}" style="height:40px">
-    </div>
-     <div class="field">
-     <label></label><label></label><br>
-		@
-    </div>
-    <div class="three wide field">
-      <label></label><br>
-      <input type="text" name="userEmail2" maxlength="3" placeholder="직접입력"  value="${(loginUser.email).substring(((loginUser.email).indexOf('@'))+1)}" style="height:40px">
-    </div>
-    <div class="seven wide field">
-      <label></label><br>
-      <div class="two fields">
-        <div class="field">
-          <select class="ui fluid search dropdown" name="card[expire-month]">
-            <option value="" selected disabled>선택</option>
-            <option value="1">daum.net</option>
-            <option value="2">google.com</option>
-            <option value="3">nate.com</option>
-            <option value="4">naver.com</option>
-          </select>
-        </div>
-         <div class="ui button" style="width:120px; height:35px;" id="email">이메일 인증</div>
-      </div>
-    </div>
-  </div>
-	<div class="field" style="margin:10px;" id="check">
-    <div class="fields">
-      <div class="field">
-        <input type="text" name="shipping[first-name]" placeholder="인증번호를 입력하세요.">
-      </div>
-        <div class="ui button" tabindex="0">인증하기</div>
 
-    </div>
-  </div>
+
   
   
-<h4 class="ui dividing header"  style="margin:10px;">주민등록번호</h4>
+<!-- <h4 class="ui dividing header"  style="margin:10px;">주민등록번호</h4>
   <div class="fields" style="margin:10px;">
      <div class="five wide field">
        <label>주민등록번호</label>
@@ -265,34 +227,11 @@ input, select{
     </div>
 
     
-    </div>
-<h4 class="ui dividing header"  style="margin:10px;">주소</h4>
-     <div class="seven wide field" style="margin:15px">
-      <label>주소</label>
-      <div class="two fields">
-         <div class="field">
-        <input type="text" name="shipping[first-name]"  style="height:40px;"  value="서울시 강남구">
-      </div>
-         <div class="ui button" style="width:120px; height:35px;" id="email">주소검색</div>
-      </div>
-       <div class="field">
-           <input type="text" name="shipping[first-name]" placeholder="상세주소를 입력해주세요." value="남도빌딩 2층 kh정보교육원" style="height:40px;">  	
-       </div>
-    </div>
+    </div> -->
 
-	<div class="field" style="margin:10px;" id="check">
-    <div class="fields">
-      <div class="field">
-        <input type="text" name="shipping[first-name]" placeholder="인증번호를 입력하세요.">
-      </div>
-        <div class="ui button" tabindex="0">인증하기</div>
-
-    </div>
-  </div>
-  
     
     
-   <h4 class="ui dividing header" style="margin:10px;">증빙서류</h4>
+<!--    <h4 class="ui dividing header" style="margin:10px;">증빙서류</h4>
    <div class="fields" style="margin:10px">
 
       <div class="two field" style="width:300px;">
@@ -309,11 +248,11 @@ input, select{
        
    			<input type="file" >
         </div>
-    </div>
+    </div> -->
     <br><br><br><br>
   
   	<div align="center">
-		 <button class="ui primary button" onclick="update();">
+		 <button class="ui primary button" type="submit">
 		   	수정하기
 		</button>
 		<button class="ui button" onclick="back();">

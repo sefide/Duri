@@ -1,6 +1,9 @@
 package com.kh.duri.board.model.service;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import org.mybatis.spring.SqlSessionTemplate;
 
 import com.kh.duri.board.model.exception.BoardException;
 import com.kh.duri.board.model.exception.DonateListException;
@@ -39,6 +42,12 @@ public interface boardService {
 	int insertItem(Board b) throws BoardException;
 
 	int moneyCountOne(Board moneyDetail);
+
+	int selectTotalMoney(Member m);
+
+	int selectTotalCount(Member m);
+
+
 
 
 

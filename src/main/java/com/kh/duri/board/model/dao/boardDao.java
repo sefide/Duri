@@ -1,5 +1,6 @@
 package com.kh.duri.board.model.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -8,8 +9,8 @@ import com.kh.duri.board.model.exception.BoardException;
 import com.kh.duri.board.model.exception.DonateListException;
 import com.kh.duri.board.model.vo.Board;
 import com.kh.duri.board.model.vo.BoardItem;
-import com.kh.duri.member.model.vo.Member;
 import com.kh.duri.board.model.vo.PageInfo;
+import com.kh.duri.member.model.vo.Member;
 
 public interface boardDao {
 
@@ -42,6 +43,11 @@ public interface boardDao {
 	int insertCloud2(SqlSessionTemplate sqlSession, Board b) throws BoardException;
 
 	int moneyCountDetail(SqlSessionTemplate sqlSession, Board moneyDetail);
+
+	int selectTotalMoney(SqlSessionTemplate sqlSession, Member m);
+
+	int selectTotalCount(SqlSessionTemplate sqlSession, Member m);
+
 
 
 
