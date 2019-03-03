@@ -32,6 +32,7 @@ public class adminMember implements Serializable{
 	private long pValue;
 	private String p_mNo;
 	private String NumStatus;
+	private String AttachName;
 	
 	//ATTACHMENT
 	private int ano;//첨부파일번호
@@ -57,7 +58,7 @@ public class adminMember implements Serializable{
 			String mBirthDay, String mAddress, Date mAcceptDate, Date mprAcceptDate, int mGoalNum, String mStatus,
 			String mTakeStatus, long pValue, String p_mNo, String numStatus, int ano, String aoriginName,
 			String achangeName, Date adate, String aFilePath, String atype, int a_Fno, int a_mno, String aDocType,
-			String aStatus) {
+			String aStatus, String AttachName) {
 		super();
 		this.mno = mno;
 		this.mName = mName;
@@ -82,7 +83,8 @@ public class adminMember implements Serializable{
 		this.mTakeStatus = mTakeStatus;
 		this.pValue = pValue;
 		this.p_mNo = p_mNo;
-		NumStatus = numStatus;
+		this.NumStatus = numStatus;
+		this.AttachName= AttachName;
 		this.ano = ano;
 		this.aoriginName = aoriginName;
 		this.achangeName = achangeName;
@@ -107,7 +109,7 @@ public class adminMember implements Serializable{
 				+ ", mTakeStatus=" + mTakeStatus + ", pValue=" + pValue + ", p_mNo=" + p_mNo + ", NumStatus="
 				+ NumStatus + ", ano=" + ano + ", aoriginName=" + aoriginName + ", achangeName=" + achangeName
 				+ ", adate=" + adate + ", aFilePath=" + aFilePath + ", atype=" + atype + ", a_Fno=" + a_Fno + ", a_mno="
-				+ a_mno + ", aDocType=" + aDocType + ", aStatus=" + aStatus + "]";
+				+ a_mno + ", aDocType=" + aDocType + ", aStatus=" + aStatus +",AttachName="+AttachName+ "]";
 	}
 
 
@@ -516,6 +518,18 @@ public class adminMember implements Serializable{
 
 	public void setaStatus(String aStatus) {
 		this.aStatus = aStatus;
+	}
+
+
+
+	public String getAttachName() {
+		return AttachName;
+	}
+
+
+
+	public void setAttachName(String attachName) {
+		AttachName = attachName;
 	}
 
 

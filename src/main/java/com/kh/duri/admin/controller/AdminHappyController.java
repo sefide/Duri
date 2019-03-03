@@ -16,6 +16,7 @@ import com.kh.duri.admin.model.service.adminHappyService;
 import com.kh.duri.admin.model.vo.RefundList;
 import com.kh.duri.admin.model.vo.adminDirectList;
 import com.kh.duri.admin.model.vo.adminFundingHistoryList;
+import com.kh.duri.admin.model.vo.adminFundingList;
 import com.kh.duri.admin.model.vo.adminMember;
 
 
@@ -170,6 +171,58 @@ public class AdminHappyController {
 		
 	}
 	
+	
+	//신규회원 승인 버튼
+		@RequestMapping("adminNewHappyAgree.ad")
+		public String adminNewHappyAgree(HttpServletRequest request, HttpServletResponse response,adminMember m) {
+			
+			int newno = Integer.parseInt(request.getParameter("newno"));
+			m.setMno(newno);
+			m.setA_mno(newno);
+				int result1 = ahs.adminNewHappyMemberAgree(m);
+				int result2 = ahs.adminNewHappyAttachAgree(m);
+				
+				
+				return "redirect:adminHappyAcc.ad";
+			
+		}
+		
+		//자기소개 갱신 회원 승인 버튼
+		@RequestMapping("adminMprHappyAgree.ad")
+		public String adminMprHappyAgree(HttpServletRequest request, HttpServletResponse response,adminMember m) {
+			
+			int Mnonum = Integer.parseInt(request.getParameter("Mnonum"));
+			String Statusnum = request.getParameter("Statusnum");
+			String num = request.getParameter("num");
+			
+			m.setMno(Mnonum);
+			int result = ahs.adminMprHappyAgree(m);
+			
+			
+			return "redirect:adminHappyAccDetail.ad?Mnonum="+Mnonum+"&Statusnum="+Statusnum+"&num="+num;
+			
+		}
+	
+		//증빙서류 갱신 회원 승인 버튼
+		@RequestMapping("adminAttachHappyAgree.ad")
+		public String adminAttachHappyAgree(HttpServletRequest request, HttpServletResponse response,adminMember m) {
+			
+			int Mnonum = Integer.parseInt(request.getParameter("Mnonum"));
+			String changName =request.getParameter("changName");
+			m.setMno(Mnonum);
+			m.setA_mno(Mnonum);
+			m.setAttachName(changName);
+
+			int result1 = ahs.adminAttachHappyMemberAgree(m);
+			int result2 = ahs.adminAttachHappyAttach1Agree(m);
+			int result3 = ahs.adminAttachHappyAttach2Agree(m);
+			
+			
+			
+			return "redirect:adminHappyAcc.ad";
+			
+		}
+		
 	
 	
 	
