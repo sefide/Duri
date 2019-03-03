@@ -102,8 +102,9 @@
              		<c:when test="${thingDetail.fStatus eq 'END' or thingDetail.fStatus eq 'GOAL'}">
 		             	<h3 class="mb-4">${thingDetail.mNick}님!</h3>
 		              	<p>후원해주신 나눔두리들께 </br>감사편지를 보내주세요!</p>
-		              	<p><a href="crowdfundingLetter.happy?ftitle=${thingDetail.fTitle}&fno=${thingDetail.fno}&fWriter=${thingDetail.fWriter}&ftype" 
-		              	class="btn btn-white px-3 py-2 mt-2">감사편지쓰러가기</a></p>
+		              	<p><a onclick="letterInsertBtn();" id="letterInsertBtn">감사편지쓰러가기</a></p>
+		              	<%-- <p><a href="crowdfundingLetter.happy?ftitle=${thingDetail.fTitle}&fno=${thingDetail.fno}&fWriter=${thingDetail.fWriter}" 
+		              	class="btn btn-white px-3 py-2 mt-2" id="letterInsertBtn">감사편지쓰러가기</a></p> --%>
              		</c:when>
              		<c:otherwise>
              			<h3 class="mb-4">${thingDetail.mNick}님!</h3>
@@ -174,16 +175,25 @@
         </div>
       </div>
     </section>
-		
 
    <!-- footer  -->
    <jsp:include page="../common/footer.jsp"></jsp:include>
-  
 
   <!-- loader -->
    <jsp:include page="../common/loader.jsp"></jsp:include>
  
+
+<script>
+	function letterInsertBtn(){
+		$("#letterInsertBtn").setEnabled(false);
+		location.href="crowdfundingLetter.happy?ftitle="+${thingDetail.fTitle}+"&fno="+${thingDetail.fno}+"&fWriter="+${thingDetail.fWriter};
+	}
+
+
+</script>
+ 
+ 
+ 
  
   </body>
-
 </html>
