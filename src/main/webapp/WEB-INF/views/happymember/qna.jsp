@@ -76,18 +76,31 @@
 			<tbody>
 			<c:if test="${ !empty qnaList }">
 			<c:forEach items="${qnaList }" var="qnaList">
+			<!-- qnaContent 길이 잘라올 변수 선언 -->
+			<c:set var="content" value="${qnaList.qcontent}"></c:set>
+			<c:set var="dot" value="..."></c:set>
+			<c:set var="cSubstring" value="${fn:substring(content, 0, 40)}"></c:set>
 				<tr>
 					<td style="display: none;">${qnaList.qno}</td>
 					<td><c:out value="${qnaList.rnum }"></c:out></td>
 					<td><c:out value="${qnaList.qtitle }"></c:out></td>
-					<td id="contentA" class="requestQno"><c:out value="${qnaList.qcontent }"></c:out></td>
-					<td><c:out value="${qnaList.qdate }"></c:out></td>
-					<c:if test="${ empty qnaList.qanswer }">
+					<c:choose> 
+					<c:when test="${fn:length(content) gt 40}">
+						<td id="contentA" class="requestQno"><c:out value="${cSubstring}${dot}"></c:out></td>
+					</c:when>
+					<c:otherwise>
+						<td id="contentA" class="requestQno"><c:out value="${qnaList.qcontent}"></c:out></td>
+					</c:otherwise>
+					</c:choose>
+					<td><c:out value="${qnaList.qdate}"></c:out></td>
+					<c:choose>
+					<c:when test="${ empty qnaList.qanswer }">
 						<td><i class="yellow circle icon" alt="답변중"></i></td>
-					</c:if>
-					<c:if test="${ !empty qnaList.qanswer }">
+					</c:when>
+					<c:otherwise>
 						<td><i class="green circle icon" alt="답변완료"></i></td>
-					</c:if>
+					</c:otherwise>
+					</c:choose>
 				</tr>	
 			</c:forEach>
 			</c:if>
@@ -147,10 +160,7 @@
 		
 		<div id="button" class="textSilver">
 			<button onclick="location.href='qnaInsert.happy'" class="massive ui instagram button">문의하러 가기</button>
-		</div>
-		
-		
-		
+		</div>		
 		
 	</div>
 

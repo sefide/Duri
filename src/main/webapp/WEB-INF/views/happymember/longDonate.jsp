@@ -53,9 +53,6 @@
 				<div style="float: left;" class="textSilver" >됩니다.&nbsp;반드시&nbsp;</div>
 				<div style="float: left;" class="textOrange" >포인트 환급 신청&nbsp;</div>
 				<div style="float: left;" class="textSilver" >바랍니다. </div>
-				<!-- <h5>&nbsp;&nbsp;
-				* 매월 둘째 주 월요일마다 후원 받은 금액이 포인트로  자동 충전됩니다. 반드시 포인트 환급 신청 바랍니다.
-				</h5> -->
 			</div>
 			<span>마이페이지 &gt; 정기 후원 현황</span>
 		</div>
@@ -151,10 +148,20 @@
 		
 		<div style="height: 100px;"></div>
 		
+		<c:choose>
+		<c:when test="${loginUser.mTakeStatus eq 4 }">
+		<div id="button" class="textSilver">
+			* 정기후원은 자기소개를 바탕으로 진행되므로 변경할 내용이 있을 시 수정해주세요.<br><br>
+		</div>
+		</c:when>
+		<c:otherwise>
 		<div id="button" class="textSilver">
 			* 정기후원은 자기소개를 바탕으로 진행되므로 변경할 내용이 있을 시 수정해주세요.<br><br>
 			<button onclick="location.href='myIntroModify.happy'"class="massive ui instagram button">자기소개 수정하기</button>
 		</div>
+		
+		</c:otherwise>
+		</c:choose>
 
 	</div><!--// inner E-->
 </div>

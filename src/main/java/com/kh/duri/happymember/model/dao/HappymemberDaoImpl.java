@@ -187,13 +187,24 @@ public class HappymemberDaoImpl implements HappymemberDao{
 		return deliveryList;
 	}
 
+	//자기소개 수정 전 현재 자기소개 내용 불러오기(세션으로 가져오면 안되서..ㅠㅠ)
+	@Override
+	public Member searchMprMprNew(SqlSessionTemplate sqlSession, int mno) throws MypageException {
+		Member member = sqlSession.selectOne("HappyMember.searchMprMprNew", mno);
+		
+		if(member == null) {
+			throw new MypageException("현자기소개와 신청된 자기소개를 찾을 수 없습니다.");
+		}
+		return member;
+	}
+	
 	//자기소개 수정1 - 회원상태 1,2
 	@Override
 	public int updateIntroduce1(SqlSessionTemplate sqlSession, Member oldLoginUser) throws MypageException {
 		int result1 = sqlSession.update("HappyMember.updateIntroduce1", oldLoginUser);
 		/*System.out.println("회원번너너너너너너넌호 : " + oldLoginUser.getMno());
-		System.out.println("자기소개 : " + oldLoginUser.getMprNew());
-		System.out.println("정보 : " + result);*/
+		System.out.println("자기소개 : " + oldLoginUser.getMprNew());*/
+		System.out.println("dao1 : " + result1);
 		
 		if(result1 < 0) {
 			throw new MypageException("자기소개 수정 실패");
@@ -205,7 +216,7 @@ public class HappymemberDaoImpl implements HappymemberDao{
 	@Override
 	public int updateIntroduce2(SqlSessionTemplate sqlSession, Member oldLoginUser) throws MypageException {
 		int result2 = sqlSession.update("HappyMember.updateIntroduce2", oldLoginUser);
-		
+		System.out.println("dao2 : " + result2);
 		if(result2 < 0) {
 			throw new MypageException("자기소개 수정 실패");
 		}
@@ -398,6 +409,10 @@ public class HappymemberDaoImpl implements HappymemberDao{
 	public List<FundHistory> selectNanumMno(SqlSessionTemplate sqlSession, FundHistory fs) throws MypageException {
 		 List<FundHistory> nanumMnoList = sqlSession.selectList("HappyMember.selectNanumMno", fs);
 		 
+		 if(nanumMnoList == null) {
+			 throw new MypageException("후원한 나눔두리 목록이 존재하지 않습니다.");
+		 }
+		 
 		return nanumMnoList;
 	}
 
@@ -407,6 +422,10 @@ public class HappymemberDaoImpl implements HappymemberDao{
 		Funding ftype = sqlSession.selectOne("HappyMember.selectFtype", f);
 		System.out.println(ftype);
 		
+		if(ftype == null) {
+			throw new MypageException("후원한 펀딩 구분을 알 수 없습니다.");
+		}
+		
 		return ftype;
 	}
 
@@ -415,8 +434,22 @@ public class HappymemberDaoImpl implements HappymemberDao{
 	public int insertCrowdfundingLetter(SqlSessionTemplate sqlSession, Letter l) throws MypageException {
 		int result = sqlSession.insert("HappyMember.insertCrowdfundingLetter", l);
 		
+		if(result < 0) {
+			throw new MypageException("크라운드 펀딩 감사편지를 보내지 못했습니다.");
+		}
+		
 		return result;
 	}
+
+	//단체 감사편지 중복체크
+	@Override
+	public int letterCheck(SqlSessionTemplate sqlSession, Letter l) throws MypageException {
+		int count = sqlSession.selectOne("HappyMember.letterCheck", l);
+	
+		return count;
+	}
+
+	
 
 
 	

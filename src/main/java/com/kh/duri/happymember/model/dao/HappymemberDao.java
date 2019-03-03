@@ -50,10 +50,12 @@ public interface HappymemberDao {
 	//배송현황 목록 조회
 	List<DeliveryDetail> selectDeliveryList(SqlSessionTemplate sqlSession, Member m, PageInfo pi) throws MypageException;
 
+	//자기소개 수정 전 현재 자기소개 내용 불러오기(세션으로 가져오면 안되서..ㅠㅠ)
+	Member searchMprMprNew(SqlSessionTemplate sqlSession, int mno) throws MypageException;
+	
 	//자기소개 수정
 	int updateIntroduce1(SqlSessionTemplate sqlSession, Member oldLoginUser)throws MypageException;
 	int updateIntroduce2(SqlSessionTemplate sqlSession, Member oldLoginUser)throws MypageException;
-	
 	
 	//물품후원 목록 개수 조회
 	int selectItemDonateCount(SqlSessionTemplate sqlSession, Member m) throws MypageException;
@@ -102,6 +104,11 @@ public interface HappymemberDao {
 
 	//크라우드 펀딩 단체 감사편지 보내기
 	int insertCrowdfundingLetter(SqlSessionTemplate sqlSession, Letter l) throws MypageException;
+
+	//단체 감사편지 중복체크
+	int letterCheck(SqlSessionTemplate sqlSession, Letter l) throws MypageException;
+
+	
 
 
 

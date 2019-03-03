@@ -118,8 +118,10 @@
 		<br><br><br><br><br><br><br>
 		<div>
 			<h1 class="h1">※ 증빙서류를 재 제출해주세요</h1><br>
+			
 		</div>
 	<form id="uploadForm" action="proofDocumentUpload.happy" method="post" encType="multipart/form-data">	
+		<input type="hidden" name="photoOrigin" value="${proofDocument.achangename }"/>
 		<div style="margin-left: 290px;">
 				<div class="fields" style="margin:10px">
 					<div class="two field" style="width: 210px; float: left;">

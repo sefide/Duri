@@ -134,7 +134,8 @@ input, select{
 			내 공고 목록
 			<span>홈 &gt; 마이페이지 &gt; 내 공고 목록</span>
 		</div> -->
-<form id="updatePrForm" action="updateIntroduce.happy">	
+<form id="updatePrForm" action="updateIntroduce.happy" method="post">
+	<input type="hidden" value="${member.mprNew}" id="mprNew"/>
 		<div class="titNavi">
 			<div style="float: left;"><h1><i class="chevron right icon"></i>자기소개 수정</h1></div>
 			<span>마이페이지 &gt; 자기소개 수정</span>
@@ -146,7 +147,7 @@ input, select{
    	<div class="field" style="margin:10px" style="float:left">
         <div class="field" >
         <label></label><br>
-   			<textarea name="memo" cols="174" rows="10" style="resize:none" placeholder="입력하신 자기소개는 정기후원 게시판에서 보여집니다." readonly>${loginUser.mpr }</textarea>
+   			<textarea cols="174" rows="10" style="resize:none" placeholder="입력하신 자기소개는 정기후원 게시판에서 보여집니다." readonly>${member.mpr}</textarea>
         </div>
     </div>
     
@@ -177,36 +178,54 @@ input, select{
 	}
 	
 	function updatePr(){
-		swal({
-			  title: "자기소개 수정을 신청 하시겠습니까?",
-			  text: "",
-			  icon: "warning",
-			  buttons: true,
-			  dangerMode: true,
-			})
-			.then((willDelete) => {
-			  if (willDelete) {
-			    swal({
-			    	title: "수정 신청되었습니다.",
-					text: "관리자의 승인을 기다려주세요!(1~7일 소요됩니다)",
-			     	icon: "success",
-			    }).then(function(){
-			    	$("#updatePrForm").submit();
-			    });
-			    
-			  } else {
-			    swal("자기소개 수정신청을 취소합니다.");
-			  }
-			});
-	}
-	
-	
-	/*function updatePr(){
-		alert("자기소개 수정이 신청되었습니다. 승인을 기다려 주세요!");
-		$("#updatePrForm").submit();
-		console.log("성공");
+		if($("#mprNew").value == null){
+			swal({
+				title: "",
+				text: "자기소개 수정을 신청 하시겠습니까?",
+				icon: "warning",
+				buttons: true,
+				dangerMode: true,
+				})
+				.then((willDelete) => {
+				  if (willDelete) {
+				    swal({
+				    	title: "수정 신청되었습니다.",
+						text: "관리자의 승인을 기다려주세요!(1~7일 소요됩니다)",
+				     	icon: "success",
+				    }).then(function(){
+				    	$("#updatePrForm").submit();
+				    });
+				    
+				  } else {
+				    swal("자기소개 수정신청을 취소합니다.");
+				  }
+				});
 		
-	} */
+			}else{
+				swal({
+					title: "다시",
+					text: "자기소개 수정 신청을 하시겠습니까?",
+					icon: "warning",
+					buttons: true,
+					dangerMode: true,
+					})
+					.then((willDelete) => {
+					  if (willDelete) {
+					    swal({
+					    	title: "수정 신청되었습니다.",
+							text: "관리자의 승인을 기다려주세요!(1~7일 소요됩니다)",
+					     	icon: "success",
+					    }).then(function(){
+					    	$("#updatePrForm").submit();
+					    });
+					    
+					  } else {
+					    swal("자기소개 수정신청을 취소합니다.");
+					  }
+					});
+			}   
+		}
+
 </script>
 </body>
 </html>
