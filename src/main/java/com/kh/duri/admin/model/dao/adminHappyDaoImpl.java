@@ -111,5 +111,16 @@ public class adminHappyDaoImpl implements adminHappyDao{
 		int result = sqlsession.update("Admin.adminAttachHappyAttach2Agree",m);
 		return result;
 	}
+	//신규행복두리 반려버튼
+	@Override
+	public int adminNewHappyMemberRefuse(SqlSessionTemplate sqlsession, adminMember m) {
+		int result = sqlsession.update("Admin.adminNewHappyMemberRefuse",m);
+		return result;
+	}
+	@Override
+	public int adminNewHappyAttachRefuse(SqlSessionTemplate sqlsession, adminMember m) {
+		int result = sqlsession.update("Admin.adminNewHappyAttachRefuse",m);
+		return result;
+	}
 
 }

@@ -197,9 +197,16 @@
 	<update id="adminNewHappyAttachAgree"  parameterType="adminMember" >
 		UPDATE ATTACHMENT SET ADATE=SYSDATE, ASTATUS='Y' WHERE A_MNO=#{a_mno} AND ADOCTYPE=1
 	</update>
+	<!-- 신규 행복두리 반려 버튼 -->
+	<update id="adminNewHappyMemberRefuse"  parameterType="adminMember" >
+		UPDATE MEMBER SET MPR=NULL WHERE MNO=#{mno}
+	</update>
+	<update id="adminNewHappyAttachRefuse"  parameterType="adminMember" >
+		UPDATE ATTACHMENT SET ADATE=NULL, AORIGINNAME='EMPTY', ACHANGENAME='EMPTY' WHERE A_MNO=#{a_mno} AND ADOCTYPE=1
+	</update>
 	<!-- 자기소개 갱신 행복두리 승인버튼 -->
 	<update id="adminMprHappyAgree"  parameterType="adminMember" >
-		UPDATE MEMBER SET MPR=MPRNEW, MPRNEW=NULL, MACCEPTDATE=SYSDATE WHERE MNO=#{mno}
+		UPDATE MEMBER SET MPR=MPRNEW, MPRNEW=NULL, MPRACCEPTDATE=SYSDATE WHERE MNO=#{mno}
 	</update>
 	<!-- 증빙서류 갱신 회원 승인 버튼 -->
 	<update id="adminAttachHappyMemberAgree"  parameterType="adminMember" >
