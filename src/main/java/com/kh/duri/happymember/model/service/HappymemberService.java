@@ -86,7 +86,8 @@ public interface HappymemberService {
 	Attachment selectProofDocument(Member m) throws MypageException;
 
 	//증빙서류 업로드(파일 이름 변경)
-	int updateProofDocumentUpload(Member m);
+	int updateProofDocumentUpload3(Member m);
+	int updateProofDocumentUpload24(Member m);
 
 	//크라운드 참여한 나눔두리 찾아오기
 	List<FundHistory> selectNanumMno(FundHistory fs) throws MypageException;
@@ -99,6 +100,8 @@ public interface HappymemberService {
 
 	//단체 감사편지 중복체크
 	int letterCheck(Letter l) throws MypageException;
+
+	
 
 	
 	

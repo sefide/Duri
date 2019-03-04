@@ -498,12 +498,24 @@ public class HappymemberController {
 			m.setOrigin(originFileName);
 			m.setChange(changeName+ext);
 			
-			int result = hs.updateProofDocumentUpload(m);
+			System.out.println("회원 상태 : " +m.getmTakeStatus() );
+			if(m.getmTakeStatus().equals("3")) {
+				System.out.println("3 기회!!");
+				int result3 = hs.updateProofDocumentUpload3(m);
+				if(result3 > 0) {
+					System.out.println("3성공!!");
+					return "redirect:proofDocument.happy";
+				}
 				
-			if(result > 0) {
-				System.out.println("성공!!");
-				return "redirect:proofDocument.happy";
+			}else {
+				int result24 = hs.updateProofDocumentUpload24(m);
+				
+				if(result24 > 0) {
+					System.out.println("24성공!!");
+					return "redirect:proofDocument.happy";
+				}
 			}
+			
 			
 		} catch (IOException e) {
 			new File(filePath = "\\" + changeName + ext).delete();

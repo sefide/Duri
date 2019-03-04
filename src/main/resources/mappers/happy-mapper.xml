@@ -314,8 +314,7 @@
 		SELECT ADATE, TO_DATE(ADATE+184) AS DDAY,(TO_DATE(TO_CHAR(SYSDATE, 'YYYYMMDD')) - TO_DATE(ADATE+184))AS FINISHDATE, ACHANGENAME 
 		FROM ATTACHMENT 
 		WHERE A_MNO = #{mno} 
-		AND ADOCTYPE = 1 
-		AND ASTATUS = 'Y'
+		AND ADOCTYPE = 1
 	</select>
 	<!-- 증빙서류 재 제출 - 후원타입 update -->
 	<update id="updateMfundType">
@@ -323,10 +322,15 @@
 		WHERE MNO = #{mno}
 	</update>
 	<!-- 증빙서류 재 제출 - 증빙서류 update -->
-	<update id="updateProofDocumentUpload">
-	UPDATE ATTACHMENT SET AORIGINNAME = #{origin}, ACHANGENAME = #{change}, ADATE = SYSDATE
-	WHERE A_MNO = #{mno} 
-	AND ADOCTYPE = 2
+	<update id="updateProofDocumentUpload3">
+		UPDATE ATTACHMENT SET AORIGINNAME = #{origin}, ACHANGENAME = #{change}, ADATE = SYSDATE 
+		WHERE A_MNO = #{mno} 
+		AND ADOCTYPE = '1'
+	</update>
+	<update id="updateProofDocumentUpload24">
+		UPDATE ATTACHMENT SET AORIGINNAME = #{origin}, ACHANGENAME = #{change}, ADATE = SYSDATE 
+		WHERE A_MNO = #{mno} 
+		AND ADOCTYPE = '2'
 	</update>
 	<!-- 물품 크라운드 참여한 나눔두리 조회하기 -->
 	<select id="selectNanumMno" resultMap="fundHistoryResultSet" parameterType="FundHistory">

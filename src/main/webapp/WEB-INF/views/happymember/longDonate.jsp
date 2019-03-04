@@ -97,7 +97,7 @@
 				
 				<c:if test="${ empty directFundList }">
 					<tr>
-						<td colspan = "6"> 정기 후원 내역이 없습니다.  </td>
+						<td colspan = "7"> 정기 후원 내역이 없습니다.  </td>
 					<tr>
 				</c:if>
 			</tbody>

@@ -94,7 +94,8 @@ public interface HappymemberDao {
 	Attachment selectProofDocument(SqlSessionTemplate sqlSession, Member m) throws MypageException;
 
 	//증빙서류 업로드(파일 이름 변경)
-	int updateProofDocumentUpload(SqlSessionTemplate sqlSession, Member m);
+	int updateProofDocumentUpload3(SqlSessionTemplate sqlSession, Member m);
+	int updateProofDocumentUpload24(SqlSessionTemplate sqlSession, Member m);
 
 	//크라운드 참여한 나눔두리 찾아오기
 	List<FundHistory> selectNanumMno(SqlSessionTemplate sqlSession, FundHistory fs) throws MypageException;
@@ -107,6 +108,8 @@ public interface HappymemberDao {
 
 	//단체 감사편지 중복체크
 	int letterCheck(SqlSessionTemplate sqlSession, Letter l) throws MypageException;
+
+	
 
 	
 

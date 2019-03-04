@@ -178,7 +178,6 @@ input, select{
 	}
 	
 	function updatePr(){
-		if($("#mprNew").value == null){
 			swal({
 				title: "",
 				text: "자기소개 수정을 신청 하시겠습니까?",
@@ -200,8 +199,8 @@ input, select{
 				    swal("자기소개 수정신청을 취소합니다.");
 				  }
 				});
-		
-			}/* else{
+		}
+			/* else{
 				swal({
 					title: "다시",
 					text: "자기소개 수정 신청을 하시겠습니까?",

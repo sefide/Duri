@@ -98,6 +98,7 @@
 			</thead>
 			<tbody>
 			<tr>
+			<c:if test="${not empty proofDocument.finishdate}">
 				<td>1</td>
 				<td>${proofDocument.adate }</td>
 				<td>${proofDocument.dday }</td>
@@ -112,12 +113,18 @@
 				<td class="d-day-plus">재 제출 기간을 넘었습니다.</td>
 				</c:otherwise>
 				</c:choose>	
+			</c:if>
+			<c:if test="${empty proofDocument.finishdate}">
+			<tr>
+				<td colspan="4">승인된 증빙서류 이력이 없습니다.</td>
+			</tr>
+			</c:if>
 			</tr>
 			</tbody>
 		</table>
 	<form id="uploadForm" action="proofDocumentUpload.happy" method="post" encType="multipart/form-data">	
 		<c:choose>
-		<c:when test="${loginUser.mTakeStatus eq '2' or loginUser.mTakeStatus eq '4' }">
+		<c:when test="${loginUser.mTakeStatus ne '1'}">
 		<br><br><br><br><br><br><br>
 		<div>
 			<h1 class="h1">※ 증빙서류를 재 제출해주세요</h1><br>	

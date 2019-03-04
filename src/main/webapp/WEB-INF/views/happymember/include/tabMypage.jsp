@@ -18,9 +18,18 @@
 
 	<script>
 	function alert(){
-		swal("정기후원 해주시는", " 나눔두리님께 감사편지를 보내보세요!")
-		.then(function(){
-			location.href="thankyouLetter.happy"
-		});
+		var mStatus = "${loginUser.mTakeStatus}";
+		if(mStatus != "3"){
+			swal("정기후원 해주시는", " 나눔두리님께 감사편지를 보내보세요!")
+			.then(function(){
+				location.href="thankyouLetter.happy"
+			});
+		}else{
+			swal("신규회원 승인 후 이용하실 수 있습니다!")
+			.then(function(){
+				location.href="mypage.happy"
+			});
+		}
+		
 	}
 	</script>
