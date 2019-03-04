@@ -41,6 +41,12 @@
 								<table class="table table-bordered">
 									<tbody>
 										<tr>
+											<td class="total" style="display: none;">회원번호</td>
+											<td id="memberno" style="display: none;">${HappyAccDetail[0].mno}</td>
+											<td class="total" style="display: none;">회원상태</td>
+											<td id="memberst" style="display: none;">${HappyAccDetail[0].mTakeStatus}</td>
+											<td class="total" style="display: none;">회원상태현황</td>
+											<td id="membernum" style="display: none;">AccNotAttach</td>
 											<td class="total">아이디</td>
 											<td>${HappyAccDetail[0].mid}</td>
 											<td class="total">생년월일</td>
@@ -101,17 +107,16 @@
                          <strong style="color: #c16624;">${HappyAccDetail[0].mName}</strong>님의 후원 필수서류
                         </h1>
              
-		
+				
             		  <div class="row">
+            		 <c:if test="${HappyAccDetail[0].mprNew!=null}">
                     <div class="col-md-6">
                         <div class="panel panel-default">
                         <div class="panel-heading">
                            	자기소개 글(원글)
                         </div>
-                       
                         <div class="panel-body">
 		                  <div class="well">
-		                        <h4>저는 집이 없어요...</h4>
 		                        <p style="height: 600px;">
 		                        <big>${HappyAccDetail[0].mpr}</big>
 		                        </p>
@@ -120,6 +125,26 @@
                         </div>
                           </div>
                     </div>
+                   </c:if>
+            		 <c:if test="${HappyAccDetail[0].mprNew==null}">
+                    <div class="col-md-12">
+                        <div class="panel panel-default">
+                        <div class="panel-heading">
+                           	자기소개 글(원글)
+                        </div>
+                        <div class="panel-body">
+		                  <div class="well">
+		                        <p style="height: 600px;">
+		                        <big>${HappyAccDetail[0].mpr}</big>
+		                        </p>
+		                    </div>
+                
+                        </div>
+                          </div>
+                    </div>
+                   </c:if>
+                    
+                    <c:if test="${HappyAccDetail[0].mprNew!=null}">
                   <div class="col-md-6">
                         <div class="panel panel-default">
                         <div class="panel-heading">
@@ -128,26 +153,32 @@
                        
                         <div class="panel-body">
 		                  <div class="well">
-		                        <h4>저는 집이 없어요...</h4>
 		                       <p style="height: 600px;">
-		                        <big>${HappyAccDetail[0].mpr}</big>
+		                        <big>${HappyAccDetail[0].mprNew}</big>
 		                        </p>
 		                    </div>
-                
                         </div>
                           </div>
                     </div>
+                </c:if>
                 </div>
+                
+                
+               
+                
+                
                 <br>
                 <br>
+                <c:if test="${HappyAccDetail[0].mprNew!=null}">
                  <button type="button" class="btn btn-light btn-lg btn-block">반려하기</button>
-		  		 <button type="button" class="btn btn-warning btn-lg btn-block">승인하기</button>
+		  		 <button type="button" class="btn btn-warning btn-lg btn-block MprAgree">승인하기</button>
+		  		 </c:if>
             	<br><br>	  
             	<br><br>		  
             		  
             		  
             		  <div class="row">
-                  
+                  	<c:if test="${HappyAccDetail[1].achangeName!='EMPTY'}">
                     <div class="col-md-6">
                         <div class="panel panel-default">
                         <div class="panel-heading">
@@ -161,7 +192,24 @@
                             </div>
                             </div>
                     </div>
+                    </c:if>
+                  	<c:if test="${HappyAccDetail[1].achangeName =='EMPTY'}">
+                    <div class="col-md-12">
+                        <div class="panel panel-default">
+                        <div class="panel-heading">
+                            	증빙 서류(원본)
+                        </div>
+                       
+                        <div class="panel-body" style="height: 700px; text-align: center;"" >
+                       	
+		                <img style="height: 650px; width: 600px;" src="resources/${HappyAccDetail[0].aFilePath}/${HappyAccDetail[0].achangeName}.jpg" onclick="OnloadImg(this.src)">
+		               
+                            </div>
+                            </div>
+                    </div>
+                    </c:if>
                     
+                    <c:if test="${HappyAccDetail[1].achangeName!='EMPTY'}">
                     <div class="col-md-6">
                         <div class="panel panel-default">
                         <div class="panel-heading">
@@ -170,18 +218,19 @@
                        
                         <div class="panel-body" style="height: 700px; text-align: center;"">
                        	
-		                <img style="height: 650px; width: 600px;" src="resources/${HappyAccDetail[0].aFilePath}/${HappyAccDetail[0].achangeName}.jpg" onclick="OnloadImg(this.src)">
-		               
+		                <img style="height: 650px; width: 600px;" src="resources/${HappyAccDetail[1].aFilePath}/${HappyAccDetail[1].achangeName}.jpg" onclick="OnloadImg(this.src)">
+		               <div id="imgName" style="display: none;">${HappyAccDetail[1].achangeName}</div>
                             </div>
                             </div>
                     </div>
+                    </c:if>
                 </div>
 	
 		<br><br><br>
-            	
+           <c:if test="${HappyAccDetail[1].achangeName!='EMPTY'}"> 	
           <button type="button" class="btn btn-light btn-lg btn-block">반려하기</button>
-		  <button type="button" class="btn btn-warning btn-lg btn-block">승인하기</button>
-           
+		  <button type="button" class="btn btn-warning btn-lg btn-block AttachAgree">승인하기</button>
+           </c:if>
            <br><br><br> 
             
              <h1 class="page-header">
@@ -350,7 +399,7 @@
                 </div>
             </div>
             <br><br>
-            <button type="button" class="btn btn-primary btn-lg btn-block" onclick="location.href='adminHappyAll.ad'">목록으로 가기</button>
+            <button type="button" class="btn btn-primary btn-lg btn-block" onclick="location.href='adminHappyAcc.ad'">목록으로 가기</button>
             <br><br>
         </div>
     </div>
@@ -377,7 +426,24 @@
   OpenWindow.document.write("<style>body{margin:0px;}</style><img src='"+url+"' width='"+win_width+"'>");
 
  }
-
+ 
+ $(".MprAgree").click(function () {
+	var Mnonum = $("#memberno").text();
+	var Statusnum = $("#memberst").text();
+	var num = $("#membernum").text();
+	
+	
+	location.href="adminMprHappyAgree.ad?Mnonum="+Mnonum+"&Statusnum="+Statusnum+"&num="+num;
+});
+ $(".AttachAgree").click(function () {
+	var Mnonum = $("#memberno").text();
+	var changName =$("#imgName").text();
+	
+	 location.href="adminAttachHappyAgree.ad?Mnonum="+Mnonum+"&changName="+changName; 
+});
+ 
+ 
+ 
 </script>
 
 </body>

@@ -78,5 +78,38 @@ public class adminHappyDaoImpl implements adminHappyDao{
 		return sqlsession.selectList("Admin.adminHappyNotAttachList");
 	}
 	
+	//신규행복두리 승인버튼
+	@Override
+	public int adminNewHappyMemberAgree(SqlSessionTemplate sqlsession, adminMember m) {
+		int result = sqlsession.update("Admin.adminNewHappyMemberAgree",m);
+		return result;
+	}
+	@Override
+	public int adminNewHappyAttachAgree(SqlSessionTemplate sqlsession, adminMember m) {
+		int result = sqlsession.update("Admin.adminNewHappyAttachAgree",m);
+		return result;
+	}
+	//자기소개 갱신 행복두리 승인버튼
+	@Override
+	public int adminMprHappyAgree(SqlSessionTemplate sqlsession, adminMember m) {
+		int result = sqlsession.update("Admin.adminMprHappyAgree",m);
+		return result;
+	}
+	//증빙서류 갱신 회원 승인 버튼
+	@Override
+	public int adminAttachHappyMemberAgree(SqlSessionTemplate sqlsession, adminMember m) {
+		int result = sqlsession.update("Admin.adminAttachHappyMemberAgree",m);
+		return result;
+	}
+	@Override
+	public int adminAttachHappyAttach1Agree(SqlSessionTemplate sqlsession, adminMember m) {
+		int result = sqlsession.update("Admin.adminAttachHappyAttach1Agree",m);
+		return result;
+	}
+	@Override
+	public int adminAttachHappyAttach2Agree(SqlSessionTemplate sqlsession, adminMember m) {
+		int result = sqlsession.update("Admin.adminAttachHappyAttach2Agree",m);
+		return result;
+	}
 
 }

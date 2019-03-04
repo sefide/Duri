@@ -103,6 +103,41 @@ public class adminHappyServiceImpl implements adminHappyService{
 		
 		return list;
 	}
+
+	
+	//신규행복두리 승인버튼
+	@Override
+	public int adminNewHappyMemberAgree(adminMember m) {
+		int result = ahd.adminNewHappyMemberAgree(sqlsession,m);
+		return result;
+	}
+	@Override
+	public int adminNewHappyAttachAgree(adminMember m) {
+		int result = ahd.adminNewHappyAttachAgree(sqlsession,m);
+		return result;
+	}
+	//자기소개 갱신 행복두리 승인버튼
+	@Override
+	public int adminMprHappyAgree(adminMember m) {
+		int result = ahd.adminMprHappyAgree(sqlsession,m);
+		return result;
+	}
+	//증빙서류 갱신 회원 승인 버튼
+	@Override
+	public int adminAttachHappyMemberAgree(adminMember m) {
+		int result = ahd.adminAttachHappyMemberAgree(sqlsession,m);
+		return result;
+	}
+	@Override
+	public int adminAttachHappyAttach1Agree(adminMember m) {
+		int result = ahd.adminAttachHappyAttach1Agree(sqlsession,m);
+		return result;
+	}
+	@Override
+	public int adminAttachHappyAttach2Agree(adminMember m) {
+		int result = ahd.adminAttachHappyAttach2Agree(sqlsession,m);
+		return result;
+	}
 	
 
 	

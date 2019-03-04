@@ -49,6 +49,8 @@
 								<table class="table table-bordered">
 									<tbody>
 										<tr>
+											<td class="total" style="display: none;">회원번호</td>
+											<td id="NewNumber" style="display: none;">${HappyDetail.mno}</td>
 											<td class="total">아이디</td>
 											<td>${HappyDetail.mid}</td>
 											<td class="total">생년월일</td>
@@ -152,7 +154,7 @@
 		<br><br><br>
           <c:if test="${HappyDetail.mTakeStatus == 3 }"> 	
           <button type="button" class="btn btn-light btn-lg btn-block">반려하기</button>
-		  <button type="button" class="btn btn-warning btn-lg btn-block">승인하기</button>
+		  <button type="button" class="btn btn-warning btn-lg btn-block NewAgree">승인하기</button>
            
            <br><br><br> 
           </c:if> 
@@ -356,6 +358,14 @@
   OpenWindow.document.write("<style>body{margin:0px;}</style><img src='"+url+"' width='"+win_width+"'>");
 
  }
+ 
+ 
+ $(".NewAgree").click(function () {
+	var newno = $("#NewNumber").text();
+	console.log("newno: "+newno);
+	location.href="adminNewHappyAgree.ad?newno="+newno;
+	
+});
 
 </script>
 </body>

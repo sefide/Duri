@@ -187,7 +187,7 @@ $(function () {
             
               
            
-            <div class="row">
+            <div class="row" id="beforePrint" >
                 <div class="col-md-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
@@ -278,7 +278,17 @@ $(function () {
     <jsp:include page="include/admintableFooter.jsp" />
     <script type="text/javascript">
     		function Refundprint() {
-				print();
+    			var inbody = document.body.innerHTML;
+    			window.onbeforeprint = function () {
+					document.body.innerHTML = document.getElementById('beforePrint').innerHTML;
+					
+				}
+    			window.onafterprint = function () {
+					document.body.innerHTML = inbody;
+				}
+				 window.print();
+
+
 			}
     		
     		

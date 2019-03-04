@@ -33,6 +33,18 @@ public interface adminHappyDao {
 	List<adminMember> adminHappyAttachList(SqlSessionTemplate sqlsession)throws ListException;
 	//행복두리 승인목록 -증빙서류 비갱신 목록
 	List<adminMember> adminHappyNotAttachList(SqlSessionTemplate sqlsession)throws ListException;
+
+	
+	
+	//신규행복두리 승인버튼
+	int adminNewHappyMemberAgree(SqlSessionTemplate sqlsession, adminMember m);
+	int adminNewHappyAttachAgree(SqlSessionTemplate sqlsession, adminMember m);
+	//자기소개 갱신 행복두리 승인버튼
+	int adminMprHappyAgree(SqlSessionTemplate sqlsession, adminMember m);
+	//증빙서류 갱신 회원 승인 버튼
+	int adminAttachHappyMemberAgree(SqlSessionTemplate sqlsession, adminMember m);
+	int adminAttachHappyAttach1Agree(SqlSessionTemplate sqlsession, adminMember m);
+	int adminAttachHappyAttach2Agree(SqlSessionTemplate sqlsession, adminMember m);
 	
 
 
