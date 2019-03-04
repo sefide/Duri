@@ -115,53 +115,48 @@
 			</tr>
 			</tbody>
 		</table>
+	<form id="uploadForm" action="proofDocumentUpload.happy" method="post" encType="multipart/form-data">	
+		<c:choose>
+		<c:when test="${loginUser.mTakeStatus eq '2' or loginUser.mTakeStatus eq '4' }">
 		<br><br><br><br><br><br><br>
 		<div>
-			<h1 class="h1">※ 증빙서류를 재 제출해주세요</h1><br>
-			
+			<h1 class="h1">※ 증빙서류를 재 제출해주세요</h1><br>	
 		</div>
-	<form id="uploadForm" action="proofDocumentUpload.happy" method="post" encType="multipart/form-data">	
 		<input type="hidden" name="photoOrigin" value="${proofDocument.achangename }"/>
 		<div style="margin-left: 290px;">
-				<div class="fields" style="margin:10px">
-					<div class="two field" style="width: 210px; float: left;">
-						<select class="ui search dropdown" name="fundType">
-							<option value="" selected disabled>증빙서류 유형선택</option>
-							<option value="기초생활수급자">기초생활수급자</option>
-							<option value="소년소녀가장">소년소녀가장</option>
-							<option value="한부모가정">한부모가정</option>
-						</select>
+			<div class="fields" style="margin:10px">
+				<div class="two field" style="width: 210px; float: left;">
+					<select class="ui search dropdown" name="fundType">
+						<option value="" selected disabled>증빙서류 유형선택</option>
+						<option value="기초생활수급자">기초생활수급자</option>
+						<option value="소년소녀가장">소년소녀가장</option>
+						<option value="한부모가정">한부모가정</option>
+					</select>
+				</div>
+				<div style="float: left;">
+					<div class="ui input" id="file_name_textbox">
+			  			<input type="text" id="fileName" readonly>
 					</div>
-					<div style="float: left;">
-						<div class="ui input" id="file_name_textbox">
-			  				<input type="text" id="fileName" readonly>
-						</div>
-						<div class="ui input" id="file_input_box">
-							<input type="button" value="파일첨부" class="file_input_button"/>
-			  				<input name="photo" type="file" class="file_input_hidden" 
-			  				onchange="javascript:document.getElementById('fileName').value = this.value"/>
-						</div>
+					<div class="ui input" id="file_input_box">
+						<input type="button" value="파일첨부" class="file_input_button"/>
+			  			<input name="photo" type="file" class="file_input_hidden" 
+			  			onchange="javascript:document.getElementById('fileName').value = this.value"/>
 					</div>
 				</div>
-			<!-- <div>
-				<div class="ui input" id="file_name_textbox">
-	  				<input type="text" id="fileName" readonly>
-				</div>
-				
-				<div class="ui input" id="file_input_box">
-					<input type="button" value="파일첨부" class="file_input_button"/>
-	  				<input name="photo" type="file" class="file_input_hidden" 
-	  				onchange="javascript:document.getElementById('fileName').value = this.value"/>
-				</div>
-			</div> -->
+			</div>
 		</div>
 		<div class="textSilver">
-			<div onclick="upload();" id="button" class="massive ui instagram button" style="margin-top: 10px;">증빙서류 재 제출</div>
+			<div onclick="upload();" id="button" class="massive ui instagram button">증빙서류 재 제출</div>
 		</div>
+		</c:when>
+		<c:otherwise>
+		<div class="textSilver"></div>
+		</c:otherwise>
+		</c:choose>
 	</form>	
 		<br><br><br><br>
 		
-		<div id="proofDocument" align="center"><h1>증빙서류 예시</h1>
+		<div id="proofDocument" align="center"><h1>&lt;현재 증빙서류&gt;</h1>
 			<img alt="최근증빙서류 이미지" src="resources/formFiles/${proofDocument.achangename}" style="width: 600px; height: 800px;">
 		</div>
 		

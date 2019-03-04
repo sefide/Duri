@@ -187,7 +187,7 @@
                        
                         <div class="panel-body" style="height: 700px; text-align: center;"" >
                        	
-		                <img style="height: 650px; width: 600px;" src="resources/${HappyAccDetail[0].aFilePath}/${HappyAccDetail[0].achangeName}.jpg" onclick="OnloadImg(this.src)">
+		                <img style="height: 650px; width: 600px;" src="resources/${HappyAccDetail[0].aFilePath}/${HappyAccDetail[0].achangeName}" onclick="OnloadImg(this.src)">
 		               
                             </div>
                             </div>
@@ -202,7 +202,7 @@
                        
                         <div class="panel-body" style="height: 700px; text-align: center;"" >
                        	
-		                <img style="height: 650px; width: 600px;" src="resources/${HappyAccDetail[0].aFilePath}/${HappyAccDetail[0].achangeName}.jpg" onclick="OnloadImg(this.src)">
+		                <img style="height: 650px; width: 600px;" src="resources/${HappyAccDetail[0].aFilePath}/${HappyAccDetail[0].achangeName}" onclick="OnloadImg(this.src)">
 		               
                             </div>
                             </div>
@@ -218,7 +218,7 @@
                        
                         <div class="panel-body" style="height: 700px; text-align: center;"">
                        	
-		                <img style="height: 650px; width: 600px;" src="resources/${HappyAccDetail[1].aFilePath}/${HappyAccDetail[1].achangeName}.jpg" onclick="OnloadImg(this.src)">
+		                <img style="height: 650px; width: 600px;" src="resources/${HappyAccDetail[1].aFilePath}/${HappyAccDetail[1].achangeName}" onclick="OnloadImg(this.src)">
 		               <div id="imgName" style="display: none;">${HappyAccDetail[1].achangeName}</div>
                             </div>
                             </div>
