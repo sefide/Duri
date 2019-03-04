@@ -48,6 +48,10 @@ public interface adminHappyDao {
 	//신규행복두리 반려버튼
 	int adminNewHappyMemberRefuse(SqlSessionTemplate sqlsession, adminMember m);
 	int adminNewHappyAttachRefuse(SqlSessionTemplate sqlsession, adminMember m);
+	//자기소개 갱신 행복두리 반려버튼
+	int adminMprHappyRefuse(SqlSessionTemplate sqlsession, adminMember m);
+	//증빙서류 갱신 회원 반려 버튼
+	int adminAttachRefuse(SqlSessionTemplate sqlsession, adminMember m);
 	
 
 

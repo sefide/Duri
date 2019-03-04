@@ -97,7 +97,7 @@
 		FROM MEMBER M JOIN ATTACHMENT A ON (A_MNO=M.MNO)
 		WHERE M.MTYPE='H' AND M.MSTATUS='Y' AND M.MTAKESTATUS =1 
         AND A.ADATE IS NOT NULL AND M.MPRNEW IS NULL AND A.ADOCTYPE =1 
-        AND M.MPRNEW IS NULL ORDER BY MACCEPTDATE
+        AND M.MPRNEW IS NULL ORDER BY MACCEPTDATE DESC
 	</select>
 	<!-- 행복두리 [기존회원(1)/신규회원(3)] 상세페이지 (공통페이지)-->
 	<select id="adminHappyDetail" resultType="adminMember" parameterType="adminMember" >
@@ -208,6 +208,10 @@
 	<update id="adminMprHappyAgree"  parameterType="adminMember" >
 		UPDATE MEMBER SET MPR=MPRNEW, MPRNEW=NULL, MPRACCEPTDATE=SYSDATE WHERE MNO=#{mno}
 	</update>
+	<!-- 자기소개 갱신 행복두리 반려버튼 -->
+	<update id="adminMprHappyRefuse"  parameterType="adminMember" >
+		UPDATE MEMBER SET MPRNEW=NULL WHERE MNO=#{mno}
+	</update>
 	<!-- 증빙서류 갱신 회원 승인 버튼 -->
 	<update id="adminAttachHappyMemberAgree"  parameterType="adminMember" >
 		UPDATE MEMBER SET MTAKESTATUS=1 WHERE MNO=#{mno}
@@ -220,6 +224,11 @@
 		 UPDATE ATTACHMENT SET ADATE=NULL, ASTATUS='F', AORIGINNAME='EMPTY',ACHANGENAME='EMPTY' 
 		 WHERE A_MNO=#{a_mno} AND ADOCTYPE =2
 	</update>	   
+	<!-- 증빙서류 갱신 회원 승인 버튼 -->
+	<update id="adminAttachRefuse"  parameterType="adminMember" >
+		UPDATE ATTACHMENT SET ADATE=NULL, AORIGINNAME='EMPTY',ACHANGENAME='EMPTY',ASTATUS='F' 
+		WHERE A_MNO=#{a_mno} AND ADOCTYPE =2
+	</update>
 
 
 	

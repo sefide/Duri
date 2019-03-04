@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -91,7 +92,7 @@
                                             <td class="center">${row.mid}</td>
                                             <td class="center">${row.mFundtype}</td>
                                             <td class="center">${row.fValueType }</td>
-                                            <td class="center">${row.fValue}원</td>
+                                            <td class="center"><fmt:formatNumber value = "${row.fValue}" type="currency" currencySymbol=" "/>원</td>
                                             <td class="center"> <a class="btn btn-default btn-sm adminMoneyFunding">승인하러하기</a></td>
                                         </tr>
                                     </c:forEach>
