@@ -58,6 +58,10 @@ public interface boardService {
 
 	int insertWish3(Board2 b) throws BoardException;
 
+	Board2 thingDetailOne3(BoardItem bi) throws BoardException;
+
+	List<Board2> selectPercent(PageInfo pi) throws BoardException;
+
 
 
 

@@ -59,6 +59,10 @@ public interface boardDao {
 
 	int insertWish3(SqlSessionTemplate sqlSession, Board2 b) throws BoardException;
 
+	Board2 thingDetail3(SqlSessionTemplate sqlSession, BoardItem bi) throws BoardException;
+
+	List<Board2> selectPercent(SqlSessionTemplate sqlSession, PageInfo pi);
+
 
 
 

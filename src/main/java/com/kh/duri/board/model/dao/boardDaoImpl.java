@@ -145,11 +145,12 @@ public class boardDaoImpl implements boardDao {
 
 	@Override
 	public List<BoardItem> selectThingList2(SqlSessionTemplate sqlSession, PageInfo pi) {
-		int offset = (pi.getCurrentPage() - 1) * pi.getLimit();
-		RowBounds rowBounds = new RowBounds(offset, pi.getLimit());
+		//int offset = (pi.getCurrentPage() - 1) * pi.getLimit();
+		//RowBounds rowBounds = new RowBounds(offset, pi.getLimit());
 
-		List<BoardItem> th2 = sqlSession.selectList("Boards.selectThingList2", null,rowBounds);
-
+		//List<BoardItem> th2 = sqlSession.selectList("Boards.selectThingList2", null,rowBounds);
+		List<BoardItem> th2 = sqlSession.selectList("Boards.selectThingList2");
+		
 		/*
 		 * if(th == null){ throw new DonateListException("금액후원 명단을 불러올수 없습니다."); }
 		 */
@@ -329,6 +330,37 @@ public class boardDaoImpl implements boardDao {
 		 
 
 		return result;
+	}
+
+	@Override
+	public Board2 thingDetail3(SqlSessionTemplate sqlSession, BoardItem bi) throws BoardException {
+		Board2 result = sqlSession.selectOne("Boards.selectThing", bi);
+
+		System.out.println("찜하기 작성3 성공여부 : " + result);
+		
+		
+		 if(result == null) { 
+			 throw new BoardException("작성실패!"); //예외처리
+		 
+		 }
+		 
+
+		return result;
+	}
+
+	@Override
+	public List<Board2> selectPercent(SqlSessionTemplate sqlSession, PageInfo pi) {
+		List<Board2> thingDetail2 = sqlSession.selectList("Boards.selectPercent"); // 받아온 m을 이용해 mapper에서
+		// sql문 실행해서 받아온 값 저장
+
+		/*System.out.println("Dao thingDetail2 : " + thingDetail2);*/
+		
+		/*
+		* if(longDetail ==null) { throw new LoginException("로그인정보가 존재하지 않습니다."); //예외처리
+		* }
+		*/
+
+		return thingDetail2;
 	}
 
 

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
  <head>
@@ -77,39 +78,50 @@
 </div>
 
       </div>
-      	<div class="row">
-	      	<c:forEach var="th" items="${thList}">
-	      		<div class="col-md-4 ftco-animate">
-	      			<div class="cause-entry">
-	    					<a class="img" id="imgs" style="background-image: url(/duri/resources/common/images/cause-1.jpg);"></a>
-	    					
-							<form action="cloud_thing_datail.bo" name="sub1" id="moneyForm" method="POST">
-	    					<div class="text p-3 p-md-4">
-		    					<input type="hidden" name="fno" id="fno" value="${th.fno}"/>
-	    					<h3><input type="submit" id="goThDetail" value="${th.fTitle }"/></h3>
-	    						<p>'${th.mNick }' 행복두리의 사연</p>
-	    						<span class="donation-time mb-3 d-block" style="color:black;">${th.mFundType }</span>
-	                <div class="progress custom-progress-success">
-	                  <div class="progress-bar bg-primary" role="progressbar" style="width: 28%" aria-valuenow="28" aria-valuemin="0" aria-valuemax="100"></div>
-	                </div>
-	                
-	     					<a>46%</a>
-	                   		<c:forEach var="th2" items="${thList2}">
-	                   			<c:if test="${th.fno == th2.fno }">
-	  	            			<a style="float:right; font-size:18px">${th2.iName },</a>
-	  	            			
-	  	            			</c:if>
-	  	            			
-	  	            		</c:forEach>
-	  	            		
-					</form>
-	        				
-	    					</div>
-	    				</div>
-	      		</div>
-	      		</c:forEach>
+		<div class="row">
+			<c:forEach var="th" items="${thList}" varStatus="status">
+				
+				<div class="col-md-4 ftco-animate">
+					<div class="cause-entry">
+						<a class="img" id="imgs"
+							style="background-image: url(/duri/resources/common/images/cause-1.jpg);"></a>
+
+						<form action="cloud_thing_datail.bo" name="sub1" id="moneyForm"
+							method="POST">
+							<div class="text p-3 p-md-4">
+								<input type="hidden" name="fno" id="fno" value="${th.fno}" />
+								<h3>
+									<input type="submit" id="goThDetail" value="${th.fTitle }" />
+								</h3>
+								<p>'${th.mNick }' 행복두리의 사연</p>
+								<span class="donation-time mb-3 d-block" style="color: black;">${th.mFundType }</span>
+								<div class="progress custom-progress-success">
+									<div class="progress-bar bg-primary" role="progressbar"
+										style="width: 28%" aria-valuenow="28" aria-valuemin="0"
+										aria-valuemax="100"></div>
+								</div>
+								<fmt:formatNumber value = "${thList3[status.index].sumValue }" type = "number" var = "sumValueEx"/>
+								<fmt:formatNumber value = "${thList3[status.index].sum }" type = "number" var = "sumEx"/>
+									<c:set var="sum" value="${(sumValueEx/sumEx)*100}" />
+									<a><fmt:formatNumber value="${sum}" pattern=" " />%</a>
+									
+								<c:forEach var="th2" items="${thList2}" varStatus = "status2">
+									<c:if test="${th.fno eq th2.fno}">
+										<a style="float: right; font-size: 18px">${th2.iName } &nbsp;  </a>
+									</c:if>
+								</c:forEach>
+						
+									
+				
+						</form>
+
+					</div>
+				</div>
+		</div>
+	
+		</c:forEach>
 			</div>
-        </div>
+
         <div class="col text-center">
 					<div class="block-27">
 							<ul>

@@ -187,6 +187,20 @@ public class boardServiceImpl implements boardService {
 		return result;
 	}
 
+	@Override
+	public Board2 thingDetailOne3(BoardItem bi) throws BoardException {
+		Board2 thingDetail3 = bd.thingDetail3(sqlSession, bi);	//DAO로 Member 정보와 sqlSession 전송
+		
+		return thingDetail3;
+	}
+
+	@Override
+	public List<Board2> selectPercent(PageInfo pi) throws BoardException {
+		List<Board2> list = bd.selectPercent(sqlSession,pi);
+		
+		return list;
+	}
+
 
 
 
