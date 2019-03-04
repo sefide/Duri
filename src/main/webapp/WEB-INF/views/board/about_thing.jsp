@@ -26,6 +26,13 @@
   		font-size:10px;
   	}
 
+
+ #wishlist:hover{
+ 	background:white !important; 
+ 	color:orange !important;
+ 	border:2px solid orange;
+ 	cursor:pointer;
+ }
   </style>
   <body>
     
@@ -47,7 +54,16 @@
     				<h3 class="mb-4">${thingDetail.fTitle}</h3>
     				<p>“${thingDetail.fContent}"</p>
     				<p>지역  : ${thingDetail.mAddress}</p>
+    				<form action = "wishListTh.me" method="POST">
+		        		<input type="hidden" id="fno" value="${thingDetail.fno}" name="fno"/>
+		        		<input type="hidden" id="mno2" value="${sessionScope.loginUser2.mno}" name="mno2"/>
+		        		<input type="hidden" id="mNick" value="${thingDetail.mNick}" name="mNick"/>
+		        		
     				<p>남은기간  : <b>${thingDetail.fStartDate} ~ ${thingDetail.fEndDate}</b></p>
+    				<button type="submit" id="wishlist" style="font-weight:bold; border:2px solid orange; background:orange;color:white; border-radius:5px; padding:10px;">찜하기
+    				<img src="/duri/resources/common/images/pop_wishist.png" style="width:30px;height:30px"/>
+    				</button>
+    				</form>
     			</div>
     		</div>
     	</div>
@@ -65,15 +81,13 @@
               	<div class="progress custom-progress-success" style="background-color:white">
   	      			<div id="bar2" class="progress-bar" role="progressbar" style="width:43%" aria-valuenow="28" aria-valuemin="0" aria-valuemax="100"></div>
         		</div>
-        		<c:set var="th2" value=""></c:set>
-        		<!-- <script>
-        		<%for(int i = 0; i < 4; i++){%>
-        			${th2} +=  
-        		<%}%>
+        		<c:set var="th2" value="0"></c:set>
+        		<c:forEach var="ths" items="${thingDetail2}">
+        			${th2} = ${th2 + ths.fdValue};
         		
+        		</c:forEach>
         		
-        		</script> -->
-               	<strong class="number" data-number="1432805" style="font-size:20px">0</strong>
+               	<strong class="number" data-number="${th2}" style="font-size:20px">0</strong>
                 <span>190명의 나눔두리가 후원하였습니다.</span>
               </div>
             </div>

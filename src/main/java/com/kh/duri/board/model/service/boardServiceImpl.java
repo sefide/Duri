@@ -173,6 +173,20 @@ public class boardServiceImpl implements boardService {
 		return result;	
 	}
 
+	@Override
+	public int insertWish2(Board2 b) throws BoardException {
+		int result = bd.insertWish2(sqlSession,b);
+		
+		return result;	
+	}
+
+	@Override
+	public int insertWish3(Board2 b) throws BoardException {
+		int result = bd.insertWish3(sqlSession,b);
+		
+		return result;
+	}
+
 
 
 

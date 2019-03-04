@@ -55,6 +55,10 @@ public interface boardDao {
 
 	int insertWish(SqlSessionTemplate sqlSession, Board2 b) throws BoardException;
 
+	int insertWish2(SqlSessionTemplate sqlSession, Board2 b) throws BoardException;
+
+	int insertWish3(SqlSessionTemplate sqlSession, Board2 b) throws BoardException;
+
 
 
 
