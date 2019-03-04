@@ -42,7 +42,7 @@ body {
 }
 
 .form {
-	z-index: 15;
+	z-index: 0;
 	position: relative;
 	background: #FFFFFF;
 	width: 900px;
@@ -418,6 +418,92 @@ input {
 		border:1px solid white;
 	}
 	
+	/* 모달 창 : modal-물품목록, modal2-알림창 */
+/*모달의 background(window부분)*/
+.modal {
+	display: none; /* 버튼 누르기 전은 숨겨놓기 */
+	position: fixed; /* Stay in place */
+	z-index: 1; /* 뷰 위에 띄워야 하니까 1로 설정 (뷰는 0) */
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	overflow: auto; /* Enable scroll if needed */
+	background-color: rgb(0, 0, 0);
+	background-color: rgba(0, 0, 0, 0.4); /* 투명도 */
+}
+
+.modal2 {
+	display: none; 
+	position: fixed;
+	z-index: 16; 
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	overflow: auto; 
+	background-color: rgb(0, 0, 0);
+	background-color: rgba(0, 0, 0, 0.4); 
+}
+
+/*내용 */
+.modal-content {
+	background-color: #fefefe;
+	margin: 15% auto; /* 중앙정렬 */
+	padding: 20px;
+	border: 1px solid #888;
+	width: 30%;
+	height: 500px;
+}
+.modal-content2 {
+	background-color: #F9E79F;
+	margin: 15% auto; /* 중앙정렬 */
+	padding: 20px;
+	border: 1px solid #888;
+	width: 30%;
+	height: 300px;
+}
+
+input {font-size: 20px;}
+select {font-size: 15px;}
+.num {font-size: 15px;}
+p {font-size: 20px; text-align: center;}
+
+/* 닫기 버튼 */
+#close {
+	color: #aaa;
+	float: right;
+	font-size: 28px;
+	font-weight: bold;
+}
+#close2 {
+	color: #aaa;
+	float: right;
+	font-size: 28px;
+	font-weight: bold;
+}
+
+#close:hover, #close:focus {
+	color: black;
+	text-decoration: none;
+	cursor: pointer;
+}
+#close2:hover, #close2:focus {
+	color: black;
+	text-decoration: none;
+	cursor: pointer;
+}/*모달 창 끝*/
+
+
+input[type='radio']{
+		margin-top:-1px;
+		margin-right:3px;
+	}
+	
+label{
+	display : inline-block;
+}
+
 </style>
 </head>
 <body>
@@ -449,7 +535,7 @@ input {
         <div class="form-group">
           
           <a href="#" id="memJoin" class="form-recovery">회원가입</a>
-          <a href="#" class="form-recovery">Forgot Password?</a>
+          <a href="#" class="form-recovery" id="forget">Forgot Password?</a>
         </div>
         <div class="form-group">
           <button id="loginBtn">LogIn</button>
@@ -591,6 +677,45 @@ input {
 			</div>
 		</div>
 	</div>
+
+
+ <div id="myModal" class="modal" >
+ 
+	<!-- 내용 -->
+	<div class="modal-content">
+		<!-- 닫기 버튼 -->
+		<span id="close">&times;</span>       
+                                                       
+		<h2 align="center" style="color:yellowgreen; font-weight:bold">아이디/비밀번호 찾기</h2>
+		<br>
+		<div align="center">
+		<label for="ftype" style="width:40%">ID 찾기<input type="radio" id="mtype" value="mid" name="mtype" style="margin:0px;width:10%"></label>
+		<label for="ftype" style="width:40%">Password 찾기<input type="radio" id="mtype" value="mpwd" name="mtype" style="margin:0px;width:10%"></label>
+		</div>
+		<div id="itemsList" style="height: 200px;">
+			<!-- 왼쪽 세로 물품 -->
+			<form action="getDelivery.happy" id ="getDeliveryForm">
+		<div class="form-group" id="nick">
+          <label for="userId">NickName</label>
+          <input type="text" id="mNick" name="mNick" required="required"/>
+        </div>
+        <div class="form-group" id="id" style="display:none">
+          <label for="userId">ID</label>
+          <input type="text" id="mid3" name="mid3" required="required"/>
+        </div>
+        <div class="form-group">
+          <label for="userPwd">email</label>
+          <input type="email" id="emails" name="emails" required="required"/>
+        </div>
+         <div class="form-group">
+          <button id="findBtn">찾기</button>
+        </div>
+			</form>
+		<br><br><br>
+
+</div>
+</div>
+</div>
 
 
 	<script
@@ -801,7 +926,91 @@ input {
 		   
   }
 		
+	$("#forget").click(function(){
+		
+		$("#myModal").css("display", "block");
+	
+	});
 
+
+	$("#close").click(function(){
+		$("#myModal").css("display", "none");
+	});
+
+	
+	
+	var mtype = null;
+	 $("input[type=radio]").click(function () {
+		    if($(this).prop("checked")) {  
+		    	mtype=$(this).val();
+		    	if($(this).val()=="mid"){
+		    		mtype=$(this).val();
+		    		console.log(mtype);
+					$("#nick").show();
+					$("#id").hide();
+	
+		    	}else{
+		    		mtype=$(this).val();
+		    		console.log(mtype);
+		    		$("#nick").hide();
+					$("#id").show();
+		    		
+		    			
+		    			
+		    		}
+		    	}
+		});
+	 
+	 
+	 var pwd = "";
+	 $("#findBtn").click(function(){
+		
+		 if(mtype=="mid"){
+			 var nick = document.getElementById("mNick").value;
+			 var email = document.getElementById("emails").value;
+			 console.log(nick);
+				 $.ajax({
+						url:"findId.me",
+						type:"get",
+						data:{mNickName:nick,email:email},
+						success:function(data){
+							console.log("성공!");
+							alert("회원님의 아이디는 " + data + " 입니다.");
+
+						},
+						error:function(){
+							
+						}
+						});
+			 
+		 }else{
+			 var id = document.getElementById("mid3").value;
+			 var email = document.getElementById("emails").value;
+			 console.log(id);
+			 $.ajax({
+					url:"sendEmail.me",
+					type:"post",
+					data:{email:email},
+					success:function(data){
+						console.log("성공!");
+						 swal("이메일로 임시 비밀번호를 발급하였습니다.", {
+			        	      icon: "success",
+			        	    }).then(function(){
+			        			pwd = data;
+								location.href = "updateMyInfo3.me?mid="+id + "&mpwd="+pwd;
+			        	    })
+				
+					},
+					error:function(){
+						
+					}
+					});
+
+			 
+		 }
+	 })
+
+	 
 
 
 

@@ -8,6 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import com.kh.duri.board.model.exception.BoardException;
 import com.kh.duri.board.model.exception.DonateListException;
 import com.kh.duri.board.model.vo.Board;
+import com.kh.duri.board.model.vo.Board2;
 import com.kh.duri.board.model.vo.BoardItem;
 import com.kh.duri.board.model.vo.PageInfo;
 import com.kh.duri.member.model.vo.Member;
@@ -47,6 +48,12 @@ public interface boardDao {
 	int selectTotalMoney(SqlSessionTemplate sqlSession, Member m);
 
 	int selectTotalCount(SqlSessionTemplate sqlSession, Member m);
+
+	int moneyCountTwo(SqlSessionTemplate sqlSession, Board moneyDetail);
+
+	int selectMno(SqlSessionTemplate sqlSession, String nick);
+
+	int insertWish(SqlSessionTemplate sqlSession, Board2 b) throws BoardException;
 
 
 

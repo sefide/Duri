@@ -8,6 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import com.kh.duri.board.model.exception.BoardException;
 import com.kh.duri.board.model.exception.DonateListException;
 import com.kh.duri.board.model.vo.Board;
+import com.kh.duri.board.model.vo.Board2;
 import com.kh.duri.board.model.vo.BoardItem;
 import com.kh.duri.member.model.vo.Member;
 import com.kh.duri.board.model.vo.PageInfo;
@@ -46,6 +47,12 @@ public interface boardService {
 	int selectTotalMoney(Member m);
 
 	int selectTotalCount(Member m);
+
+	int moneyCountTwo(Board moneyDetail);
+
+	int selectMno(String nick);
+
+	int insertWish(Board2 b) throws BoardException;
 
 
 

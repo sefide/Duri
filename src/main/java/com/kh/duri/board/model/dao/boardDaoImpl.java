@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.kh.duri.board.model.exception.BoardException;
 import com.kh.duri.board.model.exception.DonateListException;
 import com.kh.duri.board.model.vo.Board;
+import com.kh.duri.board.model.vo.Board2;
 import com.kh.duri.board.model.vo.BoardItem;
 import com.kh.duri.member.model.vo.Member;
 import com.kh.duri.board.model.vo.PageInfo;
@@ -84,6 +85,7 @@ public class boardDaoImpl implements boardDao {
 		List<Board> bh = sqlSession.selectList("Boards.selectMoneyList", null,rowBounds);
 		/*List<Board> bc= sqlSession.selectList("Boards.selectFundMoneyCulValue2",null,rowBounds);*/
 
+
 		if (bh == null) {
 			throw new DonateListException("금액후원 명단을 불러올수 없습니다.");
 		}
@@ -91,6 +93,7 @@ public class boardDaoImpl implements boardDao {
 		/*System.out.println("Dao Point 객체 : " + bh.size());
 		System.out.println("Dao Point 총객체 : " + bh);
 		System.out.println("Dao Point 총객체 : " + bc);*/
+
 		return bh;
 	}
 
@@ -231,8 +234,8 @@ public class boardDaoImpl implements boardDao {
 		int listCount = sqlSession.selectOne("Point.selectFundMoneyCulValue",moneyDetail);
 
 		System.out.println("모든 후원금액 개수 : " + listCount);
-		
 
+		
 		return listCount;
 	}
 
@@ -256,6 +259,44 @@ public class boardDaoImpl implements boardDao {
 		
 
 		return listCount;
+	}
+
+	@Override
+	public int moneyCountTwo(SqlSessionTemplate sqlSession, Board moneyDetail) {
+		int listCount = sqlSession.selectOne("Boards.selectMoneyCount",moneyDetail);
+		
+
+		System.out.println("모든 후원금액 개수 : " + listCount);
+		
+
+		return listCount;
+	}
+
+	@Override
+	public int selectMno(SqlSessionTemplate sqlSession, String nick) {
+		int listCount = sqlSession.selectOne("Boards.selectMno",nick);
+		
+
+		System.out.println("모든 후원금액 개수 : " + listCount);
+		
+
+		return listCount;
+	}
+
+	@Override
+	public int insertWish(SqlSessionTemplate sqlSession, Board2 b) throws BoardException {
+		int result = sqlSession.insert("Boards.insertWish", b);
+
+		System.out.println("찜하기 작성 성공여부 : " + result);
+		
+		
+		 if(result == 0) { 
+			 throw new BoardException("작성실패!"); //예외처리
+		 
+		 }
+		 
+
+		return result;
 	}
 
 

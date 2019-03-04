@@ -32,6 +32,12 @@
   		font-size:10px;
   	}
  
+ #wishlist:hover{
+ 	background:white !important; 
+ 	color:orange !important;
+ 	border:2px solid orange;
+ 	cursor:pointer;
+ }
   </style>
   <body>
     
@@ -63,9 +69,19 @@
     			<div class="col-md-6 pl-md-5 ftco-animate">
     				<h2 class="mb-4">'${moneyDetail.mNick }' 행복두리님의 사연</h2>
     				<h3 class="mb-4">${moneyDetail.fTitle }</h3>
-    				 <p>${moneyDetail.fContent}</p>
+    				<p>${moneyDetail.fContent}</p>
     				<p>지역  : ${moneyDetail.mAddress }</p>
+    				<form action = "wishList.me" method="POST">
+		        		<input type="hidden" id="fno" value="${moneyDetail.fno}" name="fno"/>
+		        		<input type="hidden" id="mno2" value="${sessionScope.loginUser2.mno}" name="mno2"/>
+		        		<input type="hidden" id="mNick" value="${moneyDetail.mNick}" name="mNick"/>
+        	  	
     				<p>남은기간  : <b>${moneyDetail.fStartDate } ~ ${moneyDetail.fEndDate }</b></p>
+    				<button type="submit" id="wishlist" style="font-weight:bold; border:2px solid orange; background:orange;color:white; border-radius:5px; padding:10px;">찜하기
+    				<img src="/duri/resources/common/images/pop_wishist.png" style="width:30px;height:30px"/>
+    				</button>
+    				
+    				</form>	
     			</div>
     		</div>
     	</div>
@@ -78,7 +94,7 @@
             <div class="block-18 color-1 align-items-stretch">
               <div class="text">
               <c:set var="sum" value="${(b1*100)/moneyDetail.fValue}"/>
-        
+            
               	<span>현재 모금 금액 : <b><fmt:formatNumber value = "${b1}" type="currency" currencySymbol=" "/>원</b></span>
 				<span>총 목표금액 : <b><fmt:formatNumber value = "${moneyDetail.fValue}" type="currency" currencySymbol=" "/>원</b></span>
 
@@ -90,7 +106,7 @@
 					</div>
         		<!-- </div> -->
                	<%-- <strong class="number" style="font-size:20px"><fmt:formatNumber value = "${b1}" type="currency" currencySymbol=" "/>원</strong> --%>
-                <span>190명의 나눔두리가 후원하였습니다.</span>
+                <span>${b2} 명의 나눔두리가 후원하였습니다.</span>
               </div>
             </div>
           </div>

@@ -149,6 +149,35 @@ public class MemberDaoImpl implements MemberDao {
 	}
 
 
+	@Override
+	public String findId(SqlSessionTemplate sqlSession,Member m) throws LoginException {
+		String mid = sqlSession.selectOne("Member.findId",m); 
+		System.out.println(mid);
+		 if(mid == null) { 
+			 throw new LoginException("작성실패!"); //예외처리
+		 
+		 }
+		return mid;
+	}
+
+
+	@Override
+	public int updatePassword(SqlSessionTemplate sqlSession, Member m) throws LoginException {
+		int result = sqlSession.insert("Member.updatePass",m);
+		
+		System.out.println("행복두리 비밀번호 찾기 성공여부 : " + result);
+
+		
+		 if(result == 0) { 
+			 throw new LoginException("작성실패!"); //예외처리
+		 
+		 }
+		 
+
+		return result;
+	}
+
+
 	
 
 }

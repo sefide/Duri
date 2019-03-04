@@ -61,11 +61,18 @@
               <div class="text">
               	<span>총 나눔두리 후원액</span>
 
-
                 <br><br>
               	<div class="progress custom-progress-success" style="background-color:white">
   	      			<div id="bar2" class="progress-bar" role="progressbar" style="width:43%" aria-valuenow="28" aria-valuemin="0" aria-valuemax="100"></div>
         		</div>
+        		<c:set var="th2" value=""></c:set>
+        		<!-- <script>
+        		<%for(int i = 0; i < 4; i++){%>
+        			${th2} +=  
+        		<%}%>
+        		
+        		
+        		</script> -->
                	<strong class="number" data-number="1432805" style="font-size:20px">0</strong>
                 <span>190명의 나눔두리가 후원하였습니다.</span>
               </div>

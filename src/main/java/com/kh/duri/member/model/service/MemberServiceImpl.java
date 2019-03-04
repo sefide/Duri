@@ -112,6 +112,20 @@ public class MemberServiceImpl implements MemberService {
 		return result;	
 	}
 
+	@Override
+	public String findCheck(Member m) throws LoginException {
+		String result = md.findId(sqlSession,m);
+		
+		return result;	
+	}
+
+	@Override
+	public int updatePassword(Member m) throws LoginException {
+		int result = md.updatePassword(sqlSession,m);
+		
+		return result;	
+	}
+
 
 
 	

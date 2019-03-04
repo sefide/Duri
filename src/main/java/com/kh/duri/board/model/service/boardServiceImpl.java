@@ -13,6 +13,7 @@ import com.kh.duri.board.model.dao.boardDao;
 import com.kh.duri.board.model.exception.BoardException;
 import com.kh.duri.board.model.exception.DonateListException;
 import com.kh.duri.board.model.vo.Board;
+import com.kh.duri.board.model.vo.Board2;
 import com.kh.duri.board.model.vo.BoardItem;
 import com.kh.duri.member.model.vo.Member;
 import com.kh.duri.board.model.vo.PageInfo;
@@ -146,6 +147,30 @@ public class boardServiceImpl implements boardService {
 		int listCount = bd.selectTotalCount(sqlSession,m);
 		
 		return listCount;
+	}
+
+	
+	@Override
+	public int moneyCountTwo(Board moneyDetail) {
+		int listCount = bd.moneyCountTwo(sqlSession,moneyDetail);
+		
+		return listCount;
+	}
+
+	
+	//회원번호 받아오기
+	@Override
+	public int selectMno(String nick) {
+		int listCount = bd.selectMno(sqlSession,nick);
+		
+		return listCount;
+	}
+
+	@Override
+	public int insertWish(Board2 b) throws BoardException {
+		int result = bd.insertWish(sqlSession,b);
+		
+		return result;	
 	}
 
 

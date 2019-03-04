@@ -1,6 +1,5 @@
 package com.kh.duri.board.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,6 +16,7 @@ import com.kh.duri.board.model.exception.BoardException;
 import com.kh.duri.board.model.exception.DonateListException;
 import com.kh.duri.board.model.service.boardService;
 import com.kh.duri.board.model.vo.Board;
+import com.kh.duri.board.model.vo.Board2;
 import com.kh.duri.board.model.vo.BoardItem;
 import com.kh.duri.board.model.vo.PageInfo;
 import com.kh.duri.board.model.vo.Pagination;
@@ -144,12 +144,16 @@ public class BoardController {
 			   b.setFno(happyMoneyFno);
 			   System.out.println("happyMoneyFno : " + happyMoneyFno);
 		   }   
+		   
 		System.out.println("Board : "+b);		
 		Board moneyDetail = null; 	
 		moneyDetail = bs.moneyDetailOne(b); //받아온 아이디와 비밀번호로 로그인 정보 조회		
 		int b1 =  bs.moneyCountOne(moneyDetail);
+		int b2 =  bs.moneyCountTwo(moneyDetail);
+		
 		session.setAttribute("moneyDetail", moneyDetail);	//세션에 뿌려주기	
 		session.setAttribute("b1", b1);	//세션에 뿌려주기	
+		session.setAttribute("b2", b2);	//세션에 뿌려주기	
 		mv.setViewName("redirect:moneyDetail.bo"); //위처럼 redirect로 뷰페이지이름연결할거랑 똑같음			
 		return mv;
 
@@ -302,6 +306,46 @@ public class BoardController {
 		return mv;
 
 	}
+	
+	
+	
+	// 펀딩글 작성2(행복두리)
+		@RequestMapping("wishList.me")
+		public ModelAndView wishList(Board2 b, ModelAndView mv, HttpSession session) {
+
+			try {
+				System.out.println("Board2 : " + b);
+				String nick = b.getmNick();
+				
+				int mno = bs.selectMno(nick);
+				
+				b.setMno(mno);
+				
+				int writeCloud2 = 0;
+
+				writeCloud2 = bs.insertWish(b); // 물품 종류, 개수 insert
+				
+				if ( writeCloud2 > 0) {
+					System.out.println("내사연페이지로 이동");
+					mv.setViewName("redirect:wish.bo"); // 위처럼 redirect로 뷰페이지이름연결할거랑 똑같음
+
+				}
+
+			} catch (BoardException e) {
+				System.out.println("실패!");
+
+			}
+
+			return mv;
+
+		}
+	
+	
+		
+	@RequestMapping("wish.bo")
+	public String wish() {
+		return "Nanummember/mypage/mypage_likefund";
+	}	
 
 	@RequestMapping("writeCloud_page.bo")
 	public String eunji10() {
