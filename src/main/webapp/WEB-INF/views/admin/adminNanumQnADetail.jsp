@@ -223,6 +223,7 @@ td {
 					$('textarea').prop('readonly', true);					
 				}			
 			});
+			location.href = "adminNanumQnA.ad" ; 
 			}
 
       

@@ -9,7 +9,7 @@
 
 
 <%@ include file="../include/common.jsp" %>
-<title> 나눔두리 마이페이지</title>
+<title> 나눔두리 마이페이지 - 행복두리 편지</title>
 <%@ include file="../../common/css.jsp" %>
 <style>
 .mb50 {
@@ -30,25 +30,26 @@
 /* 	margin-left: 20px;
 	margin-right: 20px;   */
 }
-	table {
-		width : 96%;
+	table {		
 		margin : 0 auto;
 		color : #434343;
 		border-top : 4px solid #FE9D35; 
 		text-align:center;	
 		margin-bottom: 10px;
 	}
-	th{				
-		color :  rgba(250, 143, 61);
-		background : #FFEDBF;
-		font-weight: bold;
-		font-size: 17px;
+	th{						
+		background : rgba(200,200,200,0.5);
+		font-weight: bold; 
+	}
+	tr:hover{
+		cursor: pointer;
+		background: rgba(230,230,230,0.3);
 	}
 	tr{
-		height : 50px;
+		height : 60px;
 	}
-	td{
-		font-size: 16px;
+	tr, td, th {
+		text-align : center;
 	}
 	.categotyBtn{
 		width: 80px;
@@ -56,20 +57,24 @@
 		text-align: center;
 		display: table-cell;
         vertical-align: middle; 
-		background-color: #FFEDBF;  
-		color: #FE9D35;
+		background-color: rgba(200,200,200,0.5);
 		font-weight:bold;
 		cursor:pointer;
-		text-align: center;
-		
+		text-align: center;	
 	}
-.categotyBtn:hover{
-		color:  rgb(50, 147, 63);
+	.categotyBtn:hover{
+		color:  #FE9D35;
 	}
-
-tr:hover{
-		cursor: pointer;
-		background : #f2f1ed;
+	p {
+    margin: 0 0 1em;
+    line-height: 1.4285em;
+	}
+	#bar1 {
+    width: 98%;
+    margin: 0% auto;
+    border-bottom: 1px solid #B8B8B8;
+    height: 10px;
+    margin-top: 15px;
 	}
 </style>
 </head>
@@ -78,12 +83,18 @@ tr:hover{
 <%@ include file="../include/header.jsp" %>
 <br><br><br><br>	
 		<div class="contBox inner" id="fundIng" >
-				<%@ include file="../include/tabMypage.jsp"%>
+			<%@ include file="../include/tabMypage.jsp"%>
 				
 			<!-- 진행중인 정기후원 편지 -->
+			<br>
 			<div class="tableArea" id="fundIngDiv">
 				<div id="myTitle"><i class="envelope icon"></i></i>진행 중인 정기 행복두리 편지</div>
-				<div style="width: 96%; margin: 0 auto;">
+				<p>"<c:out value="${ sessionScope.loginUser2.mName }"/>"님이 정기후원 하고있는 행복두리 편지입니다.<br>
+				행복두리의 감사한 마음을 글로 볼 수 있습니다. <br>
+				예쁜 마음을 한 번 더 읽어 주세요.
+				</p>
+				<br>
+				<div style=" margin: 0 auto;">
 				<div id="fundIngBtn" class="categotyBtn" onclick="fundIng()" style="margin-right: 30px; color: green;">진행중</div>
 				<div id="fundEndBtn" class="categotyBtn" onclick="fundEnd()">종료</div>
 				</div>
@@ -143,11 +154,16 @@ tr:hover{
 					</div>
 				</div>
 			</div>
-
+			
 			<!-- 종료된 정기후원 편지 -->
 			<div class="tableArea" id="fundEndDiv"  style="display: none;">
 				<div id="myTitle"><i class="envelope icon"></i></i>종료된 정기 행복두리 편지</div>
-				<div style="width: 96%; margin: 0 auto;">
+				<p>"<c:out value="${ sessionScope.loginUser2.mName }"/>"님이 정기후원했던 행복두리 편지입니다.<br>
+				행복두리의 감사한 마음을 글로 볼 수 있습니다. <br>
+				예쁜 마음을 한 번 더 읽어 주세요.
+				</p>
+				<br>
+				<div style=" margin: 0 auto;">
 				<div id="fundIngBtn" class="categotyBtn" onclick="fundIng()" style="margin-right: 30px;">진행중</div>
 				<div id="fundEndBtn" class="categotyBtn" onclick="fundEnd()">종료</div>
 				</div>
@@ -207,11 +223,18 @@ tr:hover{
 					</div>
 				</div>
 			</div>
-
+			
+			<div id="bar1"></div>
+			
 			<!-- 금액 크라우드 편지  -->
 			<div class="tableArea" id="moneyDiv">
 				<div id="myTitle"><i class="envelope outline icon"></i> 금액 크라우드펀딩 행복두리 편지</div>
-				<div style="width: 96%; margin: 0 auto;">
+				<p>"<c:out value="${ sessionScope.loginUser2.mName }"/>"님이 후원했던 금액 크라우드 펀딩의 행복두리 편지입니다.<br>
+				행복두리의 감사한 마음을 글로 볼 수 있습니다. <br>
+				예쁜 마음을 한 번 더 읽어 주세요.
+				</p>
+				<br>
+				<div style="margin: 0 auto;">
 				<div id="moneyBtn" class="categotyBtn" onclick="moneyLetter()" style="margin-right: 30px; color: green;">금액</div>
 				<div id="itemBtn" class="categotyBtn" onclick="itemLetter()">물품</div>
 				</div>
@@ -276,7 +299,12 @@ tr:hover{
 			<!-- 물품 크라우드 편지  -->
 			<div class="tableArea" id="itemDiv" style="display: none; ">
 				<div id="myTitle"><i class="envelope outline icon"></i> 물품 크라우드펀딩 행복두리 편지</div>
-				<div style="width: 96%; margin: 0 auto;">
+				<p>"<c:out value="${ sessionScope.loginUser2.mName }"/>"님이 후원했던 물품 크라우드 펀딩의 행복두리 편지입니다.<br>
+				행복두리의 감사한 마음을 글로 볼 수 있습니다. <br>
+				예쁜 마음을 한 번 더 읽어 주세요.
+				</p>
+				<br>
+				<div style=" margin: 0 auto;">
 				<div id="moneyBtn" class="categotyBtn" onclick="moneyLetter()" style="margin-right: 30px;">금액</div>
 				<div id="itemBtn" class="categotyBtn" onclick="itemLetter()">물품</div>
 				</div>

@@ -9,7 +9,7 @@
 
 
 <%@ include file="../include/common.jsp" %>
-<title> 나눔두리 마이페이지</title>
+<title> 나눔두리 마이페이지 - 하고싶은 후원</title>
 <%@ include file="../../common/css.jsp" %>
 <style>
 .mb50 {
@@ -30,33 +30,26 @@
 /* 	margin-left: 20px;
 	margin-right: 20px;   */
 }
-	table {
-		width : 96%;
+	table {		
 		margin : 0 auto;
 		color : #434343;
 		border-top : 4px solid #FE9D35; 
 		text-align:center;	
 		margin-bottom: 10px;
-		table-layout: fixed;
 	}
-	th{				
-		color :  rgba(250, 143, 61);
-		background : #FFEDBF;
-		font-weight: bold;
-		font-size: 17px;
+	th{						
+		background : rgba(200,200,200,0.5);
+		font-weight: bold; 
+	}
+	tr:hover{
+		cursor: pointer;
+		background: rgba(230,230,230,0.3);
 	}
 	tr{
 		height : 50px;
 	}
-	td{
-		cursor : pointer;
-		font-size: 16px;
-		table-layout:fixed;
-		overflow: hidden; 
-  		text-overflow: ellipsis !important ;
- 		white-space: nowrap; 
- 		/* width: 100px;
- 		height: 20px;  */
+	tr, td, th {
+		text-align : center;
 	}
 	.categotyBtn{
 		width: 80px;
@@ -64,18 +57,24 @@
 		text-align: center;
 		display: table-cell;
         vertical-align: middle; 
-		background-color: #FFEDBF;  
-		color: #FE9D35;
+		background-color: rgba(200,200,200,0.5);
 		font-weight:bold;
 		cursor:pointer;
-		text-align: center;		
+		text-align: center;	
 	}
 	.categotyBtn:hover{
-		color:  rgb(50, 147, 63);
+		color:  #FE9D35;
 	}
-	tr:hover{
-		cursor: pointer;
-		background : #f2f1ed;
+	p {
+    margin: 0 0 1em;
+    line-height: 1.4285em;
+	}
+	#bar1 {
+    width: 98%;
+    margin: 0% auto;
+    border-bottom: 1px solid #B8B8B8;
+    height: 10px;
+    margin-top: 15px;
 	}
 </style>
 </head>
@@ -85,10 +84,16 @@
 <!-- #wrap {position:relative; width:100%;} -->
 <br><br><br><br>	
 			<div class="contBox inner">
-				<%@ include file="../include/tabMypage.jsp"%>
+			<%@ include file="../include/tabMypage.jsp"%>
+			<br>
 			<!-- 찜한 정기행복두리  -->
 			<div class="tableArea">
 				<div id="myTitle"><i class="heart icon"></i>보고싶은 정기 행복두리</div>
+				<p>"<c:out value="${ sessionScope.loginUser2.mName }"/>"님이 찜한 후원입니다.<br>
+				다시 한번 더 보고싶은 행복두리들입니다. <br>
+				많은 행복두리에게 빛나는 마음을 널리 퍼트려 주세요.
+				</p>
+				<br>
 				<table>
 					<thead>
 						<tr>
@@ -146,19 +151,26 @@
 				</div>
 			</div>
 			
+			<div id="bar1"></div>
+			
 			<!-- 찜한 금액 크라우드 펀딩 -->
 			<div class="tableArea" id="MoneyCloud" style="display : block;">
 				<div id="myTitle"><i class="heart icon"></i>보고싶은 금액 크라우드 펀딩</div>
-				<div style="width: 96%; margin: 0 auto;">
-				<div  id="mBtn" class="categotyBtn" onclick="MoneyCloud();" style="margin-right: 30px; color: green;">금액</div>
+				<p>"<c:out value="${ sessionScope.loginUser2.mName }"/>"님이 찜한 후원입니다.<br>
+				다시 한번 더 보고싶은 금액 크라우드 펀딩 입니다. <br>
+				도음이 많이 필요한 행복두리에게 소중한 마음을 선물해주세요.
+				</p>
+				<br>
+				<div style="margin: 0 auto;">
+				<div  id="mBtn" class="categotyBtn" onclick="MoneyCloud();" style="margin-right: 30px; color: #FE9D35;">금액</div>
 				<div  id="iBtn" class="categotyBtn" onclick="ItemCloud();">물품</div>
 				</div>
 				<table>
-					<thead>
+				<thead>
 						<tr>
-							<th style="width: 25%;">행복두리</th>
-							<th style="width: 80%;">크라우드 펀딩 제목</th>
-							<th style="width: 15%;">찜한 일시</th>								
+							<th style='width: 25%;'>행복두리</th>
+							<th style='width: 60%;'>크라우드 펀딩 제목</th>
+							<th style='width: 15%;'>찜한 일시</th>								
 						</tr>
 					</thead>
 					<tbody>
@@ -179,20 +191,19 @@
 							</c:if>
 							<c:if test="${ pi2.currentPage > 1 }">
 								<c:url var="blistBack" value="mypageLikefund.nanum">
-									<c:param name="currentPage" value="${ pi2.currentPage - 1}"/>
+									<c:param name="currentPage2" value="${ pi2.currentPage - 1}"/>
 								</c:url>
 								<li><a href="${ blistBack }">&lt;</a></li>
 							</c:if>
-
-							<c:forEach var="p" begin="${ pi2.startPage }" end="${ pi2.endPage }">
-								<c:if test="${ p == pi2.currentPage }">
-									<li class="active"><a class="active" href="${ blistCheck }">${ p }</a></li>
+							<c:forEach var="p2" begin="${ pi2.startPage }" end="${ pi2.endPage }">
+								<c:if test="${ p2 == pi2.currentPage }">
+									<li class="active"><a class="active" href="${ blistCheck }">${ p2 }</a></li>
 								</c:if>
-								<c:if test="${ p != pi2.currentPage }">
+								<c:if test="${ p2 != pi2.currentPage }">
 									<c:url var="blistCheck" value="mypageLikefund.nanum">
-										<c:param name="currentPage" value="${p}"/>									
+										<c:param name="currentPage2" value="${p2}"/>									
 									</c:url>
-									 <li><a href="${ blistCheck }">${ p }</a></li> 									
+									 <li><a href="${ blistCheck }">${ p2 }</a></li> 									
 								</c:if>
 							</c:forEach>
 							
@@ -201,7 +212,7 @@
 							</c:if>
 							<c:if test="${ pi2.currentPage < pi2.maxPage }">
 								<c:url var="blistEnd" value="mypageLikefund.nanum">
-									<c:param name="currentPage" value="${ pi2.currentPage + 1}"/>
+									<c:param name="currentPage2" value="${ pi2.currentPage + 1}"/>
 								</c:url>
 								<li><a href="${ blistEnd }">&gt;</a></li>
 							</c:if>						
@@ -213,7 +224,12 @@
 			<!-- 찜한 물품 크라우드 펀딩 -->
 			<div class="tableArea" id="ItemCloud" style="display: none;">
 				<div id="myTitle"><i class="heart icon"></i>보고싶은 물품 크라우드 펀딩</div>
-				<div style="width: 96%; margin: 0 auto;">
+				<p>"<c:out value="${ sessionScope.loginUser2.mName }"/>"님이 찜한 후원입니다.<br>
+				다시 한번 더 보고싶은 물품 크라우드 펀딩 입니다. <br>
+				도음이 많이 필요한 행복두리에게 소중한 마음을 선물해주세요.
+				</p>
+				<br>
+				<div style=" margin: 0 auto;">
 				<div  id="mBtn" class="categotyBtn" onclick="MoneyCloud();" style="margin-right: 30px;">금액</div>
 				<div  id="iBtn" class="categotyBtn" onclick="ItemCloud();">물품</div>
 				</div>
@@ -221,7 +237,7 @@
 					<thead>
 						<tr>
 							<th style="width: 25%;">행복두리</th>
-							<th style="width: 80%;">크라우드 펀딩 제목</th>
+							<th style="width: 60%;">크라우드 펀딩 제목</th>
 							<th style="width: 15%;">찜한 일시</th>								
 						</tr>
 					</thead>
@@ -243,20 +259,20 @@
 							</c:if>
 							<c:if test="${ pi3.currentPage > 1 }">
 								<c:url var="blistBack" value="mypageLikefund.nanum">
-									<c:param name="currentPage" value="${ pi3.currentPage - 1}"/>
+									<c:param name="currentPage3" value="${ pi3.currentPage - 1}"/>
 								</c:url>
 								<li><a href="${ blistBack }">&lt;</a></li>
 							</c:if>
 
-							<c:forEach var="p" begin="${ pi3.startPage }" end="${ pi3.endPage }">
-								<c:if test="${ p == pi3.currentPage }">
-									<li class="active"><a class="active" href="${ blistCheck }">${ p }</a></li>
+							<c:forEach var="p3" begin="${ pi3.startPage }" end="${ pi3.endPage }">
+								<c:if test="${ p3 == pi3.currentPage }">
+									<li class="active"><a class="active" href="${ blistCheck }">${ p3 }</a></li>
 								</c:if>
-								<c:if test="${ p != pi3.currentPage }">
+								<c:if test="${ p3 != pi3.currentPage }">
 									<c:url var="blistCheck" value="mypageLikefund.nanum">
-										<c:param name="currentPage" value="${p}"/>									
+										<c:param name="currentPage3" value="${p3}"/>									
 									</c:url>
-									 <li><a href="${ blistCheck }">${ p }</a></li> 									
+									 <li><a href="${ blistCheck }">${ p3 }</a></li> 									
 								</c:if>
 							</c:forEach>
 							
@@ -265,7 +281,7 @@
 							</c:if>
 							<c:if test="${ pi3.currentPage < pi3.maxPage }">
 								<c:url var="blistEnd" value="mypageLikefund.nanum">
-									<c:param name="currentPage" value="${ pi3.currentPage + 1}"/>
+									<c:param name="currentPage3" value="${ pi3.currentPage + 1}"/>
 								</c:url>
 								<li><a href="${ blistEnd }">&gt;</a></li>
 							</c:if>						
@@ -288,7 +304,7 @@
 			success:function(data){
 				 $("#MoneyCloud").show(); 
 				 $("#ItemCloud").hide();
-				 $("#mBtn").css("color","green");
+				 $("#mBtn").css("color","#FE9D35");
 			},
 			error:function(status){
 				console.log(status);
@@ -305,7 +321,7 @@
 			success:function(data){
 				 $("#MoneyCloud").hide(); 
 				 $("#ItemCloud").show();
-				 $("#ItemCloud").find("#iBtn").css("color","green");					 
+				 $("#ItemCloud").find("#iBtn").css("color","#FE9D35");					 
 			},
 			error:function(status){
 				console.log(status);
