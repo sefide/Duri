@@ -42,5 +42,8 @@ public interface adminHappyService {
 	int adminAttachHappyMemberAgree(adminMember m);
 	int adminAttachHappyAttach1Agree(adminMember m);
 	int adminAttachHappyAttach2Agree(adminMember m);
+	//신규행복두리 반려버튼
+	int adminNewHappyMemberRefuse(adminMember m);
+	int adminNewHappyAttachRefuse(adminMember m);
 	
 }

@@ -45,6 +45,9 @@ public interface adminHappyDao {
 	int adminAttachHappyMemberAgree(SqlSessionTemplate sqlsession, adminMember m);
 	int adminAttachHappyAttach1Agree(SqlSessionTemplate sqlsession, adminMember m);
 	int adminAttachHappyAttach2Agree(SqlSessionTemplate sqlsession, adminMember m);
+	//신규행복두리 반려버튼
+	int adminNewHappyMemberRefuse(SqlSessionTemplate sqlsession, adminMember m);
+	int adminNewHappyAttachRefuse(SqlSessionTemplate sqlsession, adminMember m);
 	
 
 

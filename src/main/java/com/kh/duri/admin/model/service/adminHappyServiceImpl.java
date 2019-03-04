@@ -138,6 +138,18 @@ public class adminHappyServiceImpl implements adminHappyService{
 		int result = ahd.adminAttachHappyAttach2Agree(sqlsession,m);
 		return result;
 	}
+	//신규행복두리 반려버튼
+	@Override
+	public int adminNewHappyMemberRefuse(adminMember m) {
+		int result = ahd.adminNewHappyMemberRefuse(sqlsession,m);
+		return result;
+	}
+
+	@Override
+	public int adminNewHappyAttachRefuse(adminMember m) {
+		int result = ahd.adminNewHappyAttachRefuse(sqlsession,m);
+		return result;
+	}
 	
 
 	

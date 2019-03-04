@@ -141,7 +141,7 @@
                         
 
 
-						<img style="height: 650px; width: 600px;" src="resources/${HappyDetail.aFilePath}/${HappyDetail.achangeName}.jpg" onclick="OnloadImg(this.src)">
+						<img style="height: 650px; width: 600px;" src="resources/${HappyDetail.aFilePath}/${HappyDetail.achangeName}" onclick="OnloadImg(this.src)">
 
 
 						
@@ -153,7 +153,7 @@
 	
 		<br><br><br>
           <c:if test="${HappyDetail.mTakeStatus == 3 }"> 	
-          <button type="button" class="btn btn-light btn-lg btn-block">반려하기</button>
+          <button type="button" class="btn btn-light btn-lg btn-block NewRefuse">반려하기</button>
 		  <button type="button" class="btn btn-warning btn-lg btn-block NewAgree">승인하기</button>
            
            <br><br><br> 
@@ -364,6 +364,12 @@
 	var newno = $("#NewNumber").text();
 	console.log("newno: "+newno);
 	location.href="adminNewHappyAgree.ad?newno="+newno;
+	
+});
+ $(".NewRefuse").click(function () {
+	var newno = $("#NewNumber").text();
+	console.log("newno: "+newno);
+	location.href="adminNewHappyRefuse.ad?newno="+newno;
 	
 });
 

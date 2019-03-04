@@ -170,7 +170,7 @@
                 <br>
                 <br>
                 <c:if test="${HappyAccDetail[0].mprNew!=null}">
-                 <button type="button" class="btn btn-light btn-lg btn-block">반려하기</button>
+                 <button type="button" class="btn btn-light btn-lg btn-block MprRefuse">반려하기</button>
 		  		 <button type="button" class="btn btn-warning btn-lg btn-block MprAgree">승인하기</button>
 		  		 </c:if>
             	<br><br>	  
@@ -187,7 +187,7 @@
                        
                         <div class="panel-body" style="height: 700px; text-align: center;"" >
                        	
-		                <img style="height: 650px; width: 600px;" src="resources/${HappyAccDetail[0].aFilePath}/${HappyAccDetail[0].achangeName}.jpg" onclick="OnloadImg(this.src)">
+		                <img style="height: 650px; width: 600px;" src="resources/${HappyAccDetail[0].aFilePath}/${HappyAccDetail[0].achangeName}" onclick="OnloadImg(this.src)">
 		               
                             </div>
                             </div>
@@ -200,9 +200,9 @@
                             	증빙 서류(원본)
                         </div>
                        
-                        <div class="panel-body" style="height: 700px; text-align: center;"" >
+                        <div class="panel-body" style="height: 700px; text-align: center;" >
                        	
-		                <img style="height: 650px; width: 600px;" src="resources/${HappyAccDetail[0].aFilePath}/${HappyAccDetail[0].achangeName}.jpg" onclick="OnloadImg(this.src)">
+		                <img style="height: 650px; width: 600px;" src="resources/${HappyAccDetail[0].aFilePath}/${HappyAccDetail[0].achangeName}" onclick="OnloadImg(this.src)">
 		               
                             </div>
                             </div>
@@ -216,9 +216,9 @@
                             	증빙 서류(갱신서류)
                         </div>
                        
-                        <div class="panel-body" style="height: 700px; text-align: center;"">
+                        <div class="panel-body" style="height: 700px; text-align: center;">
                        	
-		                <img style="height: 650px; width: 600px;" src="resources/${HappyAccDetail[1].aFilePath}/${HappyAccDetail[1].achangeName}.jpg" onclick="OnloadImg(this.src)">
+		                <img style="height: 650px; width: 600px;" src="resources/${HappyAccDetail[1].aFilePath}/${HappyAccDetail[1].achangeName}" onclick="OnloadImg(this.src)">
 		               <div id="imgName" style="display: none;">${HappyAccDetail[1].achangeName}</div>
                             </div>
                             </div>
@@ -435,6 +435,14 @@
 	
 	location.href="adminMprHappyAgree.ad?Mnonum="+Mnonum+"&Statusnum="+Statusnum+"&num="+num;
 });
+/*   $(".MprRefuse").click(function () {
+	var Mnonum = $("#memberno").text();
+	var Statusnum = $("#memberst").text();
+	var num = $("#membernum").text();
+	
+	
+	location.href="adminMprHappyRefuse.ad?Mnonum="+Mnonum+"&Statusnum="+Statusnum+"&num="+num;
+});  */
  $(".AttachAgree").click(function () {
 	var Mnonum = $("#memberno").text();
 	var changName =$("#imgName").text();
