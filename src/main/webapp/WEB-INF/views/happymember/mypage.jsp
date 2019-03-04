@@ -197,6 +197,7 @@
 			        //제목,내용 길이 제한
 					var title = (data.itemDonateList[i].ftitle).substring(0, 10);
 					var content = (data.itemDonateList[i].fcontent).substring(0, 30);
+					var content2 = content.replace("<br>"," ");
 					var item = (data.itemDonateList[i].fitemname).substring(0, 8);
 					var itemDatail = data.itemDonateList[i].fno;
 					console.log("물품후원 글상세 : " + itemDatail);
@@ -210,7 +211,7 @@
 				}
 				
 				if(data.itemDonateList[i].fcontent.length > 30){
-					itemTbodyHtml.push('<td><a href="cloud_thing_datail.bo?itemDatail='+itemDatail+'">'+content+'...</a></td>');
+					itemTbodyHtml.push('<td><a href="cloud_thing_datail.bo?itemDatail='+itemDatail+'">'+content2+'...</a></td>');
 				}else{
 					itemTbodyHtml.push('<td><a href="cloud_thing_datail.bo?itemDatail='+itemDatail+'">'+data.itemDonateList[i].fcontent+'</a></td>');
 				}	
@@ -320,7 +321,8 @@
 			        endDate = ed.getFullYear() + '-' + ('0' + (ed.getMonth() + 1)).slice(-2) + '-' + ('0' + (ed.getDate())).slice(-2);
 			        //제목,내용 길이 제한
 					var title = (data.moneyDonateList[i].ftitle).substring(0, 10);
-					var content = (data.moneyDonateList[i].fcontent).substring(0, 30);
+					var content = (data.moneyDonateList[i].fcontent).substring(0, 30)
+					var content2 = content.replace("<br>"," ");
 					var moneyDatail = data.moneyDonateList[i].fno;
 					console.log("금액후원글 번호 : " + moneyDatail);
 					
@@ -334,7 +336,7 @@
 				
 				
 				if(data.moneyDonateList[i].fcontent.length > 30){
-					moneyTbodyHtml.push('<td><a href="cloud_money_datail.bo?moneyDatail='+moneyDatail+'">'+content+'...</a></td>');
+					moneyTbodyHtml.push('<td><a href="cloud_money_datail.bo?moneyDatail='+moneyDatail+'">'+content2+'...</a></td>');
 				}else{
 					moneyTbodyHtml.push('<td><a href="cloud_money_datail.bo?moneyDatail='+moneyDatail+'">'+data.moneyDonateList[i].fcontent+'</a></td>');
 				}

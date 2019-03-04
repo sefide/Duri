@@ -201,7 +201,7 @@ input, select{
 				  }
 				});
 		
-			}else{
+			}/* else{
 				swal({
 					title: "다시",
 					text: "자기소개 수정 신청을 하시겠습니까?",
@@ -224,7 +224,7 @@ input, select{
 					  }
 					});
 			}   
-		}
+		} */
 
 </script>
 </body>
