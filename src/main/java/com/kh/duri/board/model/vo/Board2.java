@@ -6,17 +6,21 @@ public class Board2 {
 	private int mno;
 	private int mno2;
 	private String mNick;
+	private int sum;
+	private int sumValue;
 	
 	
 	public Board2() {}
 
 
-	public Board2(int fno, int mno, int mno2, String mNick) {
+	public Board2(int fno, int mno, int mno2, String mNick, int sum, int sumValue) {
 		super();
 		this.fno = fno;
 		this.mno = mno;
 		this.mno2 = mno2;
 		this.mNick = mNick;
+		this.sum = sum;
+		this.sumValue = sumValue;
 	}
 
 
@@ -60,10 +64,34 @@ public class Board2 {
 	}
 
 
+	public int getSum() {
+		return sum;
+	}
+
+
+	public void setSum(int sum) {
+		this.sum = sum;
+	}
+
+
+	public int getSumValue() {
+		return sumValue;
+	}
+
+
+	public void setSumValue(int sumValue) {
+		this.sumValue = sumValue;
+	}
+
+
 	@Override
 	public String toString() {
-		return "Board2 [fno=" + fno + ", mno=" + mno + ", mno2=" + mno2 + ", mNick=" + mNick + "]";
+		return "Board2 [fno=" + fno + ", mno=" + mno + ", mno2=" + mno2 + ", mNick=" + mNick + ", sum=" + sum
+				+ ", sumValue=" + sumValue + "]";
 	}
+
+
+
 
 
 	

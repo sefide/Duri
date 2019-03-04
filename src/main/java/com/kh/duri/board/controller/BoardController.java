@@ -148,8 +148,10 @@ public class BoardController {
 		System.out.println("Board : "+b);		
 		Board moneyDetail = null; 	
 		moneyDetail = bs.moneyDetailOne(b); //받아온 아이디와 비밀번호로 로그인 정보 조회		
+       
 		int b1 =  bs.moneyCountOne(moneyDetail);//현재 모금 금액
 		int b2 =  bs.moneyCountTwo(moneyDetail); // 후원명수...
+
 		
 		session.setAttribute("moneyDetail", moneyDetail);	//세션에 뿌려주기	
 		session.setAttribute("b1", b1);	//세션에 뿌려주기	
@@ -163,7 +165,9 @@ public class BoardController {
 	//물품후원 리스트 조회
 	   @RequestMapping("thing_donate.bo")
 	   public String thingDonateList(Model model, HttpServletRequest request, HttpServletResponse response) throws DonateListException {
-	      int currentPage = 1;
+	      
+		try {
+		   int currentPage = 1;
 	      
 	      if(request.getParameter("currentPage") != null) {
 	         currentPage = Integer.parseInt(request.getParameter("currentPage"));
@@ -174,11 +178,24 @@ public class BoardController {
 			System.out.println("크라우드펀딩 물품후원  :  " + listCount);
 			List<BoardItem> thList;
 			List<BoardItem> thList2;
+
+			List<Board2> thList3;
+			
 			thList = bs.selectThingList(pi);
 			thList2 = bs.selectThingList2(pi);
+			System.out.println("controller thList2 : "+ thList2);
+			thList3 = bs.selectPercent(pi);
+			
 			model.addAttribute("thList", thList);
 			model.addAttribute("thList2", thList2);
+			model.addAttribute("thList3", thList3);
 			model.addAttribute("pi", pi);
+			
+		} catch (BoardException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 			return "board/causes2";
 
 	   }
@@ -188,7 +205,7 @@ public class BoardController {
 	//물품후원 상세조회
 	@RequestMapping("cloud_thing_datail.bo")
 	public ModelAndView thingDetail(BoardItem bi, ModelAndView mv,HttpSession session, HttpServletRequest request, HttpServletResponse response){ 
-		
+		try {
 		String itemDatail = request.getParameter("itemDatail");
 		/*System.out.println("itemDatail : " + itemDatail);*/
 		
@@ -203,18 +220,27 @@ public class BoardController {
 		
 		BoardItem thingDetail = null; 
 		List<BoardItem> thingDetail2 = null; 
+		Board2 thingDetail3 = null;
 		
 		
 		thingDetail = bs.thingDetailOne(bi); //물품펀딩글 받아오기(fundging)
 		thingDetail2 = bs.thingDetailOne2(bi);//물품만 받아오기(fundgindDetail & fundItem)
+	
+			thingDetail3 = bs.thingDetailOne3(bi);
+	
+		//물품만 받아오기(fundgindDetail & fundItem)
 			
 		session.setAttribute("thingDetail", thingDetail);
 		session.setAttribute("thingDetail2", thingDetail2);	
-			
+		session.setAttribute("thingDetail3", thingDetail3);	
+		
+		
 		mv.setViewName("redirect:thingDetail.bo"); //위처럼 redirect로 뷰페이지이름연결할거랑 똑같음
 
-
-	
+	} catch (BoardException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
 		return mv;
 	
 

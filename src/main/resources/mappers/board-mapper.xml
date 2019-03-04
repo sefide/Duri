@@ -106,6 +106,15 @@
 		<result property="dhDay" column="DHDAY"/>
 	</resultMap>
 	
+	
+	<resultMap type="com.kh.duri.board.model.vo.Board2" id="boardSS">
+	<!-- property=컬럼명, column=필드명    반드시 일치! -->
+		<id property="fno" column="FNO"></id>
+		<result property="sum" column="SUM(FDVALUE)"/>
+		<result property="sumValue" column="SUMVALUE"/>
+	</resultMap>
+	
+	
 	<!-- 금액후원 리스트 갯수 조회 -->
 	<select id="selectMoneyListCount" resultType="_int">
 		SELECT COUNT(*)
@@ -279,6 +288,30 @@
 		VALUES(SEQ_FI_NO.NEXTVAL,SYSDATE,'Y','1',#{mno},null,#{mno2})
 	</insert>
 	
+	<select id="selectThing" resultMap = "boardSS">
+		 SELECT FNO, SUM(FDVALUE), SUM(FHDITEMVALUE) AS SUMVALUE FROM (SELECT DISTINCT FNO, FDNO, FDVALUE, INO, INAME, IPRICE, FHDITEMVALUE
+	      FROM FUNDINGDETAIL FD
+	      JOIN FUNDITEM FI ON (FD.FD_INO = FI.INO )
+	        JOIN FUNDHISTORY FH ON (FH.FH_FNO = FD.FD_FNO)
+	      LEFT OUTER JOIN FUNDHISTORYDETAIL FHD ON (FHD.FHD_INO = FD.FD_INO AND FHD.FHD_FHNO = FH.FHNO)
+	      JOIN FUNDING F ON (F.FNO = FD.FD_FNO )
+	      WHERE FNO = #{fno})
+	       GROUP BY FNO
+	</select>
+	
+	<select id="selectPercent" resultMap = "boardSS" parameterType="Board2">
+		 SELECT FNO, SUM(FDVALUE), SUM(FHDITEMVALUE) AS SUMVALUE 
+		 FROM (SELECT DISTINCT FNO, FDNO, FDVALUE, INO, INAME, IPRICE, FHDITEMVALUE
+	       FROM FUNDINGDETAIL FD
+	       JOIN FUNDITEM FI ON (FD.FD_INO = FI.INO )
+	       JOIN FUNDHISTORY FH ON (FH.FH_FNO = FD.FD_FNO)
+	       LEFT OUTER JOIN FUNDHISTORYDETAIL FHD ON (FHD.FHD_INO = FD.FD_INO AND FHD.FHD_FHNO = FH.FHNO)
+	       JOIN FUNDING F ON (F.FNO = FD.FD_FNO )
+	       
+	       )
+		GROUP BY FNO
+		ORDER BY FNO
+	</select>
 	
 </mapper>
 

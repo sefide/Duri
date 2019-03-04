@@ -26,6 +26,7 @@
 		<typeAlias type="com.kh.duri.Nanummember.model.vo.QnA" alias="NanumQnA"/> 
 		<typeAlias type="com.kh.duri.board.model.vo.DirectFundHistory" alias="DirectFundHistorys"/> 
 		<typeAlias type="com.kh.duri.board.model.vo.Board" alias="Board"/>	
+		<typeAlias type="com.kh.duri.board.model.vo.Board2" alias="Board2"/>	
 		<typeAlias type="com.kh.duri.board.model.vo.BoardItem" alias="BoardItem"/>	
 		
 		<typeAlias type="com.kh.duri.happymember.model.vo.DeliveryDetail" alias="DeliveryDetail"/>

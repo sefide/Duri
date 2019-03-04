@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"  import = "com.kh.duri.member.model.vo.Member"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
  <head>
@@ -75,20 +76,15 @@
     			<div class="col-md-5 d-flex justify-content-center counter-wrap ftco-animate">
             <div class="block-18 color-1 align-items-stretch">
               <div class="text">
-              	<span>총 나눔두리 후원액</span>
-
+              	<span><b>물품후원 현황</b></span>
+				 <c:set var="sum" value="${(thingDetail3.sumValue/thingDetail3.sum)*100}"/>
                 <br><br>
-              	<div class="progress custom-progress-success" style="background-color:white">
-  	      			<div id="bar2" class="progress-bar" role="progressbar" style="width:43%" aria-valuenow="28" aria-valuemin="0" aria-valuemax="100"></div>
-        		</div>
-        		<c:set var="th2" value="0"></c:set>
-        		<c:forEach var="ths" items="${thingDetail2}">
-        			${th2} = ${th2 + ths.fdValue};
-        		
-        		</c:forEach>
-        		
-               	<strong class="number" data-number="${th2}" style="font-size:20px">0</strong>
-                <span>190명의 나눔두리가 후원하였습니다.</span>
+              	<div class="progress" style="height:30px">
+            	  	
+ 		 				<div class="progress-bar" role="progressbar" style="width: ${sum}%; font-size:15px; background-color:yellowgreen" aria-valuenow="${sum}" aria-valuemin="0" aria-valuemax="100"><fmt:formatNumber value = "${sum}" pattern = " "/>%</div>
+				</div>
+				<br>
+                <span>${thingDetail3.sum}개를 나눔두리가 후원하였습니다.</span>
               </div>
             </div>
           </div>
