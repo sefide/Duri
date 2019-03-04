@@ -62,6 +62,8 @@ public interface boardService {
 
 	List<Board2> selectPercent(PageInfo pi) throws BoardException;
 
+	List<Board2> selectNowList();
+
 
 
 

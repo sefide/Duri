@@ -121,12 +121,16 @@ public class BoardController {
 			
 
 			List<Board> moList;
+			List<Board2> moList2;
 			
+			moList = bs.selectMoneyList(pi);
+			moList2 = bs.selectNowList();	//금액후원 현재 받고 있는 금액 리스트
 			
-			moList = bs.selectMoneyList(pi);			
+			System.out.println(moList2);
 			
 			model.addAttribute("moList", moList);
-
+			model.addAttribute("moList2", moList2);
+			
 			model.addAttribute("pi", pi);
 			return "board/causes";
 

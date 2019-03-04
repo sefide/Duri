@@ -631,11 +631,12 @@ label{
 			<tr>
 			<td></td>
 				<td>
-					<select id="email">
+					<select id="selectEmail">
 							<option value="self" selected>직접입력</option>
-							<option value="naver">naver.com</option>
-							<option value="daum">daum.net</option>
-							<option value="google">google.com</option>
+							<option value="naver.com">naver.com</option>
+							<option value="daum.net">daum.net</option>
+							<option value="google.com">google.com</option>
+							<option value="nate.com">nate.com</option>
 					</select>
 				</td>
 				<td>
@@ -765,6 +766,14 @@ label{
 	function duplicationCheck(){
 		var mid2=$("#mid2").val();
 		console.log(mid2);
+		
+		  var idReg = /^[a-z]+[a-z0-9]{5,19}$/g;
+	        if( !idReg.test( $("input[name=mid]").val() ) ) {
+	            alert("아이디는 영문자로 시작하는 6~20자 영문자 또는 숫자이어야 합니다.");
+	            return;
+	        }else{
+
+	        	
 		if(mid2 == ""){
 			
 			swal("아이디를 입력해주세요!");
@@ -795,6 +804,7 @@ label{
 		return false;
 	}	
 	}
+	        }
 	
 	var mGender = null;
 	//성별 체크
@@ -1012,6 +1022,10 @@ label{
 
 	 
 
+$('#selectEmail').change(function() {
+		var state = $('#selectEmail option:selected').val();
+		$("#email2").val(state);
+	});
 
 
 

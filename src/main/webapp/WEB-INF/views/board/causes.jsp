@@ -96,9 +96,14 @@
     					<p>' ${mo.mNick} ' 행복두리의 사연</p>
     					<span class="donation-time mb-3 d-block" style="color:black">${mo.mFundType}</span>
 	                	<div class="progress custom-progress-success">
-	                    <div class="progress-bar bg-primary" role="progressbar" style="width: 40%" aria-valuenow="28" aria-valuemin="0" aria-valuemax="100"></div>
+	                	
+	                    <div class="progress-bar bg-primary" role="progressbar" style="width: ${sum}%" aria-valuenow="${sum}" aria-valuemin="0" aria-valuemax="100"></div>
 	                	</div>
-	               		<a>46%</a><a style="float:right"><fmt:formatNumber value = "${mo.fValue}" type="currency" currencySymbol=" "/>원</a>
+	                	<c:forEach var="mo2" items="${moList2}">
+	                	<c:set var="sum" value="${(mo2.sumFhValue/mo.fValue)*100}"/>
+	                	</c:forEach>
+	               		<a><fmt:formatNumber value="${sum}" pattern=" " />%</a><a style="float:right"><fmt:formatNumber value = "${mo.fValue}" type="currency" currencySymbol=" "/>원</a>
+	    				
 	    			</div>
 	    		</form>
     			</div>

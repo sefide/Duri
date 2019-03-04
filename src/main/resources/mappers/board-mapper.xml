@@ -112,6 +112,7 @@
 		<id property="fno" column="FNO"></id>
 		<result property="sum" column="SUM(FDVALUE)"/>
 		<result property="sumValue" column="SUMVALUE"/>
+		<result property="sumFhValue" column="SUM(FH.FHVALUE)"/>
 	</resultMap>
 	
 	
@@ -311,6 +312,15 @@
 	       )
 		GROUP BY FNO
 		ORDER BY FNO
+	</select>
+	
+	<select id="selectNow" resultMap = "boardSS" parameterType="Board2">
+		 SELECT SUM(FH.FHVALUE) FROM 
+		FUNDHISTORY FH
+		JOIN FUNDING F ON(F.FNO = FH.FH_FNO)
+		WHERE F.FTYPE = 'MONEY'
+		GROUP BY F.FNO
+        ORDER BY F.FNO
 	</select>
 	
 </mapper>

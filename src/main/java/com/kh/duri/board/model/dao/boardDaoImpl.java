@@ -363,6 +363,21 @@ public class boardDaoImpl implements boardDao {
 		return thingDetail2;
 	}
 
+	@Override
+	public List<Board2> selectNowList(SqlSessionTemplate sqlSession) {
+		List<Board2> thingDetail2 = sqlSession.selectList("Boards.selectNow"); // 받아온 m을 이용해 mapper에서
+		// sql문 실행해서 받아온 값 저장
+
+		/*System.out.println("Dao thingDetail2 : " + thingDetail2);*/
+		
+		/*
+		* if(longDetail ==null) { throw new LoginException("로그인정보가 존재하지 않습니다."); //예외처리
+		* }
+		*/
+
+		return thingDetail2;
+	}
+
 
 
 

@@ -63,6 +63,8 @@ public interface boardDao {
 
 	List<Board2> selectPercent(SqlSessionTemplate sqlSession, PageInfo pi);
 
+	List<Board2> selectNowList(SqlSessionTemplate sqlSession);
+
 
 
 

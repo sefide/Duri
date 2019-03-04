@@ -230,13 +230,71 @@
       <td>
      	<select align="center" name="mLeftDay" id="mLeftDay" style="width:150px; height:30px;">
      		<option disabled selected>기간선택</option>
+     		<c:choose>
+     		<c:when test="${changestart*(-1) < 15 }">
      		<option>15</option>
+     		<option disabled>30</option>
+     		<option disabled>60</option>
+     		<option disabled>90</option>
+     		<option disabled>120</option>
+     		<option disabled>150</option>
+     		<option disabled>170</option>
+     		</c:when>
+     		<c:when test="${changestart*(-1) < 30}">
+     		<option>15</option>
+     		<option>30</option>
+     		<option disabled>60</option>
+     		<option disabled>90</option>
+     		<option disabled>120</option>
+     		<option disabled>150</option>
+     		<option disabled>170</option>
+     		</c:when>
+     		<c:when test="${changestart*(-1) < 60 }">
+     		<option>15</option>
+     		<option>30</option>
+     		<option disabled>60</option>
+     		<option disabled>90</option>
+     		<option disabled>120</option>
+     		<option disabled>150</option>
+     		<option disabled>170</option>
+     		</c:when>
+     		<c:when test="${changestart*(-1) < 90 }">
+     		<option>15</option>
+     		<option>30</option>
+     		<option>60</option>
+     		<option disabled>90</option>
+     		<option disabled>120</option>
+     		<option disabled>150</option>
+     		<option disabled>170</option>
+     		</c:when>
+     		<c:when test="${changestart*(-1) < 120 }">
+     		<option>15</option>
+     		<option>30</option>
+     		<option>60</option>
+     		<option>90</option>
+     		<option disabled>120</option>
+     		<option disabled>150</option>
+     		<option disabled>170</option>
+     		</c:when>
+     		<c:when test="${changestart*(-1) < 150 }">
+     		<option disabled>15</option>
+     		<option>30</option>
+     		<option>60</option>
+     		<option>90</option>
+     		<option>120</option>
+     		<option disabled>150</option>
+     		<option disabled>170</option>
+     		</c:when>
+     		<c:when test="${changestart*(-1) < 170 }">
+     		<option disabled>15</option>
      		<option>30</option>
      		<option>60</option>
      		<option>90</option>
      		<option>120</option>
      		<option>150</option>
-     		<option>170</option>
+     		<option disabled>170</option>
+     		</c:when>
+     		</c:choose>
      	</select>
 	 </td>
 	 <td>&nbsp;<br>
@@ -378,7 +436,14 @@ var ftype = null;
 
 	}
 	
-	
+	$(document).ready(function(){
+		$("#fContent").on('keyup',function(){
+			if($(this).val.length > 200){
+				alert("200자 이상은 잘립니다!");
+				$(this).val($(this).val().substring(0,200));
+			}
+		})
+	})
 
 	
 	
