@@ -421,7 +421,8 @@ public class PaymentDaoImpl implements PaymentDao {
 	@Override
 	public int insertFundnPoint(SqlSessionTemplate sqlSession, FundHistory fh) throws FundingException {
 		int result = sqlSession.insert("Point.insertFundnPoint", fh);
-		
+
+		System.out.println("dao 나눔두리 포인트이력 업뎃 - " + fh);
 		if(result == 0) {
 			throw new FundingException("포인트 이력을 업데이트하지 못하였습니다. ");
 		}
@@ -433,7 +434,7 @@ public class PaymentDaoImpl implements PaymentDao {
 	@Override
 	public int insertFundhPoint(SqlSessionTemplate sqlSession, FundHistory fh) throws FundingException {
 		int result = sqlSession.insert("Point.insertFundhPoint", fh);
-		
+		System.out.println("dao 행복두리 포인트이력 업뎃 - " + fh);
 		if(result == 0) {
 			throw new FundingException("포인트 이력을 업데이트하지 못하였습니다. ");
 		}
