@@ -33,6 +33,7 @@ import com.kh.duri.payment.model.exception.PointHistoryException;
 import com.kh.duri.payment.model.exception.ReceiptException;
 import com.kh.duri.payment.model.exception.RefundException;
 import com.kh.duri.payment.model.service.PaymentService;
+import com.kh.duri.payment.model.vo.BoardItemValue;
 import com.kh.duri.payment.model.vo.DirectFundHist;
 import com.kh.duri.payment.model.vo.DonateReceipt;
 import com.kh.duri.payment.model.vo.FundItemDetail;
@@ -808,7 +809,19 @@ public class PaymentController {
 		
 		try {
 			HashMap<String, Object> hmap = ps.selectFundItem(bi);
+			ArrayList<BoardItemValue> totalList = (ArrayList<BoardItemValue>) hmap.get("biList");
+			double total = 0;
+			double cur = 0;
 			
+			for(int i = 0; i < totalList.size(); i++) {
+				total += Integer.parseInt(totalList.get(i).getFdValue());
+				if(totalList.get(i).getSumItemValue() != null) {
+					cur += Integer.parseInt(totalList.get(i).getSumItemValue());
+				}
+			}
+
+			double progress = Math.round((cur/total)*100);
+			model.addAttribute("progress", progress);
 			model.addAttribute("biList", hmap.get("biList"));
 			model.addAttribute("b", hmap.get("b"));
 			
@@ -822,7 +835,6 @@ public class PaymentController {
 	// 물품 후원 진행 
 	@RequestMapping("execfundItem.pm")
 	public String execfundItem(HttpServletRequest request, HttpServletResponse response, Model model, HttpSession session) {
-		System.out.println("Hello");
 		Member m = (Member)session.getAttribute("loginUser2");
 		if(m == null) {
 			return "redirect:thing_donate.bo";
@@ -838,7 +850,7 @@ public class PaymentController {
 		String ipin1;
 		String ipin2;
 		
-		/*System.out.println("fno : " + fno);
+		System.out.println("fno : " + fno);
 		System.out.println("m : " + m);
 		System.out.println("totalValue : " + totalValue);
 		System.out.println("fWriter : " + fWriter);
@@ -857,7 +869,7 @@ public class PaymentController {
 		System.out.println("itemSumPrice : ");
 		for (String i : itemSumPrice) {
 			System.out.println(i);
-		}*/
+		}
 		if(check.equals("1")) {
 			ipin1 = request.getParameter("ipin1");
 			ipin2 = request.getParameter("ipin2");

@@ -450,7 +450,7 @@
 	
 	<!-- 행복두리 새로운 소유물품 insert -->
 	<insert id = "insertHappyOwnItem">
-		INSERT INTO OWNITEM VALUES(SEQ_I_NO.NEXTVAL, #{fhd_mNo_take}, #{fhd_iNo}, #{fhdItemValue})
+		INSERT INTO OWNITEM VALUES(SEQ_O_NO.NEXTVAL, #{fhd_mNo_take}, #{fhd_iNo}, #{fhdItemValue})
 	</insert>
 	
 	<!-- 정기후원 스케줄, 오늘 후원 insert -->
