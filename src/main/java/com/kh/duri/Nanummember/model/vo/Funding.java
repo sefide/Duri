@@ -16,11 +16,12 @@ public class Funding implements java.io.Serializable{
 	private int fhValue;
 	private Date fhDate;
 	private String iName;
+	private int sum;
 	
 	public Funding() {}
 
 	public Funding(int fNo, String fType, String fTitle, String fContent, Date fWriteDate, Date fStartDate,
-			Date fEndDate, String fStatus, int fValue, int fWriter, int fhValue, Date fhDate, String iName) {
+			Date fEndDate, String fStatus, int fValue, int fWriter, int fhValue, Date fhDate, String iName, int sum) {
 		super();
 		this.fNo = fNo;
 		this.fType = fType;
@@ -35,6 +36,7 @@ public class Funding implements java.io.Serializable{
 		this.fhValue = fhValue;
 		this.fhDate = fhDate;
 		this.iName = iName;
+		this.sum = sum;
 	}
 
 	@Override
@@ -42,7 +44,7 @@ public class Funding implements java.io.Serializable{
 		return "Funding [fNo=" + fNo + ", fType=" + fType + ", fTitle=" + fTitle + ", fContent=" + fContent
 				+ ", fWriteDate=" + fWriteDate + ", fStartDate=" + fStartDate + ", fEndDate=" + fEndDate + ", fStatus="
 				+ fStatus + ", fValue=" + fValue + ", fWriter=" + fWriter + ", fhValue=" + fhValue + ", fhDate="
-				+ fhDate + ", iName=" + iName + "]";
+				+ fhDate + ", iName=" + iName + ", sum=" + sum + "]";
 	}
 
 	public int getfNo() {
@@ -148,6 +150,17 @@ public class Funding implements java.io.Serializable{
 	public void setiName(String iName) {
 		this.iName = iName;
 	}
+
+	public int getSum() {
+		return sum;
+	}
+
+	public void setSum(int sum) {
+		this.sum = sum;
+	}
+
+	
+	
 
 	
 

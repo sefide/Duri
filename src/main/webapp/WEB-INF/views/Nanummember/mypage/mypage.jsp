@@ -28,33 +28,24 @@
 	padding-bottom: 20px;
 }
 
-	table {
-		/* width : 98%; */
+	table {		
 		margin : 0 auto;
 		color : #434343;
 		border-top : 4px solid #FE9D35; 
 		text-align:center;	
 		margin-bottom: 10px;
 	}
-	th{				
-		/* color :  rgba(250, 143, 61); */
+	th{						
 		background : rgba(200,200,200,0.5);
-		/* font-weight: bold; */
-		/* font-size: 17px; */
+		font-weight: bold; 
 	}
 	tr:hover{
 		cursor: pointer;
-		/* background : #f2f1ed; */
 		background: rgba(230,230,230,0.3);
 	}
 	tr{
 		height : 60px;
 	}
-	td{
-		/* font-size: 16px; */
-	}
-/* 	tr:nth-child(even) {background:#f9f9f9;}
-	tr:nth-child(even) {background: rgba(230,230,230,0.3);} */
 	tr, td, th {
 		text-align : center;
 	}
@@ -65,7 +56,6 @@
 		display: table-cell;
         vertical-align: middle; 
 		background-color: rgba(200,200,200,0.5);
-		/* color: #FE9D35; */
 		font-weight:bold;
 		cursor:pointer;
 		text-align: center;	
@@ -76,14 +66,14 @@
 	p {
     margin: 0 0 1em;
     line-height: 1.4285em;
-}
-#bar1 {
+	}
+	#bar1 {
     width: 98%;
     margin: 0% auto;
     border-bottom: 1px solid #B8B8B8;
     height: 10px;
     margin-top: 15px;
-}
+	}
 </style>
 </head>
 
@@ -174,9 +164,7 @@
 						</div>
 				</div>
 			</div>
-			
-			<div id="bar1"></div>
-			
+
 			<!-- 진행중인 물품 크라우드 펀딩  -->
 			<div class="tableArea" id="ItemCloudIng" style="display: none; ">
 				<div id="myTitle"> <i class="hourglass half icon"></i>진행중인 물품 크라우드 펀딩</div>
@@ -258,10 +246,16 @@
 				</div>
 			</div>
 			
-
+			<div id="bar1"></div>
+			
 			<!-- 종료된 금액 크라우드 펀딩 -->
 			<div class="tableArea" id="MoneyCloudEnd" style="display : block;">
 				<div id="myTitle"><i class="hourglass end icon"></i>종료된 금액 크라우드 펀딩</div>
+				<p>"<c:out value="${ sessionScope.loginUser2.mName }"/>"님이 후원한 종료된 금액 크라우드 펀딩입니다.<br>
+				나눔두리들의 따뜻한 마음들이 차곡차곡 쌓였답니다. <br>
+				우리의 작은 마음이, 소복소복 쌓여 행복두리들의 커다란 행복이 되었습니다.
+				</p>
+				<br>
 				<div style="margin: 0 auto;">
 				<div id="emBtn" class="categotyBtn" onclick="MoneyCloudEnd()" style="margin-right: 30px; color: #FE9D35;" >금액</div>
 				<div id="eiBtn" class="categotyBtn" onclick="ItemCloudEnd()">물품</div>
@@ -338,6 +332,11 @@
 			<!-- 종료된 물품 크라우드 펀딩 -->
 			<div class="tableArea" id="ItemCloudEnd" style="display: none; ">
 				<div id="myTitle"><i class="hourglass end icon"></i>종료된 물품 크라우드 펀딩</div>
+				<p>"<c:out value="${ sessionScope.loginUser2.mName }"/>"님이 후원한 종료된 물품 크라우드 펀딩입니다.<br>
+				나눔두리들의 따뜻한 마음들이 차곡차곡 쌓였답니다. <br>
+				우리의 작은 마음이, 소복소복 쌓여 행복두리들의 커다란 행복이 되었습니다.
+				</p>
+				<br>
 				<div style="margin: 0 auto;">
 				<div id="emBtn" class="categotyBtn" onclick="MoneyCloudEnd()" style="margin-right: 30px; ">금액</div>
 				<div id="eiBtn" class="categotyBtn" onclick="ItemCloudEnd()">물품</div>

@@ -9,7 +9,7 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="../include/common.jsp" %>
-<title> 나눔두리 마이페이지</title>
+<title> 나눔두리 마이페이지 - 행복두리 편지 상세</title>
 <%@ include file="../../common/css.jsp" %>
 <style>
 .mb50 {
@@ -27,29 +27,47 @@
 	margin : 0 auto;
 	padding-top: 50px;
 	padding-bottom: 20px;
-/* 	margin-left: 20px;
-	margin-right: 20px;   */
 }
-	table {
-		width : 96%;
+	table {		
 		margin : 0 auto;
 		color : #434343;
-		border-top : 4px solid #FE9D35; 
-		border-bottom : 4px solid #FE9D35; 
+		border-top : 4px solid #FE9D35 !important; 
+		border-bottom : 4px solid #FE9D35 !important; 
 		text-align:center;	
 		margin-bottom: 10px;
+		border-color: rgba(200,200,200,0.5);
+		border: 2px;
 	}
-	th{				
-		color :  rgba(250, 143, 61);
-		background : #FFEDBF;
-		font-weight: bold;
-		font-size: 17px;
+	th{						
+		background : rgba(200,200,200,0.5);
+		font-weight: bold; 
 	}
 	tr{
-		height : 50px;
+		height : 60px;
 	}
-	td{
-		font-size: 16px;
+	tr, td, th {
+		text-align : center;
+	}
+	p {
+    margin: 0 0 1em;
+    line-height: 1.4285em;
+	}
+	#bar1 {
+    width: 98%;
+    margin: 0% auto;
+    border-bottom: 1px solid #B8B8B8;
+    height: 10px;
+    margin-top: 15px;
+	}
+	#back-btn{
+		background: #FE9D35;
+		width : 320px;
+		height : 50px;
+		border-radius : 5px;
+		text-align : center;
+		padding-top : 8px;
+		cursor : pointer;
+		margin: auto;		
 	}
 </style>
 </head>
@@ -59,10 +77,14 @@
 <br><br><br><br>
 		<div class="contBox inner">
 				<%@ include file="../include/tabMypage.jsp"%>
-			
+			<br>
 			<div class="tableArea">
-				 <c:forEach items="${letterDetailList}" var="letterDetailList">
+				<c:forEach items="${letterDetailList}" var="letterDetailList">
 				<div id="myTitle"><i class="envelope icon"></i></i> '<c:out value="${letterDetailList.mNick}"/>'행복두리의  편지</div>
+				<p> 행복두리가 정성스럽게 작성한 소중한 편지입니다.<br>
+				편지를 통해 행복두리와의 유대감을 느껴보세요.
+				</p>
+				<br>
 				<div style="width: 96%; margin: 0 auto;">
 				</div>
 				<table>				
@@ -90,9 +112,12 @@
 				</c:forEach>
 			</div>
 			
-			<center> 
-			<button onclick="location.href='mypageLetter.nanum'" class="ui orange basic button" style="font-size: 18px;">목록으로 되돌아가기</button>
-			</center>
+			
+			<div id = "back-btn" style=" ">
+				<a onclick="location.href='mypageLetter.nanum'" style="font-size: 20px;">목록으로 돌아가기</a>
+	    	</div>
+			
+			
 
 			
 		</div>	

@@ -85,11 +85,14 @@ public class NanumMemberDaoImpl implements NanumMemberDao {
 		int offset = (pi.getCurrentPage() -1 ) *pi.getLimit();
 		RowBounds rowBounds = new RowBounds(offset, pi.getLimit());		
 		List<SelectDirectFund> fundIngList = sqlSession.selectList("Nanum.selectDirectFund",m,rowBounds);
-		/*System.out.println("fundIngList"+fundIngList);*/
-		int offset2 = (pi2.getCurrentPage() -1 ) *pi2.getLimit();
+		
+		int offset2 = (pi2.getCurrentPage() -1 ) *pi2.getLimit();		
 		RowBounds rowBounds2 = new RowBounds(offset2, pi2.getLimit());		
 		List<SelectDirectFund> fundEndList = sqlSession.selectList("Nanum.selectDirectFund2",m,rowBounds2);		
+		
 		HashMap<String, List<SelectDirectFund>> fundList = new HashMap<>();
+		System.out.println("fundIngList"+fundIngList);
+		System.out.println("fundEndList"+fundEndList);	
 		fundList.put("fundIngList",fundIngList );
 		fundList.put("fundEndList",fundEndList );
 		return fundList;
