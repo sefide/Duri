@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -192,9 +192,9 @@
                                             <td class="center">${status.count}</td>
                                             <td class="center">${row.mid }</td>
                                             <td class="center">${row.dhStartDate }</td>
-                                            <td class="center">${row.dhValue}원</td>
+                                            <td class="center"><fmt:formatNumber value = "${row.dhValue}" type="currency" currencySymbol=" "/>원</td>
                                             <td class="center">${row.cnt}회</td>
-                                            <td class="center">${row.sum}원</td>
+                                            <td class="center"><fmt:formatNumber value = "${row.sum}" type="currency" currencySymbol=" "/>원</td>
                                             <c:if test="${row.dhStatus=='Y'}">
                                             <td class="center">후원중</td>
                                             </c:if>
@@ -246,7 +246,7 @@
                                             <td class="center">${row.fStartDate }</td>
                                             <td class="center">${row.fEndDate }</td>
                                             <td class="center">${row.fhDate }</td>
-                                            <td class="center">${row.fhValue }원</td>
+                                            <td class="center"><fmt:formatNumber value = "${row.fhValue }" type="currency" currencySymbol=" "/>원</td>
                                             <c:choose>
                                             	<c:when test="${row.fStatus=='ING' }">
                                             	 <td class="center">펀딩 진행중</td>

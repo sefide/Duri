@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -13,6 +14,9 @@
 	 
 	 
 <script type="text/javascript">
+function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
 //버튼
  function addBtnEvent() {
 
@@ -53,9 +57,9 @@ function refundbefore(bfPage) {
 					beforeListHtml.push('	<td class="center">' +data.adminRefundList[i].rrDate+ '</td>');
 					beforeListHtml.push('	<td class="center">' +data.adminRefundList[i].rAccount+ '</td>');
 					beforeListHtml.push('	<td class="center">' +data.adminRefundList[i].rBank+"은행"+ '</td>');
-					beforeListHtml.push('	<td class="center">' +data.adminRefundList[i].rValue+"원"+'</td>');
+					beforeListHtml.push('	<td class="center">' +numberWithCommas(data.adminRefundList[i].rValue)+"원"+'</td>');
 					beforeListHtml.push('	<td class="center"><a class="btn btn-warning btn-sm RefundComplete">환급진행하기</a></td>');
-					beforeListHtml.push('</tr>');
+					beforeListHtml.push('</tr>');	
 					}
 
 				$("#beforeList").html("");//이전틀 지우고
@@ -119,7 +123,7 @@ function refundafter(afPage) {
 					afterListHtml.push('	<td class="center">' +data.adminRefundList[i].rrDate+ '</td>');
 					afterListHtml.push('	<td class="center">' +data.adminRefundList[i].rAccount+ '</td>');
 					afterListHtml.push('	<td class="center">' +data.adminRefundList[i].rBank+"은행"+ '</td>');
-					afterListHtml.push('	<td class="center" >' +data.adminRefundList[i].rValue+"원"+'</td>');
+					afterListHtml.push('	<td class="center" >' +numberWithCommas(data.adminRefundList[i].rValue)+"원"+'</td>');
 					afterListHtml.push('	<td class="center" style="width: 100px;">환급완료</td>');
 					afterListHtml.push('</tr>');
 
