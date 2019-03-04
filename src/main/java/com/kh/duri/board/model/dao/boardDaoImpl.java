@@ -43,8 +43,8 @@ public class boardDaoImpl implements boardDao {
 			throw new DonateListException("정기후원 명단을 불러올수 없습니다.");
 		}
 
-		System.out.println("Dao Point 객체 : " + bh.size());
-		System.out.println("Dao Point 총객체 : " + bh);
+		/*System.out.println("Dao Point 객체 : " + bh.size());
+		System.out.println("Dao Point 총객체 : " + bh);*/
 		return bh;
 	}
 
@@ -53,7 +53,7 @@ public class boardDaoImpl implements boardDao {
 	public Member longDonateDetail(SqlSessionTemplate sqlSession, Member m) {
 		Member longDetail = sqlSession.selectOne("Member.selectLongList", m); // 받아온 m을 이용해 mapper에서 sql문 실행해서 받아온 값 저장
 
-		System.out.println("Dao Member : " + longDetail);
+		/*System.out.println("Dao Member : " + longDetail);*/
 
 		/*
 		 * if(longDetail ==null) { throw new LoginException("로그인정보가 존재하지 않습니다."); //예외처리
@@ -83,15 +83,17 @@ public class boardDaoImpl implements boardDao {
 		RowBounds rowBounds = new RowBounds(offset, pi.getLimit());
 
 		List<Board> bh = sqlSession.selectList("Boards.selectMoneyList", null,rowBounds);
-		//List<Board> bc= sqlSession.selectList("Boards.selectFundMoneyCulValue2",null,rowBounds);
+		/*List<Board> bc= sqlSession.selectList("Boards.selectFundMoneyCulValue2",null,rowBounds);*/
+
 
 		if (bh == null) {
 			throw new DonateListException("금액후원 명단을 불러올수 없습니다.");
 		}
 
-		System.out.println("Dao Point 객체 : " + bh.size());
+		/*System.out.println("Dao Point 객체 : " + bh.size());
 		System.out.println("Dao Point 총객체 : " + bh);
-		//System.out.println("Dao Point 총객체 : " + bc);
+		System.out.println("Dao Point 총객체 : " + bc);*/
+
 		return bh;
 	}
 
@@ -101,7 +103,7 @@ public class boardDaoImpl implements boardDao {
 		Board moneyDetail = sqlSession.selectOne("Boards.selectMoneyDetail", b); // 받아온 m을 이용해 mapper에서 sql문 실행해서 받아온 값
 																					// 저장
 
-		System.out.println("Dao Member : " + moneyDetail);
+		/*System.out.println("Dao Member : " + moneyDetail);*/
 
 		/*
 		 * if(longDetail ==null) { throw new LoginException("로그인정보가 존재하지 않습니다."); //예외처리
@@ -136,8 +138,8 @@ public class boardDaoImpl implements boardDao {
 		 * if(th == null){ throw new DonateListException("금액후원 명단을 불러올수 없습니다."); }
 		 */
 
-		System.out.println("Dao Point 객체 : " + th.size());
-		System.out.println("Dao Point 총객체 : " + th);
+		/*System.out.println("Dao Point 객체 : " + th.size());
+		System.out.println("Dao Point 총객체 : " + th);*/
 		return th;
 	}
 
@@ -152,8 +154,8 @@ public class boardDaoImpl implements boardDao {
 		 * if(th == null){ throw new DonateListException("금액후원 명단을 불러올수 없습니다."); }
 		 */
 
-		System.out.println("Dao Point 객체 : " + th2.size());
-		System.out.println("Dao Point 총객체 : " + th2);
+		/*System.out.println("Dao Point 객체 : " + th2.size());
+		System.out.println("Dao Point 총객체 : " + th2);*/
 		return th2;
 	}
 
@@ -162,7 +164,7 @@ public class boardDaoImpl implements boardDao {
 		BoardItem thingDetail = sqlSession.selectOne("Boards.selectThingDetail", bi); // 받아온 m을 이용해 mapper에서 sql문 실행해서
 																						// 받아온 값 저장
 
-		System.out.println("Dao thingDetail : " + thingDetail);
+		/*System.out.println("Dao thingDetail : " + thingDetail);*/
 
 		/*
 		 * if(longDetail ==null) { throw new LoginException("로그인정보가 존재하지 않습니다."); //예외처리
@@ -177,7 +179,7 @@ public class boardDaoImpl implements boardDao {
 		List<BoardItem> thingDetail2 = sqlSession.selectList("Boards.selectThingDetail2", bi); // 받아온 m을 이용해 mapper에서
 																								// sql문 실행해서 받아온 값 저장
 
-		System.out.println("Dao thingDetail2 : " + thingDetail2);
+		/*System.out.println("Dao thingDetail2 : " + thingDetail2);*/
 
 		/*
 		 * if(longDetail ==null) { throw new LoginException("로그인정보가 존재하지 않습니다."); //예외처리

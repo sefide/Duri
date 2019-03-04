@@ -5,7 +5,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>둘이두리 나눔두리</title>
+<title>둘이두리</title>
 <meta charset="utf-8">
 <!-- 공통 css 부분 -->
 <jsp:include page="../common/css.jsp" />

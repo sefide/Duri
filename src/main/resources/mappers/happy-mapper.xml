@@ -201,6 +201,13 @@
 		AND D.D_MNO = #{mno}
 		ORDER BY D.DDATE DESC)
 	</select>
+	<!-- //자기소개 수정 전 현재 자기소개 내용 불러오기(세션으로 가져오면 안되서..ㅠㅠ) -->
+	<select id="searchMprMprNew" resultMap="memberResultSet" parameterType="_int">
+		SELECT MPR, MPRNEW 
+		FROM MEMBER 
+		WHERE MNO = #{mno} 
+		AND MSTATUS = 'Y'
+	</select>
 	<!-- 자기소개 수정1  : 회원상태 1,2 -->
 	<update id="updateIntroduce1">
 		UPDATE MEMBER SET MPRNEW = #{mprNew}
@@ -337,6 +344,14 @@
 	<insert id="insertCrowdfundingLetter">
 		INSERT INTO LETTER VALUES(SEQ_LE_NO.NEXTVAL, #{leMnoTake}, #{leMnoGive}, #{leTitle}, #{leContent}, SYSDATE, #{leType}, DEFAULT)
 	</insert>
+	<!-- 단체 감사편지 중복체크 -->
+	<select id="letterCheck" resultType="_int">
+		SELECT COUNT(*) 
+		FROM LETTER 
+		WHERE LE_MNO_TAKE = #{leMnoTake} 
+		AND LE_MNO_GIVE = #{leMnoGive} 
+		AND LETYPE = #{leType}
+	</select>
 </mapper>
 
 

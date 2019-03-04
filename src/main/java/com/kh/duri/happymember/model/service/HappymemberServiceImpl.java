@@ -105,6 +105,14 @@ public class HappymemberServiceImpl implements HappymemberService {
 		return deliveryList;
 	}
 
+	//자기소개 수정 전 현재 자기소개 내용 불러오기(세션으로 가져오면 안되서..ㅠㅠ)
+	@Override
+	public Member searchMprMprNew(int mno) throws MypageException {
+		Member member = hd.searchMprMprNew(sqlSession, mno);
+			
+		return member;
+	}
+	
 	//자기소개 수정
 	@Override
 	public int updateIntroduce(Member oldLoginUser) throws MypageException {
@@ -113,12 +121,13 @@ public class HappymemberServiceImpl implements HappymemberService {
 		
 		int result = 0;
 		
-		if(result1 > 0 && result2 < 0) {
+		if(result1 > 0 && result2 == 0) {
 			result = 1;
-		}else if(result2 > 0 && result1 < 0) {
-			result = 2;
+			System.out.println("service result1 : " + result);
+		}else if(result2 > 0 && result1 == 0) {
+			result = 1;
+			System.out.println("service result2 : " + result);
 		}
-				
 		return result;
 	}
 
@@ -249,6 +258,16 @@ public class HappymemberServiceImpl implements HappymemberService {
 		
 		return result;
 	}
+
+	//단체 감사편지 중복체크
+	@Override
+	public int letterCheck(Letter l) throws MypageException {
+		int count = hd.letterCheck(sqlSession, l);
+		
+		return count;
+	}
+
+	
 
 	
 	

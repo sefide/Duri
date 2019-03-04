@@ -15,9 +15,9 @@
 
 <style>
 	a {color: #333;}
-	#button{text-align: center;}
-	/* .textSilver {color: silver; font-weight: 600;}
-	.textOrange {color: orange; font-weight: 600;} */
+	.button{text-align: center;}
+	.textSilver {color: silver; font-weight: 600;}
+	.textOrange {color: orange; font-weight: 600;}
 	td:hover {cursor: pointer;}
 </style>
 </head>
@@ -138,8 +138,23 @@
 		
 		<div style="height: 100px;"></div>
 		
-		<div id="button">
+		<div class="button">
+			<div style="margin-left: 320px;">
+				<div style="float: left;" class="textSilver" >&nbsp;&nbsp;&nbsp;* 내가&nbsp;</div>
+				<div style="float: left;" class="textOrange" >신청한 사연이 후원 종료되면&nbsp;</div>
+				<div style="float: left;" class="textSilver" >후원해준 나눔두리님 들께&nbsp;</div>
+				<div style="float: left;" class="textOrange" >감사편지를 보내주세요&nbsp;</div>
+				<div style="float: left;" class="textSilver" >:-)</div><br>
+			</div>
+			<div style="margin-left: 380px;">
+				<div style="float: left;" class="textSilver" >* 후원 종료 된 사연의 상세페이지로 이동하면 감사편지를 보낼 수 있어요.</div>
+			</div><br><br>
+			<c:choose>
+			<c:when test="${loginUser.mTakeStatus eq 4}"></c:when>
+			<c:otherwise>
 			<button onclick="writeCloud();" class="massive ui instagram button">사연 신청하러 가기</button>
+			</c:otherwise>
+			</c:choose>
 		</div>
 <!-- onclick="location.href='cloudWrite.happy'" -->
 </div><!--// inner E-->
