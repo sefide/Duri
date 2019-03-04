@@ -1,3 +1,5 @@
+
+
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -435,6 +437,49 @@ p {font-size: 20px; text-align: center;}
 		/**/
 	}
 	
+</script>
+<script>
+var wsUri = "ws://localhost:8181/ex/count";
+function send_message() {
+    websocket = new WebSocket(wsUri);
+    websocket.onopen = function(evt) {
+        onOpen(evt);
+    };
+
+    websocket.onmessage = function(evt) {
+        onMessage(evt);
+    };
+
+    websocket.onerror = function(evt) {
+        onError(evt);
+    };
+
+}
+
+function onOpen(evt) 
+
+{
+}
+
+function onMessage(evt) {
+	console.log("웹소켓@@@@@")
+	if(evt.data == $("input[name=mno]").val()) {
+		$("#modalBtn2").text("알림(+)")
+	} else {
+		$("#modalBtn2").text("알림(-)")
+	}
+}
+
+function onError(evt) {
+}
+
+$(document).ready(function(){
+		send_message();
+});
+
+
+
+
 </script>
 
 </body>

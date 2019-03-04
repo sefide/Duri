@@ -217,7 +217,7 @@ public class AdminHappyController {
 			
 		}
 	
-	/*	//자기소개 갱신 회원 반려 버튼
+		//자기소개 갱신 회원 반려 버튼
 		@RequestMapping("adminMprHappyRefuse.ad")
 		public String adminMprHappyRefuse(HttpServletRequest request, HttpServletResponse response,adminMember m) {
 			
@@ -231,7 +231,7 @@ public class AdminHappyController {
 			
 			return "redirect:adminHappyAccDetail.ad?Mnonum="+Mnonum+"&Statusnum="+Statusnum+"&num="+num;
 			
-		}*/
+		}
 		
 		//증빙서류 갱신 회원 승인 버튼
 		@RequestMapping("adminAttachHappyAgree.ad")
@@ -246,6 +246,20 @@ public class AdminHappyController {
 			int result1 = ahs.adminAttachHappyMemberAgree(m);
 			int result2 = ahs.adminAttachHappyAttach1Agree(m);
 			int result3 = ahs.adminAttachHappyAttach2Agree(m);
+			
+			
+			
+			return "redirect:adminHappyAcc.ad";
+			
+		}
+		//증빙서류 갱신 회원 반려 버튼
+		@RequestMapping("adminAttachRefuse.ad")
+		public String adminAttachRefuse(HttpServletRequest request, HttpServletResponse response,adminMember m) {
+			
+			int Mnonum = Integer.parseInt(request.getParameter("Mnonum"));
+			m.setA_mno(Mnonum);
+			
+			int result = ahs.adminAttachRefuse(m);
 			
 			
 			

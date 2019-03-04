@@ -224,7 +224,7 @@
 		 UPDATE ATTACHMENT SET ADATE=NULL, ASTATUS='F', AORIGINNAME='EMPTY',ACHANGENAME='EMPTY' 
 		 WHERE A_MNO=#{a_mno} AND ADOCTYPE =2
 	</update>	   
-	<!-- 증빙서류 갱신 회원 승인 버튼 -->
+	<!-- 증빙서류 갱신 회원 반려 버튼 -->
 	<update id="adminAttachRefuse"  parameterType="adminMember" >
 		UPDATE ATTACHMENT SET ADATE=NULL, AORIGINNAME='EMPTY',ACHANGENAME='EMPTY',ASTATUS='F' 
 		WHERE A_MNO=#{a_mno} AND ADOCTYPE =2
