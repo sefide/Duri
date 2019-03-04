@@ -166,7 +166,7 @@
 
 </div><!--// Wrap E-->
 </c:if>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> 
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>  -->
 <script>
 	
 	//물품후원 목록 조회
