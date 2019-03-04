@@ -227,6 +227,16 @@
 			color : #434343;
    			margin-left : 56%;
 		}
+		
+   		#barBox{
+   			background-color : rgb(240,240,240);
+   			width : 93%;
+   			height : 3em;
+   		 }
+		#progressbar{
+   		 	background-color : #FE9D35;
+   		 	font-size : 17px;
+   		 }
     </style>
 </head>
 <body>
@@ -369,6 +379,16 @@
     					<td colspan = "2" >${b.fTitle}</td>
     				</tr>
     				<tr>
+    					<th>펀딩 진행률</th>
+    					<td colspan = "2" >
+    						<div class="progress custom-progress-success" id = "barBox" >
+				    			<div id="progressbar" class="progress-bar" role="progressbar" aria-valuenow="28" aria-valuemin="0" aria-valuemax="100">
+				    				<fmt:formatNumber value = "${progress}" pattern = ""/>%
+				    			</div>
+				   			</div>
+    					</td>
+    				</tr>
+    				<tr>
     					<th>후원 기간</th>
     					<td colspan = "2" >${b.fStartDate} ~ ${b.fEndDate}</td>
     				</tr>
@@ -444,6 +464,8 @@
 		$(document).ready(function() {
 			/* 주민등록번호 입력창 숨겨두기 */
 			$(".ipin").css("display","none");
+			var percents = ${progress};
+			$("#progressbar").css("width", percents+"%");
 			
 			/* 기부금 영수증 발급 시 주민등록번호 입력창 보이기 */
 			$("input[name=sponReceip]").change(function(){   // 발급
@@ -481,12 +503,14 @@
   	  			$("#itemValue"+ thisId).text(numberWithCommas(itemPrice*itemCount));
   	  			$("#itemSumPrice"+ thisId).val(itemPrice*itemCount);
   			}
-  			
+
+  			console.log("후원갯수 선택 blur");
   			calValue();
   		});
   		
   		/* 물품 체크박스 선택 시 */
   		$(".chkItem").change(function(){
+  			console.log("체크박스 선택 ");
   			calValue();
   		});
   		
@@ -498,14 +522,14 @@
 	  			var Idlength = thisId.length;
 	  			thisId = thisId.substring(Idlength-1,Idlength);
 	  			
-	  			var value = Number($("#itemSumPrice"+thisId).val());
-	  			console.log($("#itemSumPrice"+thisId).val() + " 원 임당");
-	  			if(value == undefined){
-	  				
-	  			}else{
+	  			if($("#itemSumPrice"+thisId).val() != null){
+	  				var value = Number($("#itemSumPrice"+thisId).val());
 	  				total += value;
-	  				console.log(total);
+	  			}else {
+	  				console.log("얍 ");
+	  				$("#item"+thisId).val("0");
 	  			}
+	  			
 	  			
 			});
 			

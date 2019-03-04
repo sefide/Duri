@@ -150,6 +150,18 @@ public class adminHappyServiceImpl implements adminHappyService{
 		int result = ahd.adminNewHappyAttachRefuse(sqlsession,m);
 		return result;
 	}
+	//자기소개 갱신 행복두리 반려버튼
+	@Override
+	public int adminMprHappyRefuse(adminMember m) {
+		int result = ahd.adminMprHappyRefuse(sqlsession,m);
+		return result;
+	}
+	//증빙서류 갱신 회원 반려 버튼
+	@Override
+	public int adminAttachRefuse(adminMember m) {
+		int result = ahd.adminAttachRefuse(sqlsession,m);
+		return result;
+	}
 	
 
 	

@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 
@@ -119,7 +122,8 @@
 							<h4>정기후원 금액</h4>
 							<div class="easypiechart" id="easypiechart-blue"
 								data-percent="82">
-								<span class="percent">${Todaylist[4]}</span>
+								<span class="percent"><fmt:formatNumber value = "${Todaylist[4]}" type="currency" currencySymbol=" "/></span>
+								
 							</div>
 						</div>
 					</div>
@@ -141,7 +145,7 @@
 							<h4>펀딩후원 금액</h4>
 							<div class="easypiechart" id="easypiechart-teal"
 								data-percent="84">
-								<span class="percent">${Todaylist[6]}</span>
+								<span class="percent"><fmt:formatNumber value = "${Todaylist[6]}" type="currency" currencySymbol=" "/></span>
 							</div>
 						</div>
 					</div>
@@ -151,7 +155,7 @@
 						<div class="panel-body easypiechart-panel">
 							<h4>포인트 충전금액</h4>
 							<div class="easypiechart" id="easypiechart-red" data-percent="46">
-								<span class="percent">${Todaylist[7]}</span>
+								<span class="percent"><fmt:formatNumber value = "${Todaylist[7]}" type="currency" currencySymbol=" "/></span>
 							</div>
 						</div>
 					</div>
@@ -185,15 +189,15 @@
 										</tr>
 										<tr>
 											<td class="total">총 누적 후원 금액 </td>
-											<td>${Totallist[5]}원</td>
+											<td><fmt:formatNumber value = "${Totallist[5]}" type="currency" currencySymbol=" "/>원</td>
 										</tr>
 										<tr>
 											<td class="total">누적 정기후원 금액</td>
-											<td>${Totallist[2]}원</td>
+											<td><fmt:formatNumber value = "${Totallist[2]}" type="currency" currencySymbol=" "/>원</td>
 										</tr>
 										<tr>
 											<td class="total">누적 펀딩후원 금액</td>
-											<td>${Totallist[3]}원</td>
+											<td><fmt:formatNumber value = "${Totallist[3]}" type="currency" currencySymbol=" "/>원</td>
 										</tr>
 										<tr>
 											<td class="total">누적 후원물품 갯수</td>

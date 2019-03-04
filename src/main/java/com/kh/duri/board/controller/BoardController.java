@@ -148,8 +148,10 @@ public class BoardController {
 		System.out.println("Board : "+b);		
 		Board moneyDetail = null; 	
 		moneyDetail = bs.moneyDetailOne(b); //받아온 아이디와 비밀번호로 로그인 정보 조회		
-		int b1 =  bs.moneyCountOne(moneyDetail); //현재 모금금액 
-		int b2 =  bs.moneyCountTwo(moneyDetail); //현재 후원하는 사람의 명수
+       
+		int b1 =  bs.moneyCountOne(moneyDetail);//현재 모금 금액
+		int b2 =  bs.moneyCountTwo(moneyDetail); // 후원명수...
+
 		
 		session.setAttribute("moneyDetail", moneyDetail);	//세션에 뿌려주기	
 		session.setAttribute("b1", b1);	//세션에 뿌려주기	
@@ -171,16 +173,12 @@ public class BoardController {
 	         currentPage = Integer.parseInt(request.getParameter("currentPage"));
 	      }
 
-	      
-	         int listCount = bs.getThingListCount();
-			
-			PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
-			
+	        int listCount = bs.getThingListCount();			
+			PageInfo pi = Pagination.getPageInfo(currentPage, listCount);			
 			System.out.println("크라우드펀딩 물품후원  :  " + listCount);
-			
-
 			List<BoardItem> thList;
 			List<BoardItem> thList2;
+
 			List<Board2> thList3;
 			
 			thList = bs.selectThingList(pi);
@@ -188,8 +186,6 @@ public class BoardController {
 			System.out.println("controller thList2 : "+ thList2);
 			thList3 = bs.selectPercent(pi);
 			
-			
-
 			model.addAttribute("thList", thList);
 			model.addAttribute("thList2", thList2);
 			model.addAttribute("thList3", thList3);
@@ -202,9 +198,6 @@ public class BoardController {
 		
 			return "board/causes2";
 
-	         
-	      
-	      
 	   }
 
 	

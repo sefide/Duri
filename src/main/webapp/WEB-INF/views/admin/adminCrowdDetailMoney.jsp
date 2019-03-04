@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -150,14 +151,14 @@
 										</tr>
 										<tr>
 											<td class="total">목표 금액 </td>
-											<td>${CrowdFundInfo.fValue}원</td>
+											<td><fmt:formatNumber value = "${CrowdFundInfo.fValue}" type="currency" currencySymbol=" "/>원</td>
 										</tr>
 										<tr>
 											<td class="total">펀딩 등록 날짜</td>
 											<td>${CrowdFundInfo.fWriteDate}</td>
 										</tr>
 										<tr>
-											<td class="total" >펀딩 설정기간</td>
+											<td class="total" >펀딩 설정기간(일)</td>
 											<td id="Term">${CrowdFundInfo.fLeftDay}</td>
 										</tr>
 										

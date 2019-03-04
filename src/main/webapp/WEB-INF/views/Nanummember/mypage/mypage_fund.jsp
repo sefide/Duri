@@ -29,29 +29,26 @@
 /* 	margin-left: 20px;
 	margin-right: 20px;   */
 }
-	table {
-		width : 96%;
+	table {		
 		margin : 0 auto;
 		color : #434343;
 		border-top : 4px solid #FE9D35; 
 		text-align:center;	
 		margin-bottom: 10px;
 	}
-	th{				
-		color :  rgba(250, 143, 61);
-		background : #FFEDBF;
-		font-weight: bold;
-		font-size: 17px;
-	}
-	tr{
-		height : 50px;
-	}
-	td{
-		font-size: 16px;
+	th{						
+		background : rgba(200,200,200,0.5);
+		font-weight: bold; 
 	}
 	tr:hover{
 		cursor: pointer;
-		background : #f2f1ed;
+		background: rgba(230,230,230,0.3);
+	}
+	tr{
+		height : 60px;
+	}
+	tr, td, th {
+		text-align : center;
 	}
 	.categotyBtn{
 		width: 80px;
@@ -59,21 +56,24 @@
 		text-align: center;
 		display: table-cell;
         vertical-align: middle; 
-		background-color: #FFEDBF; 
-		/* border-top: 3px solid #FE9D35;
-		border-left: 3px solid #FE9D35; */
-		/* border-right: 1px solid #FE9D35; */	 
-		color: #FE9D35;
+		background-color: rgba(200,200,200,0.5);
 		font-weight:bold;
-		/*margin-left : 10px;
-		margin-right: 10px;		
-		padding-left: 10px;
-		padding-right: 10px;  */
 		cursor:pointer;
-		text-align: center;
+		text-align: center;	
 	}
 	.categotyBtn:hover{
-		color:  rgb(50, 147, 63);
+		color:  #FE9D35;
+	}
+	p {
+    margin: 0 0 1em;
+    line-height: 1.4285em;
+	}
+	#bar1 {
+    width: 98%;
+    margin: 0% auto;
+    border-bottom: 1px solid #B8B8B8;
+    height: 10px;
+    margin-top: 15px;
 	}
 	
 </style>
@@ -85,9 +85,14 @@
 <br><br><br><br>		
 			<div class="contBox inner">
 				<%@ include file="../include/tabMypage.jsp"%>
-
+			<br>
 			<div class="tableArea">
 				<div id="myTitle"><i class="child icon"></i> 진행중인 정기후원현황</div>
+				<p>"<c:out value="${ sessionScope.loginUser2.mName }"/>"님이 후원중인 행복두리들 입니다.<br>
+				후원자님의 매 달 정기적인, 소중한 마음이 행복두리에게 전해지고 있습니다.<br>
+				행복두리들에게 큰 희망으로 다가갑니다.
+				</p>
+				<br>
 				<table>
 					<thead>
 						<tr>
@@ -149,9 +154,15 @@
 				</div>
 			</div>
 
+			<div id="bar1"></div>
+			
 			<!-- 종료된 정기 후원 -->
-						<div class="tableArea">
+				<div class="tableArea">
 				<div id="myTitle"><i class="child icon"></i>종료된 정기후원</div>
+				<p>"<c:out value="${ sessionScope.loginUser2.mName }"/>"님이 후원하셨던 행복두리들 입니다.<br>
+				소중한 마음을 나누어 주셔서 감사합니다.<br>
+				</p>
+				<br>
 				<table>
 					<thead>
 						<tr>

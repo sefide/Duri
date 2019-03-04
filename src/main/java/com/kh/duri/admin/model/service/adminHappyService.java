@@ -45,5 +45,9 @@ public interface adminHappyService {
 	//신규행복두리 반려버튼
 	int adminNewHappyMemberRefuse(adminMember m);
 	int adminNewHappyAttachRefuse(adminMember m);
+	//자기소개 갱신 행복두리 반려버튼
+	int adminMprHappyRefuse(adminMember m);
+	//증빙서류 갱신 회원 반려 버튼
+	int adminAttachRefuse(adminMember m);
 	
 }

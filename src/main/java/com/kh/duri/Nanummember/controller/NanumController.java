@@ -162,6 +162,7 @@ public class NanumController {
 			model.addAttribute("pi3",pi3);	
 			model.addAttribute("endItemList",endItemList);
 			model.addAttribute("pi4",pi4);		
+			
 			return "Nanummember/mypage/mypage";	
 		}catch (NanumException e) {
 			model.addAttribute("msg", e.getMessage());
@@ -185,6 +186,8 @@ public class NanumController {
 			fundCount = ns.getFundCount(m);	 //정기후원 개수 가져오기 	
 			int fundIng = fundCount.get("fundIng"); 
 			int fundEnd = fundCount.get("fundEnd"); 
+			System.out.println("fundIng"+fundIng);
+			System.out.println("fundEnd"+fundEnd);
 			PageInfo pi = Pagination.getPageInfo(currentPage, fundIng, 3);
 			PageInfo pi2 = Pagination.getPageInfo(currentPage2, fundEnd, 3);		
 			HashMap<String, PageInfo> paging = new HashMap<>();
@@ -194,6 +197,10 @@ public class NanumController {
 			fundList = ns.selectFundList(m,paging);	//정기후원 가져오기 
 			List<SelectDirectFund> fundIngList = fundList.get("fundIngList"); 
 			List<SelectDirectFund> fundEndList = fundList.get("fundEndList"); 
+			
+			/*System.out.println("fundIngList"+fundIngList);
+			System.out.println("fundEndList"+fundEndList);*/
+			
 			model.addAttribute("fundIngList",fundIngList);
 			model.addAttribute("pi",pi);
 			model.addAttribute("fundEndList",fundEndList);
@@ -292,7 +299,7 @@ public class NanumController {
 		}
 		if(request.getParameter("currentPage2") != null) {
 			currentPage2 = Integer.parseInt(request.getParameter("currentPage2"));
-		}
+		}	
 		if(request.getParameter("currentPage3") != null) {
 			currentPage3 = Integer.parseInt(request.getParameter("currentPage3"));
 		}
@@ -302,6 +309,8 @@ public class NanumController {
 			int likeDirectCount = likeListCount.get("likeDirectCount");
 			int likeMoneyCount = likeListCount.get("likeMoneyCount");		
 			int likeItemCount = likeListCount.get("likeItemCount");
+			System.out.println("likeMoneyCount"+likeMoneyCount);
+			System.out.println("likeItemCount"+likeItemCount);
 			PageInfo pi = Pagination.getPageInfo(currentPage, likeDirectCount, 3);
 			PageInfo pi2 = Pagination.getPageInfo(currentPage2, likeMoneyCount, 3);
 			PageInfo pi3 = Pagination.getPageInfo(currentPage3, likeItemCount, 3);
@@ -319,8 +328,7 @@ public class NanumController {
 			model.addAttribute("likeMoneyList",likeMoneyList);
 			model.addAttribute("pi2",pi2);
 			model.addAttribute("likeItemList",likeItemList);
-			model.addAttribute("pi3",pi3);
-			
+			model.addAttribute("pi3",pi3);			
 			return "Nanummember/mypage/mypage_likefund";
 		} catch (NanumException e) {
 			e.printStackTrace();
