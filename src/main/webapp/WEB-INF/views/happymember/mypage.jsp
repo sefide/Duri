@@ -150,10 +150,10 @@
 				<div style="float: left;" class="textSilver" >* 후원 종료 된 사연의 상세페이지로 이동하면 감사편지를 보낼 수 있어요.</div>
 			</div><br><br>
 			<c:choose>
-			<c:when test="${loginUser.mTakeStatus eq 4}"></c:when>
-			<c:otherwise>
+			<c:when test="${loginUser.mTakeStatus eq '1' or loginUser.mTakeStatus eq '2'}">
 			<button onclick="writeCloud();" class="massive ui instagram button">사연 신청하러 가기</button>
-			</c:otherwise>
+			</c:when>
+			<c:otherwise></c:otherwise>
 			</c:choose>
 		</div>
 <!-- onclick="location.href='cloudWrite.happy'" -->

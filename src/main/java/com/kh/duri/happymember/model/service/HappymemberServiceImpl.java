@@ -123,10 +123,10 @@ public class HappymemberServiceImpl implements HappymemberService {
 		
 		if(result1 > 0 && result2 == 0) {
 			result = 1;
-			System.out.println("service result1 : " + result);
+			/*System.out.println("service result1 : " + result);*/
 		}else if(result2 > 0 && result1 == 0) {
 			result = 1;
-			System.out.println("service result2 : " + result);
+			/*System.out.println("service result2 : " + result);*/
 		}
 		return result;
 	}
@@ -229,8 +229,17 @@ public class HappymemberServiceImpl implements HappymemberService {
 
 	//증빙서류 업로드(파일 이름 변경)
 	@Override
-	public int updateProofDocumentUpload(Member m){
-		int result = hd.updateProofDocumentUpload(sqlSession, m);
+	public int updateProofDocumentUpload3(Member m) {
+		/*System.out.println("3 sericve!!");*/
+
+		int result = hd.updateProofDocumentUpload3(sqlSession, m);
+		
+		return result;
+	}
+
+	@Override
+	public int updateProofDocumentUpload24(Member m){
+		int result = hd.updateProofDocumentUpload24(sqlSession, m);
 		
 		return result;
 	}
@@ -266,6 +275,7 @@ public class HappymemberServiceImpl implements HappymemberService {
 		
 		return count;
 	}
+
 
 	
 

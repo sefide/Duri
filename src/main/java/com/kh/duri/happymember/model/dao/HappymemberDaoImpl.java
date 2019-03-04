@@ -392,10 +392,26 @@ public class HappymemberDaoImpl implements HappymemberDao{
 
 	//증빙서류 업로드(파일 이름 변경)
 	@Override
-	public int updateProofDocumentUpload(SqlSessionTemplate sqlSession, Member m){
+	public int updateProofDocumentUpload3(SqlSessionTemplate sqlSession, Member m) {
+		int result = 0;
+		/*System.out.println("3 dao!!");*/
+
+		int result1 = sqlSession.update("HappyMember.updateMfundType", m);
+		int result2 = sqlSession.update("HappyMember.updateProofDocumentUpload3", m);
+		/*System.out.println("daoImpl result1: " + result1);	
+		System.out.println("daoImpl result2: " + result2);*/		
+		if(result1 > 0 && result2 > 0) {
+			result = 1;
+		}
+		
+		return result;
+	}
+	
+	@Override
+	public int updateProofDocumentUpload24(SqlSessionTemplate sqlSession, Member m){
 		int result = 0;
 		int result1 = sqlSession.update("HappyMember.updateMfundType", m);
-		int result2 = sqlSession.update("HappyMember.updateProofDocumentUpload", m);
+		int result2 = sqlSession.update("HappyMember.updateProofDocumentUpload24", m);
 				
 		if(result1 > 0 && result2 > 0) {
 			result = 1;
@@ -448,6 +464,8 @@ public class HappymemberDaoImpl implements HappymemberDao{
 	
 		return count;
 	}
+
+
 
 	
 
