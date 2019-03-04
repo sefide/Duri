@@ -69,7 +69,7 @@
     			<c:forEach var="rf" items="${ rfList }">
 		    		<tr>	
 					<td>${ rf.rDate }</td>
-					<td><fmt:formatNumber value = "${ rf.rValue }" type="currency" currencySymbol=" "/></td>
+					<td><fmt:formatNumber value = "${ rf.rValue }" type="currency" currencySymbol=" "/>원</td>
 					<td>${ rf.rName } </td>
 					<td>${ rf.rBank }</td>
 					<td>${ rf.rAccount }</td>

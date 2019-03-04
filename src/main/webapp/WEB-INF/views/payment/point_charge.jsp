@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -189,6 +189,8 @@
 	 <!-- 네비바 -->
 	<jsp:include page="../common/navi.jsp"/>
 	<jsp:include page="../Nanummember/include/header.jsp" />	
+	
+	
 	<c:set var = "user" value = "${ sessionScope.loginUser2 }"/>
 	<br><br><br><br>	
 	
@@ -207,7 +209,7 @@
 	    				<table>
 	    					<tr>
 	    						<th>현재 보유포인트</th>
-	    						<td>${ user.mPoint }원</td>
+	    						<td><fmt:formatNumber value = "${ user.mPoint }" type="currency" currencySymbol=" "/>원</td>
 	    					</tr>
 	    					<tr>
 	    						<th>충전 금액</th>
@@ -278,6 +280,10 @@
 	<jsp:include page="../common/loader.jsp"></jsp:include>
 	
 	<script>
+	function numberWithCommas(x) {
+	    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+	}
+	
 	$(document).ready(function() {
 		/* 충전 포인트 입력 시 */
 		$("#chargeValue").change(function(){
@@ -291,10 +297,10 @@
 			}else {
 				fees = value * 0.05;
 			}
-			$("#txtFees").text(fees+"원");
+			$("#txtFees").text(numberWithCommas(fees)+"원");
 			//fees = Number(fees.substring(0, fees.length-1));
-			$("#txtChargeValue").text(value+"원");
-			$("#totalValue").text(value+fees);
+			$("#txtChargeValue").text(numberWithCommas(value)+"원");
+			$("#totalValue").text(numberWithCommas(value+fees));
 		});
 		
 		
@@ -313,7 +319,7 @@
 				pg : 'inicis', // version 1.1.0부터 지원.
 				merchant_uid : 'merchant_' + new Date().getTime(),
 				name : '둘이두리 포인트충전',
-				amount : 63000,
+				amount : 100,
 				buyer_email : 'sefide@naver.com',
 				buyer_name : bName,
 			}, function(rsp) {
@@ -341,5 +347,6 @@
 	
 	
 	</script>
+	
 </body>
 </html>

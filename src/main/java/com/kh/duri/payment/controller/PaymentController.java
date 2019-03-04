@@ -364,8 +364,13 @@ public class PaymentController {
 	
 	// 나눔두리 포인트 충전페이지
 	@RequestMapping("pointCharge.pm")
-	public String pointCharge() {
-	    return "payment/point_charge"; 
+	public String pointCharge(HttpSession session) {
+		if(session.getAttribute("loginUser2") != null) {
+			 return "payment/point_charge"; 
+		}else {
+			 return "redirect:nanumLogin.me"; 
+		}
+	   
 	}
 
 	// 나눔두리 - 포인트 충전 결제하기
