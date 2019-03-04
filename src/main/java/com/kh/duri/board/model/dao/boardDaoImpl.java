@@ -299,6 +299,38 @@ public class boardDaoImpl implements boardDao {
 		return result;
 	}
 
+	@Override
+	public int insertWish2(SqlSessionTemplate sqlSession, Board2 b) throws BoardException {
+		int result = sqlSession.insert("Boards.insertWish2", b);
+
+		System.out.println("찜하기 작성2 성공여부 : " + result);
+		
+		
+		 if(result == 0) { 
+			 throw new BoardException("작성실패!"); //예외처리
+		 
+		 }
+		 
+
+		return result;
+	}
+
+	@Override
+	public int insertWish3(SqlSessionTemplate sqlSession, Board2 b) throws BoardException {
+		int result = sqlSession.insert("Boards.insertWish3", b);
+
+		System.out.println("찜하기 작성3 성공여부 : " + result);
+		
+		
+		 if(result == 0) { 
+			 throw new BoardException("작성실패!"); //예외처리
+		 
+		 }
+		 
+
+		return result;
+	}
+
 
 
 

@@ -266,7 +266,17 @@
 	
 	<insert id="insertWish">
 		INSERT INTO FUNDINTEREST 
+		VALUES(SEQ_FI_NO.NEXTVAL,SYSDATE,'Y','2',#{mno},#{fno},#{mno2})
+	</insert>
+	
+	<insert id="insertWish2">
+		INSERT INTO FUNDINTEREST 
 		VALUES(SEQ_FI_NO.NEXTVAL,SYSDATE,'Y','3',#{mno},#{fno},#{mno2})
+	</insert>
+	
+	<insert id="insertWish3">
+		INSERT INTO FUNDINTEREST 
+		VALUES(SEQ_FI_NO.NEXTVAL,SYSDATE,'Y','1',#{mno},null,#{mno2})
 	</insert>
 	
 	

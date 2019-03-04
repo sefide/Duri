@@ -309,7 +309,7 @@ public class BoardController {
 	
 	
 	
-	// 펀딩글 작성2(행복두리)
+		// 찜하기
 		@RequestMapping("wishList.me")
 		public ModelAndView wishList(Board2 b, ModelAndView mv, HttpSession session) {
 
@@ -339,6 +339,70 @@ public class BoardController {
 			return mv;
 
 		}
+		
+		
+		// 찜하기 물품후원
+				@RequestMapping("wishListTh.me")
+				public ModelAndView wishList2(Board2 b, ModelAndView mv, HttpSession session) {
+
+					try {
+						System.out.println("Board2 : " + b);
+						String nick = b.getmNick();
+						
+						int mno = bs.selectMno(nick);
+						
+						b.setMno(mno);
+						
+						int writeCloud2 = 0;
+
+						writeCloud2 = bs.insertWish2(b); // 물품 종류, 개수 insert
+						
+						if ( writeCloud2 > 0) {
+							System.out.println("내사연페이지로 이동");
+							mv.setViewName("redirect:wish.bo"); // 위처럼 redirect로 뷰페이지이름연결할거랑 똑같음
+
+						}
+
+					} catch (BoardException e) {
+						System.out.println("실패!");
+
+					}
+
+					return mv;
+
+				}
+				
+				
+				// 찜하기 정기후원
+				@RequestMapping("wishListLong.me")
+				public ModelAndView wishList3(Board2 b, ModelAndView mv, HttpSession session) {
+
+					try {
+						System.out.println("Board2 : " + b);
+						String nick = b.getmNick();
+						
+						int mno = bs.selectMno(nick);
+						
+						b.setMno(mno);
+						
+						int writeCloud2 = 0;
+
+						writeCloud2 = bs.insertWish3(b); // 물품 종류, 개수 insert
+						
+						if ( writeCloud2 > 0) {
+							System.out.println("내사연페이지로 이동");
+							mv.setViewName("redirect:wish.bo"); // 위처럼 redirect로 뷰페이지이름연결할거랑 똑같음
+
+						}
+
+					} catch (BoardException e) {
+						System.out.println("실패!");
+
+					}
+
+					return mv;
+
+				}
 	
 	
 		

@@ -54,6 +54,10 @@ public interface boardService {
 
 	int insertWish(Board2 b) throws BoardException;
 
+	int insertWish2(Board2 b) throws BoardException;
+
+	int insertWish3(Board2 b) throws BoardException;
+
 
 
 

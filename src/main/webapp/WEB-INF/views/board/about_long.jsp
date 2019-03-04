@@ -46,6 +46,17 @@ b{
 	border-radius:8px;
 	padding:5px 5px; 
 }
+
+#introduce::after{
+ 	clear: both;
+}
+
+ #wishlist:hover{
+ 	background:white !important; 
+ 	color:orange !important;
+ 	border:2px solid orange;
+ 	cursor:pointer;
+ }
   </style>
   <body>
     
@@ -64,10 +75,20 @@ b{
     				<div class="img img-about align-self-stretch" style="background-image: url(/duri/resources/common/images/bg_33.jpg); width: 100%;"></div>
     			</div>  -->
     			<div style="float:left" class="col-md-12 pl-md-7 ftco-animate" id="intro">
-    				<h2 class="mb-4">'${longDetail.mNickName}' 행복두리님의 자기소개</h2>
+    			<form action = "wishListLong.me" method="POST">
+    				<div><h2 id="introduce" class="mb-4" style="width:990px; float:left">'${longDetail.mNickName}' 행복두리님의 자기소개</h2>
+    				<button type="submit" id="wishlist" style="font-weight:bold; border:2px solid orange; background:orange;color:white; border-radius:5px; padding:8px;margin:5px">찜하기
+    				<img src="/duri/resources/common/images/pop_wishist.png" style="width:30px;height:30px"/>
+    			</button>
+    				</div>
     				<p id="longDetail">${longDetail.mpr}</p>
+    					<input type="hidden" id="mno2" value="${sessionScope.loginUser2.mno}" name="mno2"/>
+		        		<input type="hidden" id="mNick" value="${longDetail.mNickName}" name="mNick"/>
+				
+    			</form>
     			</div>
-
+    			
+		        	
     			
     		</div>
     	</div>
