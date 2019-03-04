@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
+import org.springframework.web.socket.handler.AbstractWebSocketHandler;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 @Repository
@@ -18,42 +19,18 @@ public class WebSocketHandler extends TextWebSocketHandler {
 
 	private final Logger logger = LogManager.getLogger(getClass());
 
+	//웹소켓 연결후
 	@Override
-	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
-		
-
-	}
-
-
-
-  @Override
-
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
-
-		
-
+		// TODO Auto-generated method stub
+		super.afterConnectionEstablished(session);
 	}
-
-
-
- @Override
-
+	
+	@Override
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
-
-		/*NoteDao dao = sqlsession.getMapper(NoteDao.class);
-
 		this.logger.info(message.getPayload());
-
-		session.sendMessage(new TextMessage(dao.count_receive_note(message.getPayload()))); 
-*/
-
-		
-
+		session.sendMessage(new TextMessage("반려 되었습니다.")); 
 	}
-
-
-
-
 
 }
 

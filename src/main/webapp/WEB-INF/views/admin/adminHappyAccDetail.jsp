@@ -460,5 +460,35 @@
  
 </script>
 
+<script type="text/javascript">
+var wsDuri = "ws://localhost:8181/duri/count";
+function send_message() {
+    websocket = new WebSocket(wsDuri);
+    websocket.onopen = function(evt) {
+        onOpen(evt);
+    };
+
+    websocket.onmessage = function(evt) {
+        onMessage(evt);
+    };
+
+    websocket.onerror = function(evt) {
+        onError(evt);
+    };
+
+}
+
+function onOpen(evt) {
+	websocket.send($("#memberno").text());
+}
+
+function onMessage(evt) {
+}
+
+function onError(evt) {
+
+}
+</script>
+
 </body>
 </html>
