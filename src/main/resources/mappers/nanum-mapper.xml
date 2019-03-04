@@ -203,9 +203,9 @@
 	</select>	
 	<!-- 정기후원  조회 (진행)-->
 	<select id="selectDirectFund" resultMap="directFundResultSet" parameterType="SelectDirectFund" resultType="list">
-		SELECT ROWNUM RNUM, nick, value, cnt, sum ,DHDDATE, MNO
+		SELECT ROWNUM RNUM, nick, value, cnt, a*cnt as sum ,DHDDATE, MNO
 		FROM( 
-		SELECT  M.MNICK as nick, MAX(DH.DHVALUE) as value, MAX(DHD.DHDCOUNT) as cnt, SUM(DH.DHVALUE) as sum , DHD.DHDDATE, M.MNO
+		SELECT  M.MNICK as nick, MAX(DH.DHVALUE) as value, MAX(DHD.DHDCOUNT) as cnt, SUM(DH.DHVALUE) as a , DHD.DHDDATE, M.MNO
 		FROM Member M, DIRECTFUNDHISTORY DH, DIRECTFUNDHISTORYDETAIL DHD
 		WHERE DH.DHSTATUS = 'Y'  AND DH.DHNO = DHD.DHD_DHNO AND DH.DH_MNO_GIVE = #{mno} AND DH.DH_MNO_TAKE = M.MNO
 		GROUP BY M.MNICK, DH.DHVALUE, DHD.DHDDATE, M.MNO )
@@ -222,12 +222,12 @@
 	</select>
 	<!-- 정기후원  조회 (종료)-->
 	<select id="selectDirectFund2" resultMap="directFundResultSet" parameterType="SelectDirectFund" resultType="list">
-		SELECT ROWNUM RNUM, nick, value, cnt, sum, MNO
+		SELECT ROWNUM RNUM, nick, value, cnt, a*cnt as sum ,DHDDATE, MNO
 		FROM( 
-		SELECT  M.MNICK as nick, MAX(DH.DHVALUE) as value, MAX(DHD.DHDCOUNT) as cnt, SUM(DH.DHVALUE) as sum , M.MNO
+		SELECT  M.MNICK as nick, MAX(DH.DHVALUE) as value, MAX(DHD.DHDCOUNT) as cnt, SUM(DH.DHVALUE) as a , DHD.DHDDATE, M.MNO
 		FROM Member M, DIRECTFUNDHISTORY DH, DIRECTFUNDHISTORYDETAIL DHD
 		WHERE DH.DHSTATUS = 'N'  AND DH.DHNO = DHD.DHD_DHNO AND DH.DH_MNO_GIVE = #{mno} AND DH.DH_MNO_TAKE = M.MNO
-		GROUP BY M.MNICK, DH.DHVALUE, M.MNO)
+		GROUP BY M.MNICK, DH.DHVALUE, DHD.DHDDATE, M.MNO )
 	</select>
 	<!-- 정기 감사편지 개수 조회 (진행)-->
   	<select id="selectDirectLetterCount" resultType="_int">

@@ -6,10 +6,9 @@
 <!-- semantic ui -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
 <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
-
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ include file="../include/common.jsp" %>
-<title> 나눔두리 마이페이지</title>
+<title> 나눔두리 마이페이지 - 정기후원현황</title>
 <%@ include file="../../common/css.jsp" %>
 <style>
 .mb50 {
@@ -103,9 +102,9 @@
 						<c:forEach items="${fundIngList}" var = "fundIngList">
 							<tr onclick="goFund(${fundIngList.mNo});">
 								<td><c:out value="${fundIngList.mNickName}"/></td>
-								<td><c:out value="${fundIngList.value}"/> 원 </td>
-								<td><c:out value="${fundIngList.cnt}"/> 달 째</td>
-								<td><c:out value="${fundIngList.sum}"/> 원</td>
+								<td><fmt:formatNumber value = "${ fundIngList.value }" type="currency" currencySymbol=" "/> 원</td>
+								<td><c:out value="${fundIngList.cnt}"/> 달 째</td>					
+								<td><fmt:formatNumber value = "${ fundIngList.sum }" type="currency" currencySymbol=" "/> 원</td>
 								<td><c:out value="${fundIngList.dhdDate}"/> </td>
 							</tr>
 						</c:forEach>
@@ -166,9 +165,9 @@
 						<c:forEach items="${fundEndList}" var = "fundEndList" varStatus="">
 								<tr onclick="goFund(${fundEndList.mNo});">
 									<td><c:out value="${fundEndList.mNickName}"/></td>
-									<td><c:out value="${fundEndList.value}"/> 원 </td>
+									<td><fmt:formatNumber value = "${ fundEndList.value }" type="currency" currencySymbol=" "/> 원</td>
 									<td><c:out value="${fundEndList.cnt}"/> 달 </td>
-									<td><c:out value="${fundEndList.sum}"/> 원</td>
+									<td><fmt:formatNumber value = "${ fundEndList.sum }" type="currency" currencySymbol=" "/> 원</td>				
 							</tr>
 						</c:forEach>
 					</tbody>

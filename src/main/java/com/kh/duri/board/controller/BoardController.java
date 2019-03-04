@@ -88,10 +88,11 @@ public class BoardController {
 	public ModelAndView longDonate(Member m, ModelAndView mv,HttpSession session,HttpServletRequest request, HttpServletResponse response){ 	
 			String longDetail2 = request.getParameter("longDetail");
 			System.out.println(m.getMno());
+			System.out.println("longDetail2"+longDetail2);
 			if(longDetail2 != null) {
 				int mNo = Integer.parseInt(longDetail2);
 				m.setMno(mNo);
-			}else {
+			}
 			System.out.println("member : "+m);			
 			Member longDetail = null; 
 			int money = bs.selectTotalMoney(m);
@@ -102,7 +103,6 @@ public class BoardController {
 			session.setAttribute("money", money);	//세션에 뿌려주기
 			session.setAttribute("count", count);	//세션에 뿌려주기
 			mv.setViewName("redirect:longDonate.bo"); //위처럼 redirect로 뷰페이지이름연결할거랑 똑같음
-			}
 		return mv;
 	}
 

@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
 <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ include file="../include/common.jsp" %>
 <title> 나눔두리 마이페이지</title>
 <%@ include file="../../common/css.jsp" %>
@@ -26,11 +26,10 @@
 	margin : 0 auto;
 	padding-top: 50px;
 	padding-bottom: 20px;
-/* 	margin-left: 20px;
-	margin-right: 20px;   */
 }
+
 	table {
-		width : 96%;
+		/* width : 98%; */
 		margin : 0 auto;
 		color : #434343;
 		border-top : 4px solid #FE9D35; 
@@ -38,20 +37,26 @@
 		margin-bottom: 10px;
 	}
 	th{				
-		color :  rgba(250, 143, 61);
-		background : #FFEDBF;
-		font-weight: bold;
-		font-size: 17px;
+		/* color :  rgba(250, 143, 61); */
+		background : rgba(200,200,200,0.5);
+		/* font-weight: bold; */
+		/* font-size: 17px; */
 	}
 	tr:hover{
 		cursor: pointer;
-		background : #f2f1ed;
+		/* background : #f2f1ed; */
+		background: rgba(230,230,230,0.3);
 	}
 	tr{
-		height : 50px;
+		height : 60px;
 	}
 	td{
-		font-size: 16px;
+		/* font-size: 16px; */
+	}
+/* 	tr:nth-child(even) {background:#f9f9f9;}
+	tr:nth-child(even) {background: rgba(230,230,230,0.3);} */
+	tr, td, th {
+		text-align : center;
 	}
 	.categotyBtn{
 		width: 80px;
@@ -59,23 +64,26 @@
 		text-align: center;
 		display: table-cell;
         vertical-align: middle; 
-		background-color: #FFEDBF; 
-		/* border-top: 3px solid #FE9D35;
-		border-left: 3px solid #FE9D35; */
-		/* border-right: 1px solid #FE9D35; */	 
-		color: #FE9D35;
+		background-color: rgba(200,200,200,0.5);
+		/* color: #FE9D35; */
 		font-weight:bold;
-		/*margin-left : 10px;
-		margin-right: 10px;		
-		padding-left: 10px;
-		padding-right: 10px;  */
 		cursor:pointer;
 		text-align: center;	
 	}
 	.categotyBtn:hover{
-		color:  rgb(50, 147, 63);
+		color:  #FE9D35;
 	}
-	
+	p {
+    margin: 0 0 1em;
+    line-height: 1.4285em;
+}
+#bar1 {
+    width: 98%;
+    margin: 0% auto;
+    border-bottom: 1px solid #B8B8B8;
+    height: 10px;
+    margin-top: 15px;
+}
 </style>
 </head>
 
@@ -84,13 +92,19 @@
 <%@ include file="../include/header.jsp" %>
 <br><br><br><br>
 	<div class="contBox inner">
-				<%@ include file="../include/tabMypage.jsp"%>
+			<%@ include file="../include/tabMypage.jsp"%>
 			
 			<!-- 진행중인 금액 크라우드 펀딩  -->
+			<br>
 			<div class="tableArea" id="MoneyCloudIng" style="display : block; ">
 				<div id="myTitle"> <i class="hourglass half icon"></i>진행중인 금액 크라우드 펀딩</div>
-				<div style="width: 96%; margin: 0 auto;">
-				<div id="mBtn" class="categotyBtn" onclick="MoneyCloudIng()" style="margin-right: 30px; color: green;">금액</div>
+				<p>"<c:out value="${ sessionScope.loginUser2.mName }"/>"님이 후원한 진행중인  금액 크라우드 펀딩입니다.<br>
+				나눔두리들의 따뜻한 마음들이 차곡차곡 모이고 있습니다. <br>
+				우리의 작은 마음이, 소복소복 쌓여 행복두리들의 커다란 행복이 됩니다.
+				</p>
+				<br>
+				<div style=" margin: 0 auto;">
+				<div id="mBtn" class="categotyBtn" onclick="MoneyCloudIng()" style="margin-right: 30px; color: #FE9D35;">금액</div>
 				<div id="iBtn" class="categotyBtn" onclick="ItemCloudIng()">물품</div>
 				</div>
 				<table id="MoneyCloudTbl">
@@ -108,7 +122,7 @@
 							<tr onclick="goFund(${moneyList.fNo});">
 								<td><c:out value="${moneyList.fTitle}"/></td>
 								<td></td>
-								<td><c:out value="${moneyList.fhValue}"/></td>							
+								<td><fmt:formatNumber value = "${ moneyList.fhValue }" type="currency" currencySymbol=" "/></td>						
 								<td><c:out value="${moneyList.fhDate}"></c:out></td>
 								<c:choose>
 									<c:when test="${moneyList.fStatus eq 'GOAL'}">
@@ -161,10 +175,17 @@
 				</div>
 			</div>
 			
+			<div id="bar1"></div>
+			
 			<!-- 진행중인 물품 크라우드 펀딩  -->
 			<div class="tableArea" id="ItemCloudIng" style="display: none; ">
 				<div id="myTitle"> <i class="hourglass half icon"></i>진행중인 물품 크라우드 펀딩</div>
-				<div style="width: 96%; margin: 0 auto;">
+				<p>"<c:out value="${ sessionScope.loginUser2.mName }"/>"님이 후원한 진행중인  물품 크라우드 펀딩입니다.<br>
+				나눔두리들의 따뜻한 마음들이 차곡차곡 모이고 있습니다. <br>
+				우리의 작은 마음이, 소복소복 쌓여 행복두리들의 커다란 행복이 됩니다.
+				</p>
+				<br>
+				<div style=" margin: 0 auto;">
 				<div id="mBtn" class="categotyBtn" onclick="MoneyCloudIng()" style="margin-right: 30px;">금액</div>
 				<div id="iBtn" class="categotyBtn" onclick="ItemCloudIng()">물품</div>
 				</div>
@@ -241,8 +262,8 @@
 			<!-- 종료된 금액 크라우드 펀딩 -->
 			<div class="tableArea" id="MoneyCloudEnd" style="display : block;">
 				<div id="myTitle"><i class="hourglass end icon"></i>종료된 금액 크라우드 펀딩</div>
-				<div style="width: 96%; margin: 0 auto;">
-				<div id="emBtn" class="categotyBtn" onclick="MoneyCloudEnd()" style="margin-right: 30px; color: green;" >금액</div>
+				<div style="margin: 0 auto;">
+				<div id="emBtn" class="categotyBtn" onclick="MoneyCloudEnd()" style="margin-right: 30px; color: #FE9D35;" >금액</div>
 				<div id="eiBtn" class="categotyBtn" onclick="ItemCloudEnd()">물품</div>
 				</div>
 				<table>
@@ -260,8 +281,7 @@
 							<tr onclick="goFund(${endMoneyList.fNo});">
 								<td><c:out value="${endMoneyList.fTitle}"/></td>
 								<td></td>
-								<td><c:out value="${endMoneyList.fhValue}"/></td>
-								
+								<td><fmt:formatNumber value = "${ endMoneyList.fhValue }" type="currency" currencySymbol=" "/></td>								
 								<td><c:out value="${endMoneyList.fhDate}"></c:out></td>
 								<c:choose>
 									<c:when test="${endMoneyList.fStatus eq 'GOAL'}">
@@ -318,7 +338,7 @@
 			<!-- 종료된 물품 크라우드 펀딩 -->
 			<div class="tableArea" id="ItemCloudEnd" style="display: none; ">
 				<div id="myTitle"><i class="hourglass end icon"></i>종료된 물품 크라우드 펀딩</div>
-				<div style="width: 96%; margin: 0 auto;">
+				<div style="margin: 0 auto;">
 				<div id="emBtn" class="categotyBtn" onclick="MoneyCloudEnd()" style="margin-right: 30px; ">금액</div>
 				<div id="eiBtn" class="categotyBtn" onclick="ItemCloudEnd()">물품</div>
 				</div>
@@ -407,7 +427,7 @@
 					success:function(data){
 						 $("#MoneyCloudIng").show(); 
 						 $("#ItemCloudIng").hide();
-						 $("#mBtn").css("color","green");
+						 $("#mBtn").css("color","#FE9D35");
 					},
 					error:function(status){
 						console.log(status);
@@ -424,7 +444,7 @@
 					success:function(data){
 						 $("#MoneyCloudIng").hide(); 
 						 $("#ItemCloudIng").show();
-						 $("#ItemCloudIng").find("#iBtn").css("color","green");					 
+						 $("#ItemCloudIng").find("#iBtn").css("color","#FE9D35");					 
 					},
 					error:function(status){
 						console.log(status);
@@ -442,7 +462,7 @@
 					success:function(data){
 						 $("#MoneyCloudEnd").show(); 
 						 $("#ItemCloudEnd").hide();
-						 $("#emBtn").css("color","green");
+						 $("#emBtn").css("color","#FE9D35");
 					},
 					error:function(status){
 						console.log(status);
@@ -459,7 +479,7 @@
 					success:function(data){
 						 $("#MoneyCloudEnd").hide(); 
 						 $("#ItemCloudEnd").show();
-						 $("#ItemCloudEnd").find("#eiBtn").css("color","green");						 
+						 $("#ItemCloudEnd").find("#eiBtn").css("color","#FE9D35");						 
 					},
 					error:function(status){
 						console.log(status);
