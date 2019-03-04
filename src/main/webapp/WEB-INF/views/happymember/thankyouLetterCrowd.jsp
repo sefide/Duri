@@ -55,6 +55,7 @@
 			<!-- 감사편지 쓰기 : 펀딩글 제목 -->
 			<div style="float: left; margin-left: 45px; margin-top: 4px;">
 				&nbsp;<div class="ui grey basic button" id="ftitle">${f.ftitle}</div>&nbsp;&nbsp;
+				<input type="hidden" value="${f.ftitle}" class="ftitle"/>
 			</div>
 			
 			
@@ -77,8 +78,8 @@
 		</div>
 		
 		<div style="height: 100px;">
-			<input type="hidden" name="fno" value="${f.fno}"/>
-			<input type="hidden" name="ftype" value="${f.ftype}"/>
+			<input type="hidden" name="fno" class="fno" value="${f.fno}"/>
+			<input type="hidden" name="ftype" class="ftype" value="${f.ftype}"/>
 		</div>
 		
 		<div id="button">
@@ -102,28 +103,60 @@
 	}
 	
 	function insertThankyouLetter(){
-		swal({
-			  title: "",
-			  text: "나눔두리님들께 감사편지를 보내시겠습니까?",
-			  icon: "warning",
-			  buttons: true,
-			  dangerMode: true,
-			})
-			.then((willDelete) => {
-			  if (willDelete) {
-			    swal("감사편지가 전달됩니다!", {
-			      icon: "success",
-			    }).then(function(){
-			    	$("#crowdfundingLetterForm").submit();
-			    });
-			    
-			  } else {
-			    swal("감사편지 전송을 취소합니다.");
-			  }
+		<!-- 보낸 단체 감사편지 중복체크  -->\
+		var ftype = $(".ftype").val();
+		var fno = $(".fno").val();
+		
+			$.ajax({
+				url:"letterCheck.happy",
+				type:"get",
+				data:{ftype:ftype, fno:fno},
+				success:function(data){
+					console.log("성공 후 ftitle : " + data.count);
+					if(data.count == "success"){
+						swal({
+							  title: "",
+							  text: "나눔두리님들께 감사편지를 보내시겠습니까?",
+							  icon: "warning",
+							  buttons: true,
+							  dangerMode: true,
+							})
+							.then((willDelete) => {
+							  if (willDelete) {
+							    swal("감사편지가 전달됩니다!", {
+							      icon: "success",
+							    }).then(function(){
+							    	$("#crowdfundingLetterForm").submit();
+							    });
+							    
+							  } else {
+							    swal("감사편지 전송을 취소합니다.");
+							  }
+							});
+					}else{
+						swal("이미 감사편지를 전했습니다!", "크라운드 펀딩 감사편지는 1번만 보내실 수 있습니다.")
+						.then(function(){
+							location.href="mypage.happy";
+						});
+					}
+				},
+				error:function(data){
+					console.log("통신실패");
+				}
 			});
+			
+		
 	}
-</script>
-<!--  -->
+	
+	
+	
+	
+	
+	
+	
+	
 
+	
+</script>
 </body>
 </html>

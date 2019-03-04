@@ -107,7 +107,7 @@
             <div class="block-18 color-3 align-items-stretch">
               <div class="text">
              <c:choose>
-             	<c:when test="${empty sessionScope.loginUser && not empty sessionScope.loginUser2}">
+             	<c:when test="${not empty sessionScope.loginUser2}">
              		<h3 class="mb-4">후원하기</h3>
              		<p style="font-weight:bold;">행복두리에게 올 한해 따뜻하게 </br>지낼 수 있는 행복을 선물하세요.</p>
              		<p><a href="fundMoney.pm?fno=${moneyDetail.fno}" class="btn btn-white px-3 py-2 mt-2" style="font-weight:bold;">후원하러가기</a></p>
@@ -119,17 +119,17 @@
              	</c:when>
              </c:choose> 
              <!-- 행복두리가 상세페이지로 들어왔을 경우 -->
-            <c:if test="${not empty sessionScope.loginUser && empty sessionScope.loginUser2}">
+            <c:if test="${not empty sessionScope.loginUser}">
              	<c:choose>
              		<c:when test="${moneyDetail.fStatus eq 'END' or moneyDetail.fStatus eq 'GOAL'}">
              			<h3 class="mb-4">${moneyDetail.mNick}님!</h3>
-		              	<p>후원해주신 나눔두리들께 </br>감사편지를 보내주세요!</p>
+		              	<p>후원이 종료되면  </br>후원해주신 나눔두리들께 </br>감사편지를 보내주세요!</p>
 		              	<p><a href="crowdfundingLetter.happy?ftitle=${moneyDetail.fTitle}&fno=${moneyDetail.fno}&fWriter=${moneyDetail.fWriter}" 
 		              	class="btn btn-white px-3 py-2 mt-2">감사편지쓰러가기</a></p>
              		</c:when>
              		<c:otherwise>
              			<h3 class="mb-4">${moneyDetail.mNick}님!</h3>
-		              	<p>후원해주신 나눔두리들께 </br>감사편지를 보내주세요!</p>
+		              	<p>후원이 종료되면  </br>후원해주신 나눔두리들께 </br>감사편지를 보내주세요!</p>
              		</c:otherwise>
              	</c:choose>
              </c:if>

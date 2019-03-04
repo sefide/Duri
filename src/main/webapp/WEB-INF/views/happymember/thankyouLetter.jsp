@@ -16,8 +16,8 @@
 	.to {font-size: 30px; font-weight: 600;}
 	a {color: #333;}
 	#button{text-align: center;}
-	/* .textSilver {color: silver; font-weight: 600;}
-	.textOrange {color: orange; font-weight: 600;} */
+	.textSilver {color: silver; font-weight: 600;}
+	/*.textOrange {color: orange; font-weight: 600;} */
 </style>
 
 <title>마이페이지>감사편지 쓰기</title>

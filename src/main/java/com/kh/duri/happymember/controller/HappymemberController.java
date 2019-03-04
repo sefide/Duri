@@ -1,7 +1,10 @@
 package com.kh.duri.happymember.controller;
 
+import static org.junit.Assume.assumeNoException;
+
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -178,6 +181,23 @@ public class HappymemberController {
 		return "happymember/deliveryStatus";
 	}
 	
+	//자기소개 수정 전 현재 자기소개 내용 불러오기(세션으로 가져오면 안되서..ㅠㅠ)
+	@RequestMapping("myIntroModify.happy")
+	public String myIntroModify(Model model, HttpServletRequest request, HttpServletResponse response) {
+		Member m = (Member)request.getSession().getAttribute("loginUser");
+		int mno = m.getMno();
+		
+		try {
+			Member member = hs.searchMprMprNew(mno);
+			
+			model.addAttribute("member", member);
+			return "happymember/myIntroModify";
+			
+		} catch (MypageException e) {
+			model.addAttribute("msg", e.getMessage());
+			return "common/errorPage";
+		}
+	}
 	
 	//자기소개 수정
 	@RequestMapping("updateIntroduce.happy")
@@ -192,7 +212,7 @@ public class HappymemberController {
 				
 		try {
 			int result = hs.updateIntroduce(oldLoginUser);
-			
+			System.out.println("성공했으면  : " + result);
 			if(result > 0){
 				return "redirect:logngDonateRefresh.happy";
 			}
@@ -203,7 +223,7 @@ public class HappymemberController {
 		}
 	
 		
-		return "happymember/myIntroModify.happy";
+		return "happymember/myIntroModify";
 	}
 	
 	//물품후원 목록 개수 조회, 목록 페이징
@@ -428,7 +448,6 @@ public class HappymemberController {
 	@RequestMapping("proofDocument.happy")
 	public String adate(Model model, HttpServletRequest request, HttpServletResponse response) {
 		Member m = (Member)request.getSession().getAttribute("loginUser");
-
 			
 		try {
 			//증빙서류 현황 테이블
@@ -436,6 +455,7 @@ public class HappymemberController {
 			
 			/*System.out.println("힝.. : " + proofDocument.getAchangename());*/
 
+			System.out.println("파일 이름 : " + proofDocument.getAchangename());
 			model.addAttribute("proofDocument", proofDocument);
 					
 					
@@ -454,6 +474,8 @@ public class HappymemberController {
 		Member m = (Member)request.getSession().getAttribute("loginUser");
 		
 		String fundType = request.getParameter("fundType");
+		String photoOrigin = request.getParameter("photoOrigin");
+		System.out.println("photoOrigin : " + photoOrigin);
 		
 	
 		//실제경로 가져오기
@@ -553,10 +575,8 @@ public class HappymemberController {
 			//후원한 나눔두리들이 있을 경우 단체 감사편지 보내기
 			if(nanumMnoList != null) {
 				Letter l = new Letter();
-				System.out.println("letter만들어졌어?");
 				int nanumMno = 0;
 				for(int i = 0; i < nanumMnoList.size(); i++) {
-					System.out.println("for문 진입");
 					nanumMno = nanumMnoList.get(i).getFhMnoGive();
 					l.setLeMnoGive(nanumMno);
 					l.setLeMnoTake(m.getMno());
@@ -580,7 +600,48 @@ public class HappymemberController {
 		return "happymember/mypage";
 	}
 	
-	
+	//단체 감사편지 중복 체크
+	@RequestMapping("letterCheck.happy")
+	public @ResponseBody HashMap<String, Object> letterCheck(@RequestParam String ftype, int fno, Model model, HttpServletRequest request, HttpServletResponse response) throws IOException {
+		HashMap<String, Object> hamp = new HashMap<String, Object>();
+		
+		Member m = (Member)request.getSession().getAttribute("loginUser");
+		int mno = m.getMno();
+		
+		FundHistory fs = new FundHistory();
+		fs.setFhFno(fno);
+		
+		try {
+			
+			List<FundHistory> nanumMnoList;
+			nanumMnoList = hs.selectNanumMno(fs);
+			
+			if(nanumMnoList != null) {
+				Letter l = new Letter();
+				int nanumMno = 0;
+				for(int i = 0; i < nanumMnoList.size(); i++) {
+					nanumMno = nanumMnoList.get(i).getFhMnoGive();
+					l.setLeMnoGive(nanumMno);
+					l.setLeMnoTake(mno);
+					l.setLeType(ftype);
+					int count = hs.letterCheck(l);
+
+						if(count > 0) {
+							String result = "already";
+							hamp.put("count", result);
+							
+						}else {
+							String result = "success";
+							hamp.put("count", result);
+						}
+					}
+				} 
+			return hamp;
+		} catch (MypageException e) {
+			model.addAttribute("msg", e.getMessage());
+		}
+		return hamp;
+	}
 	
 	
 	//물품 배송 목록 새로고침했을 때 insert다시 안되게 !
@@ -603,47 +664,51 @@ public class HappymemberController {
 		
 	//새로고침 - 단체 감사편지
 	@RequestMapping("crowdfundingLetterRefresh.happy")
-	public String qnaInsert() {
+	public String crowdfundingLetterRefresh() {
 		return "happymember/mypage";
+	}
+	
+	@RequestMapping("introRefresh.happy")
+	public String introRefresh() {
+		return "happymember/myIntroModify";
+	}
+	
+	@RequestMapping("qnaInsert.happy")
+	public String qnaInsert() {
+		return "happymember/qnaInsert";
 	}
 	
 	@RequestMapping("mypage.happy")
-	public String happy1() {
+	public String mypage() {
 		return "happymember/mypage";
 	}
 	
-	
 	@RequestMapping("deliveryStatus.happy")
-	public String happy3() {
+	public String deliveryStatus() {
 		return "happymember/deliveryStatus";
 	}
 	
-	
 	@RequestMapping("cloudWrite.happy")
-	public String happt10() {
+	public String cloudWrite() {
 		return "happymember/cloudWrite";
 	}
 	
 	@RequestMapping("cloudThingDetail.happy")
-	public String happt11() {
+	public String cloudThingDetail() {
 		return "board/about_thing";
 	}
 	
 	@RequestMapping("cloudMoneyDetail.happy")
-	public String happt12() {
+	public String cloudMoneyDetail() {
 		return "board/about_money";
 	}
 	
-	
 	@RequestMapping("myInfoModifyHappy.happy")
-	public String happt30() {
+	public String myInfoModifyHappy() {
 		return "happymember/myInfoModify";
 	}
 	
-	@RequestMapping("myIntroModify.happy")
-	public String happt31() {
-		return "happymember/myIntroModify";
-	}
-	/**/
+	
+	
 }
 
