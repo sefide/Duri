@@ -201,6 +201,13 @@ public class boardServiceImpl implements boardService {
 		return list;
 	}
 
+	@Override
+	public List<Board2> selectNowList() {
+		List<Board2> list = bd.selectNowList(sqlSession);
+		
+		return list;
+	}
+
 
 
 

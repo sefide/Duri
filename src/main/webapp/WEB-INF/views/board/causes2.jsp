@@ -95,14 +95,15 @@
 								</h3>
 								<p>'${th.mNick }' 행복두리의 사연</p>
 								<span class="donation-time mb-3 d-block" style="color: black;">${th.mFundType }</span>
+								<c:set var="sum" value="${(sumValueEx/sumEx)*100}" />
 								<div class="progress custom-progress-success">
 									<div class="progress-bar bg-primary" role="progressbar"
-										style="width: 28%" aria-valuenow="28" aria-valuemin="0"
+										style="width: ${sum}%" aria-valuenow="${sum}" aria-valuemin="0"
 										aria-valuemax="100"></div>
 								</div>
 								<fmt:formatNumber value = "${thList3[status.index].sumValue }" type = "number" var = "sumValueEx"/>
 								<fmt:formatNumber value = "${thList3[status.index].sum }" type = "number" var = "sumEx"/>
-									<c:set var="sum" value="${(sumValueEx/sumEx)*100}" />
+									
 									<a><fmt:formatNumber value="${sum}" pattern=" " />%</a>
 									
 								<c:forEach var="th2" items="${thList2}" varStatus = "status2">

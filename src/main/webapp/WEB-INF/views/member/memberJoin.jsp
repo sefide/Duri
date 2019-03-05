@@ -382,7 +382,7 @@ input, select{
 
 <form class="ui form" action="insert2.me" method="POST" name = "sub1" id="sub1" style="background: none;" encType="multipart/form-data">
 	<div class="field" style="margin:10px;">
-    <label>ID</label>
+    <label>*ID</label>
     <div class="two fields">
       <div class="field">
         <input type="text" name="mid" id="mid" placeholder="아이디를 입력하세요.">
@@ -394,21 +394,21 @@ input, select{
 
 
   <div class="field" style="margin:10px;">
-    <label>Name</label>
+    <label>*Name</label>
     <div class="two fields">
       <div class="field">
         <input type="text" name="mName" id="mName" placeholder="이름을 입력하세요."  style="width:100%">
       </div>
       
       <div class="field" align="right" style="width:300px">
-        <input type="text" name="mNickName" id="mNick" placeholder="닉네임을 입력하세요." style="width:300px">
+        <input type="text" name="mNickName" id="mNick" placeholder="*닉네임을 입력하세요." style="width:300px">
       </div>
        <div class="ui button" onclick="duplicationCheckNick();" style="width:110px; margin-left:15px" tabindex="0">중복확인</div>
     </div>
   </div>
   
 	<div class="field" style="margin:10px;">
-    <label>Password</label>
+    <label>*Password</label>
     <div class="two fields">
       <div class="field">
         <input type="password" name="mpwd" id="mpwd" placeholder="비밀번호를 입력하세요." required>
@@ -423,7 +423,7 @@ input, select{
  
   <div class="two fields"  style="margin:10px;">
     <div class="field">
-      <label>Gender</label>
+      <label>*Gender</label>
       <select name="mGender" id="mGender" class="ui fluid dropdown">
         <option value="" selected disabled>선택</option>
     	<option value="M">남</option>
@@ -447,7 +447,7 @@ input, select{
    
   <div class="fields"  style="margin:10px;">
     <div class="five wide field">
-      <label>이메일주소</label>
+      <label>*이메일주소</label>
       <input type="text" name="email1" id="email1" maxlength="10" placeholder="이메일 주소를 입력해주세요.">
     </div>
      <div class="field">
@@ -462,12 +462,12 @@ input, select{
       <label></label><br>
       <div class="two fields">
         <div class="field">
-          <select class="ui fluid search dropdown" name="card[expire-month]">
+          <select class="ui fluid search dropdown" id="selectEmail" name="card[expire-month]">
             <option value="" selected disabled>선택</option>
-            <option value="1">daum.net</option>
-            <option value="2">google.com</option>
-            <option value="3">nate.com</option>
-            <option value="4">naver.com</option>
+            <option value="naver.com">naver.com</option>
+            <option value="daum.net">daum.net</option>
+            <option value="google.com">google.com</option>
+            <option value="nate.com">nate.com</option>
           </select>
         </div>
          <div class="ui button" style="width:120px; height:35px;" id="sendEmail">이메일 인증</div>
@@ -488,7 +488,7 @@ input, select{
   
   <div class="fields" style="margin:10px;">
      <div class="five wide field">
-       <label>생년월일</label>
+       <label>*생년월일</label>
       <input type="Date" name="mBirthDay" id="mBirthDay" maxlength="6" placeholder="">
     </div>
 
@@ -496,7 +496,7 @@ input, select{
     </div>
 
      <div class="seven wide field" style="margin:15px">
-      <label>주소</label>
+      <label>*주소</label>
       <div class="two fields">
          <div class="field">
         <input type="text" name="mAddress1" id="mAddress1" placeholder="">
@@ -519,7 +519,7 @@ input, select{
   
     
     
-   <h4 class="ui dividing header" style="margin:10px; font-size:10px">증빙서류</h4>
+   <h4 class="ui dividing header" style="margin:10px; font-size:10px">*증빙서류</h4>
    <div class="fields" style="margin:10px">
 
       <div class="two field" style="width:300px;">
@@ -578,42 +578,58 @@ input, select{
 	//아이디 중복체크
 	var i = 0;
 	function duplicationCheck(){
+		var re = /^[a-zA-Z0-9]{4,12}$/ // 아이디와 패스워드가 적합한지 검사할 정규식
+		var re2 = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+		
 		var mid2=$("#mid").val();
 		console.log(mid2);
-		if(mid2 == ""){
-			
-			swal("아이디를 입력해주세요!");
-		}else{
-		$.ajax({
-			url:"duplicationCheck.me",
-			type:"post",
-			data:{mid2:mid2},
-			success:function(data){
-				console.log(data);
-				  if (data > 0) {
-	                   console.log(data);
-	                   swal("존재하는 아이디 입니다!");
-	                   $("#mid").val(""); 
-	    
-	                } else{
-	                    swal("사용가능한 아이디입니다.");
-	                    i = 1;
-	                }
-			},
-			error:function(status){
-				console.log(status);
-			}
-			
-		});
 		
-		
-		return false;
-	}	
-	}
+		// 아이디 검사(유효성)
+         var idReg = /^[a-z]+[a-z0-9]{5,19}$/g;
+        if( !idReg.test( $("input[name=mid]").val() ) ) {
+            alert("아이디는 영문자로 시작하는 6~20자 영문자 또는 숫자이어야 합니다.");
+            return;
+        }else{
 
-	//아이디 중복체크
+        if(mid2 == ""){
+	   			
+	   			swal("아이디를 입력해주세요!");
+	   		}else{
+	   		$.ajax({
+	   			url:"duplicationCheck.me",
+	   			type:"post",
+	   			data:{mid2:mid2},
+	   			success:function(data){
+	   				console.log(data);
+	   				  if (data > 0) {
+	   	                   console.log(data);
+	   	                   swal("존재하는 아이디 입니다!");
+	   	                   $("#mid").val(""); 
+	   	    
+	   	                } else{
+	   	                    swal("사용가능한 아이디입니다.");
+	   	                    i = 1;
+	   	                }
+	   			},
+	   			error:function(status){
+	   				console.log(status);
+	   			}
+	   			
+	   		});
+	   		
+	   		
+	   		return false;
+	   	}	
+	       }
+	}
+		
+	
+
+	//닉네임 중복체크
 	var j = 0;
 	function duplicationCheckNick(){
+
+		
 		var mNick=$("#mNick").val();
 		console.log(mNick);
 		if(mNick == ""){
@@ -814,6 +830,35 @@ input, select{
 			}
 		   
   }
+
+	$('#selectEmail').change(function() {
+		var state = $('#selectEmail option:selected').val();
+		$("#email2").val(state);
+	});
+
+
+	
+	function chk(re, e, msg) {
+
+        if (re.test(e.value)) {
+
+                return true;
+
+        }
+
+
+
+        alert(msg);
+
+        e.value = "";
+
+        e.focus();
+
+        return false;
+
+ }
+
+
 
 
 </script>
