@@ -11,6 +11,7 @@ import com.kh.duri.board.model.vo.Board;
 import com.kh.duri.board.model.vo.Board2;
 import com.kh.duri.board.model.vo.BoardItem;
 import com.kh.duri.board.model.vo.PageInfo;
+import com.kh.duri.member.model.exception.LoginException;
 import com.kh.duri.member.model.vo.Member;
 
 public interface boardDao {
@@ -27,7 +28,7 @@ public interface boardDao {
 
 	List<Board> selectMoneyList(SqlSessionTemplate sqlSession, PageInfo pi) throws DonateListException;
 
-	Board moneyDetail(SqlSessionTemplate sqlSession, Board b);
+	Board moneyDetail(SqlSessionTemplate sqlSession, Board b) throws LoginException;
 
 	int getThingListCount(SqlSessionTemplate sqlSession) throws DonateListException;
 

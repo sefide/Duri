@@ -15,6 +15,7 @@ import com.kh.duri.board.model.exception.DonateListException;
 import com.kh.duri.board.model.vo.Board;
 import com.kh.duri.board.model.vo.Board2;
 import com.kh.duri.board.model.vo.BoardItem;
+import com.kh.duri.member.model.exception.LoginException;
 import com.kh.duri.member.model.vo.Member;
 import com.kh.duri.board.model.vo.PageInfo;
 
@@ -72,7 +73,7 @@ public class boardServiceImpl implements boardService {
 	}
 
 	@Override
-	public Board moneyDetailOne(Board b) {
+	public Board moneyDetailOne(Board b) throws LoginException {
 		Board moneyDetail = bd.moneyDetail(sqlSession, b);	//DAO로 Member 정보와 sqlSession 전송
 		
 		return moneyDetail ;

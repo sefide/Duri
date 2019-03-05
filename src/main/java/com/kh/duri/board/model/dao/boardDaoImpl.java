@@ -11,6 +11,7 @@ import com.kh.duri.board.model.exception.DonateListException;
 import com.kh.duri.board.model.vo.Board;
 import com.kh.duri.board.model.vo.Board2;
 import com.kh.duri.board.model.vo.BoardItem;
+import com.kh.duri.member.model.exception.LoginException;
 import com.kh.duri.member.model.vo.Member;
 import com.kh.duri.board.model.vo.PageInfo;
 
@@ -99,16 +100,16 @@ public class boardDaoImpl implements boardDao {
 
 	// 금액후원 상세정보 조회
 	@Override
-	public Board moneyDetail(SqlSessionTemplate sqlSession, Board b) {
+	public Board moneyDetail(SqlSessionTemplate sqlSession, Board b) throws LoginException {
 		Board moneyDetail = sqlSession.selectOne("Boards.selectMoneyDetail", b); // 받아온 m을 이용해 mapper에서 sql문 실행해서 받아온 값
 																					// 저장
 
-		/*System.out.println("Dao Member : " + moneyDetail);*/
+		System.out.println("Dao Member : " + moneyDetail);
 
-		/*
-		 * if(longDetail ==null) { throw new LoginException("로그인정보가 존재하지 않습니다."); //예외처리
-		 * }
-		 */
+		
+		 if(moneyDetail ==null) { throw new LoginException("로그인정보가 존재하지 않습니다."); //예외처리
+		  }
+		 
 
 		return moneyDetail;
 	}
@@ -206,7 +207,9 @@ public class boardDaoImpl implements boardDao {
 
 		return result;
 	}
-
+	
+	
+	//크라우드 펀딩 물품 작성
 	@Override
 	public int insertCloud2(SqlSessionTemplate sqlSession, Board b) throws BoardException {
 		int result = 0;	//전체 삽입 결과 확인
@@ -229,21 +232,25 @@ public class boardDaoImpl implements boardDao {
 		return result;
 	}
 
-
+	//금액후원 작성
 	@Override
 	public int moneyCountDetail(SqlSessionTemplate sqlSession, Board moneyDetail) {
+
 		System.out.println("모든 moneyDetail 개수 : " + moneyDetail);
 		Integer listCount = sqlSession.selectOne("Point.selectFundMoneyCulValue",moneyDetail);
 		
 		if(listCount == null) {
 			listCount = 0;
 		}
+
 		System.out.println("모든 후원금액 개수 : " + listCount);
 
 		
 		return listCount;
 	}
 
+	
+	//모든 후원금액 조회
 	@Override
 	public int selectTotalMoney(SqlSessionTemplate sqlSession, Member m) {
 		System.out.println(m);
@@ -255,6 +262,8 @@ public class boardDaoImpl implements boardDao {
 		return listCount;
 	}
 
+	
+	//몇명이 후원하는가
 	@Override
 	public int selectTotalCount(SqlSessionTemplate sqlSession, Member m) {
 		int listCount = sqlSession.selectOne("Boards.selectTotalCount",m);
@@ -343,9 +352,11 @@ public class boardDaoImpl implements boardDao {
 		System.out.println("찜하기 작성3 성공여부 : " + result);
 		
 		
-		 if(result == null) { 
-			 throw new BoardException("작성실패!"); //예외처리
-		 
+		 if(result == null) {
+			 result.setSum(0);
+			 result.setSumValue(0);
+			 /*throw new BoardException("작성실패!"); //예외처리
+*/		 
 		 }
 		 
 

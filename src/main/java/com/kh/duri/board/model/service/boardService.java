@@ -10,6 +10,7 @@ import com.kh.duri.board.model.exception.DonateListException;
 import com.kh.duri.board.model.vo.Board;
 import com.kh.duri.board.model.vo.Board2;
 import com.kh.duri.board.model.vo.BoardItem;
+import com.kh.duri.member.model.exception.LoginException;
 import com.kh.duri.member.model.vo.Member;
 import com.kh.duri.board.model.vo.PageInfo;
 
@@ -26,7 +27,7 @@ public interface boardService {
 
 	List<Board> selectMoneyList(PageInfo pi) throws DonateListException;
 
-	Board moneyDetailOne(Board b);
+	Board moneyDetailOne(Board b) throws LoginException;
 
 	int getThingListCount() throws DonateListException;
 
