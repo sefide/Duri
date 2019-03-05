@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.kh.duri.admin.model.exception.ListException;
 import com.kh.duri.admin.model.service.adminHappyService;
+import com.kh.duri.admin.model.vo.Notice;
 import com.kh.duri.admin.model.vo.RefundList;
 import com.kh.duri.admin.model.vo.adminDirectList;
 import com.kh.duri.admin.model.vo.adminFundingHistoryList;
@@ -188,13 +189,20 @@ public class AdminHappyController {
 		}
 		//신규회원 반려 버튼
 		@RequestMapping("adminNewHappyRefuse.ad")
-		public String adminNewHappyRefuse(HttpServletRequest request, HttpServletResponse response,adminMember m) {
+		public String adminNewHappyRefuse(HttpServletRequest request, HttpServletResponse response,adminMember m,Notice n) {
 			
-			int newno = Integer.parseInt(request.getParameter("newno"));
+			int newno = Integer.parseInt(request.getParameter("number"));
+			String textContent = request.getParameter("textContent");
+			String type = request.getParameter("type");
 			m.setMno(newno);
 			m.setA_mno(newno);
+			n.setN_mno(newno);
+			n.setNcontents(textContent);
+			n.setNtype(type);
+			
 			int result1 = ahs.adminNewHappyMemberRefuse(m);
 			int result2 = ahs.adminNewHappyAttachRefuse(m);
+			int result3 = ahs.adminHappyNoticeRefuse(n);
 			
 			
 			return "redirect:adminHappyAcc.ad";
@@ -219,14 +227,21 @@ public class AdminHappyController {
 	
 		//자기소개 갱신 회원 반려 버튼
 		@RequestMapping("adminMprHappyRefuse.ad")
-		public String adminMprHappyRefuse(HttpServletRequest request, HttpServletResponse response,adminMember m) {
+		public String adminMprHappyRefuse(HttpServletRequest request, HttpServletResponse response,adminMember m,Notice n) {
 			
 			int Mnonum = Integer.parseInt(request.getParameter("Mnonum"));
 			String Statusnum = request.getParameter("Statusnum");
 			String num = request.getParameter("num");
+			String textContent = request.getParameter("textContent");
+			String type = request.getParameter("type");
 			
 			m.setMno(Mnonum);
-			int result = ahs.adminMprHappyRefuse(m);
+			n.setN_mno(Mnonum);
+			n.setNcontents(textContent);
+			n.setNtype(type);
+			
+			int result1 = ahs.adminMprHappyRefuse(m);
+			int result2 = ahs.adminMprHappyRefuseMsg(n);
 			
 			
 			return "redirect:adminHappyAccDetail.ad?Mnonum="+Mnonum+"&Statusnum="+Statusnum+"&num="+num;
@@ -254,12 +269,18 @@ public class AdminHappyController {
 		}
 		//증빙서류 갱신 회원 반려 버튼
 		@RequestMapping("adminAttachRefuse.ad")
-		public String adminAttachRefuse(HttpServletRequest request, HttpServletResponse response,adminMember m) {
+		public String adminAttachRefuse(HttpServletRequest request, HttpServletResponse response,adminMember m,Notice n) {
 			
-			int Mnonum = Integer.parseInt(request.getParameter("Mnonum"));
+			int Mnonum = Integer.parseInt(request.getParameter("number"));
+			String textContent = request.getParameter("textContent");
+			String type = request.getParameter("type");
 			m.setA_mno(Mnonum);
+			n.setN_mno(Mnonum);
+			n.setNcontents(textContent);
+			n.setNtype(type);
 			
-			int result = ahs.adminAttachRefuse(m);
+			int result1 = ahs.adminAttachRefuse(m);
+			int result2 = ahs.adminHappyNoticeRefuse(n);
 			
 			
 			
@@ -268,7 +289,7 @@ public class AdminHappyController {
 		}
 		
 	
-	
+		
 	
 	
 }

@@ -3,6 +3,7 @@ package com.kh.duri.admin.model.service;
 import java.util.List;
 
 import com.kh.duri.admin.model.exception.ListException;
+import com.kh.duri.admin.model.vo.Notice;
 import com.kh.duri.admin.model.vo.RefundList;
 import com.kh.duri.admin.model.vo.adminDirectList;
 import com.kh.duri.admin.model.vo.adminFundingHistoryList;
@@ -50,4 +51,8 @@ public interface adminHappyService {
 	//증빙서류 갱신 회원 반려 버튼
 	int adminAttachRefuse(adminMember m);
 	
+	//반려사유(신규+증빙)
+	int adminHappyNoticeRefuse(Notice n);
+	//반려사유(자기소개)
+	int adminMprHappyRefuseMsg(Notice n);
 }

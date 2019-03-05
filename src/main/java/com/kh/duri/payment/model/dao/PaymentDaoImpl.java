@@ -350,7 +350,11 @@ public class PaymentDaoImpl implements PaymentDao {
 	// 물품 후원 결제페이지 - 후원물품정보 select
 	@Override
 	public int selectFundMoneyCulValue(SqlSessionTemplate sqlSession, Board b) {
-		int result = sqlSession.selectOne("Point.selectFundMoneyCulValue", b);
+		Integer result = sqlSession.selectOne("Point.selectFundMoneyCulValue", b);
+		
+		if(result == null) {
+			result = 0;
+		}
 		System.out.println("dao 현재 누적 후원금 :" + result);
 		return result;
 	}

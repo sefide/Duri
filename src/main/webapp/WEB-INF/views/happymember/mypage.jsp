@@ -341,7 +341,7 @@
 					moneyTbodyHtml.push('<td><a href="cloud_money_datail.bo?moneyDatail='+moneyDatail+'">'+data.moneyDonateList[i].fcontent+'</a></td>');
 				}
 					
-					moneyTbodyHtml.push('<td>'+data.moneyDonateList[i].fvalue+'</td>');
+					moneyTbodyHtml.push('<td>'+numberWithCommas(data.moneyDonateList[i].fvalue)+'</td>');
 					
 				if(data.moneyDonateList[i].fstartdate == null){
 					moneyTbodyHtml.push('<td>승인대기중</td>');
@@ -425,7 +425,7 @@
 	}
 	
 	function writeCloud(){
-		 if(${loginUser.mTakeStatus eq '3'}||${loginUser.mTakeStatus eq '4'}){																																																																																			
+		 if(${loginUser.mTakeStatus eq '3'} || ${loginUser.mTakeStatus eq '4'}){																																																																																			
 			 swal("관리자 승인 기간에는 펀딩 글 작성이 불가합니다!");
 		 }else{
 			 location.href='cloudWrite.happy';
@@ -433,6 +433,10 @@
 		
 	}
 
+	//금액에 , 단위 찍기
+	function numberWithCommas(x) {
+       return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+   }
 </script>
 	
 </body>

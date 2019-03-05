@@ -394,7 +394,7 @@
     				</tr>
     				<tr>
     					<th>나눔두리</th>
-    					<td colspan = "2" >${giveM.mNickName}</td>
+    					<td colspan = "2" >${giveM.mNickName}(${giveM.mName})</td>
     				</tr>
     				<tr>
     					<th>기부금영수증</th>
