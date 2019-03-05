@@ -141,10 +141,10 @@ public class BoardController {
 	 //금액후원 상세조회
 	   @RequestMapping("cloud_money_datail.bo")
 	   public ModelAndView moneyDetail(Board b, ModelAndView mv,HttpSession session, HttpServletRequest request, HttpServletResponse response){ 	   
-		   String moneyDatail = request.getParameter("moneyDatail");
-		   System.out.println("moneyDatail : " + moneyDatail);	   
-		   if(moneyDatail != null) {
-			   int happyMoneyFno = Integer.parseInt(moneyDatail);			   
+		   String fno = request.getParameter("moneyDatail");
+		   System.out.println("moneyDatail : " + fno);	   
+		   if(fno != null) {
+			   int happyMoneyFno = Integer.parseInt(fno);			   
 			   b.setFno(happyMoneyFno);
 			   System.out.println("happyMoneyFno : " + happyMoneyFno);
 		   }   
@@ -152,7 +152,7 @@ public class BoardController {
 		System.out.println("Board : "+b);		
 		Board moneyDetail = null; 	
 		moneyDetail = bs.moneyDetailOne(b); //받아온 아이디와 비밀번호로 로그인 정보 조회		
-       
+		System.out.println(moneyDetail);
 		int b1 =  bs.moneyCountOne(moneyDetail);//현재 모금 금액
 		int b2 =  bs.moneyCountTwo(moneyDetail); // 후원명수...
 
