@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.duri.admin.model.exception.ListException;
+import com.kh.duri.admin.model.vo.Notice;
 import com.kh.duri.admin.model.vo.RefundList;
 import com.kh.duri.admin.model.vo.adminDirectList;
 import com.kh.duri.admin.model.vo.adminFundingHistoryList;
@@ -122,6 +123,7 @@ public class adminHappyDaoImpl implements adminHappyDao{
 		int result = sqlsession.update("Admin.adminNewHappyAttachRefuse",m);
 		return result;
 	}
+	
 	//자기소개 갱신 행복두리 반려버튼
 	@Override
 	public int adminMprHappyRefuse(SqlSessionTemplate sqlsession, adminMember m) {
@@ -134,5 +136,19 @@ public class adminHappyDaoImpl implements adminHappyDao{
 		int result = sqlsession.update("Admin.adminAttachRefuse",m);
 		return result;
 	}
+	
 
+	
+	//반려사유(신규+증빙)
+	@Override
+	public int adminHappyNoticeRefuse(SqlSessionTemplate sqlsession, Notice n) {
+		int result = sqlsession.insert("Admin.adminHappyNoticeRefuse",n);
+		return result;
+	}
+	//반려사유(자기소개)
+	@Override
+	public int adminMprHappyRefuseMsg(SqlSessionTemplate sqlsession, Notice n) {
+		int result = sqlsession.insert("Admin.adminHappyNoticeRefuse",n);
+		return result;
+	}
 }

@@ -5,6 +5,7 @@ import java.util.List;
 import org.mybatis.spring.SqlSessionTemplate;
 
 import com.kh.duri.admin.model.exception.ListException;
+import com.kh.duri.admin.model.vo.Notice;
 import com.kh.duri.admin.model.vo.RefundList;
 import com.kh.duri.admin.model.vo.adminDirectList;
 import com.kh.duri.admin.model.vo.adminFundingHistoryList;
@@ -52,7 +53,10 @@ public interface adminHappyDao {
 	int adminMprHappyRefuse(SqlSessionTemplate sqlsession, adminMember m);
 	//증빙서류 갱신 회원 반려 버튼
 	int adminAttachRefuse(SqlSessionTemplate sqlsession, adminMember m);
-	
+	//반려사유(신규+증빙)
+	int adminHappyNoticeRefuse(SqlSessionTemplate sqlsession, Notice n);
+	//반려사유(자개소개)
+	int adminMprHappyRefuseMsg(SqlSessionTemplate sqlsession, Notice n);
 
 
 
