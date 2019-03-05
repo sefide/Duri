@@ -13,6 +13,7 @@ import com.kh.duri.board.model.vo.BoardItem;
 import com.kh.duri.member.model.exception.LoginException;
 import com.kh.duri.member.model.vo.Member;
 import com.kh.duri.board.model.vo.PageInfo;
+import com.kh.duri.happymember.model.vo.Funding;
 
 public interface boardService {
 
@@ -64,6 +65,14 @@ public interface boardService {
 	List<Board2> selectPercent(PageInfo pi) throws BoardException;
 
 	List<Board2> selectNowList();
+
+	List<Board2> moneyCountThr(Board moneyDetail);
+
+	List<Board2> moneyCountThr(BoardItem thingDetail);
+
+	List<Board2> moneyCountThr(Member longDetail);
+
+	List<Funding> selectItemDonateList();
 
 
 

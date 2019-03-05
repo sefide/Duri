@@ -57,7 +57,7 @@
 
         <h3><a href="money_donate.bo" id="money">금액후원</a><b> | </b><a href="thing_donate.bo" id="thing">물품후원</a></h3>
 
-		<div align="right" style="width:950px">
+		<!-- <div align="right" style="width:950px">
 		<label>지역 : </label>
 		 <select align="center" style="height:40px; width:150px;">
         	<option>서울시</option>
@@ -72,7 +72,7 @@
         	<option>소년소녀가장</option>
         	<option>한부모가정</option>
         </select>
-		</div>
+		</div> -->
       </div>		
       	<div class="row">
       	   <c:forEach var="mo" items="${moList}">
@@ -96,13 +96,15 @@
     					<p>' ${mo.mNick} ' 행복두리의 사연</p>
     					<span class="donation-time mb-3 d-block" style="color:black">${mo.mFundType}</span>
 	                	<div class="progress custom-progress-success">
-	                	
-	                    <div class="progress-bar bg-primary" role="progressbar" style="width: ${sum}%" aria-valuenow="${sum}" aria-valuemin="0" aria-valuemax="100"></div>
+	                	<c:forEach var="mo2" items="${moList2}">
+	                	<c:set var="sum1" value="${(mo2.sumFhValue/mo.fValue)*100}"/>
+	                	</c:forEach>
+	                    <div class="progress-bar bg-primary" role="progressbar" style="width: ${sum1}%" aria-valuenow="${sum1}" aria-valuemin="0" aria-valuemax="100"></div>
 	                	</div>
 	                	<c:forEach var="mo2" items="${moList2}">
-	                	<c:set var="sum" value="${(mo2.sumFhValue/mo.fValue)*100}"/>
+	                	<c:set var="sum2" value="${(mo2.sumFhValue/mo.fValue)*100}"/>
 	                	</c:forEach>
-	               		<a><fmt:formatNumber value="${sum}" pattern=" " />%</a><a style="float:right"><fmt:formatNumber value = "${mo.fValue}" type="currency" currencySymbol=" "/>원</a>
+	               		<a><fmt:formatNumber value="${sum2}" pattern=" " />%</a><a style="float:right"><fmt:formatNumber value = "${mo.fValue}" type="currency" currencySymbol=" "/>원</a>
 	    				
 	    			</div>
 	    		</form>

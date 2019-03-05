@@ -14,6 +14,7 @@ import com.kh.duri.board.model.vo.BoardItem;
 import com.kh.duri.member.model.exception.LoginException;
 import com.kh.duri.member.model.vo.Member;
 import com.kh.duri.board.model.vo.PageInfo;
+import com.kh.duri.happymember.model.vo.Funding;
 
 @Repository
 public class boardDaoImpl implements boardDao {
@@ -215,19 +216,74 @@ public class boardDaoImpl implements boardDao {
 		int result = 0;	//전체 삽입 결과 확인
 		int insertCloud = sqlSession.insert("Boards.insertCloud2", b);
 		int fd_fno = sqlSession.selectOne("Boards.selectFnoCurrval");
+		int insertItem1 = 0;
+		int insertItem2 = 0;
+		int insertItem3 = 0;
+		
 		System.out.println(fd_fno);
 		b.setFd_fno(fd_fno);
-		int insertItem1 = sqlSession.insert("Boards.insertItem1", b);	//첫번째 물품 목록 삽입
-		int insertItem2 = sqlSession.insert("Boards.insertItem2", b);	//두번째 물품 목록 삽입
-		int insertItem3 = sqlSession.insert("Boards.insertItem3", b);	//세번째 물품 목록 삽입
-
-		if(insertItem1>0 && insertItem2 >0 && insertItem3 >0 && insertCloud > 0) {
-			System.out.println("크라우드펀딩 작성 성공여부 : " + result);
-			result = 1;
-		}else {
+		if(b.getFdValue() != 0 && b.getFd_ino() != 0 && b.getFdValue2() != 0 && b.getFd_ino2() != 0 && b.getFdValue3() != 0 &&b.getFd_ino3() != 0) {
+			insertItem1 = sqlSession.insert("Boards.insertItem1", b);	//첫번째 물품 목록 삽입
+			insertItem2 = sqlSession.insert("Boards.insertItem2", b);	//두번째 물품 목록 삽입
+			insertItem3 = sqlSession.insert("Boards.insertItem3", b);	//세번째 물품 목록 삽입
 			
-			throw new BoardException("작성실패!"); //예외처리
+			if(insertItem1 > 0 && insertItem2 > 0 && insertItem3 > 0) {
+				result = 1;
+			}
+			
+		}else if(b.getFdValue() != 0 && b.getFd_ino() != 0 && b.getFdValue2() != 0 && b.getFd_ino2() != 0 && b.getFdValue3() == 0 &&b.getFd_ino3() == 0) {
+			insertItem1 = sqlSession.insert("Boards.insertItem1", b);	//첫번째 물품 목록 삽입
+			insertItem2 = sqlSession.insert("Boards.insertItem2", b);	//두번째 물품 목록 삽입
+			
+			if(insertItem1 > 0 && insertItem2 > 0) {
+				result = 1;
+			}
+			
+		}else if(b.getFdValue() != 0 && b.getFd_ino() != 0 && b.getFdValue2() == 0 && b.getFd_ino2() == 0 && b.getFdValue3() != 0 &&b.getFd_ino3() != 0) {
+			insertItem1 = sqlSession.insert("Boards.insertItem1", b);
+			insertItem3 = sqlSession.insert("Boards.insertItem3", b);	//세번째 물품 목록 삽입
+		
+			if(insertItem1 > 0 && insertItem3 > 0) {
+				result = 1;
+			}
+		
+		}else if(b.getFdValue() == 0 && b.getFd_ino() == 0 && b.getFdValue2() != 0 && b.getFd_ino2() != 0 && b.getFdValue3() != 0 &&b.getFd_ino3() != 0) {
+			insertItem2 = sqlSession.insert("Boards.insertItem2", b);	//두번째 물품 목록 삽입
+			insertItem3 = sqlSession.insert("Boards.insertItem3", b);	//세번째 물품 목록 삽입
+		
+			if(insertItem2 > 0 && insertItem3 > 0) {
+				result = 1;
+			}
+		
+		}else if(b.getFdValue() == 0 && b.getFd_ino() == 0 && b.getFdValue2() == 0 && b.getFd_ino2() == 0 && b.getFdValue3() != 0 &&b.getFd_ino3() != 0) {
+	
+			insertItem3 = sqlSession.insert("Boards.insertItem3", b);	//세번째 물품 목록 삽입
+		
+			if(insertItem3 > 0) {
+				result = 1;
+			}
+		
+		}else if(b.getFdValue() != 0 && b.getFd_ino() != 0 && b.getFdValue2() == 0 && b.getFd_ino2() == 0 && b.getFdValue3() == 0 &&b.getFd_ino3() == 0) {
+	
+			insertItem1 = sqlSession.insert("Boards.insertItem1", b);	//첫번째 물품 목록 삽입
+		
+			if(insertItem1 > 0) {
+				result = 1;
+			}
+			
+			
+		}else if(b.getFdValue() == 0 && b.getFd_ino() == 0 && b.getFdValue2() != 0 && b.getFd_ino2() != 0 && b.getFdValue3() == 0 &&b.getFd_ino3() == 0) {
+	
+			insertItem2 = sqlSession.insert("Boards.insertItem2", b);	//두번째 물품 목록 삽입
+		
+			if(insertItem2 > 0) {
+				result = 1;
+			}
 		}
+		
+		
+
+
 		
 		return result;
 	}
@@ -348,13 +404,13 @@ public class boardDaoImpl implements boardDao {
 	@Override
 	public Board2 thingDetail3(SqlSessionTemplate sqlSession, BoardItem bi) throws BoardException {
 		Board2 result = sqlSession.selectOne("Boards.selectThing", bi);
-
+		
+		
 		System.out.println("찜하기 작성3 성공여부 : " + result);
 		
 		
 		 if(result == null) {
-			 result.setSum(0);
-			 result.setSumValue(0);
+		
 			 /*throw new BoardException("작성실패!"); //예외처리
 */		 
 		 }
@@ -389,6 +445,54 @@ public class boardDaoImpl implements boardDao {
 		* if(longDetail ==null) { throw new LoginException("로그인정보가 존재하지 않습니다."); //예외처리
 		* }
 		*/
+
+		return thingDetail2;
+	}
+
+	@Override
+	public List<Board2> moneyCountThr(SqlSessionTemplate sqlSession, Board moneyDetail) {
+		List<Board2> thingDetail2 = sqlSession.selectList("Boards.moneyCountThr",moneyDetail); // 받아온 m을 이용해 mapper에서
+		// sql문 실행해서 받아온 값 저장
+
+		System.out.println("Dao thingDetail2 : " + thingDetail2);
+		
+	
+
+		return thingDetail2;
+	}
+
+	@Override
+	public List<Board2> moneyCountThr(SqlSessionTemplate sqlSession, BoardItem thingDetail) {
+		List<Board2> thingDetail2 = sqlSession.selectList("Boards.moneyCountThr",thingDetail); // 받아온 m을 이용해 mapper에서
+		// sql문 실행해서 받아온 값 저장
+
+		System.out.println("Dao thingDetail2 : " + thingDetail2);
+		
+	
+
+		return thingDetail2;
+	}
+
+	@Override
+	public List<Board2> moneyCountThr(SqlSessionTemplate sqlSession, Member longDetail) {
+		List<Board2> thingDetail2 = sqlSession.selectList("Boards.moneyCountThr2",longDetail); // 받아온 m을 이용해 mapper에서
+		// sql문 실행해서 받아온 값 저장
+
+		System.out.println("Dao thingDetail2 : " + thingDetail2);
+		
+	
+
+		return thingDetail2;
+	}
+
+	@Override
+	public List<Funding> selectItemDonateList(SqlSessionTemplate sqlSession) {
+		List<Funding> thingDetail2 = sqlSession.selectList("HappyMember.selectItemDonateListBoard"); // 받아온 m을 이용해 mapper에서
+		// sql문 실행해서 받아온 값 저장
+
+		System.out.println("Dao thingDetail2 : " + thingDetail2);
+		
+	
 
 		return thingDetail2;
 	}
