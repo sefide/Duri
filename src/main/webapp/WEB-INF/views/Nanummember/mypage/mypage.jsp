@@ -100,10 +100,9 @@
 				<table id="MoneyCloudTbl">
 					<thead>
 						<tr>
-							<th style="width: 40%;">제목</th>
-							<th style="width: 15%;">진행현황</th>
+							<th style="width: 50%;">제목</th>
 							<th style="width: 15%;">내가 후원한 호인트</th>
-							<th style="width: 15%;">후원 일시</th>
+							<th style="width: 20%;">후원 일시</th>
 							<th style="width: 15%;">100%달성여부</th>
 						</tr>
 					</thead>
@@ -111,7 +110,6 @@
 						<c:forEach items="${moneyList}" var = "moneyList" varStatus="">
 							<tr onclick="goFund(${moneyList.fNo});">
 								<td><c:out value="${moneyList.fTitle}"/></td>
-								<td></td>
 								<td><fmt:formatNumber value = "${ moneyList.fhValue }" type="currency" currencySymbol=" "/></td>						
 								<td><c:out value="${moneyList.fhDate}"></c:out></td>
 								<c:choose>
@@ -180,10 +178,9 @@
 				<table id="">
 					<thead>
 						<tr>
-							<th style="width: 40%;">제목</th>
-							<th style="width: 15%;">진행현황</th>
-							<th style="width: 15%;">내가 후원한 물품</th>
-							<th style="width: 15%;">후원 일시</th>
+							<th style="width: 50%;">제목</th>
+							<th style="width: 15%;">내가 후원한 호인트</th>
+							<th style="width: 20%;">후원 일시</th>
 							<th style="width: 15%;">100%달성여부</th>
 						</tr>
 					</thead>
@@ -191,9 +188,7 @@
 						<c:forEach items="${itemList}" var = "itemList" varStatus="">
 							<tr onclick="goItemFund(${itemList.fNo});">							
 								<td><c:out value="${itemList.fTitle}"/></td>
-								<td></td>
-								<td><c:out value="${itemList.iName}"/></td>
-								
+								<td><c:out value="${itemList.iName}"/></td>								
 								<td><c:out value="${itemList.fhDate}"></c:out></td>
 								<c:choose>
 									<c:when test="${itemList.fStatus eq 'GOAL'}">
@@ -263,10 +258,9 @@
 				<table>
 					<thead>					
 						<tr>
-							<th style="width: 40%;">제목</th>
-							<th style="width: 15%;">진행현황</th>
+							<th style="width: 50%;">제목</th>
 							<th style="width: 15%;">내가 후원한 호인트</th>
-							<th style="width: 15%;">후원 일시</th>
+							<th style="width: 20%;">후원 일시</th>
 							<th style="width: 15%;">100%달성여부</th>
 						</tr>					
 					</thead>
@@ -274,7 +268,6 @@
 						<c:forEach items="${endMoneyList}" var = "endMoneyList" varStatus="">
 							<tr onclick="goFund(${endMoneyList.fNo});">
 								<td><c:out value="${endMoneyList.fTitle}"/></td>
-								<td></td>
 								<td><fmt:formatNumber value = "${ endMoneyList.fhValue }" type="currency" currencySymbol=" "/></td>								
 								<td><c:out value="${endMoneyList.fhDate}"></c:out></td>
 								<c:choose>
@@ -344,10 +337,9 @@
 				<table>
 					<thead>					
 						<tr>
-							<th style="width: 40%;">제목</th>
-							<th style="width: 15%;">진행현황</th>
-							<th style="width: 15%;">내가 후원한 물품</th>
-							<th style="width: 15%;">후원 일시</th>
+							<th style="width: 50%;">제목</th>
+							<th style="width: 15%;">내가 후원한 호인트</th>
+							<th style="width: 20%;">후원 일시</th>
 							<th style="width: 15%;">100%달성여부</th>
 						</tr>					
 					</thead>
@@ -355,7 +347,6 @@
 						<c:forEach items="${endItemList}" var ="endItemList" varStatus="">
 							<tr onclick="goItemFund(${endItemList.fNo});">	
 								<td><c:out value="${endItemList.fTitle}"/></td>
-								<td></td>
 								<td><c:out value="${endItemList.iName}"/></td>						
 								<td><c:out value="${endItemList.fhDate}"></c:out></td>
 								<c:choose>
