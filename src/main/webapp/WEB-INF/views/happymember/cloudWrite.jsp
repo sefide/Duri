@@ -226,7 +226,7 @@
      <tr height="1" bgcolor="#dddddd"><td colspan="4"></td></tr>
      <tr>
       <td>&nbsp;</td>
-      <td align="center" style="height:50px;"><b>펀딩 종료 기간</b></td>
+      <td align="center" style="height:50px;"><b>펀딩 진행 기간</b></td>
       <td>
      	<select align="center" name="mLeftDay" id="mLeftDay" style="width:150px; height:30px;">
      		<option disabled selected>기간선택</option>
