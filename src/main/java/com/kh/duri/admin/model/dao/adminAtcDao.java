@@ -8,6 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 
 import com.kh.duri.Nanummember.model.vo.PageInfo;
 import com.kh.duri.admin.model.exception.ListException;
+import com.kh.duri.admin.model.vo.Notice;
 import com.kh.duri.admin.model.vo.RefundList;
 import com.kh.duri.admin.model.vo.adminFundingList;
 import com.kh.duri.admin.model.vo.adminMember;
@@ -49,8 +50,10 @@ public interface adminAtcDao {
 	int selectRefundPageCount(SqlSessionTemplate sqlsession, RefundList r);
 	//환불하기 버튼 ajax
 	int adminRefundButton(SqlSessionTemplate sqlsession, RefundList rfL);
-	
-	
+	//행복두리 알림 보내기 ajax
+	List<Notice> adminAlarm(SqlSessionTemplate sqlsession, Notice n);
+	//행복두리 알림확인완료 ajax
+	int adminAlarmBtn(SqlSessionTemplate sqlsession, Notice n);
 	
 	
 	
@@ -97,6 +100,8 @@ public interface adminAtcDao {
 	int TotalitemMoney(SqlSessionTemplate sqlsession);
 	int TotalDirectConn(SqlSessionTemplate sqlsession);
 	int TotalFundUpload(SqlSessionTemplate sqlsession);
+
+	
 	
 	
 

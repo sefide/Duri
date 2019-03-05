@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.kh.duri.Nanummember.model.vo.PageInfo;
 import com.kh.duri.admin.model.exception.ListException;
+import com.kh.duri.admin.model.vo.Notice;
 import com.kh.duri.admin.model.vo.RefundList;
 import com.kh.duri.admin.model.vo.adminFundingList;
 import com.kh.duri.admin.model.vo.adminMember;
@@ -52,9 +53,10 @@ public interface adminAtcService {
 	int selectRefundPageCount(RefundList r);
 	//환불하기 버튼 ajax
 	int adminRefundButton(RefundList rfL);
-	
-	
-	
+	//행복두리 알림보내기 ajax
+	List<Notice> adminAlarm(Notice n);
+	//행복두리 알림확인완료 ajax
+	int adminAlarmBtn(Notice n);
 	
 	//Today
 	int TodayNewNanum();
@@ -77,6 +79,8 @@ public interface adminAtcService {
 	int TotalitemMoney();
 	int TotalDirectConn();
 	int TotalFundUpload();
+	
+	
 	
 
 

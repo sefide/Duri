@@ -1,6 +1,5 @@
 package com.kh.duri.admin.model.service;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -11,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.kh.duri.Nanummember.model.vo.PageInfo;
 import com.kh.duri.admin.model.dao.adminAtcDao;
 import com.kh.duri.admin.model.exception.ListException;
+import com.kh.duri.admin.model.vo.Notice;
 import com.kh.duri.admin.model.vo.RefundList;
 import com.kh.duri.admin.model.vo.adminFundingList;
 import com.kh.duri.admin.model.vo.adminMember;
@@ -129,6 +129,25 @@ public class adminAtcServiceImpl implements adminAtcService{
 		
 		return result;
 	}
+	//행복두리 알림보내기 ajax
+	@Override
+	public List<Notice> adminAlarm(Notice n){
+		List<Notice>list = aad.adminAlarm(sqlsession,n);
+		return list;
+	}
+	//행복두리 알림확인완료 ajax
+	@Override
+	public int adminAlarmBtn(Notice n) {
+		
+		int result = aad.adminAlarmBtn(sqlsession,n);
+				
+		return result;
+	}
+	
+	
+	
+	
+	
 	
 	//통계 페이지 - bar chart 데이터
 	@Override
@@ -224,5 +243,7 @@ public class adminAtcServiceImpl implements adminAtcService{
 		int result =aad.TotalFundUpload(sqlsession);
 		return result;
 	}
+	
+
 	
 }
