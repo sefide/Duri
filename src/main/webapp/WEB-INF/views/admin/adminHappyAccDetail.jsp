@@ -23,7 +23,8 @@
 <body>
     <div id="wrapper">
        <jsp:include page="include/adminNavi.jsp" />
-	
+		<jsp:include page="include/MprRefusePopUp.jsp" />
+		<jsp:include page="include/RefusePopUp.jsp" />
 	
        
         <div id="page-wrapper" >
@@ -171,7 +172,7 @@
                 <br>
                 <br>
                 <c:if test="${HappyAccDetail[0].mprNew!=null}">
-                 <button type="button" class="btn btn-light btn-lg btn-block MprRefuse">반려하기</button>
+                 <button type="button" class="btn btn-light btn-lg btn-block MprRefuse" data-toggle="modal" data-target="#MprRefuseModal">반려하기</button>
 		  		 <button type="button" class="btn btn-warning btn-lg btn-block MprAgree">승인하기</button>
 		  		 </c:if>
             	<br><br>	  
@@ -229,7 +230,7 @@
 	
 		<br><br><br>
            <c:if test="${HappyAccDetail[1].achangeName!='EMPTY'}"> 	
-          <button type="button" class="btn btn-light btn-lg btn-block AttachRefuse">반려하기</button>
+          <button type="button" class="btn btn-light btn-lg btn-block AttachRefuse" data-toggle="modal" data-target="#RefuseModal">반려하기</button>
 		  <button type="button" class="btn btn-warning btn-lg btn-block AttachAgree">승인하기</button>
            </c:if>
            <br><br><br> 
@@ -409,7 +410,7 @@
     
     <jsp:include page="include/admintableFooter.jsp" />
       <script>
-
+//증빙서류 확대
  function OnloadImg(url){
 
   var img=new Image();
@@ -427,7 +428,7 @@
   OpenWindow.document.write("<style>body{margin:0px;}</style><img src='"+url+"' width='"+win_width+"'>");
 
  }
- 
+ //자기소개 승인 버튼
  $(".MprAgree").click(function () {
 	var Mnonum = $("#memberno").text();
 	var Statusnum = $("#memberst").text();
@@ -436,59 +437,69 @@
 	
 	location.href="adminMprHappyAgree.ad?Mnonum="+Mnonum+"&Statusnum="+Statusnum+"&num="+num;
 });
+ //자기소개 반려버튼 시 모달창
    $(".MprRefuse").click(function () {
 	var Mnonum = $("#memberno").text();
 	var Statusnum = $("#memberst").text();
 	var num = $("#membernum").text();
+	$("#Mnonum").val(Mnonum);
+	$("#Statusnum").val(Statusnum);
+	$("#num").val(num);
+	$("#type").val("MPR");
 	
-	
-	location.href="adminMprHappyRefuse.ad?Mnonum="+Mnonum+"&Statusnum="+Statusnum+"&num="+num;
 });  
+   //자기소개 반려+사유 전송
+   $("#MprRefuseBtn").click(function () {
+		var textContent = $("#textContent").val();//반려사유
+		var Mnonum = $("#Mnonum").val();
+		var Statusnum = $("#Statusnum").val();
+		var num = $("#num").val();
+		var type = $("#type").val();
+		$.ajax({
+			url:"adminMprHappyRefuse.ad",
+			type : "get",
+			data : {Mnonum:Mnonum,Statusnum:Statusnum,num:num,textContent:textContent,type:type},
+			success : function (data) {
+				location.href="adminHappyAccDetail.ad?Mnonum="+Mnonum+"&Statusnum="+Statusnum+"&num="+num;
+			}
+		});
+	}); 
+ 
+   //증빙서류 승인버튼
  $(".AttachAgree").click(function () {
 	var Mnonum = $("#memberno").text();
 	var changName =$("#imgName").text();
 	
 	 location.href="adminAttachHappyAgree.ad?Mnonum="+Mnonum+"&changName="+changName; 
 });
+   //증빙서류 반려 시 모달창
  $(".AttachRefuse").click(function () {
 	var Mnonum = $("#memberno").text();
+	$("#number").val(Mnonum);
+	$("#type").val("DOC");
 	
-	 location.href="adminAttachRefuse.ad?Mnonum="+Mnonum; 
+	  
 });
- 
+	//증빙서류 반려+사유 전송
+ $("#RefuseBtn").click(function () {
+		var textContent = $(".textContent").val();//반려사유
+		var number = $("#number").val();
+		var type = $("#type").val();
+		$.ajax({
+			url:"adminAttachRefuse.ad",
+			type : "get",
+			data : {number:number, textContent:textContent,type:type},
+			success : function (data) {
+				location.href="adminHappyAcc.ad";
+			}
+		});
+	}); 
+
  
  
 </script>
 
-<script type="text/javascript">
-var wsDuri = "ws://localhost:8181/duri/count";
-function send_message() {
-    websocket = new WebSocket(wsDuri);
-    websocket.onopen = function(evt) {
-        onOpen(evt);
-    };
 
-    websocket.onmessage = function(evt) {
-        onMessage(evt);
-    };
-
-    websocket.onerror = function(evt) {
-        onError(evt);
-    };
-
-}
-
-function onOpen(evt) {
-	websocket.send($("#memberno").text());
-}
-
-function onMessage(evt) {
-}
-
-function onError(evt) {
-
-}
-</script>
 
 </body>
 </html>

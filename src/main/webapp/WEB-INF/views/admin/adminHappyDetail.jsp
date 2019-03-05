@@ -23,6 +23,7 @@
 <body>
     <div id="wrapper">
        <jsp:include page="include/adminNavi.jsp" />
+       <jsp:include page="include/RefusePopUp.jsp" />
 	
 	
 	
@@ -153,9 +154,12 @@
 	
 		<br><br><br>
           <c:if test="${HappyDetail.mTakeStatus == 3 }"> 	
-          <button type="button" class="btn btn-light btn-lg btn-block NewRefuse">반려하기</button>
+          <button type="button" class="btn btn-light btn-lg btn-block NewRefuse" data-toggle="modal" data-target="#RefuseModal">반려하기</button>
 		  <button type="button" class="btn btn-warning btn-lg btn-block NewAgree">승인하기</button>
            
+           
+ 
+
            <br><br><br> 
           </c:if> 
           
@@ -366,13 +370,29 @@
 	location.href="adminNewHappyAgree.ad?newno="+newno;
 	
 });
+ //반려버튼 누를때
  $(".NewRefuse").click(function () {
 	var newno = $("#NewNumber").text();
-	console.log("newno: "+newno);
-	location.href="adminNewHappyRefuse.ad?newno="+newno;
+	$("#number").val(newno);
+	$("#type").val("NEW");
+
 	
 });
 
+//반려 팝업에 있는 보내기 버튼 누를때
+ $("#RefuseBtn").click(function () {
+	var textContent = $(".textContent").val();//반려사유
+	var number = $("#number").val();
+	var type = $("#type").val();
+	$.ajax({
+		url:"adminNewHappyRefuse.ad",
+		type : "get",
+		data : {number:number, textContent:textContent,type:type},
+		success : function (data) {
+			location.href="adminHappyAcc.ad";
+		}
+	});
+}); 
 </script>
 </body>
 </html>

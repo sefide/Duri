@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.duri.admin.model.dao.adminHappyDao;
 import com.kh.duri.admin.model.exception.ListException;
+import com.kh.duri.admin.model.vo.Notice;
 import com.kh.duri.admin.model.vo.RefundList;
 import com.kh.duri.admin.model.vo.adminDirectList;
 import com.kh.duri.admin.model.vo.adminFundingHistoryList;
@@ -150,6 +151,7 @@ public class adminHappyServiceImpl implements adminHappyService{
 		int result = ahd.adminNewHappyAttachRefuse(sqlsession,m);
 		return result;
 	}
+	
 	//자기소개 갱신 행복두리 반려버튼
 	@Override
 	public int adminMprHappyRefuse(adminMember m) {
@@ -162,6 +164,22 @@ public class adminHappyServiceImpl implements adminHappyService{
 		int result = ahd.adminAttachRefuse(sqlsession,m);
 		return result;
 	}
+	
+	
+	//반려사유(신규+증빙)
+	@Override
+	public int adminHappyNoticeRefuse(Notice n) {
+		int result = ahd.adminHappyNoticeRefuse(sqlsession,n);
+		return result;
+	}
+	//반려사유(자기소개)
+	@Override
+	public int adminMprHappyRefuseMsg(Notice n) {
+		int result = ahd.adminMprHappyRefuseMsg(sqlsession,n);
+		return result;
+	}
+
+	
 	
 
 	

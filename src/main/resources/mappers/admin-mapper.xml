@@ -204,6 +204,7 @@
 	<update id="adminNewHappyAttachRefuse"  parameterType="adminMember" >
 		UPDATE ATTACHMENT SET ADATE=NULL, AORIGINNAME='EMPTY', ACHANGENAME='EMPTY' WHERE A_MNO=#{a_mno} AND ADOCTYPE=1
 	</update>
+	
 	<!-- 자기소개 갱신 행복두리 승인버튼 -->
 	<update id="adminMprHappyAgree"  parameterType="adminMember" >
 		UPDATE MEMBER SET MPR=MPRNEW, MPRNEW=NULL, MPRACCEPTDATE=SYSDATE WHERE MNO=#{mno}
@@ -230,6 +231,12 @@
 		WHERE A_MNO=#{a_mno} AND ADOCTYPE =2
 	</update>
 
+	
+	<!--반려사유(신규+증빙+자기소개) -->
+	<insert id="adminHappyNoticeRefuse"  parameterType="Notice" >
+		INSERT INTO NOTICE VALUES (SEQ_N_NO.NEXTVAL,#{n_mno},#{ntype},#{ncontents},SYSDATE,'Y')
+	</insert>
+	
 
 	
 	
@@ -244,7 +251,7 @@
 	<!-- 크라우드 물품 펀딩 승인목록 -->
 	<select id="adminGoodsFundingList" resultType="adminFundingList" parameterType="adminFundingList" >
 		SELECT DISTINCT F.FNO,F.FTITLE,F.FWRITER,F.FWRITEDATE,M.MID,M.MFUNDTYPE,
-		(SELECT LISTAGG(CAST(FA2.INAME as varchar2(15)),',') WITHIN GROUP (ORDER BY FD_FNO)
+		(SELECT LISTAGG(CAST(FA2.INAME as varchar2(50)),',') WITHIN GROUP (ORDER BY FD_FNO)
 		FROM FUNDINGDETAIL FA1 JOIN FUNDITEM FA2 ON(FA2.INO=FA1.FD_INO) WHERE F.FNO = FD_FNO GROUP BY FD_FNO) AS GOODSNAME
 		,(SELECT SUM(FDVALUE) FROM FUNDINGDETAIL WHERE FD_FNO=F.FNO) AS TOTALCOUNT
 		FROM FUNDING F JOIN MEMBER M ON (F.FWRITER=M.MNO)
