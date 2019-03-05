@@ -132,7 +132,7 @@
 	<!-- 행복두리 회원수정 -->
 	<update id="updateHappy">
 		UPDATE MEMBER
-		SET MPHONE = #{mPhone} , MPWD = #{mpwd} ,MGENDER = #{mGender}
+		SET MPHONE = #{mPhone} , MPWD = #{mpwd} ,MGENDER = #{mGender},MADDRESS = #{mAddress}
 		WHERE MID = #{mid} 
 	</update>
 	

@@ -20,6 +20,7 @@ import com.kh.duri.board.model.vo.Board2;
 import com.kh.duri.board.model.vo.BoardItem;
 import com.kh.duri.board.model.vo.PageInfo;
 import com.kh.duri.board.model.vo.Pagination;
+import com.kh.duri.member.model.exception.LoginException;
 import com.kh.duri.member.model.vo.Member;
 
 
@@ -141,6 +142,8 @@ public class BoardController {
 	 //금액후원 상세조회
 	   @RequestMapping("cloud_money_datail.bo")
 	   public ModelAndView moneyDetail(Board b, ModelAndView mv,HttpSession session, HttpServletRequest request, HttpServletResponse response){ 	   
+		   try {
+		   
 		   String moneyDatail = request.getParameter("moneyDatail");
 		   System.out.println("moneyDatail : " + moneyDatail);	   
 		   if(moneyDatail != null) {
@@ -151,8 +154,9 @@ public class BoardController {
 		   
 		System.out.println("Board : "+b);		
 		Board moneyDetail = null; 	
-		moneyDetail = bs.moneyDetailOne(b); //받아온 아이디와 비밀번호로 로그인 정보 조회		
-       
+		
+			moneyDetail = bs.moneyDetailOne(b);
+		
 		int b1 =  bs.moneyCountOne(moneyDetail);//현재 모금 금액
 		int b2 =  bs.moneyCountTwo(moneyDetail); // 후원명수...
 
@@ -160,7 +164,12 @@ public class BoardController {
 		session.setAttribute("moneyDetail", moneyDetail);	//세션에 뿌려주기	
 		session.setAttribute("b1", b1);	//세션에 뿌려주기	
 		session.setAttribute("b2", b2);	//세션에 뿌려주기	
-		mv.setViewName("redirect:moneyDetail.bo"); //위처럼 redirect로 뷰페이지이름연결할거랑 똑같음			
+		mv.setViewName("redirect:moneyDetail.bo"); //위처럼 redirect로 뷰페이지이름연결할거랑 똑같음	
+		   } catch (LoginException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} //받아온 아이디와 비밀번호로 로그인 정보 조회		
+	       
 		return mv;
 
 	}
@@ -230,7 +239,7 @@ public class BoardController {
 		thingDetail = bs.thingDetailOne(bi); //물품펀딩글 받아오기(fundging)
 		thingDetail2 = bs.thingDetailOne2(bi);//물품만 받아오기(fundgindDetail & fundItem)
 	
-			thingDetail3 = bs.thingDetailOne3(bi);
+		thingDetail3 = bs.thingDetailOne3(bi);
 	
 		//물품만 받아오기(fundgindDetail & fundItem)
 			

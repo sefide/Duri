@@ -10,6 +10,7 @@
 <!-- semantic ui -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
 <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 
 <title>마이페이지>내 정보 수정</title>
 <!-- 정기후원 -->
@@ -210,8 +211,27 @@ input, select{
     </div>
   </div>
 
-
-
+  
+<h4 class="ui dividing header"  style="margin:10px;">주소지</h4>
+<div class="seven wide field" style="margin:15px">
+      <label>*주소</label>
+      <div class="two fields">
+         <div class="field">
+        <input type="text" name="mAddress1" id="mAddress1" placeholder="" style="height:40px">
+      </div>
+         <div class="ui button" style="width:120px; height:35px;" id="mAdd">주소검색</div>
+      </div>
+      
+       <div class="two fields">
+          <div class="field">
+           <input type="text" name="mAddress2" id="mAddress2" placeholder="주소를 입력해주세요." style="width:350px;height:40px"> 
+   		</div> 
+		<div class="field">
+           <input type="text" name="mAddress3" id="mAddress3" placeholder="상세주소를 입력해주세요." style="width:400px;margin-left:100px;height:40px">  	
+			<input type="hidden" name="mAddress" id="mAddress">
+		</div>
+	</div>
+    </div>
   
   
 <!-- <h4 class="ui dividing header"  style="margin:10px;">주민등록번호</h4>
@@ -252,7 +272,7 @@ input, select{
     <br><br><br><br>
   
   	<div align="center">
-		 <button class="ui primary button" type="submit">
+		 <button class="ui primary button" onclick="sub()">
 		   	수정하기
 		</button>
 		<button class="ui button" onclick="back();">
@@ -268,14 +288,68 @@ input, select{
 
 </div>
 </div>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> 
 <script>
+
+//주소 검색
+var mAdd = null;
+$("#mAdd").click(function(){
+	 new daum.Postcode({
+	        oncomplete: function(data) {
+
+                // 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
+                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+                var fullRoadAddr = data.roadAddress; // 도로명 주소 변수
+                var extraRoadAddr = ''; // 참고 항목 변수
+
+                // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+                // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+                if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+                    extraRoadAddr += data.bname;
+                }
+                // 건물명이 있고, 공동주택일 경우 추가한다.
+                if(data.buildingName !== '' && data.apartment === 'Y'){
+                   extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                }
+                // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+                if(extraRoadAddr !== ''){
+                    extraRoadAddr = ' (' + extraRoadAddr + ')';
+                }
+                
+                //도로명, 지번 주소의 유무에 따라 해당 주소 풀로 입력
+                if(fullRoadAddr !== ''){
+                	fullRoadAddr += extraRoadAddr;
+                }
+                
+				console.log(fullRoadAddr);
+                // 우편번호와 주소 정보를 해당 필드에 넣는다.
+				
+                $('#mAddress1').val(data.zonecode) ;
+                $('#mAddress2').val(fullRoadAddr);
+                // 커서를 상세주소 필드로 이동한다.
+                $("#mAddress3").focus();
+              
+
+            }
+	        
+	    }).open();
+	
+})
+
+
 	function back(){
 		history.back();
 	}
 	
 	function update(){
 		$("#updateForm").submit();
+	}
+	
+	
+	function sub(){
+		$("#mAddress").val($("#mAddress2").val() + " " + $("#mAddress3").val());
+		$("#updateForm").submit();
+		
 	}
 </script>
 </body>

@@ -144,7 +144,7 @@
       <td style="width:800px;">
      	<div class="ui input ">
  			<select align="center" id="fd_ino" style="width:160px; height:30px;">
- 				<option disabled selected>선택</option>
+ 				<option value="0">선택안함</option>
  				<option value="1">생리대</option>
  				<option value="2">스킨로션세트</option>
  				<option value="3">라면</option>
@@ -166,10 +166,10 @@
  				<option value="19">클렌징폼&바디로션</option>
  			</select>
  			&nbsp;&nbsp;
- 			<input type="text" id="fdValue" name="fdValue" maxlength="2" style=" width:65px"><b>개</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ 			<input type="text" id="fdValue" name="fdValue" maxlength="2" style=" width:65px" value="0"><b>개</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
  			
  				<select align="center" id="fd_ino2" style="width:160px; height:30px;">
- 				<option disabled selected>선택</option>
+ 				<option value="0">선택안함</option>
  				<option value="1">생리대</option>
  				<option value="2">스킨로션세트</option>
  				<option value="3">라면</option>
@@ -191,10 +191,10 @@
  				<option value="19">클렌징폼&바디로션</option>
  			</select>
  			&nbsp;&nbsp;
- 			<input type="text" id="fdValue2" name="fdValue" maxlength="2" style=" width:65px"><b>개</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ 			<input type="text" id="fdValue2" name="fdValue" maxlength="2" style=" width:65px" value="0"><b>개</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
  				
  				<select align="center" id="fd_ino3" style="width:160px; height:30px;">
- 				<option disabled selected>선택</option>
+ 				<option value="0">선택안함</option>
  				<option value="1">생리대</option>
  				<option value="2">스킨로션세트</option>
  				<option value="3">라면</option>
@@ -216,7 +216,7 @@
  				<option value="19">클렌징폼&바디로션</option>
  			</select>
  			&nbsp;&nbsp;
- 			<input type="text" id="fdValue3" name="fdValue" maxlength="2" style=" width:65px"><b>개</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ 			<input type="text" id="fdValue3" name="fdValue" maxlength="2" style=" width:65px" value="0"><b>개</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 		</div>
 	 </td>
      </tr>
