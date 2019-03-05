@@ -193,7 +193,7 @@ p {font-size: 20px; text-align: center;}
 
 			<span><a class="a-tag" id="modalBtn" onclick="items(${loginUser.mno});">보유물품</a></span><br>
 			<span><a class="a-tag" href="passCheck.me" style="margin-right: 80px;">내 정보 수정</a></span>
-			<span><a class="a-tag" id="modalBtn2">알림</a></span><br>
+			<span><a class="a-tag" id="modalBtn2" onclick="modalBtn2();">알림</a></span><br>
 		</div>
 	</div>
 </div>
@@ -270,12 +270,12 @@ p {font-size: 20px; text-align: center;}
 <script>
      
    //클릭시 모달 가져오기(알림)
-	$(function () {
-        $("#modalBtn2").click(function () {
+	$(function (){
+        $("#modalBtn2").click(function(){
         	$("#myModal2").css("display", "block");
         });
      });
-	
+   
 	//모달 닫기 버튼
 	$(function (){
 		$("#close").click(function(){
@@ -340,7 +340,6 @@ p {font-size: 20px; text-align: center;}
 						$itemsSelect.append($("<option>").text(0));
 						var itemsOption = "";
 						
-						//<select>	<option>3</option><option>2</option><option>1</option></select>
 						for(var o in data.ownlist){//보유물품리스트를 순서대로 인덱스를 줘서 정보 뽑기
 							console.log("보유물품번호 : " + data.ownlist[o].o_ino + "/ 후원물품번호 : " + data.fundItemList[i].ino);
 							if(data.ownlist[o].o_ino == data.fundItemList[i].ino){
@@ -439,43 +438,41 @@ p {font-size: 20px; text-align: center;}
 	
 </script>
 <script>
-var wsUri = "ws://localhost:8181/ex/count";
-function send_message() {
-    websocket = new WebSocket(wsUri);
-    websocket.onopen = function(evt) {
-        onOpen(evt);
-    };
-
-    websocket.onmessage = function(evt) {
-        onMessage(evt);
-    };
-
-    websocket.onerror = function(evt) {
-        onError(evt);
-    };
-
-}
-
-function onOpen(evt) 
-
-{
-}
-
-function onMessage(evt) {
-	console.log("웹소켓@@@@@")
-	if(evt.data == $("input[name=mno]").val()) {
-		$("#modalBtn2").text("알림(+)")
-	} else {
-		$("#modalBtn2").text("알림(-)")
+	var wsUri = "ws://localhost:8181/ex/count";
+	function send_message() {
+	    websocket = new WebSocket(wsUri);
+	    websocket.onopen = function(evt) {
+	        onOpen(evt);
+	    };
+	
+	    websocket.onmessage = function(evt) {
+	        onMessage(evt);
+	    };
+	
+	    websocket.onerror = function(evt) {
+	        onError(evt);
+	    };
+	
 	}
-}
-
-function onError(evt) {
-}
-
-$(document).ready(function(){
-		send_message();
-});
+	
+	function onOpen(evt){
+	}
+	
+	function onMessage(evt) {
+		console.log("웹소켓@@@@@")
+		if(evt.data == $("input[name=mno]").val()) {
+			$("#modalBtn2").text("알림(+)")
+		} else {
+			$("#modalBtn2").text("알림(-)")
+		}
+	}
+	
+	function onError(evt) {
+	}
+	
+	$(document).ready(function(){
+			send_message();
+	});
 
 
 

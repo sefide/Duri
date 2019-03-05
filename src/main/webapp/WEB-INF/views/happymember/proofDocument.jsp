@@ -16,7 +16,7 @@
 	.h1 {color: darkorange; text-align: center;}
 	a {color: #333;}
 	#button {margin-left: 310px; width: 49.7%; height: 40px; font-size: 18px;}
-	/* #proofDocument {margin:auto; width: 60%; height: 750px; background: lightgray; text-align: center;} */
+	#proofDocument {margin:auto; width: 57%; height: 880px; background: lightgray; text-align: center;}
 	.d-day-plus {color: red;}
 	.textSilver {margin-left:-9px; margin-top: 60px; width: 101.5%;}
 	
@@ -162,8 +162,8 @@
 		</c:choose>
 	</form>	
 		<br><br><br><br>
-		
-		<div id="proofDocument" align="center"><h1>&lt;현재 증빙서류&gt;</h1>
+		<h1 align="center">&lt;현재 증빙서류&gt;</h1>
+		<div id="proofDocument" align="center"><br><br>
 			<img alt="최근증빙서류 이미지" src="resources/formFiles/${proofDocument.achangename}" style="width: 600px; height: 800px;">
 		</div>
 		
