@@ -4,6 +4,8 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <!-- semantic ui -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
 <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
@@ -332,7 +334,8 @@ p {font-size: 20px; text-align: center;}
 					console.log(data.ownlist[i]);//보유 물품 뽑기(번호, 수량 등)
 					
 					//물품명 뽑기
-					var fundItemList01= "<div style='float: left;'><input type='checkbox' name = 'item' value = "+data.fundItemList[i].ino+"></div><div style='float: left;'><h3>&nbsp;&nbsp;"+data.fundItemList[i].iname;
+					var fundItemList01= "<div style='float: left;'><input type='checkbox' name = 'item' value = "
+					+data.fundItemList[i].ino+"></div><div style='float: left;'><h3>&nbsp;&nbsp;"+data.fundItemList[i].iname;
 					var fundItemList02= "</h3></div><br><br><br><br>"
 					
 						//수량 뽑기
@@ -343,13 +346,11 @@ p {font-size: 20px; text-align: center;}
 						for(var o in data.ownlist){//보유물품리스트를 순서대로 인덱스를 줘서 정보 뽑기
 							console.log("보유물품번호 : " + data.ownlist[o].o_ino + "/ 후원물품번호 : " + data.fundItemList[i].ino);
 							if(data.ownlist[o].o_ino == data.fundItemList[i].ino){
-								console.log("if문 진입했습니다용")
 								var optionStart = "<option>";
 								var optionEnd = "</option>";
 								$itemsSelect.empty();
 								
 								for(var j = data.ownlist[o].ovalue; j >0; j--){
-									console.log("오 !!option 추가했다");
 									itemsOption = (optionStart+ j + optionEnd);
 									$itemsSelect.append(itemsOption);
 									
@@ -408,7 +409,7 @@ p {font-size: 20px; text-align: center;}
 						
 					$("input[name='item']:checked").each(function(){//=for문
 						item.push($(this).val());	//물품번호 가져오기
-						itemAmount.push($(this).parent().next().next($("#amout option:selected")).val());//select값(물품수량)가져오기
+						itemAmount.push($(this).parent().next().next($("#amout option:selected")).val());//select값(물품수량)가져오기b
 
 					});
 						console.log("체크박스 값 : " + item);
@@ -475,6 +476,10 @@ p {font-size: 20px; text-align: center;}
 	});
 
 
+	//금액에 , 단위 찍기
+	function numberWithCommas(x) {
+	   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+	}
 
 
 </script>

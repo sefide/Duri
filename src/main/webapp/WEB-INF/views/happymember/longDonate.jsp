@@ -2,6 +2,8 @@
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <% 
 	String bigtabon="2";
 %>
@@ -39,12 +41,7 @@
 	<div class="contBox inner"><!-- inner S -->
 	 
 		<%@ include file="include/tabMypage.jsp" %>
-		
-		<!-- <div class="titNavi">
-			내 공고 목록
-			<span>홈 &gt; 마이페이지 &gt; 내 공고 목록</span>
-		</div> -->
-		
+	
 		<div class="titNavi">
 			<div style="float: left;"><h1><i class="chevron right icon"></i>정기 후원</h1></div>
 			<div style="float: left;">
@@ -83,6 +80,7 @@
 			<tbody>
 				<c:if test="${!empty directFundList }">
 				<c:forEach items="${directFundList}" var="directList">
+				<c:set var="dhvalue" value="${directList.dhvalue}"></c:set>
 					<tr>
 						<td><c:out value="${directList.rnum}"/></td>
 						<td><c:out value="${directList.dh_nick_give}&nbsp;님" escapeXml="false"/></td>
@@ -165,11 +163,17 @@
 
 	</div><!--// inner E-->
 </div>
-
-<%-- <%@ include file="/hyun/myPost/include/footer.jsp" %> --%>
-
-
 </div><!--// Wrap E-->
 </c:if>
+
+<script>
+//금액에 , 단위 찍기
+function numberWithCommas(x) {
+   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
+/* <fmt:formatNumber value = "${ f.fdValue }" type="currency" currencySymbol=" "/> */
+</script>
+
 </body>
 </html>
