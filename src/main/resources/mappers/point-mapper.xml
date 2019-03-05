@@ -352,7 +352,7 @@
 		WHERE FNO = #{fno}
 	</select>
 	
-	<select id = "selectFundMoneyCulValue" resultType="_int">
+	<select id = "selectFundMoneyCulValue" resultType="java.lang.Integer">
 		SELECT SUM(FH.FHVALUE) FROM 
 		FUNDHISTORY FH
 		JOIN FUNDING F ON(F.FNO = FH.FH_FNO)

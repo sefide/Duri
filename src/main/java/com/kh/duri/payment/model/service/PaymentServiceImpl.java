@@ -319,8 +319,7 @@ public class PaymentServiceImpl implements PaymentService {
 			fhdList.get(i).setFhd_mNo_take(Integer.parseInt(fWriter));
 			result5 = pd.updateHappyOwnItem(sqlSession, fhdList.get(i));
 			
-			System.out.println("result5 : "+ result5);
-			// 행복두리 소유 물품 추가하기
+			// 행복두리 소유 정보 없는 물품 추가하기
 			if(result5 == 0) {
 				pd.insertHappyOwnItem(sqlSession, fhdList.get(i));
 			}
@@ -331,7 +330,6 @@ public class PaymentServiceImpl implements PaymentService {
 		int result6 = pd.insertFundnPoint(sqlSession, fh);
 		int giveNum = fh.getFhMnoGive();
 		fh.setFhMnoGive(Integer.parseInt(fWriter));
-		System.out.println("행복두리 포인트이력 업뎃 - " + fh.getFhMnoGive());
 		int result7 = pd.insertFundhPoint(sqlSession, fh);
 		
 		m.setMno(giveNum);

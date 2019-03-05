@@ -429,7 +429,7 @@ public class MemberController {
 	
 	@RequestMapping("goNanumMain.me")
 	public String goMain() {
-		return "Nanummember/nanumMain";
+		return "redirect:main.nanum";
 	}
 	
 	
