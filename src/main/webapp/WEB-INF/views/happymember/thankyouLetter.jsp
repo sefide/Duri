@@ -61,6 +61,11 @@
 				</c:forEach>
 			</select>
 			</c:if>
+			<c:if test="${ empty nanumNicks}">
+			<select class="ui search dropdown" name="nick" id="nick">
+					<option value="선택없음">선택없음</option>
+			</select>
+			</c:if>
 				<!-- 나눔두리~제목 사이 여백 -->
 				<div style="width: 90px; float: left;"></div>
 			</div>
