@@ -70,10 +70,6 @@ public class NanumController {
 			String mPwd = request.getParameter("mPwd"); 
 			String mPwd2 = request.getParameter("mPwd2"); 
 			String mPhone = request.getParameter("mPhone"); 
-			System.out.println("mNick"+mNick);
-			System.out.println("mPwd"+mPwd);
-			System.out.println("mPwd2"+mPwd2);
-			System.out.println("mPhone"+mPhone);
 			if(mPwd.equals(mPwd2)) {
 				if(mNick == null || mNick.length() == 0) {
 					mNick = m.getmNickName();
@@ -89,7 +85,6 @@ public class NanumController {
 				m2.setmNickName(mNick);
 				m2.setMpwd(encPassword);//암호화된 비밀번호 저장
 				m2.setmPhone(mPhone);
-				System.out.println("m2"+m2);
 				try {
 					int result = ns.updateMember(m2);
 					if(result>0) {
@@ -130,7 +125,7 @@ public class NanumController {
 		}	
 		try {			
 			HashMap<String, Integer> cloudCount = new HashMap<>();
-			HashMap<String, List<Funding>> cloudList =  new HashMap<String, List<Funding>>();			
+			HashMap<String, List> cloudList =  new HashMap<String, List>();			
 			cloudCount = ns.getCloudCont(m);	 //크라우드 펀딩 개수 가져오기 		
 			int moneyCount = cloudCount.get("moneyCount");
 			int endMoneyCount = cloudCount.get("endMoneyCount");
@@ -153,7 +148,7 @@ public class NanumController {
 			List<Funding>endItemList = cloudList.get("endItemList");
 			//물품을 가져와 보자!
 			HashMap<String,FundItem> ingItem = new HashMap<String,FundItem>(); //진행중인 물품 크라우드 펀딩 - 물품 리스트
-			HashMap<String,FundItem> endItem = new HashMap<String,FundItem>(); //종료된 물품 크라우드 펀딩 - 물품 리스트			
+			HashMap<String,FundItem> endItem = new HashMap<String,FundItem>(); //종료된 물품 크라우드 펀딩 - 물품 리스트		
 			model.addAttribute("moneyList",moneyList);
 			model.addAttribute("pi",pi);
 			model.addAttribute("endMoneyList",endMoneyList);
@@ -161,8 +156,7 @@ public class NanumController {
 			model.addAttribute("itemList",itemList);
 			model.addAttribute("pi3",pi3);	
 			model.addAttribute("endItemList",endItemList);
-			model.addAttribute("pi4",pi4);		
-			
+			model.addAttribute("pi4",pi4);					
 			return "Nanummember/mypage/mypage";	
 		}catch (NanumException e) {
 			model.addAttribute("msg", e.getMessage());
@@ -186,8 +180,6 @@ public class NanumController {
 			fundCount = ns.getFundCount(m);	 //정기후원 개수 가져오기 	
 			int fundIng = fundCount.get("fundIng"); 
 			int fundEnd = fundCount.get("fundEnd"); 
-			System.out.println("fundIng"+fundIng);
-			System.out.println("fundEnd"+fundEnd);
 			PageInfo pi = Pagination.getPageInfo(currentPage, fundIng, 3);
 			PageInfo pi2 = Pagination.getPageInfo(currentPage2, fundEnd, 3);		
 			HashMap<String, PageInfo> paging = new HashMap<>();
@@ -196,11 +188,7 @@ public class NanumController {
 			HashMap<String, List<SelectDirectFund>> fundList =  new HashMap<String, List<SelectDirectFund>>();
 			fundList = ns.selectFundList(m,paging);	//정기후원 가져오기 
 			List<SelectDirectFund> fundIngList = fundList.get("fundIngList"); 
-			List<SelectDirectFund> fundEndList = fundList.get("fundEndList"); 
-			
-			/*System.out.println("fundIngList"+fundIngList);
-			System.out.println("fundEndList"+fundEndList);*/
-			
+			List<SelectDirectFund> fundEndList = fundList.get("fundEndList"); 			
 			model.addAttribute("fundIngList",fundIngList);
 			model.addAttribute("pi",pi);
 			model.addAttribute("fundEndList",fundEndList);
@@ -309,8 +297,6 @@ public class NanumController {
 			int likeDirectCount = likeListCount.get("likeDirectCount");
 			int likeMoneyCount = likeListCount.get("likeMoneyCount");		
 			int likeItemCount = likeListCount.get("likeItemCount");
-			System.out.println("likeMoneyCount"+likeMoneyCount);
-			System.out.println("likeItemCount"+likeItemCount);
 			PageInfo pi = Pagination.getPageInfo(currentPage, likeDirectCount, 3);
 			PageInfo pi2 = Pagination.getPageInfo(currentPage2, likeMoneyCount, 3);
 			PageInfo pi3 = Pagination.getPageInfo(currentPage3, likeItemCount, 3);
@@ -328,7 +314,7 @@ public class NanumController {
 			model.addAttribute("likeMoneyList",likeMoneyList);
 			model.addAttribute("pi2",pi2);
 			model.addAttribute("likeItemList",likeItemList);
-			model.addAttribute("pi3",pi3);			
+			model.addAttribute("pi3",pi3);				
 			return "Nanummember/mypage/mypage_likefund";
 		} catch (NanumException e) {
 			e.printStackTrace();

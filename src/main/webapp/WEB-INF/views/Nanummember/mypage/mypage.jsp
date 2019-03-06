@@ -101,9 +101,9 @@
 					<thead>
 						<tr>
 							<th style="width: 50%;">제목</th>
-							<th style="width: 15%;">내가 후원한 호인트</th>
+							<th style="width: 15%;">내가 후원한 포인트</th>
 							<th style="width: 20%;">후원 일시</th>
-							<th style="width: 15%;">100%달성여부</th>
+							<th style="width: 15%;">진행률</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -112,14 +112,7 @@
 								<td><c:out value="${moneyList.fTitle}"/></td>
 								<td><fmt:formatNumber value = "${ moneyList.fhValue }" type="currency" currencySymbol=" "/></td>						
 								<td><c:out value="${moneyList.fhDate}"></c:out></td>
-								<c:choose>
-									<c:when test="${moneyList.fStatus eq 'GOAL'}">
-										<td>O</td>
-									</c:when>
-									<c:otherwise>
-										<td>X</td>
-									</c:otherwise>
-								</c:choose>						
+								<td><c:out value="${moneyList.sum}"></c:out> %</td>				
 							</tr>
 						</c:forEach>
 					</tbody>
@@ -181,7 +174,7 @@
 							<th style="width: 50%;">제목</th>
 							<th style="width: 15%;">내가 후원한 호인트</th>
 							<th style="width: 20%;">후원 일시</th>
-							<th style="width: 15%;">100%달성여부</th>
+							<th style="width: 15%;">진행률</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -190,14 +183,7 @@
 								<td><c:out value="${itemList.fTitle}"/></td>
 								<td><c:out value="${itemList.iName}"/></td>								
 								<td><c:out value="${itemList.fhDate}"></c:out></td>
-								<c:choose>
-									<c:when test="${itemList.fStatus eq 'GOAL'}">
-										<td>O</td>
-									</c:when>
-									<c:otherwise>
-										<td>X</td>
-									</c:otherwise>
-								</c:choose>						
+								<td><c:out value="${itemList.sum}"></c:out> %</td>					
 							</tr>
 						</c:forEach>
 					</tbody>

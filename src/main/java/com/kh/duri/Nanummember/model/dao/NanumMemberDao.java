@@ -21,7 +21,7 @@ public interface NanumMemberDao {
 	//크라우드 펀딩 개수 가져오기
 	HashMap<String, Integer> getCloudCont(SqlSessionTemplate sqlSession, Member m) throws NanumException;
 	//크라우드 펀딩 가져오기
-	HashMap<String, List<Funding>> selectCloudList(SqlSessionTemplate sqlSession, Member m, HashMap<String, PageInfo> paging) throws NanumException;
+	HashMap<String, List> selectCloudList(SqlSessionTemplate sqlSession, Member m, HashMap<String, PageInfo> paging) throws NanumException;
 	//정기후원 개수 가져오기
 	HashMap<String, Integer> getFundCount(SqlSessionTemplate sqlSession, Member m) throws NanumException;
 	//정기후원  가져오기

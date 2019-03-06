@@ -95,7 +95,7 @@
 				</p>
 				<br>
 				<div style=" margin: 0 auto;">
-				<div id="fundIngBtn" class="categotyBtn" onclick="fundIng()" style="margin-right: 30px; color: green;">진행중</div>
+				<div id="fundIngBtn" class="categotyBtn" onclick="fundIng()" style="margin-right: 30px; color: rgba(250, 143, 61);">진행중</div>
 				<div id="fundEndBtn" class="categotyBtn" onclick="fundEnd()">종료</div>
 				</div>
 				<table>
@@ -235,7 +235,7 @@
 				</p>
 				<br>
 				<div style="margin: 0 auto;">
-				<div id="moneyBtn" class="categotyBtn" onclick="moneyLetter()" style="margin-right: 30px; color: green;">금액</div>
+				<div id="moneyBtn" class="categotyBtn" onclick="moneyLetter()" style="margin-right: 30px; color: rgba(250, 143, 61);">금액</div>
 				<div id="itemBtn" class="categotyBtn" onclick="itemLetter()">물품</div>
 				</div>
 				<table>
@@ -384,7 +384,7 @@
 				success:function(data){
 					 $("#fundIngDiv").show(); 
 					 $("#fundEndDiv").hide();
-					 $("#fundIngBtn").css("color","green");
+					 $("#fundIngBtn").css("color","rgba(250, 143, 61)");
 				},
 				error:function(status){
 					console.log(status);
@@ -401,7 +401,7 @@
 				success:function(data){
 					 $("#fundIngDiv").hide(); 
 					 $("#fundEndDiv").show();
-					 $("#fundEndDiv").find("#fundEndBtn").css("color","green");					 
+					 $("#fundEndDiv").find("#fundEndBtn").css("color","rgba(250, 143, 61)");					 
 				},
 				error:function(status){
 					console.log(status);
@@ -419,7 +419,7 @@
 				success:function(data){
 					 $("#moneyDiv").show(); 
 					 $("#itemDiv").hide();
-					 $("#moneyBtn").css("color","green");
+					 $("#moneyBtn").css("color","rgba(250, 143, 61)");
 				},
 				error:function(status){
 					console.log(status);
@@ -436,7 +436,7 @@
 				success:function(data){
 					 $("#moneyDiv").hide(); 
 					 $("#itemDiv").show();
-					 $("#itemDiv").find("#itemBtn").css("color","green");					 
+					 $("#itemDiv").find("#itemBtn").css("color","rgba(250, 143, 61)");					 
 				},
 				error:function(status){
 					console.log(status);

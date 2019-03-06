@@ -19,7 +19,7 @@ public interface NanumMemberService {
 	//크라우드 펀딩 수 가져오기
 	HashMap<String, Integer> getCloudCont(Member m) throws NanumException;	
 	//크라우드 펀딩 가져오기
-	HashMap<String, List<Funding>> selectCloudList(Member m, HashMap<String, PageInfo> paging)  throws NanumException;
+	HashMap<String, List> selectCloudList(Member m, HashMap<String, PageInfo> paging)  throws NanumException;
 	//정기후원 수  가져오기
 	HashMap<String, Integer> getFundCount(Member m) throws NanumException;
 	//정기후원  가져오기

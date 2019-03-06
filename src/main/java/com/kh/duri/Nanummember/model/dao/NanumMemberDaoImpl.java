@@ -36,28 +36,42 @@ public class NanumMemberDaoImpl implements NanumMemberDao {
 	}
 	//크라우드 펀딩 가져오기
 	@Override
-	public HashMap<String, List<Funding>> selectCloudList(SqlSessionTemplate sqlSession, Member m, HashMap<String, PageInfo> paging) throws NanumException {		
+	public HashMap<String, List> selectCloudList(SqlSessionTemplate sqlSession, Member m, HashMap<String, PageInfo> paging) throws NanumException {		
 		PageInfo pi = paging.get("pi");
 		PageInfo pi2 = paging.get("pi2");
 		PageInfo pi3 = paging.get("pi3");
-		PageInfo pi4 = paging.get("pi4");		
+		PageInfo pi4 = paging.get("pi4");	
 		int offset = (pi.getCurrentPage() -1 ) *pi.getLimit();
 		RowBounds rowBounds = new RowBounds(offset, pi.getLimit());		
-		List<Funding> moneyList = sqlSession.selectList("Nanum.selectMoneyCloud",m,rowBounds);		
-		
+		List<Funding> moneyList = sqlSession.selectList("Nanum.selectMoneyCloud",m,rowBounds);				
 		int offset2 = (pi2.getCurrentPage() -1 ) *pi2.getLimit();
 		RowBounds rowBounds2 = new RowBounds(offset2, pi2.getLimit());		
-		List<Funding> endMoneyList = sqlSession.selectList("Nanum.selectEndMoneyClound",m,rowBounds2);		
-		
+		List<Funding> endMoneyList = sqlSession.selectList("Nanum.selectEndMoneyClound",m,rowBounds2);				
 		int offset3 = (pi3.getCurrentPage() -1 ) *pi3.getLimit();
 		RowBounds rowBounds3 = new RowBounds(offset3, pi3.getLimit());		
-		List<Funding> itemList = sqlSession.selectList("Nanum.selectItemCloud",m,rowBounds3);		
-		
+		List<Funding> itemList = sqlSession.selectList("Nanum.selectItemCloud",m,rowBounds3);				
 		int offset4 = (pi4.getCurrentPage() -1 ) *pi4.getLimit();
 		RowBounds rowBounds4 = new RowBounds(offset4, pi4.getLimit());		
 		List<Funding> endItemList = sqlSession.selectList("Nanum.selectEndItemCloud",m,rowBounds4);		
-		
-		HashMap<String, List<Funding>> cloudList = new HashMap<>();
+		//금액 진행률
+		int arr[] = new int[moneyList.size()];		
+		for(int i= 0; i<moneyList.size();i++) {
+			 arr[i] = moneyList.get(i).getfNo();
+			 int a = sqlSession.selectOne("Nanum.selectGetSum", arr[i]);
+			 int b = moneyList.get(i).getTotal();
+			 int sum =(a*100)/b;		
+			 moneyList.get(i).setSum(sum);
+		}		
+		//물품 진행률
+		int arr1[] = new int[itemList.size()];		
+		for(int i= 0; i<itemList.size();i++) {
+			 arr1[i] = itemList.get(i).getfNo();
+			 int a = sqlSession.selectOne("Nanum.selectGetItemSum", arr1[i]);
+			 int b = sqlSession.selectOne("Nanum.selectGetItemSum2", arr1[i]);
+			 int sum =(int)( (double)b/ (double)a * 100.0 );
+			 itemList.get(i).setSum(sum);
+		}		
+		HashMap<String, List> cloudList = new HashMap<>();
 		cloudList.put("moneyList", moneyList);
 		cloudList.put("endMoneyList", endMoneyList);
 		cloudList.put("itemList", itemList);
@@ -169,12 +183,10 @@ public class NanumMemberDaoImpl implements NanumMemberDao {
 		PageInfo pi3 = paging.get("pi3");
 		int offset = (pi.getCurrentPage() -1 ) *pi.getLimit();
 		RowBounds rowBounds = new RowBounds(offset, pi.getLimit());		
-		List<FundInterest> likeDirectList = sqlSession.selectList("Nanum.selectLikeDirect",m,rowBounds);	
-		
+		List<FundInterest> likeDirectList = sqlSession.selectList("Nanum.selectLikeDirect",m,rowBounds);		
 		int offset2 = (pi2.getCurrentPage() -1 ) *pi2.getLimit();
 		RowBounds rowBounds2 = new RowBounds(offset2, pi2.getLimit());		
-		List<FundInterest> likeMoneyList = sqlSession.selectList("Nanum.selectLikeMoneyCloud",m,rowBounds2);		
-		
+		List<FundInterest> likeMoneyList = sqlSession.selectList("Nanum.selectLikeMoneyCloud",m,rowBounds2);				
 		int offset3 = (pi3.getCurrentPage() -1 ) *pi3.getLimit();
 		RowBounds rowBounds3 = new RowBounds(offset3, pi3.getLimit());		
 		List<FundInterest> likeItemList = sqlSession.selectList("Nanum.selectLikeItemCloud",m,rowBounds3);			
