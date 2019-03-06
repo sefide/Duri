@@ -35,8 +35,8 @@ public class NanumMemberServiceImpl implements NanumMemberService {
 	}
 	//크라우드 펀딩 가져오기
 	@Override
-	public HashMap<String, List<Funding>> selectCloudList(Member m, HashMap<String, PageInfo> paging) throws NanumException {
-		HashMap<String, List<Funding>> cloudList = nd.selectCloudList(sqlSession,m,paging);
+	public HashMap<String, List> selectCloudList(Member m, HashMap<String, PageInfo> paging) throws NanumException {
+		HashMap<String, List> cloudList = nd.selectCloudList(sqlSession,m,paging);
 		return cloudList;
 	}
 	//정기후원 수 가져오기

@@ -41,7 +41,8 @@
 		<result property="fValue" column="FVALUE"/>
 		<result property="fWriter" column="FWRITER"/>
 		<result property="iName" column="INAME"/>
-		
+		<result property="sum" column="sum"/>
+		<result property="total" column="total"/>
 	</resultMap>
 	
 	<resultMap type="com.kh.duri.Nanummember.model.vo.FundHistory" id="fundHistoryResultSet">
@@ -127,15 +128,60 @@
 	
 	<!-- 금액 크라우드 펀딩 조회 (진행) -->
 	<select id="selectMoneyCloud" resultMap="fundingResultSet" parameterType="Funding" resultType="list">
-		SELECT ROWNUM RNUM, FTITLE , FHVALUE ,FSTATUS, FSTARTDATE , FENDDATE , FHDATE, FNO
-		FROM(SELECT f.FTITLE , fh.FHVALUE , f.FSTATUS,  f.FSTARTDATE ,f.FENDDATE , fh.FHDATE , f.FNO
+		 SELECT ROWNUM RNUM, FTITLE , FHVALUE ,FSTATUS, FSTARTDATE , FENDDATE , FHDATE, FNO, total
+		FROM(SELECT f.FTITLE , fh.FHVALUE , f.FSTATUS,  f.FSTARTDATE ,f.FENDDATE , fh.FHDATE , f.FNO, f.FVALUE as total
 		FROM FUNDING f, FUNDHISTORY fh		
-		<![CDATA[
+		<![CDATA[		
 		WHERE f.FNO = fh.FH_FNO and fh.FH_MNO_GIVE = #{mno}  and f.FTYPE= 'MONEY' 
 			and f.fstartdate <= SYSDATE and f.fenddate >= SYSDATE ]]>
-        ORDER BY fh.FHDATE DESC)
+        ORDER BY fh.FHDATE DESC)	
 	</select> 
 	
+	<!-- 총 합 가져오기(금액) -->
+	<select id="selectGetSum" resultType="java.lang.Integer">
+		SELECT SUM(FH.FHVALUE) FROM 
+		FUNDHISTORY FH
+		JOIN FUNDING F ON(F.FNO = FH.FH_FNO)
+		WHERE F.FNO = #{arr[i]}
+		AND F.FTYPE = 'MONEY'
+		GROUP BY F.FNO
+	</select>
+	
+	<!-- 총 합 가져오기(물품 - 목표) -->
+	<select id="selectGetItemSum" resultType="java.lang.Integer">
+		 SELECT SUM(FDVALUE) 
+       	FROM (SELECT DISTINCT FNO, FDNO, FDVALUE, INO, INAME, IPRICE, FHDITEMVALUE
+          FROM FUNDINGDETAIL FD
+          JOIN FUNDITEM FI ON (FD.FD_INO = FI.INO )
+          JOIN FUNDHISTORY FH ON (FH.FH_FNO = FD.FD_FNO)
+          LEFT OUTER JOIN FUNDHISTORYDETAIL FHD ON (FHD.FHD_INO = FD.FD_INO AND FHD.FHD_FHNO = FH.FHNO)
+          JOIN FUNDING F ON (F.FNO = FD.FD_FNO )
+          WHERE F.FSTATUS != 'END'
+           AND F.FSTATUS != 'GOAL'
+           AND F.FSTATUS != 'YET'
+           AND F.FNO = #{arr1[i]}
+          )
+      GROUP BY FNO
+      ORDER BY FNO DESC
+	</select>
+	
+	<!-- 총 합 가져오기(물품 - 모은개수 ) -->
+	<select id="selectGetItemSum2" resultType="java.lang.Integer">
+		 SELECT SUM(FHDITEMVALUE) 
+       	FROM (SELECT DISTINCT FNO, FDNO, FDVALUE, INO, INAME, IPRICE, FHDITEMVALUE
+          FROM FUNDINGDETAIL FD
+          JOIN FUNDITEM FI ON (FD.FD_INO = FI.INO )
+          JOIN FUNDHISTORY FH ON (FH.FH_FNO = FD.FD_FNO)
+          LEFT OUTER JOIN FUNDHISTORYDETAIL FHD ON (FHD.FHD_INO = FD.FD_INO AND FHD.FHD_FHNO = FH.FHNO)
+          JOIN FUNDING F ON (F.FNO = FD.FD_FNO )
+          WHERE F.FSTATUS != 'END'
+           AND F.FSTATUS != 'GOAL'
+           AND F.FSTATUS != 'YET'
+           AND F.FNO = #{arr1[i]}
+          )
+      GROUP BY FNO
+      ORDER BY FNO DESC
+	</select>
 	<!-- 금액 크라우드 펀딩 개수 조회 (종료) -->
 	<select id="selectEndMoneyCloundListCount" resultType="_int">
 		SELECT COUNT(*)

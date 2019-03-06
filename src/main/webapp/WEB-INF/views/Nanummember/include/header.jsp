@@ -6,6 +6,7 @@
 <!-- semantic ui -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
 <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <style>
 .mynav_2{	
@@ -110,7 +111,7 @@
     			등급 : 열매두리<br>
     		</c:if>
     		
-    		포인트 : <c:out value="${ sessionScope.loginUser2.mPoint }"/> 원 <br>
+    		포인트 : <fmt:formatNumber value = "${ sessionScope.loginUser2.mPoint }" type="currency" currencySymbol=" "/> 원 <br>
     		100% 달성 펀딩 참여 횟수 : <c:out value="${ sessionScope.loginUser2.mGoalNum }"/> 회 <br>
     	</div>
     	<div id='box-right'>
