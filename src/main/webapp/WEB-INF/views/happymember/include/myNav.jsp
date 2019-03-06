@@ -6,11 +6,13 @@
 
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
+
 <!-- semantic ui -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
 <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <style>
 /* 모달 창 : modal-물품목록, modal2-알림창 */
 /*모달의 background(window부분)*/
@@ -50,12 +52,13 @@
 	height: 950px;
 }
 .modal-content2 {
-	background-color: #F9E79F;
+	background-color: #d9eaf7;
 	margin: 15% auto; /* 중앙정렬 */
 	padding: 20px;
 	border: 1px solid #888;
 	width: 30%;
-	height: 300px;
+	height: 500px;
+	
 }
 
 input {font-size: 20px;}
@@ -195,7 +198,14 @@ p {font-size: 20px; text-align: center;}
 
 			<span><a class="a-tag" id="modalBtn" onclick="items(${loginUser.mno});">보유물품</a></span><br>
 			<span><a class="a-tag" href="passCheck.me" style="margin-right: 80px;">내 정보 수정</a></span>
-			<span><a class="a-tag" id="modalBtn2" onclick="modalBtn2();">알림</a></span><br>
+			<c:if test="${loginUser.count==0}">
+			<span><a class="a-tag"  onclick="alarm(${loginUser.mno});">알림</a></span><br>
+			</c:if>
+			<c:if test="${loginUser.count>0}">
+			<span><a class="a-tag"  onclick="alarm(${loginUser.mno});">알림<i class="red circle icon"></i></a></span><br>
+			</c:if> 
+			
+			
 		</div>
 	</div>
 </div>
@@ -253,32 +263,98 @@ p {font-size: 20px; text-align: center;}
 </div>
 <!-- 물품목록 모달 띄우기 E -->
 
+
+
+
 <!-- 알림 모달 띄우기 S -->
 <div id="myModal2" class="modal2">
 	<!-- 내용 -->
 	<div class="modal-content2">
 		<!-- 닫기 버튼 -->
 		<span id="close2">&times;</span>  
+		<div style="padding: 70px 0px; text-align: center;" >
+		<h2 align="center" style="color: #050749">&nbsp;관리자의 반려 사유를 확인하세요 &nbsp;</h2><br>
+		<h6 align="center" style="color: #70717a">&nbsp;*반드시 확인후 확인완료 버튼을 클릭해주세요 &nbsp;</h6>
+		<h6 align="center" style="color: #70717a">&nbsp;*확인완료 클릭시 알림내역은 사라집니다 &nbsp;</h6>
+		<br>
+		<div id="alarmcontent" style="text-align: center;">
+			<p style="font-weight:bold" id="NoRefuse"><h3>반려된 서류가 없습니다.</h3></p>
+		</div>
 		
-		<h1 align="center"><&nbsp;내용&nbsp;></h1>
-		<br><br>
-		<div>
-			<p>●'기초생활 수급자.jpg'제출이 반려되었습니다.</p>
-			<p>●'한부모 가족 증명서.png'제출이 반려되었습니다.</p>
 		</div>
 	</div>	    
 </div>
+
+
 <!-- 알림 모달 띄우기 E -->
 <script>
+
      
    //클릭시 모달 가져오기(알림)
-	$(function (){
-        $("#modalBtn2").click(function(){
-        	$("#myModal2").css("display", "block");
-        });
-     });
+	function alarm(mno) {
+		$("#myModal2").css("display", "block");
+		$.ajax({
+			url:"adminAlarm_ajax.ad",
+			type:"get",
+			data:{mno:mno},
+			success:function(data){
+				$("#myModal2").css("display", "block");
+				 var TagPhtml=[];
+
+
+				 TagPhtml.push('<div style="display: none;" id="alarmMNO">'+data[0].n_mno+'</div>');
+
+						for(var i=0; i<data.length; i++){
+							
+							if(data[i].ntype=="NEW"){
+								TagPhtml.push('<p style="font-weight:bold"><h4 style="color: red">▶신규회원 신청 반려('+data[i].nndate+')</h4><h5>[반려사유]:'+data[i].ncontents+'</h5></p>');
+							}
+							else if(data[i].ntype=="MPR"){
+								TagPhtml.push('<p style="font-weight:bold"><h4 style="color: red">▶자기소개 수정 반려('+data[i].nndate+')</h4><h5>[반려사유]:'+data[i].ncontents+'</h5></p>');
+							
+							}else{
+								TagPhtml.push('<p style="font-weight:bold"><h4 style="color: red">▶증빙서류 갱신 반려('+data[i].nndate+')</h4><h5>[반려사유]:'+data[i].ncontents+'</h5></p>');
+							}
+						}
+				 TagPhtml.push('<br>');
+				 TagPhtml.push('<br>');
+				 TagPhtml.push('<button type="button" class="btn btn-primary" id="AlarmComBtn">확인완료</button>');
+				 
+				 
+				
+				$("#alarmcontent").html("");
+				$("#alarmcontent").append(TagPhtml.join('')); 
+				
+				
+				 addBtnEvent();
+				
+			}
+	});
    
-	//모달 닫기 버튼
+		};
+		
+function addBtnEvent() {
+   //모달에서 확인 버튼
+   
+  		$("#AlarmComBtn").click(function () {
+  			var mno = $("#alarmMNO").text();
+  			console.log("mno"+mno)
+	  		$.ajax({
+				url:"adminAlarmBtn_ajax.ad",
+				type:"get",
+				data:{mno:mno},
+				success:function(data){
+					
+					location.href="mypage.happy";
+					
+					
+						}
+			});
+		});
+   	
+		 } 
+   
+   //모달 닫기 버튼
 	$(function (){
 		$("#close").click(function(){
 			$("#myModal").css("display", "none");
@@ -291,6 +367,7 @@ p {font-size: 20px; text-align: center;}
 			$("#myModal2").css("display", "none");
 		});
 	});
+	
 	
 	
 
@@ -438,41 +515,7 @@ p {font-size: 20px; text-align: center;}
 	
 </script>
 <script>
-	var wsUri = "ws://localhost:8181/ex/count";
-	function send_message() {
-	    websocket = new WebSocket(wsUri);
-	    websocket.onopen = function(evt) {
-	        onOpen(evt);
-	    };
 	
-	    websocket.onmessage = function(evt) {
-	        onMessage(evt);
-	    };
-	
-	    websocket.onerror = function(evt) {
-	        onError(evt);
-	    };
-	
-	}
-	
-	function onOpen(evt){
-	}
-	
-	function onMessage(evt) {
-		console.log("웹소켓@@@@@")
-		if(evt.data == $("input[name=mno]").val()) {
-			$("#modalBtn2").text("알림(+)")
-		} else {
-			$("#modalBtn2").text("알림(-)")
-		}
-	}
-	
-	function onError(evt) {
-	}
-	
-	$(document).ready(function(){
-			send_message();
-	});
 
 
 	//금액에 , 단위 찍기

@@ -9,26 +9,28 @@ public class Notice {
 	private String ntype;
 	private String ncontents;
 	private Date ndate;
+	private String nndate;
 	private String nstatus;
 	
 	public Notice() {
 		
 	}
 
-	public Notice(int nno, int n_mno, String ntype, String ncontents, Date ndate, String nstatus) {
+	public Notice(int nno, int n_mno, String ntype, String ncontents, Date ndate, String nndate, String nstatus) {
 		super();
 		this.nno = nno;
 		this.n_mno = n_mno;
 		this.ntype = ntype;
 		this.ncontents = ncontents;
 		this.ndate = ndate;
+		this.nndate = nndate;
 		this.nstatus = nstatus;
 	}
 
 	@Override
 	public String toString() {
 		return "Notice [nno=" + nno + ", n_mno=" + n_mno + ", ntype=" + ntype + ", ncontents=" + ncontents + ", ndate="
-				+ ndate + ", nstatus=" + nstatus + "]";
+				+ ndate + ", nndate=" + nndate + ", nstatus=" + nstatus + "]";
 	}
 
 	public int getNno() {
@@ -71,6 +73,14 @@ public class Notice {
 		this.ndate = ndate;
 	}
 
+	public String getNndate() {
+		return nndate;
+	}
+
+	public void setNndate(String nndate) {
+		this.nndate = nndate;
+	}
+
 	public String getNstatus() {
 		return nstatus;
 	}
@@ -78,8 +88,7 @@ public class Notice {
 	public void setNstatus(String nstatus) {
 		this.nstatus = nstatus;
 	}
-	
-	
+
 	
 
 }

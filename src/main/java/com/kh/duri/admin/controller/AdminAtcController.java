@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.kh.duri.Nanummember.model.vo.PageInfo;
 import com.kh.duri.admin.model.exception.ListException;
 import com.kh.duri.admin.model.service.adminAtcService;
+import com.kh.duri.admin.model.vo.Notice;
 import com.kh.duri.admin.model.vo.Pagination;
 import com.kh.duri.admin.model.vo.RefundList;
 import com.kh.duri.admin.model.vo.adminFundingList;
@@ -417,10 +418,42 @@ public class AdminAtcController {
 		
 		
 		}
+	//알림 ajax
+	@RequestMapping("adminAlarm_ajax.ad")
+	public @ResponseBody List<Notice> adminAlarm(HttpServletRequest request, HttpServletResponse response,Notice n) {
 		
+		
+		int mno = Integer.parseInt(request.getParameter("mno"));
+		n.setN_mno(mno);
+		
+		List<Notice> list = aas.adminAlarm(n);
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		for(int i = 0; i < list.size(); i++) {
+			String nndate = sdf.format(list.get(i).getNdate());
+			
+			list.get(i).setNndate(nndate);
+			
+			
+			}
+		return list;
+		
+	}
+		
+	//알림 확인완료 버튼 ajax
+	@RequestMapping("adminAlarmBtn_ajax.ad")
+	public String adminAlarmBtn(HttpServletRequest request, HttpServletResponse response,Notice n) {
+		
+		
+		int mno = Integer.parseInt(request.getParameter("mno"));
+		n.setN_mno(mno);
+		int result = aas.adminAlarmBtn(n);
+		
+		return "redirect:mypage.happy";
+	}
 	
 		
-		
+	
+
 	
 
 		

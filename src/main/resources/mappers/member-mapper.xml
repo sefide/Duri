@@ -31,6 +31,7 @@
       	<result property="cfMoney" column="FHVALUE"/>
       	<result property="origin" column="AORIGINNAME"/>
       	<result property="change" column="ACHANGENAME"/>
+      	<result property="count" column="COUNT"/>
 	</resultMap>
 	
 	<select id="loginCheck" resultMap="memberResultSet" parameterType="Member">
@@ -42,9 +43,21 @@
         	WHERE M.MID=#{mid}) AS DHVALUE
         ,(SELECT SUM(FHVALUE) FROM MEMBER M JOIN FUNDHISTORY FH ON(FH.FH_MNO_GIVE = M.MNO) JOIN FUNDING F ON(F.FNO = FH.FH_FNO) 
         	WHERE F.FWRITER=(SELECT MNO FROM MEMBER WHERE MID=#{mid}))AS FHVALUE
+        ,(SELECT COUNT(*) FROM MEMBER M JOIN NOTICE N ON(N.N_MNO=M.MNO) 
+            WHERE N.NSTATUS='Y' AND MID=#{mid})AS COUNT
 		FROM MEMBER
 		WHERE MID=#{mid}
-		AND MPWD=#{mpwd}
+		AND MPWD=#{mpwd} 
+	<!-- 	SELECT MNO, MNAME, MNICK ,MGENDER ,MPHONE ,MID ,MPWD ,MEMAIL 
+		,MENROLLDATE ,MPOINT ,MTYPE ,MFUNDTYPE ,MPR ,MPRNEW ,MBIRTHDAY 
+		,MADDRESS ,MACCEPTDATE ,MGOALNUM ,MSTATUS ,MTAKESTATUS 
+        ,(SELECT SUM(DHVALUE) FROM MEMBER M  INNER JOIN DIRECTFUNDHISTORY DI ON(M.MNO = DI.DH_MNO_TAKE) 
+        	WHERE M.MID=#{mid}) AS DHVALUE
+        ,(SELECT SUM(FHVALUE) FROM MEMBER M JOIN FUNDHISTORY FH ON(FH.FH_MNO_GIVE = M.MNO) JOIN FUNDING F ON(F.FNO = FH.FH_FNO) 
+        	WHERE F.FWRITER=(SELECT MNO FROM MEMBER WHERE MID=#{mid}))AS FHVALUE
+		FROM MEMBER
+		WHERE MID=#{mid}
+		AND MPWD=#{mpwd} -->
 	</select>
 	
 	<!-- 로그인 나눔두리 -->

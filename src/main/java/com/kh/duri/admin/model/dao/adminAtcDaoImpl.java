@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.duri.Nanummember.model.vo.PageInfo;
 import com.kh.duri.admin.model.exception.ListException;
+import com.kh.duri.admin.model.vo.Notice;
 import com.kh.duri.admin.model.vo.RefundList;
 import com.kh.duri.admin.model.vo.adminFundingList;
 import com.kh.duri.admin.model.vo.adminMember;
@@ -112,6 +113,20 @@ public class adminAtcDaoImpl implements adminAtcDao{
 		int result = sqlsession.update("Admin.adminRefundButton",rfL);
 		return result;
 	}
+	//행복두리 알림보내기 ajax
+	@Override
+	public List<Notice> adminAlarm(SqlSessionTemplate sqlsession, Notice n) {
+		return sqlsession.selectList("Admin.adminAlarm",n);
+	}
+	//행복두리 알림확인완료 ajax
+	@Override
+	public int adminAlarmBtn(SqlSessionTemplate sqlsession, Notice n) {
+		int result = sqlsession.update("Admin.adminAlarmBtn",n);
+		return result;
+	}
+	
+	
+	
 	
 	//통계 페이지 - bar chart 데이터
 	@Override
@@ -210,6 +225,7 @@ public class adminAtcDaoImpl implements adminAtcDao{
 		int result = sqlsession.selectOne("Admin.adminTotalFundUpload");
 		return result;
 	}
+	
 	
 	
 	

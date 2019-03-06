@@ -350,7 +350,17 @@
 		UPDATE REFUND SET RSTATUS='Y' WHERE RNO=#{rNo}
 	</update>
 	
+	<!-- 행복두리 알림 보내기 ajax-->
+	<select id="adminAlarm" resultType="Notice" parameterType="Notice">
+		SELECT N.NNO,N.N_MNO,N.NTYPE,N.NCONTENTS,N.NDATE,N.NSTATUS,M.MNAME 
+		FROM NOTICE N JOIN MEMBER M ON(N.N_MNO=M.MNO)
+		WHERE N.N_MNO=#{n_mno} AND N.NSTATUS='Y' ORDER BY N.NDATE DESC
+	</select> 
 	
+	<!-- 행복두리 알림확인완료 ajax -->
+	<update id="adminAlarmBtn"  parameterType="Notice" >
+		UPDATE NOTICE SET NSTATUS='N' WHERE N_MNO=#{n_mno}
+	</update>
 	
 	
 	

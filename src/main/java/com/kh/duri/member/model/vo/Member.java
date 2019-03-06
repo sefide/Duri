@@ -27,13 +27,12 @@ public class Member implements java.io.Serializable{
 	private int cfMoney;
 	private String origin;
 	private String change;
-	
+	private int count;
 	public Member() {}
-
 	public Member(int mno, String mName, String mNickName, String mGender, String mPhone, String mid, String mpwd,
 			String email, Date mEnrollDate, int mPoint, String mtype, String mFundtype, String mpr, String mprNew,
 			String mBirthDay, String mAddress, Date mAcceptDate, int mGoalNum, String mStatus, String mTakeStatus,
-			int dMoney, int cfMoney, String origin, String change) {
+			int dMoney, int cfMoney, String origin, String change, int count) {
 		super();
 		this.mno = mno;
 		this.mName = mName;
@@ -59,200 +58,8 @@ public class Member implements java.io.Serializable{
 		this.cfMoney = cfMoney;
 		this.origin = origin;
 		this.change = change;
+		this.count = count;
 	}
-
-	public int getMno() {
-		return mno;
-	}
-
-	public void setMno(int mno) {
-		this.mno = mno;
-	}
-
-	public String getmName() {
-		return mName;
-	}
-
-	public void setmName(String mName) {
-		this.mName = mName;
-	}
-
-	public String getmNickName() {
-		return mNickName;
-	}
-
-	public void setmNickName(String mNickName) {
-		this.mNickName = mNickName;
-	}
-
-	public String getmGender() {
-		return mGender;
-	}
-
-	public void setmGender(String mGender) {
-		this.mGender = mGender;
-	}
-
-	public String getmPhone() {
-		return mPhone;
-	}
-
-	public void setmPhone(String mPhone) {
-		this.mPhone = mPhone;
-	}
-
-	public String getMid() {
-		return mid;
-	}
-
-	public void setMid(String mid) {
-		this.mid = mid;
-	}
-
-	public String getMpwd() {
-		return mpwd;
-	}
-
-	public void setMpwd(String mpwd) {
-		this.mpwd = mpwd;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public Date getmEnrollDate() {
-		return mEnrollDate;
-	}
-
-	public void setmEnrollDate(Date mEnrollDate) {
-		this.mEnrollDate = mEnrollDate;
-	}
-
-	public int getmPoint() {
-		return mPoint;
-	}
-
-	public void setmPoint(int mPoint) {
-		this.mPoint = mPoint;
-	}
-
-	public String getMtype() {
-		return mtype;
-	}
-
-	public void setMtype(String mtype) {
-		this.mtype = mtype;
-	}
-
-	public String getmFundtype() {
-		return mFundtype;
-	}
-
-	public void setmFundtype(String mFundtype) {
-		this.mFundtype = mFundtype;
-	}
-
-	public String getMpr() {
-		return mpr;
-	}
-
-	public void setMpr(String mpr) {
-		this.mpr = mpr;
-	}
-
-	public String getMprNew() {
-		return mprNew;
-	}
-
-	public void setMprNew(String mprNew) {
-		this.mprNew = mprNew;
-	}
-
-	public String getmBirthDay() {
-		return mBirthDay;
-	}
-
-	public void setmBirthDay(String mBirthDay) {
-		this.mBirthDay = mBirthDay;
-	}
-
-	public String getmAddress() {
-		return mAddress;
-	}
-
-	public void setmAddress(String mAddress) {
-		this.mAddress = mAddress;
-	}
-
-	public Date getmAcceptDate() {
-		return mAcceptDate;
-	}
-
-	public void setmAcceptDate(Date mAcceptDate) {
-		this.mAcceptDate = mAcceptDate;
-	}
-
-	public int getmGoalNum() {
-		return mGoalNum;
-	}
-
-	public void setmGoalNum(int mGoalNum) {
-		this.mGoalNum = mGoalNum;
-	}
-
-	public String getmStatus() {
-		return mStatus;
-	}
-
-	public void setmStatus(String mStatus) {
-		this.mStatus = mStatus;
-	}
-
-	public String getmTakeStatus() {
-		return mTakeStatus;
-	}
-
-	public void setmTakeStatus(String mTakeStatus) {
-		this.mTakeStatus = mTakeStatus;
-	}
-
-	public int getdMoney() {
-		return dMoney;
-	}
-
-	public void setdMoney(int dMoney) {
-		this.dMoney = dMoney;
-	}
-
-	public int getCfMoney() {
-		return cfMoney;
-	}
-
-	public void setCfMoney(int cfMoney) {
-		this.cfMoney = cfMoney;
-	}
-
-	public String getOrigin() {
-		return origin;
-	}
-
-	public void setOrigin(String origin) {
-		this.origin = origin;
-	}
-
-	public String getChange() {
-		return change;
-	}
-
-	public void setChange(String change) {
-		this.change = change;
-	}
-
 	@Override
 	public String toString() {
 		return "Member [mno=" + mno + ", mName=" + mName + ", mNickName=" + mNickName + ", mGender=" + mGender
@@ -260,7 +67,158 @@ public class Member implements java.io.Serializable{
 				+ mEnrollDate + ", mPoint=" + mPoint + ", mtype=" + mtype + ", mFundtype=" + mFundtype + ", mpr=" + mpr
 				+ ", mprNew=" + mprNew + ", mBirthDay=" + mBirthDay + ", mAddress=" + mAddress + ", mAcceptDate="
 				+ mAcceptDate + ", mGoalNum=" + mGoalNum + ", mStatus=" + mStatus + ", mTakeStatus=" + mTakeStatus
-				+ ", dMoney=" + dMoney + ", cfMoney=" + cfMoney + ", origin=" + origin + ", change=" + change + "]";
+				+ ", dMoney=" + dMoney + ", cfMoney=" + cfMoney + ", origin=" + origin + ", change=" + change
+				+ ", count=" + count + "]";
+	}
+	public int getMno() {
+		return mno;
+	}
+	public void setMno(int mno) {
+		this.mno = mno;
+	}
+	public String getmName() {
+		return mName;
+	}
+	public void setmName(String mName) {
+		this.mName = mName;
+	}
+	public String getmNickName() {
+		return mNickName;
+	}
+	public void setmNickName(String mNickName) {
+		this.mNickName = mNickName;
+	}
+	public String getmGender() {
+		return mGender;
+	}
+	public void setmGender(String mGender) {
+		this.mGender = mGender;
+	}
+	public String getmPhone() {
+		return mPhone;
+	}
+	public void setmPhone(String mPhone) {
+		this.mPhone = mPhone;
+	}
+	public String getMid() {
+		return mid;
+	}
+	public void setMid(String mid) {
+		this.mid = mid;
+	}
+	public String getMpwd() {
+		return mpwd;
+	}
+	public void setMpwd(String mpwd) {
+		this.mpwd = mpwd;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public Date getmEnrollDate() {
+		return mEnrollDate;
+	}
+	public void setmEnrollDate(Date mEnrollDate) {
+		this.mEnrollDate = mEnrollDate;
+	}
+	public int getmPoint() {
+		return mPoint;
+	}
+	public void setmPoint(int mPoint) {
+		this.mPoint = mPoint;
+	}
+	public String getMtype() {
+		return mtype;
+	}
+	public void setMtype(String mtype) {
+		this.mtype = mtype;
+	}
+	public String getmFundtype() {
+		return mFundtype;
+	}
+	public void setmFundtype(String mFundtype) {
+		this.mFundtype = mFundtype;
+	}
+	public String getMpr() {
+		return mpr;
+	}
+	public void setMpr(String mpr) {
+		this.mpr = mpr;
+	}
+	public String getMprNew() {
+		return mprNew;
+	}
+	public void setMprNew(String mprNew) {
+		this.mprNew = mprNew;
+	}
+	public String getmBirthDay() {
+		return mBirthDay;
+	}
+	public void setmBirthDay(String mBirthDay) {
+		this.mBirthDay = mBirthDay;
+	}
+	public String getmAddress() {
+		return mAddress;
+	}
+	public void setmAddress(String mAddress) {
+		this.mAddress = mAddress;
+	}
+	public Date getmAcceptDate() {
+		return mAcceptDate;
+	}
+	public void setmAcceptDate(Date mAcceptDate) {
+		this.mAcceptDate = mAcceptDate;
+	}
+	public int getmGoalNum() {
+		return mGoalNum;
+	}
+	public void setmGoalNum(int mGoalNum) {
+		this.mGoalNum = mGoalNum;
+	}
+	public String getmStatus() {
+		return mStatus;
+	}
+	public void setmStatus(String mStatus) {
+		this.mStatus = mStatus;
+	}
+	public String getmTakeStatus() {
+		return mTakeStatus;
+	}
+	public void setmTakeStatus(String mTakeStatus) {
+		this.mTakeStatus = mTakeStatus;
+	}
+	public int getdMoney() {
+		return dMoney;
+	}
+	public void setdMoney(int dMoney) {
+		this.dMoney = dMoney;
+	}
+	public int getCfMoney() {
+		return cfMoney;
+	}
+	public void setCfMoney(int cfMoney) {
+		this.cfMoney = cfMoney;
+	}
+	public String getOrigin() {
+		return origin;
+	}
+	public void setOrigin(String origin) {
+		this.origin = origin;
+	}
+	public String getChange() {
+		return change;
+	}
+	public void setChange(String change) {
+		this.change = change;
+	}
+	public int getCount() {
+		return count;
+	}
+	public void setCount(int count) {
+		this.count = count;
 	}
 
 	
