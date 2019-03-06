@@ -250,7 +250,7 @@
         					<h3><a href="teacher-single,jsp">${b3.mNick}</a></h3>
         					<span class="position"></span>
         					<div class="text">
-		        				<p style="width:200px">${b3.fValueType} <span>${b3.sumValue2}원</span> 기부중</p>
+		        				<p style="width:200px">${b3.fValueType} <span><fmt:formatNumber value = "${b3.sumValue2}" type="currency" currencySymbol=" "/>원</span> 기부중</p>
 		        			
 		        			</div>
         				</div>

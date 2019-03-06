@@ -212,10 +212,22 @@
 				}
 				
 				if(data.itemDonateList[i].fcontent.length > 30){
-					itemTbodyHtml.push('<td><a href="cloud_thing_datail.bo?itemDatail='+itemDatail+'">'+content2+'...</a></td>');
+					if(data.itemDonateList[i].fstatus == 'YET'){
+						itemTbodyHtml.push('<td><a onclick = "denySeeDetail(1);">'+content2+'...</a></td>');
+					}else if(data.itemDonateList[i].fstatus == 'DENY'){
+						itemTbodyHtml.push('<td><a onclick = "denySeeDetail(2);">'+content2+'...</a></td>');
+					}else  {
+						itemTbodyHtml.push('<td><a href="cloud_thing_datail.bo?itemDatail='+itemDatail+'">'+content2+'...</a></td>');
+					}
 				}else{
-					itemTbodyHtml.push('<td><a href="cloud_thing_datail.bo?itemDatail='+itemDatail+'">'+data.itemDonateList[i].fcontent+'</a></td>');
-				}	
+					if(data.itemDonateList[i].fstatus == 'YET'){
+						itemTbodyHtml.push('<td><a onclick = "denySeeDetail(1);">'+data.itemDonateList[i].fcontent+'...</a></td>');
+					}else if(data.itemDonateList[i].fstatus == 'DENY'){
+						itemTbodyHtml.push('<td><a onclick = "denySeeDetail(2);">'+data.itemDonateList[i].fcontent+'...</a></td>');
+					}else  {
+						itemTbodyHtml.push('<td><a href="cloud_thing_datail.bo?itemDatail='+itemDatail+'">'+data.itemDonateList[i].fcontent+'</a></td>');
+					}
+				}
 				
 				if(data.itemDonateList[i].fitemname.length > 8){
 					itemTbodyHtml.push('<td>'+item+'...</td>');
@@ -224,7 +236,11 @@
 				}
 				
 				if(data.itemDonateList[i].fstartdate == null){
-					itemTbodyHtml.push('<td>승인대기중</td>');
+					if(data.itemDonateList[i].fstatus == 'YET'){
+						itemTbodyHtml.push('<td>승인대기중</td>');
+					}else if(data.itemDonateList[i].fstatus == 'DENY'){
+						itemTbodyHtml.push('<td>반려됨</td>');
+					}
 				}else if(data.itemDonateList[i].fstartdate != null && data.itemDonateList[i].fenddate == null){
 					itemTbodyHtml.push('<td>'+startDate+'~</td>');
 				}else {
@@ -337,15 +353,31 @@
 				
 				
 				if(data.moneyDonateList[i].fcontent.length > 30){
-					moneyTbodyHtml.push('<td><a href="cloud_money_datail.bo?moneyDatail='+moneyDatail+'">'+content2+'...</a></td>');
+					if(data.moneyDonateList[i].fstatus == 'YET'){
+						moneyTbodyHtml.push('<td><a onclick = "denySeeDetail(1);">'+content2+'...</a></td>');
+					}else if(data.moneyDonateList[i].fstatus == 'DENY'){
+						moneyTbodyHtml.push('<td><a onclick = "denySeeDetail(2);">'+content2+'...</a></td>');
+					}else  {
+						moneyTbodyHtml.push('<td><a href="cloud_money_datail.bo?moneyDatail='+moneyDatail+'">'+content2+'...</a></td>');
+					}
 				}else{
-					moneyTbodyHtml.push('<td><a href="cloud_money_datail.bo?moneyDatail='+moneyDatail+'">'+data.moneyDonateList[i].fcontent+'</a></td>');
+					if(data.moneyDonateList[i].fstatus == 'YET'){
+						moneyTbodyHtml.push('<td><a onclick = "denySeeDetail(1);">'+data.moneyDonateList[i].fcontent+'...</a></td>');
+					}else if(data.moneyDonateList[i].fstatus == 'DENY'){
+						moneyTbodyHtml.push('<td><a onclick = "denySeeDetail(2);">'+data.moneyDonateList[i].fcontent+'...</a></td>');
+					}else  {
+						moneyTbodyHtml.push('<td><a href="cloud_money_datail.bo?moneyDatail='+moneyDatail+'">'+data.moneyDonateList[i].fcontent+'</a></td>');
+					}
 				}
 					
 					moneyTbodyHtml.push('<td>'+numberWithCommas(data.moneyDonateList[i].fvalue)+'</td>');
 					
 				if(data.moneyDonateList[i].fstartdate == null){
-					moneyTbodyHtml.push('<td>승인대기중</td>');
+					if(data.moneyDonateList[i].fstatus == 'YET'){
+						moneyTbodyHtml.push('<td>승인대기중</td>');
+					}else if(data.moneyDonateList[i].fstatus == 'DENY'){
+						moneyTbodyHtml.push('<td>반려됨</td>');
+					}
 				}else if(data.moneyDonateList[i].fstartdate != null && data.moneyDonateList[i].fenddate == null){
 					moneyTbodyHtml.push('<td>'+startDate+'~</td>');
 				}else {
@@ -434,6 +466,22 @@
 		
 	}
 
+	
+	function denySeeDetail(num){
+		if(num == 1){
+			swal("관리자의 승인을 기다려주세요!")
+			.then(function(){
+				return false;
+			});
+		}else{
+			swal("반려된 글 입니다!")
+			.then(function(){
+				return false;
+			});
+		}
+		
+	}
+	
 	//금액에 , 단위 찍기
 	function numberWithCommas(x) {
        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");

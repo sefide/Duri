@@ -473,10 +473,14 @@ public class PaymentDaoImpl implements PaymentDao {
 	// 물품 후원 결제페이지 - 후원물품정보 select
 	@Override
 	public List<BoardItemValue> selectFundItem(SqlSessionTemplate sqlSession, BoardItem bi) throws FundingException {
-		List<BoardItemValue> biList = sqlSession.selectList("Point.selectFundItem", bi);
-		
-		if(biList == null) {
-			throw new FundingException("물품후원 정보를 조회할 수 없습니다. ");
+		List<BoardItemValue> biList = null;
+		biList = sqlSession.selectList("Point.selectFundItem", bi);
+		if(biList.size() == 0) {
+			biList = sqlSession.selectList("Point.selectFundItemNull", bi);
+			for(int i = 0; i < biList.size(); i++) {
+				biList.get(i).setSumItemValue("0");
+			}
+			
 		}
 		System.out.println("Dao biList : " + biList);
 		return biList;
