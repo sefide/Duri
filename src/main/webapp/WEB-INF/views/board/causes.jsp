@@ -24,9 +24,9 @@
 	#money:hover,#thing:hover{
 		background:orange;
 		color:white;
-		/* margin:10px; */
-		padding:3px 3px;
-		border-radius:8px;
+		padding:10px 3px;
+	
+		border-radius:6px;
 	}
 	
 	#goMoDetail{
@@ -52,27 +52,11 @@
 
 
     <section class="ftco-section">
-      <div class="container">
-      <div class="row">
+      <div class="container" >
+      <div class="row" style=" width:100% !important; height:70px !important">
 
-        <h3><a href="money_donate.bo" id="money">금액후원</a><b> | </b><a href="thing_donate.bo" id="thing">물품후원</a></h3>
+        <h3 style="width:100%; text-align:center"><a href="money_donate.bo" id="money" style="font-size:25px;margin:10px;padding:10px; ">금액후원</a><b>|</b><a href="thing_donate.bo" id="thing" style="font-size:25px;margin:10px;padding:10px; ">물품후원</a></h3>
 
-		<!-- <div align="right" style="width:950px">
-		<label>지역 : </label>
-		 <select align="center" style="height:40px; width:150px;">
-        	<option>서울시</option>
-        	<option>경상도</option>
-        	<option>경기도</option>
-        </select>
-        
-        &nbsp;&nbsp;&nbsp;&nbsp;
-        <label>유형 : </label>
-        <select align="center" style="height:40px; width:150px;">
-        	<option>기초생활수급자</option>
-        	<option>소년소녀가장</option>
-        	<option>한부모가정</option>
-        </select>
-		</div> -->
       </div>		
       	<div class="row">
       	   <c:forEach var="mo" items="${moList}">
@@ -81,13 +65,13 @@
       			<div class="cause-entry">
       			<!-- style="background-image: url(/duri/resources/common/images/cause-1.jpg);" -->
       			<c:if test="${mo.fValueType eq '생활비' }">
-    					<a href="#" class="img" style="background-image: url(/duri/resources/fundFiles/funding_ex_img04.jpg);"></a>
+    					<a href="#" class="img" style="background-image: url(/duri/resources/fundFiles/bg_01.jpg);"></a>
     			</c:if>
     			<c:if test="${mo.fValueType eq '교육비' }">
-    					<a href="#" class="img" style="background-image: url(/duri/resources/fundFiles/funding_ex_img_school.jpg);"></a>
+    					<a href="#" class="img" style="background-image: url(/duri/resources/fundFiles/school2.jpg);"></a>
     			</c:if>
     			<c:if test="${mo.fValueType eq '의료비' }">
-    					<a href="#" class="img" style="background-image: url(/duri/resources/fundFiles/funding_ex_img_doctor.jpg);"></a>
+    					<a href="#" class="img" style="background-image: url(/duri/resources/fundFiles/doctor.jpg);"></a>
     			</c:if>
     			<form action="cloud_money_datail.bo" name="sub1" id="moneyForm" method="POST">
     				<div class="text p-3 p-md-4">
@@ -96,16 +80,34 @@
     					<p>' ${mo.mNick} ' 행복두리의 사연</p>
     					<span class="donation-time mb-3 d-block" style="color:black">${mo.mFundType}</span>
 	                	<div class="progress custom-progress-success">
-	                	<c:forEach var="mo2" items="${moList2}">
-	                	<c:set var="sum1" value="${(mo2.sumFhValue/mo.fValue)*100}"/>
+	                	<c:forEach var="mo3" items="${moList2}">
+	                	<c:choose>
+	                	<c:when test="${mo.fno eq mo3.fno}">
+	                	<c:set var="sum1" value="${(mo3.sumFhValue/mo.fValue)*100}"/>
+	                	</c:when>
+	                	<c:otherwise>
+	                	<c:set var="sum1" value="0"/>
+	                	</c:otherwise>
+	                	</c:choose>
+	                	<div class="progress-bar bg-primary" role="progressbar" style="width: ${sum1}%" aria-valuenow="${sum1}" aria-valuemin="0" aria-valuemax="100"></div>
 	                	</c:forEach>
-	                    <div class="progress-bar bg-primary" role="progressbar" style="width: ${sum1}%" aria-valuenow="${sum1}" aria-valuemin="0" aria-valuemax="100"></div>
+	                    
 	                	</div>
-	                	<c:forEach var="mo2" items="${moList2}">
-	                	<c:set var="sum2" value="${(mo2.sumFhValue/mo.fValue)*100}"/>
+	                	<c:set var="sum2" value="0"/>
+	                	<c:forEach var="mo2" items="${moList2}" varStatus = "status">
+	                		 
+	                		          
+	                		<c:if test="${mo.fno eq mo2.fno}">
+			                	<c:set var="sum2" value="${(mo2.sumFhValue/mo.fValue)*100}"/>
+		                	</c:if>
+		                	
+		                	<c:if test = "${status.last}">
+			                	<a><fmt:formatNumber value="${sum2}" pattern=" " />%</a><a style="float:right"><fmt:formatNumber value = "${mo.fValue}" type="currency" currencySymbol=" "/>원</a>
+		                	</c:if>
+		                		
 	                	</c:forEach>
-	               		<a><fmt:formatNumber value="${sum2}" pattern=" " />%</a><a style="float:right"><fmt:formatNumber value = "${mo.fValue}" type="currency" currencySymbol=" "/>원</a>
-	    				
+	                	
+	               		
 	    			</div>
 	    		</form>
     			</div>
@@ -113,6 +115,8 @@
       		</c:forEach>
       	
         </div>
+        
+        <br><br>
         <div class="col text-center">
 					<div class="block-27">
 							<ul>
@@ -167,6 +171,11 @@
     	$("#moneyForm").submit();	
     	
     }
+    
+    $(document).ready(function(){
+    	var check = "${check}";
+    	console.log(check);
+    });
     </script>
   </body>
 </html>

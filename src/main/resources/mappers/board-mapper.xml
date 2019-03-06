@@ -114,6 +114,7 @@
 		<result property="sum" column="SUM(FDVALUE)"/>
 		<result property="sumValue" column="SUMVALUE"/>
 		<result property="sumFhValue" column="SUM(FH.FHVALUE)"/>
+		<result property="sumValue2" column="FHVALUE"/>
 		<result property="dhValue" column="DHVALUE"/>
 		<result property="dh_valueType" column="DHVALUETYPE"/>
 		<result property="dh_mno" column="DH_MNO_GIVE"/>
@@ -282,17 +283,17 @@
 	
 	<insert id="insertWish">
 		INSERT INTO FUNDINTEREST 
-		VALUES(SEQ_FI_NO.NEXTVAL,SYSDATE,'Y','2',#{mno},#{fno},#{mno2})
+		VALUES(SEQ_FI_NO.NEXTVAL,SYSDATE,'Y','2',#{mno2},#{fno},#{mno})
 	</insert>
 	
 	<insert id="insertWish2">
 		INSERT INTO FUNDINTEREST 
-		VALUES(SEQ_FI_NO.NEXTVAL,SYSDATE,'Y','3',#{mno},#{fno},#{mno2})
+		VALUES(SEQ_FI_NO.NEXTVAL,SYSDATE,'Y','3',#{mno2},#{fno},#{mno})
 	</insert>
 	
 	<insert id="insertWish3">
 		INSERT INTO FUNDINTEREST 
-		VALUES(SEQ_FI_NO.NEXTVAL,SYSDATE,'Y','1',#{mno},null,#{mno2})
+		VALUES(SEQ_FI_NO.NEXTVAL,SYSDATE,'Y','1',#{mno2},null,#{mno})
 	</insert>
 	
 	<select id="selectThing" resultMap = "boardSS">
@@ -323,20 +324,24 @@
 	</select>
 	
 	<select id="selectNow" resultMap = "boardSS" parameterType="Board2">
-		SELECT SUM(FH.FHVALUE) FROM 
+		 SELECT SUM(FH.FHVALUE),F.FNO FROM 
 		FUNDHISTORY FH
 		JOIN FUNDING F ON(F.FNO = FH.FH_FNO)
 		WHERE F.FTYPE = 'MONEY'
+        AND F.FSTATUS != 'END'
+        AND F.FSTATUS != 'GOAL'
+        AND F.FSTATUS != 'YET'
 		GROUP BY F.FNO
         ORDER BY F.FNO DESC
 	</select>
 	
 	<select id="moneyCountThr" resultMap = "boardSS" parameterType="Board2">
-		SELECT DHVALUE , DHVALUETYPE, DH_MNO_GIVE ,ME.MNICK
-		FROM DIRECTFUNDHISTORY DH
-		LEFT JOIN MEMBER M ON(M.MNO = DH.DH_MNO_TAKE)
-		LEFT JOIN MEMBER ME ON(DH_MNO_GIVE = ME.MNO)
-		WHERE M.MNO = #{fWriter}
+		SELECT FH.FHVALUE , ME.MNICK, F.FVALUETYPE
+		FROM FUNDHISTORY FH
+        LEFT JOIN FUNDING F ON (FH.FH_FNO = F.FNO)
+		LEFT JOIN MEMBER M ON(M.MNO = FH.FH_FNO)
+		LEFT JOIN MEMBER ME ON(FH.FH_MNO_GIVE = ME.MNO)
+		WHERE F.FNO = #{fno}
 	</select>
 	
 	

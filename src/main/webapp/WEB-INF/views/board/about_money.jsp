@@ -122,17 +122,17 @@
     		<div class="row d-flex">
     			<c:if test="${moneyDetail.fValueType eq '생활비' }">
 	    			<div class="col-md-6 d-flex ftco-animate">
-	    				<div class="img img-about align-self-stretch" style="background-image: url(/duri/resources/fundFiles/funding_ex_img04.jpg); width: 100%;"></div>
+	    				<div class="img img-about align-self-stretch" style="background-image: url(/duri/resources/fundFiles/bg_01.jpg); width: 100%;"></div>
 	    			</div>
     			</c:if>
     			<c:if test="${moneyDetail.fValueType eq '교육비' }">
     				<div class="col-md-6 d-flex ftco-animate">
-	    				<div class="img img-about align-self-stretch" style="background-image:url(/duri/resources/fundFiles/funding_ex_img_school.jpg); width: 100%;"></div>
+	    				<div class="img img-about align-self-stretch" style="background-image:url(/duri/resources/fundFiles/school2.jpg); width: 100%;"></div>
 	    			</div>
     			</c:if>
     			<c:if test="${moneyDetail.fValueType eq '의료비' }">
     				<div class="col-md-6 d-flex ftco-animate">
-	    				<div class="img img-about align-self-stretch" style="background-image:url(/duri/resources/fundFiles/funding_ex_img_doctor.jpg); width: 100%;"></div>
+	    				<div class="img img-about align-self-stretch" style="background-image:url(/duri/resources/fundFiles/doctor.jpg); width: 100%;"></div>
 	    			</div>
     			</c:if>
     			<div class="col-md-6 pl-md-5 ftco-animate">
@@ -250,7 +250,7 @@
         					<h3><a href="teacher-single,jsp">${b3.mNick}</a></h3>
         					<span class="position"></span>
         					<div class="text">
-		        				<p style="width:200px">${b3.dh_valueType} <span>${b3.dhValue}원</span> 기부중</p>
+		        				<p style="width:200px">${b3.fValueType} <span>${b3.sumValue2}원</span> 기부중</p>
 		        			
 		        			</div>
         				</div>
@@ -263,7 +263,7 @@
         </c:when>
         <c:otherwise>
         <div class="col-md-7 heading-section ftco-animate text-center">
-            <p style="width:1000px; font-size:30px; font-weight:bold">아직 받고있는 정기후원이 없습니다.</p>
+            <p style="width:1000px; font-size:30px; font-weight:bold">&nbsp;&nbsp;아직 받고있는 후원이 없습니다.</p>
           </div>
         </c:otherwise>
         </c:choose>

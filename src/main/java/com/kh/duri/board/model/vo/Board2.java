@@ -8,15 +8,17 @@ public class Board2 {
 	private String mNick;
 	private int sum;
 	private int sumValue;
+	private int sumValue2;
 	private int sumFhValue;
 	private int dhValue;
 	private String dh_valueType;
 	private int dh_mno;
+	private String fValueType;
 	
 	public Board2() {}
 
-	public Board2(int fno, int mno, int mno2, String mNick, int sum, int sumValue, int sumFhValue, int dhValue,
-			String dh_valueType, int dh_mno) {
+	public Board2(int fno, int mno, int mno2, String mNick, int sum, int sumValue, int sumValue2, int sumFhValue,
+			int dhValue, String dh_valueType, int dh_mno, String fValueType) {
 		super();
 		this.fno = fno;
 		this.mno = mno;
@@ -24,10 +26,12 @@ public class Board2 {
 		this.mNick = mNick;
 		this.sum = sum;
 		this.sumValue = sumValue;
+		this.sumValue2 = sumValue2;
 		this.sumFhValue = sumFhValue;
 		this.dhValue = dhValue;
 		this.dh_valueType = dh_valueType;
 		this.dh_mno = dh_mno;
+		this.fValueType = fValueType;
 	}
 
 	public int getFno() {
@@ -78,6 +82,14 @@ public class Board2 {
 		this.sumValue = sumValue;
 	}
 
+	public int getSumValue2() {
+		return sumValue2;
+	}
+
+	public void setSumValue2(int sumValue2) {
+		this.sumValue2 = sumValue2;
+	}
+
 	public int getSumFhValue() {
 		return sumFhValue;
 	}
@@ -110,13 +122,21 @@ public class Board2 {
 		this.dh_mno = dh_mno;
 	}
 
+	public String getfValueType() {
+		return fValueType;
+	}
+
+	public void setfValueType(String fValueType) {
+		this.fValueType = fValueType;
+	}
+
 	@Override
 	public String toString() {
 		return "Board2 [fno=" + fno + ", mno=" + mno + ", mno2=" + mno2 + ", mNick=" + mNick + ", sum=" + sum
-				+ ", sumValue=" + sumValue + ", sumFhValue=" + sumFhValue + ", dhValue=" + dhValue + ", dh_valueType="
-				+ dh_valueType + ", dh_mno=" + dh_mno + "]";
+				+ ", sumValue=" + sumValue + ", sumValue2=" + sumValue2 + ", sumFhValue=" + sumFhValue + ", dhValue="
+				+ dhValue + ", dh_valueType=" + dh_valueType + ", dh_mno=" + dh_mno + ", fValueType=" + fValueType
+				+ "]";
 	}
-
 
 	
 

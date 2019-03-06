@@ -54,43 +54,26 @@
 
 
 
-
-
+	<c:set var="alphabet">/duri/resources/board/images/ebul.jpg , /duri/resources/board/images/ssal.jpg , /duri/resources/board/images/nuddle.jpg , /duri/resources/board/images/sengredae.jpg , /duri/resources/board/images/ssal.jpg , /duri/resources/board/images/yeon.jpg
+	,/duri/resources/board/images/ssal.jpg , /duri/resources/board/images/ebul.jpg , /duri/resources/board/images/ssal.jpg , /duri/resources/board/images/sengredae.jpg , /duri/resources/board/images/nuddle.jpg , /duri/resources/board/images/yeon.jpg
+	</c:set>
     <section class="ftco-section">
       <div class="container">
+		<div class="row" style=" width:100% !important; height:70px !important">
+		
+        <h3 style="width:100%; text-align:center"><a href="money_donate.bo" id="money" style="font-size:25px;margin:10px;padding:10px; ">금액후원</a><b>|</b><a href="thing_donate.bo" id="thing" style="font-size:25px;margin:10px;padding:10px; ">물품후원</a></h3>
+
+      </div>
 		<div class="row">
-
-			<h3>
-				<a href="money_donate.bo" id="money">금액후원</a><b> | </b><a
-					href="thing_donate.bo" id="thing">물품후원</a>
-			</h3>
-
-			<!-- <div align="right" style="width: 950px">
-
-				<label>유형 : </label> <select align="center"
-					style="height: 40px; width: 150px;">
-					<option>기초생활수급자</option>
-					<option>소년소녀가장</option>
-					<option>한부모가정</option>
-				</select>
-			</div> -->
-
-		</div>
-		<div class="row">
-			<c:forEach var="th" items="${thList}" varStatus="status">
-				
+			<c:forEach var="th" items="${thList}" varStatus="status1">
+			
 				<div class="col-md-4 ftco-animate">
 					<div class="cause-entry">
-					<c:choose>
-					<c:when test="${fn:contains(itemDonateList, '라면')}">
-						<a class="img" id="imgs"style="background-image: url(/duri/resources/board/images/birthday.png);"></a>
-					</c:when>
-					
-					
-					<c:otherwise>
-						<a class="img" id="imgs"style="background-image: url(/duri/resources/board/images/ebul.jpg);"></a>
-					</c:otherwise>
-					</c:choose>
+					<c:forTokens items="${alphabet}" delims="," var="letter" varStatus="status2">
+					<c:if test = "${ status1.index eq status2.index }">
+						<a class="img" id="imgs"style="background-image: url(${letter});"></a>
+						</c:if>
+					</c:forTokens>
 						<form action="cloud_thing_datail.bo" name="sub1" id="moneyForm"
 							method="POST">
 							<div class="text p-3 p-md-4">
@@ -100,30 +83,32 @@
 								</h3>
 								<p>'${th.mNick }' 행복두리의 사연</p>
 								<span class="donation-time mb-3 d-block" style="color: black;">${th.mFundType }</span>
+								<fmt:formatNumber value = "${thList3[status1.index].sumValue }" type = "number" var = "sumValueEx"/>
+									<fmt:formatNumber value = "${thList3[status1.index].sum }" type = "number" var = "sumEx"/>
+									<c:set var="sum" value="0" />
 								<c:forEach var="th3" items="${thList3}" varStatus = "status2">
 								<c:if test="${th.fno eq th3.fno}">
-									<fmt:formatNumber value = "${thList3[status.index].sumValue }" type = "number" var = "sumValueEx"/>
-									<fmt:formatNumber value = "${thList3[status.index].sum }" type = "number" var = "sumEx"/>
+									
+									
+									<c:if test="${not empty sum}">
 									<c:set var="sum" value="${(sumValueEx/sumEx)*100}" />
-									<c:choose>
-									<c:when test="${not empty sum}">
-										<div class="progress custom-progress-success">
+										<%-- <div class="progress custom-progress-success">
+											<div class="progress-bar bg-primary" role="progressbar"
+												style="width: ${sum}%" aria-valuenow="${sum}" aria-valuemin="0"
+												aria-valuemax="100"></div>
+										</div> --%>
+									</c:if>
+								</c:if>
+								
+			                	<c:if test = "${status2.last}">
+				                	<div class="progress custom-progress-success">
 											<div class="progress-bar bg-primary" role="progressbar"
 												style="width: ${sum}%" aria-valuenow="${sum}" aria-valuemin="0"
 												aria-valuemax="100"></div>
 										</div>
-										</c:when>
-										<c:otherwise>
-											<div class="progress custom-progress-success">
-											<div class="progress-bar bg-primary" role="progressbar"
-												style="width: 0%" aria-valuenow="0" aria-valuemin="0"
-												aria-valuemax="100"></div>
-										</div>
-										</c:otherwise>
-									</c:choose>
-									
-								</c:if>
+			                	</c:if>
 									</c:forEach>
+									
 									<c:choose>
 									<c:when test="${not empty sum}">
 										<a><fmt:formatNumber value="${sum}" pattern=" " />%</a>
@@ -144,13 +129,14 @@
 				
 					</div>
 				</div>
+
 		</c:forEach>
 		</div>
 	
 		
 			</div>
 			
-
+<br><br>
         <div class="col text-center">
 					<div class="block-27">
 							<ul>
