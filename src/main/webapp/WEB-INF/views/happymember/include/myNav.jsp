@@ -311,7 +311,6 @@ p {font-size: 20px; text-align: center;}
 	function items(mno){
 		$("#myModal").css("display", "block");
 		console.log("ajax 회원번호 : " + mno);
-		/* console.log("ajax 회원주소 : " + address); */
 		
 		$.ajax({
 			url:"donateItemList.happy",

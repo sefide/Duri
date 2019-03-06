@@ -57,7 +57,7 @@
 			<!-- Q&A : 내용 -->
 			<div>
 				<div class="field">
-				    <textarea style="width: 92%; height: 600px; font-size: 18px;" readonly>${qnaContent}</textarea>
+				    <textarea style="width: 92%; height: 250px; font-size: 18px;" readonly>${qnaContent}</textarea>
 				</div>
 			</div>
 			<br>

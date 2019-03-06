@@ -92,7 +92,7 @@
 			<tr>
 				<th scope="col">No</th>
 				<th scope="col">증빙서류 최근 승인일</th>
-				<th scope="col">증빙서류 제출 마감일</th>
+				<th scope="col">증빙서류 유효기간</th>
 				<th scope="col">D-day(남은기간)</th>
 			</tr>
 			</thead>
@@ -101,7 +101,7 @@
 			<c:if test="${not empty proofDocument.finishdate}">
 				<td>1</td>
 				<td>${proofDocument.adate }</td>
-				<td>${proofDocument.dday }</td>
+				<td>~&nbsp;${proofDocument.dday }</td>
 				<c:choose>
 				<c:when test="${proofDocument.finishdate lt (0)}">
 				<td>D${proofDocument.finishdate}</td>
