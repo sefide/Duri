@@ -117,7 +117,7 @@ tr:hover{
 							<th style="width: 40%;">제목</th>
 							<th style="width: 15%;">작성자</th>
 							<th style="width: 15%;">작성일</th>
-							<th style="width: 10%;">댓글완료</th>
+							<th style="width: 10%;">답변상태</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -129,10 +129,10 @@ tr:hover{
 							<td><c:out value="${QnAList.qDate}"></c:out></td>
 							<c:choose>
 								<c:when test="${QnAList.qAnswer == NULL }">
-									<td>X</td>
+									<td>-</td>
 								</c:when>
 								<c:otherwise>
-									<td>O</td>
+									<td>답변완료</td>
 								</c:otherwise>
 							</c:choose>			
 						</tr>

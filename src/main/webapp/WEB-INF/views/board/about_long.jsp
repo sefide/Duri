@@ -35,9 +35,10 @@ b{
 }
 
 #longDetail{
-	background:#FFFFA1;
+	background: #ffffff;
+    border: 4px solid #ffa501;
 	padding:10px 10px;
-	border-radius:10px;
+	/* border-radius:10px; */
 	height:180px;
 }
 #mpr{

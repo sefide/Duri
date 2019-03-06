@@ -357,7 +357,7 @@
 				}else if(data.moneyDonateList[i].fstatus == 'END'){
 					moneyTbodyHtml.push('<td><i class="red circle icon" alt="기간종료"></i></td>');
 				}else if(data.moneyDonateList[i].fstatus == 'GOAL'){
-					itemTbmoneyTbodyHtmlodyHtml.push('<td><i class="blue circle icon" alt="달성되어종료"></i></td>');
+					moneyTbodyHtml.push('<td><i class="blue circle icon" alt="달성되어종료"></i></td>');
 				}else if(data.moneyDonateList[i].fstatus == 'YET'){
 					moneyTbodyHtml.push('<td><i class="yellow circle icon" alt="승인대기"></i></td>');
 				}else{

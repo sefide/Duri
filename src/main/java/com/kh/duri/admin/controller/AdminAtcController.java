@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -440,16 +441,24 @@ public class AdminAtcController {
 	}
 		
 	//알림 확인완료 버튼 ajax
-	@RequestMapping("adminAlarmBtn_ajax.ad")
-	public String adminAlarmBtn(HttpServletRequest request, HttpServletResponse response,Notice n) {
-		
-		
-		int mno = Integer.parseInt(request.getParameter("mno"));
-		n.setN_mno(mno);
-		int result = aas.adminAlarmBtn(n);
-		
-		return "redirect:mypage.happy";
-	}
+	   @RequestMapping("adminAlarmBtn_ajax.ad")
+	   public String adminAlarmBtn(HttpSession session,HttpServletRequest request, HttpServletResponse response,Notice n) {
+	      
+	      Member m =(Member) session.getAttribute("loginUser");
+	   /*   Member m = (Member)request.getSession().getAttribute("loginUser");*/
+	      int mno = Integer.parseInt(request.getParameter("mno"));
+	      
+	      n.setN_mno(mno);
+	      int result = aas.adminAlarmBtn(n);
+	      
+	      
+	      m.setCount(0);
+	      
+	      session.setAttribute("loginUser",m);
+	      
+	      
+	      return "redirect:mypage.happy";
+	   }
 	
 		
 	
