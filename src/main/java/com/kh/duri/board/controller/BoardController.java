@@ -20,6 +20,7 @@ import com.kh.duri.board.model.vo.Board2;
 import com.kh.duri.board.model.vo.BoardItem;
 import com.kh.duri.board.model.vo.PageInfo;
 import com.kh.duri.board.model.vo.Pagination;
+import com.kh.duri.happymember.model.vo.Funding;
 import com.kh.duri.member.model.exception.LoginException;
 import com.kh.duri.member.model.vo.Member;
 
@@ -68,7 +69,7 @@ public class BoardController {
 				List<Member> doList;
 				
 				doList = bs.selectDonateList(pi);
-				
+				System.out.println(doList);
 
 				model.addAttribute("doList", doList);
 				model.addAttribute("pi", pi);
@@ -87,22 +88,19 @@ public class BoardController {
 	//정기후원 상세페이지
 	@RequestMapping("long_donate_detail.bo")
 	public ModelAndView longDonate(Member m, ModelAndView mv,HttpSession session,HttpServletRequest request, HttpServletResponse response){ 	
-			String longDetail2 = request.getParameter("longDetail");
-			System.out.println(m.getMno());
-			System.out.println("longDetail2"+longDetail2);
-			if(longDetail2 != null) {
-				int mNo = Integer.parseInt(longDetail2);
-				m.setMno(mNo);
-			}
+			
 			System.out.println("member : "+m);			
 			Member longDetail = null; 
 			int money = bs.selectTotalMoney(m);
 			int count = bs.selectTotalCount(m);
 			longDetail = bs.longDanateDetail(m);
+			List<Board2> b3 = bs.moneyCountThr(longDetail); // 정기후원받고 있는금액 조회
+			
 			
 			session.setAttribute("longDetail", longDetail);	//세션에 뿌려주기	
 			session.setAttribute("money", money);	//세션에 뿌려주기
 			session.setAttribute("count", count);	//세션에 뿌려주기
+			session.setAttribute("b3", b3);	//세션에 뿌려주기
 			mv.setViewName("redirect:longDonate.bo"); //위처럼 redirect로 뷰페이지이름연결할거랑 똑같음
 		return mv;
 	}
@@ -161,11 +159,14 @@ public class BoardController {
 
 		int b1 =  bs.moneyCountOne(moneyDetail);//현재 모금 금액
 		int b2 =  bs.moneyCountTwo(moneyDetail); // 후원명수...
+		List<Board2> b3 = bs.moneyCountThr(moneyDetail); // 정기후원받고 있는금액 조회
 
+		
 		
 		session.setAttribute("moneyDetail", moneyDetail);	//세션에 뿌려주기	
 		session.setAttribute("b1", b1);	//세션에 뿌려주기	
 		session.setAttribute("b2", b2);	//세션에 뿌려주기	
+		session.setAttribute("b3", b3);	//세션에 뿌려주기
 		mv.setViewName("redirect:moneyDetail.bo"); //위처럼 redirect로 뷰페이지이름연결할거랑 똑같음	
 		   } catch (LoginException e) {
 				// TODO Auto-generated catch block
@@ -200,10 +201,12 @@ public class BoardController {
 			thList2 = bs.selectThingList2(pi);
 			System.out.println("controller thList2 : "+ thList2);
 			thList3 = bs.selectPercent(pi);
+			List<Funding> itemDonateList = bs.selectItemDonateList();
 			
 			model.addAttribute("thList", thList);
 			model.addAttribute("thList2", thList2);
 			model.addAttribute("thList3", thList3);
+			model.addAttribute("itemDonateList", itemDonateList);
 			model.addAttribute("pi", pi);
 			
 		} catch (BoardException e) {
@@ -242,13 +245,15 @@ public class BoardController {
 		thingDetail2 = bs.thingDetailOne2(bi);//물품만 받아오기(fundgindDetail & fundItem)
 	
 		thingDetail3 = bs.thingDetailOne3(bi);
+		
+		List<Board2> b3 = bs.moneyCountThr(thingDetail); // 정기후원받고 있는금액 조회
 	
 		//물품만 받아오기(fundgindDetail & fundItem)
 			
 		session.setAttribute("thingDetail", thingDetail);
 		session.setAttribute("thingDetail2", thingDetail2);	
 		session.setAttribute("thingDetail3", thingDetail3);	
-		
+		session.setAttribute("b3", b3);	
 		
 		mv.setViewName("redirect:thingDetail.bo"); //위처럼 redirect로 뷰페이지이름연결할거랑 똑같음
 
@@ -350,13 +355,15 @@ public class BoardController {
 				
 				b.setMno(mno);
 				
+				System.out.println("Board2 : " + b);
+				
 				int writeCloud2 = 0;
 
 				writeCloud2 = bs.insertWish(b); // 물품 종류, 개수 insert
 				
 				if ( writeCloud2 > 0) {
 					System.out.println("내사연페이지로 이동");
-					mv.setViewName("redirect:wish.bo"); // 위처럼 redirect로 뷰페이지이름연결할거랑 똑같음
+					mv.setViewName("redirect:money_donate.bo"); // 위처럼 redirect로 뷰페이지이름연결할거랑 똑같음
 
 				}
 
@@ -388,7 +395,7 @@ public class BoardController {
 						
 						if ( writeCloud2 > 0) {
 							System.out.println("내사연페이지로 이동");
-							mv.setViewName("redirect:wish.bo"); // 위처럼 redirect로 뷰페이지이름연결할거랑 똑같음
+							mv.setViewName("redirect:thing_donate.bo"); // 위처럼 redirect로 뷰페이지이름연결할거랑 똑같음
 
 						}
 
@@ -420,7 +427,7 @@ public class BoardController {
 						
 						if ( writeCloud2 > 0) {
 							System.out.println("내사연페이지로 이동");
-							mv.setViewName("redirect:wish.bo"); // 위처럼 redirect로 뷰페이지이름연결할거랑 똑같음
+							mv.setViewName("redirect:long_donate.bo"); // 위처럼 redirect로 뷰페이지이름연결할거랑 똑같음
 
 						}
 

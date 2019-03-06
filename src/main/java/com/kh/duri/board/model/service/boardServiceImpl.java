@@ -18,6 +18,7 @@ import com.kh.duri.board.model.vo.BoardItem;
 import com.kh.duri.member.model.exception.LoginException;
 import com.kh.duri.member.model.vo.Member;
 import com.kh.duri.board.model.vo.PageInfo;
+import com.kh.duri.happymember.model.vo.Funding;
 
 @Service
 public class boardServiceImpl implements boardService {
@@ -205,6 +206,34 @@ public class boardServiceImpl implements boardService {
 	@Override
 	public List<Board2> selectNowList() {
 		List<Board2> list = bd.selectNowList(sqlSession);
+		
+		return list;
+	}
+
+	@Override
+	public List<Board2> moneyCountThr(Board moneyDetail) {
+		List<Board2> list = bd.moneyCountThr(sqlSession,moneyDetail);
+		
+		return list;
+	}
+
+	@Override
+	public List<Board2> moneyCountThr(BoardItem thingDetail) {
+		List<Board2> list = bd.moneyCountThr(sqlSession,thingDetail);
+		
+		return list;
+	}
+
+	@Override
+	public List<Board2> moneyCountThr(Member longDetail) {
+		List<Board2> list = bd.moneyCountThr(sqlSession,longDetail);
+		
+		return list;
+	}
+
+	@Override
+	public List<Funding> selectItemDonateList() {
+		List<Funding> list = bd.selectItemDonateList(sqlSession);
 		
 		return list;
 	}

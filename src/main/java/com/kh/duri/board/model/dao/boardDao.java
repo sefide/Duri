@@ -11,6 +11,7 @@ import com.kh.duri.board.model.vo.Board;
 import com.kh.duri.board.model.vo.Board2;
 import com.kh.duri.board.model.vo.BoardItem;
 import com.kh.duri.board.model.vo.PageInfo;
+import com.kh.duri.happymember.model.vo.Funding;
 import com.kh.duri.member.model.exception.LoginException;
 import com.kh.duri.member.model.vo.Member;
 
@@ -65,6 +66,14 @@ public interface boardDao {
 	List<Board2> selectPercent(SqlSessionTemplate sqlSession, PageInfo pi);
 
 	List<Board2> selectNowList(SqlSessionTemplate sqlSession);
+
+	List<Board2> moneyCountThr(SqlSessionTemplate sqlSession, Board moneyDetail);
+
+	List<Board2> moneyCountThr(SqlSessionTemplate sqlSession, BoardItem thingDetail);
+
+	List<Board2> moneyCountThr(SqlSessionTemplate sqlSession, Member longDetail);
+
+	List<Funding> selectItemDonateList(SqlSessionTemplate sqlSession);
 
 
 

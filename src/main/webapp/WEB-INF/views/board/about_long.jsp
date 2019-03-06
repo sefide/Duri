@@ -81,7 +81,7 @@ b{
     				<img src="/duri/resources/common/images/pop_wishist.png" style="width:30px;height:30px"/>
     			</button>
     				</div>
-    				<p id="longDetail">${longDetail.mpr}</p>
+    				<p id="longDetail" style="color:black; font-size:20px">${longDetail.mpr}</p>
     					<input type="hidden" id="mno2" value="${sessionScope.loginUser2.mno}" name="mno2"/>
 		        		<input type="hidden" id="mNick" value="${longDetail.mNickName}" name="mNick"/>
 				
@@ -153,52 +153,36 @@ b{
             <p>지금까지 행복두리가 많은 나눔두리들에게 나눔받은 후원내역입니다. </p>
           </div>
         </div>
+       <c:choose>
+        <c:when test="${not empty b3}">
+        
         <div class="row">
+        <c:forEach var="b3" items="${b3}">
         	<div class="col-lg-4 d-flex mb-sm-4 ftco-animate">
         		<div class="staff">
         			<div class="d-flex mb-4">
-        				<div class="img" style="background-image: url(/duri/resources/common/images/person_1.jpg);"></div>
-        				<div class="info ml-4">
-        					<h3><a href="teacher-single,jsp">cjdrud123</a></h3>
-        					<span class="position">Donated Just now</span>
+        				<div class="img" style="background-image: url(/duri/resources/common/images/girl.png);"></div>
+        				<div class="info ml-4" style="width:180px; height:60px; margin:10px">
+        					<h3><a href="teacher-single,jsp">${b3.mNick}</a></h3>
+        					<span class="position"></span>
         					<div class="text">
-		        				<p>교육비 <span>200만원</span> 기부</p>
-		        				<p> <a href="#">Children Needs Food</a></p>
+		        				<p style="width:200px">${b3.dh_valueType} <span>${b3.dhValue}원</span> 기부중</p>
+		        			
 		        			</div>
         				</div>
         			</div>
         		</div>
         	</div>
-        	<div class="col-lg-4 d-flex mb-sm-4 ftco-animate">
-        		<div class="staff">
-        			<div class="d-flex mb-4">
-        				<div class="img" style="background-image: url(/duri/resources/common/images/person_2.jpg);"></div>
-        				<div class="info ml-4">
-        					<h3><a href="teacher-single,jsp">Ivan Jacobson</a></h3>
-        					<span class="position">Donated Just now</span>
-        					<div class="text">
-		        				<p>교육비 <span>200만원</span> 기부</p>
-		        				<p> <a href="#">Children Needs Food</a></p>
-		        			</div>
-        				</div>
-        			</div>
-        		</div>
-        	</div>
-        	<div class="col-lg-4 d-flex mb-sm-4 ftco-animate">
-        		<div class="staff">
-        			<div class="d-flex mb-4">
-        				<div class="img" style="background-image: url(/duri/resources/common/images/person_3.jpg);"></div>
-        				<div class="info ml-4">
-        					<h3><a href="teacher-single,jsp">Ivan Jacobson</a></h3>
-        					<span class="position">Donated Just now</span>
-        					<div class="text">
-		        				<p>Donated <span>$250</span> for <a href="#">Children Needs Food</a></p>
-		        			</div>
-        				</div>
-        			</div>
-        		</div>
-        	</div>
+         </c:forEach>
         </div>
+      
+        </c:when>
+        <c:otherwise>
+        <div class="col-md-7 heading-section ftco-animate text-center">
+            <p style="width:1040px; font-size:30px; font-weight:bold">아직 받고있는 정기후원이 없습니다.</p>
+          </div>
+        </c:otherwise>
+        </c:choose>
       </div>
     </section>
 		

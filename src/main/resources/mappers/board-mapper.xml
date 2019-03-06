@@ -110,9 +110,14 @@
 	<resultMap type="com.kh.duri.board.model.vo.Board2" id="boardSS">
 	<!-- property=컬럼명, column=필드명    반드시 일치! -->
 		<id property="fno" column="FNO"></id>
+		<result property="mNick" column="MNICK"/>
 		<result property="sum" column="SUM(FDVALUE)"/>
 		<result property="sumValue" column="SUMVALUE"/>
 		<result property="sumFhValue" column="SUM(FH.FHVALUE)"/>
+		<result property="dhValue" column="DHVALUE"/>
+		<result property="dh_valueType" column="DHVALUETYPE"/>
+		<result property="dh_mno" column="DH_MNO_GIVE"/>
+
 	</resultMap>
 	
 	
@@ -138,7 +143,7 @@
 					AND F.FSTATUS != 'YET'
 					AND F.FSTATUS != 'GOAL'  
             		))
-        ORDER BY RNUM
+        ORDER BY FNO DESC
 	</select>
 	
 	<!-- 금액후원 상세보기 조회 -->
@@ -170,7 +175,7 @@
 		            AND F.FSTATUS != 'END'
 		            AND F.FSTATUS != 'YET'
 		            AND F.FSTATUS != 'GOAL' 
-		            ORDER BY F.FNO))
+		            ORDER BY F.FNO DESC))
 	</select>
 	
 	<!-- 물품후원 펀딩글 물품종류 및 갯수 리스트 조회 -->
@@ -186,7 +191,7 @@
                     AND F.FSTATUS != 'END'
                     AND F.FSTATUS != 'YET'
                     AND F.FSTATUS != 'GOAL' 
-            		ORDER BY F.FNO))
+            		ORDER BY F.FNO DESC))
 	</select>
 	
 	<!-- 물품후원 상세보기 조회 (펀딩글)-->
@@ -302,27 +307,50 @@
 	</select>
 	
 	<select id="selectPercent" resultMap = "boardSS" parameterType="Board2">
-		 SELECT FNO, SUM(FDVALUE), SUM(FHDITEMVALUE) AS SUMVALUE 
+		  SELECT FNO, SUM(FDVALUE), SUM(FHDITEMVALUE) AS SUMVALUE 
 		 FROM (SELECT DISTINCT FNO, FDNO, FDVALUE, INO, INAME, IPRICE, FHDITEMVALUE
 	       FROM FUNDINGDETAIL FD
 	       JOIN FUNDITEM FI ON (FD.FD_INO = FI.INO )
 	       JOIN FUNDHISTORY FH ON (FH.FH_FNO = FD.FD_FNO)
 	       LEFT OUTER JOIN FUNDHISTORYDETAIL FHD ON (FHD.FHD_INO = FD.FD_INO AND FHD.FHD_FHNO = FH.FHNO)
 	       JOIN FUNDING F ON (F.FNO = FD.FD_FNO )
-	       
+	       WHERE F.FSTATUS != 'END'
+           AND F.FSTATUS != 'GOAL'
+           AND F.FSTATUS != 'YET'
 	       )
 		GROUP BY FNO
-		ORDER BY FNO
+		ORDER BY FNO DESC
 	</select>
 	
 	<select id="selectNow" resultMap = "boardSS" parameterType="Board2">
-		 SELECT SUM(FH.FHVALUE) FROM 
+		SELECT SUM(FH.FHVALUE) FROM 
 		FUNDHISTORY FH
 		JOIN FUNDING F ON(F.FNO = FH.FH_FNO)
 		WHERE F.FTYPE = 'MONEY'
 		GROUP BY F.FNO
-        ORDER BY F.FNO
+        ORDER BY F.FNO DESC
 	</select>
+	
+	<select id="moneyCountThr" resultMap = "boardSS" parameterType="Board2">
+		SELECT DHVALUE , DHVALUETYPE, DH_MNO_GIVE ,ME.MNICK
+		FROM DIRECTFUNDHISTORY DH
+		LEFT JOIN MEMBER M ON(M.MNO = DH.DH_MNO_TAKE)
+		LEFT JOIN MEMBER ME ON(DH_MNO_GIVE = ME.MNO)
+		WHERE M.MNO = #{fWriter}
+	</select>
+	
+	
+	<select id="moneyCountThr2" resultMap = "boardSS" parameterType="Board2">
+		SELECT DHVALUE , DHVALUETYPE, DH_MNO_GIVE ,ME.MNICK
+		FROM DIRECTFUNDHISTORY DH
+		LEFT JOIN MEMBER M ON(M.MNO = DH.DH_MNO_TAKE)
+		LEFT JOIN MEMBER ME ON(DH_MNO_GIVE = ME.MNO)
+		WHERE M.MNO = #{mno}
+	</select>
+	
+	
+	
+
 	
 </mapper>
 

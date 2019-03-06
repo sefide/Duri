@@ -356,6 +356,35 @@
 		AND LE_MNO_GIVE = #{leMnoGive} 
 		AND LETYPE = #{leType}
 	</select>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+		<!-- 물품후원 목록 조회 -->
+	<select id="selectItemDonateListBoard" resultMap="happyFundingResultSet" parameterType="_int">
+		  SELECT DISTINCT ROWNUM RNUM, FNO, FTITLE, FCONTENT, FITEMNAME, FSTARTDATE, FENDDATE, FSTATUS 
+		FROM (SELECT DISTINCT F.FNO, F.FTITLE, F.FCONTENT, 
+			(SELECT LISTAGG(CAST(FI2.INAME as varchar2(50)),',') WITHIN GROUP (ORDER BY FD2.FD_FNO) 
+			FROM FUNDINGDETAIL FD2 JOIN FUNDITEM FI2 ON(FI2.INO = FD2.FD_INO) 
+			WHERE F.FNO = FD2.FD_FNO GROUP BY FD2.FD_FNO) AS FITEMNAME,
+			F.FSTARTDATE, F.FENDDATE, F.FSTATUS 
+			FROM FUNDING F JOIN FUNDINGDETAIL FD ON(F.FNO=FD.FD_FNO) 
+			JOIN FUNDITEM FI ON(FD.FD_INO=FI.INO) 
+			WHERE FTYPE = 'ITEM' 
+            AND FSTATUS != 'END'
+            AND FSTATUS != 'GOAL'
+            AND FSTATUS != 'YET'
+			ORDER BY FNO DESC)
+		ORDER BY FNO DESC
+	</select>
+	
+	
+	
 </mapper>
 
 
