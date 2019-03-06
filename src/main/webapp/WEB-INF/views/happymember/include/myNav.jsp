@@ -48,7 +48,7 @@
 	margin: 15% auto; /* 중앙정렬 */
 	padding: 20px;
 	border: 1px solid #888;
-	width: 50%;
+	width: 65%;
 	height: 950px;
 }
 .modal-content2 {
@@ -175,14 +175,14 @@ p {font-size: 20px; text-align: center;}
 			</div>
 			<span class="box-left-content">
 				${loginUser.mNickName}<br>
-				${loginUser.mPoint}&nbsp;<i class="yellow product hunt icon"></i>
+				<fmt:formatNumber value = "${loginUser.mPoint}" type="currency" currencySymbol=" "/>&nbsp;<i class="yellow product hunt icon"></i>
 			</span>
 			<br>
 			<div style="font-weight: bold; color: white; font-size:20px;">
-				매 달 정기후원 금액 : ${loginUser.dMoney} 원
+				매 달 정기후원 금액 : <fmt:formatNumber value = "${loginUser.dMoney}" type="currency" currencySymbol=" "/> 원
 			</div>
 			<div style="font-weight: bold; color: white; font-size:20px;">
-				일시 후원 총 누적액 : ${loginUser.cfMoney} 원
+				일시 후원 총 누적액 : <fmt:formatNumber value = "${loginUser.cfMoney}" type="currency" currencySymbol=" "/> 원
 			</div>
 		</div>
 		
@@ -250,9 +250,9 @@ p {font-size: 20px; text-align: center;}
 		</div>
 		<br><br><br>
 		<div style="height: 80px;">
-			<div style="float: left; margin-left: 24%" class="textBlack1">배송 받을 물품을&nbsp;</div>
+			<div style="float: left;" class="textBlack1">배송 받을 물품을&nbsp;</div>
 			<div style="float: left;" class="textOrange1">맞게 선택하셨나요?</div><br>
-			<div style="float: left; margin-left: 7%" class="textBlack2" >배송 받을 주소가 변경되었다면&nbsp;</div>
+			<div style="float: left; margin-left: 14%" class="textBlack2" >배송 받을 주소가 변경되었다면&nbsp;</div>
 			<div style="float: left;" class="textOrange2">내 정보 수정</div>
 			<div style="float: left;" class="textBlack2">에서 꼭!수정해주세요!&nbsp;</div>
 		</div>
@@ -516,13 +516,12 @@ function addBtnEvent() {
 </script>
 <script>
 	
-
-
 	//금액에 , 단위 찍기
 	function numberWithCommas(x) {
 	   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 	}
 
+	
 
 </script>
 

@@ -85,8 +85,8 @@
 						<td><c:out value="${directList.rnum}"/></td>
 						<td><c:out value="${directList.dh_nick_give}&nbsp;님" escapeXml="false"/></td>
 						<td><c:out value="${directList.dhvaluetype}"/></td>
-						<td><c:out value="${directList.dhvalue}원" escapeXml="false"/></td>
-						<td><c:out value="${directList.sum}원" escapeXml="false"/></td>
+						<td><fmt:formatNumber value = "${directList.dhvalue}" type="currency" currencySymbol=" "/> 원</td>
+						<td><fmt:formatNumber value = "${directList.sum}" type="currency" currencySymbol=" "/> 원</td>
 						<td><c:out value="${directList.cnt}회" escapeXml="false"/></td>
 						<td><c:out value="${directList.dhstartdate}&nbsp;~" escapeXml="false"/></td>
 					</tr>

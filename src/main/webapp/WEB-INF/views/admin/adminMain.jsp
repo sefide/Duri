@@ -223,42 +223,8 @@
 
 
 
-			<h1 class="page-header">
-				GRAPH <small>statistics</small>
-			</h1>
-
-
-
-			<div class="row">
-
-
-				<div class="col-md-6 col-sm-12 col-xs-12">
-					<div class="panel panel-default">
-						<div class="panel-heading">Bar Chart</div>
-						<div class="panel-body">
-							<div id="morris-bar-chart"></div>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-6 col-sm-12 col-xs-12">
-					<div class="panel panel-default">
-						<div class="panel-heading">Donut Chart</div>
-						<div class="panel-body">
-							<div id="morris-donut-chart">
-							</div>
-						</div>
-					</div>
-				</div>
-
-			</div>
-			<!-- /. ROW  -->
-
-		<div id="barChartValue" style="display: none;">
-			<c:forEach items="${barChartList}" var="vo" varStatus="index">
-				<span id="${vo.MONTH}">${vo.MONTHCNT}</span>
-			</c:forEach>
-		</div>
 			
+
 
 <footer><p>All right reserved. Template by: <a href="http://webthemez.com">WebThemez.com</a></p></footer>
 		</div>

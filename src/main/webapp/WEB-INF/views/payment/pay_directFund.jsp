@@ -195,7 +195,7 @@
    			width : 670px;
    			z-index : 200;
    			/* text-align : center; */
-   			top : 70%;
+   			top : 80%;
    			left : 30%;
    			visibility : hidden;
    			border : 1px solid lightgray;
