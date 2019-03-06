@@ -9,52 +9,46 @@
 
 <style>
 .mynav_2{	
-	margin-right:70px;
-	font-size:30px !important;
+	margin-right:25px;
+	font-size:20px !important;
 	line-height: 1.5; 
 	color: #fa8f3d !important; 
 	font-weight: bold; 
-	font-family: Nanum Pen Script; 
 }
-#container {
-	
+#container {	
   	display: flex;
-  	height: 200px;
+  	height: 160px;
   	width : 70%;
   	margin: 0 auto;
   	margin-top:20px;
 	margin-bottom:20px;
 	padding-top : 15px;
 	padding-bottom:15px;
-	background: rgb(242, 179, 78);
+	background: #ffe6bf;
+	border-color:black;
 	line-height: 60px;
 	border-radius: 0.5em;
 }
 #box-left {
-	 flex: 1;
-	 color: white;	  
+	 flex: 1;	 	  
 	 text-align: left;
 	 line-height: 60px;
-	 font-size:23px !important;
+	 font-size:20px !important;
 	 padding :20px;
 	 /* font-weight: bold;  */
 	 /* font-family: Nanum Pen Script;  */
 }
 #box-center { 	
- 	flex: 1;
- 	color: white;
- 	font-size:22px !important;
+ 	flex: 1;	
+ 	font-size:20px !important;
   	text-align: left; 	
   	display: table-cell;
 	vertical-align: middle;	
 	 padding :20px;
-	/* font-weight: bold;  */
-	/* font-family: Nanum Pen Script; */
-	/* line-height: 60px; */
 }
 #box-right {
   	flex: 1;
-  	color: white !important;
+  	color: black;
   	text-align: right; 	
   	display: table-cell;
 	vertical-align: middle;
@@ -71,26 +65,27 @@
     padding-top: 20px;  
 }
 
-.headerpoint{
-	color: white; 
+.headerpoint{	
+	color: black;
 	font-size:20px; 
 	margin-right: 10px;
 }
 
 .headerpoint:hover{
-	color: black;
+	color: white;
 }
 
 
 </style>	
 
-<header style=" height: 50px; text-align: right; ">		
+<header style=" height: 40px; text-align: right; margin-top: 90px; ">		
 	<a class="mynav_2" href="updateInfo.nanum" >회원정보 수정</a>
 	<a class="mynav_2" href="logout.me">로그아웃</a>
+	<br><br><br>
 	<div id="container">	
 		<div id='box-left'>
-			<i class="handshake outline icon"></i>
-			<span id='box-left' style="font-weight: bold; margin-left: 5px;">"<c:out value="${ sessionScope.loginUser2.mName }"/>"</span>님 반갑습니다!
+			<!-- <i class="handshake outline icon"></i>  -->
+			<span id='box-left' style="font-weight: bold; margin-left: 5px; color: rgb(22, 96, 53);">"<c:out value="${ sessionScope.loginUser2.mName }"/>"</span>님 반갑습니다!
 		</div>
     	<div id='box-center'>
     		<c:choose>
@@ -116,10 +111,10 @@
     		</c:if>
     		
     		포인트 : <c:out value="${ sessionScope.loginUser2.mPoint }"/> 원 <br>
-    		100% 달성 크라우드 펀딩 참여 횟수 : <c:out value="${ sessionScope.loginUser2.mGoalNum }"/> 회 <br>
+    		100% 달성 펀딩 참여 횟수 : <c:out value="${ sessionScope.loginUser2.mGoalNum }"/> 회 <br>
     	</div>
     	<div id='box-right'>
-    		<a href = "pointCharge.pm" class="headerpoint"> 포인트 충전</a><br>
+    		<a  href = "pointCharge.pm" class="headerpoint"> 포인트 충전</a><br>
     		<a href="pointReturnList.pm" class="headerpoint" >포인트 환불</a><br>
     		<a href="pointHistory.pm" class="headerpoint"> 포인트 내역</a><br>
     	</div>
