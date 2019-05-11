@@ -1,5 +1,5 @@
 
-# ET Planner (Europe Travel Planner)
+# Duriduri (둘이두리)
 
 
 
